@@ -1,15 +1,20 @@
-const express = require('express');
+const express = require("express");
 import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
 import cors from "cors";
 import resolvers from "./graphql";
 import typeDefs from "./graphql/typeDefs";
+import Connection from "./db/conn";
 const PORT = process.env.PORT || 8080;
 
 (async () => {
   const app = express();
 
+  // dotenv configuration
   dotenv.config();
+
+  // connect to db
+  Connection(process.env.MONGODB_URI);
 
   const corsOption = {
     origin: [
@@ -20,6 +25,7 @@ const PORT = process.env.PORT || 8080;
     credentials: true,
   };
 
+  //   Setting up CORS
   app.use(cors(corsOption));
 
   const server = new ApolloServer({ typeDefs, resolvers });
