@@ -1,1 +1,1 @@
-export { allItems } from "./allItems";
+export { getUser } from "./getUser";
