@@ -1,5 +1,5 @@
 import { User } from "../../../schema/userSchema";
-import { registerType } from "../../types";
+import { RegisterType } from "../../types";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
@@ -10,7 +10,7 @@ import { UserInputError } from "apollo-server-express";
 
 export const registerUser = async (
   _parent: any,
-  args: { data: registerType }
+  args: { data: RegisterType }
 ) => {
   try {
     const { data } = args;

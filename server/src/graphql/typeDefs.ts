@@ -1,7 +1,7 @@
 import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
-  input Registration {
+  input RegistrationInputType {
     name: String
     email: String
     phoneNumber: String
@@ -11,7 +11,7 @@ const typeDefs = gql`
     expectedSalary: String
   }
 
-  type RegisterType {
+  type RegistrationInputDataType {
     name: String
     email: String
     phoneNumber: String
@@ -27,7 +27,7 @@ const typeDefs = gql`
 
   type Mutation {
     login: String
-    registerUser(data: Registration): RegisterType
+    registerUser(data: RegistrationInputType): RegistrationInputDataType
   }
 
   scalar DateTime

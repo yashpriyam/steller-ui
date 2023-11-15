@@ -1,7 +1,7 @@
-import { mailResponseType } from "../graphql/types";
+import { MailResponseType } from "../graphql/types";
 import nodemailer from "nodemailer";
 
-export const sendEmail = async(messageObject: mailResponseType)=>{
+export const sendEmail = async(messageObject: MailResponseType)=>{
     try {
         // create reusable transporter object using the default SMTP transport
         let transporter = nodemailer.createTransport({

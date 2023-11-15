@@ -1,10 +1,10 @@
-import { emailType } from "../graphql/types";
+import { EmailType } from "../graphql/types";
 
 export const getRegistrationEmailForUser = ({
   userName,
   phoneNumber,
   email,
-}: emailType) => ({
+}: EmailType) => ({
   subject: "Welcome to WebMasters",
   html: `<b>Hi ${userName},</b>
     <p>Thanks for showing interest in joining WebMasters program to become a top notch Software Developer. We are excited to have you. Here are the responses that you have submitted. </p>
@@ -20,7 +20,7 @@ export const getRegistrationEmailForAdmin = ({
   phoneNumber,
   email,
   time,
-}: emailType) => ({
+}: EmailType) => ({
   subject: `${userName} registered to WebMasters`,
   html: ` 
     Name: ${userName} <br>

@@ -1,24 +1,24 @@
 import { Request, Response } from "express";
 
-type contextType = {
+type ContextType = {
   req: Request;
   res: Response;
 };
 
-type mailResponseType = {
+type MailResponseType = {
   html: string;
   subject: string;
   to: string;
 };
 
-type emailType = {
+type EmailType = {
   userName: string;
   phoneNumber: string;
   email: string;
   time: string;
 };
 
-type registerType = {
+type RegisterType = {
   name: string;
   email: string;
   phoneNumber: string;
