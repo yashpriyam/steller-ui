@@ -9,7 +9,7 @@ import { isValidEmail, isValidPhoneNumber } from "../../../utils/validate";
 import { UserInputError } from "apollo-server-express";
 
 export const registerUser = async (
-  _parent: any,
+  _parent: undefined,
   args: { data: RegisterType }
 ) => {
   try {
