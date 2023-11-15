@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 8080;
   //   Setting up CORS
   app.use(cors(corsOption));
 
-  const server = new ApolloServer({ typeDefs, resolvers });
+  const server = new ApolloServer({ typeDefs, resolvers, context: ({ req, res }) => ({ req, res }) });
   await server.start();
   await server.applyMiddleware({ app, path: "/graphql", cors: false });
 
