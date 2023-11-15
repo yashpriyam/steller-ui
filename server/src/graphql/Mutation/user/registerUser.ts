@@ -7,7 +7,7 @@ import {
 import { sendEmail } from "../../../utils/sendEmail";
 import { isValidEmail, isValidPhoneNumber } from "../../../utils/validate";
 import { UserInputError } from "apollo-server-express";
-import { errorMessage } from "../../../constants/error";
+import { errorMessage } from "../../../constants/errorMessages";
 
 export const registerUser = async (
   _parent: undefined,
