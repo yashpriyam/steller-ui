@@ -17,7 +17,7 @@ export const registerUser = async (
     const { data } = args;
 
     if (!data) {
-      throw new UserInputError(errorMessage.EMAIL_AND_PHONE_NOT_FOUND);
+      throw new UserInputError(errorMessage.USER.EMAIL_AND_PHONE_NOT_FOUND);
     }
 
     const {
@@ -31,9 +31,9 @@ export const registerUser = async (
     } = data;
 
     if (!isValidEmail(email)) {
-      throw new UserInputError(errorMessage.INVALID_EMAIL);
+      throw new UserInputError(errorMessage.USER.INVALID_EMAIL);
     } else if (!isValidPhoneNumber(phoneNumber)) {
-      throw new UserInputError(errorMessage.INVALID_PHONE_NUMBER);
+      throw new UserInputError(errorMessage.USER.INVALID_PHONE_NUMBER);
     }
 
     const savedUser = await User.create({
