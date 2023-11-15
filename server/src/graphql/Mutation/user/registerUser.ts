@@ -7,6 +7,7 @@ import {
 import { sendEmail } from "../../../utils/sendEmail";
 import { isValidEmail, isValidPhoneNumber } from "../../../utils/validate";
 import { UserInputError } from "apollo-server-express";
+import { errorMessage } from "../../../constants/error";
 
 export const registerUser = async (
   _parent: undefined,
@@ -16,7 +17,7 @@ export const registerUser = async (
     const { data } = args;
 
     if (!data) {
-      throw new UserInputError("email and phone number does not found");
+      throw new UserInputError(errorMessage.EMAIL_AND_PHONE_NOT_FOUND);
     }
 
     const {
@@ -30,9 +31,9 @@ export const registerUser = async (
     } = data;
 
     if (!isValidEmail(email)) {
-      throw new UserInputError("invalid email address");
+      throw new UserInputError(errorMessage.INVALID_EMAIL);
     } else if (!isValidPhoneNumber(phoneNumber)) {
-      throw new UserInputError("invalid phone number");
+      throw new UserInputError(errorMessage.INVALID_PHONE_NUMBER);
     }
 
     const savedUser = await User.create({
