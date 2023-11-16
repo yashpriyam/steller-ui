@@ -18,12 +18,17 @@ type EmailType = {
   time: string;
 };
 
+enum SessionPreferenceEnum {
+  online = "online",
+  offline = "offline",
+}
+
 type RegisterType = {
   name: string;
   email: string;
   phoneNumber: string;
   isJobSeeker: boolean;
   occupation: string;
-  sessionPreference: string;
+  sessionPreference: SessionPreferenceEnum;
   expectedSalary: string;
 };

@@ -11,13 +11,18 @@ const typeDefs = gql`
     expectedSalary: String
   }
 
+  enum SessionPreferenceEnum {
+    online
+    offline
+  }
+
   type RegistrationInputDataType {
     name: String
     email: String
     phoneNumber: String
     isJobSeeker: Boolean
     occupation: String
-    sessionPreference: String
+    sessionPreference: SessionPreferenceEnum
     expectedSalary: String
   }
 
