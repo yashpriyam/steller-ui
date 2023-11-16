@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 
-export const sendEmail = async(messageObject: MailResponseType)=>{
+export const sendEmail = async(messageObject: MailResponseType): Promise<string | unknown> =>{
     try {
         // create reusable transporter object using the default SMTP transport
         const transporter = nodemailer.createTransport({
@@ -18,7 +18,7 @@ export const sendEmail = async(messageObject: MailResponseType)=>{
         });
         
         console.log("Message sent: %s", info.messageId);
-        return info;
+        return info.messageId;
     } catch (error) {
         console.error(error);
         return error;
