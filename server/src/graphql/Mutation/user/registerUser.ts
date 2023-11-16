@@ -46,7 +46,7 @@ export const registerUser = async (
 
     const { IST: time } = savedUser;
 
-    const emailDetails = {
+    const emailDetails: EmailType = {
       name: capitalizedName,
       phoneNumber,
       email,
