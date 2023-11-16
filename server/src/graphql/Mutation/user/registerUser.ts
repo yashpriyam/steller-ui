@@ -12,7 +12,7 @@ import { errorMessages } from "@constants";
 export const registerUser = async (
   _parent: undefined,
   args: { data: RegisterType }
-) => {
+): Promise<RegisterType | UserInputError | unknown> => {
   try {
     const { data } = args;
 
