@@ -1,5 +1,4 @@
 import { User } from "../../../schema/userSchema";
-import { RegisterType } from "../../types";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,

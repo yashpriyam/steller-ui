@@ -1,4 +1,3 @@
-import { MailResponseType } from "../graphql/types";
 import nodemailer from "nodemailer";
 
 export const sendEmail = async(messageObject: MailResponseType)=>{

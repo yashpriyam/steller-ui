@@ -1,4 +1,3 @@
-import { EmailType } from "../graphql/types";
 
 export const getRegistrationEmailForUser = ({
   name,
