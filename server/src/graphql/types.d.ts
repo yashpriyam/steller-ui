@@ -12,7 +12,7 @@ type MailResponseType = {
 };
 
 type EmailType = {
-  userName: string;
+  name: string;
   phoneNumber: string;
   email: string;
   time: string;

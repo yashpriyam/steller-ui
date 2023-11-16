@@ -21,7 +21,7 @@ export const registerUser = async (
     }
 
     const {
-      name: firstName,
+      name,
       email,
       phoneNumber,
       isJobSeeker,
@@ -36,8 +36,10 @@ export const registerUser = async (
       throw new UserInputError(errorMessage.USER.INVALID_PHONE_NUMBER);
     }
 
+    const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
+
     const savedUser = await User.create({
-      name: firstName.charAt(0).toUpperCase() + firstName.slice(1),
+      name: capitalizedName,
       email,
       phoneNumber,
       isJobSeeker,
@@ -45,14 +47,23 @@ export const registerUser = async (
       sessionPreference,
       expectedSalary,
     });
-    const { name: userName = "", IST: time } = savedUser;
+
+    const { IST: time } = savedUser;
+
+    const emailDetails = {
+      name: capitalizedName,
+      phoneNumber,
+      email,
+      time,
+    };
+
     await Promise.allSettled([
       sendEmail({
-        ...getRegistrationEmailForUser({ userName, phoneNumber, email, time }),
+        ...getRegistrationEmailForUser(emailDetails),
         to: email,
       }),
       sendEmail({
-        ...getRegistrationEmailForAdmin({ userName, phoneNumber, email, time }),
+        ...getRegistrationEmailForAdmin(emailDetails),
         to: process.env.SENDER_EMAIL || "",
       }),
     ]);
