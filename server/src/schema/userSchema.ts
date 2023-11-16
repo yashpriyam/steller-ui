@@ -8,9 +8,9 @@ const sessionPreferences = Object.freeze({
 
 const userSchema = new mongoose.Schema(
   {
-    email: { type: String },
-    name: { type: String },
-    phoneNumber: { type: String },
+    email: { type: String, required: true },
+    name: { type: String, required: true },
+    phoneNumber: { type: String, required: true },
     isJobSeeker: { type: Boolean, default: false },
     occupation: { type: String },
     sessionPreference: {

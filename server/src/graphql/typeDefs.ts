@@ -7,7 +7,7 @@ const typeDefs = gql`
 
   type Mutation {
     login: String
-    registerUser(data: RegistrationInputType): RegistrationInputDataType
+    registerUser(data: RegistrationInputType!): RegistrationInputDataType
   }
 
   input RegistrationInputType {
