@@ -7,7 +7,7 @@ import {
   isValidPhoneNumber,
 } from "@utils";
 import { UserInputError } from "apollo-server-express";
-import { errorMessage } from "@constants";
+import { errorMessages } from "@constants";
 
 export const registerUser = async (
   _parent: undefined,
@@ -15,10 +15,6 @@ export const registerUser = async (
 ) => {
   try {
     const { data } = args;
-
-    if (!data) {
-      throw new UserInputError(errorMessage.USER.EMAIL_AND_PHONE_NOT_FOUND);
-    }
 
     const {
       name,
@@ -31,9 +27,9 @@ export const registerUser = async (
     } = data;
 
     if (!isValidEmail(email)) {
-      throw new UserInputError(errorMessage.USER.INVALID_EMAIL);
+      throw new UserInputError(errorMessages.USER.INVALID_EMAIL);
     } else if (!isValidPhoneNumber(phoneNumber)) {
-      throw new UserInputError(errorMessage.USER.INVALID_PHONE_NUMBER);
+      throw new UserInputError(errorMessages.USER.INVALID_PHONE_NUMBER);
     }
 
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
