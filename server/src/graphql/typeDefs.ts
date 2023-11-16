@@ -1,14 +1,23 @@
 import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
+  type Query {
+    getUser: String
+  }
+
+  type Mutation {
+    login: String
+    registerUser(data: RegistrationInputType): RegistrationInputDataType
+  }
+
   input RegistrationInputType {
-    name: String
-    email: String
-    phoneNumber: String
-    isJobSeeker: Boolean
-    occupation: String
-    sessionPreference: String
-    expectedSalary: String
+    name: String!
+    email: String!
+    phoneNumber: String!
+    isJobSeeker: Boolean!
+    occupation: String!
+    sessionPreference: String!
+    expectedSalary: String!
   }
 
   enum SessionPreferenceEnum {
@@ -17,22 +26,13 @@ const typeDefs = gql`
   }
 
   type RegistrationInputDataType {
-    name: String
-    email: String
-    phoneNumber: String
-    isJobSeeker: Boolean
-    occupation: String
-    sessionPreference: SessionPreferenceEnum
-    expectedSalary: String
-  }
-
-  type Query {
-    getUser: String
-  }
-
-  type Mutation {
-    login: String
-    registerUser(data: RegistrationInputType): RegistrationInputDataType
+    name: String!
+    email: String!
+    phoneNumber: String!
+    isJobSeeker: Boolean!
+    occupation: String!
+    sessionPreference: SessionPreferenceEnum!
+    expectedSalary: String!
   }
 
   scalar DateTime

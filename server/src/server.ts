@@ -1,14 +1,15 @@
-const express = require("express");
+import 'module-alias/register';
 import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
 import cors from "cors";
 import resolvers from "./graphql";
 import typeDefs from "./graphql/typeDefs";
 import Connection from "./db/conn";
+import express from "express";
 const PORT = process.env.PORT || 8080;
 
 (async () => {
-  const app = express();
+  const app = express() as any;
 
   // dotenv configuration
   dotenv.config();
