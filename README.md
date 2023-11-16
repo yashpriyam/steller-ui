@@ -7,7 +7,7 @@
 1. **Node JS**
 2. **TypeScript**
 3. **GraphQL**
-5. **MongoDB**
+4. **MongoDB**
 
 ## Rules:
 
