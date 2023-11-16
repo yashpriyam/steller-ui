@@ -26,6 +26,8 @@
     "ts-node": "^10.9.1"
   },
   "_moduleAliases": {
-    "@utils": "src/utils/index"
+    "@utils": "src/utils/index",
+    "@constants": "src/utils/constants/index",
+    "@schemas": "src/schema/index"
   }
 }

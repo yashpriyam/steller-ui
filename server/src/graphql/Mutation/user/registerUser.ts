@@ -1,13 +1,13 @@
-import { User } from "../../../schema/userSchema";
+import { User } from "@schemas";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
   sendEmail,
-  isValidEmail, 
-  isValidPhoneNumber
+  isValidEmail,
+  isValidPhoneNumber,
 } from "@utils";
 import { UserInputError } from "apollo-server-express";
-import { errorMessage } from "../../../constants/errorMessages";
+import { errorMessage } from "@constants";
 
 export const registerUser = async (
   _parent: undefined,
