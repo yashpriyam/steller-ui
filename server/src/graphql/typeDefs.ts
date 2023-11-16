@@ -16,7 +16,7 @@ const typeDefs = gql`
     phoneNumber: String!
     isJobSeeker: Boolean!
     occupation: String!
-    sessionPreference: String!
+    sessionPreference: SessionPreferenceEnum!
     expectedSalary: String!
   }
 

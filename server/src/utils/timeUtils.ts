@@ -5,7 +5,7 @@ export function convertUTCtoIST() {
   return formatDate(utcDate);
 }
 export function formatDate(date: Date) {
-  const options: any = {
+  return date.toLocaleString("en-IN", {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
@@ -13,6 +13,5 @@ export function formatDate(date: Date) {
     month: "2-digit",
     year: "numeric",
     timeZoneName: "short",
-  };
-  return date.toLocaleString("en-IN", options);
+  });
 }
