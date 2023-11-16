@@ -1,4 +1,4 @@
-import { User } from "@schemas";
+import { User } from "@models";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,

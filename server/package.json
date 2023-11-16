@@ -28,6 +28,6 @@
   "_moduleAliases": {
     "@utils": "src/utils/index",
     "@constants": "src/utils/constants/index",
-    "@schemas": "src/schema/index"
+    "@models": "src/schema/index"
   }
 }
