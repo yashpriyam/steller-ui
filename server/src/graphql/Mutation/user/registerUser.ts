@@ -1,10 +1,11 @@
-import { sendEmail } from "@utils/sendEmail";
 import { User } from "../../../schema/userSchema";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
-} from "@utils/registrationEmail";
-import { isValidEmail, isValidPhoneNumber } from "@utils/validate";
+  sendEmail,
+  isValidEmail, 
+  isValidPhoneNumber
+} from "@utils";
 import { UserInputError } from "apollo-server-express";
 import { errorMessage } from "../../../constants/errorMessages";
 

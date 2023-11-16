@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { convertUTCtoIST } from "@utils/time-utils";
+import { convertUTCtoIST } from "@utils";
 
 const sessionPreferences = Object.freeze({
   online: "online",
