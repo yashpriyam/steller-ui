@@ -12,6 +12,11 @@ declare global {
     to: string;
   };
 
+  type MailDataType = {
+    html: string;
+    subject: string;
+  }
+
   type EmailType = {
     name: string;
     phoneNumber: string;

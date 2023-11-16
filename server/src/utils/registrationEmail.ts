@@ -3,7 +3,7 @@ export const getRegistrationEmailForUser = ({
   name,
   phoneNumber,
   email,
-}: EmailType) => ({
+}: EmailType): MailDataType => ({
   subject: "Welcome to WebMasters",
   html: `<b>Hi ${name},</b>
     <p>Thanks for showing interest in joining WebMasters program to become a top notch Software Developer. We are excited to have you. Here are the responses that you have submitted. </p>
@@ -19,7 +19,7 @@ export const getRegistrationEmailForAdmin = ({
   phoneNumber,
   email,
   time,
-}: EmailType) => ({
+}: EmailType) : MailDataType => ({
   subject: `${name} registered to WebMasters`,
   html: ` 
     Name: ${name} <br>
