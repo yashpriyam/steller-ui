@@ -9,7 +9,7 @@ import express from "express";
 const PORT = process.env.PORT || 8080;
 
 (async () => {
-  const app = express() as any;
+  const app: express.Application = express();
 
   // dotenv configuration
   dotenv.config();
