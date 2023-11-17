@@ -2,12 +2,27 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Query {
-    getUser: String
+    getPaymentDetails(programType: ProgramTypeEnum!): ProgramDetailsDataType
   }
 
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationInputDataType
+  }
+
+  enum ProgramTypeEnum {
+    demoCourse
+    oneWeekProgram
+    fullCourse
+  }
+
+  type ProgramDetailsDataType {
+    name: String
+    description: String
+    programType: String
+    amount: Int
+    isActive: Boolean
+    title: String
   }
 
   input RegistrationInputType {
