@@ -24,7 +24,6 @@
     "module-alias": "^2.2.3",
     "mongoose": "^7.6.3",
     "nodemailer": "^6.9.7",
-    "razorpay-typescript": "^1.0.12",
     "ts-node": "^10.9.1"
   },
   "_moduleAliases": {
