@@ -30,7 +30,6 @@
   "_moduleAliases": {
     "@utils": "src/utils/index",
     "@constants": "src/utils/constants/index",
-    "@models": "src/schema/index",
-    "@configs": "src/configs/index"
+    "@models": "src/schema/index"
   }
 }
