@@ -8,6 +8,23 @@ const typeDefs = gql`
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationInputDataType
+    createTransaction(data: CreateTransactionInput!):CreateTransactionType
+  }
+
+  input CreateTransactionInput {
+    amount: Int!
+    programType: String!
+    paymentId: String!
+    userId: String!
+    isPaymentSuccessfull: Boolean!
+  }
+
+  type CreateTransactionType {
+    amount: Int!
+    programType: String!
+    paymentId: String!
+    userId: String!
+    isPaymentSuccessfull: Boolean!
   }
 
   enum ProgramTypeEnum {
