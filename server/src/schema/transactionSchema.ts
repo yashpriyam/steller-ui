@@ -7,6 +7,7 @@ const transactionSchema = new Schema(
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     amount: {
       type: Number,
@@ -18,10 +19,11 @@ const transactionSchema = new Schema(
     },
     paymentId: {
       type: String,
+      required: true,
     },
     isPaymentSuccessfull: {
       type: Boolean,
-      default: false,
+      required: true,
     },
   },
   { timestamps: true }
