@@ -8,10 +8,10 @@ const typeDefs = gql`
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
-    createTransaction(data: CreateTransactionInput!):CreateTransactionOutputType
+    createTransaction(data: CreateTransactionInputType!):CreateTransactionOutputType
   }
 
-  input CreateTransactionInput {
+  input CreateTransactionInputType {
     amount: Int!
     programType: String!
     paymentId: String!
