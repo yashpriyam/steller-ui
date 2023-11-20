@@ -1,2 +1,2 @@
 export { errorMessages } from "./errorMessages";
-export { messages } from "./messages";
+export { localMessages } from "./localMessages";

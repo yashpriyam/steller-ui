@@ -1,6 +1,6 @@
 import { Program } from "@models";
 import { UserInputError } from "apollo-server-express";
-import { errorMessages, messages } from "@constants";
+import { errorMessages, localMessages } from "@constants";
 
 export const getPaymentDetails = async (
   _parent: undefined,
@@ -14,8 +14,8 @@ export const getPaymentDetails = async (
     })?.lean();
     if (program) {
       return {
-        name: messages.WEBMASTER,
-        description: messages.REGISTRATION_FEE_FOR_WEB_MASTER,
+        name: localMessages.WEBMASTER,
+        description: localMessages.REGISTRATION_FEE_FOR_WEB_MASTER,
         ...program,
       };
     } else {
