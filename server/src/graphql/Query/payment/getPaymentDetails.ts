@@ -4,11 +4,11 @@ import { errorMessages, messages } from "@constants";
 
 export const getPaymentDetails = async (
   _parent: undefined,
-  args: { programType: ProgramTypeEnum }
-): Promise<PaymentDetailsData | UserInputError | unknown> => {
+  args: { programType: string } 
+): Promise<PaymentDetailsDataType | UserInputError | unknown> => {
   try {
     const { programType } = args;
-    const program: ProgramData | null = await Program.findOne({
+    const program: ProgramDataType | null = await Program.findOne({
       programType,
       isActive: true,
     })?.lean();

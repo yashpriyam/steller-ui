@@ -2,21 +2,15 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Query {
-    getPaymentDetails(programType: ProgramTypeEnum!): ProgramDetailsDataType
+    getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
   }
 
   type Mutation {
     login: String
-    registerUser(data: RegistrationInputType!): RegistrationInputDataType
+    registerUser(data: RegistrationInputType!): RegistrationOutputDataType
   }
 
-  enum ProgramTypeEnum {
-    demoCourse
-    oneWeekProgram
-    fullCourse
-  }
-
-  type ProgramDetailsDataType {
+  type ProgramDetailsOutputDataType {
     name: String
     description: String
     programType: String
@@ -40,7 +34,7 @@ const typeDefs = gql`
     offline
   }
 
-  type RegistrationInputDataType {
+  type RegistrationOutputDataType {
     name: String!
     email: String!
     phoneNumber: String!

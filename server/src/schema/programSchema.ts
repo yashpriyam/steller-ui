@@ -1,15 +1,8 @@
 import mongoose from "mongoose";
 
-const programType = Object.freeze({
-  demoCourse: "demoCourse",
-  oneWeekCourse: "oneWeekCourse",
-  fullCourse: "fullCourse",
-});
-
 const programSchema = new mongoose.Schema({
   programType: {
     type: String,
-    enum: Object.values(programType),
     required: true,
     unique: true,
   },
