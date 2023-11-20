@@ -54,4 +54,12 @@ declare global {
     name: string;
     description: string;
   };
+
+  type CreateTransactionType = {
+    amount: number;
+    programType: string;
+    paymentId: string;
+    userId: string;
+    isPaymentSuccessfull: boolean;
+  }
 }

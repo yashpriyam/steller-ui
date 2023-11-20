@@ -8,6 +8,23 @@ const typeDefs = gql`
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
+    createTransaction(data: CreateTransactionInputType!):CreateTransactionOutputType
+  }
+
+  input CreateTransactionInputType {
+    amount: Int!
+    programType: String!
+    paymentId: String!
+    userId: String!
+    isPaymentSuccessfull: Boolean!
+  }
+
+  type CreateTransactionOutputType {
+    amount: Int!
+    programType: String!
+    paymentId: String!
+    userId: String!
+    isPaymentSuccessfull: Boolean!
   }
 
   type ProgramDetailsOutputDataType {
