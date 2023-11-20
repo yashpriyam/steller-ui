@@ -39,31 +39,21 @@ declare global {
     expectedSalary: string;
   };
 
-  enum ProgramTypeEnum {
-    demoCourse = "demoCourse",
-    oneWeekProgram = "oneWeekProgram",
-    fullCourse = "fullCourse",
-  }
-
-  type CreateOrderType = {
-    programType: ProgramTypeEnum;
-  };
-
-  type ProgramData = {
-    programType: ProgramTypeEnum;
+  type ProgramDataType = {
+    programType: string;
     amount: number;
     title: string;
     isActive: boolean;
-  }
+  };
 
-  type PaymentDetailsData = {
-    programType: ProgramTypeEnum;
+  type PaymentDetailsDataType = {
+    programType: string;
     amount: number;
     title: string;
     isActive: boolean;
     name: string;
     description: string;
-  }
+  };
 
   type CreateTransactionType = {
     amount: number;
