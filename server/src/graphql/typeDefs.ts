@@ -2,12 +2,21 @@ import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Query {
-    getUser: String
+    getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
   }
 
   type Mutation {
     login: String
-    registerUser(data: RegistrationInputType!): RegistrationInputDataType
+    registerUser(data: RegistrationInputType!): RegistrationOutputDataType
+  }
+
+  type ProgramDetailsOutputDataType {
+    name: String
+    description: String
+    programType: String
+    amount: Int
+    isActive: Boolean
+    title: String
   }
 
   input RegistrationInputType {
@@ -25,7 +34,7 @@ const typeDefs = gql`
     offline
   }
 
-  type RegistrationInputDataType {
+  type RegistrationOutputDataType {
     name: String!
     email: String!
     phoneNumber: String!

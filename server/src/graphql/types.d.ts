@@ -15,7 +15,7 @@ declare global {
   type MailDataType = {
     html: string;
     subject: string;
-  }
+  };
 
   type EmailType = {
     name: string;
@@ -37,5 +37,21 @@ declare global {
     occupation: string;
     sessionPreference: SessionPreferenceEnum;
     expectedSalary: string;
+  };
+
+  type ProgramDataType = {
+    programType: string;
+    amount: number;
+    title: string;
+    isActive: boolean;
+  };
+
+  type PaymentDetailsDataType = {
+    programType: string;
+    amount: number;
+    title: string;
+    isActive: boolean;
+    name: string;
+    description: string;
   };
 }

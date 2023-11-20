@@ -1,1 +1,1 @@
-export { getUser } from "./getUser";
+export { getPaymentDetails } from "./payment/getPaymentDetails"
