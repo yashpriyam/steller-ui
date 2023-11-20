@@ -8,7 +8,7 @@ const typeDefs = gql`
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
-    createTransaction(data: CreateTransactionInput!):CreateTransactionType
+    createTransaction(data: CreateTransactionInput!):CreateTransactionOutputType
   }
 
   input CreateTransactionInput {
@@ -19,7 +19,7 @@ const typeDefs = gql`
     isPaymentSuccessfull: Boolean!
   }
 
-  type CreateTransactionType {
+  type CreateTransactionOutputType {
     amount: Int!
     programType: String!
     paymentId: String!
