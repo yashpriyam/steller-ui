@@ -1,4 +1,4 @@
-.buttonComp{
+.buttonComp, .hoverOnButton{
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
@@ -27,8 +27,9 @@
 .large {
     font-size: 18px;
 }
-
-
+.hoverOnButton{
+    background-color: grey;
+}
 
 
 
