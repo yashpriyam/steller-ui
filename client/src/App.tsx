@@ -13,7 +13,7 @@ const App:React.FC = () => {
     return (
       <div>
         <h1>React Button Example</h1>
-        <Button className="buttonComp" onClick={onClick} onHover={onHover} isDisabled={false} size={"small"} isHidden={false} variant={"outlined"} />
+        <Button className="buttonComp" onClick={onClick} onHover={onHover} isDisabled={false} size={"large"} isHidden={false} variant={"outlined"} />
       </div>
     );
 }

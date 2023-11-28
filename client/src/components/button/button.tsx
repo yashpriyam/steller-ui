@@ -61,7 +61,7 @@ export const Button: React.FC<ModalProps> = ({
       <>
         <button
           ref={ref}
-          className={`${className} ${variant} `}
+          className={`${className} ${variant} ${size}`}
           disabled={isDisabled}
           onClick={onClick}
           onMouseEnter={onHover}
