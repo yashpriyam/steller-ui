@@ -44,7 +44,7 @@ export const Button: React.FC<ModalProps> = ({
           {(isLoading && (
             <span className={loaderPosition}>
               <span className="leftSubmit">Submit</span>
-              <img src={loaderIcon} alt="loading..." />
+              <img className="loaderIcon" src={loaderIcon} alt="loading..." />
               <span className="rightSubmit">Submit</span>
             </span>
           )) ||
