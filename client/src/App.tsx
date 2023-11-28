@@ -1,12 +1,22 @@
-import { useTranslation } from "react-i18next";
+import { Button } from "./components/button/button";
+// interface AppProps {}
+const App:React.FC = () => {
+  // const { t } = useTranslation();
+    const onClick = () => {
+      // setIsModalOpen(true);
+    };
 
-const App = () => {
-  const { t } = useTranslation();
-  return (
-    <div>
-      <h1>{t("greeting")}</h1>
-    </div>
-  );
-};
+    const onHover = () => {
+      // setIsModalOpen(false);
+    };
+
+    return (
+      <div>
+        <h1>React Button Example</h1>
+        <Button className="buttonComp" onClick={onClick} onHover={onHover} isDisabled={false} size={"small"} isHidden={false} variant={"outlined"} />
+      </div>
+    );
+}
 
 export default App;
+
