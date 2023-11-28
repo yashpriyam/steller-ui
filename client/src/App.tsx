@@ -4,8 +4,8 @@ import { Button } from "./components/button/button";
 const App: React.FC = () => {
   const [className, setClassName] = useState<string>('buttonComp')
   // const { t } = useTranslation();
-    const onClick = () => {
-      // setIsModalOpen(true);
+  const onClick = () => {
+      setClassName("clickOnButton")
     };
 
   const onHover = () => {

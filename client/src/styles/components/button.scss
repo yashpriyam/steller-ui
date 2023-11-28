@@ -1,4 +1,4 @@
-.buttonComp, .hoverOnButton{
+.buttonComp, .hoverOnButton,.clickOnButton{
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
@@ -29,6 +29,9 @@
 }
 .hoverOnButton{
     background-color: grey;
+}
+.clickOnButton{
+    background-color: rgba(255, 255, 0, 0.838)
 }
 
 
