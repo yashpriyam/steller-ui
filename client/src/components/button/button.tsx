@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import "../../styles/components/button.scss";
-
+import loader from "../../icons/index";
 interface ModalProps {
   className: string;
   isDisabled: boolean;
@@ -29,45 +29,26 @@ export const Button: React.FC<ModalProps> = ({
   iconOnRight,
   iconOnCentre,
   isLoading = false,
-  loaderPosition = "centre",
-  loaderIcon,
+  loaderPosition = "center",
+  loaderIcon = loader,
 }) => {
-  const fontTextSize: Record<string, string> = {
-    small: "14px",
-    medium: "16px",
-    large: "18px",
-  };
-  //   useEffect(() => {
-  //     if (ref.current) {
-  //           if (isLoading) {
-  //             ref.current.innerHTML = `<img src=${loaderIcon} alt="loading..."/>`;
-  //             ref.current.style.display = "flex";
-  //             ref.current.style.justifyContent = loaderPosition;
-  //           } else if (iconOnLeft) {
-  //             ref.current.innerHTML = `<img src=${iconOnLeft} alt="loading..."/> <span>Submit</span>`;
-  //           } else if (iconOnRight) {
-  //             ref.current.innerHTML = `<span>Submit</span> <img src=${iconOnRight} alt="loading..."/>`;
-  //           } else if (iconOnCentre) {
-  //             ref.current.innerHTML = `<img src=${iconOnCentre} alt="loading..."/>`;
-  //           } else {
-  //             ref.current.innerText = "Submit";
-  //           }
-  //     }
-  //   });
-
-  const ref = useRef<HTMLButtonElement>(null);
-
   return (
     <>
-      {isHidden === false && (
+      {!isHidden && (
         <button
-          ref={ref}
           className={`${className} ${variant} ${size}`}
           disabled={isDisabled}
           onClick={onClick}
           onMouseEnter={onHover}
         >
-          {(iconOnCentre && <img src={iconOnCentre} alt="loading..." />) ||
+          {(isLoading && (
+            <span className={loaderPosition}>
+              <span className="leftSubmit">Submit</span>
+              <img src={loaderIcon} alt="loading..." />
+              <span className="rightSubmit">Submit</span>
+            </span>
+          )) ||
+            (iconOnCentre && <img src={iconOnCentre} alt="loading..." />) ||
             (iconOnLeft && (
               <span>
                 <img src={iconOnLeft} alt="loading..." /> Submit

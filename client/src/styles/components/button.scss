@@ -34,7 +34,21 @@
     color: black;
 }
 
-
+.center{
+    >.leftSubmit,.rightSubmit{
+        display: none;
+    }
+}
+.left {
+    >.rightSubmit {
+        display: none;
+    }
+}
+.right {
+    >.leftSubmit{
+        display: none;
+    }
+}
 
 
 
