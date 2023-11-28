@@ -1,0 +1,92 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.select-container{
+    width: 130px;
+    padding: 10px;
+    text-align: center;
+}
+
+.select{
+    position: relative;
+    
+}
+.select-box{
+    border: 1.5px solid rgb(14, 114, 177);
+    border-radius: 4px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+    cursor: pointer;
+
+    >.arrow{
+        font-weight:900;
+        font-size: 12px;
+        padding: 0px;
+    }
+    
+    >.rotate-arrow{
+        transform: rotate(90deg);
+    }
+}
+
+.error{
+    border-color: red;
+}
+
+.options{
+    position: absolute;
+    left: 0px;
+    top: 29px;
+    width: 110px;
+    height: 75px;
+    list-style: none;
+    background-color: white;
+    padding: 4px 0px;
+    border-radius: 4px;
+    box-shadow: 0px 7px 20px -5px gray;
+    font-size: 10px;
+    text-align: start;
+    overflow: auto;
+    >li{
+        padding: 2px 12px;
+    }
+    >li:hover{
+        cursor: pointer;
+        background-color: rgba(159, 196, 219, 0.228);
+    }
+}
+
+.label{
+    font-size: 7px;
+    color: rgb(172, 163, 163);
+}
+
+.label-position-top{
+    top: 37px;
+}
+
+.requireds{
+    color: red;
+    position: absolute;
+    padding: 8px;
+    background-color: rgb(255, 255, 255);
+    width: 05px;
+    height: 5px;
+    right: 20px;
+    top: -5px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
+}
