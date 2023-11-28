@@ -40,12 +40,12 @@
     }
 }
 .left {
-    >.rightSubmit {
+    >.leftSubmit {
         display: none;
     }
 }
 .right {
-    >.leftSubmit{
+    >.rightSubmit {
         display: none;
     }
 }

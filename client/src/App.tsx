@@ -17,7 +17,7 @@ const App: React.FC = () => {
     return (
       <div>
         <h1>React Button Example</h1>
-        <Button className={className} onClick={onClick} onHover={onHover} isDisabled={false} size={"large"} isHidden={false} variant={"outlined"} isLoading={true} loaderPosition={"right"} />
+        <Button className={className} onClick={onClick} onHover={onHover} isDisabled={false} size={"large"} isHidden={false} variant={"outlined"} isLoading={true} loaderPosition={"center"} />
       </div>
     );
 }

@@ -13,7 +13,7 @@ interface ModalProps {
   iconOnRight?: string;
   iconOnCentre?: string;
   isLoading?: boolean;
-  loaderPosition?: "left" | "centre" | "right";
+  loaderPosition?: "left" | "center" | "right";
   loaderIcon?: string;
 }
 
