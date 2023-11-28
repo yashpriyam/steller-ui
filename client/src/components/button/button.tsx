@@ -18,57 +18,59 @@ interface ModalProps {
 }
 
 export const Button: React.FC<ModalProps> = ({
-  className,
-  isDisabled = false,
-  onClick,
-  onHover,
-  size = "medium",
-  variant = "contained",
-  isHidden = false,
-  iconOnLeft,
-  iconOnRight,
-  iconOnCentre,
-  isLoading = false,
-  loaderPosition = "centre",
-  loaderIcon,
+    className,
+    isDisabled = false,
+    onClick,
+    onHover,
+    size = "medium",
+    variant = "contained",
+    isHidden = false,
+    iconOnLeft,
+    iconOnRight,
+    iconOnCentre,
+    isLoading = false,
+    loaderPosition = "centre",
+    loaderIcon,
 }) => {
-  const fontTextSize: Record<string, string> = {
-    small: "14px",
-    medium: "16px",
-    large: "18px",
-  };
-//   useEffect(() => {
-//     if (ref.current) {
-//           if (isLoading) {
-//             ref.current.innerHTML = `<img src=${loaderIcon} alt="loading..."/>`;
-//             ref.current.style.display = "flex";
-//             ref.current.style.justifyContent = loaderPosition;
-//           } else if (iconOnLeft) {
-//             ref.current.innerHTML = `<img src=${iconOnLeft} alt="loading..."/> <span>Submit</span>`;
-//           } else if (iconOnRight) {
-//             ref.current.innerHTML = `<span>Submit</span> <img src=${iconOnRight} alt="loading..."/>`;
-//           } else if (iconOnCentre) {
-//             ref.current.innerHTML = `<img src=${iconOnCentre} alt="loading..."/>`;
-//           } else {
-//             ref.current.innerText = "Submit";
-//           }
-//     }
-//   });
+    const fontTextSize: Record<string, string> = {
+        small: "14px",
+        medium: "16px",
+        large: "18px",
+    };
+    //   useEffect(() => {
+    //     if (ref.current) {
+    //           if (isLoading) {
+    //             ref.current.innerHTML = `<img src=${loaderIcon} alt="loading..."/>`;
+    //             ref.current.style.display = "flex";
+    //             ref.current.style.justifyContent = loaderPosition;
+    //           } else if (iconOnLeft) {
+    //             ref.current.innerHTML = `<img src=${iconOnLeft} alt="loading..."/> <span>Submit</span>`;
+    //           } else if (iconOnRight) {
+    //             ref.current.innerHTML = `<span>Submit</span> <img src=${iconOnRight} alt="loading..."/>`;
+    //           } else if (iconOnCentre) {
+    //             ref.current.innerHTML = `<img src=${iconOnCentre} alt="loading..."/>`;
+    //           } else {
+    //             ref.current.innerText = "Submit";
+    //           }
+    //     }
+    //   });
 
-  const ref = useRef<HTMLButtonElement>(null);
+    const ref = useRef<HTMLButtonElement>(null);
 
     return (
       <>
-        <button
-          ref={ref}
-          className={`${className} ${variant} ${size}`}
-          disabled={isDisabled}
-          onClick={onClick}
-          onMouseEnter={onHover}
-          style={{ display: isHidden ? "none" : "block" }}
-            >
-                Submit
-        </button>
+            {(isHidden === false) &&
+                <button
+                    ref={ref}
+                    className={`${className} ${variant} ${size}`}
+                    disabled={isDisabled}
+                    onClick={onClick}
+                    onMouseEnter={onHover}
+                >
+                    {" "}
+                    Submit
+                </button>
+            }
       </>
     );
 };
