@@ -1,7 +1,8 @@
-.buttonComp, .hoverOnButton,.clickOnButton{
+.buttonComp{
     padding: 10px 20px;
     border-radius: 10px;
     border: none;
+    text-align: center;
     cursor: pointer;
     background-color: #fff;
     color: rgb(26, 74, 219);
@@ -27,12 +28,13 @@
 .large {
     font-size: 18px;
 }
-.hoverOnButton{
-    background-color: grey;
+
+.buttonComp:hover{
+    background-color: red;
+    color: black;
 }
-.clickOnButton{
-    background-color: rgba(255, 255, 0, 0.838)
-}
+
+
 
 
 
