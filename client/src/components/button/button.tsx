@@ -20,8 +20,8 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({
   className,
   isDisabled = false,
-  onClick,
-  onHover,
+  onClick = () => {},
+  onHover = () => {},
   size = "medium",
   variant = "contained",
   isHidden = false,
@@ -32,11 +32,11 @@ export const Button: React.FC<ButtonProps> = ({
   loaderPosition = "center",
   loaderIcon,
 }: ButtonProps) => {
-  const variantClassName: Record<string,string> = {
-    'text': 'text-button-style',
-    'outlined': 'outlined-button-style',
-    'contained': 'contained-button-style'
-  }
+  const variantClassName: Record<string, string> = {
+    text: "text-button-style",
+    outlined: "outlined-button-style",
+    contained: "contained-button-style",
+  };
   const sizeClassName: Record<string, string> = {
     small: "small-fontsize",
     medium: "medium-fontsize",
@@ -47,7 +47,7 @@ export const Button: React.FC<ButtonProps> = ({
     center: "loader-position-center",
     right: "loader-position-right",
   };
-         
+
   return (
     <>
       {!isHidden && (
@@ -58,10 +58,19 @@ export const Button: React.FC<ButtonProps> = ({
           onMouseEnter={onHover}
         >
           {(isLoading && (
-            <span className={`loader-postion-style ${loaderPositionClassName[loaderPosition]}`}>
+            <span
+              className={`loader-postion-style ${loaderPositionClassName[loaderPosition]}`}
+            >
               <span className="left-submit button-text">Submit</span>
-                {loaderIcon?<img className="loader-icon" src={loaderIcon} alt="loading..." />:
-              <Loader/>}
+              {loaderIcon ? (
+                <img
+                  className="loader-icon"
+                  src={loaderIcon}
+                  alt="loading..."
+                />
+              ) : (
+                <Loader />
+              )}
               <span className="right-submit button-text">Submit</span>
             </span>
           )) ||
@@ -76,7 +85,7 @@ export const Button: React.FC<ButtonProps> = ({
                 Submit
                 <img src={iconOnLeft} alt="loading..." />
               </span>
-            ))|| <span>Submit</span>}
+            )) || <span>Submit</span>}
         </button>
       )}
     </>
