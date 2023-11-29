@@ -1,6 +1,6 @@
 import React from "react";
 import "../../styles/components/button.scss";
-import loader from "../../icons/index";
+import { Loader } from "../loader/loader";
 interface ModalProps {
   className: string;
   isDisabled: boolean;
@@ -30,7 +30,7 @@ export const Button: React.FC<ModalProps> = ({
   iconOnCentre,
   isLoading = false,
   loaderPosition = "center",
-  loaderIcon = loader,
+  loaderIcon,
 }) => {
   return (
     <>
@@ -44,7 +44,8 @@ export const Button: React.FC<ModalProps> = ({
           {(isLoading && (
             <span className={loaderPosition}>
               <span className="leftSubmit">Submit</span>
-              <img className="loaderIcon" src={loaderIcon} alt="loading..." />
+                {loaderIcon?<img className="loaderIcon" src={loaderIcon} alt="loading..." />:
+              <Loader/>}
               <span className="rightSubmit">Submit</span>
             </span>
           )) ||

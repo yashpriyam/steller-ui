@@ -21,7 +21,7 @@ const App: React.FC = () => {
           isHidden={false}
           variant={"outlined"}
           isLoading={true}
-          loaderPosition="left"
+          loaderPosition="right"
         />
       </div>
     );
