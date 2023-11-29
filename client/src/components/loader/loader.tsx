@@ -1,13 +1,13 @@
 import React from "react";
 import '../../styles/components/loader.scss'
 
-interface ModalProps {
+interface LoaderProps {
   className?: string;
 }
 
-export const Loader: React.FC<ModalProps> = ({className="loader"}) => {
+export const Loader: React.FC<LoaderProps> = ({ className }) => {
     
     return (
-        <div className={className}></div>
+        <div className={`loader-component ${className}`}></div>
     );
 }

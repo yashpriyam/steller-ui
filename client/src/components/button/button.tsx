@@ -1,12 +1,12 @@
 import React from "react";
 import "../../styles/components/button.scss";
 import { Loader } from "../loader/loader";
-interface ModalProps {
-  className: string;
-  isDisabled: boolean;
-  onClick: () => void; 
-  onHover: () => void;
-  size: "small" | "medium" | "large";
+interface ButtonProps {
+  className?: string;
+  isDisabled?: boolean;
+  onClick ?: () => void; 
+  onHover?: () => void;
+  size?: "small" | "medium" | "large";
   variant?: "text" | "contained" | "outlined";
   isHidden: boolean;
   iconOnLeft?: string;
@@ -17,7 +17,7 @@ interface ModalProps {
   loaderIcon?: string;
 }
 
-export const Button: React.FC<ModalProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   className,
   isDisabled = false,
   onClick,
@@ -31,22 +31,23 @@ export const Button: React.FC<ModalProps> = ({
   isLoading = false,
   loaderPosition = "center",
   loaderIcon,
-}) => {
+}: ButtonProps) => {
+         
   return (
     <>
       {!isHidden && (
         <button
-          className={`${className} ${variant} ${size}`}
+          className={`button-component ${className} ${variant==="text"?"text-button-style":variant==="outlined"?"outlined-button-style":"conatined-button-style"} ${size==="small"?"small-fontsize":size==="medium"?"medium-fontsize":"large-fontsize"}`}
           disabled={isDisabled}
           onClick={onClick}
           onMouseEnter={onHover}
         >
           {(isLoading && (
-            <span className={loaderPosition}>
-              <span className="leftSubmit">Submit</span>
-                {loaderIcon?<img className="loaderIcon" src={loaderIcon} alt="loading..." />:
+            <span className={`loader-postion-style ${loaderPosition==='left'?"loader-position-left":loaderPosition==='right'?"loader-position-right":"loader-position-center"}`}>
+              <span className="left-submit button-text">Submit</span>
+                {loaderIcon?<img className="loader-icon" src={loaderIcon} alt="loading..." />:
               <Loader/>}
-              <span className="rightSubmit">Submit</span>
+              <span className="right-submit button-text">Submit</span>
             </span>
           )) ||
             (iconOnCentre && <img src={iconOnCentre} alt="loading..." />) ||
@@ -60,7 +61,7 @@ export const Button: React.FC<ModalProps> = ({
                 Submit
                 <img src={iconOnLeft} alt="loading..." />
               </span>
-            ))}
+            ))|| <span>Submit</span>}
         </button>
       )}
     </>

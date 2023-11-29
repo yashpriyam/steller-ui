@@ -1,4 +1,4 @@
-.buttonComp {
+.button-component {
   padding: 10px 20px;
   border-radius: 10px;
   border: none;
@@ -6,55 +6,52 @@
   cursor: pointer;
   background-color: #fff;
   color: rgb(26, 74, 219);
-}
-.contained {
-  background-color: "blue";
-  color: #fff;
-  background-color: rgb(15, 146, 198);
-}
-.outlined {
-  border: 2px solid rgb(26, 74, 219);
-}
-.text {
-  border: none;
-}
-
-.small {
-  font-size: 14px;
-}
-.medium {
-  font-size: 16px;
-}
-.large {
-  font-size: 18px;
-}
-
-.left,
-.right,
-.center {
+  
+  .loader-postion-style {
     display: flex;
     justify-items: center;
     align-items: center;
     gap: 10px;
-}
-.center {
-  > .leftSubmit,
-  .rightSubmit {
-    display: none;
+    .loader-icon {
+      width: fit-content;
+      height: 30px;
+    }
+  }
+  .loader-position-center {
+    margin: 0 30px;
+    .button-text {
+      display: none;
+    }
+  }
+  .loader-position-left {
+    .left-submit {
+      display: none;
+    }
+  }
+  .loader-position-right {
+    .right-submit {
+      display: none;
+    }
   }
 }
-.left {
-  > .leftSubmit {
-    display: none;
-  }
+.contained-button-style {
+  background-color: blue;
+  color: #fff;
+  background-color: rgb(15, 146, 198);
 }
-.right {
-  > .rightSubmit {
-    display: none;
-  }
+.outlined-button-style {
+  border: 2px solid rgb(26, 74, 219);
+}
+.text-button-style {
+  border: none;
 }
 
-.loaderIcon {
-  width: fit-content;
-  height: 30px;
+.small-fontsize {
+  font-size: 14px;
+}
+.medium-fontsize {
+  font-size: 16px;
+}
+.large-fontsize {
+  font-size: 18px;
 }
