@@ -9,11 +9,6 @@ interface ModalProps {
 
 export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
-
-//   const modalRoot = document.getElementById('body'); // Use 'modal-root' as the container
-
-//   if (!modalRoot) return null; // Ensure the modal root exists before rendering
-
   return createPortal(
     <div className="modal-overlay">
       <div className="modal-content">

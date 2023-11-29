@@ -4,9 +4,9 @@ import { Loader } from "../loader/loader";
 interface ModalProps {
   className: string;
   isDisabled: boolean;
-  onClick: () => void; // Adjusted the type of onClick and onHover to void
+  onClick: () => void; 
   onHover: () => void;
-  size: "small" | "medium" | "large"; // Restrict size to specific values
+  size: "small" | "medium" | "large";
   variant?: "text" | "contained" | "outlined";
   isHidden: boolean;
   iconOnLeft?: string;

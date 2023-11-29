@@ -1,13 +1,9 @@
 import { Button } from "./components/button/button";
-// interface AppProps {}
 const App: React.FC = () => {
-  // const { t } = useTranslation();
   const onClick = () => {
-      // setClassName("clickOnButton")
     };
 
   const onHover = () => {
-      // setClassName('hoverOnButton')
     };
     return (
       <div>
