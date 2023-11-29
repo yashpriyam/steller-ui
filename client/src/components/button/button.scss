@@ -1,0 +1,57 @@
+.button-component {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  background-color: #fff;
+  color: rgb(26, 74, 219);
+  
+  .loader-postion-style {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+    .loader-icon {
+      width: fit-content;
+      height: 30px;
+    }
+  }
+  .loader-position-center {
+    margin: 0 30px;
+    .button-text {
+      display: none;
+    }
+  }
+  .loader-position-left {
+    .left-submit {
+      display: none;
+    }
+  }
+  .loader-position-right {
+    .right-submit {
+      display: none;
+    }
+  }
+}
+.contained-button-style {
+  background-color: blue;
+  color: #fff;
+  background-color: rgb(15, 146, 198);
+}
+.outlined-button-style {
+  border: 2px solid rgb(26, 74, 219);
+}
+.text-button-style {
+  border: none;
+}
+
+.small-fontsize {
+  font-size: 14px;
+}
+.medium-fontsize {
+  font-size: 16px;
+}
+.large-fontsize {
+  font-size: 18px;
+}
