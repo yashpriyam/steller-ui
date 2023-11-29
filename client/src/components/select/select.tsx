@@ -1,102 +1,94 @@
 import React, { useEffect, useState } from "react";
-import "../../styles/components/select/select.scss"
+import "./select.scss";
 
 interface SelectProps {
-  isDisabled: boolean;
-  className: string;
-  data: { text: string; value: string }[];
-  defaultSelected: string;
-  onSelect: () => void;
+  isDisabled?: boolean;
+  className?: string;
+  data?: { text: string; value: string }[];
+  defaultSelected?: string;
+  onSelect?: (value : string) => void;
   label?: string;
   labelPosition?: "top" | "bottom";
-  isRequired: boolean;
-  isError: boolean;
-  placeHolder: string;
-  maxSize: number;
+  isRequired?: boolean;
+  isError?: boolean;
+  placeHolder?: string;
 }
 
 export const SelectComp: React.FC<SelectProps> = ({
   isDisabled = false,
   className = "",
   data = [],
-  defaultSelected = "Default option",
-  onSelect = () => {},
+  defaultSelected = "Select an Option",
+  onSelect = (value="") => {},
   label = "",
   labelPosition = "bottom",
   isRequired = false,
   isError = false,
-  placeHolder = "",
-  maxSize = 10,
-}) => {
+  placeHolder = "Select",
+}: SelectProps) => {
+
   const [selectedValue, setSelectedValue] = useState<string>(defaultSelected);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [dropBoxSize, setdropBoxSize] = useState<number>(maxSize);
-  const [dataOnUI, setDataOnUI] = useState<{ text: string; value: string }[]>(
-    []
-  );
-  const labelPositions= { top: "top", bottom: "bottom"};
+
+  const labelPositions: Record<string, string> = {
+    top: "top",
+    bottom: "bottom",
+  };
 
   const handleSelect = (value: string) => {
-    console.log(value);
     setSelectedValue(value);
     setIsOpen(false);
-    onSelect();
-  };
-  const handleOnScroll = (e: any) => {
-    setdropBoxSize(dropBoxSize + maxSize);
-    const newDataOnUI = data.slice(0, dropBoxSize + maxSize);
-    setDataOnUI(newDataOnUI);
+    onSelect(value);
   };
 
-  useEffect(() => {
-    const newDataOnUI = data.slice(0, dropBoxSize);
-    setDataOnUI(newDataOnUI);
-  }, []);
+  useEffect(()=>{
+    setIsOpen(false);
+  },[isDisabled])
 
   return (
     <div className={`select-container ${className}`}>
-      <div className={`select ${isDisabled && "disabled"}`}>
+      <div className={`select`}>
         {label && labelPosition === labelPositions.top && (
-          <label className={"label"}>{label}</label>
-        )}
-        {isRequired && (
-          <div className={`${isRequired && "requireds"}`}>
-            <span>*</span>
-          </div>
+          <label className="label">{label}</label>
         )}
         <div
-          className={`select-box ${isOpen && "open"} ${isError && "error"} ${
-            isDisabled && "disabled"
+          className={`select-box ${isError && "select-error"} ${
+            isDisabled && "select-disabled"
           }`}
           onClick={() => {
             !isDisabled && setIsOpen(!isOpen);
           }}
         >
+          {isRequired && (
+            <div className={`${isRequired && "select-required-tag"}`}>
+              <span>*</span>
+            </div>
+          )}
           <div className="selected-value">
             {selectedValue || placeHolder || "Select an option"}
           </div>
-          <div className={`arrow ${isOpen && "rotate-arrow"}`}>{">"}</div>
+          {isOpen && (
+            <ul
+              className={`options-container ${
+                labelPosition === labelPositions.top && "label-position-top"
+              }`}
+            >
+              {data.map((option) => (
+                <li
+                  key={option.value}
+                  onClick={() => handleSelect(option.value)}
+                  className={`list-child ${
+                    option.value === selectedValue && "selected-option"
+                  }`}
+                >
+                  {option.text}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
         {label && labelPosition === labelPositions.bottom && (
-          <label className={`label ${isRequired && "required"}`}>{label}</label>
-        )}
-        {isOpen && (
-          <ul
-            className={`options ${
-              labelPosition === labelPositions.top && "label-position-top"
-            }`}
-            onScroll={handleOnScroll}
-          >
-            {dataOnUI.map((option) => (
-              <li
-                key={option.value}
-                onClick={() => handleSelect(option.value)}
-                className={`${option.value === selectedValue && "selected"}`}
-              >
-                {option.text}
-              </li>
-            ))}
-          </ul>
+          <label className="label">{label}</label>
         )}
       </div>
     </div>
