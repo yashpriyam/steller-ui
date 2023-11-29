@@ -1,27 +1,12 @@
-import { Button } from "./components/button/button";
-const App: React.FC = () => {
-  const onClick = () => {
-    };
+import { useTranslation } from "react-i18next";
 
-  const onHover = () => {
-    };
-    return (
-      <div>
-        <h1>React Button Example</h1>
-        <Button
-          className={"buttonComp"}
-          onClick={onClick}
-          onHover={onHover}
-          isDisabled={true}
-          size={"large"}
-          isHidden={false}
-          variant={"outlined"}
-          isLoading={true}
-          loaderPosition="right"
-        />
-      </div>
-    );
-}
+const App = () => {
+  const { t } = useTranslation();
+  return (
+    <div>
+      <h1>{t("greeting")}</h1>
+    </div>
+  );
+};
 
 export default App;
-
