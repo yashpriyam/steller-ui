@@ -32,18 +32,33 @@ export const Button: React.FC<ButtonProps> = ({
   loaderPosition = "center",
   loaderIcon,
 }: ButtonProps) => {
+  const variantClassName: Record<string,string> = {
+    'text': 'text-button-style',
+    'outlined': 'outlined-button-style',
+    'contained': 'contained-button-style'
+  }
+  const sizeClassName: Record<string, string> = {
+    small: "small-fontsize",
+    medium: "medium-fontsize",
+    large: "large-fontsize",
+  };
+  const loaderPositionClassName: Record<string, string> = {
+    left: "loader-position-left",
+    center: "loader-position-center",
+    right: "loader-position-right",
+  };
          
   return (
     <>
       {!isHidden && (
         <button
-          className={`button-component ${className} ${variant==="text"?"text-button-style":variant==="outlined"?"outlined-button-style":"conatined-button-style"} ${size==="small"?"small-fontsize":size==="medium"?"medium-fontsize":"large-fontsize"}`}
+          className={`button-component ${className} ${variantClassName[variant]} ${sizeClassName[size]}`}
           disabled={isDisabled}
           onClick={onClick}
           onMouseEnter={onHover}
         >
           {(isLoading && (
-            <span className={`loader-postion-style ${loaderPosition==='left'?"loader-position-left":loaderPosition==='right'?"loader-position-right":"loader-position-center"}`}>
+            <span className={`loader-postion-style ${loaderPositionClassName[loaderPosition]}`}>
               <span className="left-submit button-text">Submit</span>
                 {loaderIcon?<img className="loader-icon" src={loaderIcon} alt="loading..." />:
               <Loader/>}
