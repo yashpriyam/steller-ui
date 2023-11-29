@@ -6,7 +6,9 @@
   cursor: pointer;
   background-color: #fff;
   color: rgb(26, 74, 219);
-  
+  &:disabled {
+    cursor: default;
+  }
   .loader-postion-style {
     display: flex;
     justify-items: center;
@@ -17,19 +19,19 @@
       height: 30px;
     }
   }
-  .loader-position-center {
+  .icon-position-center {
     margin: 0 30px;
-    .button-text {
+    .loader-button {
       display: none;
     }
   }
-  .loader-position-left {
-    .left-submit {
+  .icon-position-left {
+    .loader-left-button {
       display: none;
     }
   }
-  .loader-position-right {
-    .right-submit {
+  .icon-position-right {
+    .loader-right-button {
       display: none;
     }
   }
