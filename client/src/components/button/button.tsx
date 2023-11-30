@@ -14,6 +14,7 @@ interface ButtonProps {
   isLoading?: boolean;
   loaderIcon?: string;
   text?: string;
+  style?: object;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -29,6 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   isLoading,
   loaderIcon,
+  style = {}
 }: ButtonProps) => {
   const variantMap: Record<string, string> = {
     text: "text-button-style",
@@ -53,6 +55,7 @@ export const Button: React.FC<ButtonProps> = ({
           disabled={isDisabled}
           onClick={onClick}
           onMouseEnter={onHover}
+          style={style}
         >
           {isLoading || icon ? (
             <span

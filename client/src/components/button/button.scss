@@ -1,13 +1,20 @@
 .button-component {
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   text-align: center;
   cursor: pointer;
   background-color: #fff;
-  color: rgb(26, 74, 219);
+  color: #1565C0;
+  font-weight: 550;
   &:disabled {
     cursor: default;
+    opacity: 0.6;
+  }
+  &:not([disabled]):hover{
+      background-color: rgb(79, 77, 77);
+      border: none;
+      color: #fff;
   }
   .loader-postion-style {
     display: flex;
@@ -37,15 +44,20 @@
   }
 }
 .contained-button-style {
-  background-color: blue;
+  background-color: #1565C0;
   color: #fff;
-  background-color: rgb(15, 146, 198);
 }
 .outlined-button-style {
-  border: 2px solid rgb(26, 74, 219);
+  border: 1px solid #1565C0;
 }
 .text-button-style {
   border: none;
+  &:not([disabled]):hover{
+      background-color: white;
+      font-size: 15px;
+      color:#1565C0;
+  }
+
 }
 
 .small-fontsize {
