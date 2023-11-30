@@ -19,11 +19,9 @@ const useOnOutsideClick = (
       }
     };
 
-    document.body.style.overflowY = "hidden";
     document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.body.style.overflowY = "auto";
       document.removeEventListener("click", handleClickOutside);
     };
   }, [callbackRef, elementRef]);

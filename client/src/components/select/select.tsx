@@ -17,7 +17,7 @@ interface SelectProps {
 }
 
 
-export const SelectComp: React.FC<SelectProps> = ({
+export const Select: React.FC<SelectProps> = ({
   isDisabled = false,
   className = "",
   data = [],
