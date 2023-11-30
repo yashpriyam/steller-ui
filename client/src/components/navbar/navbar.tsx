@@ -25,7 +25,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     },
   ],
   direction = "right",
-  avtarIcon = "https://img.icons8.com/pastel-glyph/64/person-male--v3.png",
+  avtarIcon = "https://img.icons8.com/pastel-glyph/30/person-male--v3.png",
 }: NavbarProps) => {
   const navbarDirectionMap: Record<string, string> = {
     right: "navbar-container-direction-right",
@@ -44,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
       <div className="avtar-icon">
         <img
-          src="https://img.icons8.com/pastel-glyph/64/person-male--v3.png"
+          src={avtarIcon}
           alt="person-male--v3"
         />
       </div>
@@ -84,9 +84,12 @@ const OptionComponent: React.FC<OptionProps> = ({ options ,className
                         {option.url && <img src={option.url} />}
                       </span>
                       <span>{option.text}</span>
-                        </span>
-                        <span className={`${(isActive === index) && "isactive-option"}`}></span>
-                        
+                    </span>
+                    <span
+                      className={`${
+                        isActive === index ? "isactive-option" : "slide-bar"
+                      }`}
+                    ></span>
                   </div>
                 );
                 

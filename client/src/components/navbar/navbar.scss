@@ -1,6 +1,7 @@
 .navbar-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
   background-color: rgb(255, 255, 255);
   gap: 10px;
@@ -17,21 +18,22 @@
     }
   }
   .avtar-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 50px;
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     img {
       border-radius: 50%;
       background-color: #fff;
-      width: 40px;
-      height: 40px;
+      width: 20px;
+      height: 20px;
     }
   }
   .options-container-nav {
-    margin-left: 30px;
     width: 90%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     .options-container {
       display: flex;
@@ -39,19 +41,29 @@
       gap: 20px;
       width: 90%;
       overflow: scroll;
+            height: 40px;
       &::-webkit-scrollbar {
         display: none;
       }
       .option-container {
         display: flex;
+        justify-content: space-evenly;
         flex-direction: column;
         cursor: pointer;
-    
+          height: 40px;
         .option-data {
           display: flex;
+          align-items: center;
+          justify-content: center;
           color: #000000;
           &:hover {
-          color: rgb(0, 28, 110);
+           text-decoration: underline;
+          }
+          .left-option-icon{
+            img{
+                width: 25px;
+              height: 25px;
+            }
         }
         }
       }
@@ -78,7 +90,7 @@
     margin: 20px;
     img {
       width: 100px;
-      height: 80px;
+      height: 60px;
     }
   }
   .avtar-icon {
@@ -101,16 +113,28 @@
       display: flex;
       flex-direction: row-reverse;
       .option-container{
+            height: 30px;
         .option-data{
+            span{font-size: 25px;}
             &:hover{
-            color: rgb(90, 87, 88);
+                text-decoration: underline;
         }
+        .left-option-icon{
+            img{
+                width: 20px;
+               height: 20px;
+            }
+          }
         }
       }
     }
   }
 }
+.slide-bar{
+    height: 2.8px;
+}
 .isactive-option {
+    height: 0;
   border: 2px solid rgb(0, 0, 0);
   animation: borderAnimation 0.5s ease-in-out;
   border-radius: 2px;
@@ -148,7 +172,7 @@
     width: 90%;
   }
   100% {
-    width: 100%;
+    width:100%  ;
   }
 }
 
@@ -158,7 +182,7 @@
   .navbar-container {
     display: flex;
     width: 100%;
-    background-color: rgb(216, 231, 2);
+    background-color: rgb(255, 255, 255);
     font-size: 20px;
     font-weight: 600;
     font-family: serif;
@@ -166,17 +190,29 @@
       padding: 0 0 0 10px;
       margin: 2px;
       img {
-        width: 80px;
-        height: 70px;
+        width: 50px;
+        height: 50px;
       }
     }
+    .avtar-icon {
+    margin:20px;
+    width: 60px;
+    height: 60px;
+    img {
+    border-radius: 50%;
+    background-color: #fff;
+    width: 40px;
+      height: 40px;
+  }
+}
     .options-container-nav {
-      margin-left: 5px;
+      margin: 0px;
       width: 90%;
       display: flex;
       justify-content: space-between;
-      overflow: scroll;
+      overflow: auto;
       align-items: center;
+      
       .options-container {
         display: flex;
         align-items: center;
@@ -184,19 +220,8 @@
         width: 100%;
         padding-right: 5px;
         &::-webkit-scrollbar {
-          display: none;
-        }
-        .option-container {
-          display: flex;
-          flex-direction: column;
-          cursor: pointer;
-          &:hover {
-            color: crimson;
-          }
-          .option-data {
-            display: flex;
-          }
-        }
+        display: none;
+      }
       }
     }
   }
