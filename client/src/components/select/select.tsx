@@ -1,52 +1,66 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./select.scss";
+import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
 interface SelectProps {
   isDisabled?: boolean;
   className?: string;
   data?: { text: string; value: string }[];
   defaultSelected?: string;
-  onSelect?: (value : string) => void;
+  onSelect?: (option : {}) => void;
   label?: string;
   labelPosition?: "top" | "bottom";
   isRequired?: boolean;
   isError?: boolean;
   placeHolder?: string;
+  style?: object;
 }
+
 
 export const SelectComp: React.FC<SelectProps> = ({
   isDisabled = false,
   className = "",
   data = [],
   defaultSelected = "Select an Option",
-  onSelect = (value="") => {},
+  onSelect = (option={}) => {},
   label = "",
   labelPosition = "bottom",
   isRequired = false,
   isError = false,
   placeHolder = "Select",
+  style={}
 }: SelectProps) => {
 
   const [selectedValue, setSelectedValue] = useState<string>(defaultSelected);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const dropdownRef = useRef<HTMLDivElement>(null);
+  
   const labelPositions: Record<string, string> = {
     top: "top",
     bottom: "bottom",
   };
-
-  const handleSelect = (value: string) => {
-    setSelectedValue(value);
-    setIsOpen(false);
-    onSelect(value);
+  
+  
+  type Option = {
+    value: string;
+    text: string;
   };
+
+  const handleSelect = (option: Option): void => {
+    setSelectedValue(option.text);
+    setIsOpen(false);
+    onSelect(option);
+  };
+
+  
+  useOnOutsideClick(dropdownRef,()=>setIsOpen(false))
 
   useEffect(()=>{
     setIsOpen(false);
   },[isDisabled])
 
   return (
-    <div className={`select-container ${className}`}>
+    <div ref={dropdownRef} style={style} className={`select-container ${className}`}>
       <div className={`select`}>
         {label && labelPosition === labelPositions.top && (
           <label className="label">{label}</label>
@@ -76,9 +90,9 @@ export const SelectComp: React.FC<SelectProps> = ({
               {data.map((option) => (
                 <li
                   key={option.value}
-                  onClick={() => handleSelect(option.value)}
+                  onClick={() => handleSelect(option)}
                   className={`list-child ${
-                    option.value === selectedValue && "selected-option"
+                    option.text === selectedValue && "selected-option"
                   }`}
                 >
                   {option.text}
