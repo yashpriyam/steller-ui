@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { GiHamburgerMenu } from "react-icons/gi";
 import "./navbar.scss";
 
 
@@ -25,8 +26,9 @@ export const Navbar: React.FC<NavbarProps> = ({
     },
   ],
   direction = "right",
-  avtarIcon = "https://img.icons8.com/pastel-glyph/30/person-male--v3.png",
+  avtarIcon = "https://img.icons8.com/pastel-glyph/person-male--v3.png",
 }: NavbarProps) => {
+    const [showMediaIcons,setShowMediaIcons]=useState<boolean>(false)
   const navbarDirectionMap: Record<string, string> = {
     right: "navbar-container-direction-right",
     left: "navbar-container-direction-left",
@@ -37,16 +39,26 @@ export const Navbar: React.FC<NavbarProps> = ({
       className={`navbar-container ${navbarDirectionMap[direction]} ${className}`}
     >
       <div className="icon-container">
-        <img src={icon} alt={"WM"} />
+        <img className="application-icon-bar" src={icon} alt={"WM"} />
       </div>
-      <div className={`options-container-nav ${className}`}>
-        <OptionComponent options={options} />
+      <div className={`${
+            showMediaIcons
+              ? "mobile-view-options-container"
+              :"options-avtar-wrapper"}`}>
+        <div
+          className={`options-container ${className}`}
+        >
+          <OptionComponent options={options} />
+        </div>
+        {<div className="avtar-icon-container">
+          <img className="avtar-icon" src={avtarIcon} alt="" />
+        </div>}
       </div>
-      <div className="avtar-icon">
-        <img
-          src={avtarIcon}
-          alt="person-male--v3"
-        />
+      <div
+        className="menu-icon-bar"
+        onClick={() => setShowMediaIcons(!showMediaIcons)}
+      >
+        <GiHamburgerMenu className="menu-icon" />
       </div>
     </div>
   );
@@ -68,8 +80,7 @@ const OptionComponent: React.FC<OptionProps> = ({ options ,className
     const onClickFunction = (e: React.MouseEvent<HTMLDivElement>,index:number) => {
      setActive(index)
  };
-    return <div className={`options-container ${className}`}>
-        
+    return <>        
         {
             options?.map((option, index) => {
                 return (
@@ -79,22 +90,22 @@ const OptionComponent: React.FC<OptionProps> = ({ options ,className
                       onClickFunction(e, index)
                     }
                   >
-                    <span className="option-data">
-                      <span className="left-option-icon">
-                        {option.url && <img src={option.url} />}
-                      </span>
-                      <span>{option.text}</span>
-                    </span>
-                    <span
+                    <div className="option-data">
+                        {option.url && <img className="navbar-option-icon" src={option.url} alt="" />}
+                      <div className="navbar-option-text">{option.text}</div>
+                    </div>
+                    <div
                       className={`${
-                        isActive === index ? "isactive-option" : "slide-bar"
+                        isActive === index ? "active-slide-option" : "inactive-slide-option"
                       }`}
-                    ></span>
+                        >
+                            <div className="progress-line"></div>
+                    </div>
                   </div>
                 );
                 
             })
         }
+        </>
         
-  </div>;
 };
