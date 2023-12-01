@@ -21,7 +21,7 @@ export const Button: React.FC<ButtonProps> = ({
   onClick = (e:React.MouseEvent<HTMLButtonElement>) => {},
   onHover = () => {},
   size = "medium",
-  variant = "contained",
+  variant = "outlined",
   iconPosition = "left",
   text = "submit",
   className,
