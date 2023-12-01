@@ -1,0 +1,148 @@
+.drawer-container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(95, 94, 94);
+  transition: width 2s;
+  position: absolute;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .drawer-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgb(129, 128, 128);
+    .drawer-option-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      img {
+        width: 25px;
+        height: 25px;
+      }
+    }
+    .drawer-option-text {
+      display: flex;
+      align-items: center;
+      justify-content: left;
+      font-size: 25px;
+      padding-left: 10px;
+      color: #fff;
+      width: 100%;
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
+.drawer-left-open {
+  height: 100vh;
+  width: 30%;
+  padding-right: 2px;
+  left: 0;
+  top: 0;
+}
+.drawer-right-open {
+  height: 100vh;
+  width: 30%;
+  padding-right: 2px;
+  right: 0;
+  top: 0;
+}
+.drawer-top-open {
+  width: 100vw;
+  max-height: 80%;
+  padding-right: 2px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.drawer-bottom-open {
+  width: 100vw;
+  max-height: 80%;
+  padding-right: 2px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 900px) {
+  .drawer-left-open,
+  .drawer-right-open {
+    width: 40%;
+  }
+}
+@media screen and (max-width: 900px) and (min-width: 600px) {
+  .drawer-left-open,
+  .drawer-right-open {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 600px) and (min-width: 500px) {
+  .drawer-left-open,
+  .drawer-right-open {
+    width: 60%;
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: 20px;
+        padding: 5px;
+        img {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  .drawer-top-open,
+  .drawer-bottom-open {
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: 20px;
+        padding: 4px;
+        img {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) and (min-width: 300px) {
+  .drawer-left-open,
+  .drawer-right-open {
+    width: 80%;
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: 15px;
+        padding: 4px;
+        img {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+  .drawer-top-open,
+  .drawer-bottom-open {
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: 15px;
+        padding: 4px;
+        img {
+          font-size: 15px;
+        }
+      }
+    }
+  }
+  
+}
