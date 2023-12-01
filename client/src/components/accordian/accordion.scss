@@ -1,0 +1,56 @@
+.accordion {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  overflow: hidden;
+  box-shadow: 1px 1px 2px 1px rgba(203, 200, 200, 0.854);
+
+    .accordion-header {
+        cursor: pointer;
+        padding: 10px;
+        background-color: white;
+        color: rgba(25, 25, 25, 0.849);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .drop-up-icon {
+            transform: rotate(180deg);
+            transition: all 0.5s;
+        }
+        
+        .drop-down-icon {
+            margin: 0px 10px;
+            transition: all 0.5s;
+        }
+
+        .drop-down-icon::selection{
+            background-color: transparent;
+        }
+
+    }
+    
+    .accordion-content {
+        background-color: white;
+        color: black;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+
+        .content-wrapper {
+            padding: 10px;
+        }
+    }
+
+
+    .open-accordion {
+        max-height: 300px;
+        transition: all 0.7s;
+    }
+
+    .closed-accordion {
+        max-height: 0;
+        transition: all 0.4s;
+    }
+
+}
