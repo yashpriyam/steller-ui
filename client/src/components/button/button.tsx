@@ -3,7 +3,7 @@ import "./button.scss";
 import { Loader } from "../loader/loader";
 interface ButtonProps {
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  onHover?: () => void;
+  onHover?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   size?: "small" | "medium" | "large";
   variant?: "text" | "contained" | "outlined";
   iconPosition?: "left" | "center" | "right";
@@ -18,8 +18,8 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({
-  onClick = (e:React.MouseEvent<HTMLButtonElement>) => {},
-  onHover = () => {},
+  onClick = (e: React.MouseEvent<HTMLButtonElement>) => {},
+  onHover = (e: React.MouseEvent<HTMLButtonElement>) => {},
   size = "medium",
   variant = "outlined",
   iconPosition = "left",
@@ -30,7 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
   icon,
   isLoading,
   loaderIcon,
-  style = {}
+  style = {},
 }: ButtonProps) => {
   const variantMap: Record<string, string> = {
     text: "text-button-style",
