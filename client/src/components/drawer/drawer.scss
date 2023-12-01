@@ -1,9 +1,10 @@
 .drawer-container {
   display: flex;
   flex-direction: column;
-  background-color: rgb(95, 94, 94);
+  background-color: rgb(255, 255, 255);
   transition: width 2s;
   position: absolute;
+  box-shadow: 1px 1px 3px 1px rgb(162, 161, 161);
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
@@ -31,7 +32,7 @@
       justify-content: left;
       font-size: 25px;
       padding-left: 10px;
-      color: #fff;
+      color: #000000;
       width: 100%;
       overflow: scroll;
       &::-webkit-scrollbar {

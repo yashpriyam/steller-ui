@@ -15,7 +15,7 @@ interface DrawerProps {
 }
 
 export const Drawer: React.FunctionComponent<DrawerProps> = ({
-  direction = "top",
+  direction = "right",
   options,
   className,
   isOpen = false,
