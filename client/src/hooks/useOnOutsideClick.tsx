@@ -14,7 +14,6 @@ const useOnOutsideClick = (
         !elementRef.current.contains(e.target as Node) &&
         callbackRef.current
       ) {
-        document.body.style.overflowY = "auto";
         callbackRef.current(e);
       }
     };

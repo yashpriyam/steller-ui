@@ -18,16 +18,16 @@ interface SelectProps {
 
 
 export const Select: React.FC<SelectProps> = ({
-  isDisabled = false,
-  className = "",
+  isDisabled,
+  className,
   data = [],
   defaultSelected = "Select an Option",
   onSelect = (option={}) => {},
-  label = "",
+  label,
   labelPosition = "bottom",
-  isRequired = false,
-  isError = false,
-  placeHolder = "Select",
+  isRequired,
+  isError,
+  placeHolder,
   style={}
 }: SelectProps) => {
 
@@ -40,13 +40,8 @@ export const Select: React.FC<SelectProps> = ({
     bottom: "bottom",
   };
   
-  
-  type Option = {
-    value: string;
-    text: string;
-  };
 
-  const handleSelect = (option: Option): void => {
+  const handleSelect = (option: { value: string; text: string }): void => {
     setSelectedValue(option.text);
     setIsOpen(false);
     onSelect(option);
@@ -83,9 +78,7 @@ export const Select: React.FC<SelectProps> = ({
           </div>
           {isOpen && (
             <ul
-              className={`options-container ${
-                labelPosition === labelPositions.top && "label-position-top"
-              }`}
+              className="options-container"
             >
               {data.map((option) => (
                 <li
