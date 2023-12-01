@@ -41,18 +41,25 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="icon-container">
         <img className="application-icon-bar" src={icon} alt={"WM"} />
       </div>
-      <div className={`${
-            showMediaIcons
-              ? "mobile-view-options-container"
-              :"options-avtar-wrapper"}`}>
-        <div
-          className={`options-container ${className}`}
-        >
+      <div
+        className={`${
+          showMediaIcons
+            ? "mobile-view-options-container"
+            : "options-avtar-mobile-view-wrapper"
+        }  options-avtar-wrapper`}
+      >
+        <div className={`options-container ${className}`}>
           <OptionComponent options={options} />
         </div>
-        {<div className="avtar-icon-container">
-          <img className="avtar-icon" src={avtarIcon} alt="" />
-        </div>}
+        {
+          <div
+            className={`${
+              showMediaIcons && "avtar-icon-hide"
+            } avtar-icon-container`}
+          >
+            <img className="avtar-icon" src={avtarIcon} alt="" />
+          </div>
+        }
       </div>
       <div
         className="menu-icon-bar"
