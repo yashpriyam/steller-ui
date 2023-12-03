@@ -1,4 +1,4 @@
-@import "../../components/variables.scss" ;
+@import "../../components//variables.scss" ;
 
 .select-container{
     width: 200px;
@@ -58,20 +58,20 @@
             
             .list-child{
                 padding: 8px 10px;
-                border-bottom: 1px solid $lightBlue-secondary;
+                border-bottom: 1px solid $lightBlueSecondary;
                 transition: all 0.3s;
             }
     
             .list-child:hover {
                 cursor: pointer;
-                background-color: $lightBlue-secondary;
+                background-color: $lightBlueSecondary;
             }
             
             .selected-option{
-                background-color: $lightBlue-primary;
+                background-color: $lightBluePrimary;
             }
             .selected-option:hover{
-                background-color: $lightBlue-primary;
+                background-color: $lightBluePrimary;
             }
         }
 
