@@ -4,11 +4,13 @@
   width: 100%;
   height: 80px;
   box-shadow: 1px 1px 4px 1px rgb(145, 143, 143);
-
   .icon-container {
     width: 200px;
     height: 100%;
-    padding: 10px 30px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .application-icon-bar {
       width: 140px;
       height: 100%;
@@ -49,7 +51,7 @@
       align-items: center;
       margin-bottom: 4px;
       &:hover {
-        text-decoration: underline cyan 2px;
+        text-decoration: underline black;
       }
       .navbar-option-icon {
         width: 25px;
@@ -73,7 +75,7 @@
       .progress-line {
         height: 100%;
         border-radius: 10px;
-        background-color: rgb(20, 127, 220);
+        background-color: rgb(0, 0, 0);
         animation: loading 1s forwards cubic-bezier(0, 0, 0, 0);
       }
     }
@@ -89,9 +91,9 @@
   &:hover {
     cursor: pointer;
   }
-  .avtar-icon {
-      width: 30px;
-      height: 30px;
+  .navbar-avatar {
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: #fff;
   }
@@ -124,8 +126,6 @@
 @media screen and (max-width: 920px) {
   .menu-icon-bar {
     display: block;
-    width: 100px;
-    padding: 20px 30px;
     .menu-icon {
       font-size: 35px;
       cursor: pointer;
@@ -134,21 +134,25 @@
   .navbar-container {
     justify-content: space-between;
     position: relative;
+    padding: 0 20px;
+    box-shadow: 1px 1px 4px 1px rgb(145, 143, 143);
     &.navbar-container-direction-left
         .mobile-view-options-container{
             left: 0;
     }
+    .icon-container{
+      width: 120px;
+    }
     .mobile-view-options-container {
       position: absolute;
-      display: block;
+      display: flex;
+      flex-direction: column-reverse;
       top: 100%;
       right: 0;
       height: fit-content;
       width: 50%;
       animation: slider-in 1s forwards cubic-bezier(0, 0, 0, 0);
-      background-color: rgb(138, 138, 138);
       .options-container {
-        background-color: grey;
         position: absolute;
         display: block;
         top: 100%;
@@ -161,8 +165,7 @@
         border-bottom: 1px solid black;
         padding: 5px 0;
         justify-content: left;
-        background-color: grey;
-        .avtar-icon {
+        .navbar-avatar {
           width: 30px;
           height: 30px;
           border-radius: 50%;
@@ -171,7 +174,7 @@
       }
     }
 }
-  }
+}
 
   @keyframes slider-in {
     0% {
@@ -179,15 +182,6 @@
     }
     100% {
       width: 50%;
-    }
-  }
-
-  @keyframes slider-out {
-    0% {
-      width: 50%;
-    }
-    100% {
-      width: 0%;
     }
   }
 

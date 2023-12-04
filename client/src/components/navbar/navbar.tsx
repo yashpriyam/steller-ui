@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import "./navbar.scss";
 
-
 interface NavbarProps {
   className?: string;
   icon?: string;
@@ -17,7 +16,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({
   className,
-  icon = "http://localhost:3000/static/media/Logo.68860f31b9df8fed08edea34af2f9ae8.svg",
+  icon = "",
   options = [
     {
       onClick: (e: React.MouseEvent<HTMLDivElement>) => {},
@@ -26,13 +25,21 @@ export const Navbar: React.FC<NavbarProps> = ({
     },
   ],
   direction = "right",
-  avtarIcon = "https://img.icons8.com/pastel-glyph/person-male--v3.png",
+  avtarIcon,
 }: NavbarProps) => {
     const [showMediaIcons,setShowMediaIcons]=useState<boolean>(false)
   const navbarDirectionMap: Record<string, string> = {
     right: "navbar-container-direction-right",
     left: "navbar-container-direction-left",
   };
+   const [isActive, setActive] = useState<number>(0);
+
+   const onClickFunction = (
+     e: React.MouseEvent<HTMLDivElement>,
+     index: number
+   ) => {
+     setActive(index);
+   };
 
   return (
     <div
@@ -49,7 +56,36 @@ export const Navbar: React.FC<NavbarProps> = ({
         }  options-avtar-wrapper`}
       >
         <div className={`options-container ${className}`}>
-          <OptionComponent options={options} />
+          {options?.map((option, index) => {
+            return (
+              <div
+                className={`option-container ${className}`}
+                onClick={(e: React.MouseEvent<HTMLDivElement>) =>
+                  onClickFunction(e, index)
+                }
+              >
+                <div className="option-data">
+                  {option.url && (
+                    <img
+                      className="navbar-option-icon"
+                      src={option.url}
+                      alt=""
+                    />
+                  )}
+                  <div className="navbar-option-text">{option.text}</div>
+                </div>
+                <div
+                  className={`${
+                    isActive === index
+                      ? "active-slide-option"
+                      : "inactive-slide-option"
+                  }`}
+                >
+                  <div className="progress-line"></div>
+                </div>
+              </div>
+            );
+          })}
         </div>
         {
           <div
@@ -57,7 +93,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               showMediaIcons && "avtar-icon-hide"
             } avtar-icon-container`}
           >
-            <img className="avtar-icon" src={avtarIcon} alt="" />
+            <img className="navbar-avatar" src={avtarIcon} alt="" />
           </div>
         }
       </div>
@@ -69,50 +105,4 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
     </div>
   );
-};
-
-interface OptionProps {
-  options?: {
-    onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
-    text?: string;
-    url?: string;
-  }[];
-    className?: string;
-}
-
-const OptionComponent: React.FC<OptionProps> = ({ options ,className
-}: OptionProps) => {
- const [isActive, setActive] = useState<number>(0);
-
-    const onClickFunction = (e: React.MouseEvent<HTMLDivElement>,index:number) => {
-     setActive(index)
- };
-    return <>        
-        {
-            options?.map((option, index) => {
-                return (
-                  <div
-                    className={`option-container ${className}`}
-                    onClick={(e: React.MouseEvent<HTMLDivElement>) =>
-                      onClickFunction(e, index)
-                    }
-                  >
-                    <div className="option-data">
-                        {option.url && <img className="navbar-option-icon" src={option.url} alt="" />}
-                      <div className="navbar-option-text">{option.text}</div>
-                    </div>
-                    <div
-                      className={`${
-                        isActive === index ? "active-slide-option" : "inactive-slide-option"
-                      }`}
-                        >
-                            <div className="progress-line"></div>
-                    </div>
-                  </div>
-                );
-                
-            })
-        }
-        </>
-        
 };
