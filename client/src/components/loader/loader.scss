@@ -1,0 +1,18 @@
+@import '../variable.scss';
+.loader-component {
+  border: 4px solid $sencondaryBorderColor;
+  border-top: 4px solid $primaryBorderColor; 
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: loaderComponentSpinner 1s linear infinite; 
+}
+
+@keyframes loaderComponentSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
