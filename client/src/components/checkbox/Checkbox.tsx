@@ -52,6 +52,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             style={{
               backgroundColor: checkboxColor,
             }}
+            onClick={() => handleCheckboxChange(index)}
           ></div>
           <label className="label-text">{option}</label>
         </div>
