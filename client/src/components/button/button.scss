@@ -1,0 +1,72 @@
+@import '../../components/variables.scss';
+
+.button-component {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  background-color: $primaryBg;
+  color: $primaryTextColor;
+  font-weight: 550;
+  &:disabled {
+    cursor: default;
+    opacity: 0.6;
+  }
+  &:not([disabled]):hover{
+      background-color: $primaryBgColorOnHover;
+      border: none;
+      color: $primaryBg;
+  }
+  .loader-postion-style {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+    .loader-icon {
+      width: fit-content;
+      height: 30px;
+    }
+  }
+  .icon-position-center {
+    margin: 0 30px;
+    .loader-button {
+      display: none;
+    }
+  }
+  .icon-position-left {
+    .loader-left-button {
+      display: none;
+    }
+  }
+  .icon-position-right {
+    .loader-right-button {
+      display: none;
+    }
+  }
+}
+.contained-button-style {
+  background-color: $sencondaryBg;
+  color: $primaryBg;
+}
+.outlined-button-style {
+  border: 1px solid $primaryBorderColor;
+}
+.text-button-style {
+  border: none;
+  &:not([disabled]):hover{
+      background-color: $primaryBg;
+      font-size: 15px;
+      color:$primaryTextColor;
+  }
+}
+
+.small-fontsize {
+  font-size: $smallFontSize;
+}
+.medium-fontsize {
+  font-size: $mediumFontSize;
+}
+.large-fontsize {
+  font-size: $largerFontSize;
+}
