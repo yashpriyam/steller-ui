@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
 import "./navbar.scss";
+import menuIcon from "../../icons/icons8-menu.svg";
 
 interface NavbarProps {
   className?: string;
@@ -8,9 +8,9 @@ interface NavbarProps {
   options?: {
     onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
     text?: string;
-      url?: string;
-    }[];
-    avtarIcon?:string
+    url?: string;
+  }[];
+  avtarIcon?: string;
   direction?: "right" | "left";
 }
 
@@ -27,20 +27,18 @@ export const Navbar: React.FC<NavbarProps> = ({
   direction = "right",
   avtarIcon,
 }: NavbarProps) => {
-    const [showMediaIcons,setShowMediaIcons]=useState<boolean>(false)
+  const [showMediaIcons, setShowMediaIcons] = useState<boolean>(false);
   const navbarDirectionMap: Record<string, string> = {
     right: "navbar-container-direction-right",
     left: "navbar-container-direction-left",
   };
-   const [isActive, setActive] = useState<number>(0);
-
-   const onClickFunction = (
-     e: React.MouseEvent<HTMLDivElement>,
-     index: number
-   ) => {
-     setActive(index);
-   };
-
+  const [isActive, setActive] = useState<number>(0);
+  const onClickFunction = (
+    e: React.MouseEvent<HTMLDivElement>,
+    index: number
+  ) => {
+    setActive(index);
+  };
   return (
     <div
       className={`navbar-container ${navbarDirectionMap[direction]} ${className}`}
@@ -49,11 +47,9 @@ export const Navbar: React.FC<NavbarProps> = ({
         <img className="application-icon-bar" src={icon} alt={"WM"} />
       </div>
       <div
-        className={`${
-          showMediaIcons
-            ? "mobile-view-options-container"
-            : "options-avtar-mobile-view-wrapper"
-        }  options-avtar-wrapper`}
+        className={` options-avtar-wrapper ${
+          showMediaIcons ? "drawer-open" : "drawer-close"
+        }  `}
       >
         <div className={`options-container ${className}`}>
           {options?.map((option, index) => {
@@ -88,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           })}
         </div>
         {
-          <div
+          avtarIcon&&<div
             className={`${
               showMediaIcons && "avtar-icon-hide"
             } avtar-icon-container`}
@@ -101,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         className="menu-icon-bar"
         onClick={() => setShowMediaIcons(!showMediaIcons)}
       >
-        <GiHamburgerMenu className="menu-icon" />
+        <img className="menu-icon" src={menuIcon} alt="" />
       </div>
     </div>
   );
