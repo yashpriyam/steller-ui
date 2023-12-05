@@ -7,23 +7,62 @@
     gap: 20px;
     .scheduling-page-filter-container {
         width: 25%;
-        height: 100px;
+        height: fit-content;
         background-color: rgb(128, 128, 128, 0.3);
         border-radius: 5px;
+        padding: 5px 10px;
+        display: flex;
+        
+        .filter-sub-container{
+            font-size: 20px;
+
+            .filter-heading{
+                border-bottom: 1px solid rgb(165, 161, 161);
+            }
+        
+        .checkbox-content{
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        
+            .checkbox-wrapper{
+                display: flex;
+                gap: 5px;
+                align-items: center;
+
+                input[type=checkbox]{
+                    width: 20px;
+                    height: 20px;
+                    cursor: pointer;
+                }
+
+                label{
+                    font-size: 16px;
+                    cursor: pointer;
+                }
+                
+            }
+        }
     }
+}
     .scheduling-page-accordion {
         padding: 0px 10px;
         display: flex;
         flex-direction: column;
         width: 50%;
         gap: 10px;
+        
+
         .schedule-accordion-description {
             color: rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+            font-size: 15px;
         }
         .daylist-container{
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
             padding: 20px 0px;
             .day-container{
                 display: flex;
@@ -33,19 +72,81 @@
             }
         }
         .accordion-button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 10px;
+
+            .title{
+                font-size: 20px;
+            }
+            .description{
+                color: rgb(100, 100, 100);
+                font-size: 13px;
+                font-weight: 600;
+            }
+
+            .btn-wrapper{          
                 display: flex;
                 gap: 5px;
-                padding: 10px 5px;
-                .assignment-button{
+                align-items: center;
+                flex-wrap: wrap;
+                
+                .btn{
+                    // color: white;
+                    // transition: color 1s;
+                    // transition: background-color 0.3s;
+                    // border-color: transparent;
+
+                    background-color: rgba(0, 0, 0, 0.744);
+                    border-color: black;
                     color: white;
+                    &:hover{
+                    background-color: #ED303C;
+                    transition: all 0.3s;
+                    }
+                }
+
+                .red-btn{
+                    background-color: #ED303C;
+                    border-color: #ED303C;
+                }
+                .assignment-button{
                     background-color: green;
                     &:hover{
                         background-color: #fff;
-                    color: green;
-                    border: 1px solid green;
-
+                        color: green;
+                        border: 1px solid green;
                     }
                 }
+
+                .youtube-btn{
+                    background-color: red;
+                    &:hover{
+                        background-color: #fff;
+                        color: red;
+                        border: 1px solid red;
+                    }
+                }
+
+                .notes-btn{
+                    background-color: rgb(0, 157, 255);
+                    &:hover{
+                        background-color: white;
+                        color: rgb(0, 157, 255);
+                        border: 1px solid rgb(0, 157, 255);
+                    }
+                }
+
+                .yellow-btn{
+                    background-color: rgb(236, 204, 74);
+                    &:hover{
+                        background-color: white;
+                        color: rgb(236, 204, 74);
+                        border: 1px solid rgb(236, 204, 74);
+                    }
+                }
+            }
 
         }
     }
