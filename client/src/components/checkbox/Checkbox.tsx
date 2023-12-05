@@ -3,16 +3,22 @@ import "./checkbox.scss";
 import checkIcon from "../../icons/check-icon.svg";
 interface CheckboxProps {
   className?: string;
-  options?: string[];
-  checkboxColor?: string;
+  options: string[];
+  bgColor?: string;
+  textColor?: string;
   onSelect?: (currentSelected: string, selectedValues: string[]) => void;
+  style?: {};
+  checkboxDirection?: "row" | "column";
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
   className,
   options = [],
-  checkboxColor,
   onSelect = () => {},
+  bgColor,
+  style,
+  textColor,
+  checkboxDirection="column",
 }) => {
   const [selectedValues, setSelectedValues] = useState<Record<number, boolean>>(
     {}
@@ -30,7 +36,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   };
 
   return (
-    <div className={`checkbox-container ${className}`}>
+    <div className={`checkbox-container ${className}`} style={{flexDirection:checkboxDirection}}>
       {options.map((option, index) => (
         <div
           className="checkbox-label"
@@ -38,8 +44,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         >
           <div
             style={{
-              backgroundColor: checkboxColor,
-              borderColor: checkboxColor,
+              ...style,
+              backgroundColor: bgColor,
+              borderColor: bgColor,
             }}
             className="custom-checkbox"
           >
@@ -50,11 +57,14 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           <div
             className="checkbox-wrapper"
             style={{
-              backgroundColor: checkboxColor,
+              ...style,
+              backgroundColor: bgColor,
             }}
             onClick={() => handleCheckboxChange(index)}
           ></div>
-          <label className="label-text">{option}</label>
+          <label className="label-text" style={{ color: textColor }}>
+            {option}
+          </label>
         </div>
       ))}
     </div>
