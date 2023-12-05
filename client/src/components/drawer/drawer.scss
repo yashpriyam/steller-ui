@@ -1,21 +1,29 @@
+@import '../variables.scss';
 .drawer-container {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  background-color: rgb(255, 255, 255);
-  transition: width 2s;
-  position: absolute;
-  box-shadow: 1px 1px 3px 1px rgb(162, 161, 161);
+  background-color: $primaryBg;
+  box-shadow: 1px 1px 3px 1px $box-shadow-color;
   overflow: scroll;
   &::-webkit-scrollbar {
     display: none;
   }
+  .web-master-icon-container{
+border-bottom: 1px solid $bottom-border-color;    
+.web-master-icon{
+      margin: 0 20px;
+      padding:10px;
+      width: 120px;
+      height: 80px;
+    }
+  }
   .drawer-option {
     display: flex;
     align-items: center;
-    width: 100%;
     padding: 10px;
     border: none;
-    border-bottom: 1px solid rgb(129, 128, 128);
+    border-bottom: 1px solid $bottom-border-color;
     .drawer-option-icon {
       display: flex;
       align-items: center;
@@ -32,7 +40,7 @@
       justify-content: left;
       font-size: 25px;
       padding-left: 10px;
-      color: #000000;
+      color:$text-color-black;
       width: 100%;
       overflow: scroll;
       &::-webkit-scrollbar {
@@ -45,15 +53,15 @@
   height: 100vh;
   width: 30%;
   padding-right: 2px;
-  left: 0;
   top: 0;
+  animation: drawerOpenAnimationLeft 1s forwards;
 }
 .drawer-right-open {
   height: 100vh;
   width: 30%;
   padding-right: 2px;
-  right: 0;
   top: 0;
+  animation: drawerOpenAnimationRight 1s forwards;
 }
 .drawer-top-open {
   width: 100vw;
@@ -61,7 +69,8 @@
   padding-right: 2px;
   position: absolute;
   left: 0;
-  top: 0;
+  animation: drawerOpenAnimationTop 1s forwards;
+
 }
 .drawer-bottom-open {
   width: 100vw;
@@ -69,7 +78,7 @@
   padding-right: 2px;
   position: absolute;
   left: 0;
-  bottom: 0;
+  animation: drawerOpenAnimationBottom 1s forwards;
 }
 
 @media screen and (max-width: 1200px) and (min-width: 900px) {
@@ -146,4 +155,38 @@
     }
   }
   
+}
+
+@keyframes drawerOpenAnimationLeft {
+  0%{
+    left:-100%;
+  }
+  100%{
+    left: 0;
+  }
+}
+
+@keyframes drawerOpenAnimationRight {
+  0%{
+    right:-100%;
+  }
+  100%{
+    right: 0;
+  }
+}
+@keyframes drawerOpenAnimationTop {
+  0%{
+    top:-100%;
+  }
+  100%{
+    top: 0;
+  }
+}
+@keyframes drawerOpenAnimationBottom {
+  0%{
+    bottom:-100%;
+  }
+  100%{
+    bottom: 0;
+  }
 }
