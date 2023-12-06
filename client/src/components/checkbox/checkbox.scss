@@ -1,65 +1,89 @@
-@import "../../components/variables.scss";
+@import "../variables.scss";
 
 .checkbox-container{
     display: flex;
     flex-direction: column;
     width: fit-content;
-    gap: 15px;
+    height: fit-content;
+    gap: 10px;
 
-    .checkbox-label {
-        position: relative;
+    .title{
+        font-size: 20px;
+    }
+    .checkbox-label-wrapper{
         display: flex;
-        align-items: center;
-        cursor: pointer;
+        flex-direction: column;
+        width: fit-content;
+        gap: 15px;
 
-        .checkbox-wrapper{
-            position: absolute;
-            padding: 20px;
-            border-radius: 50%;
+        .checkbox-label {
             display: flex;
-            transition: all 0.3s;
-            opacity: 0;
-            background-color: $lightBlue;
-            top: 50%;
-            transform: translate(-25%, -50%);
-            
-        }
-
-        .checkbox-wrapper:hover{
-            opacity: 0.1;
-        }
-
-        .custom-checkbox {
-            position: relative;
-            z-index: 1;
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
-            display: inline-block;
-            background-color: $lightBlue;
-            
-            .checkmark-icon {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .checkmark-icon::selection{
-                background-color: transparent;
-            }
-        }
-        
-        .custom-checkbox:hover ~ .checkbox-wrapper{
-            opacity: 0.1;
-        }
-        
-        
-        .label-text {
-            margin-left: 10px;
+            align-items: center;
+            gap: 10px;
             cursor: pointer;
-            font-size: $mediumFontSize;
+            width: fit-content;
+
+            .checkbox-wrapper{
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center; 
+                width: 20px;
+                height: 20px;
+                border: 2px solid $lightBlue;
+                border-radius: 4px;
+                
+                .checkbox-bg{
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    opacity: 0;
+                    transition: all 0.4s;
+                    animation: none;
+
+                    &:hover {
+                        background-color: $lightBlue;
+                        opacity: 0.1;
+                    }
+                }
+
+                .animated-checkbox-bg{
+                    opacity: 0.3;
+                    animation: spread 1s 1 forwards;
+                }
+
+                @keyframes spread {
+                    from {
+                        width: 20px;
+                        height: 20px;
+                    }
+                    to{
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+                
+                .custom-checkbox {
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 4px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color:$lightBlue;
+                    opacity: 1;
+
+                    .checkmark-icon::selection{
+                        background-color: transparent;
+                    }
+                }
+            }
+
+            .label-text {
+                cursor: pointer;
+                font-size: $mediumFontSize;
+            }
         }
     }
-    
 }
