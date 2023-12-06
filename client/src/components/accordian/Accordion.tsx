@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./accordion.scss";
 import dropDownIcon from "../../icons/drop-down-icon.svg";
-import useThrottle from "../../hook/useThrottle";
+import useThrottle from "../../hooks/useThrottle";
+import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
 interface AccordionProps {
   children?: React.ReactNode;
@@ -22,9 +23,10 @@ export const Accordion: React.FC<AccordionProps> = ({
   const toggleAccordion = useThrottle(function () {
     setIsOpen(!isOpen);
   }, 500);
-
+  const divRef = useRef<HTMLDivElement| null>(null)
+  useOnOutsideClick(divRef,()=>setIsOpen(false))
   return (
-    <div className={`accordion ${className}`} style={style}>
+    <div ref={divRef} className={`accordion ${className}`} style={style}>
       <div className="accordion-header" onClick={toggleAccordion}>
         <h2>{title}</h2>
         <img
