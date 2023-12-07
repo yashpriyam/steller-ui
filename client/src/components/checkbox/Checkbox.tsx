@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./checkbox.scss";
-import checkIcon from "../../icons/check-icon.svg";
+import ArrowIcon from "../../icons/arrowIcon";
 interface CheckboxProps {
   className?: string;
-  options: {text: string, value : string}[];
+  options: { text: string; value: string }[];
   bgColor?: string;
   textColor?: string;
-  onSelect?: (currentSelected: string, selectedValues: string[]) => void;
-  style?: {};
+  onSelect?: (currentSelected: {}, selectedValues: {}[]) => void;
+  style?: React.CSSProperties;
   direction?: "row" | "column";
   title?: string;
 }
@@ -19,29 +19,24 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   bgColor,
   style,
   textColor,
-  direction="column",
+  direction = "column",
   title,
-
 }) => {
-  const [selectedValues, setSelectedValues] = useState<Record<number, boolean>>(
-    {}
-  );
-  const [hoverBg, setHoverBg] = useState<boolean[]>([]);
+  const [selectedValues, setSelectedValues] = useState<{}[]>([]);
 
-  useEffect(()=>{
-    const newHoverBg : boolean[] = options.map(elem=>false);
-    setHoverBg(newHoverBg);
-  },[options])
-  
   const handleCheckboxChange = (index: number) => {
-    const newSelectedValues : Record<number,boolean> = { ...selectedValues };
-    if (newSelectedValues[index]) {
-      delete newSelectedValues[index];
+    const newselectedValues: {}[] = {
+      ...selectedValues
+    };
+    if (newselectedValues[index]) {
+      delete newselectedValues[index];
+
     } else {
-      newSelectedValues[index] = true;
+      newselectedValues[index] = options[index];
     }
-    setSelectedValues(newSelectedValues);
-    onSelect(options[index].value, Object.keys(newSelectedValues));
+    setSelectedValues(newselectedValues);
+    
+    onSelect(options[index], newselectedValues);
   };
 
   return (
@@ -56,40 +51,16 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             className="checkbox-label"
             onClick={() => handleCheckboxChange(index)}
           >
-            <div
-              className="checkbox-wrapper"
-              style={{ borderColor: bgColor }}
-              onMouseOver={() => {
-                hoverBg[index] = true;
-                setHoverBg([...hoverBg]);
-              }}
-              onMouseOut={() => {
-                hoverBg[index] = false;
-                setHoverBg([...hoverBg]);
-              }}
-            >
-              {hoverBg[index] && (
-                <div
-                  className={`${
-                    selectedValues[index] && "animated-checkbox-bg"
-                  } checkbox-bg`}
-                  style={{
-                    ...style,
-                    backgroundColor: `${hoverBg[index] && bgColor}`,
-                    opacity: 0.2,
-                  }}
-                ></div>
-              )}
+            <div className="checkbox-wrapper" style={{ ...style, borderColor: bgColor }}>
               {selectedValues[index] && (
                 <div
                   style={{
                     ...style,
                     backgroundColor: bgColor,
-                    borderColor: bgColor,
                   }}
                   className="custom-checkbox"
                 >
-                  <img className="checkmark-icon" src={checkIcon} alt="icon" />
+                  <ArrowIcon />
                 </div>
               )}
             </div>
