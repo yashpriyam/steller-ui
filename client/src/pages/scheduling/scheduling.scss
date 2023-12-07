@@ -55,8 +55,8 @@
         
 
         .schedule-accordion-description {
-            color: rgba(0, 0, 0, 0.5);
-            font-weight: 600;
+            color: rgba(0, 0, 0, 0.9);
+            // font-weight: 600;
             font-size: 15px;
         }
         .daylist-container{
@@ -80,11 +80,6 @@
             .title{
                 font-size: 20px;
             }
-            .description{
-                color: rgb(100, 100, 100);
-                font-size: 13px;
-                font-weight: 600;
-            }
 
             .btn-wrapper{          
                 display: flex;
@@ -107,6 +102,7 @@
                     }
                 }
 
+                // remove s from the className in component to enable these color btn classes 
                 .red-btn{
                     background-color: #ED303C;
                     border-color: #ED303C;
