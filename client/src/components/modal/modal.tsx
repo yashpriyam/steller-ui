@@ -4,11 +4,10 @@ import './modal.scss'
 
 export interface ModalProps {
     className?: string;
-    style?: object;
+    style?: React.CSSProperties;
     bgColor?: string;
     children?: React.ReactNode;
     isClosable?: boolean;
-    defaultSelected?: string;
     onClose?:()=>void ;
     isOpen?: boolean;
 }
@@ -18,19 +17,19 @@ export const Modal: React.FC<ModalProps> = ({
     style,
     bgColor,
     children,
-    isClosable = false,
+    isClosable,
     onClose,
     isOpen 
 }:ModalProps)=>{
 
 
-    const toHandleCloseButton = () =>{
+    const handleClose = () =>{
         onClose && onClose();
     }
 
     return isOpen ? createPortal(
         <div style={{...style, background:bgColor}} className={`modal-container ${className}`}>
-                <button style={style} className = {`close-button ${className}`} onClick={toHandleCloseButton}>✖️</button>
+                <button className = {`close-button ${className}`} onClick={handleClose}>✖️</button>
                 {children}
         </div>,
         document.body
