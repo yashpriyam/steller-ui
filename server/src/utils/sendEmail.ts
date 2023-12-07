@@ -7,7 +7,7 @@ export const sendEmail = async(messageObject: MailResponseType): Promise<string 
             service: "gmail",
             auth: {
                 user: process.env.SENDER_EMAIL, // generated ethereal user
-                pass: process.env.SENDER_EMAIL_PASSWORD, // generated ethereal password
+                pass: process.env.SENDER_PASSWORD, // generated ethereal password
             },
         });
 
@@ -16,12 +16,12 @@ export const sendEmail = async(messageObject: MailResponseType): Promise<string 
             from: process.env.SENDER_EMAIL, // sender address
            ...messageObject
         });
-        
+
         console.log("Message sent: %s", info.messageId);
         return info.messageId;
     } catch (error) {
         console.error(error);
         return error;
     }
-    
+
 }
