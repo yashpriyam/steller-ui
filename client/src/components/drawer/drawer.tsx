@@ -4,7 +4,7 @@ import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
 interface DrawerProps {
   direction?: "left" | "right" | "top" | "bottom";
-  isOpen?: true | false;
+  isOpen?:boolean;
   className?: string;
   icon?: string;
   style?: object;
@@ -17,7 +17,7 @@ interface DrawerProps {
 
 export const Drawer: React.FunctionComponent<DrawerProps> = ({
   direction = "right",
-  isOpen = false,
+  isOpen ,
   options,
   className,
   style,
@@ -35,7 +35,7 @@ export const Drawer: React.FunctionComponent<DrawerProps> = ({
     top: "drawer-top-close",
     bottom: "drawer-bottom-close",
   };
-  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(isOpen);
+  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(isOpen||false);
   const drawerRef = useRef<HTMLDivElement | null>(null);
   useOnOutsideClick(drawerRef, () => setIsOpenDrawer(false));
   return (
