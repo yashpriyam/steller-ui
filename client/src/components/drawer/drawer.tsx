@@ -1,15 +1,17 @@
 import "./drawer.scss";
-import { useState, useRef } from "react";
+import {  useRef } from "react";
 import useOnOutsideClick from "../../hooks/useOnOutsideClick";
+import { Icon } from "../../icons/avatar";
 
 interface DrawerProps {
   direction?: "left" | "right" | "top" | "bottom";
-  isOpen?:boolean;
+  onClose?: () => void;
+  onSelect?:(value:string)=>void
+  isOpen?: boolean;
   className?: string;
   icon?: string;
   style?: object;
   options?: {
-    onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
     text: string;
     url: string;
   }[];
@@ -17,7 +19,9 @@ interface DrawerProps {
 
 export const Drawer: React.FunctionComponent<DrawerProps> = ({
   direction = "right",
-  isOpen ,
+  isOpen,
+  onClose,
+  onSelect,
   options,
   className,
   style,
@@ -35,9 +39,11 @@ export const Drawer: React.FunctionComponent<DrawerProps> = ({
     top: "drawer-top-close",
     bottom: "drawer-bottom-close",
   };
-  const [isOpenDrawer, setIsOpenDrawer] = useState<boolean>(isOpen||false);
   const drawerRef = useRef<HTMLDivElement | null>(null);
-  useOnOutsideClick(drawerRef, () => setIsOpenDrawer(false));
+  useOnOutsideClick(drawerRef, () => onClose && onClose());
+  const onClickFunction= (value: string) => {
+    onSelect && onSelect(value)
+  };
   return (
     <>
       {
@@ -45,28 +51,38 @@ export const Drawer: React.FunctionComponent<DrawerProps> = ({
           ref={drawerRef}
           style={style}
           className={`drawer-container ${drawerContainerMap[direction]} ${
-            !isOpenDrawer && drawerCloseMap[direction]
+            !isOpen && drawerCloseMap[direction]
           } ${className}`}
         >
-          <div className="drawer-icon-container">
-            <img className="drawer-icon" src={icon} alt="" />
+          <div className="drawer-icon-options-wrapper">
+            {icon && <div className="drawer-icon-container">
+              <img className="drawer-icon" src={icon} alt="" />
+            </div>}
+            {options?.map((option, index) => {
+              return (
+                <div
+                  className="drawer-option"
+                  onClick={() => {
+                    onClickFunction(option.text);
+                  }}
+                >
+                  <span className="drawer-option-icon">
+                    {option.url && (
+                      <img
+                        className="drawer-icon-image"
+                        src={option.url}
+                        alt=""
+                      />
+                    )}
+                  </span>
+                  <span className="drawer-option-text">{option.text}</span>
+                </div>
+              );
+            })}
           </div>
-          {options?.map((option, index) => {
-            return (
-              <div className="drawer-option" onClick={option.onClick}>
-                <span className="drawer-option-icon">
-                  {option.url && (
-                    <img
-                      className="drawer-icon-image"
-                      src={option.url}
-                      alt=""
-                    />
-                  )}
-                </span>
-                <span className="drawer-option-text">{option.text}</span>
-              </div>
-            );
-          })}
+          <div className="drawer-avatar-conatiner">
+            <Icon className="drawer-avatar" />
+          </div>
         </div>
       }
     </>

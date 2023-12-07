@@ -11,56 +11,80 @@
 }
 .drawer-bottom-close {
   transform: translateY(100%);
+  overflow: hidden;
 }
 .drawer-container {
   position: fixed;
-  transition: all 2s;
+  transition: all 0.3s;
   z-index: 1;
   overflow: hidden;
   display: flex;
+  justify-content: space-between;
   flex-direction: column;
   background-color: $primaryBg;
   box-shadow: 1px 1px 3px 1px $boxShadowColor;
   &::-webkit-scrollbar {
     display: none;
   }
-  .drawer-icon-container {
-    border-bottom: 1px solid $bottomBorderColor;
-    .drawer-icon {
-      margin: 0 20px;
+  .drawer-icon-options-wrapper {
+    .drawer-icon-container {
+      border-bottom: 1px solid $bottomBorderColor;
+      .drawer-icon {
+        margin: 0 20px;
+        padding: 10px;
+        width: 120px;
+        height: 80px;
+      cursor: pointer;
+      }
+    }
+    .drawer-option {
+      display: flex;
+      align-items: center;
       padding: 10px;
-      width: 120px;
-      height: 80px;
+      border: none;
+      cursor: pointer;
+      border-bottom: 1px solid $bottomBorderColor;
+      &:hover{
+          background-color: $lightBlueSecondary;
+        }
+      .drawer-option-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        .drawer-icon-image {
+          width: $textColorBlack;
+          height: $textFontSize;
+        }
+      }
+      .drawer-option-text {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        font-size: $textFontSize;
+        padding-left: 10px;
+        color: $textColorBlack;
+        overflow: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+      }
     }
   }
-  .drawer-option {
+  .drawer-avatar-conatiner{
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     padding: 10px;
-    border: none;
-    border-bottom: 1px solid $bottomBorderColor;
-    .drawer-option-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 5px;
-      .drawer-icon-image {
-        width: $textColorBlack;
-        height: $textFontSize;
-      }
-    }
-    .drawer-option-text {
-      display: flex;
-      align-items: center;
-      justify-content: left;
-      font-size: $textFontSize;
-      padding-left: 10px;
-      color: $textColorBlack;
-      width: 100%;
-      overflow: scroll;
-      &::-webkit-scrollbar {
-        display: none;
-      }
+    border-top: 1px solid $bottomBorderColor;
+    .drawer-avatar{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid $bottomBorderColor;
     }
   }
 }
@@ -99,7 +123,6 @@
   min-height: 20%;
   height: fit-content;
   padding-right: 2px;
-  position: absolute;
   left: 0;
   bottom: 0;
 }
