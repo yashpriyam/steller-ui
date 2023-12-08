@@ -18,12 +18,12 @@
         
         .drop-up-icon {
             transform: rotate(180deg);
-            transition: all 0.5s;
+            transition: transform 0.5s;
         }
         
         .drop-down-icon {
             margin: 0px 10px;
-            transition: all 0.5s;
+            transition: transform 0.5s;
         }
 
         .drop-down-icon::selection{
@@ -46,12 +46,12 @@
 
     .open-accordion {
         max-height: 300px;
-        transition: all 1s;
+        transition: max-height 1s;
     }
 
     .closed-accordion {
         max-height: 0;
-        transition: all 0.5s;
+        transition: max-height 0.5s;
     }
 
 }

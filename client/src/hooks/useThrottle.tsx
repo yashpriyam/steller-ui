@@ -1,11 +1,12 @@
+import { getCurrentDate } from "../utils/date/dateUtils";
 import { useState } from "react";
 
 export const useThrottle: Function = (callBack: Function, interval = 500) => {
-  const [lastExecutedTime, setLastExecutedTime] = useState<number>(Date.now());
+  const [lastExecutedTime, setLastExecutedTime] = useState<number>(getCurrentDate());
   return (...args: any) => {
-    if (lastExecutedTime + interval <= Date.now()) {
+    if (lastExecutedTime + interval <= getCurrentDate()) {
       callBack(...args);
-      setLastExecutedTime(Date.now());
+      setLastExecutedTime(getCurrentDate());
     }
   };
 };
