@@ -3,24 +3,22 @@
 .modal-container{
     width: 100vw;
     height: 100vh;
-    background-color: $lightGrey;
+    background-color: $lightBluePrimary;
     position: absolute;
     top: 0%;
+    left: 0%;
     display: flex;
     align-items: center;
     justify-content: center; 
         .close-button{
              width: 30px;
              height: 30px;
-             color: $red;
              background-color: transparent;
-             border: 2px solid $red;
+             border: none;
              position: absolute;
              right: 20px;
              top:20px;
+             cursor: pointer;
         }
-        .close-button:hover{
-            color: $primaryBg;
-            background-color: $red;
-       }
+
 }
