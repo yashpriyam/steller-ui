@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 
 interface IconProps {
   width?: number;

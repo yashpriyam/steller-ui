@@ -2,31 +2,32 @@
 
 
 .toast-container {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     position: absolute;
-    background-color: transparent;
+    background-color: white;
     z-index: 1;
     border-radius: 5px;
     padding: 14px;
     width: fit-content;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    min-width: max-content;
 
-    >.toast-header {
+    .toast-header {
         display: flex;
         justify-content: space-between;
 
-        >.toast-title {
+        .toast-title {
             font-size: $largerFontSize;
             margin-bottom: 5px;
         }
 
-        >.close-button {
+        .close-button {
             background-color: transparent;
             border: none;
             cursor: pointer;
         }
     }
-    >.toast-description {
+
+    .toast-description {
         font-size: $smallFontSize;
         margin-bottom: 5px;
     }

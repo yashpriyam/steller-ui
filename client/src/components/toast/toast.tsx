@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './toast.scss';
 import CrossIcon from '../../icons/CrossIcon';
+
 interface ToastProps {
     title?: string;
     description?: string;
@@ -19,17 +20,8 @@ interface Offset {
     left?: number;
     top?: number;
 }
-type ToastDirection =
-    | 'leftCenter'
-    | 'leftTop'
-    | 'leftBottom'
-    | 'rightCenter'
-    | 'rightTop'
-    | 'rightBottom'
-    | 'top'
-    | 'bottom'
-    | 'center'
-    | 'inPlace';
+
+type ToastDirection = | 'leftCenter' | 'leftTop' | 'leftBottom' | 'rightCenter' | 'rightTop' | 'rightBottom' | 'top' | 'bottom' | 'center' | 'inPlace';
 
 interface ToastPosition {
     [key: string]: { left?: number; top?: number, transform?: string };
@@ -41,7 +33,7 @@ export const Toast: React.FC<ToastProps> = ({
     isClosable,
     durationInSeconds = 3,
     direction = 'inPlace',
-    offset = { left: 0, top: 0 },
+    offset = { left: 0, top: 0, },
     bgColor,
     color,
     className,
@@ -51,33 +43,43 @@ export const Toast: React.FC<ToastProps> = ({
 }) => {
     const [isHidden, setIsHidden] = useState(false);
     const toastPosition: ToastPosition = {
-        leftCenter: { left: 0, top: 50, transform: "translate(-0%, -100%)" },
+        leftCenter: { left: 0, top: 50, transform: "translate(-0%, -50%)" },
         leftTop: { left: 0, top: 0, transform: "translate(0%,0%)" },
         leftBottom: { left: 0, top: 100, transform: "translate(-0%, -100%)" },
         rightCenter: { left: 100, top: 50, transform: "translate(-100%, -50%)" },
         rightTop: { left: 100, top: 0, transform: "translate(-100%, -0%)" },
         rightBottom: { left: 100, top: 100, transform: "translate(-100%, -100%)" },
         top: { top: 0, left: 50, transform: "translate(-50%, 0%)" },
-        bottom: { top: 100, left: 50, transform: "translate(-50%, -50%)" },
+        bottom: { top: 100, left: 50, transform: "translate(-50%, -100%)" },
         center: { top: 50, left: 50, transform: "translate(-50%, -50%)" },
         inPlace: {},
     };
-    const getPosition = (offset: Offset = { top: 0, left: 0 }, direction?: ToastDirection) => {
+
+
+    const getPosition = (offset: Offset, direction?: ToastDirection) => {
         const currentPosition = toastPosition[direction || 'inPlace'];
         return {
             ...currentPosition,
-            left: `${Number(currentPosition.left) + Number(offset.left)}%`,
-            top: `${Number(currentPosition.top) + Number(offset.top)}%`,
+            left: `${Number(currentPosition.left) + Number(offset.left)}% `,
+            top: `${Number(currentPosition.top) + Number(offset.top)}% `,
         };
     };
 
+    const handleAutoToastClose = (durationInSeconds: number) => {
 
-    if (durationInSeconds > 0) {
-        setTimeout(() => {
-            setIsHidden(true);
-            onClose && onClose()
-        }, durationInSeconds * 1000);
+
+        if (durationInSeconds > 0) {
+            setTimeout(() => {
+                setIsHidden(true);
+                onClose && onClose()
+            }, durationInSeconds * 1000);
+        }
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
+    useEffect(() => {
+        handleAutoToastClose(durationInSeconds);
+    }, [durationInSeconds]);
+    /* eslint-enable react-hooks/exhaustive-deps */
     const handleClose = () => {
         setIsHidden(true);
         onClose && onClose()
@@ -89,7 +91,7 @@ export const Toast: React.FC<ToastProps> = ({
         ...getPosition(offset, direction)
     };
 
-    return (<>{!isHidden && <div className={`toast-container ${className || ""}`} style={toastStyle}>
+    return (<>{!isHidden && <div className={`toast-container  `} style={toastStyle}>
         <div className='toast-header'>
             {title && <span className="toast-title">{title}</span>}
             {isClosable && (
