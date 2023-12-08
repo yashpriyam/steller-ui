@@ -1,4 +1,3 @@
-import React, { ReactElement } from 'react';
 
 interface IconProps {
   width?: number;
@@ -25,5 +24,4 @@ function CrossIcon({ width = 24, height = 24 }: IconProps): ReactElement {
     </svg>
   );
 }
-
 export default CrossIcon;

@@ -7,7 +7,7 @@ export const sendEmail = async(messageObject: MailResponseType): Promise<string 
             service: "gmail",
             auth: {
                 user: process.env.SENDER_EMAIL, // generated ethereal user
-                pass: process.env.SENDER_PASSWORD, // generated ethereal password
+                pass: process.env.SENDER_EMAIL_PASSWORD, // generated ethereal password
             },
         });
 

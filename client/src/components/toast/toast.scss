@@ -10,6 +10,7 @@
     padding: 14px;
     width: fit-content;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
     >.toast-header {
         display: flex;
         justify-content: space-between;
@@ -24,65 +25,10 @@
             border: none;
             cursor: pointer;
         }
-
     }
-
     >.toast-description {
         font-size: $smallFontSize;
         margin-bottom: 5px;
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//   button {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     cursor: pointer;
-//     background: none;
-//     border: none;
-//     color: $defaultTextColor;
-//   }
-
-//   h3 {
-//     margin-bottom: 8px;
-//   }
-
-//   p {
-//     margin-bottom: 16px;
-//   }
-
-//   // Add any additional styling based on your requirements
-// }
-
-// .inPlace {
-//   // Add styles for the inPlace direction
-// }
-
-// .leftCenter {
-//   // Add styles for the leftCenter direction
-// }
-
-// // Add styles for other directions as needed
-
-// .bgColor {
-//   background-color: $defaultBgColor;
-// }
-
-// .textColor {
-//   color: $defaultTextColor;
-// }

@@ -1,3 +1,4 @@
+import { Toast } from "./components/toast/toast";
 import { useTranslation } from "react-i18next";
 
 const App = () => {
@@ -5,6 +6,7 @@ const App = () => {
   return (
     <div>
       <h1>{t("greeting")}</h1>
+
     </div>
   );
 };
