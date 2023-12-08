@@ -3,10 +3,12 @@
 .modal-container{
     width: 100vw;
     height: 100vh;
-    background-color: $lightBluePrimary;
+    padding: 5%;
+    background-color: $lightGrey;
     position: absolute;
-    top: 0%;
-    left: 0%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center; 
