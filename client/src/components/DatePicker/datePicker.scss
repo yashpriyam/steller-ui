@@ -1,0 +1,36 @@
+@import "../../components/variables.scss";
+body{
+    overflow: hidden;
+}
+.date-container{
+    // background-color: palegoldenrod;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(0%,0%);
+
+    .date-box{
+        display: flex;
+        align-items: center;
+
+    .date-label{
+        // background-color: antiquewhite;
+        font-size: $largerFontSize;
+        margin: 0 10px;
+    }
+    .date-picker{
+        height: 6vh;
+        width: 12vw;
+        font-size: $smallFontSize;
+    }
+    .date-picker-required{
+       margin-bottom: 35px;
+       margin-right: 3px;
+       .date-picker-star{
+        color: red;
+       }
+    }
+}
+}

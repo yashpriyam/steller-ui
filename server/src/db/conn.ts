@@ -6,7 +6,8 @@ const Connection: any = (URI: string) => {
     .then(() => {
       console.log("db Connected successfully");
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err)
       console.log("Failed to connect db");
     });
 };
