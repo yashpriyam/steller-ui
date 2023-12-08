@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./checkbox.scss";
-import ArrowIcon from "../../icons/arrowIcon";
+import CheckIcon from "../../icons/CheckIcon";
 interface CheckboxProps {
   className?: string;
   options: { text: string; value: string }[];
@@ -51,7 +51,10 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             className="checkbox-label"
             onClick={() => handleCheckboxChange(index)}
           >
-            <div className="checkbox-wrapper" style={{ ...style, borderColor: bgColor }}>
+            <div
+              className="checkbox-wrapper"
+              style={{ ...style, borderColor: bgColor }}
+            >
               {selectedValues[index] && (
                 <div
                   style={{
@@ -60,7 +63,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                   }}
                   className="custom-checkbox"
                 >
-                  <ArrowIcon />
+                  <CheckIcon />
                 </div>
               )}
             </div>
