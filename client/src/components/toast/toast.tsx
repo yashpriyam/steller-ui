@@ -15,6 +15,7 @@ interface ToastProps {
     style?: React.CSSProperties;
     children?: React.ReactNode;
     onClose?: () => void;
+    isHidden?: boolean;
 }
 interface Offset {
     left?: number;
@@ -40,8 +41,8 @@ export const Toast: React.FC<ToastProps> = ({
     style,
     children,
     onClose,
+    isHidden,
 }) => {
-    const [isHidden, setIsHidden] = useState(false);
     const toastPosition: ToastPosition = {
         leftCenter: { left: 0, top: 50, transform: "translate(-0%, -50%)" },
         leftTop: { left: 0, top: 0, transform: "translate(0%,0%)" },
@@ -66,24 +67,23 @@ export const Toast: React.FC<ToastProps> = ({
     };
 
     const handleAutoToastClose = (durationInSeconds: number) => {
-
-
         if (durationInSeconds > 0) {
             setTimeout(() => {
-                setIsHidden(true);
                 onClose && onClose()
             }, durationInSeconds * 1000);
         }
     }
+
     /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         handleAutoToastClose(durationInSeconds);
     }, [durationInSeconds]);
     /* eslint-enable react-hooks/exhaustive-deps */
+
     const handleClose = () => {
-        setIsHidden(true);
         onClose && onClose()
     };
+
     const toastStyle: React.CSSProperties = {
         backgroundColor: bgColor || '',
         color: color || '',
@@ -91,7 +91,7 @@ export const Toast: React.FC<ToastProps> = ({
         ...getPosition(offset, direction)
     };
 
-    return (<>{!isHidden && <div className={`toast-container  `} style={toastStyle}>
+    return (<>{!isHidden && <div className={`toast-container ${className}`} style={toastStyle}>
         <div className='toast-header'>
             {title && <span className="toast-title">{title}</span>}
             {isClosable && (
