@@ -1,0 +1,114 @@
+@import "../../components//variables.scss";
+
+
+.carousel-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  .carousel-image-container {
+    //   border: 2px solid red;
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    //   overflow: hidden;
+
+    .carousel-images {
+      margin-inline: 20px;
+      // width: 30vw;
+      // height: 45vh;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+  }
+
+  .arrow {
+    background-color: rgba(255, 255, 255, 0.461);
+    border-radius: 50px;
+    border: 1.5px solid rgb(49, 49, 49);
+    color: rgb(49, 49, 49);
+    text-align: center;
+    cursor: pointer;
+  }
+  .carousel-arrow-right {
+    position: absolute;
+    right: 2%;
+  }
+  .carousel-arrow-left {
+    position: absolute;
+    left: 2%;
+  }
+ // controler-size
+  .controler-size-one{
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+  }
+  .controler-size-two{
+    width: 30px;
+    height: 30px;
+    font-size: 23px;
+  }
+  .controler-size-three{
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+  }
+  .controler-size-four{
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+  }
+  .controler-size-five{
+    width: 55px;
+    height: 55px;
+    font-size: 43px;
+  }
+// controler-offset 
+.controler-offset-one{
+
+}
+.controler-offset-two{
+
+}
+.controler-offset-three{
+
+}
+.controler-offset-four{
+
+}
+.controler-offset-five{
+
+}
+
+
+
+  .slide-indicators {
+    // border: 2px solid black;
+    width: 50vw;
+    // height: 5vh;
+    position: absolute;
+    bottom: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .indicator-bullets {
+      width: 2vw;
+      height: 1vh;
+      border-radius: 50px;
+      background-color: rgba(72, 72, 72, 0.447);
+      margin-inline: 10px;
+    }
+    .is-indicator-bullets-active {
+      background-color: rgb(72, 72, 72);
+    }
+  }
+}
+
+
+
