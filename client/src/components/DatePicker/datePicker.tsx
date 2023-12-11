@@ -1,12 +1,8 @@
 import React, { useState } from "react"
 import {format, parse} from 'date-fns';
 import "./datePicker.scss"
-import "../svg/svgDatePicker"
-
-// enum LabelPosition {
-//     LEFT = 'left',
-//     RIGHT = 'right',
-// } 
+import "../../icons/svgDatePicker"
+import SVGCalenderComponent from "../../icons/svgDatePicker";
 
 interface DatePickerProps {
     classname?: string,
@@ -58,47 +54,53 @@ export const DatePicker: React.FC<DatePickerProps> =({
         selectedValue:'',
         isCalenderOpen: false
     })
-
     const  handleSelect = (value: string)=>{
-          setState(prevState => ({
-            ...prevState,
-            selectedValue: value,
-            isCalenderOpen: false
-          }))
-          if(value>maxDate){
-            alert(`Date should be of before ${maxDate}`)
+        const year = new Date(value).getFullYear();
+        const strYear = String(year);
+
+          if(value > maxDate){
+            alert(`maximum date is ${maxDate}`)
             setState(prevState => ({
                 ...prevState,
                 selectedValue: '',
                 isCalenderOpen: false
               }))
-              value=''
+              value = ''
           }
-          if(value<minDate){
-            alert(`Date should be of after ${minDate}`)
+
+          if(value < minDate && strYear.length === 4){
+            alert(`minimum date is ${minDate}`)
             setState(prevState => ({
                 ...prevState,
                 selectedValue: '',
                 isCalenderOpen: false
               }))
-              value=''
+              value = ''
+          }
+
+          else{
+            setState(prevState => ({
+                ...prevState,
+                selectedValue: value,
+                isCalenderOpen: false
+              }))
           }
           if(onSelect){
             onSelect(value)
-            console.log(state.selectedValue);
         }
     }
     return(
         <div className={`date-container ${classname}`}>
             {!isDisabled &&
-            <div className={`date-box ${classname}`} style={style}>
+            <div className={`date-box ${classname}`} style={{...style}}>
                 {label && labelPosition === "left" && <label className={`date-label ${classname}`}>{label}</label>}
                 {isRequired && 
                 <div className={`date-picker-required ${classname}`}>
                     <h3 className={`date-picker-star ${classname}`}>*</h3>
-                </div>}
-                <input 
-                   className={`date-picker ${classname}`}
+                </div>
+                }
+                <div className="date-input-container">
+                   <input className={`date-picker-input ${classname}`}
                    type="date"
                    placeholder={placeHolder}
                    value={state.selectedValue}
@@ -112,6 +114,7 @@ export const DatePicker: React.FC<DatePickerProps> =({
                    max={maxDate}
                    min={minDate}
                    onChange={(e)=>{
+                    e.preventDefault();
                     const inputValue = e.target.value;
                     const parsedDate = parse(inputValue, 'yyyy-mm-dd', new Date());
                     if(inputValue && parsedDate && !Number.isNaN(parsedDate.getTime())){
@@ -119,13 +122,18 @@ export const DatePicker: React.FC<DatePickerProps> =({
                     }else{
                         isError = true;
                     }
-                   }}
-                   
+                    }}
                    />
+                    <span className="open-button">
+                      <button type="button">
+                        {icon || <SVGCalenderComponent/>}
+                      </button>
+                    </span>
+                </div>
                 {label && labelPosition === "right" && <label className={`date-label ${classname}`}>{label}</label>}
             </div>
             }
-            {/* {state.selectedValue} */}
         </div>
     )
 }
+
