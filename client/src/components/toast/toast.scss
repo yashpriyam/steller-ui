@@ -8,7 +8,7 @@
     border-radius: 5px;
     padding: 14px;
     width: fit-content;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: $primaryBoxShadow;
     min-width: max-content;
 
     .toast-header {

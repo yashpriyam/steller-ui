@@ -74,11 +74,9 @@ export const Toast: React.FC<ToastProps> = ({
         }
     }
 
-    /* eslint-disable react-hooks/exhaustive-deps */
     useEffect(() => {
         handleAutoToastClose(durationInSeconds);
     }, [durationInSeconds]);
-    /* eslint-enable react-hooks/exhaustive-deps */
 
     const handleClose = () => {
         onClose && onClose()
