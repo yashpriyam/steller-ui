@@ -1,7 +1,5 @@
-import React, { useState } from "react"
-import {format, parse} from 'date-fns';
-import "./datePicker.scss"
-import "../../icons/svgDatePicker"
+import React, { useState } from "react";
+import "./datePicker.scss";
 import SVGCalenderComponent from "../../icons/svgDatePicker";
 
 interface DatePickerProps {
@@ -13,7 +11,7 @@ interface DatePickerProps {
     calenderBg?: string,
     calenderText?: string,
     placeHolder?: string,
-    formate?: string,
+    format?: string,
     isDisabled?: boolean,
     isRequired?: boolean,
     isError?: boolean,
@@ -39,7 +37,7 @@ export const DatePicker: React.FC<DatePickerProps> =({
     calenderBg = "white",
     calenderText,
     placeHolder = "Choose a date",
-    formate = "DD/MM/YYYY",
+    format = "DD/MM/YYYY",
     isDisabled = false,
     isRequired = false,
     isError = false,
@@ -50,42 +48,57 @@ export const DatePicker: React.FC<DatePickerProps> =({
     maxDate='',
     minDate=''
 }: DatePickerProps)=>{
-    const [state, setState] = useState<DatePickerState>({
+    const [datePicker, setDatePicker] = useState<DatePickerState>({
         selectedValue:'',
         isCalenderOpen: false
     })
+    const [isValidInput, setIsValidInput] = useState<Boolean>(true)
+
+    const handleMaxDate = (value: string)=>{
+        const inpYear = new Date(value).getFullYear();
+        const strYear = String(inpYear);
+        
+        const newDate = new Date(value).getTime();
+        const maxmDate = new Date(maxDate).getTime();
+
+          if(newDate > maxmDate && strYear.length === 4){
+           setIsValidInput(false)
+           console.log('more than maxdate');
+            setDatePicker(prevState => ({
+                ...prevState,
+                selectedValue: '',
+                isCalenderOpen: false
+              }))
+              value = ''
+          }
+    }
+
+    const handleMinDate = (value: string) =>{
+        const inpYear = new Date(value).getFullYear();
+        const strYear = String(inpYear);
+
+        const newDate = new Date(value).getTime();
+        const miniDate = new Date(minDate).getTime();
+        
+        if(newDate < miniDate && strYear.length === 4){
+            setIsValidInput(false)
+            console.log('less thn min date');
+            setDatePicker(prevState => ({
+                ...prevState,
+                selectedValue: '',
+                isCalenderOpen: false
+              }))
+              value = ''
+        }
+
+    }
+
     const  handleSelect = (value: string)=>{
-        const year = new Date(value).getFullYear();
-        const strYear = String(year);
-
-          if(value > maxDate){
-            alert(`maximum date is ${maxDate}`)
-            setState(prevState => ({
-                ...prevState,
-                selectedValue: '',
-                isCalenderOpen: false
-              }))
-              value = ''
-          }
-
-          if(value < minDate && strYear.length === 4){
-            alert(`minimum date is ${minDate}`)
-            setState(prevState => ({
-                ...prevState,
-                selectedValue: '',
-                isCalenderOpen: false
-              }))
-              value = ''
-          }
-
-          else{
-            setState(prevState => ({
-                ...prevState,
-                selectedValue: value,
-                isCalenderOpen: false
-              }))
-          }
-          if(onSelect){
+        setDatePicker({ ...datePicker, selectedValue:value})
+        setIsValidInput(true)
+        console.log("correct date");
+        
+        if(onSelect){
             onSelect(value)
         }
     }
@@ -103,11 +116,11 @@ export const DatePicker: React.FC<DatePickerProps> =({
                    <input className={`date-picker-input ${classname}`}
                    type="date"
                    placeholder={placeHolder}
-                   value={state.selectedValue}
+                   value={datePicker.selectedValue}
                    style={{
                     backgroundColor: bgColor,
                     color: textColor,
-                    borderColor: isError ? "red" : borderColor,
+                    borderColor: isValidInput && !isError ? borderColor : "red",
                    }}
                    disabled = {isDisabled} 
                    required={isRequired}
@@ -116,16 +129,21 @@ export const DatePicker: React.FC<DatePickerProps> =({
                    onChange={(e)=>{
                     e.preventDefault();
                     const inputValue = e.target.value;
-                    const parsedDate = parse(inputValue, 'yyyy-mm-dd', new Date());
-                    if(inputValue && parsedDate && !Number.isNaN(parsedDate.getTime())){
-                        handleSelect(format(parsedDate,'yyyy-mm-dd'))
-                    }else{
-                        isError = true;
+                    
+                    if(inputValue < minDate){
+                        handleMinDate(inputValue)
+                    } 
+                    if(inputValue > maxDate){
+                        handleMaxDate(inputValue)
                     }
+                    else{  
+                        handleSelect(inputValue)
+                    }
+                    
                     }}
                    />
                     <span className="open-button">
-                      <button type="button">
+                      <button type="button" className="button">
                         {icon || <SVGCalenderComponent/>}
                       </button>
                     </span>

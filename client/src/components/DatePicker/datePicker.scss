@@ -1,14 +1,7 @@
-@import "../../components/variables.scss";
-body {
-  overflow: hidden;
-}
+@import "../variables.scss";
+
 .date-container {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translate(0%, 0%);
+   display: flex;
 
   .date-box {
     display: flex;
@@ -38,6 +31,9 @@ body {
         width: 150px;
         font-size: $smallFontSize;
       }
+      .date-picker-input:focus{
+        outline: none;
+      }
 
       .open-button {
         position: absolute;
@@ -49,7 +45,7 @@ body {
         pointer-events: none;
       }
 
-      .open-button button {
+      .open-button .button {
         border: none;
         background: transparent;
       }

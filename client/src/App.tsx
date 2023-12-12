@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div>
       <h1>{t("greeting")}</h1>
-      <DatePicker label="Date Picker" labelPosition="left" isRequired={true} maxDate="2023-12-08" minDate="2022-11-09" icon="📆"/>
+      <DatePicker label="Date Picker" labelPosition="left" isRequired={true} maxDate="2023-12-08" minDate="2022-12-01"  icon="📆" />
     </div>
   );
 };
