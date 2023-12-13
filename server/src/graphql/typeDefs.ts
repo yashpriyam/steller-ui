@@ -16,8 +16,8 @@ const typeDefs = gql`
   }
 
   type CustomResponseType {
-    status: Int
-    message: String
+    status: Int!
+    message: String!
   }
 
   type VideoOutputDataType {
