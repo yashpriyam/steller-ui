@@ -1,4 +1,5 @@
 import { gql } from "apollo-server-express";
+import { CreateNotesInputType,CreateNotesOutputType } from "../graphqlQueryStrings/notesStrings.graphql";
 
 const typeDefs = gql`
   type Query {
@@ -8,7 +9,10 @@ const typeDefs = gql`
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
-    createTransaction(data: CreateTransactionInputType!):CreateTransactionOutputType
+    createTransaction(
+      data: CreateTransactionInputType!
+    ): CreateTransactionOutputType
+    createNotes(notesData: CreateNotesInputType!): CreateNotesOutputType
   }
 
   input CreateTransactionInputType {
@@ -60,6 +64,8 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum!
     expectedSalary: String!
   }
+  ${CreateNotesInputType}
+  ${CreateNotesOutputType}
 
   scalar DateTime
   scalar JSON
