@@ -127,6 +127,5 @@ declare global {
   type CustomResponseType = {
     status: number;
     message: string;
-    error?: unknown;
   }
 }

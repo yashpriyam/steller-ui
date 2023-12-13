@@ -18,7 +18,6 @@ const typeDefs = gql`
   type CustomResponseType {
     status: Int
     message: String
-    error: JSON
   }
 
   type VideoOutputDataType {

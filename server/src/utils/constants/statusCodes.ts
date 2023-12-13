@@ -5,5 +5,5 @@ export const statusCodes: Record<string, number> = Object.freeze({
     UNAUTHORIZED: 401,
     PAYMENT_REQUIRED: 402,
     FORBIDDEN: 403,
-    NOT_FOUND: 404.
+    NOT_FOUND: 404,
 })
