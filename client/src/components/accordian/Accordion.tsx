@@ -6,9 +6,18 @@ import ArrowIcon from "../../icons/ArrowIcon";
 
 interface AccordionProps {
   children?: React.ReactNode;
-  title?: string;
+  title?: React.ReactNode | string;
   className?: string;
   style?: object;
+  openBy?: "icon" | "div";
+  icon?: React.ReactNode;
+  iconPosition?: "left" | "center" | "right";
+  openOnClick?: boolean;
+  openOnHover?: boolean;
+  disabled?: boolean;
+  // isOpenDefault?: boolean;  need to discuss these three features with Yash sir
+  // loaderComponent?: React.ReactNode;
+  // noDataComponent?: React.ReactNode;
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
@@ -16,19 +25,36 @@ export const Accordion: React.FC<AccordionProps> = ({
   title,
   className,
   style = {},
+  openBy = "div",
+  icon = <ArrowIcon />,
+  iconPosition = "right",
 }: AccordionProps) => {
-
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const toggleAccordion = useThrottle(()=> setIsOpen(!isOpen), 500);
+  // const [isLoading, setIsLoading] = useState(false);
   const accordionRef = useRef<HTMLDivElement | null>(null);
-  useOnOutsideClick(accordionRef, () => setIsOpen(false));
   
+  const toggleAccordion = useThrottle(() => setIsOpen(!isOpen), 500);
+  useOnOutsideClick(accordionRef, () => setIsOpen(false));
+
   return (
     <div ref={accordionRef} className={`accordion ${className}`} style={style}>
-      <div className="accordion-header" onClick={toggleAccordion}>
-        <h2>{title}</h2>
-        <span className={`drop-down-icon ${isOpen && "drop-up-icon"}`}>
-          <ArrowIcon />
+      <div
+        className="accordion-header"
+        onClick={() => {
+          if (openBy === "icon") return;
+          toggleAccordion();
+        }}
+      >
+        <div>{title}</div>
+        <span
+          tabIndex={1}
+          className={`drop-down-icon ${isOpen && "drop-up-icon"}`}
+          onClick={() => {
+            if (openBy === "div") return;
+            toggleAccordion();
+          }}
+        >
+          {icon}
         </span>
       </div>
       <div
@@ -36,7 +62,9 @@ export const Accordion: React.FC<AccordionProps> = ({
           isOpen ? "open-accordion" : "closed-accordion"
         }`}
       >
-        <div className="content-wrapper">{children}</div>
+        <div className="content-wrapper">
+          {children ? children : <h2>NO DATA !!!</h2>}
+        </div>
       </div>
     </div>
   );
