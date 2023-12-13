@@ -12,7 +12,7 @@ const notesSchema = new Schema(
         type: [String],
         required: true,
     },
-    links: {
+    link: {
         type: String,
         required: true,
     },
@@ -24,7 +24,7 @@ const notesSchema = new Schema(
       type: String,
     },
     noOfPages: {
-      type: Number,
+      type: Number, 
     },
     estimatedReadingTime: {
       type: String,
