@@ -6,4 +6,7 @@ export const errorMessages = Object.freeze({
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
   },
+  VIDEO_MODEL: {
+    VIDEO_CREATION_FAILED: "unable to insert video data",
+  }
 });

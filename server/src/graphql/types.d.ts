@@ -62,4 +62,43 @@ declare global {
     userId: string;
     isPaymentSuccessfull: boolean;
   }
+
+  type VideoOutputDataType = {
+    videoData?: videoDataType;
+    response: CustomResponseType;
+  }
+
+  type CreateVideoType = {
+    title: string;
+    description?: string;
+    dayNumber: number;
+    videoNumber: number;
+    topics: string[];
+    links: {
+      webmasters?: string;
+      youtube: string;
+    };
+    isActive?: boolean;
+    duration?: string;
+  }
+
+  type VideoDataType = {
+    title?: string;
+    description?: string;
+    dayNumber?: number;
+    videoNumber?: number;
+    topics?: string[];
+    links?: {
+      webmasters?: string;
+      youtube?: string;
+    };
+    isActive?: boolean;
+    duration?: string;
+  }
+
+  type CustomResponseType = {
+    status: number;
+    message: string;
+    error?: unknown;
+  }
 }
