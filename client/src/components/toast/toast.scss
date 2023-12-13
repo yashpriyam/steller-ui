@@ -1,35 +1,48 @@
 @import "../variables.scss";
 
-
 .toast-container {
     position: absolute;
-    background-color: white;
     z-index: 1;
     border-radius: 5px;
     padding: 14px;
     width: fit-content;
     box-shadow: $primaryBoxShadow;
     min-width: max-content;
+    cursor: pointer;
 
     .toast-header {
         display: flex;
-        justify-content: space-between;
+
+        .toast-icon {
+            border: none;
+            margin: 2px;
+        }
 
         .toast-title {
             font-size: $largerFontSize;
             margin-bottom: 5px;
         }
-
-        .close-button {
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-        }
     }
 
     .toast-description {
         font-size: $smallFontSize;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
     }
 
+    .children-taost-description {
+        margin-top: 4px;
+    }
+
+    .progress-bar-container {
+        width: 126%;
+        position: absolute;
+        height: 10px;
+        border: none;
+        border-radius: 5px;
+        overflow: hidden;
+
+        .progress-bar{
+            transition: width 0.1s linear;
+        }
+    }
 }
