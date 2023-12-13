@@ -8,7 +8,10 @@ const typeDefs = gql`
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
-    createTransaction(data: CreateTransactionInputType!):CreateTransactionOutputType
+    createTransaction(
+      data: CreateTransactionInputType!
+    ): CreateTransactionOutputType
+    createNotes(notesData: CreateNotesInputType!): CreateNotesOutputType
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
   }
 
@@ -107,7 +110,33 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum!
     expectedSalary: String!
   }
-
+  input CreateNotesInputType {
+    link: String!
+    title: String!
+    dayNumber: Int!
+    topics: [String]!
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type CreateNotesOutputType {
+    notesData: NotesDataType
+    response: CustomResponseType
+  }
+  type NotesDataType {
+    id: String
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type CustomResponseType {
+    status: Int
+    message: String
+  }
   scalar DateTime
   scalar JSON
 `;
