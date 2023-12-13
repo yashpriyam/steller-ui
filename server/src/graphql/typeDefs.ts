@@ -1,5 +1,4 @@
 import { gql } from "apollo-server-express";
-import { CreateNotesInputType,CreateNotesOutputType } from "../graphqlQueryStrings/notesStrings.graphql";
 
 const typeDefs = gql`
   type Query {
@@ -64,9 +63,33 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum!
     expectedSalary: String!
   }
-  ${CreateNotesInputType}
-  ${CreateNotesOutputType}
-
+  input CreateNotesInputType {
+    link: String!
+    title: String!
+    dayNumber: Int!
+    topics: [String]!
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type CreateNotesOutputType {
+    notesData: NotesDataType
+    response: CustomResponseType
+  }
+  type NotesDataType {
+    id: String
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type CustomResponseType {
+    status: Int
+    message: String
+  }
   scalar DateTime
   scalar JSON
 `;
