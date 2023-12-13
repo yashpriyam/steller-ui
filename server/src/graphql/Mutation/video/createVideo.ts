@@ -45,7 +45,6 @@ export const createVideo = async (
       response: {
         status: statusCodes.BAD_REQUEST,
         message: VIDEO_CREATION_FAILED,
-        error: err,
       },
     };
   }
