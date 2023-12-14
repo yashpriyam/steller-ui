@@ -15,7 +15,9 @@
 
         .toast-icon {
             border: none;
-            margin: 2px;
+            margin: 4px;
+            position: absolute;
+            top: 15%;
         }
 
         .toast-title {
@@ -34,15 +36,19 @@
     }
 
     .progress-bar-container {
-        width: 126%;
         position: absolute;
-        height: 10px;
-        border: none;
-        border-radius: 5px;
-        overflow: hidden;
+        width: 100%;
+        left: 0%;
 
-        .progress-bar{
+        .progress-bar {
+            position: absolute;
+            border: none;
+            border-radius: 5px;
+            overflow: hidden;
             transition: width 0.1s linear;
+            height: 100%;
+            position: absolute;
         }
     }
+
 }

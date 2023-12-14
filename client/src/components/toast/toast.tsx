@@ -1,24 +1,21 @@
-
 import React, { useEffect, ReactNode, useState, useRef } from 'react';
 import './toast.scss';
 import CrossIcon from '../../icons/CrossIcon';
-import SuccessIcon from '../../icons/SuccessIcon';
 
 interface ProgressBarProps {
     durationInSeconds: number;
-    progressBarColor?: string;
-    postionOfProgressBar?: "bottom" | "top";
+    directionProgressBar?: "bottom" | "top";
     isPaused?: boolean;
     onTogglePause?: () => void;
     onClose?: () => void;
+    progressBarColor?: string;
 }
 const ProgressBar: React.FC<ProgressBarProps> = ({
     durationInSeconds,
-    progressBarColor,
     isPaused,
     onTogglePause,
     onClose,
-    postionOfProgressBar = "top",
+    progressBarColor
 }) => {
     const [progress, setProgress] = useState(0);
     useEffect(() => {
@@ -29,23 +26,14 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
             }
         };
         intervalId = setInterval(updateProgress, 100);
-
-        progress === 100 && onClose && onClose()
-
+        progress >= 100 && onClose && onClose()
         return () => clearInterval(intervalId);
     }, [durationInSeconds, isPaused, progress]);
 
-    const progressBarPositionStyle: React.CSSProperties = {
-        bottom: postionOfProgressBar === "bottom" ? "-14px" : "50px",
-        left: "-40px"
-    }
     const progressBarStyle: React.CSSProperties = {
         width: `${progress}%`,
-        height: '100%',
-        position: "absolute",
-        backgroundColor: `${progressBarColor}`,
+        backgroundColor: progressBarColor
     }
-
     return (
         <div
             onMouseEnter={onTogglePause}
@@ -53,8 +41,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
             onTouchStart={onTogglePause}
             onTouchEnd={onTogglePause}
             onClick={onTogglePause}
-            style={progressBarPositionStyle} className='progress-bar-container'>
-            <div className='progress-bar' style={progressBarStyle}></div>
+            style={progressBarStyle} className='progress-bar'>
         </div>
     );
 };
@@ -78,7 +65,7 @@ interface ToastProps {
     directionOFClose?: "leftTop" | "rightTop";
     directionOFStatus?: "leftTop" | "rightTop";
     progressBarColor?: string;
-    postionOfProgressBar?: "top" | "bottom"
+    directionProgressBar?: "top" | "bottom"
 }
 
 interface Offset {
@@ -96,7 +83,9 @@ interface ToastPosition {
 interface IconProp {
     [key: string]: { left?: string; right?: string };
 }
-
+interface ProgressBarProp {
+    [key: string]: { top?: string; bottom?: string };
+}
 export const Toast: React.FC<ToastProps> = ({
     title,
     description,
@@ -113,10 +102,10 @@ export const Toast: React.FC<ToastProps> = ({
     isHidden,
     crossIcon,
     statusIcon,
-    directionOFClose = 'rightTop',
-    directionOFStatus = "leftTop",
-    progressBarColor = "red",
-    postionOfProgressBar = "bottom"
+    directionOFClose = '',
+    directionOFStatus = "",
+    progressBarColor = "",
+    directionProgressBar = "bottom"
 }) => {
     const toastRef = useRef<HTMLDivElement>(null);
     const [isTimerRunning, setTimerRunning] = useState(true);
@@ -178,29 +167,36 @@ export const Toast: React.FC<ToastProps> = ({
         ...getPosition(offset, direction),
     };
     const iconPosition: IconProp = {
-        leftTop: { left: "5%" },
-        rightTop: { right: "5%" },
+        leftTop: { left: "4%" },
+        rightTop: { right: "4%" },
     };
     const iconStyleCross: React.CSSProperties = {
-        position: "absolute",
-        top: "15%",
         ...iconPosition[directionOFClose],
     };
     const iconStyleStatus: React.CSSProperties = {
-        position: "absolute",
-        top: "15%",
         ...iconPosition[directionOFStatus],
     };
     const renderIcon = (icon: React.ReactNode, style: React.CSSProperties) => (
         <div className="toast-icon" style={style}>
             {icon}
         </div>)
+
+    const positionOfProgressBar: ProgressBarProp = {
+        top: { top: "0%" },
+        bottom: { bottom: "0%" },
+    }
+    const progressBarStyle: React.CSSProperties = {
+        height: "10px",
+        ...positionOfProgressBar[directionProgressBar]
+    }
     return (
         <>
             {!isHidden && (
                 <div
                     onMouseEnter={handlePause}
                     onMouseLeave={handleResume}
+                    onTouchStart={handlePause}
+                    onTouchEnd={handleResume}
                     onClick={handlePause}
                     ref={toastRef}
                     className={`toast-container ${className}`}
@@ -209,21 +205,17 @@ export const Toast: React.FC<ToastProps> = ({
                     <div className='toast-header'>
                         {title && <div className="toast-title">{title}</div>}
                         {isClosable && renderIcon(<div onClick={() => onClose && onClose()}>{crossIcon || <CrossIcon />}</div>, iconStyleCross)}
-                        {renderIcon(statusIcon || <SuccessIcon />, iconStyleStatus)}
+                        {statusIcon && renderIcon(statusIcon, iconStyleStatus)}
 
                     </div>
 
                     {description && <div className="toast-description">{description}</div>}
                     {children && <div className='children-taost-description'>{children}</div>}
                     {durationInSeconds && (
-                        <div style={{
-                            position: 'relative',
-                            width: `${(directionOFClose === "leftTop") || (directionOFStatus === "leftTop") ? '100%' : "90%"}`,
-                            left: `${(directionOFClose === "leftTop") || (directionOFStatus === "leftTop") ? '' : "12%"}`
-                        }}>
+                        <div className='progress-bar-container' style={progressBarStyle}>
                             <ProgressBar
                                 durationInSeconds={durationInSeconds}
-                                postionOfProgressBar={postionOfProgressBar}
+                                directionProgressBar={directionProgressBar}
                                 onClose={onClose}
                                 isPaused={isPaused}
                                 onTogglePause={handlePause}
@@ -231,20 +223,8 @@ export const Toast: React.FC<ToastProps> = ({
                             />
                         </div>
                     )}
-
                 </div>
             )}
         </>
     );
 };
-
-
-
-
-
-
-
-
-
-
-
