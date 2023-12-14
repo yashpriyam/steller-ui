@@ -61,10 +61,10 @@ declare global {
     paymentId: string;
     userId: string;
     isPaymentSuccessfull: boolean;
-  }
-  
+  };
+
   type CreateNotesInputType = {
-    link: string; 
+    link: string;
     title: string;
     topics: [string];
     dayNumber: number;
@@ -73,18 +73,41 @@ declare global {
     estimatedReadingTime?: string;
   };
   type CreateNotesOutputType = {
-    notesData: NotesDataType
-    response:CustomResponseType
-  }
-  type NotesDataType = {
-    id: string;
-    title: string;
-    links: [string];
-    topics: [string];
-    dayNumber: number;
+    notesData?: NotesDataType;
+    response: CustomResponseType;
+  };
+
+  type UpdateNotesInputType = {
+    title?: string;
+    links?: [string];
+    topics?: [string];
+    dayNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+  };
+  type UpdateNotesOutputType = {
+    notesData?: UpdateNotesDataType;
+    response: CustomResponseType;
+  };
+  type UpdateNotesDataType = {
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
+  };
+  type NotesDataType = {
+    id: String;
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
   };
   type CustomResponseType = {
     status: number;
@@ -94,7 +117,7 @@ declare global {
   type VideoOutputDataType = {
     videoData?: videoDataType;
     response: CustomResponseType;
-  }
+  };
 
   type CreateVideoType = {
     title: string;
@@ -108,7 +131,7 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  }
+  };
 
   type VideoDataType = {
     title?: string;
@@ -122,10 +145,5 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  }
-
-  type CustomResponseType = {
-    status: number;
-    message: string;
-  }
+  };
 }
