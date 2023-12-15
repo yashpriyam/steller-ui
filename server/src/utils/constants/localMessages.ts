@@ -6,5 +6,7 @@ export const localMessages = {
   },
   VIDEO_MODEL: {
     VIDEO_CREATION_SUCCESS: "video data inserted successfully",
-  }
+
+    VIDEO_DELETION_SUCCESS: "video data deleted successfully",
+  },
 };
