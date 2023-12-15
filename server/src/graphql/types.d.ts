@@ -62,8 +62,8 @@ declare global {
     userId: string;
     isPaymentSuccessfull: boolean;
   };
-
   type CreateNotesInputType = {
+    link: string;
     link: string;
     title: string;
     topics: [string];
@@ -73,10 +73,19 @@ declare global {
     estimatedReadingTime?: string;
   };
   type CreateNotesOutputType = {
-    notesData?: NotesDataType;
+    notesData: NotesDataType;
     response: CustomResponseType;
   };
-
+  type NotesDataType = {
+    id: string;
+    title: string;
+    links: [string];
+    topics: [string];
+    dayNumber: number;
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
   type UpdateNotesInputType = {
     title?: string;
     links?: [string];
@@ -145,5 +154,18 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
+  };
+  type DeletedNotesOutputType = {
+    notesData?: DeletedNotesDataType;
+    response: CustomResponseType;
+  };
+  type DeletedNotesDataType = {
+    link: string;
+    title: string;
+    dayNumber: number;
+    topics: [string];
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
   };
 }
