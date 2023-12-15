@@ -73,8 +73,8 @@ declare global {
     estimatedReadingTime?: string;
   };
   type CreateNotesOutputType = {
-    notesData: NotesDataType;;
-    response: CustomResponseType;;
+    notesData: NotesDataType;
+    response: CustomResponseType;
   };;
   type NotesDataType = {
     id: string;
