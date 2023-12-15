@@ -61,10 +61,10 @@ declare global {
     paymentId: string;
     userId: string;
     isPaymentSuccessfull: boolean;
-  }
-  
+  };
+
   type CreateNotesInputType = {
-    link: string; 
+    link: string;
     title: string;
     topics: [string];
     dayNumber: number;
@@ -73,9 +73,9 @@ declare global {
     estimatedReadingTime?: string;
   };
   type CreateNotesOutputType = {
-    notesData: NotesDataType
-    response:CustomResponseType
-  }
+    notesData: NotesDataType;
+    response: CustomResponseType;
+  };
   type NotesDataType = {
     id: string;
     title: string;
@@ -86,15 +86,11 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
-  type CustomResponseType = {
-    status: number;
-    message: string;
-  };
 
   type VideoOutputDataType = {
     videoData?: videoDataType;
     response: CustomResponseType;
-  }
+  };
 
   type CreateVideoType = {
     title: string;
@@ -108,7 +104,8 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  }
+  };
+
 
   type VideoDataType = {
     title?: string;
@@ -122,10 +119,10 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  }
+  };
 
   type CustomResponseType = {
     status: number;
     message: string;
-  }
+  };
 }

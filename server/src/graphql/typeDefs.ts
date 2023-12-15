@@ -13,6 +13,10 @@ const typeDefs = gql`
     ): CreateTransactionOutputType
     createNotes(notesData: CreateNotesInputType!): CreateNotesOutputType
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
+    updateVideoById(
+      videoId: ID!
+      videoData: UpdateVideoInput!
+    ): VideoOutputDataType
   }
 
   type CustomResponseType {
@@ -58,6 +62,22 @@ const typeDefs = gql`
   input LinksInput {
     webmasters: String
     youtube: String!
+  }
+
+  input UpdateVideoInput {
+    title: String
+    description: String
+    dayNumber: Int
+    videoNumber: Int
+    topics: [String]
+    links: UpdateLinksInput
+    isActive: Boolean
+    duration: String
+  }
+
+  input UpdateLinksInput {
+    webmasters: String
+    youtube: String
   }
 
   input CreateTransactionInputType {
@@ -132,10 +152,7 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
-  type CustomResponseType {
-    status: Int
-    message: String
-  }
+
   scalar DateTime
   scalar JSON
 `;

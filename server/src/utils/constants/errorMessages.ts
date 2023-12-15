@@ -11,5 +11,6 @@ export const errorMessages = Object.freeze({
   },
   VIDEO_MODEL: {
     VIDEO_CREATION_FAILED: "unable to insert video data",
+    VIDEO_UPDATION_FAILED: "unable to update video data",
   }
 });
