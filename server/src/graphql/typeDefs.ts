@@ -13,6 +13,7 @@ const typeDefs = gql`
     ): CreateTransactionOutputType
     createNotes(notesData: CreateNotesInputType!): CreateNotesOutputType
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
+    deleteNotesById(notesId: ID!): DeletedNotesOutputType
   }
 
   type CustomResponseType {
@@ -122,6 +123,19 @@ const typeDefs = gql`
     notesData: NotesDataType
     response: CustomResponseType
   }
+  type DeletedNotesOutputType {
+    notesData: DeletedNotesDataType
+    response: CustomResponseType
+  }
+  type DeletedNotesDataType {
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
   type NotesDataType {
     id: String
     link: String
@@ -131,10 +145,6 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
-  }
-  type CustomResponseType {
-    status: Int
-    message: String
   }
   scalar DateTime
   scalar JSON
