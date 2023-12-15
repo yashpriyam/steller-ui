@@ -16,7 +16,7 @@ export const readNotes = async (
   try {
     const { filterData } = args;
 
-    const queryConditions: Record<string, number | string | object> =
+    const queryConditions: ReadNotesFilterInputType =
       removeNullKeys(filterData);
     if (queryConditions.topics) {
       queryConditions.topics = { $in: filterData.topics };

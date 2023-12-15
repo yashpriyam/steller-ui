@@ -141,7 +141,7 @@ declare global {
     link?: String;
     title?: String;
     dayNumber?: Int;
-    topics?: [String];
+    topics?: [String]|object;
     noOfPages?: Int;
     description?: String;
     estimatedReadingTime?: String;
