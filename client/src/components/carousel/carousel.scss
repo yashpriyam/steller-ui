@@ -1,0 +1,234 @@
+@import "../../components//variables.scss";
+
+.carousel-container {
+  width: 100vw;
+  height: 90vh;
+  background-color: aqua;
+  display: flex;
+  align-items: center;
+  // overflow: hidden;
+  position: relative;
+
+
+  // .carousel-image-container {
+  //   border: 2px solid red;
+  //   width: 60%;
+  //   display: flex;
+  //   align-items: center;
+  //   // justify-content: center;
+  //   // overflow: hidden;
+  //   // overflow-x: auto;
+  //   scroll-snap-type: x mandatory;
+
+  //   .carousel-images {
+  //     scroll-snap-align: center;
+  //     object-fit: cover;
+  //     flex-shrink: 0;
+  //     width: 100%;
+  //   }
+  // }
+
+  .carousel-image-container {
+    // border: 2px solid red;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    overflow: hidden;
+    // flex-direction: column;
+    scroll-snap-type: x mandatory;// Enable scroll snapping
+
+    // .carousel-options-images:nth-child(1){
+    //   scroll-snap-align: center; // Snap images to the center
+    //   object-fit: cover;
+    //   flex-shrink: 0;
+    // }
+
+  
+    .carousel-images {
+      scroll-snap-align: center; // Snap images to the center
+      object-fit: cover;
+      flex-shrink: 0;
+      // width: 100%;
+    //  background-color: red;
+    }
+  }
+
+  .arrow {
+    background-color: rgba(49, 49, 49, 0.461);
+    border-radius: 50px;
+    border: 1.5px solid rgb(49, 49, 49);
+    color: rgb(49, 49, 49);
+    text-align: center;
+    cursor: pointer;
+  }
+  .carousel-arrow-right {
+    position: absolute;
+    right: 2%;
+  }
+  .carousel-arrow-left {
+    position: absolute;
+    left: 2%;
+  }
+  // controler-size
+  .controler-size-one {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+  }
+  .controler-size-two {
+    width: 30px;
+    height: 30px;
+    font-size: 23px;
+  }
+  .controler-size-three {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+  }
+  .controler-size-four {
+    width: 50px;
+    height: 50px;
+    font-size: 40px;
+  }
+  .controler-size-five {
+    width: 55px;
+    height: 55px;
+    font-size: 43px;
+  }
+  // controler-offset left
+  .controler-offset-left-one {
+    left: 2%;
+  }
+  .controler-offset-left-two {
+    left: 4%;
+  }
+  .controler-offset-left-three {
+    left: 6%;
+  }
+  .controler-offset-left-four {
+    left: 8%;
+  }
+  .controler-offset-left-five {
+    left: 10%;
+  }
+
+  // controller offset write
+  .controler-offset-right-one {
+    right: 2%;
+  }
+  .controler-offset-right-two {
+    right: 4%;
+  }
+  .controler-offset-right-three {
+    right: 6%;
+  }
+  .controler-offset-right-four {
+    right: 8%;
+  }
+  .controler-offset-right-five {
+    right: 10%;
+  }
+
+  // slideGap
+
+  .slide-gap-one {
+    margin: 1vw;
+  }
+  .slide-gap-two {
+    margin: 5vw;
+  }
+  .slide-gap-three {
+    margin: 10vw;
+  }
+  .slide-gap-four {
+    margin: 15vw;
+  }
+  .slide-gap-five {
+    margin: 20vw;
+  }
+
+  .slide-indicators {
+    // padding: 10px;
+    // padding-inline-end: 10px;
+    // border: 2px solid black;  
+    width: 14vw;
+    // height: 5vh;
+    position: absolute;
+    bottom: 3%;
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    border-radius: 50px;
+    overflow: hidden;
+    // scroll-snap-type: x mandatory;
+    
+
+    .indicator-bullets {
+      width: 7px;
+      height: 7px;
+      font-size: 15px;
+      border-radius: 50px;
+      // color: rgba(72, 72, 72, 0.447);
+      background-color: rgba(72, 72, 72, 0.447);;
+      margin: 10px;
+      // scroll-snap-align: center ;
+      // object-fit: cover;
+      flex-shrink: 0;
+    }
+    .is-indicator-bullets-active {
+      background-color: rgb(72, 72, 72);
+      // color: rgb(72, 72, 72);
+      width: 13px;
+      height: 13px;
+      font-size: 20px;
+    }
+    .before-active-one{
+      // color: rgba(72, 72, 72, 0.447);
+      width: 11px;
+      height: 11px;
+      font-size: 18px;
+    }
+    .after-active-one{
+      // color: rgba(72, 72, 72, 0.447);
+      width: 11px;
+      height: 11px;
+      font-size: 18px;
+    }
+    .before-active-two{
+      // color: rgba(72, 72, 72, 0.447);
+      width: 10px;
+      height: 10px;
+      font-size: 16px;
+    }
+    .after-active-two{
+      // color: rgba(72, 72, 72, 0.447);
+      width: 10px;
+      height: 10px;
+      font-size: 16px;
+    }
+  }
+
+  .progress-indicator{
+    width: 40vw;
+    // height: vh;
+    // background-color: black;
+    position: absolute;
+    border: 2px solid white;
+    border-radius: 50px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 4%;
+    &::-webkit-meter-bar {
+      background: rgba(72, 72, 72, 0.447); // Set the background color of the meter bar
+    }
+    // Style different ranges of the meter bar
+    &::-webkit-meter-optimum-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-even-less-good-value {
+      background: rgb(72, 72, 72); // Set the color for different ranges of the meter bar
+    }
+          
+  }
+}
