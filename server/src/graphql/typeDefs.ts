@@ -3,6 +3,7 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
+    readNotes(filterData: ReadNotesFilterInputType): ReadNotesOutputType
   }
 
   type Mutation {
@@ -122,7 +123,8 @@ const typeDefs = gql`
     notesData: NotesDataType
     response: CustomResponseType
   }
-  type NotesDataType {
+
+  input ReadNotesFilterInputType {
     id: String
     link: String
     title: String
@@ -132,9 +134,19 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
-  type CustomResponseType {
-    status: Int
-    message: String
+  type ReadNotesOutputType {
+    notesData: NotesDataType
+    response: CustomResponseType!
+  }
+  type NotesDataType {
+    id: String
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
   }
   scalar DateTime
   scalar JSON

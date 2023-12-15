@@ -8,8 +8,9 @@ export const errorMessages = Object.freeze({
   },
   NOTES_MODEL: {
     NOTES_CREATION_FAILED: "unable to add notes data",
+    NOTES_NOT_FOUND: "video not found",
   },
   VIDEO_MODEL: {
     VIDEO_CREATION_FAILED: "unable to insert video data",
-  }
+  },
 });
