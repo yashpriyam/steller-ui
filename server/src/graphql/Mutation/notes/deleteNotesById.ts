@@ -8,7 +8,7 @@ export const deleteNotesById = async (
 ): Promise<DeletedNotesOutputType | unknown> => {
   const { NOTES_DELETION_SUCCESS } = localMessages.NOTES_MODEL;
   const { NOTES_DELETION_FAILED } = errorMessages.NOTES_MODEL;
-  const errorData: Record<string, number | string> = {
+  const errorData: CustomResponseType = {
     status: statusCodes.BAD_REQUEST,
     message: NOTES_DELETION_FAILED,
   };
@@ -17,7 +17,7 @@ export const deleteNotesById = async (
     const deletedNotesdata: NotesDataType = await notesModel.findByIdAndDelete(
       notesId
     );
-    const response: Record<string, string | number> = deletedNotesdata
+    const response:CustomResponseType = deletedNotesdata
       ? {
           message: NOTES_DELETION_SUCCESS,
           status: statusCodes.OK,
