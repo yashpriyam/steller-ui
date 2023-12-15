@@ -8,7 +8,7 @@ export const updateNotesById = async (
 ): Promise<UpdateNotesOutputType | unknown> => {
   const { NOTES_UPDATION_SUCCESS } = localMessages.NOTES_MODEL;
   const { NOTES_UPDATION_FAILED } = errorMessages.NOTES_MODEL;
-  const errorData: Record<string, string | number> = {
+  const errorData:CustomResponseType = {
     status: statusCodes.BAD_REQUEST,
     message: NOTES_UPDATION_FAILED,
   };
@@ -36,7 +36,7 @@ export const updateNotesById = async (
       },
       { new: true }
     );
-    const response: Record<string, number | string> = notesUpdatedData
+    const response: CustomResponseType = notesUpdatedData
       ? {
           message: NOTES_UPDATION_SUCCESS,
           status: statusCodes.OK,
