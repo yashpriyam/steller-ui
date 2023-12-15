@@ -26,7 +26,7 @@ export const Select: React.FC<SelectProps> = ({
   label,
   labelPosition = "bottom",
   isRequired,
-  isError,
+  isError,  
   placeHolder,
   style={}
 }: SelectProps) => {
