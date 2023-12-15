@@ -1,0 +1,54 @@
+@import "../variables.scss";
+
+.toast-container {
+    position: absolute;
+    z-index: 1;
+    border-radius: 5px;
+    padding: 14px;
+    width: fit-content;
+    box-shadow: $primaryBoxShadow;
+    min-width: max-content;
+    cursor: pointer;
+
+    .toast-header {
+        display: flex;
+
+        .toast-icon {
+            border: none;
+            margin: 4px;
+            position: absolute;
+            top: 15%;
+        }
+
+        .toast-title {
+            font-size: $largerFontSize;
+            margin-bottom: 5px;
+        }
+    }
+
+    .toast-description {
+        font-size: $smallFontSize;
+        margin-bottom: 2px;
+    }
+
+    .children-taost-description {
+        margin-top: 4px;
+    }
+
+    .progress-bar-container {
+        position: absolute;
+        width: 100%;
+        left: 0%;
+
+        .progress-bar {
+            position: absolute;
+            border: none;
+            border-radius: 5px;
+            overflow: hidden;
+            transition: width 0.1s linear;
+            height: 100%;
+            position: absolute;
+        }
+    }
+
+}

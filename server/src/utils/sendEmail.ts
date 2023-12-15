@@ -16,12 +16,12 @@ export const sendEmail = async(messageObject: MailResponseType): Promise<string 
             from: process.env.SENDER_EMAIL, // sender address
            ...messageObject
         });
-        
+
         console.log("Message sent: %s", info.messageId);
         return info.messageId;
     } catch (error) {
         console.error(error);
         return error;
     }
-    
+
 }

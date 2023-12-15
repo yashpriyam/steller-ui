@@ -1,5 +1,7 @@
 import { DatePicker } from "./components/DatePicker/datePicker";
 import { useTranslation } from "react-i18next";
+import React  from "react";
+
 
 const App = () => {
   const { t } = useTranslation();
@@ -10,5 +12,4 @@ const App = () => {
     </div>
   );
 };
-
 export default App;
