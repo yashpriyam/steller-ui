@@ -15,6 +15,7 @@ const typeDefs = gql`
     createNotes(notesData: CreateNotesInputType!): CreateNotesOutputType
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
     deleteNotesById(notesId: ID!): DeletedNotesOutputType
+    deleteVideoById(videoId: ID!): VideoOutputDataType
   }
 
   type CustomResponseType {
@@ -28,7 +29,6 @@ const typeDefs = gql`
   }
 
   type videoDataType {
-    _id: ID
     title: String
     description: String
     dayNumber: Int

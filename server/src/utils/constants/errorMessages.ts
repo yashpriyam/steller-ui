@@ -13,5 +13,6 @@ export const errorMessages = Object.freeze({
   },
   VIDEO_MODEL: {
     VIDEO_CREATION_FAILED: "unable to insert video data",
+    VIDEO_DELETION_FAILED: "unable to delete video data",
   },
 });
