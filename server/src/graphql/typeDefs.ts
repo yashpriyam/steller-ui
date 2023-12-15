@@ -8,7 +8,56 @@ const typeDefs = gql`
   type Mutation {
     login: String
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
-    createTransaction(data: CreateTransactionInputType!):CreateTransactionOutputType
+    createTransaction(
+      data: CreateTransactionInputType!
+    ): CreateTransactionOutputType
+    createNotes(notesData: CreateNotesInputType!): CreateNotesOutputType
+    createVideo(videoData: CreateVideoInput!): VideoOutputDataType
+  }
+
+  type CustomResponseType {
+    status: Int!
+    message: String!
+  }
+
+  type VideoOutputDataType {
+    videoData: videoDataType
+    response: CustomResponseType!
+  }
+
+  type videoDataType {
+    _id: ID
+    title: String
+    description: String
+    dayNumber: Int
+    videoNumber: Int
+    topics: [String]
+    links: Links
+    isActive: Boolean
+    duration: String
+    createdAt: String
+    updatedAt: String
+  }
+
+  type Links {
+    webmasters: String
+    youtube: String
+  }
+
+  input CreateVideoInput {
+    title: String!
+    description: String
+    dayNumber: Int!
+    videoNumber: Int!
+    topics: [String]!
+    links: LinksInput!
+    isActive: Boolean
+    duration: String
+  }
+
+  input LinksInput {
+    webmasters: String
+    youtube: String!
   }
 
   input CreateTransactionInputType {
@@ -60,7 +109,33 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum!
     expectedSalary: String!
   }
-
+  input CreateNotesInputType {
+    link: String!
+    title: String!
+    dayNumber: Int!
+    topics: [String]!
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type CreateNotesOutputType {
+    notesData: NotesDataType
+    response: CustomResponseType
+  }
+  type NotesDataType {
+    id: String
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type CustomResponseType {
+    status: Int
+    message: String
+  }
   scalar DateTime
   scalar JSON
 `;
