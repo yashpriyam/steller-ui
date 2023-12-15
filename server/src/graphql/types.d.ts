@@ -123,6 +123,19 @@ declare global {
     isActive?: boolean;
     duration?: string;
   };
+  type DeletedNotesOutputType = {
+    notesData?: DeletedNotesDataType;
+    response: CustomResponseType;
+  };
+  type DeletedNotesDataType = {
+    link: string;
+    title: string;
+    dayNumber: number;
+    topics: [string];
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
   type ReadNotesFilterInputType = {
     id?: String;
     link?: String;
