@@ -1,2 +1,2 @@
 export { createNotes } from "./createNotes";
-export { updateNotesById } from "./updateNotesById"
+export { updateNotesById } from "./updateNotesById";

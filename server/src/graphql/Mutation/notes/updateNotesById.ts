@@ -1,14 +1,14 @@
 import { ObjectId } from "mongoose";
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { notesModel } from "@models";
-  
+
 export const updateNotesById = async (
   _parent: undefined,
   args: { notesId: ObjectId; notesData: UpdateNotesInputType }
 ): Promise<UpdateNotesOutputType | unknown> => {
   const { NOTES_UPDATION_SUCCESS } = localMessages.NOTES_MODEL;
   const { NOTES_UPDATION_FAILED } = errorMessages.NOTES_MODEL;
-  const errorData: Record<string, unknown> = {
+  const errorData: Record<string, string | number> = {
     status: statusCodes.BAD_REQUEST,
     message: NOTES_UPDATION_FAILED,
   };
@@ -36,7 +36,7 @@ export const updateNotesById = async (
       },
       { new: true }
     );
-    const response = notesUpdatedData
+    const response: Record<string, number | string> = notesUpdatedData
       ? {
           message: NOTES_UPDATION_SUCCESS,
           status: statusCodes.OK,
