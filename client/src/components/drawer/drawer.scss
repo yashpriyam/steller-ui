@@ -1,0 +1,197 @@
+@import "../variables.scss";
+.drawer-left-close {
+  transform: translateX(-100%);
+}
+.drawer-right-close {
+  transform: translateX(100%);
+  overflow: hidden;
+}
+.drawer-top-close {
+  transform: translateY(-100%);
+}
+.drawer-bottom-close {
+  transform: translateY(100%);
+  overflow: hidden;
+}
+.drawer-container {
+  position: fixed;
+  transition: all 0.3s;
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: $primaryBg;
+  box-shadow: 1px 1px 3px 1px $boxShadowColor;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .drawer-icon-options-wrapper {
+    .drawer-icon-container {
+      border-bottom: 1px solid $bottomBorderColor;
+      .drawer-icon {
+        margin: 0 20px;
+        padding: 10px;
+        width: 120px;
+        height: 80px;
+      cursor: pointer;
+      }
+    }
+    .drawer-option {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      border-bottom: 1px solid $bottomBorderColor;
+      &:hover{
+          background-color: $lightBlueSecondary;
+        }
+      .drawer-option-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        .drawer-icon-image {
+          width: $textColorBlack;
+          height: $textFontSize;
+        }
+      }
+      .drawer-option-text {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        font-size: $textFontSize;
+        padding-left: 10px;
+        color: $textColorBlack;
+        overflow: scroll;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        
+      }
+    }
+  }
+  .drawer-avatar-conatiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    border-top: 1px solid $bottomBorderColor;
+    .drawer-avatar{
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid $bottomBorderColor;
+    }
+  }
+}
+.drawer-left-open {
+  height: 100vh;
+  max-width: 40%;
+  min-width: 20%;
+  width: fit-content;
+  padding-right: 2px;
+  left: 0;
+  top: 0;
+}
+
+.drawer-right-open {
+  height: 100vh;
+  max-width: 40%;
+  min-width: 20%;
+  width: fit-content;
+  padding-right: 2px;
+  top: 0;
+  right: 0;
+}
+.drawer-top-open {
+  width: 100vw;
+  max-height: 50%;
+  min-height: 20%;
+  height: fit-content;
+  padding-right: 2px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.drawer-bottom-open {
+  width: 100vw;
+  max-height: 50%;
+  min-height: 20%;
+  height: fit-content;
+  padding-right: 2px;
+  left: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 920px) and (min-width: 600px) {
+  .drawer-left-open,
+  .drawer-right-open {
+    max-width: 50%;
+  }
+}
+@media screen and (max-width: 600px) and (min-width: 500px) {
+  .drawer-left-open,
+  .drawer-right-open {
+    max-width: 60%;
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: $drawerFontSize;
+        padding: 5px;
+        .drawer-icon-image {
+          font-size: $drawerFontSize;
+        }
+      }
+    }
+  }
+  .drawer-top-open,
+  .drawer-bottom-open {
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: $drawerFontSize;
+        padding: 4px;
+        .drawer-icon-image {
+          font-size: $drawerFontSize;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 500px) and (min-width: 300px) {
+  .drawer-left-open,
+  .drawer-right-open {
+    max-width: 80%;
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: $mediumFontSize;
+        padding: 4px;
+        .drawer-icon-image {
+          font-size: $mediumFontSize;
+        }
+      }
+    }
+  }
+  .drawer-top-open,
+  .drawer-bottom-open {
+    .drawer-option {
+      padding: 5px;
+      .drawer-option-text,
+      .drawer-option-icon {
+        font-size: $mediumFontSize;
+        padding: 4px;
+        .drawer-icon-image {
+          font-size: $mediumFontSize;
+        }
+      }
+    }
+  }
+}

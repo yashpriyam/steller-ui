@@ -73,9 +73,9 @@ declare global {
     estimatedReadingTime?: string;
   };
   type CreateNotesOutputType = {
-    notesData: NotesDataType;
-    response: CustomResponseType;
-  };
+    notesData: NotesDataType;;
+    response: CustomResponseType;;
+  };;
   type NotesDataType = {
     id: string;
     title: string;
@@ -104,8 +104,7 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  };
-
+  }
 
   type VideoDataType = {
     title?: string;
@@ -120,7 +119,19 @@ declare global {
     isActive?: boolean;
     duration?: string;
   };
-
+  type DeletedNotesOutputType = {
+    notesData?: DeletedNotesDataType;
+    response: CustomResponseType;
+  };
+  type DeletedNotesDataType = {
+    link: string;
+    title: string;
+    dayNumber: number;
+    topics: [string];
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
   type CustomResponseType = {
     status: number;
     message: string;
