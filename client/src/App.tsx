@@ -1,3 +1,4 @@
+import { DatePicker } from "./components/DatePicker/datePicker";
 import { useTranslation } from "react-i18next";
 import React  from "react";
 
@@ -7,6 +8,7 @@ const App = () => {
   return (
     <div>
       <h1>{t("greeting")}</h1>
+      <DatePicker label="Date Picker" labelPosition="left" isRequired={true} maxDate="2023-12-12" minDate="2011-01-01" icon="📆"/>
     </div>
   );
 };
