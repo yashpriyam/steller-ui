@@ -6,7 +6,11 @@ export const getVideo = async (
     parent: undefined,
     args: { videoDataFilter: VideoDataType }
 ): Promise<VideoOutputDataType | void> => {
-    const { VIDEO_NOT_FOUND, BAD_USER_INPUT } = errorMessages.VIDEO_MODEL;
+    const { VIDEO_NOT_FOUND } = errorMessages.VIDEO_MODEL;
+    const errorData: CustomResponseType = {
+        status: statusCodes.BAD_REQUEST,
+        message: VIDEO_NOT_FOUND,
+    };
     try {
         const { videoDataFilter } = args;
         const { VIDEO_FOUND } = localMessages.VIDEO_MODEL;
@@ -20,9 +24,7 @@ export const getVideo = async (
             description,
             dayNumber,
         }: VideoDataType = videoDataFilter;
-        const { youtube, webmasters } = links ?? {};
-        console.log({ videoDataFilter })
-        const modifiedVideoDataFilter: object = removeNullKeys({
+        let modifiedVideoDataFilter = removeNullKeys({
             links,
             videoNumber,
             topics,
@@ -32,35 +34,45 @@ export const getVideo = async (
             description,
             dayNumber,
         });
-        console.log({ modifiedVideoDataFilter });
-        console.log(Object.keys(modifiedVideoDataFilter).length);
 
+        if (links) {
+            const filteredLinks = removeNullKeys(links);
+            const updatedLinks = Object.keys(filteredLinks).reduce(
+                (acc: any, key) => {
+                    acc[`links.${key}`] = filteredLinks[key];
+                    return acc;
+                },
+                {}
+            );
+            if (updatedLinks) {
+                const { links, ...restFilters } = modifiedVideoDataFilter;
+                modifiedVideoDataFilter = { ...restFilters, ...updatedLinks };
+            }
+        }
         if (!Object.keys(modifiedVideoDataFilter).length) {
             return {
-                response: {
-                    status: statusCodes.OK,
-                    message: BAD_USER_INPUT,
-                },
+                response: errorData,
             };
         }
 
+        Object.entries(modifiedVideoDataFilter).forEach(([key, value]) => {
+            if (key === "topics") {
+                modifiedVideoDataFilter[key] = { $in: value };
+            }
+        });
         const filteredVideoData = await videoModel.findOne(modifiedVideoDataFilter);
-        console.log({ filteredVideoData });
-
         return {
             videoData: filteredVideoData,
-            response: {
-                status: statusCodes.OK,
-                message: filteredVideoData ? VIDEO_FOUND : VIDEO_NOT_FOUND,
-            },
+            response: filteredVideoData
+                ? {
+                    status: statusCodes.OK,
+                    message: VIDEO_FOUND,
+                }
+                : errorData,
         };
     } catch (err) {
-        console.log({ err })
         return {
-            response: {
-                status: statusCodes.BAD_REQUEST,
-                message: VIDEO_NOT_FOUND,
-            },
+            response: errorData,
         };
     }
 };
