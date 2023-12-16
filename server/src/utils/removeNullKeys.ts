@@ -1,5 +1,5 @@
-export const removeNullKeys = (obj: any) => {
+export const removeNullKeys = (obj: object) => {
   return Object.fromEntries(
-    Object.entries(obj).filter(([key, value]) => value !== null)
+    Object.entries(obj).filter(([key, value]) => value !== null && value !== undefined)
   );
 };

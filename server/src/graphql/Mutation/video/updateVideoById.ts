@@ -22,10 +22,11 @@ export const updateVideoById = async (
       dayNumber,
     }: VideoDataType = videoData;
 
-    let updateObj = links ?? {};
+    let updatedLinks = {};
+    const { youtube, webmasters } = links ?? {};
     if (links) {
-      const filteredLinks = removeNullKeys(links);
-      updateObj = Object.keys(filteredLinks).reduce((acc: any, key) => {
+      const filteredLinks = removeNullKeys({ youtube, webmasters });
+      updatedLinks = Object.keys(filteredLinks).reduce((acc: any, key) => {
         acc[`links.${key}`] = filteredLinks[key];
         return acc;
       }, {});
@@ -34,7 +35,7 @@ export const updateVideoById = async (
     const updatedVideoData: VideoDataType = await videoModel.findByIdAndUpdate(
       videoId,
       {
-        $set: updateObj, //this is links field
+        $set: updatedLinks,
         videoNumber,
         topics,
         title,
