@@ -137,14 +137,14 @@ declare global {
     estimatedReadingTime?: string;
   };
   type ReadNotesFilterInputType = {
-    id?: String;
-    link?: String;
-    title?: String;
-    dayNumber?: Int;
-    topics?: [String]|object;
-    noOfPages?: Int;
-    description?: String;
-    estimatedReadingTime?: String;
+    id?: string;
+    link?: string;
+    title?: string;
+    dayNumber?: number;
+    topics?: [string]|object;
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
   };
   type ReadNotesOutputType = {
     notesData?: NotesDataType;
