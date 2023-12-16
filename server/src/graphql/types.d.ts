@@ -136,4 +136,18 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
+  type ReadNotesFilterInputType = {
+    id?: string;
+    link?: string;
+    title?: string;
+    dayNumber?: number;
+    topics?: [string] | object;
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
+  type ReadAllNotesOutputType = {
+    notesData?: [NotesDataType];
+    response: CustomResponseType;
+  };
 }

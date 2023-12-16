@@ -4,6 +4,7 @@ export const localMessages = {
   NOTES_MODEL: {
     NOTES_CREATION_SUCCESS: "notes data inserted successfully",
     NOTES_DELETION_SUCCESS: "notes data deleted successfully",
+    NOTES_FOUND: "notes found successfully",
   },
   VIDEO_MODEL: {
     VIDEO_CREATION_SUCCESS: "video data inserted successfully",
