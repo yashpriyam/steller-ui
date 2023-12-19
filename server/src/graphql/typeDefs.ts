@@ -15,6 +15,10 @@ const typeDefs = gql`
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
     deleteNotesById(notesId: ID!): DeletedNotesOutputType
     deleteVideoById(videoId: ID!): VideoOutputDataType
+    updateNotesById(
+      notesId: ID!
+      notesData: UpdateNotesInputType
+    ): UpdateNotesOutputType
   }
 
   type CustomResponseType {
@@ -121,7 +125,29 @@ const typeDefs = gql`
   }
   type CreateNotesOutputType {
     notesData: NotesDataType
-    response: CustomResponseType
+    response: CustomResponseType!
+  }
+  input UpdateNotesInputType {
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type UpdateNotesOutputType {
+    notesData: UpdateNotesDataType
+    response: CustomResponseType!
+  }
+  type UpdateNotesDataType {
+    link: String!
+    title: String!
+    dayNumber: Int!
+    topics: [String]!
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
   }
   type DeletedNotesOutputType {
     notesData: DeletedNotesDataType
@@ -137,7 +163,6 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   type NotesDataType {
-    id: String
     link: String
     title: String
     dayNumber: Int
