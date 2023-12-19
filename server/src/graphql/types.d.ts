@@ -76,16 +76,6 @@ declare global {
     notesData: NotesDataType;
     response: CustomResponseType;
   };
-  type NotesDataType = {
-    id: string;
-    title: string;
-    links: [string];
-    topics: [string];
-    dayNumber: number;
-    noOfPages?: number;
-    description?: string;
-    estimatedReadingTime?: string;
-  };
   type UpdateNotesInputType = {
     title?: string;
     links?: [string];
@@ -109,7 +99,6 @@ declare global {
     estimatedReadingTime?: String;
   };
   type NotesDataType = {
-    id: String;
     title: String;
     links: [String];
     topics: [String];

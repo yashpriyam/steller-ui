@@ -163,7 +163,6 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   type NotesDataType {
-    id: String
     link: String
     title: String
     dayNumber: Int
