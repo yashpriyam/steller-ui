@@ -5,3 +5,4 @@ export {
   getRegistrationEmailForUser,
 } from "./registrationEmail";
 export { convertUTCtoIST, formatDate } from "./timeUtils";
+export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeysKeys";
