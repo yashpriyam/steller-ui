@@ -1,8 +1,8 @@
 import { notesModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { removeNullKeys } from "@utils";
+import { removeNullAndUndefinedKeys } from "@utils";
 
-export const readAllNotes = async (
+export const getAllNotes = async (
   _parent = undefined,
   args: { filterData: ReadNotesFilterInputType }
 ): Promise<ReadAllNotesOutputType | unknown> => {
@@ -15,8 +15,8 @@ export const readAllNotes = async (
 
   try {
     const { filterData } = args;
-    const queryConditions: ReadNotesFilterInputType =
-      removeNullKeys(filterData);
+    const queryConditions =
+      removeNullAndUndefinedKeys(filterData);
     if (queryConditions.topics) {
       queryConditions.topics = { $in: filterData.topics };
     }

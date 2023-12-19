@@ -1,1 +1,1 @@
-export { readAllNotes } from "./readAllnotes";
+export { getAllNotes } from "./getAllNotes";

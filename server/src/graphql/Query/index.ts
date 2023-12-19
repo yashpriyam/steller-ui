@@ -1,2 +1,2 @@
 export { getPaymentDetails } from "./payment/getPaymentDetails";
-export { readAllNotes } from "./notes/index";
+export { getAllNotes } from "./notes/index";

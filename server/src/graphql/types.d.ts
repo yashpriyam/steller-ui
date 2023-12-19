@@ -77,7 +77,6 @@ declare global {
     response: CustomResponseType;
   };
   type NotesDataType = {
-    id: string;
     title: string;
     links: [string];
     topics: [string];
@@ -137,11 +136,10 @@ declare global {
     estimatedReadingTime?: string;
   };
   type ReadNotesFilterInputType = {
-    id?: string;
     link?: string;
     title?: string;
     dayNumber?: number;
-    topics?: [string] | object;
+    topics?: [string];
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;

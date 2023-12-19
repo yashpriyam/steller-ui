@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
-    readAllNotes(filterData: ReadNotesFilterInputType): ReadAllNotesOutputType
+    getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
   }
 
   type Mutation {
@@ -137,8 +137,7 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
-  input ReadNotesFilterInputType {
-    id: String
+  input getNotesFilterInputType {
     link: String
     title: String
     dayNumber: Int
@@ -147,12 +146,11 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
-  type ReadAllNotesOutputType {
+  type getAllNotesOutputType {
     notesData: [NotesDataType]
     response: CustomResponseType!
   }
   type NotesDataType {
-    id: String
     link: String
     title: String
     dayNumber: Int
