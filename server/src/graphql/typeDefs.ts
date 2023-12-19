@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
+    getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
   }
 
   type Mutation {
@@ -181,6 +182,19 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+  }
+  input getNotesFilterInputType {
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type getAllNotesOutputType {
+    notesData: [NotesDataType]
+    response: CustomResponseType!
   }
   type NotesDataType {
     link: String
