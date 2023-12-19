@@ -106,6 +106,9 @@ declare global {
     duration?: string;
   }
 
+  type FilteredLinksType = {
+    [key: string]: string;
+  }
   type VideoDataType = {
     title?: string;
     description?: string;
