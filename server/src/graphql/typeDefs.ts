@@ -3,6 +3,7 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
+    getAllVideos(videoDataFilter: VideoInputFilterType!): AllVideoOutputDataType
   }
 
   type Mutation {
@@ -20,6 +21,11 @@ const typeDefs = gql`
   type CustomResponseType {
     status: Int!
     message: String!
+  }
+
+  type AllVideoOutputDataType {
+    videoData: [videoDataType]
+    response: CustomResponseType!
   }
 
   type VideoOutputDataType {
@@ -59,6 +65,21 @@ const typeDefs = gql`
   input LinksInput {
     webmasters: String
     youtube: String!
+  }
+
+  input VideoInputFilterType {
+    title: String
+    description: String
+    dayNumber: Int
+    videoNumber: Int
+    topics: [String]
+    links: OptionalLinksInput
+    isActive: Boolean
+    duration: String
+  }
+  input OptionalLinksInput{
+    webmasters: String
+    youtube: String
   }
 
   input CreateTransactionInputType {

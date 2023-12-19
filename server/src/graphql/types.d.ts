@@ -96,6 +96,11 @@ declare global {
     response: CustomResponseType;
   };
 
+  type AllVideoOutputDataType = {
+    videoData?: [videoDataType];
+    response: CustomResponseType;
+  }
+
   type CreateVideoType = {
     title: string;
     description?: string;
