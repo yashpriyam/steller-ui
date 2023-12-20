@@ -185,7 +185,7 @@ declare global {
     isOpenable: boolean;
     }
 }
-  type ReadNotesFilterInputType = {
+  type getNotesFilterInputType = {
     link?: string;
     title?: string;
     dayNumber?: number;
@@ -194,8 +194,20 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
-  type ReadAllNotesOutputType = {
+  type getAllNotesOutputType = {
     notesData?: [NotesDataType];
     response: CustomResponseType;
+  };
+  type getNotesOutputType = {
+    notesData?: NotesDataType;
+    response: CustomResponseType;
+  };
+
+  type QuestionAttemptSchemaType = {
+    userId: ObjectId; 
+    questionId: ObjectId; 
+    response: { imageUrl: string; text: string }[]; 
+    isCorrect: boolean
+    timestamp: Date;
   };
 }
