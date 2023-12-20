@@ -158,7 +158,7 @@ declare global {
     estimatedReadingTime?: string;
   };
 
-  enum QuestionType {
+  enum QuestionTypeEnum {
     multi= "multi",
     single= "single"
   }
@@ -171,7 +171,7 @@ declare global {
   type QuestionSchemaType = {
     question: string;
     options: { imageUrl: string; text: string }[];
-    questionType: QuestionType ;
+    questionType: QuestionTypeEnum ;
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
