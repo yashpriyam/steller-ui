@@ -171,7 +171,7 @@ declare global {
     response: CustomResponseType;
   };
 
-  type IQuestionAttemptType = {
+  type QuestionAttemptSchemaType = {
     userId: ObjectId; 
     questionId: ObjectId; 
     response: { imageUrl: string; text: string }[]; 
