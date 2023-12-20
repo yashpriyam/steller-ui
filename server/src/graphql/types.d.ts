@@ -61,5 +61,125 @@ declare global {
     paymentId: string;
     userId: string;
     isPaymentSuccessfull: boolean;
-  }
+  };
+  type CreateNotesInputType = {
+    link: string;
+    link: string;
+    title: string;
+    topics: [string];
+    dayNumber: number;
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
+  type CreateNotesOutputType = {
+    notesData: NotesDataType;
+    response: CustomResponseType;
+  };
+  type UpdateNotesInputType = {
+    title?: string;
+    links?: [string];
+    topics?: [string];
+    dayNumber?: number;
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
+  type UpdateNotesOutputType = {
+    notesData?: UpdateNotesDataType;
+    response: CustomResponseType;
+  };
+  type UpdateNotesDataType = {
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
+  };
+  type NotesDataType = {
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
+  };
+  type CustomResponseType = {
+    status: number;
+    message: string;
+  };
+
+  type VideoOutputDataType = {
+    videoData?: videoDataType;
+    response: CustomResponseType;
+  };
+
+  type CreateVideoType = {
+    title: string;
+    description?: string;
+    dayNumber: number;
+    videoNumber: number;
+    topics: string[];
+    links: {
+      webmasters?: string;
+      youtube: string;
+    };
+    isActive?: boolean;
+    duration?: string;
+  };
+
+  type VideoDataType = {
+    title?: string;
+    description?: string;
+    dayNumber?: number;
+    videoNumber?: number;
+    topics?: string[];
+    links?: {
+      webmasters?: string;
+      youtube?: string;
+    };
+    isActive?: boolean;
+    duration?: string;
+  };
+  type DeletedNotesOutputType = {
+    notesData?: DeletedNotesDataType;
+    response: CustomResponseType;
+  };
+  type DeletedNotesDataType = {
+    link: string;
+    title: string;
+    dayNumber: number;
+    topics: [string];
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
+  type getNotesFilterInputType = {
+    link?: string;
+    title?: string;
+    dayNumber?: number;
+    topics?: [string];
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
+  type getAllNotesOutputType = {
+    notesData?: [NotesDataType];
+    response: CustomResponseType;
+  };
+  type getNotesOutputType = {
+    notesData?: NotesDataType;
+    response: CustomResponseType;
+  };
+
+  type QuestionAttemptSchemaType = {
+    userId: ObjectId; 
+    questionId: ObjectId; 
+    response: { imageUrl: string; text: string }[]; 
+    isCorrect: boolean
+    timestamp: Date;
+  };
 }
