@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 
-const questionSchema = new Schema<IQuestion>({
+const questionSchema = new Schema<QuestionSchemaType>({
   question: { type: String, required: true },
   batchCode: { type: String, required: true },
   options: { type: [{ imageUrl: String, text: String }], required: true },
@@ -18,4 +18,4 @@ const questionSchema = new Schema<IQuestion>({
   },
 });
 
-export const Question = model<IQuestion>("Question", questionSchema);
+export const Question = model<QuestionSchemaType>("Question", questionSchema);

@@ -158,17 +158,17 @@ declare global {
     estimatedReadingTime?: string;
   };
 
-  enum QuestionType {
+  enum QuestionEnumType {
     multi= "multi",
     single= "single"
   }
 
-  enum MetaType {
+  enum QuestionMetaType {
     timed="timed",
     recorded = "recorded"
   }
 
-  type IQuestion = {
+  type QuestionSchemaType = {
     question: string;
     options: { imageUrl: string; text: string }[];
     questionType: QuestionType ;
