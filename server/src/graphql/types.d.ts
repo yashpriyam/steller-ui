@@ -136,4 +136,32 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
+
+  enum QuestionType {
+    multi= "multi",
+    single= "single"
+  }
+
+  enum MetaType {
+    timed="timed",
+    recorded = "recorded"
+  }
+
+  type IQuestion = {
+    question: string;
+    options: { imageUrl: string; text: string }[];
+    questionType: QuestionType ;
+    answer: { imageUrl: string; text: string }[];
+    marks: number;
+    batchCode: string;
+    meta: {
+    topic: string;
+    day: number;
+    isActive: boolean;
+    isArchived: boolean;
+    type: MetaType;
+    expiresInMins: number;
+    isOpenable: boolean;
+    }
+}
 }
