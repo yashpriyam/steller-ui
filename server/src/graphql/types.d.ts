@@ -62,8 +62,8 @@ declare global {
     userId: string;
     isPaymentSuccessfull: boolean;
   };
-
   type CreateNotesInputType = {
+    link: string;
     link: string;
     title: string;
     topics: [string];
@@ -76,15 +76,36 @@ declare global {
     notesData: NotesDataType;
     response: CustomResponseType;
   };
-  type NotesDataType = {
-    id: string;
-    title: string;
-    links: [string];
-    topics: [string];
-    dayNumber: number;
+  type UpdateNotesInputType = {
+    title?: string;
+    links?: [string];
+    topics?: [string];
+    dayNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+  };
+  type UpdateNotesOutputType = {
+    notesData?: UpdateNotesDataType;
+    response: CustomResponseType;
+  };
+  type UpdateNotesDataType = {
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
+  };
+  type NotesDataType = {
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
   };
   type CustomResponseType = {
     status: number;
@@ -128,6 +149,11 @@ declare global {
     isActive?: boolean;
     duration?: string;
   };
+
+  type FilteredLinksType = {
+    [key: string]: string;
+  }
+
   type DeletedNotesOutputType = {
     notesData?: DeletedNotesDataType;
     response: CustomResponseType;
@@ -140,5 +166,18 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+  };
+  type ReadNotesFilterInputType = {
+    link?: string;
+    title?: string;
+    dayNumber?: number;
+    topics?: [string];
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
+  type ReadAllNotesOutputType = {
+    notesData?: [NotesDataType];
+    response: CustomResponseType;
   };
 }

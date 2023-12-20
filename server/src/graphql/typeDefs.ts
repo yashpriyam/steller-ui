@@ -3,7 +3,8 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
-    getAllVideos(videoDataFilter: VideoInputFilterType!): AllVideoOutputDataType
+    getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
+    getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
   }
 
   type Mutation {
@@ -16,6 +17,10 @@ const typeDefs = gql`
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
     deleteNotesById(notesId: ID!): DeletedNotesOutputType
     deleteVideoById(videoId: ID!): VideoOutputDataType
+    updateNotesById(
+      notesId: ID!
+      notesData: UpdateNotesInputType
+    ): UpdateNotesOutputType
   }
 
   type CustomResponseType {
@@ -73,11 +78,11 @@ const typeDefs = gql`
     dayNumber: Int
     videoNumber: Int
     topics: [String]
-    links: OptionalLinksInput
+    links: UpdateLinksInput
     isActive: Boolean
     duration: String
   }
-  input OptionalLinksInput{
+  input UpdateLinksInput{
     webmasters: String
     youtube: String
   }
@@ -142,7 +147,29 @@ const typeDefs = gql`
   }
   type CreateNotesOutputType {
     notesData: NotesDataType
-    response: CustomResponseType
+    response: CustomResponseType!
+  }
+  input UpdateNotesInputType {
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type UpdateNotesOutputType {
+    notesData: UpdateNotesDataType
+    response: CustomResponseType!
+  }
+  type UpdateNotesDataType {
+    link: String!
+    title: String!
+    dayNumber: Int!
+    topics: [String]!
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
   }
   type DeletedNotesOutputType {
     notesData: DeletedNotesDataType
@@ -157,8 +184,20 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
+  input getNotesFilterInputType {
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type getAllNotesOutputType {
+    notesData: [NotesDataType]
+    response: CustomResponseType!
+  }
   type NotesDataType {
-    id: String
     link: String
     title: String
     dayNumber: Int

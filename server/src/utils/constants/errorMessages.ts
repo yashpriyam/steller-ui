@@ -9,6 +9,8 @@ export const errorMessages = Object.freeze({
   NOTES_MODEL: {
     NOTES_CREATION_FAILED: "unable to add notes data",
     NOTES_DELETION_FAILED: "unable to delete notes data",
+    NOTES_UPDATION_FAILED: "unable to update notes",
+    NOTES_NOT_FOUND: "notes not found",
   },
   VIDEO_MODEL: {
     VIDEO_CREATION_FAILED: "unable to insert video data",
