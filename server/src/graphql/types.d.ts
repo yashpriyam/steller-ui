@@ -174,4 +174,12 @@ declare global {
     notesData?: NotesDataType;
     response: CustomResponseType;
   };
+
+  type QuestionAttemptSchemaType = {
+    userId: ObjectId; 
+    questionId: ObjectId; 
+    response: { imageUrl: string; text: string }[]; 
+    isCorrect: boolean
+    timestamp: Date;
+  };
 }
