@@ -157,6 +157,34 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
+
+  enum QuestionTypeEnum {
+    multi= "multi",
+    single= "single"
+  }
+
+  enum QuestionMetaType {
+    timed="timed",
+    recorded = "recorded"
+  }
+
+  type QuestionSchemaType = {
+    question: string;
+    options: { imageUrl: string; text: string }[];
+    questionType: QuestionTypeEnum ;
+    answer: { imageUrl: string; text: string }[];
+    marks: number;
+    batchCode: string;
+    meta: {
+    topic: string;
+    day: number;
+    isActive: boolean;
+    isArchived: boolean;
+    type: QuestionMetaType ;
+    expiresInMins: number;
+    isOpenable: boolean;
+    }
+}
   type getNotesFilterInputType = {
     link?: string;
     title?: string;
