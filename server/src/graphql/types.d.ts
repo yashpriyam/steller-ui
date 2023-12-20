@@ -158,7 +158,7 @@ declare global {
     estimatedReadingTime?: string;
   };
 
-  enum QuestionEnumType {
+  enum QuestionType {
     multi= "multi",
     single= "single"
   }
@@ -180,7 +180,7 @@ declare global {
     day: number;
     isActive: boolean;
     isArchived: boolean;
-    type: MetaType;
+    type: QuestionMetaType ;
     expiresInMins: number;
     isOpenable: boolean;
     }
