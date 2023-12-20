@@ -157,7 +157,7 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
-  type ReadNotesFilterInputType = {
+  type getNotesFilterInputType = {
     link?: string;
     title?: string;
     dayNumber?: number;
@@ -166,8 +166,12 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
-  type ReadAllNotesOutputType = {
+  type getAllNotesOutputType = {
     notesData?: [NotesDataType];
+    response: CustomResponseType;
+  };
+  type getNotesOutputType = {
+    notesData?: NotesDataType;
     response: CustomResponseType;
   };
 
