@@ -1,11 +1,11 @@
 import { notesModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { removeNullKeys } from "@utils";
+import { removeNullAndUndefinedKeys } from "@utils";
 
-export const readNotes = async (
+export const getNotes = async (
   _parent = undefined,
-  args: { filterData: ReadNotesFilterInputType }
-): Promise<ReadNotesOutputType | unknown> => {
+  args: { filterData: getNotesFilterInputType }
+): Promise<getNotesOutputType | unknown> => {
   const { NOTES_FOUND } = localMessages.NOTES_MODEL;
   const { NOTES_NOT_FOUND } = errorMessages.NOTES_MODEL;
   const errorData: CustomResponseType = {
@@ -16,8 +16,7 @@ export const readNotes = async (
   try {
     const { filterData } = args;
 
-    const queryConditions: ReadNotesFilterInputType =
-      removeNullKeys(filterData);
+    const queryConditions = removeNullAndUndefinedKeys(filterData);
     if (queryConditions.topics) {
       queryConditions.topics = { $in: filterData.topics };
     }

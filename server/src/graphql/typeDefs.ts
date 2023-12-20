@@ -4,7 +4,7 @@ const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
     getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
-    readNotes(filterData: ReadNotesFilterInputType): ReadNotesOutputType
+    getNotes(filterData: getNotesFilterInputType): getNotesOutputType
   }
 
   type Mutation {
@@ -175,6 +175,10 @@ const typeDefs = gql`
   }
   type getAllNotesOutputType {
     notesData: [NotesDataType]
+    response: CustomResponseType!
+  }
+  type getNotesOutputType {
+    notesData: NotesDataType
     response: CustomResponseType!
   }
   type NotesDataType {
