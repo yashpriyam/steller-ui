@@ -167,7 +167,35 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
-  type ReadNotesFilterInputType = {
+
+  enum QuestionTypeEnum {
+    multi= "multi",
+    single= "single"
+  }
+
+  enum QuestionMetaType {
+    timed="timed",
+    recorded = "recorded"
+  }
+
+  type QuestionSchemaType = {
+    question: string;
+    options: { imageUrl: string; text: string }[];
+    questionType: QuestionTypeEnum ;
+    answer: { imageUrl: string; text: string }[];
+    marks: number;
+    batchCode: string;
+    meta: {
+    topic: string;
+    day: number;
+    isActive: boolean;
+    isArchived: boolean;
+    type: QuestionMetaType ;
+    expiresInMins: number;
+    isOpenable: boolean;
+    }
+}
+  type getNotesFilterInputType = {
     link?: string;
     title?: string;
     dayNumber?: number;
@@ -176,8 +204,20 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
-  type ReadAllNotesOutputType = {
+  type getAllNotesOutputType = {
     notesData?: [NotesDataType];
     response: CustomResponseType;
+  };
+  type getNotesOutputType = {
+    notesData?: NotesDataType;
+    response: CustomResponseType;
+  };
+
+  type QuestionAttemptSchemaType = {
+    userId: ObjectId; 
+    questionId: ObjectId; 
+    response: { imageUrl: string; text: string }[]; 
+    isCorrect: boolean
+    timestamp: Date;
   };
 }

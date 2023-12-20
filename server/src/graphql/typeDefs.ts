@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
     getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
+    getNotes(filterData: getNotesFilterInputType): getNotesOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
   }
 
@@ -195,6 +196,10 @@ const typeDefs = gql`
   }
   type getAllNotesOutputType {
     notesData: [NotesDataType]
+    response: CustomResponseType!
+  }
+  type getNotesOutputType {
+    notesData: NotesDataType
     response: CustomResponseType!
   }
   type NotesDataType {
