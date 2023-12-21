@@ -5,12 +5,13 @@ import dropdownArrow from "../../icons/accordionArrow.png"
 interface AccordionProps {
   title?: string;
   children?: React.ReactNode;
+  style?: object;
 }
 
-const Accordion: React.FC<AccordionProps> = ({ title, children }: AccordionProps) => {
+const Accordion: React.FC<AccordionProps> = ({ title, children, style }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="accordion-container">
+    <div className="accordion-container" style={style}>
       <div
         className="accordion-title"
         onClick={(e) => {
@@ -18,7 +19,7 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }: AccordionProps
           e.stopPropagation();
         }}
       >
-        {title}
+        {/* {title} */}
         <img
           className={`accordion-dropdown-arrow ${
             isOpen && "accordion-dropdown-arrow-active"
@@ -27,7 +28,9 @@ const Accordion: React.FC<AccordionProps> = ({ title, children }: AccordionProps
           alt=""
         />
       </div>
-      <div className={`accordion-children ${isOpen && "open-accordion"}`}>
+      <div className={`accordion-content ${
+          isOpen ? "open-accordion" : "closed-accordion"
+        }`}>
         {children}
       </div>
     </div>

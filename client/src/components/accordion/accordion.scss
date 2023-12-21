@@ -1,17 +1,34 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+3");
+// @import url("https://fonts.googleapis.com/css?family=Nunito");
 .accordion-container{
     width: 100%;
     height: fit-content;
     background-color: white;
+    background:radial-gradient(50% 50% at 0% 0%, var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63, rgba(255, 255, 255, 0.15)) /* {"name":"White 15%"} */ 2.210024196147939%, hsla(0, 0%, 100%, 0) 100%);
     box-shadow: 0 0 5px 1px rgb(128, 128, 128, 0.5);
-    padding: 10px;
-    border-radius: 5px;
+    cursor: pointer;
+    padding: 30px;
+    border-radius: 30px;
+       border: 1px solid
+         var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
     .accordion-title{
-        font-size: 20px;
+        font-size: 25px;
         display: flex;
+        font-family: 'Nunito';
         align-items: center;
         justify-content: space-between;
-        padding: 5px 10px;
+        padding: 10px 20px;
         cursor: pointer;
+        position: relative;
+        &::after{
+            content: "Week 1";
+            position: absolute;
+            transform: translate(-25%,0%);
+            font-size: 40px;
+            font-weight: 800;
+            color: rgba(128, 128, 128, 0.527);
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
         .accordion-dropdown-arrow{
             height: 20px;
             transform: rotate(180deg);
@@ -21,13 +38,32 @@
             transform: rotate(0deg);
         }
     }
-    .accordion-children{
-        height: 1px;
-        visibility: hidden;
+   
+    .accordion-content {
+        color: white;
+        max-height: 0;
+        overflow: hidden;
+
+        .content-wrapper {
+            padding: 10px;
+        }
     }
-    .open-accordion{
-        height: fit-content;
-        visibility: visible;
-        padding: 10px 20px;
+    .open-accordion {
+        max-height: fit-content;
+        // transition: max-height 1s;
+    }
+
+    .closed-accordion {
+        max-height: 0;
+        // transition: max-height 0.5s;
+    }
+}
+
+@media (max-width:600px){
+    .accordion-container{
+        padding: 10px;
+        .open-accordion{
+            padding: 5px;
+        }
     }
 }

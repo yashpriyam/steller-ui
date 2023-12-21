@@ -1,149 +1,232 @@
+@import '../../variable.scss';
+
 .scheduling-page {
-    width: 100%;
-    height: 100%;
-    min-width: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  padding: 20px 10px;
+  gap: 30px;
+  background-color: $primaryBgColor;
+  font-family: $primaryFontFamily;  
+  .scheduling-page-filter-container {
+    width: 20%;
+    height: fit-content;
+    background-color: rgb(128, 128, 128, 0.3);
+    border-radius: 5px;
+    padding: 5px 10px;
     display: flex;
-    padding: 20px 10px;
-    gap: 20px;
-    .scheduling-page-filter-container {
-        width: 25%;
-        height: fit-content;
-        background-color: rgb(128, 128, 128, 0.3);
-        border-radius: 5px;
-        padding: 5px 10px;
+
+    .filter-sub-container {
+      font-size: 20px;
+
+      .filter-heading {
+        border-bottom: 1px solid rgb(165, 161, 161);
+      }
+
+      .checkbox-content {
         display: flex;
-        
-        .filter-sub-container{
-            font-size: 20px;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 10px;
 
-            .filter-heading{
-                border-bottom: 1px solid rgb(165, 161, 161);
-            }
-        
-        .checkbox-content{
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-        
-            .checkbox-wrapper{
-                display: flex;
-                gap: 5px;
-                align-items: center;
+        .checkbox-wrapper {
+          display: flex;
+          gap: 5px;
+          align-items: center;
 
-                input[type=checkbox]{
-                    width: 20px;
-                    height: 20px;
-                    cursor: pointer;
-                }
+          input[type='checkbox'] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
 
-                label{
-                    font-size: 16px;
-                    cursor: pointer;
-                }
-                
-            }
+          label {
+            font-size: 16px;
+            cursor: pointer;
+          }
         }
+      }
     }
-}
-    .scheduling-page-accordion {
-        padding: 0px 10px;
+  }
+  .scheduling-page-accordion {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 20px;
+    
+    .parent {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0;
+      padding-top: 30px;
+      gap: 30px;
+
+      .schedule-accordion-column-1 {
         display: flex;
         flex-direction: column;
-        width: 50%;
-        gap: 10px;
-        
+        line-height: normal;
+        width: 100%;
+        margin-left: 0px;
+        font-size: 25px;
+      }
 
-        .schedule-accordion-description {
-            color: rgba(0, 0, 0, 0.9);
-            // font-weight: 600;
-            font-size: 15px;
-        }
-        .daylist-container{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            padding: 20px 0px;
-            .day-container{
-                display: flex;
-                align-items: center;
-                border-radius: 3px;
-                background-color: rgb(0, 0, 0, 0.1);
+      .column-2 {
+        display: flex;
+        line-height: normal;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      .daylist-container {
+        display: flex;
+        gap: 35px;
+
+        .day-container {
+          display: flex;
+          align-items: center;
+          border-radius: 3px;
+          color: $primaryColor;
+          padding: 50px;
+          border-radius:50px;
+          border: 2px solid
+            var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
+            background:radial-gradient(50% 50% at 0% 0%, var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63, rgba(255, 255, 255, 0.15)) /* {"name":"White 15%"} */ 2.210024196147939%, hsla(0, 0%, 100%, 0) 100%);
+            transition: all 0.7s;
+            &:hover{
+                color: black;
+                background-color: whitesmoke;
             }
         }
-        .accordion-button-container {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+      }
+      .accordion-button-container {
+        display: flex;
+        flex-direction: column;
+        gap:20px;
+
+        .day-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .topic-tags {
+          display: flex;
+          gap: 10px;
+          font-size: 14px;
+          transition: font-size 0.5s;
+
+          .red {
+            padding: 5px;
+            color: #ff7a3b;
+            background-color: rgba(255, 121, 59, 0.15);
+            border-radius: 10%;
+          }
+
+          .pink {
+            padding: 5px;
+            color: rgb(212, 88, 206);
+            background-color: rgba(212, 88, 206, 0.15);
+            border-radius: 10%;
+          }
+
+          .blue {
+            padding: 5px;
+            color: rgb(34, 167, 219);
+            background-color: rgba(34, 167, 219, 0.15);
+            border-radius: 10%;
+          }
+          &:hover{
+            font-size: 16px;
+          }
+        }
+        .title {
+          font-size: 25px;
+          font-family: $secondaryFontFamily;
+        }
+
+        .description {
+          font-size: 20px;
+        }
+
+        .btn-wrapper {
+          display: flex;
+          gap: 15px;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .btn {
+            border: 1px solid var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
+            background-color: rgba(0, 0, 0, 0.744);
+            color: white;
+            border-radius: 15px;
+            &:hover {      
+              background-color: black;
+              box-shadow: 1px 1px 5px 2px rgb(71, 71, 71);
+              transition: all 0.3s;
+              border-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 991px){
+  .parent {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+  .scheduling-page-accordion {
+    padding: 10px;
+    padding-top: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+    .scheduling-page{
+        flex-direction: column;
+
+        .scheduling-page-filter-container{
+            width: 100%;
+            .checkbox-content {
+                flex-direction: row;
+                width: 100%;
+            }
+            .filter-sub-container {
+                margin: 0;
+            }
+        }
+        .scheduling-page-accordion{
+            width: 100%;
             padding: 10px;
 
-            .title{
+            .accordion-container{
+                    padding: 20px;
+            }
+            .parent{
+                
+            .schedule-accordion-column-1{
                 font-size: 20px;
             }
 
-            .btn-wrapper{          
-                display: flex;
-                gap: 5px;
-                align-items: center;
-                flex-wrap: wrap;
-                
-                .btn{
-                    // color: white;
-                    // transition: color 1s;
-                    // transition: background-color 0.3s;
-                    // border-color: transparent;
+            .daylist-container{
+                .day-container{
+                    padding: 20px;
 
-                    background-color: rgba(0, 0, 0, 0.744);
-                    border-color: black;
-                    color: white;
-                    &:hover{
-                    background-color: #ED303C;
-                    transition: all 0.3s;
-                    }
-                }
-
-                // remove s from the className in component to enable these color btn classes 
-                .red-btn{
-                    background-color: #ED303C;
-                    border-color: #ED303C;
-                }
-                .assignment-button{
-                    background-color: green;
-                    &:hover{
-                        background-color: #fff;
-                        color: green;
-                        border: 1px solid green;
-                    }
-                }
-
-                .youtube-btn{
-                    background-color: red;
-                    &:hover{
-                        background-color: #fff;
-                        color: red;
-                        border: 1px solid red;
-                    }
-                }
-
-                .notes-btn{
-                    background-color: rgb(0, 157, 255);
-                    &:hover{
-                        background-color: white;
-                        color: rgb(0, 157, 255);
-                        border: 1px solid rgb(0, 157, 255);
-                    }
-                }
-
-                .yellow-btn{
-                    background-color: rgb(236, 204, 74);
-                    &:hover{
-                        background-color: white;
-                        color: rgb(236, 204, 74);
-                        border: 1px solid rgb(236, 204, 74);
+                    .accordion-button-container{
+                        .description{
+                            font-size: 20px;
+                        }
                     }
                 }
             }
-
+            .day-header{
+                flex-direction: column;
+            }
+        }
         }
     }
+
 }
