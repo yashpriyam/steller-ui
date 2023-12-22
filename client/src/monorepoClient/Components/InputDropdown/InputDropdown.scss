@@ -1,0 +1,27 @@
+.inputDropdownSecondaryClass{
+    .dropdownIcon{
+        display: flex;
+        justify-content: space-between;
+        .placeholderDropDown{
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    }
+    .dropdownOptions{
+        position: absolute;
+        max-height: 200px;
+        width: 100%;
+        top: 100%;
+        left: 0;
+        overflow-y: auto;
+        box-shadow: var(--shadow);
+        z-index: 2;
+        background: white;
+        .dropdownOption{
+            padding:10px ;
+            &:hover{
+                background: rgb(238, 238, 238);
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+.defaultCardStyle{
+    border-radius: 8px;
+    border: 1px solid var(--light-gray-border-color);
+    padding: 20px;
+}
+.defaultCardStyle.active {
+    background: var(--orange-violet-gradient);
+}

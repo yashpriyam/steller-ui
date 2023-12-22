@@ -1,0 +1,66 @@
+.leftRegisterPage {
+  width: 45%;
+  background: var(--red);
+  height: 98vh;
+  margin: 1vh;
+  border-radius: 8px;
+  display: flex;
+  z-index: 2;
+  align-items: center;
+
+  .container {
+    margin-left: 90px;
+    .saveFormButton {
+        margin-top: 10vh;
+      .saveButton {
+        background: white;
+        color: var(--red);
+        border-radius: 8px;
+        padding-left: 40px;
+        padding-right: 40px;
+      }
+    }
+
+    .heading {
+      color: white;
+      // font-size: 14px;
+      margin-bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      width: auto;
+      justify-content: space-around;
+      .mobileScreen.saveFormButton{
+           margin-top: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .leftRegisterPage {
+    width: 97%;
+    background: var(--red);
+    height: 40vh;
+    margin: 1vh;
+    border-radius: 8px;
+    .container {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-left: 0;
+      margin-top: 8vh;
+
+      .heading {
+        margin-top: 7vh;
+        margin-left: 20px;
+        margin-bottom: 4vh;
+      }
+      .steps {
+        display: flex;
+        grid-gap: 2rem;
+      }
+    }
+  }
+}

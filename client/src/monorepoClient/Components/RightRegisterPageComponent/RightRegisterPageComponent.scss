@@ -1,0 +1,133 @@
+.RightRegisterPageComponent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 10%;
+  height: 100%;
+  position: relative;
+  .container {
+    width: 75%;
+    .topText {
+      .heading {
+        color: var(--red);
+        margin-bottom: 30px;
+        margin-top: 30px;
+      }
+      .description {
+        margin-bottom: 30px;
+      }
+    }
+    .inputContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+      grid-gap: 2em;
+    }
+    .makePayment {
+      .makePaymentBtn {
+        border-radius: 8px;
+        margin-top: 30px;
+        padding-left: 40px;
+        padding-right: 40px;
+        color: white;
+        background: #00af31;
+      }
+    }
+    .resendOtpBtn {
+      margin-right: 20px;
+      border-radius: 8px;
+      padding-left: 40px;
+      padding-right: 40px;
+      color: white;
+      border: 3px solid yellow;
+      background: darkslategray;
+    }
+    .submitButton {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 30px;
+      .buttons {
+        display: flex;
+        .resetBtn {
+          margin-right: 20px;
+          border-radius: 8px;
+          padding-left: 40px;
+          padding-right: 40px;
+          color: var(--red);
+          border: 3px solid var(--red);
+          background: transparent;
+        }
+        .submitBtn {
+          border-radius: 8px;
+          padding-left: 40px;
+          padding-right: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .RightRegisterPageComponent {
+    display: block;
+    margin-left: 0;
+    margin-right: 0;
+    // width: 100%;
+    // height: 100%;
+
+
+    .container {
+      margin-left: 5%;
+      margin-right: 5%;
+      margin-top: 20px;
+      width: 90%;
+      .bannerWrapperContainerRegisterPage{
+        margin-left: 0;
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .topText {
+        .heading {
+          color: var(--red);
+          margin-bottom: 30px;
+        }
+
+        .description {
+          margin-bottom: 30px;
+        }
+      }
+
+      .inputContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+        grid-gap: 2em;
+      }
+
+      .submitButton {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 30px;
+        .buttons {
+          margin-bottom: 25px;
+
+          .submitBtn {
+            border-radius: 8px;
+            padding-left: 40px;
+            padding-right: 40px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.bannerWrapperContainerRegisterPage{
+  width: calc(100% + 150px);
+  position: absolute;
+  margin-left: -80px;
+  top: 0%;
+  left: 0%;
+  transform: translate(0%, -50%);
+}

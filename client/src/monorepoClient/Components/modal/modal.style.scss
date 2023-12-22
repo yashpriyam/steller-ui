@@ -1,0 +1,190 @@
+@mixin uploadfiles-text {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  text-transform: lowercase;
+  color: black;
+  font-weight: 600;
+}
+#portal-root {
+  .modal-background {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    margin: auto;
+
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    z-index: 10000;
+    background-color: rgba(153, 153, 153, 0.356);
+    box-shadow: 0 0 0 9999px rgba(153, 153, 153, 0.356);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .modal-hasFiles {
+      height: 76% !important;
+    }
+    .modal-container {
+      // position: fixed;
+      top: 100px;
+      width: 34%;
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      display: flex;
+      flex-direction: column;
+      padding: 25px;
+      // height: 70%;
+      overflow-y: auto;
+      .modal-file-display-container {
+        overflow-y: auto;
+      }
+
+      
+      .modal-close-button-container {
+        display: flex;
+        justify-content: flex-end;
+
+        .modal-close-button {
+          background-color: rgb(255, 255, 255);
+          border: none;
+          border-radius: 4px;
+          padding: 1px;
+          transition: transform 1s ease-out;
+          transform-origin: center;
+          transform-style: preserve-3D;
+          cursor: pointer;
+          &:hover {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+          }
+        }
+      }
+      .modal-upload-file-p {
+        padding-top: 10px;
+        // font-family: roboto, Arial, sans-serif;
+        color: #7f8eac;
+      }
+      .modal-title {
+        text-align: center;
+        font-size: 1.5em;
+        color: #7f8eac;
+        font-weight: 600;
+        // font-family: roboto, Arial, sans-serif;
+      }
+      .modal-subtitle {
+        text-align: center;
+        color: #7f8eac;
+        font-size: 1em;
+        // font-family: roboto, Arial, sans-serif;
+      }
+
+      .modal-uploaded-files {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 25px;
+        .modal-file-icon {
+          font-size: 28px;
+          margin-left: -14%;
+        }
+        .modal-filename {
+          p {
+            margin-left: -90%;
+          }
+        }
+        .modal-cross-icon {
+          align-self: center;
+          font-size: 20px;
+        }
+      }
+
+      .modal-file-status-bar {
+        display: flex;
+        justify-content: space-between;
+        padding: 4px;
+        cursor: pointer;
+        word-break: break-all;
+        transition: all 0.5s ease-out;
+
+        div {
+          display: flex;
+          justify-content: space-around;
+          .modal-file-type-logo {
+            margin-right: 10px;
+            font-size: 30px;
+          }
+          .modal-file-name {
+            @include uploadfiles-text;
+          }
+          .modal-file-size {
+            @include uploadfiles-text;
+          }
+          .file-error-message {
+            @include uploadfiles-text;
+            color: red;
+          }
+        }
+        .modal-file-remove {
+          align-items: center;
+          margin-right: 5px;
+          button {
+            border-radius: 50px;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            color: #888888;
+            background-color: #c8d4f2;
+            padding-bottom: 2px;
+            border: none;
+            cursor: pointer;
+          }
+        }
+        &:hover {
+          -webkit-box-shadow: 0 10px 6px -6px #777;
+          -moz-box-shadow: 0 10px 6px -6px #777;
+          box-shadow: 0 10px 6px -6px #777;
+          background: #e1e1dda6;
+          border-radius: 6px;
+        }
+      }
+
+      .delete-or-not {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        button {
+          padding: 5px 20px;
+          margin-top: 20px;
+          outline: none;
+          border: none;
+          background: rgb(39, 26, 180);
+          color: white;
+          text-transform: uppercase;
+          font-weight: 600;
+          border-radius: 5px;
+          &:hover {
+            background: rgb(23, 13, 133);
+          }
+        }
+      }
+    }
+    @media (max-width: 800px) {
+      .modal-container {
+        width: 80vw;
+        .modal-uploaded-files {
+          .modal-filename {
+            p {
+              margin-left: -67%;
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
