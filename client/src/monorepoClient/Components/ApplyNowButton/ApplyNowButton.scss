@@ -1,0 +1,8 @@
+.arrowIcon {
+    margin-left: 10px;
+    height: 25px;
+    width: 25px;
+    &.darkMode {
+      filter: invert(100%);
+    }
+  }
