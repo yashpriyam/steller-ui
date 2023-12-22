@@ -1,4 +1,4 @@
-@import '../../variable.scss';
+@import '../../components/variables.scss';
 
 .scheduling-page {
   min-height: 100vh;
@@ -7,7 +7,7 @@
   padding: 20px 10px;
   gap: 30px;
   background-color: $primaryBgColor;
-  font-family: $primaryFontFamily;  
+  font-family: $primaryFontFamily;
   .scheduling-page-filter-container {
     width: 20%;
     height: fit-content;
@@ -54,14 +54,13 @@
     flex-direction: column;
     width: 75%;
     gap: 20px;
-    
+
     .parent {
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 0;
-      padding-top: 30px;
       gap: 30px;
 
       .schedule-accordion-column-1 {
@@ -71,17 +70,19 @@
         width: 100%;
         margin-left: 0px;
         font-size: 25px;
+        padding: 0px 50px;
+        text-align: justify;
       }
 
-      .column-2 {
+      .daylist-container-column-2 {
+        display: flex;
+        gap: 35px;
         display: flex;
         line-height: normal;
         flex-wrap: wrap;
         width: 100%;
-      }
-      .daylist-container {
-        display: flex;
-        gap: 35px;
+        padding: 0px 50px;
+        padding-bottom: 50px;
 
         .day-container {
           display: flex;
@@ -89,21 +90,28 @@
           border-radius: 3px;
           color: $primaryColor;
           padding: 50px;
-          border-radius:50px;
+          border-radius: 50px;
           border: 2px solid
             var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
-            background:radial-gradient(50% 50% at 0% 0%, var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63, rgba(255, 255, 255, 0.15)) /* {"name":"White 15%"} */ 2.210024196147939%, hsla(0, 0%, 100%, 0) 100%);
-            transition: all 0.7s;
-            &:hover{
-                color: black;
-                background-color: whitesmoke;
-            }
+          background: radial-gradient(
+            50% 50% at 0% 0%,
+            var(
+                --token-31d2d8ec-6073-495b-98cd-5e142f56bc63,
+                rgba(255, 255, 255, 0.15)
+              )
+              /* {"name":"White 15%"} */ 2.210024196147939%,
+            hsla(0, 0%, 100%, 0) 100%
+          );
+          transition: all 0.7s;
+          &:hover {
+            box-shadow: 1px 0px 30px 5px rgb(87, 86, 86);
+          }
         }
       }
       .accordion-button-container {
         display: flex;
         flex-direction: column;
-        gap:20px;
+        gap: 20px;
 
         .day-header {
           display: flex;
@@ -137,7 +145,7 @@
             background-color: rgba(34, 167, 219, 0.15);
             border-radius: 10%;
           }
-          &:hover{
+          &:hover {
             font-size: 16px;
           }
         }
@@ -157,11 +165,12 @@
           flex-wrap: wrap;
 
           .btn {
-            border: 1px solid var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
+            border: 1px solid
+              var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
             background-color: rgba(0, 0, 0, 0.744);
             color: white;
             border-radius: 15px;
-            &:hover {      
+            &:hover {
               background-color: black;
               box-shadow: 1px 1px 5px 2px rgb(71, 71, 71);
               transition: all 0.3s;
@@ -173,7 +182,7 @@
     }
   }
 }
-@media (max-width: 991px){
+@media (max-width: 991px) {
   .parent {
     max-width: 100%;
     padding: 0 20px;
@@ -184,49 +193,54 @@
   }
 }
 
-@media (max-width: 600px) {
-    .scheduling-page{
-        flex-direction: column;
+@media (max-width: 650px) {
+  .scheduling-page {
+    gap: 0;
+    flex-direction: column;
 
-        .scheduling-page-filter-container{
-            width: 100%;
-            .checkbox-content {
-                flex-direction: row;
-                width: 100%;
-            }
-            .filter-sub-container {
-                margin: 0;
-            }
-        }
-        .scheduling-page-accordion{
-            width: 100%;
-            padding: 10px;
+    .scheduling-page-filter-container {
+      width: 100%;
 
-            .accordion-container{
-                    padding: 20px;
-            }
-            .parent{
-                
-            .schedule-accordion-column-1{
-                font-size: 20px;
-            }
-
-            .daylist-container{
-                .day-container{
-                    padding: 20px;
-
-                    .accordion-button-container{
-                        .description{
-                            font-size: 20px;
-                        }
-                    }
-                }
-            }
-            .day-header{
-                flex-direction: column;
-            }
-        }
-        }
+      .checkbox-content {
+        flex-direction: row;
+        width: 100%;
+        // transition: 0.5s;
+      }
+      .filter-sub-container {
+        margin: 0;
+      }
     }
+    .scheduling-page-accordion {
+      width: 100%;
+      padding: 10px;
+      transition: 0.5s ease-in;
 
+      .parent {
+        .schedule-accordion-column-1 {
+          font-size: 20px;
+          padding: 0px 30px;
+        }
+
+        .daylist-container-column-2 {
+          padding: 0px 30px;
+          padding-bottom: 20px;
+          .day-container {
+            padding: 25px;
+            transition: 0.5s;
+
+            .accordion-button-container {
+              .description {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+        .day-header {
+          flex-direction: column;
+          gap: 10px;
+          transition: 0.5s;
+        }
+      }
+    }
+  }
 }
