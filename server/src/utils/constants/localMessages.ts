@@ -11,4 +11,7 @@ export const localMessages = {
     VIDEO_CREATION_SUCCESS: "video data inserted successfully",
     VIDEO_DELETION_SUCCESS: "video data deleted successfully",
   },
+  OTP_MODEL: {
+    OTP_SENT_SUCCESS:"otp sent succerssfully",
+  }
 };

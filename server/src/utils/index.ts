@@ -4,5 +4,6 @@ export {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
 } from "./registrationEmail";
-export { convertUTCtoIST, formatDate } from "./timeUtils";
+export { convertUTCtoIST, formatDate ,timeAfterMins } from "./timeUtils";
 export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeysKeys";
+export{ getRandomNumOfDigits} from "./random"

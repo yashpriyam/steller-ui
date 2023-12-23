@@ -16,4 +16,8 @@ export const errorMessages = Object.freeze({
     VIDEO_CREATION_FAILED: "unable to insert video data",
     VIDEO_DELETION_FAILED: "unable to delete video data",
   },
+  OTP_MODEL: {
+    OTP_SENT_FAILED: "cannot send otp",
+    OTP_EMAIL_INVALID: "email address is not valid",
+  },
 });

@@ -21,6 +21,7 @@ const typeDefs = gql`
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
+    sendOtp(email: String!): OtpUserOutputType
   }
 
   type CustomResponseType {
@@ -189,6 +190,12 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+  }
+  input OtpUserInputType {
+    email: String!
+  }
+  type OtpUserOutputType {
+    response: CustomResponseType!
   }
   scalar DateTime
   scalar JSON

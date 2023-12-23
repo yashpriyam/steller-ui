@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ObjectId } from "mongoose";
 
 declare global {
   type ContextType = {
@@ -210,4 +211,14 @@ declare global {
     isCorrect: boolean
     timestamp: Date;
   };
+  type CreateUserOtpType = {
+    email: string;
+    emailOtp: string;
+    expiresAt: Date
+    isEmailVerified: boolean
+    id:ObjectId
+  }
+  type OtpUserOutputType={
+    response:CustomResponseType
+  }
 }
