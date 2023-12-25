@@ -21,6 +21,7 @@ const typeDefs = gql`
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
+    upsertUserActivity(userActivityData: UserActivityInputType): UserActivityOutputType
   }
 
   type CustomResponseType {
@@ -190,6 +191,28 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
+  input UserActivityInputType {
+    phoneNumber: String
+    isponed: Boolean
+    devices: [String]
+    IST: String
+    isValidPhoneNumber:Boolean
+
+  }
+  type UserActivityData {
+    phoneNumber: String
+    isOpened: Boolean
+    devices: [String]
+    IST: String
+    isValidPhoneNumber: Boolean
+  }
+
+  type UserActivityOutputType {
+    UserActivityData: UserActivityData
+    response: CustomResponseType! 
+  }
+
+
   scalar DateTime
   scalar JSON
 `;

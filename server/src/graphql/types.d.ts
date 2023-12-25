@@ -159,32 +159,32 @@ declare global {
   };
 
   enum QuestionTypeEnum {
-    multi= "multi",
-    single= "single"
+    multi = "multi",
+    single = "single"
   }
 
   enum QuestionMetaType {
-    timed="timed",
+    timed = "timed",
     recorded = "recorded"
   }
 
   type QuestionSchemaType = {
     question: string;
     options: { imageUrl: string; text: string }[];
-    questionType: QuestionTypeEnum ;
+    questionType: QuestionTypeEnum;
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
     meta: {
-    topic: string;
-    day: number;
-    isActive: boolean;
-    isArchived: boolean;
-    type: QuestionMetaType ;
-    expiresInMins: number;
-    isOpenable: boolean;
+      topic: string;
+      day: number;
+      isActive: boolean;
+      isArchived: boolean;
+      type: QuestionMetaType;
+      expiresInMins: number;
+      isOpenable: boolean;
     }
-}
+  }
   type getNotesFilterInputType = {
     link?: string;
     title?: string;
@@ -204,10 +204,36 @@ declare global {
   };
 
   type QuestionAttemptSchemaType = {
-    userId: ObjectId; 
-    questionId: ObjectId; 
-    response: { imageUrl: string; text: string }[]; 
+    userId: ObjectId;
+    questionId: ObjectId;
+    response: { imageUrl: string; text: string }[];
     isCorrect: boolean
     timestamp: Date;
   };
+
+  type UserActivityInputType = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST?: string;
+    isValidPhoneNumber?: boolean;
+  }
+
+  type UserActivityData = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST: string;
+    time?: string;
+    isValidPhoneNumber?: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
+  type UserActivityOutputType = {
+    UserActivityData?: UserActivityData;
+    response: CustomResponseType;
+  }
+
+
 }
