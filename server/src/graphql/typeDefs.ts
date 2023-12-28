@@ -21,6 +21,7 @@ const typeDefs = gql`
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
+    createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
   }
 
   type CustomResponseType {
@@ -189,6 +190,62 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+  }
+  input CreateQuestionInputType {
+    question: String!
+    batchCode: String!
+    options: [Option!]!
+    questionType: QuestionType!
+    answer: [Option!]!
+    marks: Int!
+    meta: QuestionMeta!
+  }
+  input Option {
+    imageUrl: String
+    text: String!
+  }
+  enum QuestionType {
+    multi
+    single
+  }
+  input QuestionMeta {
+    topic: String!
+    day: Int!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type QuestionOutputType {
+    questionData:questionData
+    response:CustomResponseType
+  }
+  type questionData{
+    question: String!
+    batchCode: String!
+    options: [OptionOutput!]!
+    questionType: QuestionType!
+    answer: [OptionOutput!]!
+    marks: Int!
+    meta: QuestionMetaOutput!
+  }
+  type QuestionMetaOutput {
+    topic: String!
+    day: Int!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type OptionOutput {
+    imageUrl: String
+    text: String!
+  }
+  enum QuestionMetaType {
+    timed
+    recorded
   }
   scalar DateTime
   scalar JSON

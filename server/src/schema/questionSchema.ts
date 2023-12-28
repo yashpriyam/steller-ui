@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 
 const questionTypes = Object.freeze({
     multi: "multi",
@@ -26,4 +26,5 @@ const questionSchema = new Schema<QuestionSchemaType>({
   },
 });
 
-export const Question = model<QuestionSchemaType>("Question", questionSchema);
+export const questionModel = model<QuestionSchemaType>("question", questionSchema);
+
