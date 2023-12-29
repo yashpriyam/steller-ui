@@ -1,0 +1,50 @@
+.social-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0;
+    button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 0;
+    outline: 0;
+    width: 45%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #4d4d4d;
+    border: 1px solid #969696;
+    cursor: pointer;
+    img {
+        max-width: 25px;
+        margin-right: 10px;
+    }
+    }
+}
+
+.auth-options{
+    margin-top:20px;
+    .auth-modal-span{
+        color: var(--secondary-blue);
+    }
+    .auth-modal-span:hover{
+        text-decoration: underline;
+    }
+}
+
+.modal-container{
+    background: #FBF3D4 !important;
+    .socialButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin:20px 100px 20px 100px ;
+        .googleLogo {
+            width: 30px;
+        }
+        span{
+            margin-left: 10px;
+        }
+    }
+
+}

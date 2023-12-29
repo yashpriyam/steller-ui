@@ -1,6 +1,6 @@
 import { videoModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { removeNullKeys } from "@utils";
+import { removeNullAndUndefinedKeys } from "@utils";
 
 export const getVideo = async (
     parent: undefined,
@@ -24,7 +24,7 @@ export const getVideo = async (
             description,
             dayNumber,
         }: VideoDataType = videoDataFilter;
-        let modifiedVideoDataFilter = removeNullKeys({
+        let modifiedVideoDataFilter = removeNullAndUndefinedKeys({
             links,
             videoNumber,
             topics,
@@ -36,7 +36,7 @@ export const getVideo = async (
         });
 
         if (links) {
-            const filteredLinks = removeNullKeys(links);
+            const filteredLinks = removeNullAndUndefinedKeys(links);
             const updatedLinks = Object.keys(filteredLinks).reduce(
                 (acc: any, key) => {
                     acc[`links.${key}`] = filteredLinks[key];
