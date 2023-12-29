@@ -1,5 +1,5 @@
 import { Card } from "../card/card";
-import React, { useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import "./videos.scss";
 interface VideosProps {
   videoData?: { title: string; subtitle?: string; tags?: string[] }[];
@@ -45,12 +45,10 @@ export const Videos: React.FC<VideosProps> = ({
   ],
 }: VideosProps) => {
   const [filterTag, setFilterTag] = useState<string>("");
-  const handleClick = (event: Event) => {
+  const handleClick: MouseEventHandler<HTMLSpanElement> = (event) => {
     const target = event.target as HTMLElement;
-
     if (target instanceof HTMLElement) {
       const innerTextValue: string = target.innerText;
-      console.log({ innerTextValue });
       setFilterTag(innerTextValue);
     }
   };
@@ -72,7 +70,7 @@ export const Videos: React.FC<VideosProps> = ({
       </div>
       <div className="video-container">
         {videoData?.map((data) => {
-          if (data.tags?.includes(filterTag))
+          // if (data.tags?.includes(filterTag)){
             return (
               <Card
                 className={className}
@@ -83,10 +81,10 @@ export const Videos: React.FC<VideosProps> = ({
                   "https://framerusercontent.com/images/jQaRnWtpyFktrGE79EvFXdue7Gk.jpg?scale-down-to=2048"
                 }
               >
-                {/* <div>{data.title}</div>
-              <button>close</button> */}
               </Card>
-            );
+            )
+            // }
+            // else return <></>;
         })}
       </div>
     </div>
