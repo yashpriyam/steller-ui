@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 
-
 const paidUserSchema = new mongoose.Schema({
     username: {
         type: String,
