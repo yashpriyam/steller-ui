@@ -1,7 +1,7 @@
 import { ObjectId } from "mongoose";
 import { videoModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { removeNullKeys } from "@utils";
+import { removeNullAndUndefinedKeys } from "@utils";
 
 export const updateVideoById = async (
   parent: undefined,
@@ -25,7 +25,7 @@ export const updateVideoById = async (
     let updatedLinks = {};
     const { youtube, webmasters } = links ?? {};
     if (links) {
-      const filteredLinks = removeNullKeys({ youtube, webmasters });
+      const filteredLinks = removeNullAndUndefinedKeys({ youtube, webmasters });
       updatedLinks = Object.keys(filteredLinks).reduce((acc: any, key) => {
         acc[`links.${key}`] = filteredLinks[key];
         return acc;

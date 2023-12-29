@@ -1,0 +1,166 @@
+.subscriptionPlanBlack{
+    background-color: #000;
+}
+.subscriptionPlanWhite{
+    background-color: #FFFFFF;
+}
+.subscriptionPlan{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 150px;
+    .backgroundBlack{
+        background-color: #000;
+    }
+    .backgroundWhite{
+        background-color: var(--light-red);
+    }
+
+    .background{
+        position: absolute;
+        height: 500px;
+        width: 100%;
+        top: 0;
+        z-index: -1;
+    }
+    .rightSubscriptionCircle{
+        position: absolute;
+        right: 0;
+        top: 100px;
+        height: 10vw;
+        width: fit-content;
+    }
+    .leftSubscriptionCircle{
+        position: absolute;
+        left: 0;
+        height: 10vw;
+        bottom: 100px;
+        width: fit-content;
+    }
+    .planDescriptionBlack{
+        color:white;
+    }
+    .planDescriptionWhite{
+        color:black;
+    }
+    .planDescription{
+        width: 50%;
+        text-align: center;
+        h2{
+            font-style: normal;
+            font-weight: bold;
+            font-size: 40px;
+            line-height: 52px;
+            margin-bottom: 20px;
+        }
+        p{
+            color: #767D86;
+            margin-bottom: 40px;
+        }
+    }
+    .planCardList{
+        display: flex;
+        justify-content: center;
+        // width: 60%;
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            background: #FFFFFF;
+            border-radius: 7px;
+            padding: 60px 100px 30px 100px;
+            margin:0 35px 0 35px;
+            position: relative;
+            .leftCardCircle{
+                position: absolute;
+                width: fit-content;
+                height: fit-content;
+                left: 0;
+            }
+            .bottomCardCircle{
+                position: absolute;
+                bottom: 0;
+                z-index: 0;
+                right: 20px;
+                height: fit-content;
+                width: fit-content;
+            }
+            .swipPageBtn {
+                margin-top: 30px;
+                z-index: 1;
+            }
+            .cardContent{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .planHeader{
+                    margin-bottom: 20px;
+                }
+                .planPrice{
+                    margin-bottom: 20px;
+                    color: #767D86;
+                    font-weight: bold;
+                }
+                .serviceText{
+                display: flex;
+                align-items: center;
+                margin-bottom: 10px;
+                img{
+                    height: fit-content;
+                    width: fit-content;
+                }
+            }
+            
+            // min-height: 30ch;
+            .cardText {
+                margin: 20px 10px 20px 10px;
+                text-align: center;
+                color: #5A5A5A;
+
+                h2 {
+                    margin: 30px 0 30px;
+                }
+
+            }
+
+            .cardText.active {
+                color: white;
+            }
+
+            .cardIconGroup {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 100%;
+            }
+            }
+            
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .subscriptionPlan {
+        padding: 0;
+        .planDescription{
+            width: 90%;
+        }
+        .planCardList{
+            flex-direction: column;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            
+            .card{
+                margin: 0;
+                width: 100%;
+                margin-bottom: 30px;
+                padding: 20px;
+            }
+        }
+    }
+}

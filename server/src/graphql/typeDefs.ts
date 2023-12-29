@@ -3,6 +3,8 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
+    getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
+    getNotes(filterData: getNotesFilterInputType): getNotesOutputType
   }
 
   type Mutation {
@@ -19,6 +21,11 @@ const typeDefs = gql`
       videoId: ID!
       videoData: UpdateVideoInput!
     ): VideoOutputDataType
+    updateNotesById(
+      notesId: ID!
+      notesData: UpdateNotesInputType
+    ): UpdateNotesOutputType
+    createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
   }
 
   type CustomResponseType {
@@ -141,7 +148,29 @@ const typeDefs = gql`
   }
   type CreateNotesOutputType {
     notesData: NotesDataType
-    response: CustomResponseType
+    response: CustomResponseType!
+  }
+  input UpdateNotesInputType {
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type UpdateNotesOutputType {
+    notesData: UpdateNotesDataType
+    response: CustomResponseType!
+  }
+  type UpdateNotesDataType {
+    link: String!
+    title: String!
+    dayNumber: Int!
+    topics: [String]!
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
   }
   type DeletedNotesOutputType {
     notesData: DeletedNotesDataType
@@ -156,8 +185,24 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
+  input getNotesFilterInputType {
+    link: String
+    title: String
+    dayNumber: Int
+    topics: [String]
+    noOfPages: Int
+    description: String
+    estimatedReadingTime: String
+  }
+  type getAllNotesOutputType {
+    notesData: [NotesDataType]
+    response: CustomResponseType!
+  }
+  type getNotesOutputType {
+    notesData: NotesDataType
+    response: CustomResponseType!
+  }
   type NotesDataType {
-    id: String
     link: String
     title: String
     dayNumber: Int
@@ -169,6 +214,62 @@ const typeDefs = gql`
   type CustomResponseType {
     status: Int
     message: String
+  }
+  input CreateQuestionInputType {
+    question: String!
+    batchCode: String!
+    options: [Option!]!
+    questionType: QuestionType!
+    answer: [Option!]!
+    marks: Int!
+    meta: QuestionMeta!
+  }
+  input Option {
+    imageUrl: String
+    text: String!
+  }
+  enum QuestionType {
+    multi
+    single
+  }
+  input QuestionMeta {
+    topic: String!
+    day: Int!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type QuestionOutputType {
+    questionData:questionData
+    response:CustomResponseType
+  }
+  type questionData{
+    question: String!
+    batchCode: String!
+    options: [OptionOutput!]!
+    questionType: QuestionType!
+    answer: [OptionOutput!]!
+    marks: Int!
+    meta: QuestionMetaOutput!
+  }
+  type QuestionMetaOutput {
+    topic: String!
+    day: Int!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type OptionOutput {
+    imageUrl: String
+    text: String!
+  }
+  enum QuestionMetaType {
+    timed
+    recorded
   }
   scalar DateTime
   scalar JSON

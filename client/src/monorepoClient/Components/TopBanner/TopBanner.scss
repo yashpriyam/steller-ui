@@ -1,0 +1,100 @@
+.topBannerBlack {
+  background: #000;
+  color: #fff;
+}
+.topBannerWhite {
+  background: var(--light-red);
+  color: #000;
+}
+.topBanner {
+  z-index: 3;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .bannerContainer {
+    margin-left: 90px;
+    z-index: 3;
+    width: 50%;
+    .button {
+      transition: 500ms;
+      width: fit-content;
+      .editbtn {
+        .arrowIcon {
+          width: fit-content;
+          height: fit-content;
+        }
+        background: black;
+        &.darkMode {
+          background: var(--red) !important;
+        }
+      }
+    }
+  }
+
+  .heading {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 35px;
+    line-height: 85px;
+    margin-bottom: 30px;
+    font-family: var(--main-font);
+    h1 {
+      span {
+        color: var(--red);
+      }
+    }
+  }
+
+  .description {
+    margin-bottom: 30px;
+    font-family: var(--main-font);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+
+    p {
+      span {
+        color: var(--orange);
+      }
+    }
+  }
+
+  .arrowIcon {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .topBanner {
+    padding-bottom: 300px;
+    .heading {
+      font-size: 27px;
+      line-height: 55px;
+    }
+    .bannerContainer {
+      margin-top: 150px;
+      margin-left: 40px;
+      z-index: 3;
+      width: 80%;
+
+      .shiftButton {
+        position: fixed;
+        bottom: 50px;
+        right: 50px;
+
+        // .applybtn {
+        //     width: 60px;
+        //     height: 60px;
+        //     border-radius: 50%;
+
+        //     .arrowIcon {
+        //         margin-left: -5px;
+        //     }
+        // }
+      }
+    }
+  }
+}

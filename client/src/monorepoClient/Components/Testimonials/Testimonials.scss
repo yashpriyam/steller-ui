@@ -1,0 +1,99 @@
+.faqComponentBlack {
+  background-color: #000;
+  color: #fff;
+}
+
+.faqComponentWhite {
+  background-color: #ffffff;
+  color: #000;
+}
+
+.faqComponent {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 100px;
+
+  .rightSubscriptionCircle {
+    position: absolute;
+    right: 0;
+    top: 100px;
+    height: 10vw;
+  }
+
+  .leftSubscriptionCircle {
+    position: absolute;
+    left: 0;
+    height: 10vw;
+    bottom: 100px;
+  }
+
+  .planDescription {
+    width: 50%;
+    text-align: center;
+
+    h2 {
+      font-style: normal;
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 52px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #767d86;
+      margin-bottom: 40px;
+    }
+  }
+
+  .testimonials {
+    display: flex;
+    gap: 15px;
+    overflow: auto;
+    padding: 10px;
+    width: 100%;
+    .testimonial-container {
+      border-radius: 10px;
+      background-color: #f4f4ef;
+      padding: 5px;
+      .testimonials-img {
+        margin-top: none;
+        aspect-ratio: 0.57;
+        height: 450px;
+        object-fit: contain;
+        object-position: center;
+        overflow: hidden;
+        flex-grow: 1;
+      }
+    }
+  }
+
+}
+
+
+
+
+@media only screen and (max-width: 991px) {
+  .faqComponent {
+    padding: 100px 20px 100px 20px;
+
+    .planDescription {
+      width: 90%;
+    }
+
+    .testimonials {
+      display: flex;
+      gap: 15px;
+      overflow: auto;
+      padding: 10px;
+      width: 80%;
+      overflow: auto;
+      .testimonial-container {
+        background-color: #f4f4ef;
+        padding: 5px;
+      }
+    }
+  }
+}

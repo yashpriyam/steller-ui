@@ -62,8 +62,8 @@ declare global {
     userId: string;
     isPaymentSuccessfull: boolean;
   };
-
   type CreateNotesInputType = {
+    link: string;
     link: string;
     title: string;
     topics: [string];
@@ -75,16 +75,38 @@ declare global {
   type CreateNotesOutputType = {
     notesData: NotesDataType;
     response: CustomResponseType;
-  };;
-  type NotesDataType = {
-    id: string;
-    title: string;
-    links: [string];
-    topics: [string];
-    dayNumber: number;
+  };
+
+  type UpdateNotesInputType = {
+    title?: string;
+    links?: [string];
+    topics?: [string];
+    dayNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+  };
+  type UpdateNotesOutputType = {
+    notesData?: UpdateNotesDataType;
+    response: CustomResponseType;
+  };
+  type UpdateNotesDataType = {
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
+  };
+  type NotesDataType = {
+    title: String;
+    links: [String];
+    topics: [String];
+    dayNumber: Number;
+    noOfPages?: Number;
+    description?: String;
+    estimatedReadingTime?: String;
   };
 
   type VideoOutputDataType = {
@@ -132,6 +154,64 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   };
+
+  enum QuestionTypeEnum {
+    multi= "multi",
+    single= "single"
+  }
+
+  enum QuestionMetaType {
+    timed="timed",
+    recorded = "recorded"
+  }
+
+  type QuestionSchemaType = {
+    question: string;
+    options: { imageUrl: string; text: string }[];
+    questionType: QuestionTypeEnum ;
+    answer: { imageUrl: string; text: string }[];
+    marks: number;
+    batchCode: string;
+    meta: QuestioinMetaData
+  }
+  type QuestioinMetaData = {
+    topic: string;
+    day: number;
+    isActive: boolean;
+    isArchived: boolean;
+    type: QuestionMetaType ;
+    expiresInMins: number;
+    isOpenable: boolean;
+  }
+  type getNotesFilterInputType = {
+    link?: string;
+    title?: string;
+    dayNumber?: number;
+    topics?: [string];
+    noOfPages?: number;
+    description?: string;
+    estimatedReadingTime?: string;
+  };
+  type getAllNotesOutputType = {
+    notesData?: [NotesDataType];
+    response: CustomResponseType;
+  };
+  type getNotesOutputType = {
+    notesData?: NotesDataType;
+    response: CustomResponseType;
+  };
+
+  type QuestionAttemptSchemaType = {
+    userId: ObjectId; 
+    questionId: ObjectId; 
+    response: { imageUrl: string; text: string }[]; 
+    isCorrect: boolean
+    timestamp: Date;
+  };
+  type CreateQuestionOutputType={
+    questionData?: QuestionSchemaType
+    response:CustomResponseType
+  }
   type CustomResponseType = {
     status: number;
     message: string;
