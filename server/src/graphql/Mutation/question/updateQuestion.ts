@@ -1,6 +1,6 @@
 import { questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
-import { removeNullAndUndefinedKeys } from "@utils";
+import { generateNestedUpdate, removeNullAndUndefinedKeys } from "@utils";
 export const updateQuestionById = async (
   _parent: undefined,
   args: { updateQuestionData: UpdateQuestionInputType }
@@ -14,22 +14,17 @@ export const updateQuestionById = async (
   try {
     const { updateQuestionData } = args;
     const { updates, questionId } = updateQuestionData;
-    const updatedData = removeNullAndUndefinedKeys(updates);
-    const { answer, batchCode, marks, options, question, questionType, meta } =updatedData
+    const updatedFields = generateNestedUpdate(removeNullAndUndefinedKeys(updates));
+
     const questionUpdatedData: QuestionDataType | null =
       await questionModel.findByIdAndUpdate(
         questionId,
         {
-          answer,
-          batchCode,
-          marks,
-          options,
-          question,
-          questionType,
-          $set: {"meta.$": meta },
+          $set: updatedFields,
         },
         { new: true }
       );
+
     if (!questionUpdatedData) {
       const errorData: CustomResponseType = {
         message: QUESTION_UPDATION_FAILED,
