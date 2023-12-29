@@ -26,7 +26,7 @@ export const updateVideoById = async (
     const { youtube, webmasters } = links ?? {};
     if (links) {
       const filteredLinks = removeNullAndUndefinedKeys({ youtube, webmasters });
-      updatedLinks = Object.keys(filteredLinks).reduce((acc: any, key) => {
+      updatedLinks = Object.keys(filteredLinks).reduce((acc: FilteredLinksType, key) => {
         acc[`links.${key}`] = filteredLinks[key];
         return acc;
       }, {});
