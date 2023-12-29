@@ -1,0 +1,141 @@
+ .main-container {
+   overflow-x: hidden;
+ }
+
+ .job-container-black {
+   background-color: black;
+   color: white;
+ }
+
+ .job-container-white {
+   background: var(--light-red);
+   color: black;
+ }
+
+ .job-container {
+   display: flex;
+   margin-bottom: 10px;
+ }
+
+ .card-container {
+   border: 1px solid #ddd;
+   border-radius: 8px;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   padding: 20px;
+   margin: 10px;
+   width: 300px;
+   box-sizing: border-box;
+   transition: transform 0.3s ease-in-out;
+
+   &:hover {
+     transform: scale(1.05);
+     box-shadow: 0 0 5px 5px rgba(128, 128, 128, 0.33);
+   }
+ }
+
+ .card-header {
+   display: flex;
+   align-items: center;
+   margin-bottom: 10px;
+
+   .company-logo {
+     width: 40px;
+     height: 40px;
+     background-color: transparent;
+     border-radius: 50%;
+     margin-right: 10px;
+   }
+
+   .company-name {
+     font-weight: bold;
+     font-size: 18px;
+   }
+ }
+
+ .job-title {
+   font-size: 16px;
+   font-weight: bold;
+   margin-bottom: 8px;
+ }
+
+ .experience-section,
+ .tech-stack-section,
+ .package-section {
+   font-size: 14px;
+ }
+
+ .moving-text {
+   width: fit-content;
+ }
+
+ .moving-text-right {
+   width: fit-content;
+ }
+
+ .moving-text:hover {
+   animation-play-state: paused;
+ }
+
+ .moving-text-right:hover {
+   animation-play-state: paused;
+ }
+
+ @keyframes marquee {
+   0% {
+     transform: translateX(10vw);
+   }
+
+   100% {
+     transform: translateX(-100%);
+   }
+ }
+
+
+ @keyframes marqueeRight {
+   0% {
+     transform: translateX(-88%);
+   }
+
+   100% {
+     transform: translateX(90vw);
+
+   }
+ }
+
+ /* media query to enable animation for only those who want it */
+ @media (prefers-reduced-motion: no-preference) {
+   .moving-text {
+     animation: marquee linear infinite forwards;
+   }
+ }
+
+ @media (prefers-reduced-motion: no-preference) {
+   .moving-text-right {
+     animation: marqueeRight linear infinite forwards;
+   }
+ }
+
+ @media only screen and (max-width:464px) {
+   .main-container {
+     height: 100vh;
+     overflow-y: hidden;
+
+     .moving-text:hover {
+       animation-play-state: paused;
+     }
+
+     .job-container {
+       flex-direction: column;
+       margin: auto;
+     }
+   }
+   @keyframes marquee {
+     0% {
+       transform: translatey(10v);
+     }
+
+     100% {
+       transform: translatey(-100%);
+     }
+   }
+ }

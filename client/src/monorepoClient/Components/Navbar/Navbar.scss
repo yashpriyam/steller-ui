@@ -1,0 +1,270 @@
+$color-black: #000000;
+$color-white: #ffffff;
+$red-color: rgb(255, 8, 0);
+
+.nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px 40px 20px;
+  height: 30px;
+  align-items: center;
+  z-index: 5;
+  color: #7b7b7b;
+  font-style: bold;
+
+  transition-timing-function: ease-in;
+  transition: all 0.5s;
+  .logoutOption {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 110px;
+    right: 90px;
+    height: 90px;
+    background: var(--light-red);
+    display: flex;
+    width: 350px;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 15px 2px rgba(black, 0.75);
+    .option {
+      cursor: pointer;
+    }
+  }
+  .rightPart {
+    margin-right: 90px;
+    .userAvatarName {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      span {
+        margin-left: 10px;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .leftPart {
+    margin-left: 90px;
+  }
+
+  .centerPart {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 65%;
+    .hideButton {
+      display: none;
+    }
+    .editbtn {
+      .arrowIcon {
+        width: fit-content;
+        height: fit-content;
+      }
+      background: black;
+      &.darkMode {
+        background: var(--red) !important;
+      }
+    }
+    .option {
+      cursor: pointer;
+    }
+
+    .option.selected {
+      color: var(--red);
+      border-bottom: 2px solid var(--red);
+    }
+    a {
+      color: inherit;
+      /* blue colors for links too */
+      text-decoration: inherit;
+    }
+  }
+  .centerPartRegister {
+    justify-content: space-around;
+    width: 50%;
+    margin-left: 15%;
+  }
+}
+
+.nav__white {
+  background-color: white;
+  color: #7b7b7b;
+}
+.nav__black {
+  background-color: black;
+  color: white;
+}
+.nav__text__black {
+  color: #7b7b7b;
+}
+.nav__text__white {
+  color: white;
+}
+@media only screen and (max-width: 800px) {
+  .isNavOpen {
+    width: 50%;
+    border-radius: 1rem;
+    box-shadow: 4px 4px 15px 2px rgba(black, 0.75);
+    transition: translateY(1rem);
+  }
+  .nav {
+    display: flex;
+    flex-direction: column;
+    .topContainer {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      margin-top: -15px;
+
+      .leftPart {
+        margin-left: 35px;
+      }
+      .rightPart {
+        .userAvatarInfo {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          .arrow {
+            margin-left: 10px;
+          }
+        }
+        cursor: pointer;
+        margin-right: 70px;
+      }
+    }
+    .centerPart {
+      .editbtn {
+        .arrowIcon {
+          width: fit-content;
+          height: fit-content;
+        }
+        background: black;
+        &.darkMode {
+          background: var(--red) !important;
+        }
+      }
+      .userAvatarName {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 50%;
+
+        .editbtn {
+          .arrowIcon {
+            width: fit-content;
+            height: fit-content;
+          }
+          background: black;
+          &.darkMode {
+            background: var(--red) !important;
+          }
+        }
+        .option {
+          cursor: pointer;
+        }
+
+        span {
+          margin-left: 10px;
+          font-weight: 600;
+        }
+      }
+      position: absolute;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      height: 300px;
+      top: 110px;
+      background: var(--light-red);
+      &.darkMode {
+        background-color: black;
+        color: white;
+      }
+    }
+    .centerPartRegister {
+      justify-content: space-around;
+      width: 50%;
+      margin-left: 15%;
+    }
+  }
+}
+.toggler {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 0px;
+}
+.nav-button {
+  padding: 0px 10px;
+}
+// .themeBlack {
+//   color: $color-white;
+// }
+// .themeWhite {
+//   color: $color-black;
+// }
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 2px;
+  background-color: black;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: $red-color;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px $red-color;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(14px);
+  -ms-transform: translateX(14px);
+  transform: translateX(14px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 54px;
+}
+
+.slider.round:before {
+  border-radius: 70%;
+}

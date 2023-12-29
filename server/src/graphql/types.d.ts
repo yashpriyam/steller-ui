@@ -175,7 +175,9 @@ declare global {
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
-    meta: {
+    meta: QuestioinMetaData
+  }
+  type QuestioinMetaData = {
     topic: string;
     day: number;
     isActive: boolean;
@@ -183,8 +185,7 @@ declare global {
     type: QuestionMetaType ;
     expiresInMins: number;
     isOpenable: boolean;
-    }
-}
+  }
   type getNotesFilterInputType = {
     link?: string;
     title?: string;
@@ -210,4 +211,8 @@ declare global {
     isCorrect: boolean
     timestamp: Date;
   };
+  type CreateQuestionOutputType={
+    questionData?: QuestionSchemaType
+    response:CustomResponseType
+  }
 }
