@@ -17,6 +17,7 @@ export const errorMessages = Object.freeze({
     VIDEO_DELETION_FAILED: "unable to delete video data",
   },
   QUESTION_MODEL: {
-    QUESTION_CREATION_FAILED:"unable to add question data"
-  }
+    QUESTION_CREATION_FAILED: "unable to add question data",
+    QUESTION_UPDATION_FAILED: "unable to update question data",
+  },
 });
