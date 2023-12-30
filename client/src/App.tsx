@@ -1,12 +1,11 @@
-import { useTranslation } from "react-i18next";
 import React  from "react";
+import MonorepoIndex from "./monorepoClient/MonorepoIndex";
 
 
 const App = () => {
-  const { t } = useTranslation();
   return (
     <div>
-      <h1>{t("greeting")}</h1>
+       <MonorepoIndex />
     </div>
   );
 };
