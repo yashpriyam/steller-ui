@@ -7,7 +7,6 @@
 
 .main-container {
   width: 450px;
-  background-color: #333333;
   color: $primaryBg;
   display: flex;
   flex-direction: column;
@@ -24,7 +23,6 @@
   border-radius: 20px;
 
   &:hover {
-    background-color: #585757;
     background: linear-gradient(
       142deg,
       rgba(255, 255, 255, 0.21) 34.6847%,
@@ -32,8 +30,7 @@
     );
     cursor: pointer;
   }
-
-  &:hover ~ .img {
+  &:hover > .image-div > .img {
     transform: scale(120%);
   }
 
@@ -51,19 +48,17 @@
       width: 100%;
       border-radius: 15px;
       transition: transform 1s;
-      &:hover {
-        transform: scale(120%);
-      }
     }
 
     .tags-span {
       position: absolute;
-      top: 12px;
-      left: 15px;
+      top: 10px;
       display: flex;
       gap: 5px;
-      // transform: translate(-130%,-350%);
 
+      &:hover > .hidden-tags {
+        opacity: 1;
+      }
       .tags {
         border: 1px solid $primaryBg;
         border-radius: 25px;
@@ -75,14 +70,8 @@
         font-weight: 800;
       }
       .hidden-tags {
-        display: none;
-        &:hover {
-          display: inline;
-        }
-      }
-
-      .tags:hover ~ .hidden-tags {
-        display: inline;
+        opacity: 0;
+        transition: 0.2s;
       }
 
       .html {
@@ -105,6 +94,17 @@
         border-color: rgb(0, 145, 255);
         color: rgb(0, 145, 255);
       }
+    }
+
+    .left{
+      left: 15px;
+    }
+
+    .right{
+      right: 15px;
+    }
+    .center{
+      transform: translateX(0%)
     }
   }
 

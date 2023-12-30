@@ -35,22 +35,26 @@ export const Videos: React.FC<VideosProps> = ({
     { tag: "html" },
     { tag: "js" },
     { tag: "css" },
-    { tag: "react.js" },
-    { tag: "node.js" },
-    { tag: "express.js" },
+    { tag: "react" },
+    { tag: "node" },
+    { tag: "express" },
     { tag: "mongoose" },
-    { tag: "video" },
-    { tag: "video" },
-    { tag: "video" },
   ],
 }: VideosProps) => {
   const [filterTag, setFilterTag] = useState<string>("");
-  const handleClick: MouseEventHandler<HTMLSpanElement> = (event) => {
+
+  const handleClickOnApplyFilter: MouseEventHandler<HTMLSpanElement> = (
+    event
+  ) => {
     const target = event.target as HTMLElement;
     if (target instanceof HTMLElement) {
       const innerTextValue: string = target.innerText;
       setFilterTag(innerTextValue);
     }
+  };
+
+  const handleClickOnClearFilter = () => {
+    setFilterTag("");
   };
 
   return (
@@ -59,32 +63,39 @@ export const Videos: React.FC<VideosProps> = ({
         <div className="filter-wrapper">
           {filterData?.map((data) => {
             return (
-              <span className="filter-tag" 
-              onClick={handleClick}
+              <span
+                className={`filter-tag ${
+                  data.tag === filterTag ? "active-tag" : ""
+                }`}
+                onClick={handleClickOnApplyFilter}
               >
                 {data.tag}
               </span>
             );
           })}
+          {filterData.length && (
+            <span className="clear-filter" onClick={handleClickOnClearFilter}>
+              Clear
+            </span>
+          )}
         </div>
       </div>
       <div className="video-container">
         {videoData?.map((data) => {
-          // if (data.tags?.includes(filterTag)){
+          if (data.tags?.includes(filterTag) || filterTag === "") {
             return (
               <Card
                 className={className}
                 title={data.title}
                 subtitle="subtitle"
                 tags={data.tags}
+                // tagPosition="center"
                 img={
                   "https://framerusercontent.com/images/jQaRnWtpyFktrGE79EvFXdue7Gk.jpg?scale-down-to=2048"
                 }
-              >
-              </Card>
-            )
-            // }
-            // else return <></>;
+              ></Card>
+            );
+          } else return <></>;
         })}
       </div>
     </div>
