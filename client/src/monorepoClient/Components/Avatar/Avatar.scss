@@ -1,0 +1,10 @@
+.avatar{
+    border-radius: 50%;
+    .defaultAvatar{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: 1px solid lightgray;
+        object-fit: fill;
+    }
+}
