@@ -169,14 +169,14 @@ declare global {
   }
 
   type QuestionSchemaType = {
-    question: string;
+    question: { imageUrl: string; text: string }[];
     options: { imageUrl: string; text: string }[];
-    questionType: QuestionTypeEnum ;
+    questionType: QuestionTypeEnum;
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
-    meta: QuestioinMetaData
-  }
+    meta: QuestioinMetaData;
+  };
   type QuestioinMetaData = {
     topic: string;
     day: number;
