@@ -15,4 +15,7 @@ export const localMessages = {
     USER_ACTIVITY_UPDATED: "user activity updated",
     FULFILLED: "fulfilled",
   },
+  QUESTION_MODEL: {
+    QUESTION_CREATION_SUCCESS: "question data added successfully",
+  },
 };

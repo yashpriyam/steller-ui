@@ -175,15 +175,16 @@ declare global {
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
-    meta: {
-      topic: string;
-      day: number;
-      isActive: boolean;
-      isArchived: boolean;
-      type: QuestionMetaType;
-      expiresInMins: number;
-      isOpenable: boolean;
-    }
+    meta: QuestioinMetaData
+  }
+  type QuestioinMetaData = {
+    topic: string;
+    day: number;
+    isActive: boolean;
+    isArchived: boolean;
+    type: QuestionMetaType ;
+    expiresInMins: number;
+    isOpenable: boolean;
   }
   type getNotesFilterInputType = {
     link?: string;
@@ -236,4 +237,8 @@ declare global {
   }
 
 
+  type CreateQuestionOutputType={
+    questionData?: QuestionSchemaType
+    response:CustomResponseType
+  }
 }

@@ -3,4 +3,5 @@ export { registerUser } from "./user/registerUser";
 export { createTransaction } from "./transaction/createTransaction";
 export { createNotes, deleteNotesById, updateNotesById } from "./notes/index";
 export { createVideo } from "./video/index";
-export { upsertUserActivity } from "./userActivity/index"
+export { upsertUserActivity } from "./userActivity/index";
+export { createQuestion }  from "./question/index";

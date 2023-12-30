@@ -19,4 +19,7 @@ export const errorMessages = Object.freeze({
   USER_ACTIVITY: {
     USER_ACTIVITY_UPDATION_FAILED: "unable to update user activity"
   },
+  QUESTION_MODEL: {
+    QUESTION_CREATION_FAILED:"unable to add question data"
+  }
 });

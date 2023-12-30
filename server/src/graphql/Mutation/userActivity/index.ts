@@ -1,1 +1,1 @@
-export { upsertUserActivity } from "./upsertUserActivity"
+export { upsertUserActivity } from "./upsertUserActivity";
