@@ -15,3 +15,6 @@ export function formatDate(date: Date): string {
     timeZoneName: "short",
   });
 }
+export function timeAfterMins(mins = 0) {
+  return new Date(Date.now() + mins * 60 * 1000);
+}

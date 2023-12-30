@@ -251,13 +251,23 @@ declare global {
     batchCode: string;
     meta: QuestioinUpdateOurputMetaData;
   };
-  type QuestioinUpdateOutputMetaData={
-     topic: string;
+  type QuestioinUpdateOutputMetaData = {
+    topic: string;
     day: number;
     isActive: boolean;
     isArchived: boolean;
     type: QuestionMetaType;
     expiresInMins: number;
     isOpenable: boolean;
+  }
+  type CreateOtpType = {
+    email: string;
+    emailOtp: string;
+    expiresAt: Date
+    isEmailVerified: boolean
+    id: ObjectId
+  }
+  type OtpOutputType = {
+    response: CustomResponseType
   }
 }

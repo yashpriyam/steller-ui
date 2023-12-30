@@ -23,6 +23,7 @@ const typeDefs = gql`
     ): UpdateNotesOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
     updateQuestionById(updateQuestionData:UpdateQuestionInputType!):UpdateQuestionOutputType
+    sendOtpToRegisteredUser(email: String!) : OtpOutputType
   }
 
   type CustomResponseType {
@@ -300,6 +301,9 @@ const typeDefs = gql`
     type: QuestionMetaType
     expiresInMins: Int
     isOpenable: Boolean
+  }
+  type OtpOutputType {
+    response: CustomResponseType!
   }
   scalar DateTime
   scalar JSON
