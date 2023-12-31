@@ -5,6 +5,7 @@ const typeDefs = gql`
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
     getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
     getNotes(filterData: getNotesFilterInputType): getNotesOutputType
+    getAllQuestions(input: GetQuestionsFilterInput): GetAllQuestionsOutputType
   }
 
   type Mutation {
@@ -192,7 +193,7 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   input CreateQuestionInputType {
-    question: String!
+    question: [Option!]!
     batchCode: String!
     options: [Option!]!
     questionType: QuestionType!
@@ -218,11 +219,11 @@ const typeDefs = gql`
     isOpenable: Boolean!
   }
   type QuestionOutputType {
-    questionData:questionData
-    response:CustomResponseType
+    questionData: QuestionData
+    response: CustomResponseType
   }
-  type questionData{
-    question: String!
+  type QuestionData {
+    question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
     questionType: QuestionType!
@@ -246,6 +247,16 @@ const typeDefs = gql`
   enum QuestionMetaType {
     timed
     recorded
+  }
+  input GetQuestionsFilterInput {
+    topics: [String]!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+  }
+  type GetAllQuestionsOutputType {
+    questionData: QuestionData
+    response: CustomResponseType
   }
   scalar DateTime
   scalar JSON
