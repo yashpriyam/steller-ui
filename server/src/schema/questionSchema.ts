@@ -1,20 +1,20 @@
 import mongoose, { Schema, model } from "mongoose";
 
-const questionTypes = Object.freeze({
+const questionTypes ={
     multi: "multi",
     single: "single"
-})
-const questionDurationTypes = Object.freeze({
+}
+const questionDurationTypes = {
     timed: "timed",
     recorded: "recorded"
-})
+}
 const questionSchema = new Schema<QuestionSchemaType>({
   question: { type: [{ imageUrl: String, text: String }], required: true },
   batchCode: { type: String, required: true },
   options: { type: [{ imageUrl: String, text: String }], required: true },
   questionType: {
     type: String,
-    enum: Object.values(questionTypes),
+    enum: questionTypes,
     required: true,
   },
   answer: { type: [{ imageUrl: String, text: String }], required: true },
@@ -26,7 +26,7 @@ const questionSchema = new Schema<QuestionSchemaType>({
     isArchived: { type: Boolean, required: true },
     type: {
       type: String,
-      enum: Object.values(questionDurationTypes),
+      enum:questionDurationTypes,
       required: true,
     },
     expiresInMins: { type: Number, required: true },
