@@ -11,7 +11,7 @@ const App = () => {
       {/* <h1>{t("greeting")}</h1> */}
       {/* <DatePicker label="Date Picker" labelPosition="left" isRequired={true} maxDate="2023-12-12" minDate="2011-01-01" icon="📆"/> */}
       <LoginUI/>
-       <MonorepoIndex />
+       {/* <MonorepoIndex /> */}
     </div>
   );
 };
