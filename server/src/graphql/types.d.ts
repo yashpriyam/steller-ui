@@ -170,7 +170,7 @@ declare global {
   }
 
   type QuestionSchemaType = {
-    question: string;
+    question: { imageUrl: string; text: string }[];
     options: { imageUrl: string; text: string }[];
     questionType: QuestionTypeEnum;
     answer: { imageUrl: string; text: string }[];

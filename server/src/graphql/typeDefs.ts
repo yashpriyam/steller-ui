@@ -193,7 +193,7 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   input CreateQuestionInputType {
-    question: String!
+    question: [Option!]!
     batchCode: String!
     options: [Option!]!
     questionType: QuestionType!
@@ -223,7 +223,7 @@ const typeDefs = gql`
     response: CustomResponseType
   }
   type questionData {
-    question: String!
+    question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
     questionType: QuestionType!
