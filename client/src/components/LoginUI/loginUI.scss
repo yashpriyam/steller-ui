@@ -1,24 +1,25 @@
+@import "../variables.scss";
 .main {
   height: 100vh;
-  background-color: black;
+  background-color: $black;
   display: flex;
   justify-content: center;
   align-items: center;
 
   .login-page {
     position: relative;
-    background-color: rgb(33, 32, 32);
-    height: 60vh;
-    width: 30vw;
+    background-color: $darkGrey;
+    height: 450px;
+    width: 440px;
     padding: 50px;
     border-radius: 10px;
+    font-family: "Montserrat";
     .error-text{
       position: absolute;
       top: 10px;
       left: 10px;
-      font-family: "Montserrat";
       font-size: 1vmax;
-      color: red;
+      color: $red;
     }
     .screen1 {
         height: 100%;
@@ -33,16 +34,14 @@
           margin-left: -80px;
 
           .h1{
-            color: #F6F6F6;
-            font-family: "Montserrat";
+            color: $textWhite;
             font-weight: 500;
             margin-bottom: 10px;
         }
         .h3{
-          color: #808080;
-            font-family: "Montserrat";
+          color: $textGrey;
             font-weight: 400;
-            font-size: 1vmax;
+            font-size: 15.5px;
             margin-bottom: 10px;
         }
         }
@@ -50,37 +49,37 @@
       .input{
         padding: 10px;
         background-color: transparent;
-        border: 1px solid rgb(78, 77, 77);
+        border: 1px solid $borderGrey;
         border-radius: 10px;
-        width: 20vw;
-        height: 7vh;
+        width: 320px;
+        height: 50px;
         margin-bottom: 10px;
-        color: #F6F6F6;
+        color: $textWhite;
       }
       .button{
         padding: 10px;
-        background-color: #F6F6F6;
-        border: 1px solid rgb(78, 77, 77);
+        background-color: $textWhite;
+        border: 1px solid $borderGrey;
         border-radius: 10px;
-        color: black;
+        color: $black;
         font-weight: 700;
-        width: 20vw;
-        height: 7vh;
+        width: 320px;
+        height: 50px;
         margin-top: 10px;
         cursor: pointer;
       }
       .hr{
-        width: 20vw;
+        width: 320px;
         margin-top: 10px;
       }
       .link{
         background-color: transparent;
         border: none;
-        color: #808080;
+        color: $textGrey;
       }
       .link:hover{
         cursor: pointer;
-        color: #F6F6F6;
+        color: $textWhite;
       }
     }
     .screen2{
@@ -93,8 +92,7 @@
         align-items: center;
         justify-content: center;
         .h1{
-            color: #F6F6F6;
-            font-family: "Montserrat";
+            color: $textWhite;
             font-weight: 500;
             margin-bottom: 10px;
         }
@@ -110,43 +108,30 @@
         }
         .back-arrow:hover{
           border-radius: 50%;
-          border:1px solid #808080;
+          border:1px solid $textGrey;
           cursor: pointer;
-          box-shadow: 0 0 1px 1px #808080a8;
+          box-shadow: 0 0 1px 1px $boxShadowGrey;
         }
       .input{
         padding: 10px;
         background-color: transparent;
-        border: 1px solid rgb(78, 77, 77);
+        border: 1px solid $borderGrey;
         border-radius: 10px;
-        width: 20vw;
-        height: 7vh;
-        color: #F6F6F6;
+        width: 320px;
+        height: 50px;
+        color: $textWhite;
 
       }
       .button{
         padding: 10px;
-        background-color: #F6F6F6;
-        border: 1px solid rgb(78, 77, 77);
+        background-color: $textWhite;
+        border: 1px solid $borderGrey;
         border-radius: 10px;
-        color: black;
+        color: $black;
         font-weight: 700;
-        width: 20vw;
-        height: 7vh;
+        width: 320px;
+        height: 50px;
         cursor: pointer;
-      }
-      .hr{
-        width: 20vw;
-        margin-top: 10px;
-      }
-      .link{
-        background-color: transparent;
-        border: none;
-        color: #808080;
-      }
-      .link:hover{
-        cursor: pointer;
-        color: #F6F6F6;
       }
     }
 
@@ -159,58 +144,131 @@
         align-items: center;
         justify-content: center;
         .h1{
-            color: #F6F6F6;
-            font-family: "Montserrat";
+            color: $textWhite;
             font-weight: 500;
             margin-bottom: 10px;
         }
       .input{
         padding: 10px;
         background-color: transparent;
-        border: 1px solid rgb(78, 77, 77);
+        border: 1px solid $borderGrey;
         border-radius: 10px;
-        width: 20vw;
-        height: 7vh;
-        color: #F6F6F6;
+        width: 320px;
+        height: 50px;
+        color: $textWhite;
 
       }
       .button{
         padding: 10px;
-        background-color: #F6F6F6;
-        border: 1px solid rgb(78, 77, 77);
+        background-color: $textWhite;
+        border: 1px solid $borderGrey;
         border-radius: 10px;
-        color: black;
+        color: $black;
         font-weight: 700;
-        width: 20vw;
-        height: 7vh;
+        width: 320px;
+        height: 50px;
         cursor: pointer;
         margin-bottom: 40px;
       }
       .button2{
         padding: 10px;
-        background-color: #F6F6F6;
-        border: 1px solid rgb(78, 77, 77);
+        background-color: $textWhite;
+        border: 1px solid $borderGrey;
         border-radius: 10px;
-        color: black;
+        color: $black;
         font-weight: 700;
-        width: 20vw;
-        height: 7vh;
+        width: 320px;
+        height: 50px;
         cursor: pointer;
         margin-top: 40px;
-      }
-      .hr{
-        width: 20vw;
-        margin-top: 10px;
       }
       .link{
         margin-left: 220px;
         background-color: transparent;
         border: none;
-        color: #808080;
+        color: $textGrey;
       }
       .link:hover{
         cursor: pointer;
-        color: #F6F6F6;
+        color: $textWhite;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .main{
+    width: 100%;
+    overflow: hidden;
+
+    .login-page{
+      height: 400px;
+      width: 300px;
+      .error-text{
+        font-size: 1.4vmax;
+      }
+
+      .screen1{
+        height: 100%;
+        width: 100%;
+        
+        .text{
+          margin-left: -80px;
+          .h3{
+            font-size: 10px;
+          }
+        }
+        .input{
+          height: 50px;
+          width: 230px;
+        }
+        .button{
+          height: 50px;
+          width: 230px;
+        }
+        .hr{
+          width: 230px;
+        }
+      }
+
+      .screen2{
+        height: 100%;
+        width: 100%;
+
+        .back-arrow{
+          position: absolute;
+          top: -30px;
+          left: -30px;
+        }
+        .h1{
+          margin-top: -20px;
+          margin-bottom: 30px;
+        }
+        .input, .button{
+          height: 50px;
+          width: 230px;
+        }
+
+      }
+
+      .screen3{
+          height: 100%;
+          width: 100%;
+
+          .h1{
+            font-size: 23px;
+          }
+          .input, .button, .button2{
+            height: 50px;
+            width: 230px;
+            margin-bottom: 10px;
+          }
+          .button2{
+            margin-top: 10px;
+          }
+          .link{
+            margin-left: 120px;
+          }
       }
     }
   }
