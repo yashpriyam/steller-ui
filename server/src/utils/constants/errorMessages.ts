@@ -21,7 +21,7 @@ export const errorMessages = Object.freeze({
     QUESTION_UPDATION_FAILED: "unable to update question data",
   },
   OTP_MODEL: {
-    OTP_SENT_FAILED: "cannot send otp",
+    OTP_SENT_FAILED: "Failed to send OTP",
     UNREGISTERED_EMAIL: "email address is not registered",
   },
 });

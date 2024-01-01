@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const otpSchema = new Schema({
+const emailVerificationSchema = new Schema({
     email: {
         type: String,
         required: true
@@ -20,6 +20,6 @@ const otpSchema = new Schema({
     }
 })
 
-const otpModel = mongoose.model("otp", otpSchema);
+const emailVerificationModel = mongoose.model("otp", emailVerificationSchema);
 
-export { otpModel };
+export { emailVerificationModel };
