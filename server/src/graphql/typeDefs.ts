@@ -24,7 +24,9 @@ const typeDefs = gql`
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
-    upsertUserActivity(userActivityData: UserActivityInputType): UserActivityOutputType
+    upsertUserActivity(
+      userActivityData: UserActivityInputType
+    ): UserActivityOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
     updateQuestionById(
       updateQuestionData: UpdateQuestionInputType!
@@ -210,14 +212,12 @@ const typeDefs = gql`
     isponed: Boolean
     devices: [String]
     IST: String
-    isValidPhoneNumber:Boolean
-
+    isValidPhoneNumber: Boolean
   }
 
   type UserActivityOutputType {
-    response: CustomResponseType! 
+    response: CustomResponseType!
   }
-
 
   input CreateQuestionInputType {
     question: [Option!]!

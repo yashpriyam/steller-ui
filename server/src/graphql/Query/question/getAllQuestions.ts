@@ -13,14 +13,16 @@ export const getAllQuestions = async (
     status: statusCodes.BAD_REQUEST,
   };
   try {
-    const { filterData } = args;    
+    const { filterData } = args;
     const filteredData = removeNullAndUndefinedKeys(filterData);
-  const updatedFields:Record<string,string>= {};
+    const updatedFields: Record<string, string> = {};
     for (const key in filteredData) {
       const fullPath = `meta.${key}`;
-      updatedFields[fullPath] =filteredData[key];
-    }    
-    const questionsData: QuestionSchemaType[] = await questionModel.find(updatedFields);;    
+      updatedFields[fullPath] = filteredData[key];
+    }
+    const questionsData: QuestionSchemaType[] = await questionModel.find(
+      updatedFields
+    );
     const response: CustomResponseType = questionsData.length
       ? {
           message: QUESTION_FOUND_SUCCESS,

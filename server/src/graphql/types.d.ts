@@ -170,9 +170,9 @@ declare global {
   }
 
   type QuestionSchemaType = {
-    question: { imageUrl: string, text: string }[];
+    question: { imageUrl: string; text: string }[];
     questionType: QuestionTypeEnum;
-    options: { imageUrl: string, text: string }[];
+    options: { imageUrl: string; text: string }[];
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
@@ -219,7 +219,7 @@ declare global {
     devices?: string[];
     IST?: string;
     isValidPhoneNumber?: boolean;
-  }
+  };
 
   type UserActivityData = {
     phoneNumber?: string;
@@ -230,13 +230,12 @@ declare global {
     isValidPhoneNumber?: boolean;
     createdAt: Date;
     updatedAt: Date;
-  }
+  };
 
   type UserActivityOutputType = {
     UserActivityData?: UserActivityData;
     response: CustomResponseType;
-  }
-
+  };
 
   type CreateQuestionOutputType = {
     questionData?: QuestionSchemaType;
@@ -270,32 +269,32 @@ declare global {
   };
   type QuestionDataType = {
     question: [{ imageUrl: string; text: string }];
-    options:[ { imageUrl: string; text: string }];
+    options: [{ imageUrl: string; text: string }];
     questionType: QuestionTypeEnum;
     answer: [{ imageUrl: string; text: string }];
     marks: number;
     batchCode: string;
     meta: QuestionUpdateOutputMetaData;
   };
-  type QuestionUpdateOutputMetaData={
-     topic: string;
+  type QuestionUpdateOutputMetaData = {
+    topic: string;
     day: number;
     isActive: boolean;
     isArchived: boolean;
     type: QuestionMetaType;
     expiresInMins: number;
     isOpenable: boolean;
-  }
+  };
   type CreateUserOtpType = {
     email: string;
     emailOtp: string;
-    expiresAt: Date
-    isEmailVerified: boolean
-    id:ObjectId
-  }
-  type OtpUserOutputType={
-    response:CustomResponseType
-  }
+    expiresAt: Date;
+    isEmailVerified: boolean;
+    id: ObjectId;
+  };
+  type OtpUserOutputType = {
+    response: CustomResponseType;
+  };
   type filterInputType = {
     topic?: string;
     isActive?: boolean;
