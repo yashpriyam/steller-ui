@@ -1,0 +1,135 @@
+.featureCardListBlack{
+    background-color: #000;
+}
+.featureCardListWhite{
+    background-color: var(--light-red);
+}
+.featureCardList{
+    display: flex;
+    justify-content: center;
+    padding: 100px 0 100px;
+    position: relative;
+    .cardContainer{
+        width: 100%;
+        display: flex;
+        margin-left: 110px;
+        justify-content: center;
+        flex-wrap:wrap ;
+        margin-right: 110px;
+        // grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        grid-gap: 5em;
+        .featureCard{
+            background: #FFFFFF;
+            border: 4px solid #CDCAEA;
+            border-radius: 30px;
+            // width: fit-content;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 19px;
+            transition: 20ms;
+            position: relative;
+            &:hover {
+                transform: scale(1.1);
+                z-index: 2;
+            }
+            .cardImage{
+                width: 80%;
+                height: fit-content;
+            }
+            h4{
+                margin-bottom: 20px;
+                margin-top: 20px;
+                color: var(--red);
+            }
+            .paragraph {
+                font-weight: 600;
+                line-height: 30px;
+                span{
+                    color: var(--red);
+                }
+                margin-bottom: 50px;
+            }
+            .courseDetail{
+                display: flex;
+                font-size: 1vw;
+                .topCircle{
+                    position: absolute;
+                    top: 0;
+                    left: 50px;
+                    width: 5vw;
+                    z-index: 0;
+                }
+
+                .bottomCircle {
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    right: 50%;
+                    z-index: 0;
+                }
+
+                .rightCircle {
+                    position: absolute;
+                    right: 0;
+                    height: 5vw;
+                    top: 50%;
+                }
+                .bold{
+                    font-weight: 800;
+                    margin-right: 10px;
+                }
+                .left{
+                    margin-right: 20px;
+                    z-index: 1;
+                    height: 200px;
+                    display: flex;
+                    justify-content: space-evenly;
+                    flex-direction: column;
+                  .heading{
+                    color: var(--red);
+                    margin-bottom:10px;
+                    font-size: 16px;
+                }  
+                }
+                
+                .week{
+                    display: flex;
+                }
+
+                .right {
+                    z-index: 1;
+                    height: 200px;
+                    display: flex;
+                    justify-content: space-evenly;
+                    flex-direction: column;
+                    .duration {
+                        font-size: 16px;
+                        margin-bottom:10px ;
+                        span{
+                            color: var(--red);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .featureCardCircle{
+        position: absolute;
+        left: 0;
+        bottom: 50px;
+        height: 10vw;
+    }
+   
+}
+@media only screen and (max-width: 800px) {
+    .featureCardList{
+        .cardContainer{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+    }
+}

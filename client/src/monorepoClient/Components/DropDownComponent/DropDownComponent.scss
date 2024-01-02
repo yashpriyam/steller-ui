@@ -1,0 +1,45 @@
+.dropDownComponent{
+    background: #f4f4ef;
+    border-radius: 30px;
+    padding: 30px;
+    color: black;
+    margin: 20px;
+    .questionText{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        font-size: 20px;
+        padding-bottom: 4px;
+        border-bottom: 2px solid crimson;
+        span{
+            color: #929292;
+            font-weight: 500;
+            font-size: 29.5905px;
+            line-height: 44px;
+
+            letter-spacing: -0.045em;
+            margin-right: 10px;
+        }
+        .dropdownBtn{
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 20px;
+            border-radius: 50%;
+            padding: 10px;
+            img{
+                width: fit-content;
+                height: fit-content;
+            }
+        }
+    }
+    .answerText{
+        display: flex;
+        font-size: 20px;
+        margin-top: 10px;
+        p{
+            margin-left: 10px;
+        }
+    }
+}

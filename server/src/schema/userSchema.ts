@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: convertUTCtoIST(),
     },
+    collegeName: { type: String },
   },
   { timestamps: true }
 );
