@@ -166,6 +166,24 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
+
+  input OtpUserInputType {	
+    email: String!	
+  }	
+  type OtpUserOutputType {	
+    response: CustomResponseType!	
+  }	
+  input UserActivityInputType {	
+    phoneNumber: String	
+    isOpened: Boolean	
+    devices: [String]	
+    IST: String	
+    isValidPhoneNumber: Boolean	
+  }	
+  type UserActivityOutputType {	
+    response: CustomResponseType!	
+  }
+
   type CreateNotesOutputType {
     notesData: NotesDataType
     response: CustomResponseType!
