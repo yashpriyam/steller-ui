@@ -5,7 +5,9 @@ const typeDefs = gql`
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
     getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
     getNotes(filterData: getNotesFilterInputType): getNotesOutputType
-    getAllQuestions(input: GetQuestionsFilterInput): GetAllQuestionsOutputType
+    getAllQuestions(
+      filterData: GetQuestionsFilterInput
+    ): GetAllQuestionsOutputType
   }
 
   type Mutation {
@@ -23,6 +25,9 @@ const typeDefs = gql`
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
+    updateQuestionById(
+      updateQuestionData: UpdateQuestionInputType!
+    ): UpdateQuestionOutputType
   }
 
   type CustomResponseType {
@@ -248,14 +253,67 @@ const typeDefs = gql`
     timed
     recorded
   }
+  input UpdateQuestionInputType {
+    questionId: ID!
+    updates: UpdatesQuestionInput
+  }
+
+  input UpdatesQuestionInput {
+    question: [UpdateOptionInput]
+    batchCode: String
+    options: [UpdateOptionInput]
+    questionType: QuestionType
+    answer: [UpdateOptionInput]
+    marks: Int
+    meta: QuestionMetaInput
+  }
+  input UpdateOptionInput {
+    imageUrl: String
+    text: String
+  }
+  input QuestionMetaInput {
+    topic: String
+    day: Int
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+    expiresInMins: Int
+    isOpenable: Boolean
+  }
+  type UpdateQuestionOutputType {
+    questionData: QuestionDataOutput
+    response: CustomResponseType!
+  }
+  type QuestionDataOutput {
+    question: [UpdateOptionOutput]
+    batchCode: String
+    options: [UpdateOptionOutput]
+    questionType: QuestionType
+    answer: [UpdateOptionOutput]
+    marks: Int
+    meta: QuestionMetaOutput
+  }
+  type UpdateOptionOutput {
+    imageUrl: String
+    text: String
+  }
+  type QuestionMetaOutput {
+    topic: String
+    day: Int
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+    expiresInMins: Int
+    isOpenable: Boolean
+  }
   input GetQuestionsFilterInput {
-    topics: [String]!
-    isActive: Boolean!
-    isArchived: Boolean!
-    type: QuestionMetaType!
+    topic: String
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
   }
   type GetAllQuestionsOutputType {
-    questionData: QuestionData
+    questionData: [QuestionData]
     response: CustomResponseType
   }
   scalar DateTime
