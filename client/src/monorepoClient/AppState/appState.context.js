@@ -13,7 +13,7 @@ export const AppStateContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useLayoutEffect(() => {
-    setIsLoggedIn(!!getCookie(process.env.REACT_APP_JWT_SECRET_COOKIE));
+setIsLoggedIn(!!getCookie(process.env.REACT_APP_JWT_SECRET_KEY));
   }, []);
 
   const globalStateAndDispatch = useReducer(globalReducer, globalObject);

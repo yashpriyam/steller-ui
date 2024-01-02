@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Registerpage.scss";
 import { AppStateContext } from "../../AppState/appState.context";
 import { useNavigate } from "react-router-dom";
-import useHttp from "../../CustomHooks/useHttp";
 import LeftRegisterPageComponent from "../../Components/LeftRegisterPageComponent/LeftRegisterPageComponent";
 import RightRegisterPageComponent from "../../Components/RightRegisterPageComponent/RightRegisterPageComponent";
 import Toast from "../../helpers/utils/toast";
@@ -14,6 +13,7 @@ import {
 } from "../../helpers/utils/validations";
 import { objectToBase64 } from "../../helpers/utils/base64Utils";
 import { setCookie } from "../../helpers/utils/cookieUtils";
+import { useUser } from "../../../redux/actions/userAction";
 
 const Registerpage = () => {
   const { setIsLoggedIn } = useContext(AppStateContext);
@@ -21,13 +21,12 @@ const Registerpage = () => {
   const [formStep, setFormStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
   const [finishedPage, setFinishedPage] = useState(0);
   const isEmailValid = isValidEmail(formData.email);
   const { darkMode } = useContext(ThemeContext);
   const { authenticateStateAndDispatch } = useContext(AppStateContext);
   const userDataCookieName = "userData";
-
+  const { registerUser, sendOtpApi } = useUser();
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
@@ -54,22 +53,27 @@ const Registerpage = () => {
       try {
         setIsLoading(true);
         setCookie({ key: userDataCookieName, value: objectToBase64(formData) });
-        const response = await sendRequest(
-          `/api/register/submitPersonalDetailForm`,
-          "post",
-          formData
-        );
-        if (!response) {
+        const { name, currentprofessionalstatus, email, otp, phonenumber, whatsagoodsalarythatcanmotivateyoutoacceptajoboffer, youwouldattendtheclassesonlineoroffline, whichcollegeyouarefrom } = formData;
+        const response = await registerUser({
+          name,
+          email,
+          emailOtp: otp,
+          phoneNumber: phonenumber,
+          occupation: currentprofessionalstatus,
+          expectedSalary: whatsagoodsalarythatcanmotivateyoutoacceptajoboffer,
+          sessionPreference: youwouldattendtheclassesonlineoroffline.toLowerCase() === 'online' ? 'online' : "offline",
+          isJobSeeker: true,
+          collegeName: whichcollegeyouarefrom
+        })
+        if (!response?.data?.registerUser) {
           Toast.error("Incorrect otp");
-        } else if (response.status === 201) {
+        } else  {
           dispatcher({ type: "SUBMIT_FORM", payload: response.data.data });
           Toast.success("Form Submitted Successfully");
           setFormData("");
           setResetForm((prev) => !prev);
           setIsLoggedIn(true);
           navigate("/#Home");
-        } else {
-          Toast.error(response.data.message);
         }
       } catch (e) {
         Toast.error("Something went wrong");
@@ -84,8 +88,8 @@ const Registerpage = () => {
 
   const sendOtpRequest = async (email) => {
     try {
-      const response = await sendRequest(`/api/otp/send`, "post", { email });
-      if (response.status === 200) {
+      const { status } = await sendOtpApi(email);
+      if (status === 200) {
         Toast.success("An otp is sent to your email address");
       } else {
         Toast.error("Unable to send otp on your email address");

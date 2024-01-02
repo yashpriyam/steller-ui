@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { ObjectId } from "mongoose";
 
 declare global {
   type ContextType = {
@@ -33,10 +34,12 @@ declare global {
     name: string;
     email: string;
     phoneNumber: string;
-    isJobSeeker: boolean;
-    occupation: string;
-    sessionPreference: SessionPreferenceEnum;
-    expectedSalary: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    expectedSalary?: string;
+    emailOtp: string;
+    collegeName?: string;
   };
 
   type ProgramDataType = {
@@ -114,6 +117,11 @@ declare global {
     response: CustomResponseType;
   };
 
+  type AllVideoOutputDataType = {
+    videoData?: [videoDataType];
+    response: CustomResponseType;
+  }
+
   type CreateVideoType = {
     title: string;
     description?: string;
@@ -144,6 +152,11 @@ declare global {
     isActive?: boolean;
     duration?: string;
   };
+
+  type FilteredLinksType = {
+    [key: string]: string;
+  }
+
   type DeletedNotesOutputType = {
     notesData?: DeletedNotesDataType;
     response: CustomResponseType;
@@ -159,33 +172,33 @@ declare global {
   };
 
   enum QuestionTypeEnum {
-    multi= "multi",
-    single= "single"
+    multi = "multi",
+    single = "single",
   }
 
   enum QuestionMetaType {
-    timed="timed",
-    recorded = "recorded"
+    timed = "timed",
+    recorded = "recorded",
   }
 
   type QuestionSchemaType = {
-    question: string;
+    question: { imageUrl: string; text: string }[];
+    questionType: QuestionTypeEnum;
     options: { imageUrl: string; text: string }[];
-    questionType: QuestionTypeEnum ;
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
-    meta: QuestioinMetaData
-  }
+    meta: QuestioinMetaData;
+  };
   type QuestioinMetaData = {
     topic: string;
     day: number;
     isActive: boolean;
     isArchived: boolean;
-    type: QuestionMetaType ;
+    type: QuestionMetaType;
     expiresInMins: number;
     isOpenable: boolean;
-  }
+  };
   type getNotesFilterInputType = {
     link?: string;
     title?: string;
@@ -205,16 +218,105 @@ declare global {
   };
 
   type QuestionAttemptSchemaType = {
-    userId: ObjectId; 
-    questionId: ObjectId; 
-    response: { imageUrl: string; text: string }[]; 
-    isCorrect: boolean
+    userId: ObjectId;
+    questionId: ObjectId;
+    response: { imageUrl: string; text: string }[];
+    isCorrect: boolean;
     timestamp: Date;
   };
-  type CreateQuestionOutputType={
-    questionData?: QuestionSchemaType
-    response:CustomResponseType
-  }
+
+  type UserActivityInputType = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST?: string;
+    isValidPhoneNumber?: boolean;
+  };
+
+  type UserActivityData = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST: string;
+    time?: string;
+    isValidPhoneNumber?: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+
+  type UserActivityOutputType = {
+    UserActivityData?: UserActivityData;
+    response: CustomResponseType;
+  };
+
+  type CreateQuestionOutputType = {
+    questionData?: QuestionSchemaType;
+    response: CustomResponseType;
+  };
+  type UpdateQuestionInputType = {
+    questionId: ObjectId;
+    updates: QuestionData;
+  };
+  type QuestionData = {
+    question?: [{ imageUrl: string; text: string }];
+    options?: [{ imageUrl: string; text: string }];
+    questionType?: QuestionTypeEnum;
+    answer?: [{ imageUrl: string; text: string }];
+    marks?: number;
+    batchCode?: string;
+    meta: QuestioinMetaDataUpdate;
+  };
+  type QuestioinMetaDataUpdate = {
+    topic?: string;
+    day?: number;
+    isActive?: boolean;
+    isArchived?: boolean;
+    type?: QuestionMetaType;
+    expiresInMins?: number;
+    isOpenable?: boolean;
+  };
+  type UpdateQuestionOutputType = {
+    questionData?: QuestionDataType;
+    response: CustomResponseType;
+  };
+  type QuestionDataType = {
+    question: [{ imageUrl: string; text: string }];
+    options: [{ imageUrl: string; text: string }];
+    questionType: QuestionTypeEnum;
+    answer: [{ imageUrl: string; text: string }];
+    marks: number;
+    batchCode: string;
+    meta: QuestionUpdateOutputMetaData;
+  };
+  type QuestionUpdateOutputMetaData = {
+    topic: string;
+    day: number;
+    isActive: boolean;
+    isArchived: boolean;
+    type: QuestionMetaType;
+    expiresInMins: number;
+    isOpenable: boolean;
+  };
+  type CreateUserOtpType = {
+    email: string;
+    emailOtp: string;
+    expiresAt: Date;
+    isEmailVerified: boolean;
+    id: ObjectId;
+  };
+  type OtpUserOutputType = {
+    response: CustomResponseType;
+  };
+  type filterInputType = {
+    topic?: string;
+    isActive?: boolean;
+    isArchived?: Boolean;
+    type?: QuestionMetaType;
+  };
+  type QuestionsReturnType = {
+    questionData: [QuestionSchemaType];
+    response: CustomResponseType;
+  };
   type CustomResponseType = {
     status: number;
     message: string;

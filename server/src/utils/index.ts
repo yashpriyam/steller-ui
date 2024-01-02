@@ -3,6 +3,9 @@ export { sendEmail } from "./sendEmail";
 export {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
+  getUserActivityEmail,
 } from "./registrationEmail";
-export { convertUTCtoIST, formatDate } from "./timeUtils";
+export { convertUTCtoIST, formatDate ,timeAfterMins } from "./timeUtils";
 export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeys";
+export { generateNestedUpdate } from "./generateNestedFields";
+export{ getRandomNumOfDigits} from "./random"
