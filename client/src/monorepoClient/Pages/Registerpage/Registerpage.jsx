@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Registerpage.scss";
 import { AppStateContext } from "../../AppState/appState.context";
 import { useNavigate } from "react-router-dom";
-import useHttp from "../../CustomHooks/useHttp";
 import LeftRegisterPageComponent from "../../Components/LeftRegisterPageComponent/LeftRegisterPageComponent";
 import RightRegisterPageComponent from "../../Components/RightRegisterPageComponent/RightRegisterPageComponent";
 import Toast from "../../helpers/utils/toast";
@@ -22,7 +21,6 @@ const Registerpage = () => {
   const [formStep, setFormStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
   const [finishedPage, setFinishedPage] = useState(0);
   const isEmailValid = isValidEmail(formData.email);
   const { darkMode } = useContext(ThemeContext);
@@ -55,7 +53,8 @@ const Registerpage = () => {
       try {
         setIsLoading(true);
         setCookie({ key: userDataCookieName, value: objectToBase64(formData) });
-        const { name, currentprofessionalstatus, email, otp, phonenumber, whatsagoodsalarythatcanmotivateyoutoacceptajoboffer, youwouldattendtheclassesonlineoroffline } = formData;
+        const { name, currentprofessionalstatus, email, otp, phonenumber, whatsagoodsalarythatcanmotivateyoutoacceptajoboffer, youwouldattendtheclassesonlineoroffline, whichcollegeyouarefrom } = formData;
+        console.log({ formData })
         const response = await registerUser({
           name,
           email,
@@ -63,9 +62,9 @@ const Registerpage = () => {
           phoneNumber: phonenumber,
           occupation: currentprofessionalstatus,
           expectedSalary: whatsagoodsalarythatcanmotivateyoutoacceptajoboffer,
-          sessionPreference: youwouldattendtheclassesonlineoroffline || "offline",
+          sessionPreference: youwouldattendtheclassesonlineoroffline.toLowerCase() === 'online' ? 'online' : "offline",
           isJobSeeker: true,
-          collegeName: 'SIRT'
+          collegeName: whichcollegeyouarefrom
         })
         if (!response?.data?.registerUser) {
           Toast.error("Incorrect otp");
