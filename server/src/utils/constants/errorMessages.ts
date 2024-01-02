@@ -20,6 +20,11 @@ export const errorMessages = Object.freeze({
     USER_ACTIVITY_UPDATION_FAILED: "unable to update user activity"
   },
   QUESTION_MODEL: {
-    QUESTION_CREATION_FAILED:"unable to add question data"
-  }
+    QUESTION_CREATION_FAILED: "unable to add question data",
+    QUESTION_UPDATION_FAILED: "unable to update question data",
+  },
+  OTP_MODEL: {
+    OTP_SENT_FAILED: "cannot send otp",
+    OTP_EMAIL_INVALID: "email address is not valid",
+  },
 });
