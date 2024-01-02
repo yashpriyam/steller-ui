@@ -6,6 +6,7 @@ import resolvers from "./graphql";
 import typeDefs from "./graphql/typeDefs";
 import Connection from "./db/conn";
 import express from "express";
+import cookieParser from "cookie-parser";
 const PORT = process.env.PORT || 8080;
 
 (async () => {
@@ -28,6 +29,7 @@ const PORT = process.env.PORT || 8080;
 
   //   Setting up CORS
   app.use(cors(corsOption));
+  app.use(cookieParser());
 
   const server = new ApolloServer({ typeDefs, resolvers, context: ({ req, res }) => ({ req, res }) });
   await server.start();
