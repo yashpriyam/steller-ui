@@ -21,6 +21,7 @@ const typeDefs = gql`
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
+    upsertUserActivity(userActivityData: UserActivityInputType): UserActivityOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
     updateQuestionById(updateQuestionData:UpdateQuestionInputType!):UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
@@ -199,6 +200,20 @@ const typeDefs = gql`
   type OtpUserOutputType {
     response: CustomResponseType!
   }
+  input UserActivityInputType {
+    phoneNumber: String
+    isponed: Boolean
+    devices: [String]
+    IST: String
+    isValidPhoneNumber:Boolean
+
+  }
+
+  type UserActivityOutputType {
+    response: CustomResponseType! 
+  }
+
+
   input CreateQuestionInputType {
     question: [Option!]!
     batchCode: String!
