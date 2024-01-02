@@ -1,7 +1,8 @@
+@import "../variables.scss";
 .navbar {
     height: 70px;
     width: 100%;
-    background-color: white;
+    background-color: $primaryColor;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,8 +15,8 @@
         display: flex;
         gap: 30px;
         .navbar-option {
-            font-size: 16px;
-            color: rgb(0, 0, 0, 0.7);
+            font-size: $mediumFontSize;
+            color: $sencondaryBorderColor;
             text-decoration: none;
             background-color: transparent;
             padding: 5px;
@@ -23,12 +24,12 @@
             border: none;
             cursor: pointer;
             &:hover {
-                border: 2px solid black;
+                border: 2px solid $primaryBgColor;
             }
         }
         .navbar-active-option {
-            color: black;
-            border: 2px solid black;
+            color: $primaryBgColor;
+            border: 2px solid $primaryBgColor;
         }
     }
     .navbar-avatar {

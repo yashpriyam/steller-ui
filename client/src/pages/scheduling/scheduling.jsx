@@ -22,7 +22,7 @@ const Scheduling = () => {
       <div className="scheduling-page-accordion">
         {accordionDataList.map((accordion, index) => (
           <Accordion
-            // title={accordion.title}
+            title={accordion.title}
             key={index}
             style={{ backgroundColor: 'black', color: 'white' }}
           >

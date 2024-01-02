@@ -1,48 +1,53 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+3");
-// @import url("https://fonts.googleapis.com/css?family=Nunito");
+@import "../variables.scss";
+
 .accordion-container{
     width: 100%;
     height: fit-content;
-    background-color: white;
-    background:radial-gradient(50% 50% at 0% 0%, var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63, rgba(255, 255, 255, 0.15)) /* {"name":"White 15%"} */ 2.210024196147939%, hsla(0, 0%, 100%, 0) 100%);
-    box-shadow: 0 0 5px 1px rgb(128, 128, 128, 0.5);  
+    font-family: 'Nunito';
+    background-color: $primaryColor;
+    background:radial-gradient(50% 50% at 0% 0%, $radial-gradient 100%);
+    box-shadow: 0 0 5px 1px $fadedGrayPrimary;  
     border-radius: 30px;
-       border: 1px solid
-         var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
-    .accordion-title{
-        font-size: 25px;
+    border: 1px solid $video-hut-border-color;
+    .accordion-header{
+        font-size: $subHeaderFontSize;
         display: flex;
-        font-family: 'Nunito';
         align-items: center;
         justify-content: space-between;
         padding: 60px 50px;
         cursor: pointer;
         position: relative;
-        &::after{
-            content: "Week 1";
+        .accordion-title{
             position: absolute;
-            transform: translate(0%,0%);
-            font-size: 40px;
+            z-index: 1;
+            font-size: $headerFontSize;
             font-weight: 800;
-            color: rgba(128, 128, 128, 0.527);
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: $fadedGraySecondary;
         }
         .accordion-dropdown-arrow{
-            height: 20px;
-            order: 0;
+            position: absolute;
+            z-index: 0;
             transform: rotate(180deg);
             transition: 0.1s;
         }
         .accordion-dropdown-arrow-active{
             transform: rotate(0deg);
         }
+        .right{
+            right: 30px;
+        }
+        .left{
+            left:30px;
+        }
+        .center{
+            left:50%
+        }
     }
    
     .accordion-content {
-        color: white;
+        color: $primaryColor;
         max-height: 0;
         overflow: hidden;
-        // padding: 0px 50px;
 
         .content-wrapper {
             padding: 10px;
@@ -50,18 +55,15 @@
     }
     .open-accordion {
         max-height: fit-content;
-        // transition: max-height 1s;
     }
 
     .closed-accordion {
         max-height: 0;
-        // transition: max-height 0.5s;
     }
 }
 
-@media (max-width:650px){
+@media (max-width:$screen-md){
     .accordion-container{
-        // padding: 0px;
 
         .accordion-title{
             padding: 40px 30px;
