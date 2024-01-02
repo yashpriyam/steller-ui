@@ -28,7 +28,7 @@ const Registerpage = () => {
   const { darkMode } = useContext(ThemeContext);
   const { authenticateStateAndDispatch } = useContext(AppStateContext);
   const userDataCookieName = "userData";
-  const { registerUser } = useUser();
+  const { registerUser, sendOtpApi } = useUser();
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
@@ -90,8 +90,8 @@ const Registerpage = () => {
 
   const sendOtpRequest = async (email) => {
     try {
-      const response = await sendRequest(`/api/otp/send`, "post", { email });
-      if (response.status === 200) {
+      const { status } = await sendOtpApi(email);
+      if (status === 200) {
         Toast.success("An otp is sent to your email address");
       } else {
         Toast.error("Unable to send otp on your email address");

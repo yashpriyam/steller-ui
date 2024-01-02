@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { apolloClient } from "../../graphql/apolloClient/apolloClient";
 import { actions, selectUser } from "../slices/user/userSlice";
 import { REGISTER_USER } from "../../graphql/mutation/user/registerUser";
-
-
+import { SEND_OTP } from "../../graphql/mutation/otp/sendOtp";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -18,7 +17,7 @@ export const useUser = () => {
     sessionPreference,
     expectedSalary,
     emailOtp,
-    collegeName
+    collegeName,
   }: RegisterUserData) => {
     const response = await apolloClient.mutate({
       mutation: REGISTER_USER,
@@ -39,5 +38,19 @@ export const useUser = () => {
     dispatch(actions.setItems(response.data));
     return response;
   };
-  return { users, registerUser };
+
+  const sendOtpApi = async (email: string) => {
+    const response = await apolloClient.mutate({
+      mutation: SEND_OTP,
+      variables: {
+        email,
+      },
+    });
+    return {
+      response,
+      status: response?.data?.sendOtp?.response?.status,
+    };
+  };
+
+  return { users, registerUser, sendOtpApi };
 };
