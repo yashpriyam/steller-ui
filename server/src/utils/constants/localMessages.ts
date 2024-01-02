@@ -24,4 +24,5 @@ export const localMessages = Object.freeze({
     OTP_SENT_SUCCESS:"otp sent succerssfully",
   },
   FULFILLED: 'fulfilled',
+  TOPICS: 'topics',
 });

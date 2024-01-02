@@ -9,6 +9,7 @@ const typeDefs = gql`
     getAllQuestions(
       filterData: GetQuestionsFilterInput
     ): GetAllQuestionsOutputType
+    getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
   }
 
   type Mutation {
@@ -38,6 +39,11 @@ const typeDefs = gql`
   type CustomResponseType {
     status: Int!
     message: String!
+  }
+
+  type AllVideoOutputDataType {
+    videoData: [videoDataType]
+    response: CustomResponseType!
   }
 
   type VideoOutputDataType {
