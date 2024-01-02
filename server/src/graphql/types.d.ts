@@ -170,9 +170,9 @@ declare global {
   }
 
   type QuestionSchemaType = {
-    question: { imageUrl: string; text: string }[];
-    options: { imageUrl: string; text: string }[];
+    question: { imageUrl: string, text: string }[];
     questionType: QuestionTypeEnum;
+    options: { imageUrl: string, text: string }[];
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
@@ -212,6 +212,32 @@ declare global {
     isCorrect: boolean;
     timestamp: Date;
   };
+
+  type UserActivityInputType = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST?: string;
+    isValidPhoneNumber?: boolean;
+  }
+
+  type UserActivityData = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST: string;
+    time?: string;
+    isValidPhoneNumber?: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
+  type UserActivityOutputType = {
+    UserActivityData?: UserActivityData;
+    response: CustomResponseType;
+  }
+
+
   type CreateQuestionOutputType = {
     questionData?: QuestionSchemaType;
     response: CustomResponseType;
@@ -259,6 +285,16 @@ declare global {
     type: QuestionMetaType;
     expiresInMins: number;
     isOpenable: boolean;
+  }
+  type CreateUserOtpType = {
+    email: string;
+    emailOtp: string;
+    expiresAt: Date
+    isEmailVerified: boolean
+    id:ObjectId
+  }
+  type OtpUserOutputType={
+    response:CustomResponseType
   }
   type filterInputType = {
     topic?: string;
