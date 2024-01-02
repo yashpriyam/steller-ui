@@ -5,6 +5,7 @@ const typeDefs = gql`
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
     getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
     getNotes(filterData: getNotesFilterInputType): getNotesOutputType
+    getVideo(videoDataFilter: VideoInputFilterType): VideoOutputDataType
     getAllQuestions(
       filterData: GetQuestionsFilterInput
     ): GetAllQuestionsOutputType
@@ -76,6 +77,22 @@ const typeDefs = gql`
   input LinksInput {
     webmasters: String
     youtube: String!
+  }
+
+  input VideoInputFilterType {
+    title: String
+    description: String
+    dayNumber: Int
+    videoNumber: Int
+    topics: [String]
+    links: OptionalLinksInput
+    isActive: Boolean
+    duration: String
+  }
+
+  input OptionalLinksInput{
+    webmasters: String
+    youtube: String
   }
 
   input CreateTransactionInputType {

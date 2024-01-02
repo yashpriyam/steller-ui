@@ -6,6 +6,6 @@ export {
   getUserActivityEmail,
 } from "./registrationEmail";
 export { convertUTCtoIST, formatDate ,timeAfterMins } from "./timeUtils";
-export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeysKeys";
+export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeys";
 export { generateNestedUpdate } from "./generateNestedFields";
 export{ getRandomNumOfDigits} from "./random"
