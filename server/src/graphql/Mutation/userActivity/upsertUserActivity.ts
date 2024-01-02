@@ -11,7 +11,6 @@ export const upsertUserActivity = async (
         const { userActivityData } = args;
         const { phoneNumber, isOpened, IST } = userActivityData;
         const { USER_ACTIVITY_UPDATED } = localMessages.USER_ACTIVITY;
-        console.log({ userActivityData });
 
         if (phoneNumber && isValidPhoneNumber(phoneNumber)) {
             const [activityResult, activityListResult] =
@@ -36,7 +35,7 @@ export const upsertUserActivity = async (
                         { phoneNumber: 1 }
                     ),
                 ]);
-            if (activityListResult.status !== "fulfilled" || activityResult.status !== "fulfilled") {
+            if (activityListResult.status !== localMessages.FULFILLED || activityResult.status !== localMessages.FULFILLED) {
                 return;
             }
             const userActivity: UserActivityData = activityResult.value;

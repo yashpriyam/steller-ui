@@ -1,4 +1,4 @@
-export const localMessages = {
+export const localMessages = Object.freeze({
   WEBMASTER: "WebMaster",
   REGISTRATION_FEE_FOR_WEB_MASTER: "Registration Fee for WebMaster",
   NOTES_MODEL: {
@@ -13,7 +13,6 @@ export const localMessages = {
   },
   USER_ACTIVITY: {
     USER_ACTIVITY_UPDATED: "user activity updated",
-    FULFILLED: "fulfilled",
   },
   QUESTION_MODEL: {
     QUESTION_CREATION_SUCCESS: "question data added successfully",
@@ -22,5 +21,6 @@ export const localMessages = {
   },
   OTP_MODEL: {
     OTP_SENT_SUCCESS:"otp sent succerssfully",
-  }
-};
+  },
+  FULFILLED: 'fulfilled',
+});
