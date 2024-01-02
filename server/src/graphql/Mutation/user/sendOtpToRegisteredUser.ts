@@ -1,11 +1,11 @@
-import { isValidEmail, getRandomNumOfDigits, timeAfterMins, sendEmail } from "@utils";
+import { isValidEmail, getRandomNumOfDigits, timeAfterMins, sendEmail, getHtmlForEmailVerification } from "@utils";
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { emailVerificationModel, User } from "@models";
 export const sendOtpToRegisteredUser = async (
     _parent: undefined,
     args: { email: string }
 ): Promise<OtpOutputType | void> => {
-    const { OTP_SENT_SUCCESS } = localMessages.OTP_MODEL;
+    const { OTP_SENT_SUCCESS, EMAIL_VERIFICATION_SUBJECT } = localMessages.EMAIL_VERIFICATION_MODEL;
     const { UNREGISTERED_EMAIL, OTP_SENT_FAILED } = errorMessages.OTP_MODEL;
     const { INVALID_EMAIL } = errorMessages.USER;
     try {
@@ -38,22 +38,8 @@ export const sendOtpToRegisteredUser = async (
         const otpData: CreateOtpType = await emailVerificationModel.create({ email, emailOtp, expiresAt });
 
         await sendEmail({
-            subject: `Your One-Time Password (OTP) for email verification`,
-            html: `
-          <div>
-              <h2>${otpData.emailOtp}</h2>
-              <br/>
-              <div>
-                  Please enter this OTP on the verification page to verify your email. 
-                  The OTP is valid for ${emailValidityMinutes} mins, so be sure to use it promptly.
-              </div>
-              <br/>
-              <br/>
-              Best regards,
-              <br/>
-              The Webmaster Team
-          </div>
-      `,
+            subject: EMAIL_VERIFICATION_SUBJECT,
+            html: getHtmlForEmailVerification(otpData,emailValidityMinutes),
             to: email,
         });
 

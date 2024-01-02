@@ -20,6 +20,6 @@ const emailVerificationSchema = new Schema({
     }
 })
 
-const emailVerificationModel = mongoose.model("otp", emailVerificationSchema);
+const emailVerificationModel = mongoose.model("emailVerification", emailVerificationSchema);
 
 export { emailVerificationModel };
