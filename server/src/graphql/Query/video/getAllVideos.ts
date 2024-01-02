@@ -54,7 +54,7 @@ export const getAllVideos = async (
             };
         }
         Object.entries(modifiedVideoDataFilter).forEach(([key, value]) => {
-            if (key === "topics") {
+            if (key === localMessages.TOPICS) {
                 modifiedVideoDataFilter[key] = { $in: value };
             }
         });
