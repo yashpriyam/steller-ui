@@ -9,9 +9,7 @@ export const createQuestion = async (_parent: undefined, args: { questionData: Q
     };
     
     try {
-        const { questionData } = args;
-        console.log({questionData});
-        
+        const { questionData } = args;        
         const {question,questionType,answer,batchCode,marks,options,meta } = questionData;
         const createdQuestionData: QuestionSchemaType = await questionModel.create({
             question,questionType,batchCode,marks,options,answer,meta
