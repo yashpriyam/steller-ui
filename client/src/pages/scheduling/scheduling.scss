@@ -1,4 +1,4 @@
-@import '../../components/variables.scss';
+@import "../../components/variables.scss";
 
 .scheduling-page {
   min-height: 100vh;
@@ -11,16 +11,16 @@
   .scheduling-page-filter-container {
     width: 20%;
     height: fit-content;
-    background-color: rgb(128, 128, 128, 0.3);
+    background-color: $fadedGrayPrimary;
     border-radius: 5px;
     padding: 5px 10px;
     display: flex;
 
     .filter-sub-container {
-      font-size: 20px;
+      font-size: $largerFontSize;
 
       .filter-heading {
-        border-bottom: 1px solid rgb(165, 161, 161);
+        border-bottom: 1px solid $lightGreyPrimary;
       }
 
       .checkbox-content {
@@ -34,14 +34,14 @@
           gap: 5px;
           align-items: center;
 
-          input[type='checkbox'] {
+          input[type="checkbox"] {
             width: 20px;
             height: 20px;
             cursor: pointer;
           }
 
           label {
-            font-size: 16px;
+            font-size: $mediumFontSize;
             cursor: pointer;
           }
         }
@@ -69,7 +69,7 @@
         line-height: normal;
         width: 100%;
         margin-left: 0px;
-        font-size: 25px;
+        font-size: $subHeaderFontSize;
         padding: 0px 50px;
         text-align: justify;
       }
@@ -91,20 +91,11 @@
           color: $primaryColor;
           padding: 50px;
           border-radius: 50px;
-          border: 2px solid
-            var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
-          background: radial-gradient(
-            50% 50% at 0% 0%,
-            var(
-                --token-31d2d8ec-6073-495b-98cd-5e142f56bc63,
-                rgba(255, 255, 255, 0.15)
-              )
-              /* {"name":"White 15%"} */ 2.210024196147939%,
-            hsla(0, 0%, 100%, 0) 100%
-          );
-          transition: all 0.7s;
+          border: 2px solid $video-hut-border-color;
+          background: radial-gradient(50% 50% at 0% 0%, $radial-gradient 100%);
+          transition: all 0.3s;
           &:hover {
-            box-shadow: 1px 0px 30px 5px rgb(87, 86, 86);
+            box-shadow: 1px 0px 30px 5px $primaryBgColorOnHover;
           }
         }
       }
@@ -122,40 +113,61 @@
         .topic-tags {
           display: flex;
           gap: 10px;
-          font-size: 14px;
-          transition: font-size 0.5s;
+          position: relative;
+          font-size: $smallFontSize;
 
-          .red {
+          .tag {
+            transition: 0.3s;
             padding: 5px;
+            border-radius: 10%;
+            &:hover {
+              transform: scale(120%);
+            }
+          }
+          .hidden-tags {
+            position: absolute;
+            display: none;
+            gap: 10px;
+            opacity: 0;
+            right: -80px;
+            top: 0px;
+            transition: 1s;
+            &:hover{
+              display: flex;
+              opacity: 1;
+            }
+          }
+          .show-tags{
+            opacity: 1;
+            &:hover{
+              opacity: 0;
+            }
+            &:hover ~ .hidden-tags {
+              display: flex;
+              opacity: 1;
+          }}
+          .red {
             color: #ff7a3b;
             background-color: rgba(255, 121, 59, 0.15);
-            border-radius: 10%;
           }
 
           .pink {
-            padding: 5px;
             color: rgb(212, 88, 206);
             background-color: rgba(212, 88, 206, 0.15);
-            border-radius: 10%;
           }
 
           .blue {
-            padding: 5px;
             color: rgb(34, 167, 219);
             background-color: rgba(34, 167, 219, 0.15);
-            border-radius: 10%;
-          }
-          &:hover {
-            font-size: 16px;
           }
         }
         .title {
-          font-size: 25px;
+          font-size: $subHeaderFontSize;
           font-family: $secondaryFontFamily;
         }
 
         .description {
-          font-size: 20px;
+          font-size: $largerFontSize;
         }
 
         .btn-wrapper {
@@ -165,16 +177,18 @@
           flex-wrap: wrap;
 
           .btn {
-            border: 1px solid
-              var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
-            background-color: rgba(0, 0, 0, 0.744);
-            color: white;
+            border: 1px solid $video-hut-border-color;
+            background-color: $secondaryBorderColorHighlighted;
+            color: $primaryColor;
             border-radius: 15px;
+            transition: all 0.3s;
+
             &:hover {
-              background-color: black;
-              box-shadow: 1px 1px 5px 2px rgb(71, 71, 71);
+              background-color: $primaryBgColor;
+              box-shadow: 1px 0px 5px 2px $primaryBgColorOnHover;
               transition: all 0.3s;
               border-color: transparent;
+              transform: scale(110%);
             }
           }
         }
@@ -204,7 +218,6 @@
       .checkbox-content {
         flex-direction: row;
         width: 100%;
-        // transition: 0.5s;
       }
       .filter-sub-container {
         margin: 0;
@@ -217,7 +230,7 @@
 
       .parent {
         .schedule-accordion-column-1 {
-          font-size: 20px;
+          font-size: $largerFontSize;
           padding: 0px 30px;
         }
 
