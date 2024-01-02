@@ -32,8 +32,6 @@ export const useUser = () => {
         },
       },
     });
-    console.log({ response });
-
     dispatch(actions.setItems(response.data));
   };
   return { users, registerUser };
