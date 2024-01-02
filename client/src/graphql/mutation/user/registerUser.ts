@@ -10,6 +10,7 @@ export const REGISTER_USER = gql`
       occupation
       sessionPreference
       expectedSalary
+      collegeName
     }
   }
 `;

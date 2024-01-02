@@ -34,10 +34,12 @@ declare global {
     name: string;
     email: string;
     phoneNumber: string;
-    isJobSeeker: boolean;
-    occupation: string;
-    sessionPreference: SessionPreferenceEnum;
-    expectedSalary: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    expectedSalary?: string;
+    emailOtp: string;
+    collegeName?: string;
   };
 
   type ProgramDataType = {
