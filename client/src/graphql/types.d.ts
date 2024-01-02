@@ -10,5 +10,10 @@ declare global {
         emailOtp: string;
         collegeName: string;
     }
+
+    type UserActivityDataType = {
+        phoneNumber: string;
+        isOpened: boolean;
+    }
 }
 export {}

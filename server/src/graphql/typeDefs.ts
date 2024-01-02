@@ -205,7 +205,7 @@ const typeDefs = gql`
   }
   input UserActivityInputType {
     phoneNumber: String
-    isponed: Boolean
+    isOpened: Boolean
     devices: [String]
     IST: String
     isValidPhoneNumber:Boolean

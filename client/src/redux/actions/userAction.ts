@@ -35,7 +35,7 @@ export const useUser = () => {
         },
       },
     });
-    dispatch(actions.setItems(response.data));
+    dispatch(actions.setRegisterUser(response.data));
     return response;
   };
 

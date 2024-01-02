@@ -12,6 +12,7 @@ import { AppStateContext } from "./AppState/appState.context";
 import Toast from "./helpers/utils/toast";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import DummyComponentForWhatsapp from "./helpers/utils/dummyComp";
+import { useUserActivity } from "../redux/actions/userActivityAction";
 
 function MonorepoApp() {
   // Google Analytics Id
@@ -21,13 +22,14 @@ function MonorepoApp() {
   const { sendRequest } = useHttp();
   const { setIsLoggedIn, isLoggedIn } = useContext(AppStateContext);
   const phoneNumber = new URLSearchParams(window.location.search)?.get("n");
+  const { upsertUserActivity } = useUserActivity();
 
   const userActivityRequest = async () => {
     try {
-      await sendRequest("/api/userActivity/upsert", "post", {
+      await upsertUserActivity({
         phoneNumber,
-        isOpened: true,
-      });
+        isOpened: true
+      })
     } catch (err) {
       console.log({ err });
     }
