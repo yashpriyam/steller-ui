@@ -208,16 +208,8 @@ const typeDefs = gql`
     isValidPhoneNumber:Boolean
 
   }
-  type UserActivityData {
-    phoneNumber: String
-    isOpened: Boolean
-    devices: [String]
-    IST: String
-    isValidPhoneNumber: Boolean
-  }
 
   type UserActivityOutputType {
-    UserActivityData: UserActivityData
     response: CustomResponseType! 
   }
 
