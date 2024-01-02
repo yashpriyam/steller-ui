@@ -16,6 +16,10 @@ export const errorMessages = Object.freeze({
     VIDEO_CREATION_FAILED: "unable to insert video data",
     VIDEO_DELETION_FAILED: "unable to delete video data",
   },
+  QUESTION_MODEL: {
+    QUESTION_CREATION_FAILED: "unable to add question data",
+    QUESTION_UPDATION_FAILED: "unable to update question data",
+  },
   OTP_MODEL: {
     OTP_SENT_FAILED: "cannot send otp",
     OTP_EMAIL_INVALID: "email address is not valid",
