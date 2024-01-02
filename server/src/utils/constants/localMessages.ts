@@ -16,6 +16,9 @@ export const localMessages = {
     QUESTION_UPDATION_SUCCESS:"question data updated successfully"
 
   },
+  OTP_MODEL: {
+    OTP_SENT_SUCCESS:"otp sent succerssfully",
+  }
   EMAIL_VERIFICATION_MODEL: {
     OTP_SENT_SUCCESS: "otp sent succerssfully",
     EMAIL_VERIFICATION_SUBJECT: "Your One-Time Password (OTP) for email verification"

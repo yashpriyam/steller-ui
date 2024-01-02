@@ -4,3 +4,4 @@ export { createTransaction } from "./transaction/createTransaction";
 export { createNotes, deleteNotesById, updateNotesById } from "./notes/index";
 export { createVideo } from "./video/index";
 export { createQuestion, updateQuestionById } from "./question/index";
+export { sendOtp } from "./otp/index";

@@ -23,6 +23,7 @@ const typeDefs = gql`
     ): UpdateNotesOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
     updateQuestionById(updateQuestionData:UpdateQuestionInputType!):UpdateQuestionOutputType
+    sendOtp(email: String!): OtpUserOutputType
     sendOtpToRegisteredUser(email: String!) : OtpOutputType
   }
 
@@ -193,8 +194,14 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
+  input OtpUserInputType {
+    email: String!
+  }
+  type OtpUserOutputType {
+    response: CustomResponseType!
+  }
   input CreateQuestionInputType {
-    question: String!
+    question: [Option!]!
     batchCode: String!
     options: [Option!]!
     questionType: QuestionType!
@@ -224,7 +231,7 @@ const typeDefs = gql`
     response: CustomResponseType
   }
   type questionData {
-    question: String!
+    question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
     questionType: QuestionType!

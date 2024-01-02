@@ -4,8 +4,8 @@ export {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
 } from "./registrationEmail";
-export { convertUTCtoIST, formatDate, timeAfterMins } from "./timeUtils";
+export { convertUTCtoIST, formatDate ,timeAfterMins } from "./timeUtils";
 export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeysKeys";
 export { generateNestedUpdate } from "./generateNestedFields";
-export { getRandomNumOfDigits } from "./getRandomNumOfDigits";
+export{ getRandomNumOfDigits} from "./random";
 export { getHtmlForEmailVerification } from "./getHtmlForSendingEmail";

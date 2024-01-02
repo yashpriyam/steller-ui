@@ -170,7 +170,7 @@ declare global {
   }
 
   type QuestionSchemaType = {
-    question: string;
+    question: { imageUrl: string; text: string }[];
     options: { imageUrl: string; text: string }[];
     questionType: QuestionTypeEnum;
     answer: { imageUrl: string; text: string }[];
@@ -260,14 +260,14 @@ declare global {
     expiresInMins: number;
     isOpenable: boolean;
   }
-  type CreateOtpType = {
+  type CreateUserOtpType = {
     email: string;
     emailOtp: string;
     expiresAt: Date
     isEmailVerified: boolean
-    id: ObjectId
+    id:ObjectId
   }
-  type OtpOutputType = {
-    response: CustomResponseType
+  type OtpUserOutputType={
+    response:CustomResponseType
   }
 }
