@@ -9,7 +9,7 @@ export const userSlice = createSlice({
   initialState: initialState,
   reducers: {
     setItems: (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload?.registerUser;
     },
   },
 });
