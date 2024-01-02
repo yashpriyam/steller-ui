@@ -15,5 +15,10 @@ declare global {
         phoneNumber: string;
         isOpened: boolean;
     }
+
+    type CustomResponseType = {
+        status: number;
+        message: string;
+    }
 }
 export {}

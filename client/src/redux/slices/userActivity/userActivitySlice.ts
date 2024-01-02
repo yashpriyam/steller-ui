@@ -9,11 +9,11 @@ export const userActivitySlice = createSlice({
   initialState: initialState,
   reducers: {
     setUserActivity: (state, action) => {
-      state.userActivity = action.payload?.registerUser;
+      state.userActivity = action.payload?.upsertUserActivity;
     },
   },
 });
 
 export const { actions } = userActivitySlice;
-export const selectUserActivity = (state: { userActivity: RegisterUserData }) => state.userActivity;
+export const selectUserActivity = (state: { userActivity: CustomResponseType }) => state.userActivity;
 export default userActivitySlice.reducer;

@@ -21,7 +21,10 @@ export const useUserActivity = () => {
       },
     });
     dispatch(actions.setUserActivity(response.data));
-    return response;
+    return {
+      response,
+      status: response?.data?.upsertUserActivity?.status
+    };
   };
 
   return { userActivity, upsertUserActivity };
