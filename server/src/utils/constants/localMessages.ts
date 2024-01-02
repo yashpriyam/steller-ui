@@ -1,4 +1,4 @@
-export const localMessages = {
+export const localMessages = Object.freeze({
   WEBMASTER: "WebMaster",
   REGISTRATION_FEE_FOR_WEB_MASTER: "Registration Fee for WebMaster",
   NOTES_MODEL: {
@@ -18,9 +18,9 @@ export const localMessages = {
   },
   OTP_MODEL: {
     OTP_SENT_SUCCESS:"otp sent succerssfully",
-  }
+  },
   EMAIL_VERIFICATION_MODEL: {
     OTP_SENT_SUCCESS: "otp sent succerssfully",
     EMAIL_VERIFICATION_SUBJECT: "Your One-Time Password (OTP) for email verification"
   }
-};
+});
