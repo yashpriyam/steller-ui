@@ -54,7 +54,6 @@ const Registerpage = () => {
         setIsLoading(true);
         setCookie({ key: userDataCookieName, value: objectToBase64(formData) });
         const { name, currentprofessionalstatus, email, otp, phonenumber, whatsagoodsalarythatcanmotivateyoutoacceptajoboffer, youwouldattendtheclassesonlineoroffline, whichcollegeyouarefrom } = formData;
-        console.log({ formData })
         const response = await registerUser({
           name,
           email,
