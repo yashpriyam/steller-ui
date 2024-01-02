@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import { User, otpModel } from "@models";
 import {
   getRegistrationEmailForAdmin,
@@ -11,7 +12,8 @@ import { errorMessages } from "@constants";
 
 export const registerUser = async (
   _parent: undefined,
-  args: { data: RegisterType }
+  args: { data: RegisterType },
+  { res }: ContextType,
 ): Promise<RegisterType | UserInputError | unknown> => {
   try {
     const { data } = args;
@@ -81,6 +83,9 @@ export const registerUser = async (
       }),
        otpDetails.save()
     ]);
+
+    const token = jwt.sign({ user: savedUser }, process.env.JWT_SECRET_VALUE || "");
+    res.cookie(process.env.JWT_SECRET_KEY || "", token, { httpOnly: true });
     return savedUser;
   } catch (error) {
     return error;
