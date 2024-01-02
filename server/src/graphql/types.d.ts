@@ -260,4 +260,14 @@ declare global {
     expiresInMins: number;
     isOpenable: boolean;
   }
+  type CreateUserOtpType = {
+    email: string;
+    emailOtp: string;
+    expiresAt: Date
+    isEmailVerified: boolean
+    id:ObjectId
+  }
+  type OtpUserOutputType={
+    response:CustomResponseType
+  }
 }

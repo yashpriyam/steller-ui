@@ -23,6 +23,7 @@ const typeDefs = gql`
     ): UpdateNotesOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
     updateQuestionById(updateQuestionData:UpdateQuestionInputType!):UpdateQuestionOutputType
+    sendOtp(email: String!): OtpUserOutputType
   }
 
   type CustomResponseType {
@@ -191,6 +192,12 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+  }
+  input OtpUserInputType {
+    email: String!
+  }
+  type OtpUserOutputType {
+    response: CustomResponseType!
   }
   input CreateQuestionInputType {
     question: [Option!]!
