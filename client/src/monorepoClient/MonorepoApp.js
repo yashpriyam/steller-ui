@@ -7,19 +7,17 @@ import Navbar from "./Components/Navbar/Navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ReactGA from "react-ga4";
-import useHttp from "./CustomHooks/useHttp";
 import { AppStateContext } from "./AppState/appState.context";
-import Toast from "./helpers/utils/toast";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import DummyComponentForWhatsapp from "./helpers/utils/dummyComp";
 import { useUserActivity } from "../redux/actions/userActivityAction";
+import { deleteCookieByKey } from "../utils/index";
 
 function MonorepoApp() {
   // Google Analytics Id
   const googleAnalyticsId = process.env.REACT_APP_GOOGLE_ANALYTICS_ID;
   ReactGA.initialize(googleAnalyticsId);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const { sendRequest } = useHttp();
   const { setIsLoggedIn, isLoggedIn } = useContext(AppStateContext);
   const phoneNumber = new URLSearchParams(window.location.search)?.get("n");
   const { upsertUserActivity } = useUserActivity();
@@ -35,20 +33,6 @@ function MonorepoApp() {
     }
   };
 
-  const logOutRequest = async () => {
-    try {
-      const response = await sendRequest("/api/auth/logout");
-      if (response?.status === 200) {
-        Toast.success(`Logged out successfully.`);
-      } else {
-        Toast.error(`something went wrong`);
-      }
-    } catch (err) {
-      console.log({ err });
-      Toast.error("something went wrong");
-    }
-  };
-
   useEffect(() => {
     userActivityRequest();
     ReactGA._gaCommandSendPageview(document.location.pathname);
@@ -59,7 +43,7 @@ function MonorepoApp() {
     {
       value: "Log out",
       onClick: () => {
-        logOutRequest();
+        deleteCookieByKey(process.env.REACT_APP_JWT_SECRET_KEY);
         setIsLoggedIn(false);
       },
     },
