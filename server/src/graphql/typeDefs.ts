@@ -22,6 +22,10 @@ const typeDefs = gql`
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
     deleteNotesById(notesId: ID!): DeletedNotesOutputType
     deleteVideoById(videoId: ID!): VideoOutputDataType
+    updateVideoById(
+      videoId: ID!
+      videoData: VideoInputFilterType!
+    ): VideoOutputDataType
     updateNotesById(
       notesId: ID!
       notesData: UpdateNotesInputType
@@ -162,6 +166,24 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
+
+  input OtpUserInputType {	
+    email: String!	
+  }	
+  type OtpUserOutputType {	
+    response: CustomResponseType!	
+  }	
+  input UserActivityInputType {	
+    phoneNumber: String	
+    isOpened: Boolean	
+    devices: [String]	
+    IST: String	
+    isValidPhoneNumber: Boolean	
+  }	
+  type UserActivityOutputType {	
+    response: CustomResponseType!	
+  }
+
   type CreateNotesOutputType {
     notesData: NotesDataType
     response: CustomResponseType!
@@ -227,24 +249,6 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
-  input OtpUserInputType {
-    email: String!
-  }
-  type OtpUserOutputType {
-    response: CustomResponseType!
-  }
-  input UserActivityInputType {
-    phoneNumber: String
-    isOpened: Boolean
-    devices: [String]
-    IST: String
-    isValidPhoneNumber: Boolean
-  }
-
-  type UserActivityOutputType {
-    response: CustomResponseType!
-  }
-
   input CreateQuestionInputType {
     question: [Option!]!
     batchCode: String!

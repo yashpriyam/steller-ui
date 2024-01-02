@@ -79,6 +79,7 @@ declare global {
     notesData: NotesDataType;
     response: CustomResponseType;
   };
+
   type UpdateNotesInputType = {
     title?: string;
     links?: [string];
@@ -110,10 +111,6 @@ declare global {
     description?: String;
     estimatedReadingTime?: String;
   };
-  type CustomResponseType = {
-    status: number;
-    message: string;
-  };
 
   type VideoOutputDataType = {
     videoData?: videoDataType;
@@ -137,8 +134,11 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  };
+  }
 
+  type FilteredLinksType = {
+    [key: string]: string;
+  }
   type VideoDataType = {
     title?: string;
     description?: string;
@@ -316,5 +316,9 @@ declare global {
   type QuestionsReturnType = {
     questionData: [QuestionSchemaType];
     response: CustomResponseType;
+  };
+  type CustomResponseType = {
+    status: number;
+    message: string;
   };
 }
