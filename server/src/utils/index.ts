@@ -6,3 +6,4 @@ export {
 } from "./registrationEmail";
 export { convertUTCtoIST, formatDate } from "./timeUtils";
 export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeysKeys";
+export { generateNestedUpdate } from "./generateNestedFields";

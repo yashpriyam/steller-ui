@@ -21,6 +21,8 @@ const typeDefs = gql`
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
+    createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
+    updateQuestionById(updateQuestionData:UpdateQuestionInputType!):UpdateQuestionOutputType
   }
 
   type CustomResponseType {
@@ -189,6 +191,115 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+  }
+  input CreateQuestionInputType {
+    question: [Option!]!
+    batchCode: String!
+    options: [Option!]!
+    questionType: QuestionType!
+    answer: [Option!]!
+    marks: Int!
+    meta: QuestionMeta!
+  }
+  input Option {
+    imageUrl: String
+    text: String!
+  }
+  enum QuestionType {
+    multi
+    single
+  }
+  input QuestionMeta {
+    topic: String!
+    day: Int!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type QuestionOutputType {
+    questionData: questionData
+    response: CustomResponseType
+  }
+  type questionData {
+    question: [OptionOutput!]!
+    batchCode: String!
+    options: [OptionOutput!]!
+    questionType: QuestionType!
+    answer: [OptionOutput!]!
+    marks: Int!
+    meta: QuestionMetaOutput!
+  }
+  type QuestionMetaOutput {
+    topic: String!
+    day: Int!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type OptionOutput {
+    imageUrl: String
+    text: String!
+  }
+  enum QuestionMetaType {
+    timed
+    recorded
+  }
+  input UpdateQuestionInputType {
+    questionId: ID!
+    updates: UpdatesQuestionInput
+  }
+
+  input UpdatesQuestionInput {
+    question: String
+    batchCode: String
+    options: [UpdateOptionInput]
+    questionType: QuestionType
+    answer: [UpdateOptionInput]
+    marks: Int
+    meta: QuestionMetaInput
+  }
+  input UpdateOptionInput {
+    imageUrl: String
+    text: String
+  }
+  input QuestionMetaInput {
+    topic: String
+    day: Int
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+    expiresInMins: Int
+    isOpenable: Boolean
+  }
+  type UpdateQuestionOutputType {
+    questionData: QuestionDataOutput
+    response: CustomResponseType!
+  }
+  type QuestionDataOutput {
+    question: String
+    batchCode: String
+    options: [UpdateOptionOutput]
+    questionType: QuestionType
+    answer: [UpdateOptionOutput]
+    marks: Int
+    meta: QuestionMetaOutput
+  }
+  type UpdateOptionOutput {
+    imageUrl: String
+    text: String
+  }
+  type QuestionMetaOutput {
+    topic: String
+    day: Int
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+    expiresInMins: Int
+    isOpenable: Boolean
   }
   scalar DateTime
   scalar JSON
