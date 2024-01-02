@@ -7,6 +7,8 @@ declare global {
         occupation: string;
         sessionPreference: string;
         expectedSalary: string;
+        emailOtp: string;
+        collegeName: string;
     }
 }
 export {}

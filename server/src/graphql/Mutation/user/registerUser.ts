@@ -1,4 +1,4 @@
-import { User } from "@models";
+import { User, otpModel } from "@models";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
@@ -24,6 +24,8 @@ export const registerUser = async (
       occupation,
       sessionPreference,
       expectedSalary,
+      emailOtp,
+      collegeName,
     } = data;
 
     if (!isValidEmail(email)) {
@@ -31,6 +33,20 @@ export const registerUser = async (
     } else if (!isValidPhoneNumber(phoneNumber)) {
       throw new UserInputError(errorMessages.USER.INVALID_PHONE_NUMBER);
     }
+
+    const otpDetails = await otpModel.findOne({
+      email,
+      emailOtp,
+      expiresAt: {
+        $gte: new Date()
+      }
+    })
+
+    if(!otpDetails){
+      return;
+    }
+
+    otpDetails.isEmailVerified = true;
 
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
 
@@ -42,6 +58,7 @@ export const registerUser = async (
       occupation,
       sessionPreference,
       expectedSalary,
+      collegeName,
     });
 
     const { IST: time } = savedUser;
@@ -62,6 +79,7 @@ export const registerUser = async (
         ...getRegistrationEmailForAdmin(emailDetails),
         to: process.env.SENDER_EMAIL || "",
       }),
+       otpDetails.save()
     ]);
     return savedUser;
   } catch (error) {

@@ -100,10 +100,12 @@ const typeDefs = gql`
     name: String!
     email: String!
     phoneNumber: String!
-    isJobSeeker: Boolean!
-    occupation: String!
-    sessionPreference: SessionPreferenceEnum!
-    expectedSalary: String!
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: SessionPreferenceEnum
+    expectedSalary: String
+    emailOtp: String!
+    collegeName: String
   }
 
   enum SessionPreferenceEnum {
@@ -119,6 +121,7 @@ const typeDefs = gql`
     occupation: String!
     sessionPreference: SessionPreferenceEnum!
     expectedSalary: String!
+    collegeName: String!
   }
   input CreateNotesInputType {
     link: String!

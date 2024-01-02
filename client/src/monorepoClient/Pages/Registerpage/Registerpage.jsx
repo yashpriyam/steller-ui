@@ -14,6 +14,7 @@ import {
 } from "../../helpers/utils/validations";
 import { objectToBase64 } from "../../helpers/utils/base64Utils";
 import { setCookie } from "../../helpers/utils/cookieUtils";
+import { useUser } from "../../../redux/actions/userAction";
 
 const Registerpage = () => {
   const { setIsLoggedIn } = useContext(AppStateContext);
@@ -27,7 +28,7 @@ const Registerpage = () => {
   const { darkMode } = useContext(ThemeContext);
   const { authenticateStateAndDispatch } = useContext(AppStateContext);
   const userDataCookieName = "userData";
-
+  const { registerUser } = useUser();
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
@@ -54,22 +55,27 @@ const Registerpage = () => {
       try {
         setIsLoading(true);
         setCookie({ key: userDataCookieName, value: objectToBase64(formData) });
-        const response = await sendRequest(
-          `/api/register/submitPersonalDetailForm`,
-          "post",
-          formData
-        );
-        if (!response) {
+        const { name, currentprofessionalstatus, email, otp, phonenumber, whatsagoodsalarythatcanmotivateyoutoacceptajoboffer, youwouldattendtheclassesonlineoroffline } = formData;
+        const response = await registerUser({
+          name,
+          email,
+          emailOtp: otp,
+          phoneNumber: phonenumber,
+          occupation: currentprofessionalstatus,
+          expectedSalary: whatsagoodsalarythatcanmotivateyoutoacceptajoboffer,
+          sessionPreference: youwouldattendtheclassesonlineoroffline || "offline",
+          isJobSeeker: true,
+          collegeName: 'SIRT'
+        })
+        if (!response?.data?.registerUser) {
           Toast.error("Incorrect otp");
-        } else if (response.status === 201) {
+        } else  {
           dispatcher({ type: "SUBMIT_FORM", payload: response.data.data });
           Toast.success("Form Submitted Successfully");
           setFormData("");
           setResetForm((prev) => !prev);
           setIsLoggedIn(true);
           navigate("/#Home");
-        } else {
-          Toast.error(response.data.message);
         }
       } catch (e) {
         Toast.error("Something went wrong");
