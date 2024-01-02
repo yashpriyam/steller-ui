@@ -16,6 +16,9 @@ export const errorMessages = Object.freeze({
     VIDEO_CREATION_FAILED: "unable to insert video data",
     VIDEO_DELETION_FAILED: "unable to delete video data",
   },
+  USER_ACTIVITY: {
+    USER_ACTIVITY_UPDATION_FAILED: "unable to update user activity"
+  },
   QUESTION_MODEL: {
     QUESTION_CREATION_FAILED: "unable to add question data",
     QUESTION_UPDATION_FAILED: "unable to update question data",
