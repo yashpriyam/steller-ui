@@ -16,8 +16,8 @@ export const localMessages = Object.freeze({
   },
   QUESTION_MODEL: {
     QUESTION_CREATION_SUCCESS: "question data added successfully",
-    QUESTION_UPDATION_SUCCESS:"question data updated successfully"
-
+    QUESTION_UPDATION_SUCCESS: "question data updated successfully",
+    QUESTION_FOUND_SUCCESS:"questions found successfully"
   },
   OTP_MODEL: {
     OTP_SENT_SUCCESS:"otp sent succerssfully",

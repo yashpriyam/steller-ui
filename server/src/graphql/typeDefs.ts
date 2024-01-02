@@ -5,6 +5,9 @@ const typeDefs = gql`
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
     getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
     getNotes(filterData: getNotesFilterInputType): getNotesOutputType
+    getAllQuestions(
+      filterData: GetQuestionsFilterInput
+    ): GetAllQuestionsOutputType
   }
 
   type Mutation {
@@ -21,9 +24,13 @@ const typeDefs = gql`
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
-    upsertUserActivity(userActivityData: UserActivityInputType): UserActivityOutputType
+    upsertUserActivity(
+      userActivityData: UserActivityInputType
+    ): UserActivityOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
-    updateQuestionById(updateQuestionData:UpdateQuestionInputType!):UpdateQuestionOutputType
+    updateQuestionById(
+      updateQuestionData: UpdateQuestionInputType!
+    ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
   }
 
@@ -205,14 +212,12 @@ const typeDefs = gql`
     isponed: Boolean
     devices: [String]
     IST: String
-    isValidPhoneNumber:Boolean
-
+    isValidPhoneNumber: Boolean
   }
 
   type UserActivityOutputType {
-    response: CustomResponseType! 
+    response: CustomResponseType!
   }
-
 
   input CreateQuestionInputType {
     question: [Option!]!
@@ -241,10 +246,10 @@ const typeDefs = gql`
     isOpenable: Boolean!
   }
   type QuestionOutputType {
-    questionData: questionData
+    questionData: QuestionData
     response: CustomResponseType
   }
-  type questionData {
+  type QuestionData {
     question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
@@ -276,7 +281,7 @@ const typeDefs = gql`
   }
 
   input UpdatesQuestionInput {
-    question: String
+    question: [UpdateOptionInput]
     batchCode: String
     options: [UpdateOptionInput]
     questionType: QuestionType
@@ -302,7 +307,7 @@ const typeDefs = gql`
     response: CustomResponseType!
   }
   type QuestionDataOutput {
-    question: String
+    question: [UpdateOptionOutput]
     batchCode: String
     options: [UpdateOptionOutput]
     questionType: QuestionType
@@ -322,6 +327,16 @@ const typeDefs = gql`
     type: QuestionMetaType
     expiresInMins: Int
     isOpenable: Boolean
+  }
+  input GetQuestionsFilterInput {
+    topic: String
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+  }
+  type GetAllQuestionsOutputType {
+    questionData: [QuestionData]
+    response: CustomResponseType
   }
   scalar DateTime
   scalar JSON

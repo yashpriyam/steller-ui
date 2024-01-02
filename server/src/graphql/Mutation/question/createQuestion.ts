@@ -6,13 +6,14 @@ export const createQuestion = async (_parent: undefined, args: { questionData: Q
      const errorData: CustomResponseType = {
        message: QUESTION_CREATION_FAILED,
        status: statusCodes.BAD_REQUEST,
-     };
+    };
+    
     try {
-        const { questionData } = args;
+        const { questionData } = args;        
         const {question,questionType,answer,batchCode,marks,options,meta } = questionData;
         const createdQuestionData: QuestionSchemaType = await questionModel.create({
             question,questionType,batchCode,marks,options,answer,meta
-        })
+        })        
             const response: CustomResponseType = createdQuestionData
               ? {
                   message: QUESTION_CREATION_SUCCESS,
