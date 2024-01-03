@@ -34,10 +34,12 @@ declare global {
     name: string;
     email: string;
     phoneNumber: string;
-    isJobSeeker: boolean;
-    occupation: string;
-    sessionPreference: SessionPreferenceEnum;
-    expectedSalary: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    expectedSalary?: string;
+    emailOtp: string;
+    collegeName?: string;
   };
 
   type ProgramDataType = {
@@ -77,6 +79,7 @@ declare global {
     notesData: NotesDataType;
     response: CustomResponseType;
   };
+
   type UpdateNotesInputType = {
     title?: string;
     links?: [string];
@@ -108,15 +111,16 @@ declare global {
     description?: String;
     estimatedReadingTime?: String;
   };
-  type CustomResponseType = {
-    status: number;
-    message: string;
-  };
 
   type VideoOutputDataType = {
     videoData?: videoDataType;
     response: CustomResponseType;
   };
+
+  type AllVideoOutputDataType = {
+    videoData?: [videoDataType];
+    response: CustomResponseType;
+  }
 
   type CreateVideoType = {
     title: string;
@@ -130,8 +134,11 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  };
+  }
 
+  type FilteredLinksType = {
+    [key: string]: string;
+  }
   type VideoDataType = {
     title?: string;
     description?: string;
@@ -145,6 +152,11 @@ declare global {
     isActive?: boolean;
     duration?: string;
   };
+
+  type FilteredLinksType = {
+    [key: string]: string;
+  }
+
   type DeletedNotesOutputType = {
     notesData?: DeletedNotesDataType;
     response: CustomResponseType;
@@ -170,9 +182,9 @@ declare global {
   }
 
   type QuestionSchemaType = {
-    question: string;
-    options: { imageUrl: string; text: string }[];
+    question: { imageUrl: string; text: string }[];
     questionType: QuestionTypeEnum;
+    options: { imageUrl: string; text: string }[];
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
@@ -212,6 +224,31 @@ declare global {
     isCorrect: boolean;
     timestamp: Date;
   };
+
+  type UserActivityInputType = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST?: string;
+    isValidPhoneNumber?: boolean;
+  };
+
+  type UserActivityData = {
+    phoneNumber?: string;
+    isOpened?: boolean;
+    devices?: string[];
+    IST: string;
+    time?: string;
+    isValidPhoneNumber?: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+
+  type UserActivityOutputType = {
+    UserActivityData?: UserActivityData;
+    response: CustomResponseType;
+  };
+
   type CreateQuestionOutputType = {
     questionData?: QuestionSchemaType;
     response: CustomResponseType;
@@ -221,10 +258,10 @@ declare global {
     updates: QuestionData;
   };
   type QuestionData = {
-    question?: string;
-    options?: { imageUrl: string; text: string }[];
+    question?: [{ imageUrl: string; text: string }];
+    options?: [{ imageUrl: string; text: string }];
     questionType?: QuestionTypeEnum;
-    answer?: { imageUrl: string; text: string }[];
+    answer?: [{ imageUrl: string; text: string }];
     marks?: number;
     batchCode?: string;
     meta: QuestioinMetaDataUpdate;
@@ -243,21 +280,45 @@ declare global {
     response: CustomResponseType;
   };
   type QuestionDataType = {
-    question: string;
-    options: { imageUrl: string; text: string }[];
+    question: [{ imageUrl: string; text: string }];
+    options: [{ imageUrl: string; text: string }];
     questionType: QuestionTypeEnum;
-    answer: { imageUrl: string; text: string }[];
+    answer: [{ imageUrl: string; text: string }];
     marks: number;
     batchCode: string;
-    meta: QuestioinUpdateOurputMetaData;
+    meta: QuestionUpdateOutputMetaData;
   };
-  type QuestioinUpdateOutputMetaData={
-     topic: string;
+  type QuestionUpdateOutputMetaData = {
+    topic: string;
     day: number;
     isActive: boolean;
     isArchived: boolean;
     type: QuestionMetaType;
     expiresInMins: number;
     isOpenable: boolean;
-  }
+  };
+  type CreateUserOtpType = {
+    email: string;
+    emailOtp: string;
+    expiresAt: Date;
+    isEmailVerified: boolean;
+    id: ObjectId;
+  };
+  type OtpUserOutputType = {
+    response: CustomResponseType;
+  };
+  type filterInputType = {
+    topic?: string;
+    isActive?: boolean;
+    isArchived?: Boolean;
+    type?: QuestionMetaType;
+  };
+  type QuestionsReturnType = {
+    questionData: [QuestionSchemaType];
+    response: CustomResponseType;
+  };
+  type CustomResponseType = {
+    status: number;
+    message: string;
+  };
 }
