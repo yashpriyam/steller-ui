@@ -26,6 +26,7 @@
     "module-alias": "^2.2.3",
     "mongoose": "^7.6.3",
     "nodemailer": "^6.9.7",
+    "nodemon": "^3.0.2",
     "ts-node": "^10.9.1"
   },
   "_moduleAliases": {
