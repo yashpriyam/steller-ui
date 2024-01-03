@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './accordion.scss';
-import DropDownIcon from '../../icons/dropDownIcon';
+import React, { useState } from "react";
+import "./accordion.scss";
+import DropDownIcon from "../../icons/dropDownIcon";
 
 interface AccordionProps {
   title?: string;
@@ -12,12 +12,12 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({
-  title="Title",
+  title = "Title",
   children,
   style,
-  icon=<DropDownIcon/>,
-  iconPosition="right",
-  titlePosition="left",
+  icon = <DropDownIcon />,
+  iconPosition = "right",
+  titlePosition = "left",
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -29,15 +29,16 @@ const Accordion: React.FC<AccordionProps> = ({
           e.stopPropagation();
         }}
       >
-       { title && <div className={`accordion-title ${titlePosition}`}>{title}</div>}
-        {(
-          <DropDownIcon
-            color="white"
-            className={`accordion-dropdown-arrow ${iconPosition} ${
-              isOpen && "accordion-dropdown-arrow-active"
-            }`}
-          />
-        ) || icon}
+        {title && (
+          <div className={`accordion-title position-${titlePosition}`}>{title}</div>
+        )}
+        <span
+          className={`accordion-dropdown-arrow position-${iconPosition} ${
+            isOpen && "accordion-dropdown-arrow-active"
+          }`}
+        >
+          {icon}
+        </span>
       </div>
       <div
         className={`accordion-content ${

@@ -34,13 +34,13 @@
           gap: 5px;
           align-items: center;
 
-          input[type="checkbox"] {
+          .checkbox-input {
             width: 20px;
             height: 20px;
             cursor: pointer;
           }
 
-          label {
+          .checkbox-label {
             font-size: $mediumFontSize;
             cursor: pointer;
           }
@@ -55,7 +55,7 @@
     width: 75%;
     gap: 20px;
 
-    .parent {
+    .accordion-content-wrapper {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -63,7 +63,7 @@
       padding: 0;
       gap: 30px;
 
-      .schedule-accordion-column-1 {
+      .accordion-description {
         display: flex;
         flex-direction: column;
         line-height: normal;
@@ -74,7 +74,7 @@
         text-align: justify;
       }
 
-      .daylist-container-column-2 {
+      .daylist-container {
         display: flex;
         gap: 35px;
         display: flex;
@@ -94,101 +94,102 @@
           border: 2px solid $video-hut-border-color;
           background: radial-gradient(50% 50% at 0% 0%, $radial-gradient 100%);
           transition: all 0.3s;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
           &:hover {
             box-shadow: 1px 0px 30px 5px $primaryBgColorOnHover;
           }
-        }
-      }
-      .accordion-button-container {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
 
-        .day-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
+          .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
 
-        .topic-tags {
-          display: flex;
-          gap: 10px;
-          position: relative;
-          font-size: $smallFontSize;
-
-          .tag {
-            transition: 0.3s;
-            padding: 5px;
-            border-radius: 10%;
-            &:hover {
-              transform: scale(120%);
-            }
-          }
-          .hidden-tags {
-            position: absolute;
-            display: none;
-            gap: 10px;
-            opacity: 0;
-            right: -80px;
-            top: 0px;
-            transition: 1s;
-            &:hover{
+            .topic-tags {
               display: flex;
-              opacity: 1;
+              gap: 10px;
+              position: relative;
+              font-size: $smallFontSize;
+
+              .topic-tag {
+                transition: 0.3s;
+                padding: 5px;
+                border-radius: 10%;
+                background-color: rgba(255, 255, 255, 0.15);
+                &:hover {
+                  transform: scale(120%);
+                }
+              }
+              .hidden-tags {
+                position: absolute;
+                display: none;
+                gap: 10px;
+                opacity: 0;
+                right: -80px;
+                top: 0px;
+                transition: 1s;
+                &:hover{
+                  display: flex;
+                  opacity: 1;
+                }
+              }
+              .show-tags{
+                opacity: 1;
+                &:hover{
+                  opacity: 0;
+                }
+                &:hover ~ .hidden-tags {
+                  display: flex;
+                  opacity: 1;
+                }
+              }
+              .red {
+                color: #ff7a3b;
+                background-color: rgba(255, 121, 59, 0.15);
+              }
+
+              .pink {
+                color: rgb(212, 88, 206);
+                background-color: rgba(212, 88, 206, 0.15);
+              }
+
+              .blue {
+                color: rgb(34, 167, 219);
+                background-color: rgba(34, 167, 219, 0.15);
+              }
             }
           }
-          .show-tags{
-            opacity: 1;
-            &:hover{
-              opacity: 0;
-            }
-            &:hover ~ .hidden-tags {
-              display: flex;
-              opacity: 1;
-          }}
-          .red {
-            color: #ff7a3b;
-            background-color: rgba(255, 121, 59, 0.15);
+          .day-title {
+            font-size: $subHeaderFontSize;
+            font-family: $secondaryFontFamily;
           }
 
-          .pink {
-            color: rgb(212, 88, 206);
-            background-color: rgba(212, 88, 206, 0.15);
+          .day-description {
+            font-size: $largerFontSize;
           }
 
-          .blue {
-            color: rgb(34, 167, 219);
-            background-color: rgba(34, 167, 219, 0.15);
-          }
-        }
-        .title {
-          font-size: $subHeaderFontSize;
-          font-family: $secondaryFontFamily;
-        }
+          .buttons-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
 
-        .description {
-          font-size: $largerFontSize;
-        }
-
-        .btn-wrapper {
-          display: flex;
-          gap: 15px;
-          align-items: center;
-          flex-wrap: wrap;
-
-          .btn {
-            border: 1px solid $video-hut-border-color;
-            background-color: $secondaryBorderColorHighlighted;
-            color: $primaryColor;
-            border-radius: 15px;
-            transition: all 0.3s;
-
-            &:hover {
-              background-color: $primaryBgColor;
-              box-shadow: 1px 0px 5px 2px $primaryBgColorOnHover;
+            .button {
+              border: 1px solid $video-hut-border-color;
+              background-color: $secondaryBorderColorHighlighted;
+              color: $primaryColor;
+              border-radius: 15px;
               transition: all 0.3s;
-              border-color: transparent;
-              transform: scale(110%);
+
+              &:hover {
+                background-color: $primaryBgColor;
+                box-shadow: 1px 0px 5px 2px $primaryBgColorOnHover;
+                transition: all 0.3s;
+                border-color: transparent;
+                transform: scale(110%);
+              }
             }
           }
         }
@@ -196,18 +197,19 @@
     }
   }
 }
-@media (max-width: 991px) {
-  .parent {
-    max-width: 100%;
-    padding: 0 20px;
-  }
+@media (max-width: $screen-lg) {
   .scheduling-page-accordion {
     padding: 10px;
     padding-top: 30px;
+
+    .accordion-content-wrapper {
+      max-width: 100%;
+      padding: 0 20px;
+    }
   }
 }
 
-@media (max-width: 650px) {
+@media (max-width: $screen-md) {
   .scheduling-page {
     gap: 0;
     flex-direction: column;
@@ -228,32 +230,33 @@
       padding: 10px;
       transition: 0.5s ease-in;
 
-      .parent {
-        .schedule-accordion-column-1 {
+      .accordion-content-wrapper {
+        .accordion-description {
           font-size: $largerFontSize;
           padding: 0px 30px;
         }
 
-        .daylist-container-column-2 {
+        .daylist-container {
           padding: 0px 30px;
           padding-bottom: 20px;
           .day-container {
             padding: 25px;
             transition: 0.5s;
 
-            .accordion-button-container {
-              .description {
-                font-size: 20px;
-              }
+            .day-description {
+              font-size: 20px;
             }
           }
         }
-        .day-header {
-          flex-direction: column;
-          gap: 10px;
-          transition: 0.5s;
-        }
       }
     }
+  }
+}
+
+@media (max-width : $screen-xs){
+  .day-header {
+    flex-direction: column;
+    gap: 10px;
+    transition: 0.5s;
   }
 }

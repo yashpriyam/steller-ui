@@ -11,8 +11,8 @@ const DropDownIcon: React.FC<DropDownIconProps> = ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="32"
+      width="10"
+      height="16"
       viewBox="0 0 320 512"
       className={className}
     >

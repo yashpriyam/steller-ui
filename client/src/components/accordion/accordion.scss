@@ -33,13 +33,13 @@
         .accordion-dropdown-arrow-active{
             transform: rotate(0deg);
         }
-        .right{
+        .position-right{
             right: 30px;
         }
-        .left{
+        .position-left{
             left:30px;
         }
-        .center{
+        .position-center{
             left:50%
         }
     }
@@ -64,13 +64,27 @@
 
 @media (max-width:$screen-md){
     .accordion-container{
-
-        .accordion-title{
-            padding: 40px 30px;
-            transition: 0.5s;   
+        .accordion-header{
+            .accordion-title{
+                padding: 40px 30px;
+                transition: 0.5s;   
+            }
         }
         .open-accordion{
             padding: 5px;
+        }
+    }
+}
+
+@media (max-width:$screen-sm){
+    .accordion-container{
+        .accordion-header{
+            .position-right{
+                right: 20px;
+            }
+            .position-left{
+                left:0px;
+            }
         }
     }
 }

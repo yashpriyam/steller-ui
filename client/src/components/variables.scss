@@ -28,25 +28,25 @@ $largerFontSize:18px;
 $subHeaderFontSize:25px;
 $headerFontSize:40px;
 
-$primary-color: #ffffff; /* Primary color (white) */
-$background-color: #f4f4f4; /* Background color */
-$text-color: #333333; /* Main text color */
+$primary-color: #ffffff;
+$background-color: #f4f4f4;
+$text-color: #333333;
 
-$accent-color-1: #3498db; /* Accent color 1 (blue) */
-$accent-color-2: #e74c3c; /* Accent color 2 (red) */
-$accent-color-3: #27ae60; /* Accent color 3 (green) */
-$accent-color-4: #f39c12; /* Accent color 4 (orange) */
+$accent-color-1: #3498db;
+$accent-color-2: #e74c3c;
+$accent-color-3: #27ae60;
+$accent-color-4: #f39c12;
 
-$link-color: #3498db; /* Link color */
-$link-hover-color: #2980b9; /* Hovered link color */
+$link-color: #3498db;
+$link-hover-color: #2980b9;
 
-$button-bg: #3498db; /* Button background color */
-$button-text: #ffffff; /* Button text color */
-$button-hover-bg: #2980b9; /* Hovered button background color */
+$button-bg: #3498db;
+$button-text: #ffffff;
+$button-hover-bg: #2980b9;
 
-$input-bg: #ffffff; /* Input background color */
-$input-text: #333333; /* Input text color */
-$input-border: #555555; /* Input border color */
+$input-bg: #ffffff;
+$input-text: #333333;
+$input-border: #555555;
 
 $video-hut-border-color:var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
 $radial-gradient: var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63, rgba(255, 255, 255, 0.15))2.210024196147939%, hsla(0, 0%, 100%, 0);
@@ -56,4 +56,3 @@ $screen-sm: 576px;
 $screen-md: 768px;
 $screen-lg: 992px;
 $screen-xl: 1200px;
-/* Add more screen sizes as needed */
