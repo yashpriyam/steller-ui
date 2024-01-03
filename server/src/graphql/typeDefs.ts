@@ -38,7 +38,7 @@ const typeDefs = gql`
       updateQuestionData: UpdateQuestionInputType!
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
-    createQuestionAttemtByUser(questionAttemtData:QuestionAttemptType!): QuestionAttemptOutputType
+    createQuestionAttemptByUser(questionAttemptData:QuestionAttemptType!): QuestionAttemptOutputType
   }
 
   type CustomResponseType {
