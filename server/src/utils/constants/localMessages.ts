@@ -20,11 +20,10 @@ export const localMessages = Object.freeze({
 
   },
   OTP_MODEL: {
-    OTP_SENT_SUCCESS:"otp sent succerssfully",
+    OTP_SENT_SUCCESS:"OTP sent succerssfully",
   },
   FULFILLED: 'fulfilled',
-  EMAIL_VERIFICATION_MODEL: {
-    OTP_SENT_SUCCESS: "OTP sent successfully",
+  EMAIL_SUBJECT_MODEL: {
     EMAIL_VERIFICATION_SUBJECT: "Your One-Time Password (OTP) for email verification"
   },
 });

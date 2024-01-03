@@ -1,12 +1,13 @@
 import { isValidEmail, getRandomNumOfDigits, timeAfterMins, sendEmail, getHtmlForEmailVerification } from "@utils";
 import { localMessages, errorMessages, statusCodes } from "@constants";
-import { emailVerificationModel, User } from "@models";
+import { otpModel, User } from "@models";
 export const sendOtpToRegisteredUser = async (
     _parent: undefined,
     args: { email: string }
 ): Promise<OtpUserOutputType | void> => {
-    const { OTP_SENT_SUCCESS, EMAIL_VERIFICATION_SUBJECT } = localMessages.EMAIL_VERIFICATION_MODEL;
-    const { UNREGISTERED_EMAIL, OTP_SENT_FAILED } = errorMessages.EMAIL_VERIFICATION_MODEL;
+    const { EMAIL_VERIFICATION_SUBJECT } = localMessages.EMAIL_SUBJECT_MODEL;
+    const { OTP_SENT_SUCCESS } = localMessages.OTP_MODEL;
+    const { UNREGISTERED_EMAIL, OTP_SENT_FAILED } = errorMessages.OTP_MODEL;
     const { INVALID_EMAIL } = errorMessages.USER;
     try {
         const { email } = args;
@@ -35,7 +36,7 @@ export const sendOtpToRegisteredUser = async (
         const emailOtp = getRandomNumOfDigits(6);
         const expiresAt = timeAfterMins(emailValidityMinutes);
 
-        const otpData: CreateUserOtpType = await emailVerificationModel.create({ email, emailOtp, expiresAt });
+        const otpData: CreateUserOtpType = await otpModel.create({ email, emailOtp, expiresAt });
 
         await sendEmail({
             subject: EMAIL_VERIFICATION_SUBJECT,

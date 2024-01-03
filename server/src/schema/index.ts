@@ -7,4 +7,3 @@ export { userActivityModel } from "./userActivitySchema";
 export { PaidUser } from "./paidUserSchema"
 export {questionModel} from "./questionSchema"
 export { otpModel } from "./otp-model";
-export { emailVerificationModel } from "./emailVerificationSchema";
