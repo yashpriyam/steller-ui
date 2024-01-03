@@ -26,4 +26,7 @@ export const localMessages = Object.freeze({
   },
   FULFILLED: 'fulfilled',
   TOPICS: 'topics',
+  QUESTION_ATTEMT_MODEL : {
+    QUESTION_ATTEMT_SUCCESS: "your response has been submitted successfully"
+  }
 });
