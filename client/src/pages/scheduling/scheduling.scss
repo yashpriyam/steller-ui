@@ -8,46 +8,7 @@
   gap: 30px;
   background-color: $primaryBgColor;
   font-family: $primaryFontFamily;
-  .scheduling-page-filter-container {
-    width: 20%;
-    height: fit-content;
-    background-color: $fadedGrayPrimary;
-    border-radius: 5px;
-    padding: 5px 10px;
-    display: flex;
-
-    .filter-sub-container {
-      font-size: $largerFontSize;
-
-      .filter-heading {
-        border-bottom: 1px solid $lightGreyPrimary;
-      }
-
-      .checkbox-content {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 10px;
-
-        .checkbox-wrapper {
-          display: flex;
-          gap: 5px;
-          align-items: center;
-
-          .checkbox-input {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-          }
-
-          .checkbox-label {
-            font-size: $mediumFontSize;
-            cursor: pointer;
-          }
-        }
-      }
-    }
-  }
+  
   .scheduling-page-accordion {
     padding-top: 0;
     display: flex;
@@ -87,10 +48,9 @@
         .day-container {
           display: flex;
           align-items: center;
-          border-radius: 3px;
           color: $primaryColor;
           padding: 50px;
-          border-radius: 50px;
+          border-radius: 40px;
           border: 2px solid $video-hut-border-color;
           background: radial-gradient(50% 50% at 0% 0%, $radial-gradient 100%);
           transition: all 0.3s;
@@ -98,7 +58,7 @@
           flex-direction: column;
           gap: 20px;
           &:hover {
-            box-shadow: 1px 0px 30px 5px $primaryBgColorOnHover;
+            box-shadow: 0px 0px 30px 5px $primaryBgColorOnHover;
           }
 
           .day-header {
@@ -117,9 +77,9 @@
                 transition: 0.3s;
                 padding: 5px;
                 border-radius: 10%;
-                background-color: rgba(255, 255, 255, 0.15);
+                background-color: rgba(132, 131, 131, 0.15);
                 &:hover {
-                  transform: scale(120%);
+                  transform: scale(110%);
                 }
               }
               .hidden-tags {
@@ -130,34 +90,22 @@
                 right: -80px;
                 top: 0px;
                 transition: 1s;
-                &:hover{
-                  display: flex;
-                  opacity: 1;
-                }
               }
-              .show-tags{
+              .show-hidden-tag{
+                display: flex;
                 opacity: 1;
-                &:hover{
-                  opacity: 0;
-                }
-                &:hover ~ .hidden-tags {
-                  display: flex;
-                  opacity: 1;
-                }
               }
-              .red {
-                color: #ff7a3b;
-                background-color: rgba(255, 121, 59, 0.15);
+              .html {
+                color: $accent-color-2;
               }
-
-              .pink {
-                color: rgb(212, 88, 206);
-                background-color: rgba(212, 88, 206, 0.15);
+              .css {
+                color: $accent-color-3;
               }
-
-              .blue {
-                color: rgb(34, 167, 219);
-                background-color: rgba(34, 167, 219, 0.15);
+              .js{
+                color: $accent-color-4;
+              }
+              .react {
+                color: $accent-color-1;
               }
             }
           }
@@ -185,8 +133,8 @@
 
               &:hover {
                 background-color: $primaryBgColor;
-                box-shadow: 1px 0px 5px 2px $primaryBgColorOnHover;
-                transition: all 0.3s;
+                box-shadow: 0px 0px 5px 2px $primaryBgColorOnHover;
+                transition: 0.3s;
                 border-color: transparent;
                 transform: scale(110%);
               }
@@ -214,21 +162,10 @@
     gap: 0;
     flex-direction: column;
 
-    .scheduling-page-filter-container {
-      width: 100%;
-
-      .checkbox-content {
-        flex-direction: row;
-        width: 100%;
-      }
-      .filter-sub-container {
-        margin: 0;
-      }
-    }
     .scheduling-page-accordion {
       width: 100%;
       padding: 10px;
-      transition: 0.5s ease-in;
+      transition: 0.5s;
 
       .accordion-content-wrapper {
         .accordion-description {
@@ -240,11 +177,12 @@
           padding: 0px 30px;
           padding-bottom: 20px;
           .day-container {
-            padding: 25px;
+            border-radius: 25px;
+            padding: 20px;
             transition: 0.5s;
 
             .day-description {
-              font-size: 20px;
+              font-size: $largerFontSize;
             }
           }
         }
@@ -254,9 +192,32 @@
 }
 
 @media (max-width : $screen-xs){
-  .day-header {
-    flex-direction: column;
-    gap: 10px;
-    transition: 0.5s;
+  .scheduling-page{
+    .scheduling-page-accordion{  
+      .accordion-content-wrapper {
+        .accordion-description {
+          padding: 0px 15px;
+          font-size: $mediumFontSize;
+        }
+        
+        .daylist-container {
+          padding: 0px 15px;
+          .day-container {
+            border-radius: 10px;
+            padding: 20px;
+            
+            .day-header {
+              flex-direction: column;
+              gap: 10px;
+              transition: 0.5s;
+            }
+            .day-description {
+              font-size: $smallFontSize;
+            }
+          }
+        }
+      }
+    }
   }
 }
+    

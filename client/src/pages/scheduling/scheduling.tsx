@@ -1,12 +1,12 @@
 import "./scheduling.scss";
 import Accordion from "../../components/accordion/accordion";
 import { Button } from "../../components/button/button";
-import { accordionDataList, checkboxDataList } from "./accordionDataList";
+import { accordionDataList } from "./accordionDataList";
 import React from "react";
+import { Filter } from "../../components/filter/filter";
 
 interface SchedulingPageProps {
   className?: string;
-  checkboxData?: string[];
   style?: object;
   accordionData?: {
     title?: string;
@@ -19,7 +19,6 @@ interface SchedulingPageProps {
       assignmentUrl?: string;
       tags?: {
         tagName?: string;
-        class?: string;
       }[];
     }[];
   }[];
@@ -28,26 +27,11 @@ interface SchedulingPageProps {
 const Scheduling: React.FC<SchedulingPageProps> = ({
   className,
   accordionData = accordionDataList,
-  checkboxData = checkboxDataList,
   style,
 }: SchedulingPageProps) => {
   return (
     <div className={`scheduling-page ${className}`} style={style}>
-      <div className="scheduling-page-filter-container">
-        <div className="filter-sub-container">
-          <label className="filter-heading">Filter</label>
-          <div className="checkbox-content">
-            {checkboxData.map((option) => (
-              <div className="checkbox-wrapper">
-                <input className="checkbox-input" type="checkbox" id={option} />
-                <label className="checkbox label" htmlFor={option}>
-                  {option}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <Filter />
       <div className="scheduling-page-accordion">
         {accordionData.map((accordion, index) => (
           <Accordion title={accordion.title} key={index}>
@@ -63,13 +47,16 @@ const Scheduling: React.FC<SchedulingPageProps> = ({
                       <strong className="day-title">{dayInfo.title}</strong>
                       <div className="topic-tags">
                         {dayInfo?.tags?.slice(0, 2).map((tag, idx: number) => (
-                          <span key={idx} className={`topic-tag ${tag.class}`}>
+                          <span
+                            key={idx}
+                            className={`topic-tag ${tag.tagName?.toLowerCase()}`}
+                          >
                             {tag.tagName}
                           </span>
                         ))}
                         {dayInfo?.tags?.length === 3 && (
                           <span
-                            className={`topic-tag ${dayInfo.tags[2].class}`}
+                            className={`topic-tag ${dayInfo.tags[2].tagName?.toLowerCase()}`}
                           >
                             {dayInfo.tags[2].tagName}
                           </span>
@@ -80,7 +67,7 @@ const Scheduling: React.FC<SchedulingPageProps> = ({
                               {dayInfo.tags.slice(3).map((tag, idx: number) => (
                                 <span
                                   key={idx}
-                                  className={`topic-tag  ${tag.class}`}
+                                  className={`topic-tag  ${tag.tagName?.toLowerCase()}`}
                                 >
                                   {tag.tagName}
                                 </span>
@@ -101,6 +88,11 @@ const Scheduling: React.FC<SchedulingPageProps> = ({
                       <Button text="Assignments" className="button" />
                       <Button text="Notes" className="button" />
                       <Button text="Videos" className="button" />
+                      <Button text="Links" className="button" />
+                      <Button text="Links" className="button" />
+                      <Button text="Links" className="button" />
+                      <Button text="Links" className="button" />
+                      <Button text="Links" className="button" />
                       <Button text="Links" className="button" />
                     </div>
                   </div>

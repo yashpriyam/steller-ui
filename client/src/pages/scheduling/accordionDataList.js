@@ -11,13 +11,13 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "CSS", class: "pink" },
-          { tagName: "JS", class: "blue" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "CSS", class: "pink" },
-          { tagName: "JS", class: "blue" },
-          { tagName: "JS", class: "blue" },
+          { tagName: "HTML"},
+          { tagName: "CSS" },
+          { tagName: "JS" },
+          { tagName: "HTML"},
+          { tagName: "CSS" },
+          { tagName: "JS" },
+          { tagName: "JS" },
         ],
       },
       {
@@ -27,10 +27,10 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "CSS", class: "pink" },
-          { tagName: "JS", class: "blue" },
+          { tagName: "HTML"},
+          { tagName: "JS"},
+          { tagName: "CSS" },
+          { tagName: "JS" },
         ],
       },
       {
@@ -40,9 +40,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "REACT"},
+          { tagName: "HTML"},
+          { tagName: "CSS"},
         ],
       },
       {
@@ -52,8 +52,8 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "JS"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -63,7 +63,7 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
+          { tagName: "REACT"},
         ],
       },
     ],
@@ -80,9 +80,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -92,9 +92,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -104,9 +104,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -116,9 +116,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -128,9 +128,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
     ],
@@ -147,9 +147,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -159,9 +159,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -171,9 +171,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -183,9 +183,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
       {
@@ -195,9 +195,9 @@ export const accordionDataList = [
         notesUrl: "",
         assignmentUrl: "",
         tags: [
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
-          { tagName: "HTML", class: "red" },
+          { tagName: "HTML"},
+          { tagName: "HTML"},
+          { tagName: "HTML"},
         ],
       },
     ],
