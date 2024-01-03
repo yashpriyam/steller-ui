@@ -221,7 +221,7 @@ declare global {
     userId: ObjectId;
     questionId: ObjectId;
     response: { imageUrl: string; text: string }[];
-    isCorrect: boolean;
+    isCorrect?: boolean;
     timestamp: Date;
   };
 
