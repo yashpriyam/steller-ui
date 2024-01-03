@@ -1,1 +1,1 @@
-export { createQuestionAttemptByUser } from "./createQuestionAttempt";
+export { createQuestionAttemptByUser } from "./createQuestionAttemptByUser";
