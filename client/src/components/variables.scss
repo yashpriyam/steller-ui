@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Nunito';
+  src: url('../styles/fonts/Nunito-VariableFont_wght.ttf');
+};
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('../styles/fonts/SourceSans3-VariableFont_wght.ttf');
+};
 $primaryFontFamily: 'Source Sans 3';
 $secondaryFontFamily: 'Nunito';
 $primaryBgColor: black;
