@@ -1,44 +1,60 @@
-import React, { useState } from "react";
+import React, { MouseEventHandler, useState, useRef } from "react";
 import "./accordion.scss";
 import DropDownIcon from "../../icons/dropDownIcon";
+import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
 interface AccordionProps {
+  className?: string;
   title?: string;
   children?: React.ReactNode;
   style?: object;
-  icon?: React.ReactNode;
+  icon?: React.ReactNode | string;
   iconPosition?: "left" | "center" | "right";
   titlePosition?: "left" | "center" | "right";
+  disabled?: boolean;
 }
 
 const Accordion: React.FC<AccordionProps> = ({
-  title = "Title",
+  className,
+  title,
   children,
   style,
   icon = <DropDownIcon />,
   iconPosition = "right",
   titlePosition = "left",
+  disabled = false,
 }: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const accordionRef = useRef<HTMLDivElement | null>(null);
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (!disabled) setIsOpen(!isOpen);
+    e.stopPropagation();
+  };
+  // useOnOutsideClick(accordionRef, () => setIsOpen(false)); // this need to be discussed, on applying filter accordion would get closed, so is it OK ?
+  const iconClass: string = `accordion-dropdown-arrow position-${iconPosition} ${
+    isOpen && "accordion-dropdown-arrow-active"
+  }`;
+
   return (
-    <div className="accordion-container" style={style}>
-      <div
-        className="accordion-header"
-        onClick={(e) => {
-          setIsOpen(!isOpen);
-          e.stopPropagation();
-        }}
-      >
+    <div
+      className={`accordion-container ${
+        disabled && "disable-accordion"
+      } ${className}`}
+      style={style}
+      ref={accordionRef}
+    >
+      <div className="accordion-header" onClick={handleClick}>
         {title && (
-          <div className={`accordion-title position-${titlePosition}`}>{title}</div>
+          <div className={`accordion-title position-${titlePosition}`}>
+            {title}
+          </div>
         )}
-        <span
-          className={`accordion-dropdown-arrow position-${iconPosition} ${
-            isOpen && "accordion-dropdown-arrow-active"
-          }`}
-        >
-          {icon}
-        </span>
+
+        {React.isValidElement(icon) ? (
+          <span className={iconClass}>{icon}</span>
+        ) : (
+          <img className={`image ${iconClass}`} src={`${icon}`} alt="altText" />
+        )}
       </div>
       <div
         className={`accordion-content ${
