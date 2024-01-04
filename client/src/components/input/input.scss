@@ -1,7 +1,7 @@
 @import "../variables.scss";
-.input-wrapper {
+.input-component-wrapper {
   width: 320px;
-  .input-container {
+  .input-component-container{
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -23,18 +23,18 @@
       transition: border-color 0.3s ease;
       outline: none;
     }
-    input[type="number"]::-webkit-inner-spin-button{
+    .input[type="number"]::-webkit-inner-spin-button{
       -webkit-appearance: none;
       margin: 0;
     }
-    .is-password-visible {
+    .password-visible {
       font-size: 12px;
       font-weight: 600;
       padding-right: 8px;
       color: $gray;
     }
   }
-  .error-container {
+  .input-component-error-container{
     width: 100%;
     text-align: end;
     padding: 0 10px;
