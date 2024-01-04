@@ -41,7 +41,6 @@ export const InputComponent: FC<InputProps> = ({
   };
   return (
     <div className={`input-wrapper ${error&& "error"} ${className} `}>
-      <span></span>
       <span className={`input-container`}>
         <input
           type={inputType}
