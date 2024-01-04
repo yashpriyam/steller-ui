@@ -40,7 +40,7 @@ export const InputComponent: FC<InputProps> = ({
     }
   };
   return (
-    <div className={`input-wrapper ${error&& "error"} ${className} `}>
+    <div className={`input-wrapper ${error && "error"} ${className} `}>
       <span className={`input-container`}>
         <input
           type={inputType}
@@ -54,7 +54,7 @@ export const InputComponent: FC<InputProps> = ({
         />
         {type === "password" && (
           <span className="is-password-visible" onClick={handleOnClickOfEye}>
-            {inputType === "text" ? <LockIcon /> : <OpenLockIcon />}
+            {inputType === "text" ? <OpenLockIcon /> : <LockIcon />}
           </span>
         )}
       </span>
