@@ -5,6 +5,11 @@ const typeDefs = gql`
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
     getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
     getNotes(filterData: getNotesFilterInputType): getNotesOutputType
+    getVideo(videoDataFilter: VideoInputFilterType): VideoOutputDataType
+    getAllQuestions(
+      filterData: GetQuestionsFilterInput
+    ): GetAllQuestionsOutputType
+    getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
   }
 
   type Mutation {
@@ -17,16 +22,32 @@ const typeDefs = gql`
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
     deleteNotesById(notesId: ID!): DeletedNotesOutputType
     deleteVideoById(videoId: ID!): VideoOutputDataType
+    updateVideoById(
+      videoId: ID!
+      videoData: VideoInputFilterType!
+    ): VideoOutputDataType
     updateNotesById(
       notesId: ID!
       notesData: UpdateNotesInputType
     ): UpdateNotesOutputType
+    upsertUserActivity(
+      userActivityData: UserActivityInputType
+    ): UserActivityOutputType
     createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
+    updateQuestionById(
+      updateQuestionData: UpdateQuestionInputType!
+    ): UpdateQuestionOutputType
+    sendOtp(email: String!): OtpUserOutputType
   }
 
   type CustomResponseType {
     status: Int!
     message: String!
+  }
+
+  type AllVideoOutputDataType {
+    videoData: [videoDataType]
+    response: CustomResponseType!
   }
 
   type VideoOutputDataType {
@@ -68,6 +89,22 @@ const typeDefs = gql`
     youtube: String!
   }
 
+  input VideoInputFilterType {
+    title: String
+    description: String
+    dayNumber: Int
+    videoNumber: Int
+    topics: [String]
+    links: OptionalLinksInput
+    isActive: Boolean
+    duration: String
+  }
+
+  input OptionalLinksInput{
+    webmasters: String
+    youtube: String
+  }
+
   input CreateTransactionInputType {
     amount: Int!
     programType: String!
@@ -97,10 +134,12 @@ const typeDefs = gql`
     name: String!
     email: String!
     phoneNumber: String!
-    isJobSeeker: Boolean!
-    occupation: String!
-    sessionPreference: SessionPreferenceEnum!
-    expectedSalary: String!
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: SessionPreferenceEnum
+    expectedSalary: String
+    emailOtp: String!
+    collegeName: String
   }
 
   enum SessionPreferenceEnum {
@@ -116,6 +155,7 @@ const typeDefs = gql`
     occupation: String!
     sessionPreference: SessionPreferenceEnum!
     expectedSalary: String!
+    collegeName: String!
   }
   input CreateNotesInputType {
     link: String!
@@ -126,6 +166,24 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
+
+  input OtpUserInputType {	
+    email: String!	
+  }	
+  type OtpUserOutputType {	
+    response: CustomResponseType!	
+  }	
+  input UserActivityInputType {	
+    phoneNumber: String	
+    isOpened: Boolean	
+    devices: [String]	
+    IST: String	
+    isValidPhoneNumber: Boolean	
+  }	
+  type UserActivityOutputType {	
+    response: CustomResponseType!	
+  }
+
   type CreateNotesOutputType {
     notesData: NotesDataType
     response: CustomResponseType!
@@ -192,7 +250,7 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   input CreateQuestionInputType {
-    question: String!
+    question: [Option!]!
     batchCode: String!
     options: [Option!]!
     questionType: QuestionType!
@@ -218,11 +276,11 @@ const typeDefs = gql`
     isOpenable: Boolean!
   }
   type QuestionOutputType {
-    questionData:questionData
-    response:CustomResponseType
+    questionData: QuestionData
+    response: CustomResponseType
   }
-  type questionData{
-    question: String!
+  type QuestionData {
+    question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
     questionType: QuestionType!
@@ -246,6 +304,69 @@ const typeDefs = gql`
   enum QuestionMetaType {
     timed
     recorded
+  }
+  input UpdateQuestionInputType {
+    questionId: ID!
+    updates: UpdatesQuestionInput
+  }
+
+  input UpdatesQuestionInput {
+    question: [UpdateOptionInput]
+    batchCode: String
+    options: [UpdateOptionInput]
+    questionType: QuestionType
+    answer: [UpdateOptionInput]
+    marks: Int
+    meta: QuestionMetaInput
+  }
+  input UpdateOptionInput {
+    imageUrl: String
+    text: String
+  }
+  input QuestionMetaInput {
+    topic: String
+    day: Int
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+    expiresInMins: Int
+    isOpenable: Boolean
+  }
+  type UpdateQuestionOutputType {
+    questionData: QuestionDataOutput
+    response: CustomResponseType!
+  }
+  type QuestionDataOutput {
+    question: [UpdateOptionOutput]
+    batchCode: String
+    options: [UpdateOptionOutput]
+    questionType: QuestionType
+    answer: [UpdateOptionOutput]
+    marks: Int
+    meta: QuestionMetaOutput
+  }
+  type UpdateOptionOutput {
+    imageUrl: String
+    text: String
+  }
+  type QuestionMetaOutput {
+    topic: String
+    day: Int
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+    expiresInMins: Int
+    isOpenable: Boolean
+  }
+  input GetQuestionsFilterInput {
+    topic: String
+    isActive: Boolean
+    isArchived: Boolean
+    type: QuestionMetaType
+  }
+  type GetAllQuestionsOutputType {
+    questionData: [QuestionData]
+    response: CustomResponseType
   }
   scalar DateTime
   scalar JSON
