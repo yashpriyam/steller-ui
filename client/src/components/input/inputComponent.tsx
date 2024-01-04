@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, useState } from "react";
 import "./input.scss";
 import { validateEmail } from "../../utils/validateEmail";
-import { LockIcon } from "../../icons/lockIcon";
+import { CloseLockIcon } from "../../icons/CloseLockIcon";
 import { OpenLockIcon } from "../../icons/openLockIcon";
 
 export const InputComponent: FC<InputProps> = ({
@@ -16,6 +16,10 @@ export const InputComponent: FC<InputProps> = ({
 }:InputProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const constantValues:Record<string,string> = Object.freeze({
+    password: "password",
+    text: "text",
+  });
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -58,9 +62,9 @@ export const InputComponent: FC<InputProps> = ({
           onMouseEnter={onHover}
           disabled={disabled}
         />
-        {type === "password" && (
+        {constantValues[type]&& (
           <span className="password-visible" onClick={handleShowPassword}>
-            {showPassword ? <OpenLockIcon /> : <LockIcon />}
+            {showPassword ? <OpenLockIcon /> : <CloseLockIcon />}
           </span>
         )}
       </span>
