@@ -36,8 +36,8 @@ export const InputComponent: FC<InputProps> = ({
     }
   };
   return (
-    <div className="input-wrapper">
-      <span className={`input-container ${className}`}>
+    <div className={`input-wrapper ${className}`}>
+      <span className={`input-container`}>
         <input
           type={inputType}
           className={`input`}
@@ -53,11 +53,11 @@ export const InputComponent: FC<InputProps> = ({
           </span>
         )}
       </span>
-      {errorMessage&&
+      {errorMessage && (
         <div className="error-container">
           <span className="error">{errorMessage}</span>
         </div>
-      }
+      )}
     </div>
   );
 };
