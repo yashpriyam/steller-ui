@@ -1,5 +1,5 @@
 import React from "react";
-import { checkboxDataList } from "../../pages/scheduling/accordionDataList";
+import { checkboxDataList } from "../../pages/schedulingPage/accordionDataList";
 import "./filter.scss";
 interface FilterProps {
   className?: string;

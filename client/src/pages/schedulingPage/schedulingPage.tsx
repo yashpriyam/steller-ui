@@ -1,4 +1,4 @@
-import "./scheduling.scss";
+import "./schedulingPage.scss";
 import Accordion from "../../components/accordion/accordion";
 import { Button } from "../../components/button/button";
 import { accordionDataList } from "./accordionDataList";
@@ -25,7 +25,7 @@ interface SchedulingPageProps {
   }[];
 }
 
-const Scheduling: React.FC<SchedulingPageProps> = ({
+const SchedulingPage: React.FC<SchedulingPageProps> = ({
   className,
   accordionData = accordionDataList,
   style,
@@ -103,4 +103,4 @@ const Scheduling: React.FC<SchedulingPageProps> = ({
   );
 };
 
-export default Scheduling;
+export default SchedulingPage;

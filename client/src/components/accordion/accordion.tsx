@@ -9,6 +9,7 @@ interface AccordionProps {
   children?: React.ReactNode;
   style?: object;
   icon?: React.ReactNode | string;
+  closeOnOutsideClick?: boolean;
   iconPosition?: "left" | "center" | "right";
   titlePosition?: "left" | "center" | "right";
   disabled?: boolean;
@@ -20,6 +21,7 @@ const Accordion: React.FC<AccordionProps> = ({
   children,
   style,
   icon = <DropDownIcon />,
+  closeOnOutsideClick = false,
   iconPosition = "right",
   titlePosition = "left",
   disabled = false,
@@ -30,7 +32,10 @@ const Accordion: React.FC<AccordionProps> = ({
     if (!disabled) setIsOpen(!isOpen);
     e.stopPropagation();
   };
-  // useOnOutsideClick(accordionRef, () => setIsOpen(false)); // this need to be discussed, on applying filter accordion would get closed, so is it OK ?
+  useOnOutsideClick(
+    accordionRef,
+    closeOnOutsideClick ? () => setIsOpen(false) : () => {}
+  );
   const iconClass: string = `accordion-dropdown-arrow position-${iconPosition} ${
     isOpen && "accordion-dropdown-arrow-active"
   }`;
