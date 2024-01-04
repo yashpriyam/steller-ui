@@ -1,7 +1,4 @@
 import React from "react";
-interface IconProps {
-  className?: string;
-}
 export const OpenLockIcon: React.FC<IconProps> = ({ className }: IconProps) => {
   return (
     <svg

@@ -13,7 +13,7 @@ export const InputComponent: FC<InputProps> = ({
   onChange,
   onHover,
   className,
-}: InputProps) => {
+}:InputProps) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
