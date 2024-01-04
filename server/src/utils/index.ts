@@ -9,4 +9,4 @@ export { convertUTCtoIST, formatDate ,timeAfterMins } from "./timeUtils";
 export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeys";
 export { generateNestedUpdate } from "./generateNestedFields";
 export{ getRandomNumOfDigits} from "./random";
-export { getHtmlForEmailVerification } from "./getHtmlForSendingEmail";
+export { getEmailVerificationMessage } from "./getHtmlForSendingEmail";

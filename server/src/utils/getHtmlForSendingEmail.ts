@@ -1,18 +1,27 @@
+import { localMessages } from "@constants";
 
-export const getHtmlForEmailVerification = (otpData: { emailOtp: string }, emailValidityMinutes : number) : string => {
+const { 
+    BEST_REGARDS,
+    THE_WEBMASTERS_TEAM,
+    PLEASE_ENTER_OTP_TO_VERIFY_EMAIL,
+    THE_OTP_IS_VALID_FOR,
+    USE_IT_PROMPTLY
+} = localMessages.TEXT;
+
+export const getEmailVerificationMessage = ({ otpData, emailValidityMinutes }: EmailOtpDataType): string => {
     return `
           <div>
               <h2>${otpData.emailOtp}</h2>
               <br/>
               <div>
-                  Please enter this OTP on the verification page to verify your email. 
-                  The OTP is valid for ${emailValidityMinutes} mins, so be sure to use it promptly.
+                  ${PLEASE_ENTER_OTP_TO_VERIFY_EMAIL} 
+                  ${THE_OTP_IS_VALID_FOR} ${emailValidityMinutes} ${USE_IT_PROMPTLY}
               </div>
               <br/>
               <br/>
-              Best regards,
+              ${BEST_REGARDS},
               <br/>
-              The Webmaster Team
+              ${THE_WEBMASTERS_TEAM}
           </div>
       `
 }

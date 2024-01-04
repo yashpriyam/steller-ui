@@ -321,4 +321,8 @@ declare global {
     status: number;
     message: string;
   };
+  type EmailOtpDataType = { 
+    otpData: { emailOtp : string};
+    emailValidityMinutes: number;
+  };
 }

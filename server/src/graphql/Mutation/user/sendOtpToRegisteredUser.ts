@@ -1,11 +1,11 @@
-import { isValidEmail, getRandomNumOfDigits, timeAfterMins, sendEmail, getHtmlForEmailVerification } from "@utils";
+import { isValidEmail, getRandomNumOfDigits, timeAfterMins, sendEmail, getEmailVerificationMessage } from "@utils";
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { otpModel, User } from "@models";
 export const sendOtpToRegisteredUser = async (
     _parent: undefined,
     args: { email: string }
-): Promise<OtpUserOutputType | void> => {
-    const { EMAIL_VERIFICATION_SUBJECT } = localMessages.EMAIL_SUBJECT_MODEL;
+): Promise<OtpUserOutputType > => {
+    const { EMAIL_VERIFICATION_SUBJECT } = localMessages.TEXT;
     const { OTP_SENT_SUCCESS } = localMessages.OTP_MODEL;
     const { UNREGISTERED_EMAIL, OTP_SENT_FAILED } = errorMessages.OTP_MODEL;
     const { INVALID_EMAIL } = errorMessages.USER;
@@ -40,7 +40,7 @@ export const sendOtpToRegisteredUser = async (
 
         await sendEmail({
             subject: EMAIL_VERIFICATION_SUBJECT,
-            html: getHtmlForEmailVerification(otpData,emailValidityMinutes),
+            html: getEmailVerificationMessage({otpData,emailValidityMinutes}),
             to: email,
         });
 

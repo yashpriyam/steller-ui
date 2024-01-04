@@ -38,7 +38,7 @@ const typeDefs = gql`
       updateQuestionData: UpdateQuestionInputType!
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
-    sendOtpToRegisteredUser(email: String!) : OtpOutputType
+    sendOtpToRegisteredUser(email: String!) : OtpUserOutputType
   }
 
   type CustomResponseType {
@@ -358,9 +358,6 @@ const typeDefs = gql`
     type: QuestionMetaType
     expiresInMins: Int
     isOpenable: Boolean
-  }
-  type OtpOutputType {
-    response: CustomResponseType!
   }
   input GetQuestionsFilterInput {
     topic: String
