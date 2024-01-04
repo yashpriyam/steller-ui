@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useState } from "react";
 import "./input.scss";
-import { isValidEmail } from "../../../monorepoClient/helpers/utils/validations";
+import { isValidEmail } from "../../monorepoClient/helpers/utils/validations";
 interface InputProps {
   type: "text" | "number" | "email" | "password";
   value: string | number;
