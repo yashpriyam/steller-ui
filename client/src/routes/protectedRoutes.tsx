@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 const protectedRoutesMap: RoutesMapInterface = Object.freeze({
     // Add your protected routes here
