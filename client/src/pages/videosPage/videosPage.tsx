@@ -1,20 +1,29 @@
 import { Card } from "../../components/card/card";
-import React, { useState } from "react";
-import { videoDataList, filterDataList } from "./dataList";
+import React, { useEffect, useState } from "react";
+import { filterDataList } from "./dataList";
 import "./videosPage.scss";
 import { FilterTags } from "../../components/filterTags/filterTags";
+import { useVideos } from "../../redux/actions/videosAction";
 interface VideosPageProps {
-  videoData?: { title: string; subtitle?: string; tags?: string[] }[];
   className?: string;
   filterData?: { tag: string }[];
 }
 
 const VideosPage: React.FC<VideosPageProps> = ({
-  videoData = videoDataList,
   className,
   filterData = filterDataList,
 }: VideosPageProps) => {
   const [filterTag, setFilterTag] = useState<string>("");
+  const { videoData, getAllVideos } = useVideos();
+
+  const getVideosFunc = async ()=>{
+    await getAllVideos({});
+  }
+  useEffect(() => {
+    getVideosFunc();
+  }, []);
+  console.log({videoData});
+  
 
   return (
     <div className={`video-page ${className}`}>
@@ -26,18 +35,13 @@ const VideosPage: React.FC<VideosPageProps> = ({
       <div className="videos-notes-container">
         <div className="content-title">VIDEOS</div>
         <div className="videos-wrapper">
-          {videoData?.map(
-            (data) =>
-              (data.tags?.includes(filterTag) || filterTag === "") && (
+          {videoData.videoList.map(
+            (video) =>
+              (video.topics?.includes(filterTag) || filterTag === "") && (
                 <Card
                   className={className}
-                  title={data.title}
-                  subtitle="subtitle"
-                  tags={data.tags}
                   tagPosition="left"
-                  img={
-                    "https://framerusercontent.com/images/jQaRnWtpyFktrGE79EvFXdue7Gk.jpg?scale-down-to=2048"
-                  }
+                  data={video}
                 ></Card>
               )
           )}

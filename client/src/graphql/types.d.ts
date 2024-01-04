@@ -26,5 +26,23 @@ declare global {
     interface RoutesMapInterface {
         [path: string]: ReactElement;
     }
+    type VideoDataType = {
+        title?: string;
+        description?: string;
+        dayNumber?: number;
+        videoNumber?: number;
+        topics?: string[];
+        links?: {
+            webmasters?: string;
+            youtube?: string;
+        };
+        isActive?: boolean;
+        duration?: string;
+    }
+
+    type VideoDataStateType = {
+        videoList: VideoDataType[];
+    }
+    
 }
 export {}

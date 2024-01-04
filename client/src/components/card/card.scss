@@ -1,9 +1,4 @@
-@import "../../components/variables.scss";
-
-@font-face {
-  font-family: Nunito;
-  src: url(../../styles/fonts/Nunito_VariableFont_wght.ttf);
-}
+@import "../variables.scss";
 
 .main-container {
   width: 450px;
@@ -12,7 +7,8 @@
   flex-direction: column;
   justify-content: space-evenly;
   padding: 10px;
-  border: 1px solid gray;
+  font-family: $secondaryFontFamily;
+  border: 1px solid rgba(128, 128, 128, 0.5);
   transition: 0.5s;
   font-family: Nunito;
   background: linear-gradient(
@@ -49,13 +45,20 @@
       border-radius: 15px;
       transition: transform 1s;
     }
-
+    
+    .unclickable{
+      position: absolute;
+      background-color: transparent;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
     .tags-span {
       position: absolute;
       top: 10px;
       display: flex;
       gap: 5px;
-
+      z-index: 1;
       &:hover > .hidden-tags {
         opacity: 1;
       }
@@ -64,10 +67,10 @@
         border-radius: 25px;
         background-color: transparent;
         backdrop-filter: blur(5px);
-        font-size: 15px;
+        font-size: $smallFontSize;
         text-align: center;
-        padding: 2px 15px;
-        font-weight: 800;
+        padding: 2px 12px;
+        font-weight: 700;
       }
       .hidden-tags {
         opacity: 0;
@@ -109,14 +112,33 @@
   }
 
   .text {
-    margin: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    .card-title{
+      font-size: $subHeaderFontSize;
+    }
+    .videodata-wrapper{
+      display: flex;
+      flex-wrap: wrap;
+      font-size: $mediumFontSize;
+      gap:5px;
+    }
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: $screenSm) {
   .main-container {
     width: 340px;
     height: 225px;
+    .text {  
+      .card-title{
+        font-size: $largerFontSize;
+      }
+      .videodata-wrapper{
+        font-size: $smallFontSize;
+      }
+    }
   }
 }
 

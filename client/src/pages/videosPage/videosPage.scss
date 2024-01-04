@@ -1,17 +1,13 @@
 @import "../../components/variables.scss";
 
-@font-face {
-    font-family: Nunito;
-    src: url(../../styles/fonts/Nunito_VariableFont_wght.ttf);
-}
 
 .video-page{
     width: 100vw;
     display: flex;
     flex-direction: column;
-    background-color: black;
-    color: white;
-    font-family: Nunito;
+    background-color: $primaryBgColor;
+    color: $primaryColor;
+    font-family: $secondaryFontFamily;
     justify-content: center;
     gap: 20px;
 
@@ -20,7 +16,7 @@
     .videos-notes-container{
         .content-title{
             width: 100%;
-            font-size: 40px;
+            font-size: $headerFontSize;
             text-align: center;
             letter-spacing: 5px;
         }

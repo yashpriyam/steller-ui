@@ -48,11 +48,6 @@ export const getAllVideos = async (
                 modifiedVideoDataFilter = { ...restFilters, ...updatedLinks };
             }
         }
-        if (!Object.keys(modifiedVideoDataFilter).length) {
-            return {
-                response: errorData,
-            };
-        }
         Object.entries(modifiedVideoDataFilter).forEach(([key, value]) => {
             if (key === localMessages.TOPICS) {
                 modifiedVideoDataFilter[key] = { $in: value };
