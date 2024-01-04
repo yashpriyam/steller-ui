@@ -1,7 +1,6 @@
-import { ChangeEvent, FC, useState } from "react";
+import { CSSProperties, ChangeEvent, FC, useState } from "react";
 import "./input.scss";
-import { validateEmail } from "../../utils/validateEmail";
-import { CloseLockIcon } from "../../icons/CloseLockIcon";
+import { CloseLockIcon } from "../../icons/closeLockIcon";
 import { OpenLockIcon } from "../../icons/openLockIcon";
 
 export const InputComponent: FC<InputProps> = ({
@@ -9,48 +8,39 @@ export const InputComponent: FC<InputProps> = ({
   value,
   placeholder,
   error,
+  errorMessage = "please enter valid input",
   disabled = false,
   onChange,
   onHover,
   className,
-}:InputProps) => {
-  const [errorMessage, setErrorMessage] = useState("");
+  height,
+  width,
+  backgroundColor,
+  style,
+}: InputProps) => {
   const [showPassword, setShowPassword] = useState(false);
-  const constantValues:Record<string,string> = Object.freeze({
+  const constantValues: Record<string, string> = Object.freeze({
     password: "password",
     text: "text",
   });
+  const divStyle: CSSProperties = {
+    height,
+    width,
+    backgroundColor,
+    ...style,
+  };
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-
-  const typeValidationMap: Record<string, Function> = {
-    email: (value: string) => {
-      setErrorMessage(
-        !validateEmail(value) && Boolean(value)
-          ? "Please enter a valid email"
-          : ""
-      );
-    },
-    password: (value: string) => {
-      setErrorMessage(
-        value.length === 8 || value.length === 0
-          ? ""
-          : "Password should be 8 digits"
-      );
-    },
-  };
-
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     onChange(e);
-    const inputValue = e.target.value;
-    typeValidationMap[type] && typeValidationMap[type](inputValue);
   };
   return (
     <div
       className={` input-component-wrapper ${
         error && "input-component-error"
       } ${className} `}
+      style={divStyle}
     >
       <span className={`input-component-container`}>
         <input
@@ -62,13 +52,13 @@ export const InputComponent: FC<InputProps> = ({
           onMouseEnter={onHover}
           disabled={disabled}
         />
-        {constantValues[type]&& (
+        {constantValues[type] && (
           <span className="password-visible" onClick={handleShowPassword}>
             {showPassword ? <OpenLockIcon /> : <CloseLockIcon />}
           </span>
         )}
       </span>
-      {errorMessage && (
+      {error && (
         <div className="input-component-error-container">
           <span className="error">{errorMessage}</span>
         </div>
