@@ -1,6 +1,8 @@
 import { ChangeEvent, FC, useState } from "react";
 import "./input.scss";
 import { isValidEmail } from "../../monorepoClient/helpers/utils/validations";
+import {LockIcon} from "../../icons/lockIcon"
+import {OpenLockIcon} from "../../icons/openLockIcon"
 interface InputProps {
   type: "text" | "number" | "email" | "password";
   value: string | number;
@@ -37,6 +39,7 @@ export const InputComponent: FC<InputProps> = ({
   };
   return (
     <div className={`input-wrapper ${className}`}>
+      <span></span>
       <span className={`input-container`}>
         <input
           type={inputType}
@@ -49,7 +52,7 @@ export const InputComponent: FC<InputProps> = ({
         />
         {type === "password" && (
           <span className="is-password-visible" onClick={handleOnClickOfEye}>
-            {inputType === "text" ? "hide" : "show"}
+            {inputType === "text" ? <LockIcon/> : <OpenLockIcon/>}
           </span>
         )}
       </span>

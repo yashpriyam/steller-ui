@@ -1,3 +1,5 @@
+import { ReactElement } from "react";
+
 declare global {
     type RegisterUserData = {
         name: string;
@@ -19,6 +21,10 @@ declare global {
     type CustomResponseType = {
         status: number;
         message: string;
+    }
+
+    interface RoutesMapInterface {
+        [path: string]: ReactElement;
     }
 }
 export {}
