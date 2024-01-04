@@ -1,0 +1,35 @@
+@import "../../components/variables.scss";
+
+@font-face {
+    font-family: Nunito;
+    src: url(../../styles/fonts/Nunito_VariableFont_wght.ttf);
+}
+
+.video-page{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    font-family: Nunito;
+    justify-content: center;
+    gap: 20px;
+
+    
+
+    .videos-notes-container{
+        .content-title{
+            width: 100%;
+            font-size: 40px;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+        .videos-wrapper{
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    }
+}
