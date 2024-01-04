@@ -9,7 +9,8 @@ interface InputProps {
   placeholder: string;
   error?: boolean;
   disabled?: boolean;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onHover?: (e: React.MouseEvent<HTMLInputElement>) => void;
   className?: string;
 }
 
@@ -20,6 +21,7 @@ export const InputComponent: FC<InputProps> = ({
   error,
   disabled = false,
   onChange,
+  onHover,
   className,
 }: InputProps) => {
   const [inputType, setInputType] = useState(type);
@@ -47,12 +49,13 @@ export const InputComponent: FC<InputProps> = ({
           value={value}
           placeholder={placeholder}
           onChange={onChange}
+          onMouseEnter={onHover}
           disabled={disabled}
           onKeyUp={handleOnFocusOut}
         />
         {type === "password" && (
           <span className="is-password-visible" onClick={handleOnClickOfEye}>
-            {inputType === "text" ? <LockIcon/> : <OpenLockIcon/>}
+            {inputType === "text" ? <LockIcon /> : <OpenLockIcon />}
           </span>
         )}
       </span>
