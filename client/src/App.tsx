@@ -1,16 +1,12 @@
-import React, { ChangeEvent, useState } from "react";
+import React from "react";
 import MonorepoIndex from "./monorepoClient/MonorepoIndex";
-import { InputComponent } from "./components/input/inputComponent";
-
+import RouteList from "./routes/routeList";
 
 const App = () => {
-  const [value, setValue] = useState("");
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-  };
   return (
     <div>
-      <InputComponent placeholder="password" type="password" value={value} onChange={onChange}/>
+      <RouteList />
+      <MonorepoIndex />
     </div>
   );
 };
