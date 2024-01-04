@@ -1,98 +1,136 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { ChangeEvent, useState } from "react";
 import "./loginUI.scss";
-import {LeftArrow} from "../index";
+import { LeftArrow } from "../index";
 import { errorMessages } from "../../monorepoClient/helpers/constants/errorMessages";
 import { LoginScreen } from "./loginScreen";
 import { VerficationScreen } from "./verficationScreen";
 import { CreatePasswordScreen } from "./createPasswordScreen";
+import { Input } from "./input/inputComponent";
 
 enum Screen {
   LOGIN_SCREEN,
-  ENTER_EMIAL_OTP_SCREEN,
+  ENTER_EMAIL_OTP_SCREEN,
   CREATE_PASSWORD_SCREEN,
 }
 
 export interface LoginUIProps {
-    className?: string;
-    style?: React.CSSProperties;
-    bgColor?: string;
-    textColor?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  bgColor?: string;
+  textColor?: string;
 }
 
 export const LoginUI: React.FC<LoginUIProps> = ({
-    className,
-    style,
-    bgColor,
-    textColor
+  className,
+  style,
+  bgColor,
+  textColor,
 }: LoginUIProps) => {
   const [currentScreen, setCurrentScreen] = useState(Screen.LOGIN_SCREEN);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
   const [otp, setOtp] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
-  const {t} = useTranslation();
-
+  console.log(userData);
+  
+  
   const handleLoginClick = () => {
-    if (!email.trim() || !password.trim()) {
+    if (!userData.email.trim() || !userData.password.trim()) {
       setError(`${errorMessages.LOGIN.ENTER_EMAIL_AND_PASSWORD}`);
       return;
     }
-    setError('');
+    setError("");
   };
 
   const handleInputChange = () => {
-    setError('');
+    setError("");
   };
 
   const handleLoginWithOTP = () => {
-    setEmail('')
-    setPassword('')
-    setOtp('')
-    setCurrentScreen(Screen.ENTER_EMIAL_OTP_SCREEN);
+    setUserData({
+      email: "",
+      password: "",
+    });
+    setOtp("");
+    setCurrentScreen(Screen.ENTER_EMAIL_OTP_SCREEN);
   };
 
+
   const handleVerifyOTP = () => {
-    if (!otp.trim() || !email.trim()) {
+    if (!otp.trim() || !userData.email.trim()) {
       setError(`${errorMessages.VERIFICATION.ENTER_EMAIL_AND_OTP}`);
       return;
     }
-    setError('');
+    setError("");
     setCurrentScreen(Screen.CREATE_PASSWORD_SCREEN);
   };
 
   const handelSkip = () => {
-    setEmail('')
-    setPassword('')
+    setUserData({
+      email: "",
+      password: "",
+    });
     setCurrentScreen(Screen.LOGIN_SCREEN);
   };
 
-  const handleBackArrow = ()=>{
-    setEmail('')
+  const handleBackArrow = () => {
+    setUserData({...userData,email:""});
     setCurrentScreen(Screen.LOGIN_SCREEN);
+  };
+  const handleOnCreateNewPassword = (password:string) => {
+    setUserData({ ...userData, password: password })
+    setCurrentScreen(Screen.LOGIN_SCREEN)
   }
-  const renderScreen = () => {
+  const renderScreen: React.FC = (currentScreen) => {
     switch (currentScreen) {
       case Screen.LOGIN_SCREEN:
-        return <LoginScreen t={t} email={email} setEmail={setEmail} password={password} setPassword = {setPassword} handleInputChange={handleInputChange} handleLoginClick={handleLoginClick} handleLoginWithOTP={handleLoginWithOTP}/>
-      case Screen.ENTER_EMIAL_OTP_SCREEN:
-        return <VerficationScreen t={t} email={email} setEmail={setEmail} otp={otp} setOtp={setOtp} handleInputChange={handleInputChange} handleBackArrow={handleBackArrow} handleVerifyOTP={handleVerifyOTP}/>
+        return (
+          <LoginScreen
+            userData={userData}
+            setUserData={setUserData}
+            handleInputChange={handleInputChange}
+            handleLoginClick={handleLoginClick}
+            handleLoginWithOTP={handleLoginWithOTP}
+          />
+        );
+      case Screen.ENTER_EMAIL_OTP_SCREEN:
+        return (
+          <VerficationScreen
+            email={userData.email}
+            setUserData={setUserData}
+            otp={otp}
+            setOtp={setOtp}
+            handleInputChange={handleInputChange}
+            handleBackArrow={handleBackArrow}
+            handleVerifyOTP={handleVerifyOTP}
+          />
+        );
       case Screen.CREATE_PASSWORD_SCREEN:
-        return <CreatePasswordScreen t={t} newPassword={newPassword} setNewPassword={setNewPassword} handelSkip={handelSkip}/>
+        return (
+          <CreatePasswordScreen
+            handleOnCreateNewPassword={handleOnCreateNewPassword}
+            handelSkip={handelSkip}
+          />
+        );
       default:
         return null;
     }
   };
+  const setOtpValue = (e: ChangeEvent<HTMLInputElement>) => {
+    setOtp(e.target.value);
+  };
   return (
-    <div className={`main ${className}`} style={{...style}}>
-      <div className="login-page" style={{backgroundColor: bgColor, color: textColor}}>
-        {renderScreen()}
+    <div className={`main ${className}`} style={{ ...style }}>
+      <div
+        className="login-page"
+        style={{ backgroundColor: bgColor, color: textColor }}
+      >
+        <Input type="text" placeholder="enter name" value={otp} onChange={setOtpValue}/>
         {error && <div className="error-text">{error}</div>}
       </div>
     </div>
   );
 };
-
-
