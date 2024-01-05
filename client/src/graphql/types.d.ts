@@ -26,5 +26,16 @@ declare global {
     interface RoutesMapInterface {
         [path: string]: ReactElement;
     }
+
+    interface CheckboxProps {
+        className?: string;
+        options: { text: string; value: string }[];
+        bgColor?: string;
+        textColor?: string;
+        onSelect?: (currentSelected: {}, selectedValues: {}[]) => void;
+        style?: React.CSSProperties;
+        direction?: "row" | "column";
+        title?: string;
+    }
 }
 export {}
