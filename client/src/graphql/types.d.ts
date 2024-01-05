@@ -35,8 +35,8 @@ declare global {
       onChange: (e: ChangeEvent<HTMLInputElement>) => void;
       onHover?: (e: React.MouseEvent<HTMLInputElement>) => void;
       className?: string;
-      height?: number | string;
-      width?: number | string;
+      height?: string;
+      width?: string;
       backgroundColor?: string;
       style?: CSSProperties;
     }
