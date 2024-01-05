@@ -3,17 +3,18 @@
 
 .video-page{
     width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: $primaryBgColor;
     color: $primaryColor;
     font-family: $secondaryFontFamily;
-    justify-content: center;
     gap: 20px;
+    align-items: center;
 
     
 
-    .videos-notes-container{
+    .videos-container{
         .content-title{
             width: 100%;
             font-size: $headerFontSize;

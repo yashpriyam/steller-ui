@@ -53,10 +53,11 @@ export const getAllVideos = async (
                 modifiedVideoDataFilter[key] = { $in: value };
             }
         });
-        const deletedVideoData : [VideoDataType] = await videoModel.find(modifiedVideoDataFilter);
+        const filteredVideoData: [VideoDataType] = await videoModel.find(modifiedVideoDataFilter);
+
         return {
-            videoData: deletedVideoData,
-            response: deletedVideoData.length ? {
+            videoData: filteredVideoData,
+            response: filteredVideoData.length ? {
                 status: statusCodes.OK,
                 message: VIDEO_FOUND,
             } : errorData,

@@ -35,47 +35,42 @@ export const Card: React.FC<CardProps> = ({
     <div
       className={`main-container ${className}`}
       style={{ ...style, height: height, width: width }}
-      onClick={() => {
-        // useNavigate
-      }}
     >
-      <div className="image-div">
+      <div className="card-image-container">
         <iframe
           width="560"
           height="315"
-          className="img"
+          className="card-image"
           src={links?.youtube}
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
-          onClick={()=>{}}
-        >
-        </iframe>
-        <span className="unclickable"></span>
-        <span className={`tags-span  ${tagPosition}`}>
+        ></iframe>
+        <div className="overlay-div"></div>
+        <span className={`card-tags-wrapper ${tagPosition}`}>
           {topics?.map((tag, i) => {
             return i <= 1 ? (
-              <span className={`tags ${tag}`}>{tag}</span>
+              <span className={`card-tag ${tag}`}>{tag}</span>
             ) : (
-              <span className={`tags hidden-tags ${tag}`}>{tag}</span>
+              <span className={`card-tag hidden-tags ${tag}`}>{tag}</span>
             );
           })}
         </span>
       </div>
-      <div className="text">
-        {description && <p>{description}</p>}
+      <div className="card-text-wrapper">
         {title && (
           <p className="card-title">
             <strong>{title}</strong>
           </p>
         )}
+        {description && <p>{description}</p>}
         <div className="videodata-wrapper">
           {dayNumber && <span>Day Number : {dayNumber}</span>}
           {duration && <span>duration : {duration}</span>}
           {videoNumber && <span>Video Number : {videoNumber}</span>}
+          {children}
         </div>
-        {children && children}
       </div>
     </div>
   );

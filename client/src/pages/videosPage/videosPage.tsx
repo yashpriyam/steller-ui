@@ -1,9 +1,9 @@
 import { Card } from "../../components/card/card";
 import React, { useEffect, useState } from "react";
 import { filterDataList } from "./dataList";
-import "./videosPage.scss";
 import { FilterTags } from "../../components/filterTags/filterTags";
 import { useVideos } from "../../redux/actions/videosAction";
+import "./videosPage.scss";
 interface VideosPageProps {
   className?: string;
   filterData?: { tag: string }[];
@@ -16,14 +16,13 @@ const VideosPage: React.FC<VideosPageProps> = ({
   const [filterTag, setFilterTag] = useState<string>("");
   const { videoData, getAllVideos } = useVideos();
 
-  const getVideosFunc = async ()=>{
+  const getAllVideosRequest = async () => {
     await getAllVideos({});
-  }
+  };
   useEffect(() => {
-    getVideosFunc();
+    getAllVideosRequest();
   }, []);
-  console.log({videoData});
-  
+  const { videoList } = videoData;
 
   return (
     <div className={`video-page ${className}`}>
@@ -32,17 +31,19 @@ const VideosPage: React.FC<VideosPageProps> = ({
         setFilterTag={setFilterTag}
         filterTag={filterTag}
       />
-      <div className="videos-notes-container">
+      <div className="videos-container">
         <div className="content-title">VIDEOS</div>
         <div className="videos-wrapper">
-          {videoData.videoList.map(
+          {videoList.map(
             (video) =>
               (video.topics?.includes(filterTag) || filterTag === "") && (
                 <Card
                   className={className}
                   tagPosition="left"
                   data={video}
-                ></Card>
+                >
+                  <span>Children</span>
+                </Card>
               )
           )}
         </div>
