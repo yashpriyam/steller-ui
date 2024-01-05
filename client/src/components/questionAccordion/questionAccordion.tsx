@@ -24,7 +24,7 @@ const QuestionAccordion = ({
                 }
               </div>
               <div className='question-submit-btn-wrapper'>
-                <Button className='question-submit-btn' />
+                <Button iconPosition="center" className='question-submit-btn' />
               </div>
             </div>)
           }
