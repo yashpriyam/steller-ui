@@ -36,10 +36,10 @@ export const InputComponent: FC<InputProps> = ({
   };
     const typeValidationMap: Record<string, Function> = {
       email: (value: string) => {
-        setShowError(!isValidEmail(value));
+        setShowError(!isValidEmail(value) && Boolean(value));
       },
       password: (value: string) => {
-        setShowError(!isValidPassword(value))        
+        setShowError(!isValidPassword(value)&&Boolean(value))        
       },
     };
 
