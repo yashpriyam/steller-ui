@@ -44,7 +44,7 @@ export const InputComponent: FC<InputProps> = ({
     >
       <span className={`input-component-container`}>
         <input
-          type={showPassword ? "text" : type}
+           type={showPassword ? constantValues.text : type}
           className={`input`}
           value={value}
           placeholder={placeholder}
