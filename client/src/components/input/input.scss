@@ -1,0 +1,51 @@
+@import "../variables.scss";
+.input-component-wrapper {
+  width: 240px;
+  .input-component-container{
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    align-self: stretch;  
+    border-radius: 5px;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid $gray;
+    cursor: pointer;
+     &.input-component-error{
+      border:1px solid $red;
+    }
+    width: 100%;
+    .input-container {
+      padding: 5px;
+      border-radius: 5px;
+      background-color: transparent;
+      height: 50px;
+      font-size: 16px;
+      width: 100%;
+      border: none;
+      color: $gray;
+     
+      transition: border-color 0.3s ease;
+      outline: none;
+    }
+    .input-container[type="number"]::-webkit-inner-spin-button{
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    .password-visible {
+      font-size: 12px;
+      font-weight: 600;
+      padding-right: 8px;
+      color: $gray;
+    }
+  }
+  .input-component-error-container{
+    width: 100%;
+    text-align: start;
+    .input-component-error {
+      color: $red;
+      font-size: 12px;
+      text-align: end;
+    }
+  }
+}

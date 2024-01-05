@@ -1,1 +1,1 @@
-export {}
+export { deleteCookieByKey } from "./cookies/deleteCookieByKey";

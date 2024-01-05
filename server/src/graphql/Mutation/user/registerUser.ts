@@ -1,4 +1,5 @@
-import { User } from "@models";
+import jwt from "jsonwebtoken";
+import { User, otpModel } from "@models";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
@@ -11,7 +12,8 @@ import { errorMessages } from "@constants";
 
 export const registerUser = async (
   _parent: undefined,
-  args: { data: RegisterType }
+  args: { data: RegisterType },
+  { res }: ContextType,
 ): Promise<RegisterType | UserInputError | unknown> => {
   try {
     const { data } = args;
@@ -24,6 +26,8 @@ export const registerUser = async (
       occupation,
       sessionPreference,
       expectedSalary,
+      emailOtp,
+      collegeName,
     } = data;
 
     if (!isValidEmail(email)) {
@@ -31,6 +35,20 @@ export const registerUser = async (
     } else if (!isValidPhoneNumber(phoneNumber)) {
       throw new UserInputError(errorMessages.USER.INVALID_PHONE_NUMBER);
     }
+
+    const otpDetails = await otpModel.findOne({
+      email,
+      emailOtp,
+      expiresAt: {
+        $gte: new Date()
+      }
+    })
+
+    if(!otpDetails){
+      return;
+    }
+
+    otpDetails.isEmailVerified = true;
 
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
 
@@ -42,6 +60,7 @@ export const registerUser = async (
       occupation,
       sessionPreference,
       expectedSalary,
+      collegeName,
     });
 
     const { IST: time } = savedUser;
@@ -62,7 +81,11 @@ export const registerUser = async (
         ...getRegistrationEmailForAdmin(emailDetails),
         to: process.env.SENDER_EMAIL || "",
       }),
+       otpDetails.save()
     ]);
+
+    const token = jwt.sign({ user: savedUser }, process.env.JWT_SECRET_VALUE || "");
+    res.cookie(process.env.JWT_SECRET_KEY || "", token);
     return savedUser;
   } catch (error) {
     return error;
