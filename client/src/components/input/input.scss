@@ -15,7 +15,7 @@
       border:1px solid $red;
     }
     width: 100%;
-    .input {
+    .input-container {
       padding: 5px;
       border-radius: 5px;
       background-color: transparent;
@@ -28,7 +28,7 @@
       transition: border-color 0.3s ease;
       outline: none;
     }
-    .input[type="number"]::-webkit-inner-spin-button{
+    .input-container[type="number"]::-webkit-inner-spin-button{
       -webkit-appearance: none;
       margin: 0;
     }
@@ -42,7 +42,7 @@
   .input-component-error-container{
     width: 100%;
     text-align: start;
-    .error {
+    .input-component-error {
       color: $red;
       font-size: 12px;
       text-align: end;

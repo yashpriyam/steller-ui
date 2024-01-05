@@ -60,7 +60,7 @@ export const InputComponent: FC<InputProps> = ({
       >
         <input
           type={showPassword ? constantValues.text : type}
-          className={`input`}
+          className={`input-container`}
           value={value}
           placeholder={placeholder}
           onChange={handleOnChange}
@@ -75,7 +75,7 @@ export const InputComponent: FC<InputProps> = ({
       </span>
       {showError && (
         <div className="input-component-error-container">
-          <span className="error">{errorMessage}</span>
+          <span className="input-component-error">{errorMessage}</span>
         </div>
       )}
     </div>
