@@ -30,7 +30,6 @@ declare global {
       type: string;
       value?: string;
       placeholder?: string;
-      error?: boolean;
       errorMessage?:string;
       disabled?: boolean;
       onChange: (e: ChangeEvent<HTMLInputElement>) => void;
