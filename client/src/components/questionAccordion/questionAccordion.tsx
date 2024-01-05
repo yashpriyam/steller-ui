@@ -7,15 +7,15 @@ import { Button } from '../button/button';
 const QuestionAccordion = ({
   questionData
 }: any) => {
-  const { topic, options } = questionData;
+  const { question, options } = questionData;
   return (
     <Accordion className='question-title' title={<div className='question-title'>
-      {topic[0].text}
+      {question[0].text}
     </div>}>
       <div className='question-accordion-container'>
         <div>
           {
-            topic.map((top: any) => <div className='question-title-sub-container'>
+            question.map((top: any) => <div className='question-title-sub-container'>
               <div className='question-title-text'>
               </div>
               <div className='question-option-container'>

@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './questionPage.scss';
 import QuestionAccordion from '../../components/questionAccordion/questionAccordion';
+import { useQuestions } from '../../redux/actions/questionAction';
 
 const QuestionPage = () => {
+    const { questions, getAllQuestions } = useQuestions();
+    const { questionList } = questions;
+    useEffect(()=> {
+        getAllQuestions()
+    },[])
     const questionData = {
             topic: [{
                 text: 'Which of the following keywords is used to define a variable in Javascript?',
@@ -25,7 +31,9 @@ const QuestionPage = () => {
     return (
         <div className='question-page-container'>
             <div className='question-page-sub-container'>
-                <QuestionAccordion questionData={questionData} />
+                {
+                    questionList.map((questionData, index) =>  <QuestionAccordion key={index} questionData={questionData} />)
+                }
             </div>
         </div>
     )
