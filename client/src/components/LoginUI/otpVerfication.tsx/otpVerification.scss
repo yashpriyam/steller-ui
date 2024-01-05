@@ -1,0 +1,42 @@
+@import "../../variables.scss";
+
+.verification-page-wrapper {
+  .back-arrow {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 50%;
+    color: $bacgroundBlackColor;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: $bacgroundBlackColor;
+    }
+  }
+  .heading-container {
+    margin: 10px 0;
+  }
+  .input-component {
+    height: 75px;
+    width: 100%;
+  }
+  .button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .send-verify-otp {
+      width: 100%;
+      margin: 0 5px;
+        &:disabled{
+      opacity: .5;
+      cursor: not-allowed;
+    }
+      
+    }
+  }
+  .error-container {
+    color: $red;
+    font-size: $smallFontSize;
+    padding-top: 5px;
+  }
+}
