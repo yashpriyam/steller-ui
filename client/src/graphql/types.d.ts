@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { CSSProperties, ChangeEvent, ReactElement } from "react";
 
 declare global {
     type RegisterUserData = {
@@ -25,6 +25,26 @@ declare global {
 
     interface RoutesMapInterface {
         [path: string]: ReactElement;
+    }
+    interface InputProps {
+      type: string;
+      value?: string;
+      placeholder?: string;
+      errorMessage?:string;
+      disabled?: boolean;
+      onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+      onHover?: (e: React.MouseEvent<HTMLInputElement>) => void;
+      className?: string;
+      height?: string;
+      width?: string;
+      backgroundColor?: string;
+      style?: CSSProperties;
+    }
+    interface OpenIconProps {
+      className?: string;
+    }
+    interface CloseIconProps {
+      className?: string;
     }
 }
 export {}
