@@ -1,34 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dayPage.scss";
 import Accordion from "../../components/accordion/accordion";
-import { notesDataList, questionsDataList, videosDataList } from "./dayPageDataList";
-import { useNavigate } from "react-router-dom";
+import { questionsDataList } from "./dayPageDataList";
+import { useNavigate, useParams } from "react-router-dom";
+import { useVideos } from "../../redux/actions/videosAction";
+import { useNotes } from "../../redux/actions/notesAction";
+import DropDownIcon from "../../icons/dropDownIcon";
 interface DayPageProps {
   className?: string;
   title?: React.ReactNode | string;
-  videosData?: { url?: string; title?: string }[];
-  notesData?: { url?: string; title?: string }[];
   questionsData?: { options?: string[]; title?: string }[];
 }
 
 export const DayPage: React.FC<DayPageProps> = ({
   className,
-  title = "DAY 1",
-  videosData=videosDataList,
-  notesData=notesDataList,
-  questionsData=questionsDataList,
+  title,
+  questionsData = questionsDataList,
 }: DayPageProps) => {
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const handleToggleSidebar = () => {
     setToggleSidebar(!toggleSidebar);
   };
   const navigate = useNavigate();
+  const { dayNumber } = useParams();
+  const { videoData, getAllVideos } = useVideos();
+  const { noteData, getAllNotes } = useNotes();
+  const { videoList } = videoData;
+  const { noteList } = noteData;
   const handleNavigation = (context: string) => {
     navigate(`/dayContext/${context}`);
   };
+  console.log({ noteList });
+  const getAllDataRequest = async (dayNumber: number) => {
+    await getAllVideos({ dayNumber });
+    await getAllNotes({ dayNumber });    
+  };
+  useEffect(() => {
+    getAllDataRequest(Number(dayNumber));
+  }, []);
   return (
     <div className={`main-daypage-container ${className}`}>
-      <div className="main-title-div">{title}</div>
+      <div className="main-title-div">{`Day ${dayNumber}`}</div>
       <div className="content-navigation">
         <span
           className="naviagtor"
@@ -70,13 +82,13 @@ export const DayPage: React.FC<DayPageProps> = ({
             >
               Videos
             </div>
-            {videosData?.map((video) => {
+            {videoList?.map((video) => {
               return (
                 <div className="video-content-wrapper">
                   <div className="video-content">
                     <iframe
-                      src={video.url}
-                      title="YouTube video player"
+                      src={video?.links?.youtube}
+                      title={video.title}
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
@@ -98,7 +110,7 @@ export const DayPage: React.FC<DayPageProps> = ({
                 className={`icon ${toggleSidebar && "rotate-icon"}`}
                 onClick={handleToggleSidebar}
               >
-                {">"}
+                {<DropDownIcon color="black"/>}
               </span>
             </div>
           </div>
@@ -149,12 +161,12 @@ export const DayPage: React.FC<DayPageProps> = ({
             Notes
           </div>
           <div className="note-content-wrapper">
-            {notesData?.map((note) => (
+            {noteList?.map((note) => (
               <div className="note-content-container">
                 <div className="note-content">
                   <iframe
-                    src={note.url}
-                    title="OLX Meetup: Typesafe REST with feTS"
+                    src={note.link}
+                    title={note.title}
                     scrolling="no"
                     frameBorder="0"
                     // webkitAllowFullScreen
@@ -164,7 +176,7 @@ export const DayPage: React.FC<DayPageProps> = ({
                   ></iframe>
                 </div>
                 <div className="content-text-wrapper">
-                  <div className="content-title">Day 1 HTML</div>
+                  <div className="content-title">{note.title}</div>
                   <p>Day 2</p>
                 </div>
               </div>

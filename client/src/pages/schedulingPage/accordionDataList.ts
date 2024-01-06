@@ -10,6 +10,7 @@ export const accordionDataList = [
         videoUrl: "",
         notesUrl: "",
         assignmentUrl: "",
+        dayNumber:1,
         tags: [
           { tagName: "HTML"},
           { tagName: "CSS" },
@@ -26,6 +27,7 @@ export const accordionDataList = [
         videoUrl: "",
         notesUrl: "",
         assignmentUrl: "",
+        dayNumber: 2,
         tags: [
           { tagName: "HTML"},
           { tagName: "JS"},
@@ -38,6 +40,7 @@ export const accordionDataList = [
         description: "",
         videoUrl: "",
         notesUrl: "",
+        dayNumber:3,
         assignmentUrl: "",
         tags: [
           { tagName: "REACT"},
@@ -50,6 +53,7 @@ export const accordionDataList = [
         description: "",
         videoUrl: "",
         notesUrl: "",
+        dayNumber:4,
         assignmentUrl: "",
         tags: [
           { tagName: "JS"},
@@ -61,6 +65,7 @@ export const accordionDataList = [
         description: "",
         videoUrl: "",
         notesUrl: "",
+        dayNumber:5,
         assignmentUrl: "",
         tags: [
           { tagName: "REACT"},
@@ -78,6 +83,7 @@ export const accordionDataList = [
         description: "",
         videoUrl: "",
         notesUrl: "",
+        dayNumber:1,
         assignmentUrl: "",
         tags: [
           { tagName: "HTML"},
@@ -91,6 +97,7 @@ export const accordionDataList = [
         videoUrl: "",
         notesUrl: "",
         assignmentUrl: "",
+        dayNumber: 2,
         tags: [
           { tagName: "HTML"},
           { tagName: "HTML"},

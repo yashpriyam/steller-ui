@@ -46,5 +46,45 @@ declare global {
     interface CloseIconProps {
       className?: string;
     }
+  type VideoDataType = {
+    title?: string;
+    description?: string;
+    dayNumber?: number;
+    videoNumber?: number;
+    topics?: string[];
+    links?: {
+      webmasters?: string;
+      youtube?: string;
+    };
+    isActive?: boolean;
+    duration?: string;
+  }
+
+  type VideoDataStateType = {
+    videoList: VideoDataType[];
+  }
+
+  type NotesFilterDataType = {
+    title?: string;
+    link?: string;
+    topics?: [string];
+    dayNumber?: Number;
+    noOfPages?: Number;
+    description?: string;
+    estimatedReadingTime?: string;
+  }
+  type NotesDataType = {
+    title: string;
+    link: string;
+    topics: [string];
+    dayNumber: Number;
+    noOfPages: Number;
+    description: string;
+    estimatedReadingTime: string;
+  }
+
+  type NotesDataStateType = {
+    noteList: NotesDataType[];
+  }
 }
 export {}
