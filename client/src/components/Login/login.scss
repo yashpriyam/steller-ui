@@ -1,13 +1,11 @@
 @import "../variables.scss";
-.main {
+.login-wrapper-container {
   height: 100vh;
   background-color: $black;
   display: flex;
   justify-content: center;
   align-items: center;
-
   .login-page {
-    position: relative;
     background-color: $darkGrey;
     width: 440px;
     min-height: 400px;
@@ -18,12 +16,11 @@
 }
 
 @media (max-width: 500px) {
-  .main{
+  .login-wrapper-container {
     width: 100%;
-    .login-page{
-      width: 300px;    
+    .login-page {
+      width: 300px;
       padding: 50px 25px;
-
     }
   }
 }

@@ -1,0 +1,47 @@
+@import "../variables.scss";
+
+@mixin password-login-wrapper {
+  color: $primary-color;
+  padding: 5px 0;
+  cursor: pointer;
+  font-size: $smallFontSize;
+  &:hover {
+    color: $primaryTextColor;
+  }
+}
+.login-component-wrapper {
+  .input-component {
+    height: 75px;
+    width: 100%;
+  }
+  .heading-wrapper {
+    color: $primaryColor;
+    padding: 10px 0;
+  }
+  .forget-password-login-with-otp-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .forget-password {
+      @include password-login-wrapper;
+    }
+  }
+  .login-button {
+    width: 100%;
+    margin-top: 10px;
+    font-size: $largerFontSize;
+    &:disabled{
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+  .error-container {
+    width: 100%;
+    height: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    color: $red;
+    font-size: $smallFontSize;
+    padding-top: 5px;
+  }
+}
