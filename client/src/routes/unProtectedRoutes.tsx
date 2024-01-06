@@ -7,7 +7,7 @@ import { DayPage } from "../pages/dayPage/dayPage";
 const unProtectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/homePage": <HomePage />,
   "/scheduling": <SchedulingPage/>,
-  "/daypage" : <DayPage/>,
+  "/day/:dayNumber" : <DayPage/>,
 });
 
 export const getUnProtectedRoutes = (): React.ReactNode[] => Object.entries(unProtectedRoutesMap).map(([path, element]) => <Route key={path} path={path} element={element} />)
