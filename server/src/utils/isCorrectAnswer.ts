@@ -1,13 +1,7 @@
-
-interface QuestionResponseType {
-    text: string;
-    imageUrl: string;
-  }
-  
-  function isCorrectAnswer(
+function isCorrectAnswer(
     response: QuestionResponseType[],
     question: QuestionResponseType[]
-  ) {
+) {
     const hasMatch = response.some((responseItem) =>
       question.some(
         (questionItem) =>
@@ -17,6 +11,6 @@ interface QuestionResponseType {
     );
   
     return hasMatch;
-  }
+}
 
-  export default isCorrectAnswer;
+export default isCorrectAnswer;

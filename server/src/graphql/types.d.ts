@@ -321,4 +321,10 @@ declare global {
     status: number;
     message: string;
   };
+
+  interface QuestionResponseType {
+    text: string;
+    imageUrl: string;
+  }
+
 }

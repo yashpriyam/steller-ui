@@ -1,6 +1,6 @@
 import { questionAttempt, questionModel } from '@models';
 import { localMessages, errorMessages, statusCodes } from '@constants';
-import isCorrectAnswer from './utils/isCorrectAnswer';
+import isCorrectAnswer from '../../../utils/isCorrectAnswer';
 
 
 export const createQuestionAttemptByUser = async (
