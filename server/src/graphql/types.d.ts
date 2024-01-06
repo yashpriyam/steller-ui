@@ -221,7 +221,7 @@ declare global {
     userId: ObjectId;
     questionId: ObjectId;
     response: { imageUrl: string; text: string }[];
-    isCorrect: boolean;
+    isCorrect?: boolean;
     timestamp: Date;
   };
 
@@ -321,4 +321,10 @@ declare global {
     status: number;
     message: string;
   };
+
+  interface QuestionResponseType {
+    text: string;
+    imageUrl: string;
+  }
+
 }
