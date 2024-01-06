@@ -13,7 +13,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login: String
+    login(data: LoginUserDataInputType!): LoginUserDataOutputType!
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
     createTransaction(
       data: CreateTransactionInputType!
@@ -100,7 +100,7 @@ const typeDefs = gql`
     duration: String
   }
 
-  input OptionalLinksInput{
+  input OptionalLinksInput {
     webmasters: String
     youtube: String
   }
@@ -167,21 +167,21 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
 
-  input OtpUserInputType {	
-    email: String!	
-  }	
-  type OtpUserOutputType {	
-    response: CustomResponseType!	
-  }	
-  input UserActivityInputType {	
-    phoneNumber: String	
-    isOpened: Boolean	
-    devices: [String]	
-    IST: String	
-    isValidPhoneNumber: Boolean	
-  }	
-  type UserActivityOutputType {	
-    response: CustomResponseType!	
+  input OtpUserInputType {
+    email: String!
+  }
+  type OtpUserOutputType {
+    response: CustomResponseType!
+  }
+  input UserActivityInputType {
+    phoneNumber: String
+    isOpened: Boolean
+    devices: [String]
+    IST: String
+    isValidPhoneNumber: Boolean
+  }
+  type UserActivityOutputType {
+    response: CustomResponseType!
   }
 
   type CreateNotesOutputType {
@@ -367,6 +367,13 @@ const typeDefs = gql`
   type GetAllQuestionsOutputType {
     questionData: [QuestionData]
     response: CustomResponseType
+  }
+  input LoginUserDataInputType {
+    email: String!
+    password: String!
+  }
+  type LoginUserDataOutputType{
+    response:CustomResponseType!
   }
   scalar DateTime
   scalar JSON

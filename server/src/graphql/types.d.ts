@@ -321,4 +321,8 @@ declare global {
     status: number;
     message: string;
   };
+  type loginUserInputType = {
+    email: string;
+    password: string;
+  }
 }
