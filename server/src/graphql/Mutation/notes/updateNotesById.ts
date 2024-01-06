@@ -18,7 +18,7 @@ export const updateNotesById = async (
       dayNumber,
       description,
       estimatedReadingTime,
-      links,
+      link,
       noOfPages,
       title,
       topics,
@@ -26,7 +26,7 @@ export const updateNotesById = async (
     const notesUpdatedData: NotesDataType = await notesModel.findByIdAndUpdate(
       notesId,
       {
-        links,
+        link,
         title,
         topics,
         noOfPages,
