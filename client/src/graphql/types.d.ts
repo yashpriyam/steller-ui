@@ -91,5 +91,11 @@ declare global {
     multi = "multi",
     single = "single",
   }
+  
+  interface QuestionResponseType {
+    text: string;
+    imageUrl: string;
+  }
+
 }
 export {};

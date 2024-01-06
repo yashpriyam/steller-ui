@@ -5,7 +5,8 @@ import { Checkbox } from '../checkbox/checkbox';
 import { Button } from '../button/button';
 
 const QuestionAccordion = ({
-  questionData
+  questionData,
+  onSubmit,
 }: any) => {
   const { question, options } = questionData;
   return (
@@ -24,7 +25,7 @@ const QuestionAccordion = ({
                 }
               </div>
               <div className='question-submit-btn-wrapper'>
-                <Button iconPosition="center" className='question-submit-btn' />
+                <Button onClick={onSubmit} iconPosition="center" className='question-submit-btn' />
               </div>
             </div>)
           }
