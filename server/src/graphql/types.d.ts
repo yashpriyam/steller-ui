@@ -82,7 +82,7 @@ declare global {
 
   type UpdateNotesInputType = {
     title?: string;
-    links?: [string];
+    link?: string;
     topics?: [string];
     dayNumber?: number;
     noOfPages?: number;
@@ -95,7 +95,7 @@ declare global {
   };
   type UpdateNotesDataType = {
     title: String;
-    links: [String];
+    link: String;
     topics: [String];
     dayNumber: Number;
     noOfPages?: Number;
@@ -104,7 +104,7 @@ declare global {
   };
   type NotesDataType = {
     title: String;
-    links: [String];
+    link: String;
     topics: [String];
     dayNumber: Number;
     noOfPages?: Number;
@@ -221,7 +221,7 @@ declare global {
     userId: ObjectId;
     questionId: ObjectId;
     response: { imageUrl: string; text: string }[];
-    isCorrect: boolean;
+    isCorrect?: boolean;
     timestamp: Date;
   };
 
@@ -321,4 +321,10 @@ declare global {
     status: number;
     message: string;
   };
+
+  interface QuestionResponseType {
+    text: string;
+    imageUrl: string;
+  }
+
 }

@@ -30,4 +30,7 @@ export const errorMessages = Object.freeze({
     OTP_SENT_FAILED: "cannot send otp",
     OTP_EMAIL_INVALID: "email address is not valid",
   },
+  QUESTION_ATTEMPT_MODEL : {
+    QUESTION_ATTEMPT_FAILED: "unable to submit your response"
+  }
 });
