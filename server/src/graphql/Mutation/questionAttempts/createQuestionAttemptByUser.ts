@@ -1,5 +1,8 @@
-import { questionAttempt } from '@models';
+import { questionAttempt, questionModel } from '@models';
 import { localMessages, errorMessages, statusCodes } from '@constants';
+import isCorrectAnswer from './utils/isCorrectAnswer';
+
+
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
   args: { questionAttemptData: QuestionAttemptSchemaType }
@@ -11,15 +14,19 @@ export const createQuestionAttemptByUser = async (
     status: statusCodes.BAD_REQUEST,
   };
   try {
-    const { questionAttemptData } = args;  
-    const { isCorrect, questionId, userId,response } = questionAttemptData;
+    const { questionAttemptData } = args;
+    const { questionId, userId, response } = questionAttemptData;
+    const question = await questionModel.findById(questionId);
+
+    const isCorrect = isCorrectAnswer(response, question!.answer);
+
     const createdQuestionAttemtData: QuestionAttemptSchemaType =
       await questionAttempt.create({
         isCorrect,
         questionId,
         userId,
-        response
-      });      
+        response,
+      });
     const responseData: CustomResponseType = createdQuestionAttemtData
       ? {
           message: QUESTION_ATTEMPT_SUCCESS,
@@ -29,9 +36,9 @@ export const createQuestionAttemptByUser = async (
 
     return {
       questionData: createdQuestionAttemtData,
-      response:responseData,
+      response: responseData,
     };
   } catch (error) {
-    return { response :errorData};
+    return { response: errorData };
   }
 };
