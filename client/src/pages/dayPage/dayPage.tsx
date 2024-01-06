@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./dayPage.scss";
 import Accordion from "../../components/accordion/accordion";
 import { notesDataList, questionsDataList, videosDataList } from "./dayPageDataList";
+import { useNavigate } from "react-router-dom";
 interface DayPageProps {
   className?: string;
   title?: React.ReactNode | string;
@@ -21,24 +22,35 @@ export const DayPage: React.FC<DayPageProps> = ({
   const handleToggleSidebar = () => {
     setToggleSidebar(!toggleSidebar);
   };
+  
+  const navigate = useNavigate();
+  const handleNavigation =(path : string)=>{
+    navigate(`/dayContext/${path}`);
+  }
   return (
     <div className={`main-daypage-container ${className}`}>
       <div className="main-title-div">{title}</div>
       <div className="content-navigation">
-        <a href="#videos" className="naviagtor">
+        <span className="naviagtor" onClick={()=>{
+          handleNavigation("videos")
+        }}>
           Videos
-        </a>
-        <a href="#ques" className="naviagtor">
+        </span>
+        <span className="naviagtor" onClick={()=>{
+          handleNavigation("question")
+        }}>
           Questions
-        </a>
-        <a href="#note" className="naviagtor">
+        </span>
+        <span className="naviagtor" onClick={()=>{
+          handleNavigation("notes")
+        }}>
           Notes
-        </a>
+        </span>
       </div>
       <div className="content-wrapper">
         <div className="videos-question-wrapper">
           <div className={`videos-wrapper ${toggleSidebar && "expand-videos"}`}>
-            <div id="#videos" className="content-header">
+            <div className="content-header" onClick={()=>handleNavigation("videos")}>
               Videos
             </div>
             {videosData?.map((video) => {
@@ -76,7 +88,7 @@ export const DayPage: React.FC<DayPageProps> = ({
               toggleSidebar && "hide-question-bar"
             }`}
           >
-            <div id="#ques" className="content-header">
+            <div className="content-header" onClick={()=>{handleNavigation("question")}}>
               Questions
             </div>
             {questionsData?.map((ques) => {
@@ -104,7 +116,7 @@ export const DayPage: React.FC<DayPageProps> = ({
           </div>
         </div>
         <div className={"notes-wrapper"}>
-          <div id="#notes" className="content-header">
+          <div className="content-header" onClick={()=>{handleNavigation("notes")}}>
             Notes
           </div>
           <div className="note-content-wrapper">
