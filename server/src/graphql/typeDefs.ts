@@ -277,10 +277,11 @@ const typeDefs = gql`
     isOpenable: Boolean!
   }
   type QuestionOutputType {
-    questionData: QuestionData
+    questionData: QuestionDataType
     response: CustomResponseType
   }
-  type QuestionData {
+  type QuestionDataType {
+    id: String,
     question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
@@ -366,7 +367,7 @@ const typeDefs = gql`
     type: QuestionMetaType
   }
   type GetAllQuestionsOutputType {
-    questionData: [QuestionData]
+    questionData: [QuestionDataType]
     response: CustomResponseType
   }
   input QuestionAttemptType {

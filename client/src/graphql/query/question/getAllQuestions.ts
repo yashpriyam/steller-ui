@@ -32,6 +32,7 @@ export const GET_ALL_QUESTIONS = gql`
           imageUrl
           text
         }
+        id
       }
     }
   }
