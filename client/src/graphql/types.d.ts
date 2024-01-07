@@ -63,6 +63,7 @@ declare global {
   }
 
   type QuestionDataType = {
+    id: string;
     question: { imageUrl: string; text: string }[];
     questionType: QuestionTypeEnum;
     options: { imageUrl: string; text: string }[];

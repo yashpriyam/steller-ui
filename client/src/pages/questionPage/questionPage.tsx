@@ -8,8 +8,12 @@ const QuestionPage = () => {
     const { questions, getAllQuestions } = useQuestions();
     const { createQuestionAttemptByUser } = useQuestionAttempt();
     const { questionList } = questions;
-    const onSubmit = () => {
-        console.log('submit function...')
+const onSubmit = (question: QuestionDataType, selectedValues: { imageUrl: string, text: string, __typename: string }[]) => {
+    const filteredData = selectedValues.map(selectedValue => ({
+        imageUrl: selectedValue.imageUrl,
+        text: selectedValue.text
+    }))
+    createQuestionAttemptByUser(filteredData, question.id)
     }
     useEffect(()=> {
         getAllQuestions()

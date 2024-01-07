@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Accordion from '../accordion/accordion';
 import './questionAccordion.scss'
 import { Checkbox } from '../checkbox/checkbox';
@@ -8,6 +8,7 @@ const QuestionAccordion = ({
   questionData,
   onSubmit,
 }: any) => {
+  const [selectedValues, setSelectedValues] = useState<{}>({});
   const { question, options } = questionData;
   return (
     <Accordion className='question-title' title={<div className='question-title'>
@@ -21,11 +22,11 @@ const QuestionAccordion = ({
               </div>
               <div className='question-option-container'>
                 {
-                  <Checkbox options={options} className='question-checkbox' />
+                  <Checkbox onSelect={(index, selectedValues) => setSelectedValues(selectedValues)} options={options} className='question-checkbox' />
                 }
               </div>
               <div className='question-submit-btn-wrapper'>
-                <Button onClick={onSubmit} iconPosition="center" className='question-submit-btn' />
+                <Button onClick={()=> onSubmit(questionData, Object.values(selectedValues))} iconPosition="center" className='question-submit-btn' />
               </div>
             </div>)
           }
