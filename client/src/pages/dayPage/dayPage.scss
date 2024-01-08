@@ -1,4 +1,25 @@
 @import "../../components/variables.scss";
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    background-color: rgba(128, 128, 128, 0.289);
+    width: 10px;
+    border-radius: 8px;
+    opacity: 1;
+    &:hover{
+      cursor: pointer;
+    }
+    @media (max-width:$screenMd){
+      width: 8px;
+    }
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #575757;
+    border-radius: 8px;
+    &:hover{
+      cursor: grab;
+    }
+  }
+}
 
 .main-daypage-container {
   display: flex;
@@ -10,10 +31,8 @@
   gap: 20px;
 
   .main-title-div {
-    font-size: 80px;
+    font-size: 70px;
     color: $primaryColor;
-    font-family: "Courier New", Courier, monospace;
-    border-bottom: 1px solid $primaryColor;
     font-weight: 700;
     padding: 10px 20px;
   }
@@ -37,52 +56,73 @@
   }
   .content-wrapper {
     width: 100%;
-    padding: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
     .videos-question-wrapper {
       display: flex;
       width: 100%;
       justify-content: space-evenly;
       transition: 0.3s;
-      @media (max-width: $screenMd) {
+      gap: 20px;
+      @media (max-width: $screenLg) {
         flex-direction: column;
         align-items: center;
+        gap: 50px;
       }
       .videos-wrapper {
         width: 65%;
-        @media (max-width: $screenMd) {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        @media (max-width: $screenLg) {
           width: 100%;
         }
-        .video-content-wrapper {
-          padding: 30px 0px;
-          @media (max-width: $screenMd) {
-            padding: 10px 0px;
+        .show-scrollbar{
+          @include scrollbar;
+        }
+        .videos-content-wrapper {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          width: 100%;
+          height: 900px;
+          overflow: auto;
+          padding-right: 20px;
+          &::-webkit-scrollbar {
+            opacity: 0;
           }
-
+          @media (max-width: $screenLg) {
+            height: 650px;
+          }
+          @media (max-width: $screenMd) {
+            height: 450px;
+          }
+        .video-content-wrapper {
+          display: flex;
+          flex-direction: column;
+          background-color: $accent-color-2;
+          border-radius: 20px;
+          align-items: center;
+          padding: 2px;
           .video-content {
             width: 100%;
             cursor: pointer;
-
+            aspect-ratio: 16/9;
             .video-iframe {
               width: 100%;
-              height: 550px;
+              height: 100%;
               border-radius: 20px;
-              transition: 0.3s;
-              @media (max-width: $screenMd) {
-                width: 100%;
-                height: 420px;
-              }
-            }
-            .expanded-video-iframe{
-              height: 630px;
             }
           }
-        }
+        }}
       }
       .expanded-videos-wrapper {
         width: 75%;
+        @media (max-width: $screenLg) {
+          width: 100%;
+        }
       }
       .content-separator {
         width: 1%;
@@ -95,8 +135,7 @@
           .icon {
             position: absolute;
             font-size: $largerFontSize;
-            text-align: center;
-            top: 10px;
+            top: 60px;
             right: -15px;
             cursor: pointer;
             background-color: $primaryColor;
@@ -107,10 +146,11 @@
             width: 30px;
             transition: 0.3s;
             font-weight: 800;
+            transform: rotate(90deg) ;
           }
 
           .rotate-icon {
-            transform: rotate(180deg);
+            transform: rotate(270deg);
             transition: 0.5s;
             font-size: $subHeaderFontSize;
             height: 40px;
@@ -119,43 +159,48 @@
             right: -20px;
           }
         }
-        @media (max-width: $screenMd) {
+        @media (max-width: $screenLg) {
           display: none;
         }
       }
       .question-wrapper {
         width: 30%;
-        overflow: auto;
         display: flex;
         flex-direction: column;
-        @media (max-width: $screenMd) {
+        gap: 40px;
+        transition: 0.3s;
+        @media (max-width: $screenLg) {
           width: 100%;
         }
-        &::-webkit-scrollbar {
-          display: none;
-        }
-        .ques-header {
-          font-size: $headerFontSize;
-        }
-        .question-content-wrapper {
-          padding: 10px 0px;
-
-          .question-content {
-            width: 100%;
-            cursor: pointer;
-
-            .iframe-question {
+        .questions-content-wrapper{
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+          height: 900px;
+          overflow: auto;
+          aspect-ratio: 9/16;
+          padding-right: 20px;
+          @include scrollbar;
+          @media (max-width: $screenLg) {
+            height: 650px;
+          }
+          
+          
+          .question-content-wrapper {
+            
+            .question-content {
               width: 100%;
-              height: 100%;
-              border-radius: 20px;
+              cursor: pointer;
             }
           }
         }
-        transition: 0.3s;
       }
       .hide-question-bar {
         width: 20%;
         transition: 0.3s;
+        @media (max-width: $screenMd) {
+          width: 100%;
+        }
       }
     }
     .notes-wrapper {
@@ -163,21 +208,25 @@
       .note-content-wrapper {
         display: flex;
         flex-wrap: wrap;
-        gap: 40px;
+        gap: 20px;
         padding-top: 20px;
-        @media (max-width: $screenSm) {
-          justify-content: center;
+        @media (max-width: $screenLg) {
+          justify-content: space-evenly;
         }
         .note-content-container {
+          width: 380px;
+          display: flex;
+          flex-direction: column;
+          background-color: $accent-color-2;
+          border-radius: 20px;
           .note-content {
+            width: 100%;
+            cursor: pointer;
+            aspect-ratio: 1/1;
             .note-iframe {
-              width: 500px;
-              height: 400px;
+              width: 100%;
+              height: 100%;
               border-radius: 20px;
-              @media (max-width: $screenMd) {
-                width: 100%;
-                height: 280px;
-              }
             }
           }
         }
@@ -189,13 +238,22 @@
   font-size: $headerFontSize;
   color: $link-color;
   font-weight: 700;
-  &:hover{
+  border-bottom: 2px solid transparent;
+  width: fit-content;
+  transition: 0.4s;
+  &:hover {
     cursor: pointer;
     color: $link-hover-color;
+    border-color: $link-hover-color;
   }
 }
 .content-text-wrapper {
   font-size: $subHeaderFontSize;
+  background-color: $accent-color-2;
+  padding: 10px 5px;
+  width: 100%;
+  border-radius: 0px 0px 20px 20px;
+  height: fit-content;
   .content-title {
     font-size: $subHeaderFontSize;
     font-weight: 700;

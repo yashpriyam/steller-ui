@@ -3,6 +3,7 @@ import "./dayPage.scss";
 import Accordion from "../../components/accordion/accordion";
 import { notesDataList, questionsDataList, videosDataList } from "./dayPageDataList";
 import { useNavigate } from "react-router-dom";
+import DropDownIcon from "../../icons/dropDownIcon";
 interface DayPageProps {
   className?: string;
   title?: React.ReactNode | string;
@@ -18,6 +19,7 @@ export const DayPage: React.FC<DayPageProps> = ({
   notesData=notesDataList,
   questionsData=questionsDataList,
 }: DayPageProps) => {
+  const [activeScrollbar, setActiveScrollbar] = useState<boolean>(false);
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const handleToggleSidebar = () => {
     setToggleSidebar(!toggleSidebar);
@@ -56,7 +58,7 @@ export const DayPage: React.FC<DayPageProps> = ({
         </span>
       </div>
       <div className="content-wrapper">
-        <div className="videos-question-wrapper">
+        <div className="videos-question-wrapper" onScroll={() => {}}>
           <div
             className={`videos-wrapper ${
               toggleSidebar && "expanded-videos-wrapper"
@@ -70,27 +72,32 @@ export const DayPage: React.FC<DayPageProps> = ({
             >
               Videos
             </div>
-            {videosData?.map((video) => {
-              return (
-                <div className="video-content-wrapper">
-                  <div className="video-content">
-                    <iframe
-                      src={video.url}
-                      title="YouTube video player"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className={`video-iframe ${
-                        toggleSidebar && "expanded-video-iframe"
-                      }`}
-                    ></iframe>
+            <div
+              className={`videos-content-wrapper ${
+                activeScrollbar && "show-scrollbar"
+              }`}
+              onScroll={() => setActiveScrollbar(true)}
+            >
+              {videosData?.map((video) => {
+                return (
+                  <div className="video-content-wrapper">
+                    <div className="video-content">
+                      <iframe
+                        src={video.url}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="video-iframe"
+                      ></iframe>
+                    </div>
+                    <div className="content-text-wrapper">
+                      <div className="content-title">{video.title}</div>
+                    </div>
                   </div>
-                  <div className="content-text-wrapper">
-                    <div className="content-title">{video.title}</div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
           <div className="content-separator">
             <div className="line">
@@ -98,7 +105,7 @@ export const DayPage: React.FC<DayPageProps> = ({
                 className={`icon ${toggleSidebar && "rotate-icon"}`}
                 onClick={handleToggleSidebar}
               >
-                {">"}
+                <DropDownIcon color="black"/>
               </span>
             </div>
           </div>
@@ -115,28 +122,35 @@ export const DayPage: React.FC<DayPageProps> = ({
             >
               Questions
             </div>
-            {questionsData?.map((ques) => {
-              return (
-                <div className="question-content-wrapper">
-                  <div
-                    className={`question-content ${
-                      toggleSidebar && "resize-ques-card-height"
-                    }`}
-                  >
-                    <Accordion title={ques.title}>
-                      <div>
-                        {ques.options?.map((option) => (
-                          <div>
-                            <input id={option} type="checkbox" />
-                            <label htmlFor={option}>{option}</label>
-                          </div>
-                        ))}
-                      </div>
-                    </Accordion>
+            <div
+              className={`questions-content-wrapper ${
+                activeScrollbar && "show-scrollbar"
+              }`}
+              onScroll={() => setActiveScrollbar(true)}
+            >
+              {questionsData?.map((ques) => {
+                return (
+                  <div className="question-content-wrapper">
+                    <div
+                      className={`question-content ${
+                        toggleSidebar && "resize-ques-card-height"
+                      }`}
+                    >
+                      <Accordion title={ques.title}>
+                        <div>
+                          {ques.options?.map((option) => (
+                            <div>
+                              <input id={option} type="checkbox" />
+                              <label htmlFor={option}>{option}</label>
+                            </div>
+                          ))}
+                        </div>
+                      </Accordion>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
         <div className={"notes-wrapper"}>
