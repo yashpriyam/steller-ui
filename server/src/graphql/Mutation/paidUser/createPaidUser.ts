@@ -5,7 +5,7 @@ export const createPaidUser = async (
   args: { data: PaidUserInputType }
 ): Promise<PaidUserOutputType | unknown> => {
   const { PAID_USER_CREATION_SUCCESS } = localMessages.PAID_USER_MODEL;
-  const { PAID_USER_CREATION_FAILED } = errorMessages.PAID_USER_MODEL;
+  const { PAID_USER_CREATION_FAILED ,PAID_USER_ALREADY_EXIST} = errorMessages.PAID_USER_MODEL;
   const errorData: CustomResponseType = {
     message: PAID_USER_CREATION_FAILED,
     status: statusCodes.BAD_REQUEST,
@@ -26,33 +26,40 @@ export const createPaidUser = async (
       sessionPreference,
       socialHandles,
     } = data;
-
-    const paidUserData = await paidUser.create({
-      email,
-      contact,
-      address,
-      batchCode,
-      username,
-      college,
-      expectedSalary,
-      password,
-      professionalStatus,
-      profileImg,
-      sessionPreference,
-      socialHandles,
-    });
-    console.log({ paidUserData });
-
-    const response: CustomResponseType = paidUserData
-      ? {
-          message: PAID_USER_CREATION_SUCCESS,
-          status: statusCodes.CREATED,
-        }
-      : errorData;
-    return {
-      paidUserData,
-      response,
-    };
+    const isUserExist = await paidUser.exists({email})
+    if (!isUserExist) {
+          const paidUserData = await paidUser.create({
+            email,
+            contact,
+            address,
+            batchCode,
+            username,
+            college,
+            expectedSalary,
+            password,
+            professionalStatus,
+            profileImg,
+            sessionPreference,
+            socialHandles,
+          });
+          const response: CustomResponseType = paidUserData
+            ? {
+                message: PAID_USER_CREATION_SUCCESS,
+                status: statusCodes.CREATED,
+              }
+            : errorData;
+          return {
+            paidUserData,
+            response,
+          };
+    } else {
+      return {
+        response: {
+          message: PAID_USER_ALREADY_EXIST,
+          status: statusCodes.BAD_REQUEST,
+        },
+      };
+    }
   } catch (error) {
     return {
       response: errorData,
