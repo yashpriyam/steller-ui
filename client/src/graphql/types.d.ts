@@ -49,7 +49,7 @@ declare global {
 
   interface CheckboxProps {
     className?: string;
-    options: { text: string; value: string }[];
+    options: { text: string; value: string, imageUrl?: string }[];
     bgColor?: string;
     textColor?: string;
     onSelect?: (currentSelected: {}, selectedValues: {}[]) => void;
@@ -71,6 +71,8 @@ declare global {
     marks: number;
     batchCode: string;
     meta: QuestionMetaDataType;
+    isCorrect?: boolean;
+    isAnswered?: boolean;
   };
 
   type QuestionMetaDataType = {

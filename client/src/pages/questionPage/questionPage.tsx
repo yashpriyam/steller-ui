@@ -8,21 +8,25 @@ const QuestionPage = () => {
     const { questions, getAllQuestions } = useQuestions();
     const { createQuestionAttemptByUser } = useQuestionAttempt();
     const { questionList } = questions;
-const onSubmit = (question: QuestionDataType, selectedValues: { imageUrl: string, text: string, __typename: string }[]) => {
-    const filteredData = selectedValues.map(selectedValue => ({
-        imageUrl: selectedValue.imageUrl,
-        text: selectedValue.text
-    }))
-    createQuestionAttemptByUser(filteredData, question.id)
+    const onSubmit = async (question: QuestionDataType, selectedValues: { imageUrl: string, text: string, __typename: string }[]) => {
+        const filteredData = selectedValues.map(selectedValue => ({
+            imageUrl: selectedValue.imageUrl,
+            text: selectedValue.text
+        }))
+        try {
+            await createQuestionAttemptByUser(filteredData, question.id);
+        } catch (err) {
+            console.log(err)
+        }
     }
-    useEffect(()=> {
+    useEffect(() => {
         getAllQuestions()
-    },[])
+    }, [])
     return (
         <div className='question-page-container'>
             <div className='question-page-sub-container'>
                 {
-                    questionList.map((questionData, index) =>  <QuestionAccordion key={index} questionData={questionData} onSubmit={onSubmit} />)
+                    questionList.map((questionData, index) => <QuestionAccordion key={index} questionData={questionData} onSubmit={onSubmit} />)
                 }
             </div>
         </div>

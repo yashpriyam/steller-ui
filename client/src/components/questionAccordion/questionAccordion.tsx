@@ -8,28 +8,33 @@ const QuestionAccordion = ({
   questionData,
   onSubmit,
 }: any) => {
-  const [selectedValues, setSelectedValues] = useState<{}>({});
+  const [selectedValues, setSelectedValues] = useState<{}[]>([]);
   const { question, options } = questionData;
   return (
-    <Accordion className='question-title' title={<div className='question-title'>
+    <Accordion className={`question-title`} title={<div className='question-title'>
       {question[0].text}
     </div>}>
       <div className='question-accordion-container'>
-        <div>
+        <div className='question-container'>
           {
-            question.map((top: any) => <div className='question-title-sub-container'>
+            question.map((titleData: any) => <div className='question-title-sub-container'>
               <div className='question-title-text'>
-              </div>
-              <div className='question-option-container'>
                 {
-                  <Checkbox onSelect={(index, selectedValues) => setSelectedValues(selectedValues)} options={options} className='question-checkbox' />
+                  titleData.text
                 }
               </div>
-              <div className='question-submit-btn-wrapper'>
-                <Button onClick={()=> onSubmit(questionData, Object.values(selectedValues))} iconPosition="center" className='question-submit-btn' />
-              </div>
+              <img className='question-title-img' src={titleData.imageUrl} alt="" />
             </div>)
+
           }
+          <div className='question-option-container'>
+            {
+              <Checkbox onSelect={(index, selectedValues) => setSelectedValues(Object.values(selectedValues))} options={options} className='question-checkbox' />
+            }
+          </div>
+          <div className='question-submit-btn-wrapper'>
+            <Button isDisabled={!selectedValues.length} onClick={() => onSubmit(questionData, selectedValues)} iconPosition="center" className='question-submit-btn' />
+          </div>
         </div>
       </div>
     </Accordion>

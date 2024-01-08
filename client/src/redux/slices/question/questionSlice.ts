@@ -11,6 +11,17 @@ export const questionSlice = createSlice({
     setQuestions: (state, action) => {
       state.questionList = action.payload?.getAllQuestions?.questionData || [];
     },
+    setQuestionResponse: (state, action) => {
+      const { questionList } = state;
+      const { questionId, isCorrect } = action?.payload;
+      questionList.forEach(question => {
+        if(questionId === question.id){
+          question.isCorrect = isCorrect;
+          question.isAnswered = true;
+        } 
+      })
+      state.questionList = [...questionList];
+    }
   },
 });
 

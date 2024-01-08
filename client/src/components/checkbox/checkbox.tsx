@@ -60,6 +60,9 @@ export const Checkbox: React.FC<CheckboxProps> = ({
             <label className="label-text" style={{ color: textColor }}>
               {option?.text}
             </label>
+          {
+            option?.imageUrl && (<img className="checkbox-comp-option-img" src={option?.imageUrl} alt="" />)
+          }
           </div>
         ))}
       </div>
