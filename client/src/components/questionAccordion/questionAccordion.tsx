@@ -7,23 +7,27 @@ import { Button } from '../button/button';
 const QuestionAccordion = ({
   questionData,
   onSubmit,
-}: any) => {
-  const [selectedValues, setSelectedValues] = useState<{}[]>([]);
+}: QuestionAccordionProps) => {
+  const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { question, options } = questionData;
   return (
     <Accordion className={`question-title`} title={<div className='question-title'>
-      {question[0].text}
+      {question[0]?.text}
     </div>}>
       <div className='question-accordion-container'>
         <div className='question-container'>
           {
-            question.map((titleData: any) => <div className='question-title-sub-container'>
-              <div className='question-title-text'>
-                {
-                  titleData.text
-                }
-              </div>
-              <img className='question-title-img' src={titleData.imageUrl} alt="" />
+            question.map((titleData: any, index: number) => <div className='question-title-sub-container'>
+              {
+                Boolean(index) && (<div className='question-title-text'>
+                  {
+                    titleData.text
+                  }
+                </div>)
+              }
+              {
+                titleData?.imageUrl && (<img className='question-title-img' src={titleData.imageUrl} alt="" />)
+              }
             </div>)
 
           }

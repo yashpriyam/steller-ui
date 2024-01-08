@@ -12,10 +12,10 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   direction = "column",
   title,
 }) => {
-  const [selectedValues, setSelectedValues] = useState<{}[]>([]);
+  const [selectedValues, setSelectedValues] = useState<Record<number, CheckboxValueType>>({});
 
   const handleCheckboxChange = (index: number) => {
-    const newselectedValues: {}[] = {
+    const newselectedValues = {
       ...selectedValues
     };
     if (newselectedValues[index]) {

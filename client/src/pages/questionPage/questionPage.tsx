@@ -8,7 +8,7 @@ const QuestionPage = () => {
     const { questions, getAllQuestions } = useQuestions();
     const { createQuestionAttemptByUser } = useQuestionAttempt();
     const { questionList } = questions;
-    const onSubmit = async (question: QuestionDataType, selectedValues: { imageUrl: string, text: string, __typename: string }[]) => {
+    const onSubmit = async (question: QuestionDataType, selectedValues: { imageUrl: string, text: string, __typename?: string }[]) => {
         const filteredData = selectedValues.map(selectedValue => ({
             imageUrl: selectedValue.imageUrl,
             text: selectedValue.text
