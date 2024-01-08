@@ -39,6 +39,9 @@ const typeDefs = gql`
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
     createPaidUser(data: PaidUserInputType): PaidUserOutputType
+    sendOtpToPaidUser(email: String!): CustomResponseType
+    verifyOtpPaidUser(data: verifyOtpPaidUserInputType!): CustomResponseType
+    updatePaidUser(data: updatePaidUserInputType!): PaidUserOutputType
   }
 
   type CustomResponseType {
@@ -386,10 +389,6 @@ const typeDefs = gql`
     medium: String
     portfolio: String
   }
-  input Password {
-    hash: String
-    salt: String
-  }
   input PaidUserInputType {
     username: String!
     email: String!
@@ -402,7 +401,7 @@ const typeDefs = gql`
     expectedSalary: String
     socialHandles: SocialMediaHandles
     address: String
-    password: Password
+    password: String
   }
   type PaidUserOutputType {
     paidUserData: PaidUserData
@@ -430,6 +429,27 @@ const typeDefs = gql`
     github: String
     medium: String
     portfolio: String
+  }
+  input verifyOtpPaidUserInputType {
+    email: String!
+    emailOtp: String!
+  }
+  input updatePaidUserInputType {
+    email: String!
+    updatedNewData: UpdatePaidDataType
+  }
+  input UpdatePaidDataType {
+    username: String
+    contact: String
+    profileImg: PaidProfileImageInput
+    batchCode: String
+    sessionPreference: SessionPreferenceEnum
+    professionalStatus: String
+    college: String
+    expectedSalary: String
+    socialHandles: SocialMediaHandles
+    address: String
+    password: String
   }
   scalar DateTime
   scalar JSON

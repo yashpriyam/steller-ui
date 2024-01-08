@@ -6,4 +6,9 @@ export { createVideo, deleteVideoById, updateVideoById } from "./video/index";
 export { upsertUserActivity } from "./userActivity/index";
 export { createQuestion, updateQuestionById } from "./question/index";
 export { sendOtp } from "./otp/index";
-export { createPaidUser } from "./paidUser/index";
+export {
+  createPaidUser,
+  sendOtpToPaidUser,
+  verifyOtpPaidUser,
+  updatePaidUser,
+} from "./paidUser/index";

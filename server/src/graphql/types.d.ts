@@ -301,8 +301,8 @@ declare global {
     email: string;
     emailOtp: string;
     expiresAt: Date;
-    isEmailVerified: boolean;
-    id: ObjectId;
+    isEmailVerified?: boolean;
+    id?: ObjectId;
   };
   type OtpUserOutputType = {
     response: CustomResponseType;
@@ -351,10 +351,10 @@ declare global {
     expectedSalary?: string;
     socialHandles?: SocialMediaHandles;
     address?: string;
-    password?: Password;
+    password?: string;
   };
   type PaidUserOutputType = {
-    paidUserData: PaidUserData;
+    paidUserData?: PaidUserData;
     response: CustomResponseType;
   };
   type PaidUserData = {
@@ -369,5 +369,22 @@ declare global {
     socialHandles?: SocialMediaHandles;
     address?: string;
     sessionPreference? = SessionPreferenceEnum;
+  };
+  type updatePaidUserInput = {
+    email: String;
+    updatedNewData: UpdatePaidDataType;
+  };
+  type UpdatePaidDataType = {
+    username?: string;
+    contact?: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    password?: string;
   };
 }
