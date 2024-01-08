@@ -3,11 +3,6 @@ import { UserInputError } from "apollo-server-express";
 
 const cloudinary = require("cloudinary");
 
-interface UploadImageArgumentType {
-  images: string | string[];
-  folder: string;
-}
-
 export const uploadImage = async ({
   images,
   folder,

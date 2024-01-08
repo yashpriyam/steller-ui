@@ -2,10 +2,6 @@ import { errorMessages } from "@constants";
 import { deleteImage, getImage, uploadImage } from "@utils";
 import { UserInputError } from "apollo-server-express";
 
-interface ImageUploadArgs {
-  image: string;
-}
-
 const USER_PROFILE_PICTURES_FOLDER = "Web Masters/Profile Pictures";
 
 export const updateProfilePicture = async (
