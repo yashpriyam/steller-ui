@@ -28,9 +28,13 @@ export const errorMessages = Object.freeze({
   },
   OTP_MODEL: {
     OTP_SENT_FAILED: "cannot send otp",
-    OTP_EMAIL_INVALID: "email address is not valid",
+    OTP_EMAIL_INVALID: "email address and otp is not valid",
+    OTP_EMAIL_NOT_EXIST: "email address not exist",
   },
   PAID_USER_MODEL: {
     PAID_USER_CREATION_FAILED: "unable to insert paid user data",
+    PAID_USER_ALREADY_EXIST: "user already exists",
+    PAID_USER_UPDATION_FAILED: "unable to update paid user data",
+    PAID_USER_LOGIN_FAILED: "invalid email and password",
   },
 });
