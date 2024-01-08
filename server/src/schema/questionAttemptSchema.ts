@@ -7,4 +7,4 @@ const questionAttemptSchema = new Schema<QuestionAttemptSchemaType>({
   response: { type: [{ imageUrl: String, text: String }], required: true },
 },{ timestamps: true });
 
-export const QuestionAttempt = model<QuestionAttemptSchemaType>('QuestionAttempt', questionAttemptSchema);
+export const questionAttempt = model<QuestionAttemptSchemaType>('QuestionAttempt', questionAttemptSchema);
