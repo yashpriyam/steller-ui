@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+const sessionPreferenceEnum = { online: "online", offline: "offline" };
 const paidUserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -8,7 +9,6 @@ const paidUserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
   },
   contact: {
     type: String,
@@ -30,7 +30,7 @@ const paidUserSchema = new mongoose.Schema({
   },
   sessionPreference: {
     type: String,
-    enum: ["online", "offline"],
+    enum: sessionPreferenceEnum,
     required: false,
   },
   professionalStatus: {

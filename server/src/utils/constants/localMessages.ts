@@ -23,9 +23,12 @@ export const localMessages = Object.freeze({
   },
   OTP_MODEL: {
     OTP_SENT_SUCCESS: "otp sent succerssfully",
+    OTP_VERIFIED_SUCCESS: "otp verified successfully",
   },
   PAID_USER_MODEL: {
     PAID_USER_CREATION_SUCCESS: "paid user data inserted successfully",
+    PAID_USER_UPDATED_SUCCESS: "paid user data updated successfully",
+    PAID_USER_LOGIN_SUCCESS: "login successfully",
   },
   FULFILLED: "fulfilled",
   TOPICS: "topics",
