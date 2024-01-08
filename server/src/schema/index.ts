@@ -8,3 +8,4 @@ export { PaidUser } from "./paidUserSchema"
 export {questionModel} from "./questionSchema"
 export { otpModel } from "./otp-model";
 export { questionAttempt } from './questionAttemptSchema';
+export { dayModel } from "./daySchema";
