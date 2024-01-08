@@ -326,5 +326,11 @@ declare global {
     text: string;
     imageUrl: string;
   }
-
+  interface UploadImageArgumentType {
+    images: string | string[];
+    folder: string;
+  }
+  interface ImageUploadArgs {
+    image: string;
+  }
 }
