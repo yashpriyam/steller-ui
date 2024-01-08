@@ -1,0 +1,31 @@
+.experience {
+    margin: 10px;
+    .header-experience {
+        word-spacing: 1px;
+        font-size: 20px;
+        font-weight: 500;
+        .company-name {
+            font-weight: 600;
+        }
+    }
+    .sub-heading {
+        font-size: 14px;
+        margin-block: 5px;
+    }
+    .list-experience-description {
+        padding-left: 5%;
+        font-size: 14px;
+        margin-block: 5px;
+    }
+    .experience-footer {
+        margin-top: 5px;
+        margin-bottom: 10px;
+        .tech-stack-experience {
+            font-weight: 600;
+        }
+        .tech-lang-experience {
+            display: inline-block;
+            color: #717171;
+        }
+    }
+}

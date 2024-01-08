@@ -26,6 +26,7 @@ const DropDownComponent = ({
             alt={isOpen ? "DownwardArrow" : "UpwardArrow"}
           />
         </ButtonComponent>
+        
       </div>
       {isOpen && (
         <div className="answerText">

@@ -1,0 +1,40 @@
+.sub-container {
+    display: flex;
+    gap: 10px;
+    margin: 2px;
+    transition: all 0.05s linear;
+    overflow: hidden;
+    font-size: 12px;
+
+    .img-sub-container {
+        width: 30px;
+        height: 30px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .aside-section {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+
+        .sub-header {}
+
+        .sub-description {
+            color: #717171;
+        }
+
+        .sub-links {}
+    }
+
+    &:hover {
+        transform: scale(1.02);
+        cursor: pointer;
+        background-color: #1C1C1C;
+        border: 1px solid #242424;
+    }
+}
