@@ -8,7 +8,7 @@ import DayContextPage from "../pages/dayContextPage/dayContextPage";
 const unProtectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/homePage": <HomePage />,
   "/scheduling": <SchedulingPage/>,
-  "/daypage" : <DayPage/>,
+  "/day/:dayNumber" : <DayPage/>,
   "/dayContext/:context": <DayContextPage />,
 });
 
