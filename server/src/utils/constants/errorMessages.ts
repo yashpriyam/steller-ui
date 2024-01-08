@@ -24,10 +24,13 @@ export const errorMessages = Object.freeze({
   QUESTION_MODEL: {
     QUESTION_CREATION_FAILED: "unable to add question data",
     QUESTION_UPDATION_FAILED: "unable to update question data",
-    QUESTION_NOT_FOUND:"questions not found",
+    QUESTION_NOT_FOUND: "questions not found",
   },
   OTP_MODEL: {
     OTP_SENT_FAILED: "cannot send otp",
     OTP_EMAIL_INVALID: "email address is not valid",
+  },
+  PAID_USER_MODEL: {
+    PAID_USER_CREATION_FAILED: "unable to insert paid user data",
   },
 });

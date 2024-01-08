@@ -1,23 +1,30 @@
-import jwt from "jsonwebtoken";
-import { User } from "@models";
-import { isValidEmail } from "@utils";
+import jwt from "jsonwebtoken"; 
+import bcrypt from "bcrypt";
+import { paidUser } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const login = async (
   _parent: undefined,
-  args: { userData: loginUserInputType },
+  args: { data: loginUserInputType },
   { res }: ContextType
 ): Promise<unknown> => {
   try {
-    const { email, password } = args.userData;
-    const user = User.find((u: RegisterType) => u.email === email);
-      // if (!user || !(await bcrypt.compare(password, user.password))) {
-      //   return { message: "Invalid email or password" };
-      // }
+    const { email, password } = args.data;
+    const user = await paidUser.findOne({ email });
+     const hashPassword = bcrypt.hashSync(password, user?.password?.salt||"");
+      const isValidPassword = user?.password?.hash === hashPassword;
+     if (!user || !isValidPassword) {
+       return {
+         response: {
+           message: "Invalid email or password",
+           status: statusCodes.BAD_REQUEST,
+         },
+       };
+     }
     return {
       response: {
-        message: "login successfully!",
-        status: 200,
+        message: "login successfully",
+        status: statusCodes.OK,
       },
     };
   } catch (error) {

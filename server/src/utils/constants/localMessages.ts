@@ -14,16 +14,19 @@ export const localMessages = Object.freeze({
     VIDEO_UPDATION_SUCCESS: "video updated successfully",
   },
   USER_ACTIVITY: {
-     USER_ACTIVITY_UPDATED: "user activity updated",
+    USER_ACTIVITY_UPDATED: "user activity updated",
   },
   QUESTION_MODEL: {
     QUESTION_CREATION_SUCCESS: "question data added successfully",
     QUESTION_UPDATION_SUCCESS: "question data updated successfully",
-    QUESTION_FOUND_SUCCESS:"questions found successfully"
+    QUESTION_FOUND_SUCCESS: "questions found successfully",
   },
   OTP_MODEL: {
-    OTP_SENT_SUCCESS:"otp sent succerssfully",
+    OTP_SENT_SUCCESS: "otp sent succerssfully",
   },
-  FULFILLED: 'fulfilled',
-  TOPICS: 'topics',
+  PAID_USER_MODEL: {
+    PAID_USER_CREATION_SUCCESS: "paid user data inserted successfully",
+  },
+  FULFILLED: "fulfilled",
+  TOPICS: "topics",
 });
