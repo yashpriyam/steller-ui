@@ -10,7 +10,7 @@ export const TopButtons: React.FC<TopButtonProps> = ({
     <div className="top-button-container">
       <div className="top-button">
         <button className="about-button"> {topButtonTagOne} </button>
-        <button className="Email-button"> {topButtonTagTwo} </button>
+        <button className="email-button"> {topButtonTagTwo} </button>
       </div>
     </div>
   );

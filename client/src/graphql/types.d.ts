@@ -1,7 +1,7 @@
 import { CSSProperties, ChangeEvent, ReactElement } from "react";
 
 declare global {
-  type RegisterUserDataType = {
+  type RegisterUserData = {
     name: string;
     email: string;
     phoneNumber: string;
