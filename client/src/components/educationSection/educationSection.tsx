@@ -6,11 +6,12 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
         handleFieldUpdate(fieldPath, e.currentTarget.innerText);
     };
     return (
-        <div className="education ">
+        <div className="education box">
             <div
                 onBlur={(e) => handleBlur(e, `educationalData.${index}.instituteName`)}
                 contentEditable={isEdit}
                 suppressContentEditableWarning={true}
+                className="instituteName"
             >
                 {education.instituteName}
             </div>
@@ -18,6 +19,7 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
                 onBlur={(e) => handleBlur(e, `educationalData.${index}.course`)}
                 contentEditable={isEdit}
                 suppressContentEditableWarning={true}
+                className="course-name"
             >
                 {education.course}
             </div>

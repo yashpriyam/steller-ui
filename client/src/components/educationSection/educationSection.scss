@@ -1,5 +1,30 @@
-.education{
-    border: 1px solid #202020;
-  margin-top: 10px;
-  padding: 10px;
+.education {
+  margin: 30px 10px 30px 10px;
+  padding: 20px;
+  overflow: hidden;
+
+  .instituteName {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-block: 5px;
+  }
+
+  .course-name {
+    font-size: 16px;
+    margin-block: 5px;
+
+  }
+
+  .education-footer>div,
+  .education-footer>span {
+    font-size: 14px;
+    margin-block-start: 1px;
+    color: #717171;
+
+  }
+
+  &:hover {
+    background-color: #1C1C1C;
+  }
 }

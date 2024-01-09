@@ -72,6 +72,11 @@ declare global {
     colony: string;
     city: string;
   }
+  interface ProfileAvatarProps {
+    width?: string;
+    height?: string;
+    className?: string;
+  }
 
   interface SocialDetail {
     address: Address;

@@ -1,11 +1,17 @@
+@import "../variables.scss";
+
+
+
 .personal-details-card {
-    padding: 12px;
-    border-radius: 10px;
+
     display: flex;
     flex-direction: column;
+    row-gap: 5px;
     width: 20vw;
-    // overflow: hidden;
-    background-color: #1C1C1C;
+    height: fit-content;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: $mediumFontSize;
 
     .address,
     .phone-number,
@@ -14,4 +20,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    background-color: #1C1C1C;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

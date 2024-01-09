@@ -3,7 +3,7 @@ import "./achievementSection.scss"
 
 export const AchievementSection: React.FC<{ achievement: Achievement }> = ({ achievement }) => {
     return (
-        <div className="achievements">
+        <div className="achievements box">
             <SubCardContainer
                 icon={achievement.icon} subHeader={achievement.header} subDescription={achievement.description} links={achievement.links} />
         </div>

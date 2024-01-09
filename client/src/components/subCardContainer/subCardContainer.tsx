@@ -1,5 +1,9 @@
 import "./subCardContainer.scss"
-import ProfileIcon from '../../icons/icons8-medium-icons-64.svg';
+import VerifiedIcon from "../../icons/varifiedLanguage";
+
+type StyleIcon = {
+    alignItems: "flex-start" | "center";
+};
 
 export const SubCardContainer: React.FC<{ icon?: string; subHeader?: string; subDescription?: string; links?: string }> = ({
     icon,
@@ -7,10 +11,15 @@ export const SubCardContainer: React.FC<{ icon?: string; subHeader?: string; sub
     subDescription,
     links,
 }) => {
+
+    const styleIcon: StyleIcon = {
+        alignItems: subDescription ? "flex-start" : "center",
+    };
     return (
-        <div className={`sub-container ${icon ? 'icon-available' : 'icon-not-available'}`}>
-            <div className="img-sub-container">
-                <img src={ProfileIcon} alt="" />
+        <div style={{ ...styleIcon }} className={`sub-container ${icon ? 'icon-available' : 'icon-available'}`}>
+            <div
+                className={`img-sub-container`}>
+                <VerifiedIcon />
             </div>
             <div className="aside-section">
                 {subHeader && <div className="sub-header">{subHeader}</div>}

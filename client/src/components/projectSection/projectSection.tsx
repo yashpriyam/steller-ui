@@ -1,6 +1,7 @@
 import "./projectSection.scss"
 
 export const ProjectSection: React.FC<{ project: Project; handleFieldUpdate: Function; isEdit: boolean; index: number }> = ({ project, handleFieldUpdate, isEdit, index }) => {
+
     const handleBlur = (e: React.FocusEvent<HTMLDivElement | HTMLSpanElement | HTMLLIElement>, fieldPath: string) => {
         handleFieldUpdate(`projectsData.${index}.${fieldPath}`, e.currentTarget.innerText);
     };
@@ -11,10 +12,11 @@ export const ProjectSection: React.FC<{ project: Project; handleFieldUpdate: Fun
                 onBlur={(e) => handleBlur(e, 'heading')}
                 contentEditable={isEdit}
                 suppressContentEditableWarning={true}
+                className="project-heading"
             >
                 {project.heading}
             </div>
-            <ul  className="list-experience-description">
+            <ul className="list-experience-description">
                 {project.description?.map((item: string, descIndex: number) => (
                     <li
                         key={descIndex}
