@@ -1,0 +1,87 @@
+@import "../variables.scss";
+
+.accordion-container {
+  width: 100%;
+  height: fit-content;
+  font-family: "Nunito";
+  background-color: $primaryColor;
+  background: radial-gradient(50% 50% at 0% 0%, $radialGradient 100%);
+  box-shadow: 0 0 5px 1px $fadedGrayPrimary;
+  border-radius: 30px;
+  border: 1px solid $videoHutBorderColor;
+  .accordion-header {
+    font-size: $subHeaderFontSize;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 50px;
+    cursor: pointer;
+    position: relative;
+    .accordion-title {
+      position: absolute;
+      z-index: 1;
+      font-size: $headerFontSize;
+      padding: 0;
+      font-weight: 800;
+      color: $fadedGraySecondary;
+    }
+    .accordion-dropdown-arrow {
+      position: absolute;
+      z-index: 0;
+      transform: rotate(180deg);
+      transition: 0.1s;
+    }
+    .image {
+      width: 20px;
+      height: 20px;
+    }
+    .accordion-dropdown-arrow-active {
+      transform: rotate(0deg);
+    }
+    .position-right {
+      right: 30px;
+    }
+    .position-left {
+      left: 30px;
+    }
+    .position-center {
+      left: 50%;
+    }
+  }
+
+  .accordion-content {
+    color: $primaryColor;
+    max-height: 0;
+    overflow: hidden;
+
+    .content-wrapper {
+      padding: 10px;
+    }
+  }
+  .open-accordion {
+    max-height: fit-content;
+  }
+
+  .closed-accordion {
+    max-height: 0;
+  }
+}
+.disable-accordion {
+  opacity: 0.5;
+  &:hover {
+    cursor: default;
+  }
+}
+
+@media (max-width: $screenXs) {
+  .accordion-container {
+    .accordion-header {
+      .position-right {
+        right: 20px;
+      }
+      .position-left {
+        left: 10px;
+      }
+    }
+  }
+}

@@ -50,23 +50,22 @@ function MonorepoApp() {
     },
   ];
 
-  const navbarPaths = {
+  const showNavbarPaths = {
     "/": true,
     "/register": true,
     "/privacy": true,
-    "/privacy/concerns/whatsapp": true
+    "/privacy/concerns/whatsapp": true,
   }
-
   return (
     <div className="App" onClick={() => setMenuOpen(false)}>
       <ToastContainer />
         {
-          navbarPaths[pathname] && <Navbar
-          isMenuOpen={isMenuOpen}
-          setMenuOpen={setMenuOpen}
-          profileMenuOptions={profileMenuOptions}
-          isLoggedIn={isLoggedIn}
-        />
+          showNavbarPaths[pathname] && (<Navbar
+            isMenuOpen={isMenuOpen}
+            setMenuOpen={setMenuOpen}
+            profileMenuOptions={profileMenuOptions}
+            isLoggedIn={isLoggedIn}
+          />)
         }
         <Routes>
           <Route path="/" element={<Homepage />} />

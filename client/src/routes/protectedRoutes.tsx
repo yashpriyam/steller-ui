@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Dashboard } from "../pages/dashboard/dashboard";
+import QuestionPage from '../pages/questionPage/questionPage';
 
 const protectedRoutesMap: RoutesMapInterface = Object.freeze({
-    "/dashboard": <Dashboard />,
+    "/questions": <QuestionPage />
 });
 
 export const getProtectedRoutes = (): React.ReactNode[] => {

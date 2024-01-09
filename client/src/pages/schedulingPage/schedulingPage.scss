@@ -1,0 +1,223 @@
+@import "../../components/variables.scss";
+
+.scheduling-page {
+  min-height: 100vh;
+  min-width: 100vw;
+  display: flex;
+  padding: 20px 10px;
+  gap: 30px;
+  background-color: $primaryBgColor;
+  font-family: $primaryFontFamily;
+  
+  .scheduling-page-accordion {
+    padding-top: 0;
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    gap: 20px;
+
+    .accordion-content-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0;
+      gap: 30px;
+
+      .accordion-description {
+        display: flex;
+        flex-direction: column;
+        line-height: normal;
+        width: 100%;
+        margin-left: 0px;
+        font-size: $subHeaderFontSize;
+        padding: 0px 50px;
+        text-align: justify;
+      }
+
+      .daylist-container {
+        display: flex;
+        gap: 35px;
+        display: flex;
+        line-height: normal;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0px 50px;
+        padding-bottom: 50px;
+
+        .day-container {
+          display: flex;
+          align-items: center;
+          color: $primaryColor;
+          padding: 50px;
+          border-radius: 40px;
+          border: 2px solid $videoHutBorderColor;
+          background: radial-gradient(50% 50% at 0% 0%, $radialGradient 100%);
+          transition: all 0.3s;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          &:hover {
+            box-shadow: 0px 0px 30px 5px $primaryBgColorOnHover;
+          }
+
+          .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            .topic-tags {
+              display: flex;
+              gap: 10px;
+              position: relative;
+              font-size: $smallFontSize;
+
+              .topic-tag {
+                transition: 0.3s;
+                padding: 5px;
+                border-radius: 10%;
+                background-color: rgba(132, 131, 131, 0.15);
+                &:hover {
+                  transform: scale(110%);
+                }
+              }
+              .hidden-tags {
+                position: absolute;
+                display: none;
+                gap: 10px;
+                opacity: 0;
+                right: -80px;
+                top: 0px;
+                transition: 1s;
+              }
+              .show-hidden-tag{
+                display: flex;
+                opacity: 1;
+              }
+              .html {
+                color: $accent-color-2;
+              }
+              .css {
+                color: $accent-color-3;
+              }
+              .js{
+                color: $accent-color-4;
+              }
+              .react {
+                color: $accent-color-1;
+              }
+            }
+          }
+          .day-title {
+            font-size: $subHeaderFontSize;
+            font-family: $secondaryFontFamily;
+          }
+
+          .day-description {
+            font-size: $largerFontSize;
+          }
+
+          .buttons-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+
+            .button {
+              border: 1px solid $videoHutBorderColor;
+              background-color: $secondaryBorderColorHighlighted;
+              color: $primaryColor;
+              border-radius: 15px;
+              transition: all 0.3s;
+
+              &:hover {
+                background-color: $primaryBgColor;
+                box-shadow: 0px 0px 5px 2px $primaryBgColorOnHover;
+                transition: 0.3s;
+                border-color: transparent;
+                transform: scale(110%);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: $screenLg) {
+  .scheduling-page-accordion {
+    padding: 10px;
+    padding-top: 30px;
+
+    .accordion-content-wrapper {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+  }
+}
+
+@media (max-width: $screenMd) {
+  .scheduling-page {
+    gap: 0;
+    flex-direction: column;
+
+    .scheduling-page-accordion {
+      width: 100%;
+      padding: 10px;
+      transition: 0.5s;
+
+      .accordion-content-wrapper {
+        .accordion-description {
+          font-size: $largerFontSize;
+          padding: 0px 30px;
+        }
+
+        .daylist-container {
+          padding: 0px 30px;
+          padding-bottom: 20px;
+          .day-container {
+            border-radius: 25px;
+            padding: 20px;
+            transition: 0.5s;
+
+            .day-description {
+              font-size: $largerFontSize;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width : $screenXs){
+  .scheduling-page{
+    .scheduling-page-accordion{  
+      .accordion-content-wrapper {
+        .accordion-description {
+          padding: 0px 15px;
+          font-size: $mediumFontSize;
+        }
+        
+        .daylist-container {
+          padding: 0px 15px;
+          .day-container {
+            border-radius: 10px;
+            padding: 20px;
+            
+            .day-header {
+              flex-direction: column;
+              gap: 10px;
+              transition: 0.5s;
+            }
+            .day-description {
+              font-size: $smallFontSize;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    

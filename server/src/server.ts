@@ -7,13 +7,18 @@ import typeDefs from "./graphql/typeDefs";
 import Connection from "./db/conn";
 import express from "express";
 import cookieParser from "cookie-parser";
+import cloudinaryConfiguration from './db/cloudinaryConf';
 const PORT = process.env.PORT || 8080;
 
 (async () => {
   const app: express.Application = express();
+  app.use(express.json({limit: '50mb'}));
 
   // dotenv configuration
   dotenv.config();
+
+  // cloudinary configuration
+  cloudinaryConfiguration();
 
   // connect to db
   Connection(process.env.MONGODB_URI);
