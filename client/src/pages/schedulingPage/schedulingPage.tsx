@@ -4,6 +4,7 @@ import { Button } from "../../components/button/button";
 import { accordionDataList } from "./accordionDataList";
 import React from "react";
 import { Filter } from "../../components/filter/filter";
+import { useNavigate } from "react-router-dom";
 
 interface SchedulingPageProps {
   className?: string;
@@ -17,6 +18,7 @@ interface SchedulingPageProps {
       description?: string;
       videoUrl?: string;
       notesUrl?: string;
+      dayNumber?: number;
       assignmentUrl?: string;
       tags?: {
         tagName?: string;
@@ -30,6 +32,7 @@ const SchedulingPage: React.FC<SchedulingPageProps> = ({
   accordionData = accordionDataList,
   style,
 }: SchedulingPageProps) => {
+  const navigate = useNavigate();
   return (
     <div className={`scheduling-page ${className}`} style={style}>
       <Filter />
@@ -45,7 +48,9 @@ const SchedulingPage: React.FC<SchedulingPageProps> = ({
                   const tags = dayInfo?.tags;
                   const tagsLength = tags?.length;
                   return (
-                    <div className="day-container">
+                    <div className="day-container" onClick={()=>{
+                      navigate(`/day/${dayInfo.dayNumber}`);
+                    }}>
                       <div className="day-header">
                         <strong className="day-title">{dayInfo.title}</strong>
                         <div className="topic-tags">

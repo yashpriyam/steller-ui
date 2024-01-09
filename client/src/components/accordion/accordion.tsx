@@ -1,14 +1,14 @@
-import React, { MouseEventHandler, useState, useRef } from "react";
+import React, { MouseEventHandler, useState, useRef, ReactNode } from "react";
 import "./accordion.scss";
 import DropDownIcon from "../../icons/dropDownIcon";
 import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
 interface AccordionProps {
   className?: string;
-  title?: string;
-  children?: React.ReactNode;
+  title?: ReactNode | string;
+  children?: ReactNode;
   style?: object;
-  icon?: React.ReactNode | string;
+  icon?: ReactNode | string;
   closeOnOutsideClick?: boolean;
   iconPosition?: "left" | "center" | "right";
   titlePosition?: "left" | "center" | "right";
