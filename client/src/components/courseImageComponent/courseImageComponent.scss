@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import "../variables.scss";
 
 .course-image-box {
     border: 1px solid $tertiaryBackgroundColor;
@@ -70,7 +70,7 @@
             width: 85vw;
           }
           .course-title-container {
-            border-radius: 5vw;
+            border-radius: 50px;
             width: 60vw;
             text-align: center;
             .course-image-title {

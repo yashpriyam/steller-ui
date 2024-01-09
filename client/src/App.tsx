@@ -1,7 +1,7 @@
 import React from "react";
 import MonorepoIndex from "./monorepoClient/MonorepoIndex";
 import RouteList  from './routes/routeList';
-import { Dashboard } from "../src/components/dashboardComponent/dashboard/dashboard";
+import { Dashboard } from "./pages/dashboard/dashboard";
 
 
 const App = () => {

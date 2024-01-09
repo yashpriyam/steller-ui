@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Dashboard } from "../components/dashboardComponent/dashboard/dashboard";
+import { Dashboard } from "../pages/dashboard/dashboard";
 
 const protectedRoutesMap: RoutesMapInterface = Object.freeze({
     "/dashboard": <Dashboard />,
