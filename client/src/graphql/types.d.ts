@@ -76,17 +76,17 @@ declare global {
     overviewSubcontent?: string;
     courseDetailsTitle?: string;
     courseDetails?: string[];
-    overviewButtonOne?:string;
-    overviewButtonTwo?:string;
-}
-type newsDropType = {
+    overviewButtonOne?: string;
+    overviewButtonTwo?: string;
+  }
+  type NewsDropType = {
     image: string;
     title: string;
     description: string;
   };
-  
+
   interface NewsDropProps {
-    newsDropTitile?:string;
+    newsDropTitile?: string;
     newsDropElements?: newsDrop[];
   }
 
@@ -114,15 +114,15 @@ type newsDropType = {
     overviewButtonOne?: string;
     overviewButtonTwo?: string;
   }
-type CourseImageType = {
+  type CourseImageType = {
     image: string;
     courseTitle: string;
     courseSubtitle: string;
   };
 
-    interface CourseImageProps {
-        courseImageElement?: CourseImage[];
-    }  
+  interface CourseImageProps {
+    courseImageElement?: CourseImage[];
+  }
 
   interface InputProps {
     type: string;
@@ -150,7 +150,10 @@ type CourseImageType = {
     options: CheckboxValueType[];
     bgColor?: string;
     textColor?: string;
-    onSelect?: (currentSelected: {}, selectedValues: Record<number, CheckboxValueType>) => void;
+    onSelect?: (
+      currentSelected: {},
+      selectedValues: Record<number, CheckboxValueType>
+    ) => void;
     style?: React.CSSProperties;
     direction?: "row" | "column";
     title?: string;
@@ -215,7 +218,7 @@ type CourseImageType = {
     value?: string;
     imageUrl: string | null;
     __typename?: string;
-  }
+  };
 
   type CheckboxValueType = {
     text: string | null;
@@ -230,6 +233,6 @@ type CourseImageType = {
   type ImageAndTextType = {
     imageUrl: string | null;
     text: string | null;
-  }
+  };
 }
 export {};
