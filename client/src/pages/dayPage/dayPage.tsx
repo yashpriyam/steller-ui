@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./dayPage.scss";
 import Accordion from "../../components/accordion/accordion";
-import { questionsDataList } from "./dayPageDataList";
 import { useNavigate, useParams } from "react-router-dom";
 import { useVideos } from "../../redux/actions/videosAction";
 import { useNotes } from "../../redux/actions/notesAction";
 import DropDownIcon from "../../icons/dropDownIcon";
+import { useQuestions } from "../../redux/actions/questionsAction";
 interface DayPageProps {
   className?: string;
   title?: React.ReactNode | string;
-  questionsData?: { options?: string[]; title?: string }[];
 }
 
 export const DayPage: React.FC<DayPageProps> = ({
   className,
   title,
-  questionsData = questionsDataList,
 }: DayPageProps) => {
+  const [activeScrollbar, setActiveScrollbar] = useState<boolean>(false);
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const handleToggleSidebar = () => {
     setToggleSidebar(!toggleSidebar);
@@ -25,18 +24,22 @@ export const DayPage: React.FC<DayPageProps> = ({
   const { dayNumber } = useParams();
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
+  const { questionData, getAllQuestions } = useQuestions();
   const { videoList } = videoData;
   const { noteList } = noteData;
+  const { questionList } = questionData;
+
   const handleNavigation = (context: string) => {
     navigate(`/dayContext/${context}`);
   };
-  console.log({ noteList });
   const getAllDataRequest = async (dayNumber: number) => {
     await getAllVideos({ dayNumber });
-    await getAllNotes({ dayNumber });    
+    await getAllNotes({ dayNumber });
+    await getAllQuestions({});
   };
   useEffect(() => {
     getAllDataRequest(Number(dayNumber));
+    // eslint-disable-next-line
   }, []);
   return (
     <div className={`main-daypage-container ${className}`}>
@@ -82,27 +85,32 @@ export const DayPage: React.FC<DayPageProps> = ({
             >
               Videos
             </div>
-            {videoList?.map((video) => {
-              return (
-                <div className="video-content-wrapper">
-                  <div className="video-content">
-                    <iframe
-                      src={video?.links?.youtube}
-                      title={video.title}
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className={`video-iframe ${
-                        toggleSidebar && "expanded-video-iframe"
-                      }`}
-                    ></iframe>
+            <div
+              className={`videos-content-wrapper ${
+                activeScrollbar && "show-scrollbar"
+              }`}
+              onScroll={() => setActiveScrollbar(true)}
+            >
+              {videoList?.map((video) => {
+                return (
+                  <div className="video-content-wrapper">
+                    <div className="video-content">
+                      <iframe
+                        src={video?.links?.youtube}
+                        title={video.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        className="video-iframe"
+                      ></iframe>
+                    </div>
+                    <div className="content-text-wrapper">
+                      <div className="content-title">{video.title}</div>
+                    </div>
                   </div>
-                  <div className="content-text-wrapper">
-                    <div className="content-title">{video.title}</div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
           <div className="content-separator">
             <div className="line">
@@ -110,7 +118,7 @@ export const DayPage: React.FC<DayPageProps> = ({
                 className={`icon ${toggleSidebar && "rotate-icon"}`}
                 onClick={handleToggleSidebar}
               >
-                {<DropDownIcon color="black"/>}
+                <DropDownIcon color="black"/>
               </span>
             </div>
           </div>
@@ -127,28 +135,35 @@ export const DayPage: React.FC<DayPageProps> = ({
             >
               Questions
             </div>
-            {questionsData?.map((ques) => {
-              return (
-                <div className="question-content-wrapper">
-                  <div
-                    className={`question-content ${
-                      toggleSidebar && "resize-ques-card-height"
-                    }`}
-                  >
-                    <Accordion title={ques.title}>
-                      <div>
-                        {ques.options?.map((option) => (
-                          <div>
-                            <input id={option} type="checkbox" />
-                            <label htmlFor={option}>{option}</label>
-                          </div>
-                        ))}
-                      </div>
-                    </Accordion>
+            <div
+              className={`questions-content-wrapper ${
+                activeScrollbar && "show-scrollbar"
+              }`}
+              onScroll={() => setActiveScrollbar(true)}
+            >
+              {questionList?.map((ques) => {
+                return (
+                  <div className="question-content-wrapper">
+                    <div
+                      className={`question-content ${
+                        toggleSidebar && "resize-ques-card-height"
+                      }`}
+                    >
+                      <Accordion title={"ques.question"}>
+                        <div>
+                          {ques.options?.map((option) => (
+                            <div>
+                              <input id={option.text} type="checkbox" />
+                              <label htmlFor={option.text}>{option.text}</label>
+                            </div>
+                          ))}
+                        </div>
+                      </Accordion>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
         <div className={"notes-wrapper"}>
