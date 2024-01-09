@@ -1,7 +1,7 @@
 @import "../../components/variables.scss";
 @mixin scrollbar {
   &::-webkit-scrollbar {
-    background-color: rgba(128, 128, 128, 0.289);
+    background-color: $fadedGrayPrimary;
     width: 10px;
     border-radius: 8px;
     opacity: 1;
@@ -13,7 +13,7 @@
     }
   }
   &::-webkit-scrollbar-thumb {
-    background: #575757;
+    background: $fadedGraySecondary;
     border-radius: 8px;
     &:hover{
       cursor: grab;
@@ -29,9 +29,10 @@
   color: $primaryColor;
   align-items: center;
   gap: 20px;
+  font-family: $secondaryFontFamily;
 
   .main-title-div {
-    font-size: 70px;
+    font-size: $headerFontSize;
     color: $primaryColor;
     font-weight: 700;
     padding: 10px 20px;
@@ -39,7 +40,7 @@
   .content-navigation {
     display: flex;
     gap: 20px;
-    font-size: $subHeaderFontSize;
+    font-size: $largerFontSize;
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -102,7 +103,7 @@
         .video-content-wrapper {
           display: flex;
           flex-direction: column;
-          background-color: $accent-color-2;
+          background-color: $fadedGrayPrimary;
           border-radius: 20px;
           align-items: center;
           padding: 2px;
@@ -217,7 +218,7 @@
           width: 380px;
           display: flex;
           flex-direction: column;
-          background-color: $accent-color-2;
+          background-color: $fadedGrayPrimary;
           border-radius: 20px;
           .note-content {
             width: 100%;
@@ -235,7 +236,7 @@
   }
 }
 .content-header {
-  font-size: $headerFontSize;
+  font-size: $subHeaderFontSize;
   color: $link-color;
   font-weight: 700;
   border-bottom: 2px solid transparent;
@@ -248,20 +249,19 @@
   }
 }
 .content-text-wrapper {
-  font-size: $subHeaderFontSize;
-  background-color: $accent-color-2;
+  font-size: $mediumFontSize;
   padding: 10px 5px;
   width: 100%;
   border-radius: 0px 0px 20px 20px;
   height: fit-content;
   .content-title {
-    font-size: $subHeaderFontSize;
+    font-size: $largerFontSize;
     font-weight: 700;
     @media (max-width: $screenMd) {
       font-size: $mediumFontSize;
     }
   }
   @media (max-width: $screenMd) {
-    font-size: 14px;
+    font-size: $smallFontSize;
   }
 }
