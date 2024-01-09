@@ -40,7 +40,7 @@ declare global {
   interface ThoughtsProps {
     thoughtComponentTitle?: string;
     thoughtComponentSubtitle?: string;
-    thoughtElement?: Thoughts[];
+    thoughtElement?: ThoughtsType[];
   }
   type StackBoxType = {
     icon: string;
@@ -51,7 +51,7 @@ declare global {
   interface StackComponentProps {
     stackComponentTitle?: string;
     stackComponentSubtitle?: string;
-    stackElement?: StackBox[];
+    stackElement?: StackBoxType[];
   }
 
   type ServiceBoxType = {
@@ -62,7 +62,7 @@ declare global {
   };
 
   interface ServiceComponentProps {
-    serviceElements?: ServiceBox[];
+    serviceElements?: ServiceBoxType[];
   }
 
   interface PageTitleProps {
@@ -87,7 +87,7 @@ declare global {
 
   interface NewsDropProps {
     newsDropTitile?: string;
-    newsDropElements?: newsDrop[];
+    newsDropElements?: NewsDropType[];
   }
 
   interface DashboardProps {
@@ -97,15 +97,15 @@ declare global {
     topButtonTagOne?: string;
     topButtonTagTwo?: string;
     newsDropTitile?: string;
-    newsDropElements?: newsDrop[];
+    newsDropElements?: NewsDropType[];
     thoughtComponentTitle?: string;
     thoughtComponentSubtitle?: string;
-    thoughtElement?: Thoughts[];
-    serviceElements?: ServiceBox[];
+    thoughtElement?: ThoughtsType[];
+    serviceElements?: ServiceBoxType[];
     stackComponentTitle?: string;
     stackComponentSubtitle?: string;
-    stackElement?: StackBox[];
-    courseImageElement?: CourseImage[];
+    stackElement?: StackBoxType[];
+    courseImageElement?: CourseImageType[];
     overviewTitle?: string;
     overviewMainContent?: string;
     overviewSubcontent?: string;
@@ -121,7 +121,7 @@ declare global {
   };
 
   interface CourseImageProps {
-    courseImageElement?: CourseImage[];
+    courseImageElement?: CourseImageType[];
   }
 
   interface InputProps {
