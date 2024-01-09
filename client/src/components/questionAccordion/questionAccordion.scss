@@ -13,8 +13,16 @@
                 padding-bottom: 25px;
             }
             .question-title-img{
-                height: 1000px;
+                max-height: 1000px;
             }
+        }
+        .question-incorrect-ans{
+            padding-top: 15px;
+            color: red;
+        }
+        .question-correct-ans {
+            padding-top: 15px;
+            color: green;
         }
     }
 }

@@ -1,3 +1,5 @@
 {
-    "greeting": "नमस्ते, दुनिया!"
+    "greeting": "नमस्ते, दुनिया!",
+    "incorrect_answer": "ग़लत उत्तर",
+    "correct_answer": "सही उत्तर"
 }

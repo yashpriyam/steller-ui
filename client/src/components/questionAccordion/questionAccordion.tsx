@@ -7,9 +7,12 @@ import { Button } from '../button/button';
 const QuestionAccordion = ({
   questionData,
   onSubmit,
+  isLoading,
+  errorMsg,
+  successMsg
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
-  const { question, options } = questionData;
+  const { question, options, isAnswered, isCorrect } = questionData;
   return (
     <Accordion className={`question-title`} title={<div className='question-title'>
       {question[0]?.text}
@@ -17,7 +20,7 @@ const QuestionAccordion = ({
       <div className='question-accordion-container'>
         <div className='question-container'>
           {
-            question.map((titleData: any, index: number) => <div className='question-title-sub-container'>
+            question.map((titleData: ImageAndTextType, index: number) => <div key={index} className='question-title-sub-container'>
               {
                 Boolean(index) && (<div className='question-title-text'>
                   {
@@ -33,11 +36,20 @@ const QuestionAccordion = ({
           }
           <div className='question-option-container'>
             {
-              <Checkbox onSelect={(index, selectedValues) => setSelectedValues(Object.values(selectedValues))} options={options} className='question-checkbox' />
+              <Checkbox onSelect={(index, selectedValues) => setSelectedValues(Object.values(selectedValues))} isIncorrect={isAnswered && !isCorrect} options={options} className='question-checkbox' />
             }
           </div>
+         {
+          isAnswered && (isCorrect ? (
+            <div className='question-correct-ans'>
+              {successMsg}
+            </div>
+          ) : ( <div className='question-incorrect-ans'>
+          { errorMsg }
+        </div>))
+         }
           <div className='question-submit-btn-wrapper'>
-            <Button isDisabled={!selectedValues.length} onClick={() => onSubmit(questionData, selectedValues)} iconPosition="center" className='question-submit-btn' />
+            <Button isLoading={isLoading} isDisabled={!selectedValues.length || isLoading} onClick={() => onSubmit(questionData, selectedValues)} iconPosition="center" className='question-submit-btn' />
           </div>
         </div>
       </div>

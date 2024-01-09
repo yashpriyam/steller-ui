@@ -56,6 +56,7 @@ declare global {
     style?: React.CSSProperties;
     direction?: "row" | "column";
     title?: string;
+    isIncorrect?: boolean;
   }
 
   interface QuestionStateInterface {
@@ -64,10 +65,10 @@ declare global {
 
   type QuestionDataType = {
     id: string;
-    question: { imageUrl: string; text: string }[];
+    question: ImageAndTextType[];
     questionType: QuestionTypeEnum;
-    options: { imageUrl: string; text: string }[];
-    answer: { imageUrl: string; text: string }[];
+    options: ImageAndTextType[];
+    answer: ImageAndTextType[];
     marks: number;
     batchCode: string;
     meta: QuestionMetaDataType;
@@ -106,19 +107,31 @@ declare global {
       questionData: QuestionDataType,
       selectedValues: QuestionSelectedValueType[]
     ) => {};
+    isLoading: boolean;
+    errorMsg?: string;
+    successMsg?: string;
   }
 
   type QuestionSelectedValueType = {
-    text: string;
+    text: string | null;
     value?: string;
-    imageUrl: string;
+    imageUrl: string | null;
     __typename?: string;
   }
 
   type CheckboxValueType = {
-    text: string;
+    text: string | null;
     value?: string;
-    imageUrl: string;
+    imageUrl: string | null;
   };
+
+  interface QuestionAttemptStateInterface {
+    isLoading: boolean;
+  }
+
+  type ImageAndTextType = {
+    imageUrl: string | null;
+    text: string | null;
+  }
 }
 export {};
