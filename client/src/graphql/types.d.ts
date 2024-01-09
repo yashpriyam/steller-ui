@@ -1,7 +1,7 @@
 import { CSSProperties, ChangeEvent, ReactElement } from "react";
 
 declare global {
-  type RegisterUserData = {
+  type RegisterUserDataType = {
     name: string;
     email: string;
     phoneNumber: string;
@@ -31,7 +31,7 @@ declare global {
     topButtonTagTwo?: string;
   }
 
-  type Thoughts = {
+  type ThoughtsType = {
     icon: ReactElement;
     thought: string;
     tag: string;
@@ -42,7 +42,7 @@ declare global {
     thoughtComponentSubtitle?: string;
     thoughtElement?: Thoughts[];
   }
-  type StackBox = {
+  type StackBoxType = {
     icon: string;
     title: string;
     subtitle: string;
@@ -54,7 +54,7 @@ declare global {
     stackElement?: StackBox[];
   }
 
-  type ServiceBox = {
+  type ServiceBoxType = {
     icon: ReactElement;
     title: string;
     subtitle: string;
@@ -79,7 +79,7 @@ declare global {
     overviewButtonOne?:string;
     overviewButtonTwo?:string;
 }
-type newsDrop = {
+type newsDropType = {
     image: string;
     title: string;
     description: string;
@@ -114,7 +114,7 @@ type newsDrop = {
     overviewButtonOne?: string;
     overviewButtonTwo?: string;
   }
-type CourseImage = {
+type CourseImageType = {
     image: string;
     courseTitle: string;
     courseSubtitle: string;
