@@ -120,10 +120,10 @@ type CourseImage = {
     courseSubtitle: string;
   };
 
-interface CourseImageProps {
-    courseImageElement?: CourseImage[];
-}  
-}
+    interface CourseImageProps {
+        courseImageElement?: CourseImage[];
+    }  
+
   interface InputProps {
     type: string;
     value?: string;
@@ -231,4 +231,5 @@ interface CourseImageProps {
     imageUrl: string | null;
     text: string | null;
   }
+}
 export {};

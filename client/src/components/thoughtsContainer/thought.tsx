@@ -1,12 +1,13 @@
 import React, {ReactElement} from "react"
 import "./thought.scss"
+import { useTranslation } from "react-i18next";
 
 export const ThoughtComponent: React.FC<ThoughtsProps> = ({
     thoughtComponentTitle,
     thoughtComponentSubtitle,
     thoughtElement=[],
 }: ThoughtsProps) => {
-
+ const {t} = useTranslation()
     const thoughtData =   thoughtElement.map((items, index) => {
         return (
           <div className="thought_element">
@@ -33,12 +34,12 @@ export const ThoughtComponent: React.FC<ThoughtsProps> = ({
           </div>
           <div className="subscribers-tabs">
             <div className="joinee-box">
-              <p className="joinee-count">Join 1K+ Readers</p>
-              <p className="write-ups">Sent out every two weeks. No spam.</p>
+              <p className="joinee-count">{t("join_1K+_readers")}</p>
+              <p className="write-ups">{t("sent_out_every_two_weeks_no_spam")}</p>
             </div>
             <div className="subscribe-box">
               <input className="email-input" placeholder="Your E-Mail" />
-              <button className="subscriber-button">Subscribe</button>
+              <button className="subscriber-button">{t("subscribe")}</button>
             </div>
           </div>
         </div>

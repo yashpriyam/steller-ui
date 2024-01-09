@@ -1,7 +1,7 @@
 @import "../variables.scss";
 
 .course-image-box {
-    border: 1px solid $tertiaryBackgroundColor;
+    border: 1px solid $Gray29;
     margin: 30px 0 0 230px;
     width: 850px;
     height: 300px;
@@ -35,12 +35,12 @@
         width: 600px;
         text-align: center;
         .course-image-title {
-          font-size: 60px;
-          font-weight: 600px;
+          font-size: $doubleXlFontSize;
+          font-weight: bold;
         }
         .course-image-subtitle {
-          font-size: 20px;
-          font-weight: 600px;
+          font-size: $titleFontSize;
+          font-weight: bold;
         }
       }
     }
@@ -49,7 +49,7 @@
     }
   }
 
-@media (max-width: 1080px) {
+@media (max-width: $screenXl) {
     .course-image-box {
         margin: 6vh 0 0 0;
         .image-container {
@@ -60,7 +60,7 @@
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: $screenLg) {
     .course-image-box {
         margin: 6vh 0 0 0;
         width: 85vw;
@@ -73,39 +73,18 @@
             border-radius: 50px;
             width: 60vw;
             text-align: center;
-            .course-image-title {
-              font-size: 60px;
-            }
-            .course-image-subtitle {
-              font-size: 20px;
-            }
           }
         }
       }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $screenMd) {
     .course-image-box {
         .image-container {
             .courses-image {
             width: 850px;
           }
 
-          .course-title-container {
-            .course-image-title {
-              font-size: 8vw;
-            }
-            .course-image-subtitle {
-              font-size: 3vw;
-            }
-          }
-        }
-      }
-}
-
-@media (max-width: 576px) {
-    .course-image-box {
-        .image-container {
           .course-title-container {
             .course-image-title {
               font-size: 8vw;

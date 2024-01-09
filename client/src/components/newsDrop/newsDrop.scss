@@ -5,8 +5,8 @@
     width: 850px;
     margin-top: 30px;
     .titles-news-drops {
-      font-size: 20px;
-      font-weight: 600;
+      font-size: $titleFontSize;
+      font-weight: bold;
     }
 
     .image-card-box {
@@ -17,7 +17,7 @@
 
       .images-card {
         width: 400px;
-        border: 1px solid $tertiaryBackgroundColor;
+        border: 1px solid $Gray29;
         overflow: hidden;
         border-radius: 7px;
 
@@ -35,15 +35,15 @@
           }
         }
         .image-title-data {
-          background-color: $mySecondaryBackgroundColor;
+          background-color: $Gray35;
           padding: 10px 0 10px 20px;
           width: 450px;
           .titles-image {
-            font-size: 20px;
+            font-size: $titleFontSize;
 
           }
           .image-description {
-            font-size: 15px;
+            font-size: $smallFontSize;
             font-weight: lighter;
             color: $sencondaryTextColor;
           }
@@ -52,13 +52,13 @@
     }
   }
 
-@media (max-width: 1080px) {
+@media (max-width: $screenXl) {
     .news-drops {
         margin: 10px 0 0 0;
       }
 }
 
-@media (max-width: 992px) {
+@media (max-width: $screenLg) {
     .news-drops {
         margin: 10px 0 0 0;
         width: 85vw;
@@ -81,7 +81,7 @@
       }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $screenMd) {
     .news-drops {
         .image-card-box {
           flex-direction: column;
@@ -102,10 +102,10 @@
               padding: 20px 30px 20px 30px;
               width: 800px;
               .titles-image {
-                font-size: 30px;
+                font-size: $titleFontSize;
               }
               .image-description {
-                font-size: 20px;
+                font-size: $titleFontSize;
               }
             }
           }
@@ -113,7 +113,7 @@
       }
 }
 
-@media (max-width: 576px) { 
+@media (max-width: $screenSm) { 
     .news-drops {
     margin: 10px 0 0 0;
     .image-card-box {
@@ -121,10 +121,10 @@
         .image-title-data {
           padding: 10px 0 10px 20px;
           .titles-image {
-            font-size: 20px;
+            font-size: $titleFontSize;
           }
           .image-description {
-            font-size: 15px;
+            font-size: $smallFontSize;
           }
         }
       }

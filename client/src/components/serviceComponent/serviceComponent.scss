@@ -7,13 +7,13 @@
   align-items: center;
   justify-content: space-between;
   .service_elements {
-    background-color: $mySecondaryBackgroundColor;
-    border: 1px solid $tertiaryBackgroundColor;
+    background-color: $Gray35;
+    border: 1px solid $Gray29;
     padding: 20px;
     width: 400px;
     border-radius: 7px;
     .service-icon-box {
-      background-color: $tertiaryBackgroundColor;
+      background-color: $Gray29;
       width: 40px;
       height: 40px;
       border-radius: 50px;
@@ -24,7 +24,7 @@
     .service-text {
       margin-top: 20px;
       .service-title {
-        font-size: 20px;
+        font-size: $titleFontSize;
       }
       .service-subtitle {
         margin-top: 5px;
@@ -34,27 +34,27 @@
     .service-button {
       margin-top: 20px;
       padding: 10px 20px 10px 20px;
-      background-color: $tertiaryBackgroundColor;
+      background-color: $Gray29;
       border: none;
       border-radius: 5px;
       color: white;
-      font-weight: 600;
+      font-weight: bold;
       transition: 0.6s;
     }
     .service-button:hover {
       color: $sencondaryTextColor;
-      background-color: $fourthBackgroungColor;
+      background-color: $Gray43;
     }
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: $screenXl) {
   .service-container {
     margin: 10px 0 0 0;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: $screenLg) {
   .service-container {
     margin: 10px 0 0 0;
     width: 85vw;
@@ -65,7 +65,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $screenMd) {
   .service-container {
     flex-direction: column;
     .service_elements {
@@ -78,13 +78,13 @@
       .service-button {
         margin-top: 15px;
         padding: 10px 20px 10px 20px;
-        font-size: 12px;
+        font-size: $extraSmallFontSize;
       }
     }
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: $screenSm) {
   .service-container {
     .service_elements {
       border-radius: 6px;
@@ -94,13 +94,13 @@
       .service-button {
         margin-top: 15px;
         padding: 10px 20px 10px 20px;
-        font-size: 12px;
+        font-size: $extraSmallFontSize;
       }
     }
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: $screenXs) {
   .service-container {
     .service_elements {
       border-radius: 6px;
@@ -110,7 +110,7 @@
       .service-button {
         margin-top: 15px;
         padding: 10px 20px 10px 20px;
-        font-size: 12px;
+        font-size: $extraSmallFontSize;
       }
     }
   }
