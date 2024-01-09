@@ -188,9 +188,21 @@ declare global {
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
-    meta: QuestioinMetaData;
+    meta: QuestionMetaData;
   };
-  type QuestioinMetaData = {
+
+  type AllQuestionDataType = {
+    id: ObjectId;
+    question: { imageUrl: string; text: string }[];
+    questionType: QuestionTypeEnum;
+    options: { imageUrl: string; text: string }[];
+    answer: { imageUrl: string; text: string }[];
+    marks: number;
+    batchCode: string;
+    meta: QuestionMetaData;
+  }
+
+  type QuestionMetaData = {
     topic: string;
     day: number;
     isActive: boolean;
@@ -314,7 +326,7 @@ declare global {
     type?: QuestionMetaType;
   };
   type QuestionsReturnType = {
-    questionData: [QuestionSchemaType];
+    questionData: [AllQuestionDataType];
     response: CustomResponseType;
   };
   type CustomResponseType = {
