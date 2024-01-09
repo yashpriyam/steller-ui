@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import "./dayPage.scss";
-import Accordion from "../../components/accordion/accordion";
 import { useNavigate, useParams } from "react-router-dom";
 import { useVideos } from "../../redux/actions/videosAction";
 import { useNotes } from "../../redux/actions/notesAction";
 import DropDownIcon from "../../icons/dropDownIcon";
-import { useQuestions } from "../../redux/actions/questionsAction";
-interface DayPageProps {
-  className?: string;
-  title?: React.ReactNode | string;
-}
+import { useQuestions } from "../../redux/actions/questionAction";
+import QuestionAccordion from "../../components/questionAccordion/questionAccordion";
+import { useTranslation } from "react-i18next";
+import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
 
-export const DayPage: React.FC<DayPageProps> = ({
+
+export const DayPage: React.FC<DayPagePropsInterface> = ({
   className,
   title,
-}: DayPageProps) => {
+}: DayPagePropsInterface) => {
   const [activeScrollbar, setActiveScrollbar] = useState<boolean>(false);
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const handleToggleSidebar = () => {
@@ -24,18 +23,35 @@ export const DayPage: React.FC<DayPageProps> = ({
   const { dayNumber } = useParams();
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
-  const { questionData, getAllQuestions } = useQuestions();
+  const { questions, getAllQuestions } = useQuestions();
   const { videoList } = videoData;
   const { noteList } = noteData;
-  const { questionList } = questionData;
-
+  const { questionList } = questions;
+  const { questionAttempt, createQuestionAttemptByUser } = useQuestionAttempt();
+  const { isLoading } = questionAttempt;
+  const { t } = useTranslation();
+  const onSubmit = async (
+    question: QuestionDataType,
+    selectedValues: QuestionSelectedValueType[]
+  ) => {
+    const filteredData = selectedValues.map((selectedValue) => ({
+      imageUrl: selectedValue.imageUrl,
+      text: selectedValue.text,
+    }));
+    try {
+      await createQuestionAttemptByUser(filteredData, question.id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const handleNavigation = (context: string) => {
     navigate(`/dayContext/${context}`);
   };
+ 
   const getAllDataRequest = async (dayNumber: number) => {
     await getAllVideos({ dayNumber });
     await getAllNotes({ dayNumber });
-    await getAllQuestions({});
+    await getAllQuestions();
   };
   useEffect(() => {
     getAllDataRequest(Number(dayNumber));
@@ -118,7 +134,7 @@ export const DayPage: React.FC<DayPageProps> = ({
                 className={`icon ${toggleSidebar && "rotate-icon"}`}
                 onClick={handleToggleSidebar}
               >
-                <DropDownIcon color="black"/>
+                <DropDownIcon color="black" />
               </span>
             </div>
           </div>
@@ -141,7 +157,7 @@ export const DayPage: React.FC<DayPageProps> = ({
               }`}
               onScroll={() => setActiveScrollbar(true)}
             >
-              {questionList?.map((ques) => {
+              {questionList?.map((questionData, index) => {
                 return (
                   <div className="question-content-wrapper">
                     <div
@@ -149,16 +165,14 @@ export const DayPage: React.FC<DayPageProps> = ({
                         toggleSidebar && "resize-ques-card-height"
                       }`}
                     >
-                      <Accordion title={"ques.question"}>
-                        <div>
-                          {ques.options?.map((option) => (
-                            <div>
-                              <input id={option.text} type="checkbox" />
-                              <label htmlFor={option.text}>{option.text}</label>
-                            </div>
-                          ))}
-                        </div>
-                      </Accordion>
+                      <QuestionAccordion
+                        key={index}
+                        questionData={questionData}
+                        onSubmit={onSubmit}
+                        isLoading={isLoading}
+                        errorMsg={t("incorrect_answer")}
+                        successMsg={t("correct_answer")}
+                      />
                     </div>
                   </div>
                 );
@@ -192,7 +206,6 @@ export const DayPage: React.FC<DayPageProps> = ({
                 </div>
                 <div className="content-text-wrapper">
                   <div className="content-title">{note.title}</div>
-                  <p>Day 2</p>
                 </div>
               </div>
             ))}

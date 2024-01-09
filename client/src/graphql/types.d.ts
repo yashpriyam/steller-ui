@@ -174,5 +174,10 @@ declare global {
   type NotesDataStateType = {
     noteList: NotesDataType[];
   }
+
+  interface DayPagePropsInterface {
+    className?: string;
+    title?: React.ReactNode | string;
+  }
 }
 export {};

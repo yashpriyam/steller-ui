@@ -1,7 +1,7 @@
 @import "../../components/variables.scss";
 @mixin scrollbar {
   &::-webkit-scrollbar {
-    background-color: $fadedGrayPrimary;
+    background-color: $fadedBlackColor;
     width: 10px;
     border-radius: 8px;
     opacity: 1;
@@ -103,7 +103,7 @@
         .video-content-wrapper {
           display: flex;
           flex-direction: column;
-          background-color: $fadedGrayPrimary;
+          background-color: $fadedBlackColor;
           border-radius: 20px;
           align-items: center;
           padding: 2px;
@@ -114,7 +114,7 @@
             .video-iframe {
               width: 100%;
               height: 100%;
-              border-radius: 20px;
+              border-radius: 20px 20px 0px 0px;
             }
           }
         }}
@@ -185,10 +185,8 @@
           @media (max-width: $screenLg) {
             height: 650px;
           }
-          
-          
-          .question-content-wrapper {
-            
+                    
+          .question-content-wrapper { 
             .question-content {
               width: 100%;
               cursor: pointer;
@@ -218,7 +216,8 @@
           width: 380px;
           display: flex;
           flex-direction: column;
-          background-color: $fadedGrayPrimary;
+          background-color: $fadedBlackColor;
+          border: 1px solid $videoHutBorderColor;
           border-radius: 20px;
           .note-content {
             width: 100%;
@@ -227,7 +226,7 @@
             .note-iframe {
               width: 100%;
               height: 100%;
-              border-radius: 20px;
+              border-radius: 20px 20px 0px 0px;
             }
           }
         }
@@ -250,7 +249,7 @@
 }
 .content-text-wrapper {
   font-size: $mediumFontSize;
-  padding: 10px 5px;
+  padding: 10px;
   width: 100%;
   border-radius: 0px 0px 20px 20px;
   height: fit-content;
