@@ -1,13 +1,14 @@
 function isCorrectAnswer(
     response: QuestionResponseType[],
-    question: QuestionResponseType[]
+    answer: QuestionResponseType[]
 ) 
 {
-    const hasMatch = question.every((questionItem) =>
+
+    const hasMatch = answer.length === response.length &&  answer.every((answerItem) =>
       response.some(
         (responseItem) =>
-          questionItem.text === responseItem.text &&
-          questionItem.imageUrl === responseItem.imageUrl
+         (answerItem.text && answerItem.text === responseItem.text) ||
+         (answerItem.imageUrl && answerItem.imageUrl === responseItem.imageUrl)
       )
     );
   

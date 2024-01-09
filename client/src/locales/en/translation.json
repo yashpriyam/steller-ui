@@ -1,3 +1,5 @@
 {
-    "greeting": "Hello World!"
+    "greeting": "Hello World!",
+    "incorrect_answer": "incorrect answer",
+    "correct_answer": "correct answer"
 }
