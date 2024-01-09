@@ -1,0 +1,159 @@
+@import "../variables.scss";
+
+.thoughts-container-outer {
+  border: 1px solid $Gray29;
+  border-radius: 7px;
+  margin: 30px 0 0 230px;
+  width: 850px;
+  overflow: hidden;
+  .thought-container {
+    padding: 20px;
+
+    .thought-title {
+      font-size: $titleFontSize;
+    }
+    .thought-description {
+      font-size: $smallFontSize;
+      font-weight: lighter;
+      color: $sencondaryTextColor;
+    }
+
+    .thought-box {
+      display: flex;
+      flex-wrap: wrap;
+      .thought_element {
+        border-radius: 7px;
+        width: 400px;
+        padding: 10px 30px 10px 30px;
+        display: flex;
+        margin: 5px 3px 0 0;
+        .thought-icon-box {
+          width: 40px;
+          height: 40px;
+          background-color: $Gray29;
+          border-radius: 7px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .thought-element-text {
+          margin: 0 0 0 10px;
+          .thought {
+            font-size: $largerFontSize;
+          }
+          .thought-tag {
+            font-size: $smallFontSize;
+            color: $sencondaryTextColor;
+          }
+        }
+        transition: 0.6s;
+      }
+      .thought_element:hover {
+        background-color: $Gray35;
+      }
+    }
+  }
+  .subscribers-tabs {
+    background-color: $Gray35;
+    margin-top: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    .joinee-box {
+      .joinee-count {
+        font-size: $titleFontSize;
+      }
+      .write-ups {
+        color: $sencondaryTextColor;
+      }
+    }
+    .subscribe-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      .email-input {
+        width: 250px;
+        padding: 10px;
+        background: none;
+        border: 1px solid $Gray29;
+        border-radius: 5px;
+      }
+      .subscriber-button {
+        padding: 10px 20px 10px 20px;
+        background-color: $Gray29;
+        color: $primaryTextColor;
+        border: none;
+        border-radius: 5px;
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: $screenXl) {
+  .thoughts-container-outer {
+    margin: 10px 0 0 0;
+  }
+}
+
+@media (max-width: $screenLg) {
+  .thoughts-container-outer {
+    border-radius: 6px;
+    margin: 10px 0 0 0;
+    width: 85vw;
+    .thought-container {
+      .thought-box {
+        .thought_element {
+          width: 100vw;
+          .thought-icon-box {
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $screenMd) {
+  .thoughts-container-outer {
+    .subscribers-tabs {
+      display: flex;
+      flex-direction: column;
+      .joinee-box {
+        .joinee-count {
+          font-size: $largerFontSize;
+        }
+        .write-ups {
+          font-size: $smallFontSize;
+        }
+      }
+      .subscribe-box {
+        margin-top: 20px;
+        justify-content: start;
+      }
+    }
+  }
+}
+
+@media (max-width: $screenSm) {
+  .thoughts-container-outer {
+    .subscribers-tabs {
+      display: flex;
+      flex-direction: column;
+      .joinee-box {
+        .joinee-count {
+          font-size: $largerFontSize;
+        }
+        .write-ups {
+          font-size: $smallFontSize;
+        }
+      }
+      .subscribe-box {
+        margin-top: 20px;
+        justify-content: start;
+      }
+    }
+  }
+}
