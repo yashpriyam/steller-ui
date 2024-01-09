@@ -1,3 +1,4 @@
+@import "../variables.scss";
 .question-accordion-container{
     .question-container{
         padding: 0 30px;
@@ -18,17 +19,17 @@
         }
         .question-incorrect-ans{
             padding-top: 15px;
-            color: red;
+            color: $accent-color-2;
         }
         .question-correct-ans {
             padding-top: 15px;
-            color: green;
+            color: $accent-color-3;
         }
     }
 }
 .question-title{
-    color: white;
-    font-size: 16px;
+    color: $primary-color;
+    font-size: $mediumFontSize;
 }
 .question-checkbox{
     display: flex;
