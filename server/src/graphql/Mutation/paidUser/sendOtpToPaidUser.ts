@@ -16,7 +16,7 @@ export const sendOtpToPaidUser = async (
     const { email } = args;    
     if (isValidEmail(email)) {
       const emailValidityMinutes = 30;
-      const user = await paidUser.exists({ email });
+      const user = await paidUser.exists({ email });      
       if (user) {
         const createdOtpData: CreateUserOtpType =
           await otpModel.findOneAndUpdate(
@@ -26,7 +26,7 @@ export const sendOtpToPaidUser = async (
               expiresAt: timeAfterMins(emailValidityMinutes),
             },
             { upsert: true, new: true }
-          );        
+          );
         await sendEmail({
           subject: `Your One-Time Password (OTP) for Webmaster Reset Password`,
           html: `<div><h2>${createdOtpData.emailOtp}</h2> </div>
@@ -41,16 +41,20 @@ export const sendOtpToPaidUser = async (
             The Webmaster Team`,
           to: email,
         });
-      }
-
-      return {
+        return {
           message: OTP_SENT_SUCCESS,
           status: statusCodes.OK,
-      };
+        };
+      } else
+        return {
+          message: OTP_EMAIL_INVALID,
+          status: statusCodes.BAD_REQUEST,
+        };
+
     } else
       return {
           message: OTP_EMAIL_INVALID,
-          status: statusCodes.OK,
+          status: statusCodes.BAD_REQUEST,
       };
   } catch (err) {
     return {

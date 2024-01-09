@@ -15,6 +15,8 @@ export const updatePaidUser = async (
   };
   try {
     const { email, updatedNewData } = args.data;
+    console.log({email,updatedNewData});
+    
     const password: Record<string, string> = {
       salt: "",
       hash: "",

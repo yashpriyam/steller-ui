@@ -1,47 +1,52 @@
-import React, { ChangeEvent,useState } from "react";
-import LeftArrow  from "../../icons/LeftArrow";
+import React, { ChangeEvent, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import LeftArrow from "../../icons/LeftArrow";
 import { useTranslation } from "react-i18next";
 import { InputComponent } from "../input/inputComponent";
 import { Button } from "../button/button";
 import { isValidEmail } from "../../utils/isValidEmail";
 import "./otpVerification.scss";
+import { loginAction } from "../../redux/slices/login/loginSlice";
 
 export const OtpVerification: React.FC<OtpVerificationProps> = ({
   handleOnSendOtp,
   verifyOtp,
   onBackClick,
 }) => {
+  const currentData: LoginState = useSelector((state: any) => state.login);
+  const dispatch = useDispatch();
+  const { setEmail, setIsOtpValid, setIsOtpSend, setIsSending } = loginAction;
   const { t } = useTranslation();
-  const [userData, setUserData] = useState({ email: "", otp: "" });
-  const [otp, setOtp] = useState({ isOtpSend: false, isOtpValid: false });
+  const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
 
   const handleEmailInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUserData((userData) => {
-      return { ...userData, email: e.target.value };
-    });
+    setError("");
+    dispatch(setEmail(e.target.value));
   };
   const handleOtpInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setError("");
-    setUserData({ ...userData, otp: e.target.value });
+    setOtp(e.target.value);
   };
-  const handleOnSendOtpClick = () => {
-    const validEmail = isValidEmail(userData.email);
-    validEmail && handleOnSendOtp(userData.email);
-    setOtp({ ...otp, isOtpSend: validEmail });
+  const handleOnSendOtpClick = async () => {
+    dispatch(setIsSending(true));
+    const otpSend = await handleOnSendOtp();
+    dispatch(setIsSending(false));
+    otpSend ? setError("") : setError(t("Invalid email, enter valid email"));
+    dispatch(setIsOtpSend(otpSend));
   };
-  const handleOnVerifyOtpClick = () => {
-    const isOtpValid = verifyOtp(userData);
+  const handleOnVerifyOtpClick = async () => {
+    const isOtpValid = await verifyOtp(otp);
     setError(
       isOtpValid ? "" : t("The entered OTP is invalid. Please try again.")
     );
-    setOtp({ ...otp, isOtpValid });
-    setUserData({ ...userData, otp: "" });
+    dispatch(setIsOtpValid(isOtpValid));
+    setOtp("");
   };
-  const handleOnResendOtpClick = () => {
-    const validEmail = isValidEmail(userData.email);
-    validEmail && handleOnSendOtp(userData.email);
-    setUserData({ ...userData, otp: "" });
+  const handleOnResendOtpClick = async () => {
+    const validEmail = isValidEmail(currentData.email);
+    validEmail && handleOnSendOtp();
+    setOtp("");
     setError("");
   };
   return (
@@ -53,7 +58,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
       <InputComponent
         type="email"
         className="input-component"
-        value={userData.email}
+        value={currentData.email}
         placeholder={t("Enter email address")}
         onChange={handleEmailInputChange}
         errorMessage={t("Invalid email, enter valid email")}
@@ -61,21 +66,27 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
       <InputComponent
         className="input-component"
         type="number"
-        value={userData.otp}
+        value={otp}
         placeholder={t("Enter otp")}
         onChange={handleOtpInputChange}
-        disabled={!otp.isOtpSend}
+        disabled={!currentData.isOtpSend}
       />
       <div className="button-container">
         <Button
-          text={otp.isOtpSend ? t("verify otp") : t("send otp")}
+          text={currentData.isOtpSend ? t("verify otp") : t("send otp")}
           className="send-verify-otp"
+          isLoading={currentData.isOtpSending}
+          iconPosition="center"
           onClick={
-            otp.isOtpSend ? handleOnVerifyOtpClick : handleOnSendOtpClick
+            currentData.isOtpSend
+              ? handleOnVerifyOtpClick
+              : handleOnSendOtpClick
           }
-          isDisabled={otp.isOtpSend && !Boolean(userData.otp)}
+          isDisabled={
+            currentData.isOtpSending || (currentData.isOtpSend && !Boolean(otp))
+          }
         />
-        {otp.isOtpSend && (
+        {currentData.isOtpSend && (
           <Button
             className="send-verify-otp"
             text={t("resend")}

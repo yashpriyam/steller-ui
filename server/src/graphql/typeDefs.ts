@@ -40,7 +40,7 @@ const typeDefs = gql`
     sendOtp(email: String!): OtpUserOutputType
     createPaidUser(data: PaidUserInputType): PaidUserOutputType
     sendOtpToPaidUser(email: String!): CustomResponseType
-    verifyOtpPaidUser(data: verifyOtpPaidUserInputType!): CustomResponseType
+    verifyOtpPaidUser(data: VerifyOtpPaidUserInputType!): CustomResponseType
     updatePaidUser(data: updatePaidUserInputType!): PaidUserOutputType
   }
 
@@ -430,7 +430,7 @@ const typeDefs = gql`
     medium: String
     portfolio: String
   }
-  input verifyOtpPaidUserInputType {
+  input VerifyOtpPaidUserInputType {
     email: String!
     emailOtp: String!
   }

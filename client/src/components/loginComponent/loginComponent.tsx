@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../../redux/slices/login/loginSlice";
 import { useTranslation } from "react-i18next";
 import { InputComponent } from "../input/inputComponent";
 import { Button } from "../button/button";
@@ -9,27 +11,25 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
   handleOnForgetPasswordClick,
 }) => {
   const { t } = useTranslation();
-  const [currentUserData, setCurrentUserData] = useState({
-    email: "",
-    password: "",
-  });
+  const currentData: LoginState = useSelector((state: any) => state.login);
+  const dispatch = useDispatch();
+  const { setEmail, setPassword } = loginAction;
   const [error, setError] = useState<string>("");
-  const setEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const setEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value;
-    setError("")
-    setCurrentUserData({ ...currentUserData, email });
+    setError("");
+    dispatch(setEmail(email));
   };
-  const setPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setPasswordOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const password = e.target.value;
     setError("");
-    setCurrentUserData({ ...currentUserData, password });
+    dispatch(setPassword(password));
   };
-  const handleOnLoginButtonClick = () => {
-    const isLogin = handleLoginClick(
-      currentUserData.email,
-      currentUserData.password
-    );    
-    !isLogin ? setError(t("Invalid Email and Password!")) : setError("");
+  const handleOnLoginButtonClick = async () => {
+    const isLogin = await handleLoginClick();
+    dispatch(setEmail(""), setPassword(""));
+    isLogin ? setError("") : setError(t("Invalid Email and Password!"));
   };
   return (
     <div className="login-component-wrapper">
@@ -38,17 +38,17 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
         <h3>{t("Securely access your account.")}</h3>
       </div>
       <InputComponent
-        onChange={setEmail}
+        onChange={setEmailOnChange}
         type="email"
-        value={currentUserData.email}
+        value={currentData.email}
         className="input-component"
         errorMessage={t("please enter valid email")}
         placeholder={t("Enter user id")}
       />
       <InputComponent
-        onChange={setPassword}
+        onChange={setPasswordOnChange}
         type="password"
-        value={currentUserData.password}
+        value={currentData.password}
         className="input-component"
         errorMessage={t("please enter valid Password")}
         placeholder={t("Enter password")}
@@ -62,7 +62,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
         className="login-button"
         onClick={handleOnLoginButtonClick}
         text={t("login")}
-        isDisabled={!(currentUserData.email && currentUserData.password)}
+        isDisabled={!(currentData.email && currentData.password)}
       />
       {<div className="error-container">{t(error)}</div>}
     </div>

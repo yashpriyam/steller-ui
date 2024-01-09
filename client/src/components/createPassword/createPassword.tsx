@@ -1,5 +1,7 @@
 import { Button } from "../button/button";
 import { InputComponent } from "../input/inputComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../../redux/slices/login/loginSlice";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./createPassword.scss";
@@ -7,22 +9,23 @@ import { isValidPassword } from "../../utils/isValidPassword";
 
 export const CreatePassword: React.FC<CreatePasswordProps> = ({
   handleSkip = () => {},
-  handleOnCreateNewPassword = (password: string) => {},
+  handleOnCreateNewPassword = () => {},
 }) => {
+  const currentData: LoginState = useSelector((state: any) => state.login);
+  const dispatch = useDispatch();
+  const { setPassword } = loginAction;
   const [passwordData, setPasswordData] = useState({
-    password: "",
     confirmPassword: "",
     passwordMatch: false,
   });
   const { t } = useTranslation();
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    dispatch(setPassword(value));
     setPasswordData({
       ...passwordData,
-      password: value,
       passwordMatch:
-        e.target.value === passwordData.confirmPassword &&
-        isValidPassword(value),
+        value === passwordData.confirmPassword && isValidPassword(value),
     });
   };
 
@@ -34,11 +37,11 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
     setPasswordData({
       ...passwordData,
       confirmPassword: value,
-      passwordMatch: value === passwordData.password,
+      passwordMatch: value === currentData.password,
     });
   };
   const handleCreatePasswordButton = () => {
-    handleOnCreateNewPassword(passwordData.password);
+    handleOnCreateNewPassword();
   };
 
   return (
@@ -51,7 +54,7 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
         className="input-component"
         type="password"
         placeholder={t("New Password")}
-        value={passwordData.password}
+        value={currentData.password}
         onChange={handlePasswordChange}
       />
       <InputComponent
@@ -59,9 +62,9 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
         placeholder={t("Confirm Password")}
         value={passwordData.confirmPassword}
         onChange={handleConfirmPasswordChange}
-        disabled={!isValidPassword(passwordData.password)}
+        disabled={!isValidPassword(currentData.password)}
         className={`input-component ${
-          passwordData.password !== "" && !passwordData.passwordMatch
+          currentData.password !== "" && !passwordData.passwordMatch
             ? "not-matched"
             : ""
         }`}
@@ -90,4 +93,3 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
     </div>
   );
 };
-

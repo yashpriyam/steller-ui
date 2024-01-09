@@ -47,7 +47,7 @@ declare global {
     className?: string;
   }
   interface LoginComponentProps {
-    handleLoginClick: (email: string, password: string) => boolean;
+    handleLoginClick: () => Promise<boolean>;
     handleOnForgetPasswordClick: () => void;
   }
 
@@ -59,12 +59,40 @@ declare global {
   }
   interface CreatePasswordProps {
     handleSkip?: () => void;
-    handleOnCreateNewPassword?: (password: string) => void;
+    handleOnCreateNewPassword?: () => void;
   }
   interface OtpVerificationProps {
-    handleOnSendOtp: (email: string) => void;
-    verifyOtp: (userInfo: object) => boolean;
+    handleOnSendOtp: () => Promise<boolean>;
+    verifyOtp: (otp: string) => Promise<boolean>;
     onBackClick: () => void;
+  }
+  type LoginUser = {
+    email: string;
+    password: string;
+  };
+  type updatePaidUserInput = {
+    email: String;
+    updatedNewData: UpdatePaidDataType;
+  };
+  type UpdatePaidDataType = {
+    username?: string;
+    contact?: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    password?: string;
+  };
+  interface LoginState {
+    email: string;
+    isOtpSend: boolean;
+    isOtpValid: boolean;
+    isOtpSending: boolean;
+    password: string;
   }
 }
 export {};
