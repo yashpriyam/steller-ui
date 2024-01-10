@@ -23,7 +23,7 @@
     width: 100%;
     align-items: center;
     justify-content: center;
-    .naviagtor {
+    .navigator {
       color: $link-color;
       border-bottom: 2px solid transparent;
       transition: 0.3s;
@@ -46,8 +46,12 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      color: $link-color;
       font-size: $subHeaderFontSize;
       @media (max-width: $screenLg) {
+        width: 90%;
+      }
+      @media (max-width: $screenMd) {
         width: 100%;
       }
       .context-title {
@@ -62,6 +66,9 @@
       transition: 0.3s;
       gap: 20px;
       @media (max-width: $screenLg) {
+        width: 90%;
+      }
+      @media (max-width: $screenMd) {
         width: 100%;
       }
       .video-note-content-wrapper {

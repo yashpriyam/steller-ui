@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./dayPage.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useVideos } from "../../redux/actions/videosAction";
 import { useNotes } from "../../redux/actions/notesAction";
 import DropDownIcon from "../../icons/dropDownIcon";
@@ -15,10 +15,6 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
 }: DayPagePropsInterface) => {
   const [activeScrollbar, setActiveScrollbar] = useState<boolean>(false);
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
-  const handleToggleSidebar = () => {
-    setToggleSidebar(!toggleSidebar);
-  };
-  const navigate = useNavigate();
   const { dayNumber } = useParams();
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
@@ -29,6 +25,12 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
   const { questionAttempt, createQuestionAttemptByUser } = useQuestionAttempt();
   const { isLoading } = questionAttempt;
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+  const navigationLinksData: string[] = ["videos", "questions", "notes"];
+  const handleToggleSidebar = () => {
+    setToggleSidebar(!toggleSidebar);
+  };
   const onSubmit = async (
     question: QuestionDataType,
     selectedValues: QuestionSelectedValueType[]
@@ -43,14 +45,18 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
       console.log(err);
     }
   };
-  const handleNavigation = (context: string) => {
-    navigate(`/dayContext/${context}?day=${dayNumber}`);
+  const handleNavigation = (dayContent: string) => {
+    if (dayContent === "questions") {
+      navigate(`/question?day=${dayNumber}`);
+    } else {
+      navigate(`${pathname}/${dayContent}`);
+    }
   };
 
   const getAllDataRequest = async (dayNumber: number) => {
     await getAllVideos({ dayNumber });
     await getAllNotes({ dayNumber });
-    await getAllQuestions();
+    await getAllQuestions(); // there are no filters in getAllQuestions currently @dhananjayadav
   };
   useEffect(() => {
     getAllDataRequest(Number(dayNumber));
@@ -59,30 +65,16 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
     <div className={`main-daypage-container ${className}`}>
       <div className="main-title-div">{`Day ${dayNumber}`}</div>
       <div className="content-navigation">
-        <span
-          className="naviagtor"
-          onClick={() => {
-            handleNavigation("videos");
-          }}
-        >
-          Videos
-        </span>
-        <span
-          className="naviagtor"
-          onClick={() => {
-            navigate(`/question?day=${dayNumber}`);
-          }}
-        >
-          Questions
-        </span>
-        <span
-          className="naviagtor"
-          onClick={() => {
-            handleNavigation("notes");
-          }}
-        >
-          Notes
-        </span>
+        {navigationLinksData.map((nav) => (
+          <span
+            className="navigator"
+            onClick={() => {
+              handleNavigation(nav);
+            }}
+          >
+            {t(nav)}
+          </span>
+        ))}
       </div>
       <div className="content-wrapper">
         <div
@@ -97,7 +89,7 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
                 handleNavigation("videos");
               }}
             >
-              Videos
+              {t("videos")}
             </div>
             <div
               className={`videos-content-wrapper ${
@@ -106,12 +98,22 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
               onScroll={() => setActiveScrollbar(true)}
             >
               {videoList?.map((video, index) => {
+                const {
+                  dayNumber,
+                  description,
+                  duration,
+                  isActive,
+                  links,
+                  title,
+                  topics,
+                  videoNumber,
+                } = video;
                 return (
                   <div key={index} className="video-content-wrapper">
                     <div className="video-content">
                       <iframe
-                        src={video?.links?.youtube}
-                        title={video.title}
+                        src={links?.youtube}
+                        title={title}
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
@@ -119,7 +121,16 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
                       ></iframe>
                     </div>
                     <div className="content-text-wrapper">
-                      <div className="content-title">{video.title}</div>
+                      {title && <div className="content-title">{title}</div>}
+                      {description && (
+                        <div className="content-title">{description}</div>
+                      )}
+                      {duration && (
+                        <div className="content-title">{`Duration : ${duration}`}</div>
+                      )}
+                      {videoNumber && (
+                        <div className="content-title">{`Video Number : ${videoNumber}`}</div>
+                      )}
                     </div>
                   </div>
                 );
@@ -134,29 +145,49 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
                 handleNavigation("notes");
               }}
             >
-              Notes
+              {t("notes")}
             </div>
             <div className="note-content-wrapper">
-              {noteList?.map((note, index) => (
-                <div key={index} className="note-content-container">
-                  <div key={index} className="note-content">
-                    <iframe
-                      src={note.link}
-                      title={note.title}
-                      scrolling="no"
-                      frameBorder="0"
-                      // webkitAllowFullScreen
-                      // mozallowfullscreen
-                      allowFullScreen
-                      className="note-iframe"
-                      key={index}
-                    ></iframe>
+              {noteList?.map((note, index) => {
+                const {
+                  dayNumber,
+                  description,
+                  estimatedReadingTime,
+                  link,
+                  noOfPages,
+                  title,
+                  topics,
+                } = note;
+                return (
+                  <div key={index} className="note-content-container">
+                    <div key={index} className="note-content">
+                      <iframe
+                        src={link}
+                        title={title}
+                        scrolling="no"
+                        frameBorder="0"
+                        // webkitAllowFullScreen
+                        // mozallowfullscreen
+                        allowFullScreen
+                        className="note-iframe"
+                        key={index}
+                      ></iframe>
+                    </div>
+                    <div className="content-text-wrapper">
+                      {title && <div className="content-title">{title}</div>}
+                      {description && (
+                        <div className="content-title">{description}</div>
+                      )}
+                      {estimatedReadingTime && (
+                        <div className="content-title">{`Estimated Reading Time : ${estimatedReadingTime}`}</div>
+                      )}
+                      {noOfPages && (
+                        <div className="content-title">{`Total Numbers of Pages : ${noOfPages}`}</div>
+                      )}
+                    </div>
                   </div>
-                  <div className="content-text-wrapper">
-                    <div className="content-title">{note.title}</div>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>
@@ -179,7 +210,7 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
               navigate(`/question?day=${dayNumber}`);
             }}
           >
-            Questions
+            {t("questions")}
           </div>
           <div
             className={`questions-content-wrapper ${

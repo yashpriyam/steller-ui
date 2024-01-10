@@ -10,7 +10,7 @@ const unProtectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/homePage": <HomePage />,
   "/scheduling": <SchedulingPage/>,
   "/day/:dayNumber" : <DayPage/>,
-  "/dayContext/:context": <DayContextPage />,
+  "/day/:dayNumber/:dayContent": <DayContextPage />,
   "/question": <QuestionPage/>
 });
 

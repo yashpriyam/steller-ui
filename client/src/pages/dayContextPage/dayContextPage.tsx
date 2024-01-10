@@ -1,49 +1,52 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useVideos } from "../../redux/actions/videosAction";
 import { useNotes } from "../../redux/actions/notesAction";
 import "./dayContextPage.scss";
+import { useTranslation } from "react-i18next";
 const DayVideoPage: React.FC<DayPagePropsInterface> = ({
   className,
   title,
 }: DayPagePropsInterface) => {
-  const { context } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const dayNumber = Number(searchParams.get("day"));
-  console.log(dayNumber);
+  const { dayNumber, dayContent } = useParams();
   const [pageTitle, setPageTitle] = useState<string>("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
   const { videoList } = videoData;
   const { noteList } = noteData;
 
-  const videoContext: boolean = context === "videos";
-  const notesContext: boolean = context === "notes";
-  const questionContext: boolean = context === "question";
+  const navigationLinksData: string[] = ["videos", "questions", "notes"];
+  const videoContext: boolean = dayContent === "videos";
+  const notesContext: boolean = dayContent === "notes";
+  const questionContext: boolean = dayContent === "questions";
   const setPageContentTitle = () => {
     let newPageTitle: string = "";
     if (videoContext) {
-      newPageTitle = "Videos";
+      newPageTitle = t("videos");
     } else if (notesContext) {
-      newPageTitle = "Notes";
+      newPageTitle = t("notes");
     }
     setPageTitle(newPageTitle);
   };
 
-  const setPageAndNavigate = (context: string) => {
-    if (questionContext) navigate("question");
+  const setPageAndNavigate = (dayContent: string) => {
+    if (questionContext) {
+      navigate(`/question?day=${dayNumber}`);
+      return;
+    }
     setPageContentTitle();
-    navigate(`/dayContext/${context}?day=${dayNumber}`);
+    navigate(`/day/${Number(dayNumber)}/${dayContent}`);
   };
   const getAllDataRequest = async (dayNumber: number) => {
     if (videoContext) await getAllVideos({ dayNumber });
     else if (notesContext) await getAllNotes({ dayNumber });
   };
   useEffect(() => {
-    getAllDataRequest(dayNumber);
+    getAllDataRequest(Number(dayNumber));
     setPageContentTitle();
-  }, [context]);
+  }, [dayContent, dayNumber]);
 
   return (
     <div className={`main-daycontextpage-container ${className}`}>
@@ -51,30 +54,16 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
         <div className="main-title-div">{title || `Day ${dayNumber}`}</div>
       )}
       <div className="content-navigation">
-        <span
-          className="naviagtor"
-          onClick={() => {
-            setPageAndNavigate("videos");
-          }}
-        >
-          Videos
-        </span>
-        <span
-          className="naviagtor"
-          onClick={() => {
-            navigate(`/question?day=${dayNumber}`);
-          }}
-        >
-          Questions
-        </span>
-        <span
-          className="naviagtor"
-          onClick={() => {
-            setPageAndNavigate("notes");
-          }}
-        >
-          Notes
-        </span>
+        {navigationLinksData.map((nav) => (
+          <span
+            className="navigator"
+            onClick={() => {
+              setPageAndNavigate(nav);
+            }}
+          >
+            {t(nav)}
+          </span>
+        ))}
       </div>
       <div className="context-content-wrapper">
         {pageTitle && (
@@ -85,12 +74,22 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
         <div className="video-note-wrapper">
           {videoContext &&
             videoList.map((video) => {
+              const {
+                dayNumber,
+                description,
+                duration,
+                isActive,
+                links,
+                title,
+                topics,
+                videoNumber,
+              } = video;
               return (
                 <div className="video-note-content-wrapper">
                   <div className="video-note-content">
                     <iframe
-                      src={video.links?.youtube}
-                      title={video.title}
+                      src={links?.youtube}
+                      title={title}
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
@@ -98,13 +97,31 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
                     ></iframe>
                   </div>
                   <div className="content-text-wrapper">
-                    <div className="content-title">{video.title}</div>
+                    {title && <div className="content-title">{title}</div>}
+                    {description && (
+                      <div className="content-title">{description}</div>
+                    )}
+                    {duration && (
+                      <div className="content-title">{`Duration : ${duration}`}</div>
+                    )}
+                    {videoNumber && (
+                      <div className="content-title">{`Video Number : ${videoNumber}`}</div>
+                    )}
                   </div>
                 </div>
               );
             })}
           {notesContext &&
             noteList.map((note) => {
+              const {
+                dayNumber,
+                description,
+                estimatedReadingTime,
+                link,
+                noOfPages,
+                title,
+                topics,
+              } = note;
               return (
                 <div className="video-note-content-wrapper">
                   <div className="video-note-content">
@@ -118,7 +135,16 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
                     ></iframe>
                   </div>
                   <div className="content-text-wrapper">
-                    <div className="content-title">{note.title}</div>
+                    {title && <div className="content-title">{title}</div>}
+                    {description && (
+                      <div className="content-title">{description}</div>
+                    )}
+                    {estimatedReadingTime && (
+                      <div className="content-title">{`Estimated Reading Time : ${estimatedReadingTime}`}</div>
+                    )}
+                    {noOfPages && (
+                      <div className="content-title">{`Total Numbers of Pages : ${noOfPages}`}</div>
+                    )}
                   </div>
                 </div>
               );

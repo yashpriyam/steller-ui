@@ -1,5 +1,8 @@
 {
     "greeting": "Hello World!",
     "incorrect_answer": "incorrect answer",
-    "correct_answer": "correct answer"
+    "correct_answer": "correct answer",
+    "videos": "Videos",
+    "questions": "Questions",
+    "notes": "Notes"
 }
