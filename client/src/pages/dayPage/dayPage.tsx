@@ -9,7 +9,6 @@ import QuestionAccordion from "../../components/questionAccordion/questionAccord
 import { useTranslation } from "react-i18next";
 import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
 
-
 export const DayPage: React.FC<DayPagePropsInterface> = ({
   className,
   title,
@@ -45,9 +44,9 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
     }
   };
   const handleNavigation = (context: string) => {
-    navigate(`/dayContext/${context}`);
+    navigate(`/dayContext/${context}?day=${dayNumber}`);
   };
- 
+
   const getAllDataRequest = async (dayNumber: number) => {
     await getAllVideos({ dayNumber });
     await getAllNotes({ dayNumber });
@@ -55,8 +54,7 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
   };
   useEffect(() => {
     getAllDataRequest(Number(dayNumber));
-    // eslint-disable-next-line
-  }, []);
+  }, [dayNumber]);
   return (
     <div className={`main-daypage-container ${className}`}>
       <div className="main-title-div">{`Day ${dayNumber}`}</div>
@@ -72,7 +70,7 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
         <span
           className="naviagtor"
           onClick={() => {
-            handleNavigation("question");
+            navigate(`/question?day=${dayNumber}`);
           }}
         >
           Questions
@@ -87,12 +85,12 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
         </span>
       </div>
       <div className="content-wrapper">
-        <div className="videos-question-wrapper">
-          <div
-            className={`videos-wrapper ${
-              toggleSidebar && "expanded-videos-wrapper"
-            }`}
-          >
+        <div
+          className={`videos-notes-wrapper ${
+            toggleSidebar && "expanded-videos-wrapper"
+          }`}
+        >
+          <div className="videos-wrapper">
             <div
               className="content-header"
               onClick={() => {
@@ -107,9 +105,9 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
               }`}
               onScroll={() => setActiveScrollbar(true)}
             >
-              {videoList?.map((video) => {
+              {videoList?.map((video, index) => {
                 return (
-                  <div className="video-content-wrapper">
+                  <div key={index} className="video-content-wrapper">
                     <div className="video-content">
                       <iframe
                         src={video?.links?.youtube}
@@ -128,87 +126,87 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
               })}
             </div>
           </div>
-          <div className="content-separator">
-            <div className="line">
-              <span
-                className={`icon ${toggleSidebar && "rotate-icon"}`}
-                onClick={handleToggleSidebar}
-              >
-                <DropDownIcon color="black" />
-              </span>
-            </div>
-          </div>
-          <div
-            className={`question-wrapper ${
-              toggleSidebar && "hide-question-bar"
-            }`}
-          >
+
+          <div className={"notes-wrapper"}>
             <div
               className="content-header"
               onClick={() => {
-                handleNavigation("question");
+                handleNavigation("notes");
               }}
             >
-              Questions
+              Notes
             </div>
-            <div
-              className={`questions-content-wrapper ${
-                activeScrollbar && "show-scrollbar"
-              }`}
-              onScroll={() => setActiveScrollbar(true)}
-            >
-              {questionList?.map((questionData, index) => {
-                return (
-                  <div className="question-content-wrapper">
-                    <div
-                      className={`question-content ${
-                        toggleSidebar && "resize-ques-card-height"
-                      }`}
-                    >
-                      <QuestionAccordion
-                        key={index}
-                        questionData={questionData}
-                        onSubmit={onSubmit}
-                        isLoading={isLoading}
-                        errorMsg={t("incorrect_answer")}
-                        successMsg={t("correct_answer")}
-                      />
-                    </div>
+            <div className="note-content-wrapper">
+              {noteList?.map((note, index) => (
+                <div key={index} className="note-content-container">
+                  <div key={index} className="note-content">
+                    <iframe
+                      src={note.link}
+                      title={note.title}
+                      scrolling="no"
+                      frameBorder="0"
+                      // webkitAllowFullScreen
+                      // mozallowfullscreen
+                      allowFullScreen
+                      className="note-iframe"
+                      key={index}
+                    ></iframe>
                   </div>
-                );
-              })}
+                  <div className="content-text-wrapper">
+                    <div className="content-title">{note.title}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
-        <div className={"notes-wrapper"}>
+        <div className="content-separator">
+          <div className="line">
+            <span
+              className={`icon ${toggleSidebar && "rotate-icon"}`}
+              onClick={handleToggleSidebar}
+            >
+              <DropDownIcon color="black" />
+            </span>
+          </div>
+        </div>
+        <div
+          className={`question-wrapper ${toggleSidebar && "hide-question-bar"}`}
+        >
           <div
             className="content-header"
             onClick={() => {
-              handleNavigation("notes");
+              navigate(`/question?day=${dayNumber}`);
             }}
           >
-            Notes
+            Questions
           </div>
-          <div className="note-content-wrapper">
-            {noteList?.map((note) => (
-              <div className="note-content-container">
-                <div className="note-content">
-                  <iframe
-                    src={note.link}
-                    title={note.title}
-                    scrolling="no"
-                    frameBorder="0"
-                    // webkitAllowFullScreen
-                    // mozallowfullscreen
-                    allowFullScreen
-                    className="note-iframe"
-                  ></iframe>
+          <div
+            className={`questions-content-wrapper ${
+              activeScrollbar && "show-scrollbar"
+            }`}
+            onScroll={() => setActiveScrollbar(true)}
+          >
+            {questionList?.map((questionData, index) => {
+              return (
+                <div className="question-content-wrapper">
+                  <div
+                    className={`question-content ${
+                      toggleSidebar && "resize-ques-card-height"
+                    }`}
+                  >
+                    <QuestionAccordion
+                      key={index}
+                      questionData={questionData}
+                      onSubmit={onSubmit}
+                      isLoading={isLoading}
+                      errorMsg={t("incorrect_answer")}
+                      successMsg={t("correct_answer")}
+                    />
+                  </div>
                 </div>
-                <div className="content-text-wrapper">
-                  <div className="content-title">{note.title}</div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

@@ -5,17 +5,17 @@
     width: 10px;
     border-radius: 8px;
     opacity: 1;
-    &:hover{
+    &:hover {
       cursor: pointer;
     }
-    @media (max-width:$screenMd){
+    @media (max-width: $screenMd) {
       width: 8px;
     }
   }
   &::-webkit-scrollbar-thumb {
     background: $fadedGraySecondary;
     border-radius: 8px;
-    &:hover{
+    &:hover {
       cursor: grab;
     }
   }
@@ -25,6 +25,7 @@
   display: flex;
   flex-direction: column;
   max-width: 100vw;
+  min-height: 100vh;
   background-color: $primaryBgColor;
   color: $primaryColor;
   align-items: center;
@@ -59,28 +60,29 @@
     width: 100%;
     padding: 20px;
     display: flex;
-    flex-direction: column;
     gap: 50px;
-    .videos-question-wrapper {
+    @media (max-width: $screenLg) {
+      flex-direction: column;
+    }
+
+    .videos-notes-wrapper {
       display: flex;
-      width: 100%;
-      justify-content: space-evenly;
+      flex-direction: column;
+      width: 65%;
       transition: 0.3s;
       gap: 20px;
       @media (max-width: $screenLg) {
-        flex-direction: column;
-        align-items: center;
-        gap: 50px;
+        width: 100%;
       }
       .videos-wrapper {
-        width: 65%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 30px;
         @media (max-width: $screenLg) {
           width: 100%;
         }
-        .show-scrollbar{
+        .show-scrollbar {
           @include scrollbar;
         }
         .videos-content-wrapper {
@@ -100,136 +102,133 @@
           @media (max-width: $screenMd) {
             height: 450px;
           }
-        .video-content-wrapper {
-          display: flex;
-          flex-direction: column;
-          background-color: $fadedBlackColor;
-          border-radius: 20px;
-          align-items: center;
-          padding: 2px;
-          .video-content {
-            width: 100%;
-            cursor: pointer;
-            aspect-ratio: 16/9;
-            .video-iframe {
-              width: 100%;
-              height: 100%;
-              border-radius: 20px 20px 0px 0px;
-            }
-          }
-        }}
-      }
-      .expanded-videos-wrapper {
-        width: 75%;
-        @media (max-width: $screenLg) {
-          width: 100%;
-        }
-      }
-      .content-separator {
-        width: 1%;
-        .line {
-          position: relative;
-          width: 1px;
-          height: 100%;
-          background-color: $gray;
-
-          .icon {
-            position: absolute;
-            font-size: $largerFontSize;
-            top: 60px;
-            right: -15px;
-            cursor: pointer;
-            background-color: $primaryColor;
-            text-align: center;
-            color: $primaryBgColor;
+          .video-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            background-color: $fadedBlackColor;
             border-radius: 20px;
-            height: 30px;
-            width: 30px;
-            transition: 0.3s;
-            font-weight: 800;
-            transform: rotate(90deg) ;
-          }
-
-          .rotate-icon {
-            transform: rotate(270deg);
-            transition: 0.5s;
-            font-size: $subHeaderFontSize;
-            height: 40px;
-            width: 40px;
-            border-radius: 30px;
-            right: -20px;
-          }
-        }
-        @media (max-width: $screenLg) {
-          display: none;
-        }
-      }
-      .question-wrapper {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-        transition: 0.3s;
-        @media (max-width: $screenLg) {
-          width: 100%;
-        }
-        .questions-content-wrapper{
-          display: flex;
-          flex-direction: column;
-          gap: 30px;
-          height: 900px;
-          overflow: auto;
-          aspect-ratio: 9/16;
-          padding-right: 20px;
-          @include scrollbar;
-          @media (max-width: $screenLg) {
-            height: 650px;
-          }
-                    
-          .question-content-wrapper { 
-            .question-content {
+            align-items: center;
+            padding: 2px;
+            .video-content {
               width: 100%;
               cursor: pointer;
+              aspect-ratio: 16/9;
+              .video-iframe {
+                width: 100%;
+                height: 100%;
+                border-radius: 20px 20px 0px 0px;
+              }
             }
           }
         }
       }
-      .hide-question-bar {
-        width: 20%;
-        transition: 0.3s;
-        @media (max-width: $screenMd) {
-          width: 100%;
+
+      .notes-wrapper {
+        max-width: 100vw;
+        .note-content-wrapper {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+          padding-top: 20px;
+          @media (max-width: $screenLg) {
+            justify-content: center;
+          }
+          .note-content-container {
+            width: 380px;
+            display: flex;
+            flex-direction: column;
+            background-color: $fadedBlackColor;
+            border: 1px solid $videoHutBorderColor;
+            border-radius: 20px;
+            @media (max-width: $screenLg) {
+              width: 350px;
+            }
+            .note-content {
+              width: 100%;
+              cursor: pointer;
+              aspect-ratio: 1/1;
+              .note-iframe {
+                width: 100%;
+                height: 100%;
+                border-radius: 20px 20px 0px 0px;
+              }
+            }
+          }
         }
       }
     }
-    .notes-wrapper {
-      width: 100%;
-      .note-content-wrapper {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding-top: 20px;
-        @media (max-width: $screenLg) {
-          justify-content: space-evenly;
-        }
-        .note-content-container {
-          width: 380px;
-          display: flex;
-          flex-direction: column;
-          background-color: $fadedBlackColor;
-          border: 1px solid $videoHutBorderColor;
+    .expanded-videos-wrapper {
+      width: 75%;
+      @media (max-width: $screenLg) {
+        width: 100%;
+      }
+    }
+    .content-separator {
+      width: 1%;
+      .line {
+        position: relative;
+        width: 1px;
+        height: 100%;
+        background-color: $gray;
+
+        .icon {
+          position: absolute;
+          font-size: $largerFontSize;
+          top: 60px;
+          right: -15px;
+          cursor: pointer;
+          background-color: $primaryColor;
+          text-align: center;
+          color: $primaryBgColor;
           border-radius: 20px;
-          .note-content {
+          height: 30px;
+          width: 30px;
+          transition: 0.3s;
+          font-weight: 800;
+          transform: rotate(90deg);
+        }
+
+        .rotate-icon {
+          transform: rotate(270deg);
+          transition: 0.5s;
+          font-size: $subHeaderFontSize;
+          height: 40px;
+          width: 40px;
+          border-radius: 30px;
+          right: -20px;
+        }
+      }
+      @media (max-width: $screenLg) {
+        display: none;
+      }
+    }
+    .question-wrapper {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      transition: 0.3s;
+      @media (max-width: $screenLg) {
+        width: 100%;
+      }
+      .questions-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .question-content-wrapper {
+          .question-content {
             width: 100%;
             cursor: pointer;
-            aspect-ratio: 1/1;
-            .note-iframe {
-              width: 100%;
-              height: 100%;
-              border-radius: 20px 20px 0px 0px;
-            }
           }
         }
+      }
+    }
+    .hide-question-bar {
+      width: 20%;
+      transition: 0.3s;
+      @media (max-width: $screenMd) {
+        width: 100%;
       }
     }
   }
