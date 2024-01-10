@@ -349,4 +349,13 @@ declare global {
   interface ImageUploadArgs {
     image: string;
   }
+  type DaySchemaType = {
+    title: string;
+    description: string;
+    dayNumber: Number;
+    topics: string[];
+    notes: string[];
+    videos: string[];
+    questions: string[];
+  };
 }
