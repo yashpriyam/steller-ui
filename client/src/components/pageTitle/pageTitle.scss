@@ -1,0 +1,47 @@
+@import "../variables.scss";
+
+.titles-container {
+  width: 850px;
+  margin: 80px 0 0 230px;
+  .page-title {
+    width: 600px;
+    .title {
+      font-size: $extraLargFontsize;
+    }
+    .subtitle {
+      color: $sencondaryTextColor;
+      font-size: $largerFontSize;
+      margin: 10px 0 0 0;
+    }
+  }
+}
+
+@media (max-width: $screenXl) {
+    .titles-container {
+        margin: 60px 0 0 0;
+        .page-title {
+        }
+      }
+}
+
+@media (max-width: $screenLg) {
+    .titles-container {
+        width: 85vw;
+        .page-title {
+          width: 60vw;  
+        }
+      }
+}
+
+@media (max-width: $screenMd) {
+    .titles-container {
+        width: 85vw;
+        .page-title {
+          width: 85vw;
+          .title {
+            font-size: $extraLargFontsize;
+          }
+        }
+      }
+}
+

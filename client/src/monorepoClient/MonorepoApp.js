@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./App.scss";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Homepage from "./Pages/Homepage/Homepage";
 import Registerpage from "./Pages/Registerpage/Registerpage";
 import Navbar from "./Components/Navbar/Navbar";
@@ -21,6 +21,7 @@ function MonorepoApp() {
   const { setIsLoggedIn, isLoggedIn } = useContext(AppStateContext);
   const phoneNumber = new URLSearchParams(window.location.search)?.get("n");
   const { upsertUserActivity } = useUserActivity();
+  const { pathname } = useLocation();
 
   const userActivityRequest = async () => {
     try {
@@ -49,15 +50,23 @@ function MonorepoApp() {
     },
   ];
 
+  const showNavbarPaths = {
+    "/": true,
+    "/register": true,
+    "/privacy": true,
+    "/privacy/concerns/whatsapp": true,
+  }
   return (
     <div className="App" onClick={() => setMenuOpen(false)}>
       <ToastContainer />
-        <Navbar
-          isMenuOpen={isMenuOpen}
-          setMenuOpen={setMenuOpen}
-          profileMenuOptions={profileMenuOptions}
-          isLoggedIn={isLoggedIn}
-        />
+        {
+          showNavbarPaths[pathname] && (<Navbar
+            isMenuOpen={isMenuOpen}
+            setMenuOpen={setMenuOpen}
+            profileMenuOptions={profileMenuOptions}
+            isLoggedIn={isLoggedIn}
+          />)
+        }
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/register" element={<Registerpage />} />

@@ -34,4 +34,7 @@ export const localMessages = Object.freeze({
     THE_OTP_IS_VALID_FOR:"The OTP is valid for",
     USE_IT_PROMPTLY:"mins, so be sure to use it promptly.",
   },
+  QUESTION_ATTEMPT_MODEL : {
+    QUESTION_ATTEMPT_SUCCESS: "your response has been submitted successfully"
+  }
 });

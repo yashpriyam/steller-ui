@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
   type Query {
@@ -39,6 +39,12 @@ const typeDefs = gql`
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
     sendOtpToRegisteredUser(email: String!) : OtpUserOutputType
+    createQuestionAttemptByUser(questionAttemptData:QuestionAttemptType!): QuestionAttemptOutputType
+    updateProfilePicture(image: String, size: Int, name: String): [UpdateProfilePictureOutput]
+  }
+  type UpdateProfilePictureOutput {
+    public_id: String
+    secure_url: String
   }
 
   type CustomResponseType {
@@ -277,10 +283,11 @@ const typeDefs = gql`
     isOpenable: Boolean!
   }
   type QuestionOutputType {
-    questionData: QuestionData
+    questionData: QuestionDataType
     response: CustomResponseType
   }
-  type QuestionData {
+  type QuestionDataType {
+    id: String,
     question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
@@ -366,9 +373,27 @@ const typeDefs = gql`
     type: QuestionMetaType
   }
   type GetAllQuestionsOutputType {
-    questionData: [QuestionData]
+    questionData: [QuestionDataType]
     response: CustomResponseType
   }
+  input QuestionAttemptType {
+    userId: String!
+    questionId: String!
+    response: [Option]!
+    isCorrect: Boolean
+  }
+  type QuestionAttemptOutputType{
+    questionData:QuestionAttemptDataType
+    response:CustomResponseType!
+  }
+  type QuestionAttemptDataType {
+    userId: ID
+    questionId: ID
+    response: [UpdateOptionOutput]
+    isCorrect: Boolean
+    timestamp: DateTime
+  }
+  
   scalar DateTime
   scalar JSON
 `;

@@ -82,7 +82,7 @@ declare global {
 
   type UpdateNotesInputType = {
     title?: string;
-    links?: [string];
+    link?: string;
     topics?: [string];
     dayNumber?: number;
     noOfPages?: number;
@@ -95,7 +95,7 @@ declare global {
   };
   type UpdateNotesDataType = {
     title: String;
-    links: [String];
+    link: String;
     topics: [String];
     dayNumber: Number;
     noOfPages?: Number;
@@ -104,7 +104,7 @@ declare global {
   };
   type NotesDataType = {
     title: String;
-    links: [String];
+    link: String;
     topics: [String];
     dayNumber: Number;
     noOfPages?: Number;
@@ -188,9 +188,21 @@ declare global {
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
-    meta: QuestioinMetaData;
+    meta: QuestionMetaData;
   };
-  type QuestioinMetaData = {
+
+  type AllQuestionDataType = {
+    id: ObjectId;
+    question: { imageUrl: string; text: string }[];
+    questionType: QuestionTypeEnum;
+    options: { imageUrl: string; text: string }[];
+    answer: { imageUrl: string; text: string }[];
+    marks: number;
+    batchCode: string;
+    meta: QuestionMetaData;
+  }
+
+  type QuestionMetaData = {
     topic: string;
     day: number;
     isActive: boolean;
@@ -221,7 +233,7 @@ declare global {
     userId: ObjectId;
     questionId: ObjectId;
     response: { imageUrl: string; text: string }[];
-    isCorrect: boolean;
+    isCorrect?: boolean;
     timestamp: Date;
   };
 
@@ -314,7 +326,7 @@ declare global {
     type?: QuestionMetaType;
   };
   type QuestionsReturnType = {
-    questionData: [QuestionSchemaType];
+    questionData: [AllQuestionDataType];
     response: CustomResponseType;
   };
   type CustomResponseType = {
@@ -325,4 +337,16 @@ declare global {
     otpData: { emailOtp : string};
     emailValidityMinutes: number;
   };
+
+  interface QuestionResponseType {
+    text: string;
+    imageUrl: string;
+  }
+  interface UploadImageArgumentType {
+    images: string | string[];
+    folder: string;
+  }
+  interface ImageUploadArgs {
+    image: string;
+  }
 }
