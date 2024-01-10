@@ -38,6 +38,7 @@ const typeDefs = gql`
       updateQuestionData: UpdateQuestionInputType!
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
+    sendOtpToRegisteredUser(email: String!) : OtpUserOutputType
     createQuestionAttemptByUser(questionAttemptData:QuestionAttemptType!): QuestionAttemptOutputType
     updateProfilePicture(image: String, size: Int, name: String): [UpdateProfilePictureOutput]
   }
@@ -282,10 +283,11 @@ const typeDefs = gql`
     isOpenable: Boolean!
   }
   type QuestionOutputType {
-    questionData: QuestionData
+    questionData: QuestionDataType
     response: CustomResponseType
   }
-  type QuestionData {
+  type QuestionDataType {
+    id: String,
     question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
@@ -371,7 +373,7 @@ const typeDefs = gql`
     type: QuestionMetaType
   }
   type GetAllQuestionsOutputType {
-    questionData: [QuestionData]
+    questionData: [QuestionDataType]
     response: CustomResponseType
   }
   input QuestionAttemptType {

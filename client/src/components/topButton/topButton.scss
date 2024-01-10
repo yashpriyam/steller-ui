@@ -1,0 +1,62 @@
+@import "../variables.scss";
+
+.top-button-container {
+  width: 850px;
+  margin: 10px 0 0 230px;
+
+  .top-button {
+    padding: 10px 0 10px 0;
+
+    .about-button {
+      background-color: $Gray35;
+      padding: 10px 20px 10px 20px;
+      color: $primaryTextColor;
+      font-weight: bolder;
+      border-radius: 5px;
+      border: 1px solid $Gray29;
+      transition: 0.6s;
+    }
+    .about-button:hover {
+      color: $sencondaryTextColor;
+      background-color: $Gray43;
+    }
+    .email-button {
+      background-color: $sencondaryBg;
+      background: none;
+      padding: 10px 20px 10px 20px;
+      color: $primaryTextColor;
+      font-weight: bolder;
+      border-radius: 5px;
+      border: 1px solid $Gray29;
+      margin: 0 0 0 10px;
+      transition: 0.6s;
+    }
+    .email-button:hover {
+      color: $sencondaryTextColor;
+    }
+  }
+}
+
+@media (max-width: $screenXl) {
+  .top-button-container {
+    margin: 0 0 0 0;
+    .top-button {
+      margin-top: 10px;
+    }
+  }
+}
+@media (max-width: $screenLg) {
+  .top-button-container {
+    margin: 0 0 0 0;
+    width: 85vw;
+    .top-button {
+      margin: 10px 0 0 0;
+    }
+  }
+}
+
+@media (max-width: $screenSm) {
+  .top-button {
+    margin: 10px 0 0 0;
+  }
+}

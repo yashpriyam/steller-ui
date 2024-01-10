@@ -29,7 +29,9 @@
     }
   }
   .icon-position-center {
-    margin: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .loader-button {
       display: none;
     }
