@@ -38,6 +38,7 @@ const typeDefs = gql`
       updateQuestionData: UpdateQuestionInputType!
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
+    sendOtpToRegisteredUser(email: String!) : OtpUserOutputType
     createQuestionAttemptByUser(questionAttemptData:QuestionAttemptType!): QuestionAttemptOutputType
     updateProfilePicture(image: String, size: Int, name: String): [UpdateProfilePictureOutput]
   }

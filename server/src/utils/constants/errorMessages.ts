@@ -28,8 +28,9 @@ export const errorMessages = Object.freeze({
     QUESTION_NOT_FOUND:"questions not found",
   },
   OTP_MODEL: {
-    OTP_SENT_FAILED: "cannot send otp",
-    OTP_EMAIL_INVALID: "email address is not valid",
+    OTP_SENT_FAILED: "Failed to send OTP",
+    OTP_EMAIL_INVALID: "Email address is not valid",
+    UNREGISTERED_EMAIL: "Email address is not registered",
   },
   QUESTION_ATTEMPT_MODEL: {
     QUESTION_ATTEMPT_FAILED: "unable to submit your response",

@@ -333,6 +333,10 @@ declare global {
     status: number;
     message: string;
   };
+  type EmailOtpDataType = { 
+    otpData: { emailOtp : string};
+    emailValidityMinutes: number;
+  };
 
   interface QuestionResponseType {
     text: string;
@@ -345,4 +349,13 @@ declare global {
   interface ImageUploadArgs {
     image: string;
   }
+  type DaySchemaType = {
+    title: string;
+    description: string;
+    dayNumber: Number;
+    topics: string[];
+    notes: string[];
+    videos: string[];
+    questions: string[];
+  };
 }
