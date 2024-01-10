@@ -1,34 +1,37 @@
-const mongoose = require("mongoose");
+import mongoose, { Schema, model } from "mongoose";
 
-const daySchema = new mongoose.Schema(
-    {
-        dayTitle: {
+const { ObjectId } = mongoose.Schema.Types;
+
+const daySchema = new Schema<DaySchemaType>({
+        title: {
             type: String,
+            required: true,
         },
-        dayDescription: {
+        description: {
             type: String,
+            required: true,
         },
         dayNumber: {
-            type: String,
+            type: Number,
+            required: true,
         },
         topics: {
             type: [String],
+            required: true,
         },
-        notes: {
-            type: mongoose.Schema.Types.ObjectId,
+        notes: [{
+            type: ObjectId,
             ref: 'notesModel',
-        },
-        video: {
-            type: mongoose.Schema.Types.ObjectId,
+        }],
+        videos: [{
+            type: ObjectId,
             ref: 'videoModel',
-        },
-        question: {
-            type: mongoose.Schema.Types.ObjectId,
+        }],
+        questions: [{
+            type: ObjectId,
             ref: 'questionModel',
-        }
+        }]
     }
 );
 
-const dayModel = mongoose.model("day", daySchema);
-
-export { dayModel };
+export const dayModel = model<DaySchemaType>("day", daySchema);
