@@ -4,7 +4,7 @@ import { removeNullAndUndefinedKeys } from "@utils";
 
 export const getNotes = async (
   _parent = undefined,
-  args: { filterData: getNotesFilterInputType }
+  args: { filterData: GetNotesFilterInputType }
 ): Promise<getNotesOutputType | unknown> => {
   const { NOTES_FOUND } = localMessages.NOTES_MODEL;
   const { NOTES_NOT_FOUND } = errorMessages.NOTES_MODEL;

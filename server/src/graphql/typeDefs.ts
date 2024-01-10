@@ -3,8 +3,8 @@ import { gql } from 'apollo-server-express';
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
-    getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
-    getNotes(filterData: getNotesFilterInputType): getNotesOutputType
+    getAllNotes(filterData: GetNotesFilterInputType): getAllNotesOutputType
+    getNotes(filterData: GetNotesFilterInputType): getNotesOutputType
     getVideo(videoDataFilter: VideoInputFilterType): VideoOutputDataType
     getAllQuestions(
       filterData: GetQuestionsFilterInput
@@ -229,7 +229,7 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
-  input getNotesFilterInputType {
+  input GetNotesFilterInputType {
     link: String
     title: String
     dayNumber: Int

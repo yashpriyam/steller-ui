@@ -156,8 +156,8 @@ declare global {
     title?: string;
     link?: string;
     topics?: [string];
-    dayNumber?: Number;
-    noOfPages?: Number;
+    dayNumber?: number;
+    noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
   }
@@ -165,8 +165,8 @@ declare global {
     title: string;
     link: string;
     topics: [string];
-    dayNumber: Number;
-    noOfPages: Number;
+    dayNumber: number;
+    noOfPages: number;
     description: string;
     estimatedReadingTime: string;
   }

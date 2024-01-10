@@ -9,13 +9,14 @@ import QuestionAccordion from "../../components/questionAccordion/questionAccord
 import { useTranslation } from "react-i18next";
 import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
 
-export const DayPage: React.FC<DayPagePropsInterface> = ({
+const DayPage: React.FC<DayPagePropsInterface> = ({
   className,
   title,
 }: DayPagePropsInterface) => {
   const [activeScrollbar, setActiveScrollbar] = useState<boolean>(false);
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const { dayNumber } = useParams();
+  const contentDayNumber: number = Number(dayNumber);
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
   const { questions, getAllQuestions } = useQuestions();
@@ -47,7 +48,7 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
   };
   const handleNavigation = (dayContent: string) => {
     if (dayContent === "questions") {
-      navigate(`/question?day=${dayNumber}`);
+      navigate(`/question?day=${contentDayNumber}`);
     } else {
       navigate(`${pathname}/${dayContent}`);
     }
@@ -56,14 +57,14 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
   const getAllDataRequest = async (dayNumber: number) => {
     await getAllVideos({ dayNumber });
     await getAllNotes({ dayNumber });
-    await getAllQuestions(); // there are no filters in getAllQuestions currently @dhananjayadav
+    await getAllQuestions(); // currently there are no filters in getAllQuestions api @dhananjayadav
   };
   useEffect(() => {
-    getAllDataRequest(Number(dayNumber));
+    getAllDataRequest(contentDayNumber);
   }, [dayNumber]);
   return (
     <div className={`main-daypage-container ${className}`}>
-      <div className="main-title-div">{`Day ${dayNumber}`}</div>
+      <div className="main-title-div">{`Day ${contentDayNumber}`}</div>
       <div className="content-navigation">
         {navigationLinksData.map((nav) => (
           <span
@@ -123,13 +124,13 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
                     <div className="content-text-wrapper">
                       {title && <div className="content-title">{title}</div>}
                       {description && (
-                        <div className="content-title">{description}</div>
+                        <div className="">{description}</div>
                       )}
                       {duration && (
-                        <div className="content-title">{`Duration : ${duration}`}</div>
+                        <div className="">{`Duration : ${duration}`}</div>
                       )}
                       {videoNumber && (
-                        <div className="content-title">{`Video Number : ${videoNumber}`}</div>
+                        <div className="">{`Video Number : ${videoNumber}`}</div>
                       )}
                     </div>
                   </div>
@@ -176,13 +177,13 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
                     <div className="content-text-wrapper">
                       {title && <div className="content-title">{title}</div>}
                       {description && (
-                        <div className="content-title">{description}</div>
+                        <div className="">{description}</div>
                       )}
                       {estimatedReadingTime && (
-                        <div className="content-title">{`Estimated Reading Time : ${estimatedReadingTime}`}</div>
+                        <div className="">{`Estimated Reading Time : ${estimatedReadingTime}`}</div>
                       )}
                       {noOfPages && (
-                        <div className="content-title">{`Total Numbers of Pages : ${noOfPages}`}</div>
+                        <div className="">{`Total Numbers of Pages : ${noOfPages}`}</div>
                       )}
                     </div>
                   </div>
@@ -244,3 +245,5 @@ export const DayPage: React.FC<DayPagePropsInterface> = ({
     </div>
   );
 };
+
+export default DayPage;

@@ -211,7 +211,7 @@ declare global {
     expiresInMins: number;
     isOpenable: boolean;
   };
-  type getNotesFilterInputType = {
+  type GetNotesFilterInputType = {
     link?: string;
     title?: string;
     dayNumber?: number;

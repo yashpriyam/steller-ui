@@ -1,53 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useVideos } from "../../redux/actions/videosAction";
 import { useNotes } from "../../redux/actions/notesAction";
 import "./dayContextPage.scss";
 import { useTranslation } from "react-i18next";
-const DayVideoPage: React.FC<DayPagePropsInterface> = ({
+const DayContentPage: React.FC<DayPagePropsInterface> = ({
   className,
   title,
 }: DayPagePropsInterface) => {
   const { dayNumber, dayContent } = useParams();
-  const [pageTitle, setPageTitle] = useState<string>("");
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
   const { videoList } = videoData;
   const { noteList } = noteData;
-
+  const contentDayNumber: number = Number(dayNumber);
   const navigationLinksData: string[] = ["videos", "questions", "notes"];
   const videoContext: boolean = dayContent === "videos";
   const notesContext: boolean = dayContent === "notes";
   const questionContext: boolean = dayContent === "questions";
-  const setPageContentTitle = () => {
-    let newPageTitle: string = "";
-    if (videoContext) {
-      newPageTitle = t("videos");
-    } else if (notesContext) {
-      newPageTitle = t("notes");
-    }
-    setPageTitle(newPageTitle);
-  };
 
-  const setPageAndNavigate = (dayContent: string) => {
+  const handleNavigate = (dayContent: string) => {
     if (questionContext) {
-      navigate(`/question?day=${dayNumber}`);
-      return;
+      navigate(`/question?day=${contentDayNumber}`);
     }
-    setPageContentTitle();
-    navigate(`/day/${Number(dayNumber)}/${dayContent}`);
+    else if(videoContext || notesContext){
+      navigate(`/day/${contentDayNumber}/${dayContent}`);
+    }
   };
   const getAllDataRequest = async (dayNumber: number) => {
-    if (videoContext) await getAllVideos({ dayNumber });
-    else if (notesContext) await getAllNotes({ dayNumber });
+    if (videoContext) {
+      await getAllVideos({ dayNumber });
+    }
+    else if (notesContext) {
+      await getAllNotes({ dayNumber })
+    };
   };
   useEffect(() => {
-    getAllDataRequest(Number(dayNumber));
-    setPageContentTitle();
+    getAllDataRequest(contentDayNumber);
   }, [dayContent, dayNumber]);
-
   return (
     <div className={`main-daycontextpage-container ${className}`}>
       {(title || dayNumber) && (
@@ -58,7 +50,7 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
           <span
             className="navigator"
             onClick={() => {
-              setPageAndNavigate(nav);
+              handleNavigate(nav);
             }}
           >
             {t(nav)}
@@ -66,9 +58,9 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
         ))}
       </div>
       <div className="context-content-wrapper">
-        {pageTitle && (
+        {dayContent && (
           <div className="context-content-header">
-            <div className="context-title">{pageTitle}</div>
+            <div className="context-title">{dayContent?.toUpperCase()}</div>
           </div>
         )}
         <div className="video-note-wrapper">
@@ -99,13 +91,13 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
                   <div className="content-text-wrapper">
                     {title && <div className="content-title">{title}</div>}
                     {description && (
-                      <div className="content-title">{description}</div>
+                      <div className="">{description}</div>
                     )}
                     {duration && (
-                      <div className="content-title">{`Duration : ${duration}`}</div>
+                      <div className="">{`Duration : ${duration}`}</div>
                     )}
                     {videoNumber && (
-                      <div className="content-title">{`Video Number : ${videoNumber}`}</div>
+                      <div className="">{`Video Number : ${videoNumber}`}</div>
                     )}
                   </div>
                 </div>
@@ -137,13 +129,13 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
                   <div className="content-text-wrapper">
                     {title && <div className="content-title">{title}</div>}
                     {description && (
-                      <div className="content-title">{description}</div>
+                      <div className="">{description}</div>
                     )}
                     {estimatedReadingTime && (
-                      <div className="content-title">{`Estimated Reading Time : ${estimatedReadingTime}`}</div>
+                      <div className="">{`Estimated Reading Time : ${estimatedReadingTime}`}</div>
                     )}
                     {noOfPages && (
-                      <div className="content-title">{`Total Numbers of Pages : ${noOfPages}`}</div>
+                      <div className="">{`Total Numbers of Pages : ${noOfPages}`}</div>
                     )}
                   </div>
                 </div>
@@ -155,4 +147,4 @@ const DayVideoPage: React.FC<DayPagePropsInterface> = ({
   );
 };
 
-export default DayVideoPage;
+export default DayContentPage;
