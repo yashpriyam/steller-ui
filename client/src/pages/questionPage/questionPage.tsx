@@ -4,6 +4,7 @@ import QuestionAccordion from '../../components/questionAccordion/questionAccord
 import { useQuestions } from '../../redux/actions/questionAction';
 import { useQuestionAttempt } from '../../redux/actions/questionAttemptAction';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 
 const QuestionPage = () => {
     const { questions, getAllQuestions } = useQuestions();
@@ -11,6 +12,7 @@ const QuestionPage = () => {
     const { isLoading } = questionAttempt;
     const { questionList } = questions;
     const { t } = useTranslation();
+    const [searchParams, setSearchParams] = useSearchParams();
     const onSubmit = async (question: QuestionDataType, selectedValues: QuestionSelectedValueType[]) => {
         const filteredData = selectedValues.map(selectedValue => ({
             imageUrl: selectedValue.imageUrl,
@@ -22,6 +24,8 @@ const QuestionPage = () => {
             console.log(err)
         }
     }
+    const searchParam = searchParams.get("day");
+    //will use searchParam to filter Question data @Obliger0
     useEffect(() => {
         getAllQuestions()
     }, [])
