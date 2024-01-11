@@ -7,7 +7,7 @@ export const ExperienceSection: React.FC<{ experience: Experience; handleFieldUp
     };
 
     return (
-        <div className="experience box">
+        <div className="experience box" id="experience">
             <div className="header-experience">
                 <span
                     onBlur={(e) => handleBlur(e, `experienceData.${index}.companyName`)}

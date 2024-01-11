@@ -7,7 +7,7 @@ export const SkillsSection: React.FC<SkillsSectionProps> = ({ skillsData = {} })
         return str.charAt(0).toUpperCase() + str.slice(1);
     };
     return (
-        <div className="skill">
+        <div className="skill" id="skill">
             {Object?.entries(skillsData)?.map(([category, skills]) => (
                 <CardContainer key={category} header={capitalizeFirstLetter(category)}>
                     {skills?.map((skill) => (

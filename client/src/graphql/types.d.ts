@@ -86,6 +86,10 @@ declare global {
     linkedInLink: string;
   }
 
+  type StyleIconSubContainer = {
+    alignItems: "flex-start" | "center";
+};
+
 
   type CustomResponseType = {
     status: number;

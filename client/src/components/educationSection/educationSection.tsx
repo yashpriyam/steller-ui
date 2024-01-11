@@ -3,12 +3,12 @@ import "./educationSection.scss"
 export const EducationalSection: React.FC<{ education: EducationalData; handleFieldUpdate: Function; isEdit: boolean; index: number }> = ({ education, handleFieldUpdate, isEdit, index }) => {
 
     const handleBlur = (e: React.FocusEvent<HTMLSpanElement>, fieldPath: string) => {
-        handleFieldUpdate(fieldPath, e.currentTarget.innerText);
+        handleFieldUpdate(`educationalData.${index}.${fieldPath}`, e.currentTarget.innerText);
     };
     return (
-        <div className="education box">
+        <div className="education box" id="education">
             <div
-                onBlur={(e) => handleBlur(e, `educationalData.${index}.instituteName`)}
+                onBlur={(e) => handleBlur(e, `.instituteName`)}
                 contentEditable={isEdit}
                 suppressContentEditableWarning={true}
                 className="instituteName"
@@ -16,7 +16,7 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
                 {education.instituteName}
             </div>
             <div
-                onBlur={(e) => handleBlur(e, `educationalData.${index}.course`)}
+                onBlur={(e) => handleBlur(e, `.course`)}
                 contentEditable={isEdit}
                 suppressContentEditableWarning={true}
                 className="course-name"
@@ -25,13 +25,13 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
             </div>
             <div className="education-footer">
                 <div
-                    onBlur={(e) => handleBlur(e, `educationalData.${index}.startDate`)}
+                    onBlur={(e) => handleBlur(e, `.startDate`)}
                     contentEditable={isEdit}
                     suppressContentEditableWarning={true}
                 >
                     <span
 
-                        onBlur={(e) => handleBlur(e, `educationalData.${index}.startDate`)}
+                        onBlur={(e) => handleBlur(e, `.startDate`)}
                         contentEditable={isEdit}
                         suppressContentEditableWarning={true}
                     >
@@ -39,7 +39,7 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
                     </span> -&nbsp;
                     <span
 
-                        onBlur={(e) => handleBlur(e, `educationalData.${index}.endDate`)}
+                        onBlur={(e) => handleBlur(e, `.endDate`)}
                         contentEditable={isEdit}
                         suppressContentEditableWarning={true}
                     >
@@ -47,7 +47,7 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
                     </span>
                 </div>
                 <div
-                    onBlur={(e) => handleBlur(e, `educationalData.${index}.CGPA`)}
+                    onBlur={(e) => handleBlur(e, `.CGPA`)}
                     contentEditable={isEdit}
                     suppressContentEditableWarning={true}
                 >

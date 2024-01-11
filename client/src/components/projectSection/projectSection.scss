@@ -9,6 +9,12 @@
         font-weight: 600;
     }
 
+    .project-links {
+        display: inline;
+        margin-top: 7px;
+        margin-right: 5px;
+    }
+
     .project-footer {
         margin-top: 5px;
 
@@ -18,6 +24,7 @@
             margin-top: 10px;
             display: inline-block;
         }
+
     }
 
     &:hover {

@@ -7,7 +7,7 @@ export const ProjectSection: React.FC<{ project: Project; handleFieldUpdate: Fun
     };
 
     return (
-        <div className="project box">
+        <div className="project box" id="project">
             <div
                 onBlur={(e) => handleBlur(e, 'heading')}
                 contentEditable={isEdit}
@@ -29,18 +29,18 @@ export const ProjectSection: React.FC<{ project: Project; handleFieldUpdate: Fun
 
             </ul>
             {project.gitHubLink && (
-                <span>
+                <div className="project-links">
                     <a href={project.gitHubLink} target="_blank" rel="noopener noreferrer" contentEditable={isEdit}>
                         GitHubLink
                     </a>{' '}
-                </span>
+                </div>
             )}
             {project.deployLink && (
-                <span>
+                <div className="project-links">
                     <a href={project.deployLink} target="_blank" rel="noopener noreferrer" contentEditable={isEdit}>
                         DeployLink
                     </a>{' '}
-                </span>
+                </div>
             )}
             {project?.techStack && (
                 <div className='project-footer'>
