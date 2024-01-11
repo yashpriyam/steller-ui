@@ -4,6 +4,8 @@ export { Transaction } from "./transactionSchema";
 export { videoModel } from "./videoSchema";
 export { notesModel } from "./notesSchema";
 export { userActivityModel } from "./userActivitySchema";
-export { paidUser } from "./paidUserSchema";
+export { paidUser } from "./paidUserSchema"
+export { questionAttempt } from './questionAttemptSchema';
+export { dayModel } from "./daySchema";
 export { questionModel } from "./questionSchema";
 export { otpModel } from "./otpSchema";

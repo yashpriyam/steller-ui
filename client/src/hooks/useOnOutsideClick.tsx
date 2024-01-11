@@ -4,6 +4,7 @@ const useOnOutsideClick = (
   elementRef: React.RefObject<HTMLElement>,
   callback: (e: MouseEvent) => void
 ): void => {
+  
   const callbackRef = useRef<((e: MouseEvent) => void) | null>(null);
   callbackRef.current = callback;
 

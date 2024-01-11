@@ -1,0 +1,32 @@
+@import "../variables.scss";
+
+
+
+.personal-details-card {
+
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 20vw;
+    height: fit-content;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: $mediumFontSize;
+
+    .address,
+    .phone-number,
+    .gmail {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    background-color: rgb(30, 30, 30);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media (max-width: 768px) {
+    .personal-details-card {
+        width: 200px;
+    }
+}

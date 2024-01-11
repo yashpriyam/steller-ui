@@ -1,0 +1,43 @@
+@import "../variables.scss";
+
+.experience {
+    margin: 30px 10px 30px 10px;
+    padding: 30px;
+
+    .header-experience {
+        word-spacing: 2px;
+        font-size: $largerFontSize;
+        font-weight: 500;
+
+        .company-name {
+            font-size: $subHeaderFontSize;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+    }
+
+    .sub-heading {
+        font-size: $smallFontSize;
+        gap: 2px;
+
+        div {
+            color: #717171;
+        }
+    }
+
+
+    .experience-footer {
+        margin-top: 5px 0 10px 0;
+
+        .tech-stack-experience {}
+
+        .tech-lang-experience {
+            margin-top: 10px;
+            display: inline-block;
+        }
+    }
+
+    &:hover {
+        background-color: #1C1C1C;
+    }
+}
