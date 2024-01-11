@@ -113,12 +113,12 @@ declare global {
   };
 
   type VideoOutputDataType = {
-    videoData?: videoDataType;
+    videoData?: VideoDataType;
     response: CustomResponseType;
   };
 
   type AllVideoOutputDataType = {
-    videoData?: [videoDataType];
+    videoData?: [VideoDataType];
     response: CustomResponseType;
   };
 

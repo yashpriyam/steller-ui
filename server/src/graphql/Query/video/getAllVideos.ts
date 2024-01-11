@@ -48,20 +48,16 @@ export const getAllVideos = async (
                 modifiedVideoDataFilter = { ...restFilters, ...updatedLinks };
             }
         }
-        if (!Object.keys(modifiedVideoDataFilter).length) {
-            return {
-                response: errorData,
-            };
-        }
         Object.entries(modifiedVideoDataFilter).forEach(([key, value]) => {
             if (key === localMessages.TOPICS) {
                 modifiedVideoDataFilter[key] = { $in: value };
             }
         });
-        const deletedVideoData : [VideoDataType] = await videoModel.find(modifiedVideoDataFilter);
+        const filteredVideoData: [VideoDataType] = await videoModel.find(modifiedVideoDataFilter);
+
         return {
-            videoData: deletedVideoData,
-            response: deletedVideoData.length ? {
+            videoData: filteredVideoData,
+            response: filteredVideoData.length ? {
                 status: statusCodes.OK,
                 message: VIDEO_FOUND,
             } : errorData,

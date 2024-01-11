@@ -1,0 +1,32 @@
+@import "../../components/variables.scss";
+
+
+.video-page{
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: $primaryBgColor;
+    color: $primaryColor;
+    font-family: $secondaryFontFamily;
+    gap: 20px;
+    align-items: center;
+
+    
+
+    .videos-container{
+        .content-title{
+            width: 100%;
+            font-size: $headerFontSize;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+        .videos-wrapper{
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+    }
+}
