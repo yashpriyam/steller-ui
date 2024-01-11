@@ -25,12 +25,13 @@ export const errorMessages = Object.freeze({
   QUESTION_MODEL: {
     QUESTION_CREATION_FAILED: "unable to add question data",
     QUESTION_UPDATION_FAILED: "unable to update question data",
-    QUESTION_NOT_FOUND:"questions not found",
+    QUESTION_NOT_FOUND: "questions not found",
   },
   OTP_MODEL: {
     OTP_SENT_FAILED: "Failed to send OTP",
     OTP_EMAIL_INVALID: "Email address is not valid",
     UNREGISTERED_EMAIL: "Email address is not registered",
+    OTP_EMAIL_NOT_EXIST: "email address not exist",
   },
   QUESTION_ATTEMPT_MODEL: {
     QUESTION_ATTEMPT_FAILED: "unable to submit your response",
@@ -42,4 +43,10 @@ export const errorMessages = Object.freeze({
     FAILED_TO_UPLOAD_IMAGE: "Failed to upload image",
     NO_PUBLIC_ID_PROVIDED: "No public ID found",
   },
+   PAID_USER_MODEL: {
+    PAID_USER_CREATION_FAILED: "unable to insert paid user data",
+    PAID_USER_ALREADY_EXIST: "user already exists",
+    PAID_USER_UPDATION_FAILED: "unable to update paid user data",
+    PAID_USER_LOGIN_FAILED: "invalid email and password",
+  }
 });

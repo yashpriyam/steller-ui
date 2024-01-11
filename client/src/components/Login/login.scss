@@ -1,0 +1,35 @@
+@import "../variables.scss";
+.login-wrapper-container {
+  border-radius:10px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  .close-button {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
+  .login-page {
+    padding: 50px;
+    background-color: $darkGrey;
+    width: 440px;
+    min-height: 440px;
+    border-radius: 10px;
+    font-family: "Montserrat";
+  }
+}
+
+@media (max-width: 500px) {
+  .login-wrapper-container {
+    width: 100%;
+    .login-page {
+      padding: 50px 25px;
+    }
+  }
+}

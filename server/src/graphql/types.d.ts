@@ -120,7 +120,7 @@ declare global {
   type AllVideoOutputDataType = {
     videoData?: [VideoDataType];
     response: CustomResponseType;
-  }
+  };
 
   type CreateVideoType = {
     title: string;
@@ -134,11 +134,11 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  }
+  };
 
   type FilteredLinksType = {
     [key: string]: string;
-  }
+  };
   type VideoDataType = {
     title?: string;
     description?: string;
@@ -155,7 +155,7 @@ declare global {
 
   type FilteredLinksType = {
     [key: string]: string;
-  }
+  };
 
   type DeletedNotesOutputType = {
     notesData?: DeletedNotesDataType;
@@ -313,8 +313,8 @@ declare global {
     email: string;
     emailOtp: string;
     expiresAt: Date;
-    isEmailVerified: boolean;
-    id: ObjectId;
+    isEmailVerified?: boolean;
+    id?: ObjectId;
   };
   type OtpUserOutputType = {
     response: CustomResponseType;
@@ -357,5 +357,58 @@ declare global {
     notes: string[];
     videos: string[];
     questions: string[];
+  };
+  type loginUserInputType = {
+    email: string;
+    password: string;
+  };
+  type PaidProfileImageInput = {
+    publicId?: string;
+    secureUrl?: string;
+  };
+  type SocialMediaHandles = {
+    linkedIn?: string;
+    github?: string;
+    medium?: string;
+    portfolio?: string;
+  };
+  type Password = {
+    hash?: string;
+    salt?: string;
+  };
+  type PaidUserInputType = {
+    username: string;
+    email: string;
+    contact: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    password?: string;
+  };
+  type PaidUserOutputType = {
+    paidUserData?: PaidUserData;
+    response: CustomResponseType;
+  };
+  type PaidUserData = {
+    username: string;
+    email: string;
+    contact: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    sessionPreference? = SessionPreferenceEnum;
+  };
+  type updatePaidUserPasswordInput = {
+    email: String;
+    password?: string;
   };
 }

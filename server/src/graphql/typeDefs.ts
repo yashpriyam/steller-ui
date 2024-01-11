@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 const typeDefs = gql`
   type Query {
@@ -13,7 +13,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login: String
+    login(data: LoginUserDataInputType!): LoginUserDataOutputType!
     registerUser(data: RegistrationInputType!): RegistrationOutputDataType
     createTransaction(
       data: CreateTransactionInputType!
@@ -38,9 +38,21 @@ const typeDefs = gql`
       updateQuestionData: UpdateQuestionInputType!
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
-    sendOtpToRegisteredUser(email: String!) : OtpUserOutputType
-    createQuestionAttemptByUser(questionAttemptData:QuestionAttemptType!): QuestionAttemptOutputType
-    updateProfilePicture(image: String, size: Int, name: String): [UpdateProfilePictureOutput]
+    sendOtpToRegisteredUser(email: String!): OtpUserOutputType
+    createQuestionAttemptByUser(
+      questionAttemptData: QuestionAttemptType!
+    ): QuestionAttemptOutputType
+    updateProfilePicture(
+      image: String
+      size: Int
+      name: String
+    ): [UpdateProfilePictureOutput]
+    createPaidUser(data: PaidUserInputType): PaidUserOutputType
+    sendOtpToPaidUser(email: String!): CustomResponseType
+    verifyOtpPaidUser(data: VerifyOtpPaidUserInputType!): CustomResponseType
+    updatePaidUserPassword(
+      data: updatePaidUserPasswordInputType!
+    ): CustomResponseType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -107,7 +119,7 @@ const typeDefs = gql`
     duration: String
   }
 
-  input OptionalLinksInput{
+  input OptionalLinksInput {
     webmasters: String
     youtube: String
   }
@@ -174,21 +186,21 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
 
-  input OtpUserInputType {	
-    email: String!	
-  }	
-  type OtpUserOutputType {	
-    response: CustomResponseType!	
-  }	
-  input UserActivityInputType {	
-    phoneNumber: String	
-    isOpened: Boolean	
-    devices: [String]	
-    IST: String	
-    isValidPhoneNumber: Boolean	
-  }	
-  type UserActivityOutputType {	
-    response: CustomResponseType!	
+  input OtpUserInputType {
+    email: String!
+  }
+  type OtpUserOutputType {
+    response: CustomResponseType!
+  }
+  input UserActivityInputType {
+    phoneNumber: String
+    isOpened: Boolean
+    devices: [String]
+    IST: String
+    isValidPhoneNumber: Boolean
+  }
+  type UserActivityOutputType {
+    response: CustomResponseType!
   }
 
   type CreateNotesOutputType {
@@ -287,7 +299,7 @@ const typeDefs = gql`
     response: CustomResponseType
   }
   type QuestionDataType {
-    id: String,
+    id: String
     question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
@@ -382,9 +394,9 @@ const typeDefs = gql`
     response: [Option]!
     isCorrect: Boolean
   }
-  type QuestionAttemptOutputType{
-    questionData:QuestionAttemptDataType
-    response:CustomResponseType!
+  type QuestionAttemptOutputType {
+    questionData: QuestionAttemptDataType
+    response: CustomResponseType!
   }
   type QuestionAttemptDataType {
     userId: ID
@@ -393,7 +405,73 @@ const typeDefs = gql`
     isCorrect: Boolean
     timestamp: DateTime
   }
-  
+
+  input LoginUserDataInputType {
+    email: String!
+    password: String!
+  }
+  type LoginUserDataOutputType {
+    response: CustomResponseType!
+  }
+  input PaidProfileImageInput {
+    publicId: String
+    secureUrl: String
+  }
+  input SocialMediaHandles {
+    linkedIn: String
+    github: String
+    medium: String
+    portfolio: String
+  }
+  input PaidUserInputType {
+    username: String!
+    email: String!
+    contact: String!
+    profileImg: PaidProfileImageInput
+    batchCode: String
+    sessionPreference: SessionPreferenceEnum
+    professionalStatus: String
+    college: String
+    expectedSalary: String
+    socialHandles: SocialMediaHandles
+    address: String
+    password: String
+  }
+  type PaidUserOutputType {
+    paidUserData: PaidUserData
+    response: CustomResponseType!
+  }
+  type PaidUserData {
+    username: String!
+    email: String!
+    contact: String!
+    profileImg: PaidProfileImageOutput
+    batchCode: String
+    sessionPreference: SessionPreferenceEnum
+    professionalStatus: String
+    college: String
+    expectedSalary: String
+    socialHandles: SocialMediaHandlesOutput
+    address: String
+  }
+  type PaidProfileImageOutput {
+    publicId: String
+    secureUrl: String
+  }
+  type SocialMediaHandlesOutput {
+    linkedIn: String
+    github: String
+    medium: String
+    portfolio: String
+  }
+  input VerifyOtpPaidUserInputType {
+    email: String!
+    emailOtp: String!
+  }
+  input updatePaidUserPasswordInputType {
+    email: String!
+    password: String
+  }
   scalar DateTime
   scalar JSON
 `;

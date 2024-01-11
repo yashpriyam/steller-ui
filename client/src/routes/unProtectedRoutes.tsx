@@ -14,8 +14,8 @@ const unProtectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/dashboard":<Dashboard/>,
   "/day/:dayNumber" : <DayPage/>,
   "/day/:dayNumber/:dayContent": <DayContentPage />,
-  "/question": <QuestionPage/>
-  "/VideoPage": <VideosPage />,
+  "/question": <QuestionPage/>,
+  "/videos": <VideosPage />,
 });
 
 export const getUnProtectedRoutes = (): React.ReactNode[] =>

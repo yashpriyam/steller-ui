@@ -4,8 +4,8 @@ import {
   timeAfterMins,
   sendEmail,
 } from "@utils";
-import { otpModel } from "../../../schema/otp-model";
-import { localMessages, errorMessages,statusCodes } from "@constants";
+import { otpModel } from "../../../schema/otpSchema";
+import { localMessages, errorMessages, statusCodes } from "@constants";
 export const sendOtp = async (
   _parent: undefined,
   args: { email: string }
@@ -41,19 +41,19 @@ export const sendOtp = async (
           status: statusCodes.OK,
         },
       };
-      }
-    else return {
+    } else
+      return {
         response: {
           message: OTP_EMAIL_INVALID,
           status: statusCodes.OK,
         },
-      }
-  } catch (err) {
-      return {
-        response: {
-          message: OTP_SENT_FAILED,
-          status: statusCodes.BAD_REQUEST,
-        },
       };
+  } catch (err) {
+    return {
+      response: {
+        message: OTP_SENT_FAILED,
+        status: statusCodes.BAD_REQUEST,
+      },
+    };
   }
 };
