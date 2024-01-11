@@ -370,21 +370,8 @@ declare global {
     address?: string;
     sessionPreference? = SessionPreferenceEnum;
   };
-  type updatePaidUserInput = {
+  type updatePaidUserPasswordInput = {
     email: String;
-    updatedNewData: UpdatePaidDataType;
-  };
-  type UpdatePaidDataType = {
-    username?: string;
-    contact?: string;
-    profileImg?: PaidProfileImageInput;
-    batchCode?: string;
-    sessionPreference?: SessionPreferenceEnum;
-    professionalStatus?: string;
-    college?: string;
-    expectedSalary?: string;
-    socialHandles?: SocialMediaHandles;
-    address?: string;
     password?: string;
   };
 }

@@ -56,9 +56,9 @@ declare global {
     style?: React.CSSProperties;
     bgColor?: string;
     textColor?: string;
+    closeModal?: () => void;
   }
   interface CreatePasswordProps {
-    handleSkip?: () => void;
     handleOnCreateNewPassword?: () => void;
   }
   interface OtpVerificationProps {
@@ -93,6 +93,15 @@ declare global {
     isOtpValid: boolean;
     isOtpSending: boolean;
     password: string;
+  }
+  interface ModalProps {
+    className?: string;
+    style?: React.CSSProperties;
+    bgColor?: string;
+    children?: React.ReactNode;
+    isClosable?: boolean;
+    onClose?: () => void;
+    isOpen?: boolean;
   }
 }
 export {};

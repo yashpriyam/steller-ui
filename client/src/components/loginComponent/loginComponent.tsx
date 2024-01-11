@@ -28,34 +28,35 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
   };
   const handleOnLoginButtonClick = async () => {
     const isLogin = await handleLoginClick();
-    dispatch(setEmail(""), setPassword(""));
-    isLogin ? setError("") : setError(t("Invalid Email and Password!"));
+    dispatch(setEmail(""));
+    dispatch(setPassword(""));
+    isLogin ? setError("") : setError(t("error_on_login"));
   };
   return (
     <div className="login-component-wrapper">
       <div className="heading-wrapper">
         <h1>{t("login")}</h1>
-        <h3>{t("Securely access your account.")}</h3>
+        <h3>{t("access")}</h3>
       </div>
       <InputComponent
         onChange={setEmailOnChange}
         type="email"
         value={currentData.email}
         className="input-component"
-        errorMessage={t("please enter valid email")}
-        placeholder={t("Enter user id")}
+        errorMessage={t("error_valid_mail")}
+        placeholder={t("enter_email")}
       />
       <InputComponent
         onChange={setPasswordOnChange}
         type="password"
         value={currentData.password}
         className="input-component"
-        errorMessage={t("please enter valid Password")}
-        placeholder={t("Enter password")}
+        errorMessage={t("enter_valid_password")}
+        placeholder={t("enter_password")}
       />
       <div className="forget-password-login-with-otp-wrapper">
         <span className="forget-password" onClick={handleOnForgetPasswordClick}>
-          {t("Forget password")}
+          {t("forget_password")}
         </span>
       </div>
       <Button

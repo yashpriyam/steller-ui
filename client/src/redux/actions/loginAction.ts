@@ -2,7 +2,7 @@ import { apolloClient } from "../../graphql/apolloClient/apolloClient";
 import { LOGIN } from "../../graphql/mutation/login/login";
 import { SEND_OTP_PAID_USER } from "../../graphql/mutation/sendOtpPaidUser/sendOtpPaidUser";
 import { VERIFY_OTP_PAID_USER } from "../../graphql/mutation/verifyOtpPaidUser/verifyOtpPaidUser";
-import { UPDATE_PAID_USER } from "../../graphql/mutation/updatePaidUser/updatePaidUser";
+import { UPDATE_PAID_USER_PASSWORD } from "../../graphql/mutation/updatePaidUserPassword/updatePaidUserPassword";
 
 export const useLogin = () => {
   const loginUser = async ({ email, password }: LoginUser) => {
@@ -42,16 +42,16 @@ export const useLogin = () => {
       response,
     };
   };
-  const updatePaidUserApi = async (email: string, updatedNewData: UpdatePaidDataType) => {     
+  const updatePaidUserPasswordApi = async (email: string, password: string) => {       
      const response = await apolloClient.mutate({
-       mutation: UPDATE_PAID_USER,
+       mutation: UPDATE_PAID_USER_PASSWORD,
        variables: {
          data: {
            email,
-           updatedNewData,
+           password,
          },
        },
-     });    
+     });        
      return {
        response,
      };
@@ -60,6 +60,6 @@ export const useLogin = () => {
     loginUser,
     sendOtpPaidUserApi,
     verifyOtpPaidUserApi,
-    updatePaidUserApi,
+    updatePaidUserPasswordApi,
   };
 }; 

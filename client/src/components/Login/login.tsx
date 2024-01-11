@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import "./login.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { OtpVerification } from "../otpVerfication/otpVerfication";
 import { CreatePassword } from "../createPassword/createPassword";
 import { LoginComponent } from "../loginComponent/loginComponent";
 import { useLogin } from "../../redux/actions/loginAction";
+import { loginAction } from "../../redux/slices/login/loginSlice";
 export const Login: React.FC<LoginProps> = ({
   className,
   style,
   bgColor,
   textColor,
+  closeModal,
 }: LoginProps) => {
   const {
     loginUser,
     sendOtpPaidUserApi,
     verifyOtpPaidUserApi,
-    updatePaidUserApi,
+    updatePaidUserPasswordApi,
   } = useLogin();
+  const dispatch = useDispatch();
   const currentData: LoginState = useSelector((state: any) => state.login);
+  const { setPassword, setEmail } = loginAction;
   const presentScreen: Record<string, string> = {
     CREATE_PASSWORD: "CREATE_PASSWORD",
     OTP_VERIFICATION: "FORGET_PASSWORD",
@@ -35,6 +39,7 @@ export const Login: React.FC<LoginProps> = ({
     }
   };
   const handleOnForgetPasswordClick = () => {
+    dispatch(setPassword(""));
     setCurrentScreen(presentScreen.OTP_VERIFICATION);
   };
 
@@ -55,19 +60,22 @@ export const Login: React.FC<LoginProps> = ({
     }
   };
   const onBackClick = () => {
+    dispatch(setEmail(""));
     setCurrentScreen(presentScreen.LOGIN);
   };
   const handleOnCreateNewPassword = async () => {
     try {
-      const updatedNewData: UpdatePaidDataType = {
-        password: currentData.password,
-      };
-       const response = await updatePaidUserApi(
-         currentData.email,
-         updatedNewData
-      );
-      const isDataUpdated=response?.response.data.updatePaidUser.response.status;
-      
+      const response = await updatePaidUserPasswordApi(
+        currentData.email,
+        currentData.password
+      );      
+      const isDataUpdated =
+        response?.response.data.updatePaidUserPassword.status;
+      if (isDataUpdated === 200) {
+        dispatch(setPassword(""));
+        dispatch(setEmail(""));
+        setCurrentScreen(presentScreen.LOGIN);
+      }
     } catch (error) {}
   };
   const screen: Record<string, React.ReactNode> = {
@@ -85,10 +93,7 @@ export const Login: React.FC<LoginProps> = ({
       />
     ),
     CREATE_PASSWORD: (
-      <CreatePassword
-        handleSkip={onBackClick}
-        handleOnCreateNewPassword={handleOnCreateNewPassword}
-      />
+      <CreatePassword handleOnCreateNewPassword={handleOnCreateNewPassword} />
     ),
   };
   const [currentScreen, setCurrentScreen] = useState(presentScreen.LOGIN);
@@ -97,6 +102,9 @@ export const Login: React.FC<LoginProps> = ({
       className={`login-wrapper-container ${className}`}
       style={{ ...style }}
     >
+      <button className={`close-button ${className}`} onClick={closeModal}>
+        ❌
+      </button>
       <div
         className="login-page"
         style={{ backgroundColor: bgColor, color: textColor }}

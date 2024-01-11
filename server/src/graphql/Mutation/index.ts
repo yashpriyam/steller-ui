@@ -10,5 +10,5 @@ export {
   createPaidUser,
   sendOtpToPaidUser,
   verifyOtpPaidUser,
-  updatePaidUser,
+  updatePaidUserPassword,
 } from "./paidUser/index";

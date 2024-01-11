@@ -32,13 +32,13 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
     dispatch(setIsSending(true));
     const otpSend = await handleOnSendOtp();
     dispatch(setIsSending(false));
-    otpSend ? setError("") : setError(t("Invalid email, enter valid email"));
+    otpSend ? setError("") : setError(t("invalid_email"));
     dispatch(setIsOtpSend(otpSend));
   };
   const handleOnVerifyOtpClick = async () => {
     const isOtpValid = await verifyOtp(otp);
     setError(
-      isOtpValid ? "" : t("The entered OTP is invalid. Please try again.")
+      isOtpValid ? "" : t("invalid_otp")
     );
     dispatch(setIsOtpValid(isOtpValid));
     setOtp("");
@@ -54,26 +54,26 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
       <div className="back-arrow">
         <LeftArrow onClick={onBackClick} />
       </div>
-      <h1 className="heading-container">{t("Verification")}</h1>
+      <h1 className="heading-container">{t("verification")}</h1>
       <InputComponent
         type="email"
         className="input-component"
         value={currentData.email}
-        placeholder={t("Enter email address")}
+        placeholder={t("enter_email")}
         onChange={handleEmailInputChange}
-        errorMessage={t("Invalid email, enter valid email")}
+        errorMessage={t("invalid_email")}
       />
       <InputComponent
         className="input-component"
         type="number"
         value={otp}
-        placeholder={t("Enter otp")}
+        placeholder={t("enter_otp")}
         onChange={handleOtpInputChange}
         disabled={!currentData.isOtpSend}
       />
       <div className="button-container">
         <Button
-          text={currentData.isOtpSend ? t("verify otp") : t("send otp")}
+          text={currentData.isOtpSend ? t("verify_otp") : t("send_otp")}
           className="send-verify-otp"
           isLoading={currentData.isOtpSending}
           iconPosition="center"

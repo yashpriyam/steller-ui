@@ -41,7 +41,9 @@ const typeDefs = gql`
     createPaidUser(data: PaidUserInputType): PaidUserOutputType
     sendOtpToPaidUser(email: String!): CustomResponseType
     verifyOtpPaidUser(data: VerifyOtpPaidUserInputType!): CustomResponseType
-    updatePaidUser(data: updatePaidUserInputType!): PaidUserOutputType
+    updatePaidUserPassword(
+      data: updatePaidUserPasswordInputType!
+    ): CustomResponseType
   }
 
   type CustomResponseType {
@@ -434,21 +436,8 @@ const typeDefs = gql`
     email: String!
     emailOtp: String!
   }
-  input updatePaidUserInputType {
+  input updatePaidUserPasswordInputType {
     email: String!
-    updatedNewData: UpdatePaidDataType
-  }
-  input UpdatePaidDataType {
-    username: String
-    contact: String
-    profileImg: PaidProfileImageInput
-    batchCode: String
-    sessionPreference: SessionPreferenceEnum
-    professionalStatus: String
-    college: String
-    expectedSalary: String
-    socialHandles: SocialMediaHandles
-    address: String
     password: String
   }
   scalar DateTime

@@ -27,12 +27,8 @@ export const login = async (
     const jwtSecret = process.env.JWT_SECRET;
     const jwtToken = process.env.JWT_TOKEN;    
     if (jwtSecret && jwtToken) {
-      const token = jwt.sign({email:user.email,username:user.username}, jwtSecret, {
-        expiresIn: "1h",
-      });
-      res.cookie(jwtToken, token, {
-        httpOnly: true,
-      });
+      const token = jwt.sign({user}, jwtSecret);
+      res.cookie(jwtToken, token);
     }
     return {
       response: {
