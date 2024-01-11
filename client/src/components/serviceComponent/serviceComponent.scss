@@ -1,0 +1,117 @@
+@import "../variables.scss";
+
+.service-container {
+  margin: 30px 0 0 230px;
+  width: 850px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .service_elements {
+    background-color: $Gray35;
+    border: 1px solid $Gray29;
+    padding: 20px;
+    width: 400px;
+    border-radius: 7px;
+    .service-icon-box {
+      background-color: $Gray29;
+      width: 40px;
+      height: 40px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .service-text {
+      margin-top: 20px;
+      .service-title {
+        font-size: $titleFontSize;
+      }
+      .service-subtitle {
+        margin-top: 5px;
+        color: $sencondaryTextColor;
+      }
+    }
+    .service-button {
+      margin-top: 20px;
+      padding: 10px 20px 10px 20px;
+      background-color: $Gray29;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      transition: 0.6s;
+    }
+    .service-button:hover {
+      color: $sencondaryTextColor;
+      background-color: $Gray43;
+    }
+  }
+}
+
+@media (max-width: $screenXl) {
+  .service-container {
+    margin: 10px 0 0 0;
+  }
+}
+
+@media (max-width: $screenLg) {
+  .service-container {
+    margin: 10px 0 0 0;
+    width: 85vw;
+    .service_elements {
+      width: 40vw;
+      border-radius: 7px;
+    }
+  }
+}
+
+@media (max-width: $screenMd) {
+  .service-container {
+    flex-direction: column;
+    .service_elements {
+      border-radius: 6px;
+      width: 85vw;
+      margin: 10px;
+      .service-text {
+        margin-top: 15px;
+      }
+      .service-button {
+        margin-top: 15px;
+        padding: 10px 20px 10px 20px;
+        font-size: $extraSmallFontSize;
+      }
+    }
+  }
+}
+
+@media (max-width: $screenSm) {
+  .service-container {
+    .service_elements {
+      border-radius: 6px;
+      .service-text {
+        margin-top: 15px;
+      }
+      .service-button {
+        margin-top: 15px;
+        padding: 10px 20px 10px 20px;
+        font-size: $extraSmallFontSize;
+      }
+    }
+  }
+}
+
+@media (max-width: $screenXs) {
+  .service-container {
+    .service_elements {
+      border-radius: 6px;
+      .service-text {
+        margin-top: 15px;
+      }
+      .service-button {
+        margin-top: 15px;
+        padding: 10px 20px 10px 20px;
+        font-size: $extraSmallFontSize;
+      }
+    }
+  }
+}

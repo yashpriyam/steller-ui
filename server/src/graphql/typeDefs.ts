@@ -1,10 +1,10 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
 
 const typeDefs = gql`
   type Query {
     getPaymentDetails(programType: String!): ProgramDetailsOutputDataType
-    getAllNotes(filterData: getNotesFilterInputType): getAllNotesOutputType
-    getNotes(filterData: getNotesFilterInputType): getNotesOutputType
+    getAllNotes(filterData: GetNotesFilterInputType): getAllNotesOutputType
+    getNotes(filterData: GetNotesFilterInputType): getNotesOutputType
     getVideo(videoDataFilter: VideoInputFilterType): VideoOutputDataType
     getAllQuestions(
       filterData: GetQuestionsFilterInput
@@ -38,6 +38,13 @@ const typeDefs = gql`
       updateQuestionData: UpdateQuestionInputType!
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
+    sendOtpToRegisteredUser(email: String!) : OtpUserOutputType
+    createQuestionAttemptByUser(questionAttemptData:QuestionAttemptType!): QuestionAttemptOutputType
+    updateProfilePicture(image: String, size: Int, name: String): [UpdateProfilePictureOutput]
+  }
+  type UpdateProfilePictureOutput {
+    public_id: String
+    secure_url: String
   }
 
   type CustomResponseType {
@@ -223,7 +230,7 @@ const typeDefs = gql`
     description: String
     estimatedReadingTime: String
   }
-  input getNotesFilterInputType {
+  input GetNotesFilterInputType {
     link: String
     title: String
     dayNumber: Int
@@ -276,10 +283,11 @@ const typeDefs = gql`
     isOpenable: Boolean!
   }
   type QuestionOutputType {
-    questionData: QuestionData
+    questionData: QuestionDataType
     response: CustomResponseType
   }
-  type QuestionData {
+  type QuestionDataType {
+    id: String,
     question: [OptionOutput!]!
     batchCode: String!
     options: [OptionOutput!]!
@@ -365,9 +373,27 @@ const typeDefs = gql`
     type: QuestionMetaType
   }
   type GetAllQuestionsOutputType {
-    questionData: [QuestionData]
+    questionData: [QuestionDataType]
     response: CustomResponseType
   }
+  input QuestionAttemptType {
+    userId: String!
+    questionId: String!
+    response: [Option]!
+    isCorrect: Boolean
+  }
+  type QuestionAttemptOutputType{
+    questionData:QuestionAttemptDataType
+    response:CustomResponseType!
+  }
+  type QuestionAttemptDataType {
+    userId: ID
+    questionId: ID
+    response: [UpdateOptionOutput]
+    isCorrect: Boolean
+    timestamp: DateTime
+  }
+  
   scalar DateTime
   scalar JSON
 `;

@@ -1,0 +1,21 @@
+@import '../../components/variables.scss';
+
+.loader-component {
+  border: 2px solid $primaryBorderColor;
+  border-top: transparent; 
+  border-radius: 50%;
+  min-width: 20px;
+  min-height: 20px;
+  background-color: transparent;
+  animation: loaderComponentSpinner 1s linear infinite; 
+
+}
+
+@keyframes loaderComponentSpinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

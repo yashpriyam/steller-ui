@@ -22,8 +22,19 @@ export const localMessages = Object.freeze({
     QUESTION_FOUND_SUCCESS:"questions found successfully"
   },
   OTP_MODEL: {
-    OTP_SENT_SUCCESS:"otp sent succerssfully",
+    OTP_SENT_SUCCESS:"OTP sent succerssfully",
   },
   FULFILLED: 'fulfilled',
   TOPICS: 'topics',
+  TEXT: {
+    EMAIL_VERIFICATION_SUBJECT: "Your One-Time Password (OTP) for email verification",
+    BEST_REGARDS: "Best regards",
+    THE_WEBMASTERS_TEAM: "The Webmasters Team",
+    PLEASE_ENTER_OTP_TO_VERIFY_EMAIL: "Please enter this OTP on the verification page to verify your email.",
+    THE_OTP_IS_VALID_FOR:"The OTP is valid for",
+    USE_IT_PROMPTLY:"mins, so be sure to use it promptly.",
+  },
+  QUESTION_ATTEMPT_MODEL : {
+    QUESTION_ATTEMPT_SUCCESS: "your response has been submitted successfully"
+  }
 });
