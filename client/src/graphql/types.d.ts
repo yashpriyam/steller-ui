@@ -1,6 +1,7 @@
 import { CSSProperties, ChangeEvent, ReactElement } from "react";
 
 declare global {
+
   type RegisterUserData = {
     name: string;
     email: string;
@@ -11,7 +12,95 @@ declare global {
     expectedSalary: string;
     emailOtp: string;
     collegeName: string;
+  }
+  interface Experience {
+    companyName: string;
+    companyLocation: string;
+    role: string;
+    startDate: string;
+    endDate: string;
+    description: string[];
+    techStack: string[];
+  }
+  interface Project {
+    heading: string;
+    description: string[];
+    deployLink: string;
+    gitHubLink: string;
+    techStack?: string[];
+  }
+  interface Achievement {
+    icon: string;
+    header: string;
+    description: string;
+    links: string;
+  }
+  interface SkillsData {
+    [key: string]: string[];
+  }
+
+  interface EducationalData {
+    instituteName: string;
+    location: string;
+    course: string;
+    startDate: string;
+    endDate: string;
+    CGPA: string;
+  }
+  interface ResumeData {
+    personalDetail: {
+      fullName: string;
+      headline: string;
+    };
+    socialDetail: SocialDetail;
+    experienceData: Experience[];
+    projectsData: Project[];
+    skillsData: SkillsData;
+    educationalData: EducationalData[];
+    achievementsData: Achievement[];
+  }
+  interface ProfileProps {
+    dataProfile: ResumeData;
+  }
+  interface SkillsSectionProps {
+    skillsData: SkillsData;
+  }
+  type UserActivityDataType = {
+    phoneNumber: string;
+    isOpened: boolean;
+  }
+  interface Address {
+    colony: string;
+    city: string;
+  }
+  interface ProfileAvatarProps {
+    width?: string;
+    height?: string;
+    className?: string;
+  }
+
+  interface SocialDetail {
+    address: Address;
+    phoneNumber: string;
+    gmail: string;
+    githubLink: string;
+    linkedInLink: string;
+  }
+
+  type StyleIconSubContainer = {
+    alignItems: "flex-start" | "center";
   };
+
+
+  type CustomResponseType = {
+    status: number;
+    message: string;
+  }
+
+  interface RoutesMapInterface {
+    [path: string]: ReactElement;
+  }
+
 
   type UserActivityDataType = {
     phoneNumber: string;
@@ -123,7 +212,6 @@ declare global {
   interface CourseImageProps {
     courseImageElement?: CourseImageType[];
   }
-
   interface InputProps {
     type: string;
     value?: string;
@@ -281,4 +369,4 @@ declare global {
     title?: React.ReactNode | string;
   }
 }
-export {};
+export { };

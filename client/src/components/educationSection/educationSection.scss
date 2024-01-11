@@ -1,0 +1,32 @@
+@import "../variables.scss";
+
+.education {
+  margin: 30px 10px 30px 10px;
+  padding: 20px;
+  overflow: hidden;
+
+  .instituteName {
+    font-size: $largerFontSize;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-block: 5px;
+  }
+
+  .course-name {
+    font-size: $mediumFontSize;
+    margin-block: 5px;
+
+  }
+
+  .education-footer>div,
+  .education-footer>span {
+    font-size: $smallFontSize;
+    margin-block-start: 1px;
+    color: $gray;
+
+  }
+
+  &:hover {
+    background-color: $lightBlack;
+  }
+}
