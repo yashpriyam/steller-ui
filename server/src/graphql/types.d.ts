@@ -188,9 +188,21 @@ declare global {
     answer: { imageUrl: string; text: string }[];
     marks: number;
     batchCode: string;
-    meta: QuestioinMetaData;
+    meta: QuestionMetaData;
   };
-  type QuestioinMetaData = {
+
+  type AllQuestionDataType = {
+    id: ObjectId;
+    question: { imageUrl: string; text: string }[];
+    questionType: QuestionTypeEnum;
+    options: { imageUrl: string; text: string }[];
+    answer: { imageUrl: string; text: string }[];
+    marks: number;
+    batchCode: string;
+    meta: QuestionMetaData;
+  }
+
+  type QuestionMetaData = {
     topic: string;
     day: number;
     isActive: boolean;
@@ -199,7 +211,7 @@ declare global {
     expiresInMins: number;
     isOpenable: boolean;
   };
-  type getNotesFilterInputType = {
+  type GetNotesFilterInputType = {
     link?: string;
     title?: string;
     dayNumber?: number;
@@ -314,17 +326,36 @@ declare global {
     type?: QuestionMetaType;
   };
   type QuestionsReturnType = {
-    questionData: [QuestionSchemaType];
+    questionData: [AllQuestionDataType];
     response: CustomResponseType;
   };
   type CustomResponseType = {
     status: number;
     message: string;
   };
+  type EmailOtpDataType = { 
+    otpData: { emailOtp : string};
+    emailValidityMinutes: number;
+  };
 
   interface QuestionResponseType {
     text: string;
     imageUrl: string;
   }
-
+  interface UploadImageArgumentType {
+    images: string | string[];
+    folder: string;
+  }
+  interface ImageUploadArgs {
+    image: string;
+  }
+  type DaySchemaType = {
+    title: string;
+    description: string;
+    dayNumber: Number;
+    topics: string[];
+    notes: string[];
+    videos: string[];
+    questions: string[];
+  };
 }

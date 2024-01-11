@@ -1,0 +1,21 @@
+@import "../../components/variables.scss";
+
+.dashboard {
+  background-color: $bacgroundBlackColor;
+  .dashboard-container {
+    padding: 20px;
+    color: $primaryTextColor;
+  }
+}
+
+
+@media (max-width: $screenXl) {
+  .dashboard {
+    .dashboard-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
