@@ -349,14 +349,15 @@ declare global {
   interface ImageUploadArgs {
     image: string;
   }
-  type DaySchemaType = {
+  type CreateDayDataType = {
     title?: string;
     description?: string;
-    dayNumber: Number;
+    dayNumber?: number;
     topics?: string[];
     notes?: string[];
     videos?: string[];
     questions?: string[];
+    weekNumber?: number;
   };
   type loginUserInputType = {
     email: string;
@@ -405,32 +406,14 @@ declare global {
     expectedSalary?: string;
     socialHandles?: SocialMediaHandles;
     address?: string;
-    sessionPreference? = SessionPreferenceEnum;
+    sessionPreference?: SessionPreferenceEnum;
   };
   type updatePaidUserPasswordInput = {
     email: String;
     password?: string;
   };
-  type CreateOrUpdateDayDataType = {
-    title?: string;
-    description?: string;
-    dayNumber: number;
-    topics?: string[];
-    notes?: string[];
-    videos?: string[];
-    questions?: string[];
-  }
-  type DayDataType = {
-    title?: string;
-    description?: string;
-    dayNumber?: number;
-    topics?: string[];
-    notes?: string[];
-    videos?: string[];
-    questions?: string[];
-  }
   type DayDataOutputType = {
-    dayData?: DayData;
+    dayData?: CreateDayDataType;
     response: CustomResponseType;
   }
   type WeekSchemaType = {

@@ -1,1 +1,1 @@
-export { createOrUpdateDay } from "./createOrUpdateDay";
+export { upsertDay } from "./upsertDay";

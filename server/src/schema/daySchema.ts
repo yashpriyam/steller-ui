@@ -2,7 +2,7 @@ import mongoose, { Schema, model } from "mongoose";
 
 const { ObjectId } = mongoose.Schema.Types;
 
-const daySchema = new Schema<DaySchemaType>({
+const daySchema = new Schema<CreateDayDataType>({
         title: {
             type: String,
         },
@@ -12,7 +12,6 @@ const daySchema = new Schema<DaySchemaType>({
         dayNumber: {
             type: Number,
             required: true,
-            unique: true,
         },
         topics: {
             type: [String],
@@ -32,4 +31,4 @@ const daySchema = new Schema<DaySchemaType>({
     }
 );
 
-export const dayModel = model<DaySchemaType>("day", daySchema);
+export const dayModel = model<CreateDayDataType>("day", daySchema);

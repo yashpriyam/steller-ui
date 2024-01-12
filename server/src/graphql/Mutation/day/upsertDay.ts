@@ -1,9 +1,9 @@
 import { dayModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
 
-export const createOrUpdateDay = async (
+export const upsertDay = async (
   parent: undefined,
-  args: { dayData: CreateOrUpdateDayDataType }
+  args: { dayData: CreateDayDataType }
 ): Promise<DayDataOutputType> => {
   const { DAY_CREATION_FAILED } = errorMessages.DAY_MODEL;
   const errorData: CustomResponseType = {
@@ -20,9 +20,10 @@ export const createOrUpdateDay = async (
         questions, 
         title, 
         topics, 
-        videos
+        videos,
+        weekNumber
     } = dayData;
-    const newDayData: DayDataType = await dayModel.findOneAndUpdate(
+    const newDayData: CreateDayDataType = await dayModel.findOneAndUpdate(
       { dayNumber },
       {
         dayNumber,
@@ -31,7 +32,8 @@ export const createOrUpdateDay = async (
         questions,
         title,
         topics,
-        videos,
+        videos, 
+        weekNumber,
       },
       { new: true, upsert: true }
     );

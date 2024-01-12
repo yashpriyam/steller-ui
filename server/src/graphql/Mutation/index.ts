@@ -14,4 +14,4 @@ export {
   verifyOtpPaidUser,
   updatePaidUserPassword,
 } from "./paidUser/index";
-export { createOrUpdateDay } from "./day/index";
+export { upsertDay } from "./day/index";
