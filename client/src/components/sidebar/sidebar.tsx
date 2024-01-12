@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './sideBar.scss';
+import './sidebar.scss';
 import { SidebarOption } from '../sidebarOption/sidebarOption';
 import { SidebarContainer } from '../sidebarContainer/sidebarContainer';
 import { useNavigate } from 'react-router-dom';
