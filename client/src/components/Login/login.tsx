@@ -7,6 +7,7 @@ import { LoginComponent } from "../loginComponent/loginComponent";
 import { useLogin } from "../../redux/actions/loginAction";
 import { loginAction } from "../../redux/slices/login/loginSlice";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Toast from "../../utils/toast";
 export const Login: React.FC<LoginProps> = ({
   className,
@@ -15,6 +16,7 @@ export const Login: React.FC<LoginProps> = ({
   textColor,
   closeModal=()=>{},
 }: LoginProps) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     loginUser,
@@ -79,7 +81,7 @@ export const Login: React.FC<LoginProps> = ({
       const isDataUpdated =
         response?.response.data.updatePaidUserPassword.status;
       if (isDataUpdated === 200) {
-        Toast.success("password created successfully")
+        Toast.success(t("password_created_success"))
         dispatch(setPassword(""));
         dispatch(setEmail(""));
         closeModal();

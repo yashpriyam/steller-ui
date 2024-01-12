@@ -4,7 +4,6 @@ import LeftArrow from "../../icons/LeftArrow";
 import { useTranslation } from "react-i18next";
 import { InputComponent } from "../input/inputComponent";
 import { Button } from "../button/button";
-import { isValidEmail } from "../../utils/isValidEmail";
 import "./otpVerification.scss";
 import toast from "../../utils/toast"
 import { loginAction } from "../../redux/slices/login/loginSlice";
@@ -33,7 +32,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
     const otpSend = await handleOnSendOtp();
     dispatch(setIsSending(false));
     if (otpSend) {
-      toast.success("Otp sent successfully")
+      toast.success(t("otp_sent_success"));
       setTimer(60);
       dispatch(setIsOtpSend(otpSend));
     } else {
@@ -44,7 +43,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
     dispatch(setIsSending(true));
     const isOtpValid = await verifyOtp(otp);
     dispatch(setIsSending(false));
-    isOtpValid ? toast.success("Otp verified successfully") : toast.error(t("invalid_otp"));
+    isOtpValid ? toast.success(t("otp_verified_success")) : toast.error(t("invalid_otp"));
     dispatch(setIsOtpValid(isOtpValid));
     setOtp("");
   };
@@ -52,7 +51,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
     if (disable) return;
     const otpSend = await handleOnSendOtp();
     if (otpSend) {
-      toast.success("Otp sent successfully");
+      toast.success(t("otp_sent_success"));
       dispatch(setIsOtpSend(true))
       setDisable(true);
       setTimer(60);

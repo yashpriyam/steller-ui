@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../redux/slices/login/loginSlice";
 import { useTranslation } from "react-i18next";
@@ -15,8 +15,6 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
   const currentData: LoginState = useSelector((state: any) => state.login);
   const dispatch = useDispatch();
   const { setEmail, setPassword } = loginAction;
-  const [error, setError] = useState<string>("");
-
   const setEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value;
     dispatch(setEmail(email));
@@ -29,7 +27,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
     const isLogin = await handleLoginClick();
     dispatch(setEmail(""));
     dispatch(setPassword(""));
-    isLogin ?Toast.success(t("login successfully!")): Toast.error(t("error_on_login"));
+    isLogin ?Toast.success(t("login_success")): Toast.error(t("error_on_login"));
   };
   return (
     <div className="login-component-wrapper">

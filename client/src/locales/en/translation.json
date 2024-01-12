@@ -35,5 +35,9 @@
     "home": "Home",
     "dashboard": "Dashboard",
     "schedule": "Schedule",
-    "log_out": "Log out"
+    "log_out": "Log out",
+    "login_success":"login successfully",
+    "password_created_success":"password created successfully!",
+    "otp_sent_success":"Otp sent successfully",
+    "otp_verified_success":"Otp sent successfully"
 }
