@@ -411,4 +411,12 @@ declare global {
     email: String;
     password?: string;
   };
+  type WeekSchemaType = {
+    description?: string;
+    title?: string;
+    isActive?: boolean;
+    isDisabledForUnpaidUsers?: boolean;
+    weekNumber: number;
+    days?: string[];
+  }
 }
