@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getCookie } from "../../../monorepoClient/helpers/utils/cookieUtils";
 
 const initialState = {
   user: null,
+  isLoggedIn: getCookie(process.env.REACT_APP_JWT_SECRET_KEY)
 };
 
 export const userSlice = createSlice({
