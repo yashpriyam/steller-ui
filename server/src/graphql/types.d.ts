@@ -433,4 +433,12 @@ declare global {
     dayData?: DayData;
     response: CustomResponseType;
   }
+  type WeekSchemaType = {
+    description?: string;
+    title?: string;
+    isActive?: boolean;
+    isDisabledForUnpaidUsers?: boolean;
+    weekNumber: number;
+    days?: string[];
+  }
 }

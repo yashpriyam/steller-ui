@@ -46,10 +46,7 @@ export const createOrUpdateDay = async (
     };
   } catch (err) {
     return {
-      response: {
-        message: DAY_CREATION_FAILED,
-        status: statusCodes.BAD_REQUEST,
-      },
+      response: errorData,
     };
   }
 };

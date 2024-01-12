@@ -1,3 +1,4 @@
+import React from 'react';
 export const ProfileBackGroundImg: React.FC<ProfileAvatarProps> = ({
   className = "",
 }) => {

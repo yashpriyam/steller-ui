@@ -443,5 +443,41 @@ declare global {
      onClose?: () => void;
      isOpen?: boolean;
    }
+
+   interface SvgIconProps {
+    height?: string;
+    width?: string;
+    isDarkMode?: boolean;
+    fillColor?: string;
+  }
+
+  interface SidebarOptionInterface {
+    text: string | number;
+    image: string | React.ReactNode;
+    count?: string | number;
+    showText?: boolean;
+    onClick?: MouseEventHandler<HTMLDivElement>;
+  }
+
+  interface SidebarContainerProps  {
+    heading?: string;
+    children?: React.ReactNode
+  }
+  interface SidebarProps {
+    options?: {
+      image: string | React.ReactNode;
+      url: string;
+      text: string;
+    }[],
+    optionAtLast?: {
+      text: string;
+      onClick: (e: React.MouseEvent<HTMLDivElement>) => void
+    }
+  }
+
+  type UseAppDataReturnType = {
+    sidebarData: SidebarProps;
+    monorepoPaths: Record<string, boolean>;
+  }
 }
 export { };
