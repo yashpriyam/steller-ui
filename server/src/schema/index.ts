@@ -9,3 +9,4 @@ export { questionAttempt } from './questionAttemptSchema';
 export { dayModel } from "./daySchema";
 export { questionModel } from "./questionSchema";
 export { otpModel } from "./otpSchema";
+export { weekModel } from "./weekSchema";
