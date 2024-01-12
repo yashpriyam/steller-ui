@@ -42,5 +42,8 @@ export const localMessages = Object.freeze({
   },
   QUESTION_ATTEMPT_MODEL : {
     QUESTION_ATTEMPT_SUCCESS: "your response has been submitted successfully"
-  }
+  },
+  DAY_MODEL : {
+    DAY_CREATION_SUCCESS: "Day data inserted successfully",
+  },
 });

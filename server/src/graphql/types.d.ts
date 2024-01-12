@@ -350,13 +350,13 @@ declare global {
     image: string;
   }
   type DaySchemaType = {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     dayNumber: Number;
-    topics: string[];
-    notes: string[];
-    videos: string[];
-    questions: string[];
+    topics?: string[];
+    notes?: string[];
+    videos?: string[];
+    questions?: string[];
   };
   type loginUserInputType = {
     email: string;
@@ -411,4 +411,26 @@ declare global {
     email: String;
     password?: string;
   };
+  type CreateOrUpdateDayDataType = {
+    title?: string;
+    description?: string;
+    dayNumber: number;
+    topics?: string[];
+    notes?: string[];
+    videos?: string[];
+    questions?: string[];
+  }
+  type DayDataType = {
+    title?: string;
+    description?: string;
+    dayNumber?: number;
+    topics?: string[];
+    notes?: string[];
+    videos?: string[];
+    questions?: string[];
+  }
+  type DayDataOutputType = {
+    dayData?: DayData;
+    response: CustomResponseType;
+  }
 }

@@ -53,6 +53,7 @@ const typeDefs = gql`
     updatePaidUserPassword(
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
+    createOrUpdateDay(dayData: CreateOrUpdateDayDataInputType!) : DayDataOutputType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -471,6 +472,28 @@ const typeDefs = gql`
   input updatePaidUserPasswordInputType {
     email: String!
     password: String
+  }
+  input CreateOrUpdateDayDataInputType {
+  title: String
+  description: String
+  dayNumber: Int!
+  topics: [String]
+  notes: [String]
+  videos: [String]
+  questions: [String]
+  }
+  type DayDataType {
+    title: String
+    description: String
+    dayNumber: Int!
+    topics: [String]
+    notes: [String]
+    videos: [String]
+    questions: [String]
+  }
+  type DayDataOutputType {
+    dayData: DayDataType
+    response: CustomResponseType!
   }
   scalar DateTime
   scalar JSON
