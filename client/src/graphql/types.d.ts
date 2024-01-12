@@ -1,4 +1,4 @@
-import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler } from "react";
+import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction } from "react";
 
 declare global {
 
@@ -467,6 +467,8 @@ declare global {
   type UseAppDataReturnType = {
     sidebarData: SidebarProps;
     monorepoPaths: Record<string, boolean>;
+    isLoginModalOpen: boolean;
+    setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
   }
 
 }
