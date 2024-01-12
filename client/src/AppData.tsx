@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useUser } from './redux/actions/userAction';
 import { useDispatch } from 'react-redux';
 import { actions } from './redux/slices/user/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
@@ -11,6 +12,7 @@ export const useAppData = (): UseAppDataReturnType => {
   const { isLoggedIn } = user;
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const monorepoPaths = {
     "/": true,
@@ -21,6 +23,7 @@ export const useAppData = (): UseAppDataReturnType => {
 
   const logOut = () => {
     dispatch(actions.setIsLoggedIn(false));
+    navigate("/")
   }
 
   const sidebarData: SidebarProps = {
