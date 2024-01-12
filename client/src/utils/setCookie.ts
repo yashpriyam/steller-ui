@@ -1,4 +1,3 @@
-export const setCookie = ({ key = "", value = "" }) => {
-    document.cookie = `${key}=${value};${document.cookie}`;
-}
-
+export const setCookie = ({ key, value }: SetCookieArgsType) => {
+  document.cookie = `${key}=${value};${document.cookie}`;
+};

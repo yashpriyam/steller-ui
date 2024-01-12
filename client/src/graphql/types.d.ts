@@ -471,5 +471,9 @@ declare global {
     setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
   }
 
+  type SetCookieArgsType = {
+    key: string;
+    value: string;
+  }
 }
 export { };
