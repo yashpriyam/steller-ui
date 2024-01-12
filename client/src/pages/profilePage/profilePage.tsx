@@ -134,22 +134,14 @@ const ProfilePage = () => {
         setIsExpanded(!isExpanded);
     };
 
-    const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        // Your existing implementation
-        const selectedFile = event.target.files?.[0] || null;
 
-        if (selectedFile) {
-            // Rest of your logic
-        }
-    };
 
     const handleEditToggle = () => setIsEdit(!isEdit);
     const handleFieldUpdate = (path: string, value: string) => {
         const newData = updateNestedData(data, path, value);
         setData(newData);
     };
+
     const updateNestedData = (originalData: any, path: string, value: string) => {
         const newData = { ...originalData };
         const pathArray = path.split('.');
@@ -176,9 +168,7 @@ const ProfilePage = () => {
 
     }, [isMobileView]);
 
-
     return (
-
         isMobileView ? (
             <div className={`main-container`}>
                 <div className="button-container">
@@ -191,7 +181,6 @@ const ProfilePage = () => {
                                 <UploadIcon />
                             </label>
                             <input
-                                onChange={handleImageChange}
                                 type="file"
                                 id="background-img-upload"
                                 className="background-img-upload"
@@ -216,7 +205,6 @@ const ProfilePage = () => {
                                         <UploadIcon />
                                     </label>
                                     <input
-                                        onChange={handleImageChange}
                                         type="file"
                                         id="profile-img-upload"
                                         className="profile-img-upload"
@@ -313,7 +301,6 @@ const ProfilePage = () => {
                                 <UploadIcon />
                             </label>
                             <input
-                                onChange={handleImageChange}
                                 type="file"
                                 id="background-img-upload"
                                 className="background-img-upload"
@@ -338,7 +325,6 @@ const ProfilePage = () => {
                                         <UploadIcon />
                                     </label>
                                     <input
-                                        onChange={handleImageChange}
                                         type="file"
                                         id="profile-img-upload"
                                         className="profile-img-upload"

@@ -1,4 +1,4 @@
-import { CSSProperties, ChangeEvent, ReactElement } from "react";
+import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler } from "react";
 
 declare global {
 
@@ -13,6 +13,7 @@ declare global {
     emailOtp: string;
     collegeName: string;
   }
+
   interface Experience {
     companyName: string;
     companyLocation: string;
@@ -22,6 +23,7 @@ declare global {
     description: string[];
     techStack: string[];
   }
+
   interface Project {
     heading: string;
     description: string[];
@@ -29,15 +31,16 @@ declare global {
     gitHubLink: string;
     techStack?: string[];
   }
+
   interface Achievement {
     icon: string;
     header: string;
     description: string;
     links: string;
   }
+
   interface SkillsData {
     [key: string]: string[];
-    mobileViewOn?: boolean;
   }
 
   interface EducationalData {
@@ -48,6 +51,7 @@ declare global {
     endDate: string;
     CGPA: string;
   }
+
   interface ResumeData {
     personalDetail: {
       fullName: string;
@@ -60,21 +64,21 @@ declare global {
     educationalData: EducationalData[];
     achievementsData: Achievement[];
   }
+
+  interface SkillsSectionProps {
+    skillsData?: SkillsData;
+    mobileViewOn?: boolean;
+  }
+
   interface ProfileProps {
     dataProfile: ResumeData;
   }
-  interface SkillsSectionProps {
-    skillsData: SkillsData;
-    mobileViewOn?: boolean;
-  }
-  type UserActivityDataType = {
-    phoneNumber: string;
-    isOpened: boolean;
-  }
+
   interface Address {
     colony: string;
     city: string;
   }
+
   interface ProfileAvatarProps {
     width?: string;
     height?: string;
@@ -93,31 +97,19 @@ declare global {
     alignItems: "flex-start" | "center";
   };
 
-
   type CustomResponseType = {
     status: number;
     message: string;
   }
+
   interface RoutesMapInterface {
     [path: string]: ReactElement;
   }
-  type VideoDataType = {
-    title?: string;
-    description?: string;
-    dayNumber?: number;
-    videoNumber?: number;
-    topics?: string[];
-    links?: {
-      webmasters?: string;
-      youtube?: string;
-    };
-    isActive?: boolean;
-    duration?: string;
-  }
 
-  type VideoDataStateType = {
-    videoList: VideoDataType[];
-  }
+  type UserActivityDataType = {
+    phoneNumber: string;
+    isOpened: boolean;
+  };
 
   interface TopButtonProps {
     topButtonTagOne?: string;
@@ -135,6 +127,7 @@ declare global {
     thoughtComponentSubtitle?: string;
     thoughtElement?: ThoughtsType[];
   }
+
   type StackBoxType = {
     icon: string;
     title: string;
@@ -172,6 +165,7 @@ declare global {
     overviewButtonOne?: string;
     overviewButtonTwo?: string;
   }
+
   type NewsDropType = {
     image: string;
     title: string;
@@ -217,6 +211,7 @@ declare global {
   interface CourseImageProps {
     courseImageElement?: CourseImageType[];
   }
+
   interface InputProps {
     type: string;
     value?: string;
@@ -231,9 +226,11 @@ declare global {
     backgroundColor?: string;
     style?: CSSProperties;
   }
+
   interface OpenIconProps {
     className?: string;
   }
+
   interface CloseIconProps {
     className?: string;
   }
@@ -355,6 +352,7 @@ declare global {
     description?: string;
     estimatedReadingTime?: string;
   }
+
   type NotesDataType = {
     title: string;
     link: string;
@@ -373,6 +371,7 @@ declare global {
     className?: string;
     title?: React.ReactNode | string;
   }
+
   interface LoginComponentProps {
     handleLoginClick: () => Promise<boolean>;
     handleOnForgetPasswordClick: () => void;
@@ -385,22 +384,22 @@ declare global {
     textColor?: string;
     closeModal?: () => void;
   }
+
   interface CreatePasswordProps {
     handleOnCreateNewPassword?: () => void;
   }
+
   interface OtpVerificationProps {
     handleOnSendOtp: () => Promise<boolean>;
     verifyOtp: (otp: string) => Promise<boolean>;
     onBackClick: () => void;
   }
+
   type LoginUser = {
     email: string;
     password: string;
   };
-  type updatePaidUserInput = {
-    email: String;
-    updatedNewData: UpdatePaidDataType;
-  };
+
   type UpdatePaidDataType = {
     username?: string;
     contact?: string;
@@ -414,6 +413,7 @@ declare global {
     address?: string;
     password?: string;
   };
+
   interface LoginState {
     email: string;
     isOtpSend: boolean;
@@ -421,6 +421,7 @@ declare global {
     isOtpSending: boolean;
     password: string;
   }
+
   interface ModalProps {
     className?: string;
     style?: React.CSSProperties;
@@ -430,5 +431,43 @@ declare global {
     onClose?: () => void;
     isOpen?: boolean;
   }
+
+  interface SvgIconProps {
+    height?: string;
+    width?: string;
+    isDarkMode?: boolean;
+    fillColor?: string;
+  }
+
+  interface SidebarOptionInterface {
+    text: string | number;
+    image: string | React.ReactNode;
+    count?: string | number;
+    showText?: boolean;
+    onClick?: MouseEventHandler<HTMLDivElement>;
+  }
+
+  interface SidebarContainerProps {
+    heading?: string;
+    children?: React.ReactNode;
+  }
+
+  interface SidebarProps {
+    options?: {
+      image: string | React.ReactNode;
+      url: string;
+      text: string;
+    }[],
+    optionAtLast?: {
+      text: string;
+      onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
+    }
+  }
+
+  type UseAppDataReturnType = {
+    sidebarData: SidebarProps;
+    monorepoPaths: Record<string, boolean>;
+  }
+
 }
 export { };
