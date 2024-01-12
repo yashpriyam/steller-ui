@@ -5,7 +5,7 @@ import { SidebarContainer } from '../sidebarContainer/sidebarContainer';
 import { useNavigate } from 'react-router-dom';
 import { LogOutIcon, LeftArrowIcon } from '../../icons/index';
 
-export const SideBar = ({
+export const Sidebar = ({
     options = [],
     optionAtLast
 }: SidebarProps) => {

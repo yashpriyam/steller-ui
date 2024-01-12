@@ -1,15 +1,19 @@
 import React from "react";
 import MonorepoIndex from "./monorepoClient/MonorepoIndex";
 import RouteList from './routes/routeList';
-import { SideBar } from "./components/sidebar/sidebar";
+import { Sidebar } from "./components/sidebar/sidebar";
 import './App.scss';
 import { useAppData } from "./AppData";
+import { useLocation } from "react-router-dom";
 
 const App = () => {
-  const { sidebarData } = useAppData();
+  const { sidebarData, monorepoPaths } = useAppData();
+  const { pathname } = useLocation();
   return (
     <div className="app-container">
-      <SideBar {...sidebarData} />
+      {
+        !monorepoPaths[pathname] && (<Sidebar {...sidebarData} />)
+      }
       <div className="app-section">
         <RouteList />
         <MonorepoIndex />

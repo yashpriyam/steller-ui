@@ -476,7 +476,8 @@ declare global {
   }
 
   type UseAppDataReturnType = {
-    sidebarData: SidebarProps
+    sidebarData: SidebarProps;
+    monorepoPaths: Record<string, boolean>;
   }
 }
 export { };

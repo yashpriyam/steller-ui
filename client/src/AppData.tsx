@@ -4,6 +4,12 @@ import { useTranslation } from 'react-i18next';
 
 export const useAppData = (): UseAppDataReturnType => {
   const { t } = useTranslation();
+  const monorepoPaths = {
+    "/": true,
+    "/register": true,
+    "/privacy": true,
+    "/privacy/concerns/whatsapp": true,
+  }
   const sidebarData: SidebarProps = {
     options: [
       {
@@ -37,5 +43,5 @@ export const useAppData = (): UseAppDataReturnType => {
       onClick: () => console.log('log out')
     }
   }
-  return { sidebarData }
+  return { sidebarData, monorepoPaths }
 }
