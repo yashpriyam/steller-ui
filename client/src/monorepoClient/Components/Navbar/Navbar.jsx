@@ -7,6 +7,8 @@ import Logo from "../Logo/Logo";
 import { ThemeContext } from "../Themecontext/ThemeContext";
 import ProfileMenu from "../ProfileMenu/ProfileMenu";
 import ApplyNowButton from "../ApplyNowButton/ApplyNowButton";
+import { Login } from "../../../components/Login/login";
+import { Modal } from "../../../components/Modal/modal";
 
 const googleAnalyticsButtonObj = {
   HeaderApplyButton: {
@@ -37,6 +39,7 @@ const Navbar = ({
   const [id, setId] = useState(0);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const location = useLocation();
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   useEffect(() => {
     const scrollEventListener = () => {
@@ -65,8 +68,12 @@ const Navbar = ({
     setMenuOpen((prev) => !prev);
   };
 
+  const handleLogin = () => setIsLoginModalOpen(true)
   return (
     <>
+     {
+      isLoginModalOpen && (<Modal> <Login closeModal={()=> setIsLoginModalOpen(false)}  /> </Modal>)
+     }
       <div
         className={`nav ${
           location.pathname !== "/register" && darkMode ? "nav__black" : ""
@@ -153,6 +160,12 @@ const Navbar = ({
                   <span className="slider round"></span>
                 </label>
               </div>
+              <div
+                    onClick={handleLogin}
+                    className="option"
+                  >
+                    Login
+             </div>
               {isLoggedIn && <ProfileMenu options={profileMenuOptions} />}
               <div
                 className={`${
@@ -160,13 +173,15 @@ const Navbar = ({
                 }`}
               >
                 {!isLoggedIn && (
-                  <ApplyNowButton
+                  <>
+                    <ApplyNowButton
                     googleAnalyticsObject={
                       googleAnalyticsButtonObj["HeaderApplyButton"]
                     }
                     linkTo={"register"}
                     openNewTab={false}
                   />
+                </>
                 )}
               </div>
             </div>
@@ -260,7 +275,12 @@ const Navbar = ({
                     <span className="slider round"></span>
                   </label>
                 </div>
-
+                <div
+                    onClick={handleLogin}
+                    className="option"
+                  >
+                    Login
+               </div>
                 {isLoggedIn ? (
                   <ProfileMenu options={profileMenuOptions} />
                 ) : (
