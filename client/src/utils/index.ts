@@ -1,3 +1,4 @@
 export { setCookie } from "./setCookie";
 export { getCookie } from "./getCookie";
-export { deleteCookieByKey } from "./deleteCookieByKey";
+export { deleteCookie } from "./deleteCookie";
+export { getCurrentTime } from "./getCurrentTime";
