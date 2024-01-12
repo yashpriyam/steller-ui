@@ -31,5 +31,5 @@
     "skip":"Skip for now",
     "send_otp":"Send OTP",
     "verify_otp":"Verify OTP",
-    "verification":"Verification"
+    "verification":"Email Verification"
 }

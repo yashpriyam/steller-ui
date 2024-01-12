@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { InputComponent } from "../input/inputComponent";
 import { Button } from "../button/button";
 import "./loginComponent.scss";
+import Toast from "../../utils/toast";
 
 export const LoginComponent: React.FC<LoginComponentProps> = ({
   handleLoginClick,
@@ -18,19 +19,17 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
 
   const setEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value;
-    setError("");
     dispatch(setEmail(email));
   };
   const setPasswordOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const password = e.target.value;
-    setError("");
     dispatch(setPassword(password));
   };
   const handleOnLoginButtonClick = async () => {
     const isLogin = await handleLoginClick();
     dispatch(setEmail(""));
     dispatch(setPassword(""));
-    isLogin ? setError("") : setError(t("error_on_login"));
+    isLogin ?Toast.success(t("login successfully!")): Toast.error(t("error_on_login"));
   };
   return (
     <div className="login-component-wrapper">
@@ -65,7 +64,6 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
         text={t("login")}
         isDisabled={!(currentData.email && currentData.password)}
       />
-      {<div className="error-container">{t(error)}</div>}
     </div>
   );
 };

@@ -17,18 +17,16 @@ export const login = async (
   try {
     const { email, password } = args.data;
     const user = await paidUser.findOne({ email });
-    const hashPassword = bcrypt.hashSync(password, user?.password?.salt || "");
-    const isValidPassword = user?.password?.hash === hashPassword;    
+    const isValidPassword = bcrypt.compare(password, user?.password || "");
     if (!user || !isValidPassword) {
       return {
         response: errorData,
       };
     }
-    const jwtSecret = process.env.JWT_SECRET;
-    const jwtToken = process.env.JWT_TOKEN;    
-    if (jwtSecret && jwtToken) {
-      const token = jwt.sign({user}, jwtSecret);
-      res.cookie(jwtToken, token);
+    const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
+    if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
+      const token = jwt.sign({user}, JWT_SECRET_VALUE);
+      res.cookie(JWT_SECRET_KEY,token);
     }
     return {
       response: {

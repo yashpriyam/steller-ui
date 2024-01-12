@@ -6,13 +6,16 @@ import { CreatePassword } from "../createPassword/createPassword";
 import { LoginComponent } from "../loginComponent/loginComponent";
 import { useLogin } from "../../redux/actions/loginAction";
 import { loginAction } from "../../redux/slices/login/loginSlice";
+import { useNavigate } from "react-router-dom";
+import Toast from "../../utils/toast";
 export const Login: React.FC<LoginProps> = ({
   className,
   style,
   bgColor,
   textColor,
-  closeModal,
+  closeModal=()=>{},
 }: LoginProps) => {
+  const navigate = useNavigate();
   const {
     loginUser,
     sendOtpPaidUserApi,
@@ -33,7 +36,13 @@ export const Login: React.FC<LoginProps> = ({
         email: currentData.email,
         password: currentData.password,
       });
-      return response.data.login.response.status === 200;
+      const status = response.data.login.response.status;
+      if (status === 200) {
+        closeModal();
+        navigate("/day/1");
+        return true;
+      }
+        return false;
     } catch (error) {
       return false;
     }
@@ -42,12 +51,10 @@ export const Login: React.FC<LoginProps> = ({
     dispatch(setPassword(""));
     setCurrentScreen(presentScreen.OTP_VERIFICATION);
   };
-
   const handleOnSendOtp = async (): Promise<boolean> => {
     const response = await sendOtpPaidUserApi(currentData.email);
     return response.response?.data?.sendOtpToPaidUser.status === 200;
   };
-
   const handleOnVerifyOtp = async (otp: string): Promise<boolean> => {
     try {
       const response = await verifyOtpPaidUserApi(currentData.email, otp);
@@ -68,13 +75,15 @@ export const Login: React.FC<LoginProps> = ({
       const response = await updatePaidUserPasswordApi(
         currentData.email,
         currentData.password
-      );      
+      );
       const isDataUpdated =
         response?.response.data.updatePaidUserPassword.status;
       if (isDataUpdated === 200) {
+        Toast.success("password created successfully")
         dispatch(setPassword(""));
         dispatch(setEmail(""));
-        setCurrentScreen(presentScreen.LOGIN);
+        closeModal();
+        navigate("/day/1");
       }
     } catch (error) {}
   };

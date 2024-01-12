@@ -14,24 +14,17 @@ export const updatePaidUserPassword = async (
     status: statusCodes.BAD_REQUEST,
   };
   try {
-    const { email, password } = args.data;      
-    const encodePassword: Record<string, string> = {
-      salt: "",
-      hash: "",
-    };
+    const { data } = args;
+    const { email, password } = data;      
+    let encodePassword = "";
     if (password) {
-      const SALT_ROUNDS = 10;
-      const salt = await bcrypt.genSalt(SALT_ROUNDS);
+      const salt = await bcrypt.genSalt(10);
       const hash = await bcrypt.hash(password, salt);
-      encodePassword.salt = salt;
-      encodePassword.hash = hash;
-    }
-    const updatedData = generateNestedUpdate({
-      password: encodePassword,
-    });    
+      encodePassword = hash;
+    }  
     const updatedPaidUser = await paidUser.findOneAndUpdate(
       { email },
-      { $set: updatedData },
+      {password:encodePassword},
       { upsert: true, new: true }
     );    
     if (!updatedPaidUser) {
