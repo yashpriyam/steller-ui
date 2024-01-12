@@ -6,7 +6,7 @@ import { SEND_OTP } from "../../graphql/mutation/otp/sendOtp";
 
 export const useUser = () => {
   const dispatch = useDispatch();
-  const users = useSelector(selectUser);
+  const user = useSelector(selectUser);
 
   const registerUser = async ({
     name,
@@ -52,5 +52,5 @@ export const useUser = () => {
     };
   };
 
-  return { users, registerUser, sendOtpApi };
+  return { user, registerUser, sendOtpApi };
 };

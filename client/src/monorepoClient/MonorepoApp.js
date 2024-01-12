@@ -11,7 +11,7 @@ import { AppStateContext } from "./AppState/appState.context";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import DummyComponentForWhatsapp from "./helpers/utils/dummyComp";
 import { useUserActivity } from "../redux/actions/userActivityAction";
-import { deleteCookieByKey } from "../utils/index";
+import { deleteCookie } from "../utils/index";
 
 function MonorepoApp() {
   // Google Analytics Id
@@ -49,7 +49,7 @@ function MonorepoApp() {
     {
       value: "Log out",
       onClick: () => {
-        deleteCookieByKey(process.env.REACT_APP_JWT_SECRET_KEY);
+        deleteCookie(process.env.REACT_APP_JWT_SECRET_KEY);
         setIsLoggedIn(false);
       },
     },

@@ -1,15 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon } from "./icons/index";
 import { useTranslation } from 'react-i18next';
+import { useUser } from './redux/actions/userAction';
+import { useDispatch } from 'react-redux';
+import { actions } from './redux/slices/user/userSlice';
+import { useNavigate } from 'react-router-dom';
+import { deleteCookie } from './utils';
 
 export const useAppData = (): UseAppDataReturnType => {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
+  const { user } = useUser();
+  const { isLoggedIn } = user;
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const monorepoPaths = {
     "/": true,
     "/register": true,
     "/privacy": true,
     "/privacy/concerns/whatsapp": true,
   }
+
+  const logOut = () => {
+    deleteCookie(process.env.REACT_APP_JWT_SECRET_KEY || "");
+    dispatch(actions.setIsLoggedIn(false));
+    navigate("/")
+  }
+
   const sidebarData: SidebarProps = {
     options: [
       {
@@ -38,10 +56,9 @@ export const useAppData = (): UseAppDataReturnType => {
       },
     ],
     optionAtLast: {
-      /*TODO:@dhananjay - login is not implemented, will update logout logic after its implementation */
-      text: t('log_out'),
-      onClick: () => console.log('log out')
+      text: t(isLoggedIn ? 'logout' : 'login'),
+      onClick: () => isLoggedIn ? logOut() : setIsLoginModalOpen(true)
     }
   }
-  return { sidebarData, monorepoPaths }
+  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen }
 }
