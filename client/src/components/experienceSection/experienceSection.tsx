@@ -29,20 +29,20 @@ export const ExperienceSection: React.FC<{ experience: Experience; handleFieldUp
                 </span>}
             </div>
             <div className="sub-heading">
-                <span
+                <span className='heading-in-sub-heading'
                     onBlur={(e) => handleBlur(e, `experienceData.${index}.startDate`)}
                     contentEditable={isEdit}
                     suppressContentEditableWarning={true}
                 >{experience?.startDate}</span>
                   -
-                <span
+                <span className='heading-in-sub-heading'
                     onBlur={(e) => handleBlur(e, `experienceData.${index}.endDate`)}
                     contentEditable={isEdit}
                     suppressContentEditableWarning={true}
                 >
                     {experience?.endDate}
                 </span>
-                <div >Daily Work Involve</div>
+                <div className='heading-in-sub-heading' >Daily Work Involve</div>
 
             </div>
             <ul className="list-experience-description">
