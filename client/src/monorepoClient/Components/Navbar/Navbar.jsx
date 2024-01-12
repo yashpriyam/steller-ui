@@ -160,13 +160,15 @@ const Navbar = ({
                   <span className="slider round"></span>
                 </label>
               </div>
-              <div
-                    onClick={handleLogin}
-                    className="option"
-                  >
-                    Login
-             </div>
-              {isLoggedIn && <ProfileMenu options={profileMenuOptions} />}
+              
+              {isLoggedIn 
+              ? <ProfileMenu options={profileMenuOptions} />
+              : <div
+              onClick={handleLogin}
+              className="option"
+            >
+              Login
+       </div>}
               <div
                 className={`${
                   location.pathname === "/register" && "hideButton"
@@ -275,12 +277,14 @@ const Navbar = ({
                     <span className="slider round"></span>
                   </label>
                 </div>
-                <div
+                {
+                  !isLoggedIn && (<div
                     onClick={handleLogin}
                     className="option"
                   >
                     Login
-               </div>
+               </div>)
+                }
                 {isLoggedIn ? (
                   <ProfileMenu options={profileMenuOptions} />
                 ) : (
