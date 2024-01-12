@@ -8,3 +8,10 @@
         padding-top: 10px;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .sidebar-container-children{
+        display: flex;
+        justify-content: space-between;
+    }
+}

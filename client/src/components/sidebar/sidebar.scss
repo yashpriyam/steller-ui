@@ -30,4 +30,34 @@
     .left-side-arrow{
         transform: translate(50%, 0%);
     }
+    .sidebar-main-sub-container{
+        width: 100%;
+    }
+    .sidebar-last-option-btn{
+        display: flex;
+    }
+    .sidebar-btn-mobile-view{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .sidebar-main-container{
+        display: flex;
+        position: absolute;
+        bottom: 0%;
+        width: 100%;
+        height: 90px;
+        z-index: 10;
+        flex-direction: row;
+        .sidebar-arrow-icon{
+            display: none;
+        }
+        .sidebar-last-option-btn{
+            display: none;
+        }
+        .sidebar-btn-mobile-view{
+            display: block;
+        }
+    }
 }

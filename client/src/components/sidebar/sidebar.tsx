@@ -11,6 +11,9 @@ export const Sidebar = ({
 }: SidebarProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
     const navigate = useNavigate();
+    const lastOption = optionAtLast && (
+        <SidebarOption showText={isOpen} text={optionAtLast.text} image={<LogOutIcon
+            isDarkMode={true} />} />)
     return (
         <div className='sidebar-main-container'>
             <div className={`sidebar-arrow-icon ${!isOpen && 'left-side-arrow'}`} onClick={() => setIsOpen(!isOpen)}> <LeftArrowIcon /> </div>
@@ -21,14 +24,14 @@ export const Sidebar = ({
                             return <SidebarOption onClick={() => navigate(data.url)} key={index} showText={isOpen} text={data.text} image={data.image} />
                         })
                     }
+                    <div className='sidebar-last-option-btn sidebar-btn-mobile-view' onClick={optionAtLast?.onClick}>
+                {lastOption}
+            </div>
                 </SidebarContainer>
             </div>
-            {
-                optionAtLast && (<div onClick={optionAtLast.onClick}>
-                    <SidebarOption showText={isOpen} text={optionAtLast.text} image={<LogOutIcon
-                        isDarkMode={true} />} />
-                </div>)
-            }
+            <div className='sidebar-last-option-btn' onClick={optionAtLast?.onClick}>
+                {lastOption}
+            </div>
         </div>
     )
 }

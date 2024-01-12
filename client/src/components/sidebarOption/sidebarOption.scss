@@ -26,3 +26,12 @@
         margin-left: 10px;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .sidebar-option-container{
+        min-width: fit-content;
+        .option-text{
+            display: none;
+        }
+    }
+}

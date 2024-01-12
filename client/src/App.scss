@@ -13,3 +13,11 @@
         background-color: $primaryBgColor;
     }
 }
+
+@media screen and (max-width: 425px) {
+    .app-container{
+        .app-section{
+            height: calc(100vh - 90px);
+        }
+    }
+}
