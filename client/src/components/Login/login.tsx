@@ -41,7 +41,7 @@ export const Login: React.FC<LoginProps> = ({
       const status = response.data.login.response.status;
       if (status === 200) {
         closeModal();
-        navigate("/day/1");
+        navigate("/dashboard");
         return true;
       }
         return false;
@@ -85,7 +85,7 @@ export const Login: React.FC<LoginProps> = ({
         dispatch(setPassword(""));
         dispatch(setEmail(""));
         closeModal();
-        navigate("/day/1");
+        navigate("/dashboard");
       }
     } catch (error) {}
   };
