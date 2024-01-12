@@ -10,7 +10,7 @@ import VideosPage from "../pages/videosPage/videosPage";
 
 const unProtectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/homePage": <HomePage />,
-  "/scheduling": <SchedulingPage/>,
+  "/schedule": <SchedulingPage/>,
   "/dashboard":<Dashboard/>,
   "/day/:dayNumber" : <DayPage/>,
   "/day/:dayNumber/:dayContent": <DayContentPage />,
