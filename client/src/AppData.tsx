@@ -21,9 +21,9 @@ export const useAppData = (): UseAppDataReturnType => {
         url: "/dashboard"
       },
       {
-        text: t('scheduling'),
+        text: t('schedule'),
         image: <ScheduleIcon isDarkMode={true} />,
-        url: "/scheduling"
+        url: "/schedule"
       },
       {
         text: t('questions'),
