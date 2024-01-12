@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./checkbox.scss";
-import CheckIcon from "../../icons/CheckIcon";
+import { CheckboxIcon } from "../../icons/index";
 
 export const Checkbox: React.FC<CheckboxProps> = ({
   className,
@@ -53,7 +53,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                   }}
                   className="custom-checkbox"
                 >
-                  <CheckIcon />
+                  <CheckboxIcon />
                 </div>
               )}
             </div>

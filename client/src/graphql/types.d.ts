@@ -98,22 +98,6 @@ declare global {
     status: number;
     message: string;
   }
-
-  interface RoutesMapInterface {
-    [path: string]: ReactElement;
-  }
-
-
-  type UserActivityDataType = {
-    phoneNumber: string;
-    isOpened: boolean;
-  };
-
-  type CustomResponseType = {
-    status: number;
-    message: string;
-  };
-
   interface RoutesMapInterface {
     [path: string]: ReactElement;
   }
@@ -223,6 +207,7 @@ declare global {
     overviewButtonOne?: string;
     overviewButtonTwo?: string;
   }
+
   type CourseImageType = {
     image: string;
     courseTitle: string;
