@@ -37,6 +37,7 @@ declare global {
   }
   interface SkillsData {
     [key: string]: string[];
+    mobileViewOn?: boolean;
   }
 
   interface EducationalData {
@@ -64,6 +65,7 @@ declare global {
   }
   interface SkillsSectionProps {
     skillsData: SkillsData;
+    mobileViewOn?: boolean;
   }
   type UserActivityDataType = {
     phoneNumber: string;
@@ -115,24 +117,24 @@ declare global {
   interface RoutesMapInterface {
     [path: string]: ReactElement;
   }
-    type VideoDataType = {
-        title?: string;
-        description?: string;
-        dayNumber?: number;
-        videoNumber?: number;
-        topics?: string[];
-        links?: {
-            webmasters?: string;
-            youtube?: string;
-        };
-        isActive?: boolean;
-        duration?: string;
-    }
+  type VideoDataType = {
+    title?: string;
+    description?: string;
+    dayNumber?: number;
+    videoNumber?: number;
+    topics?: string[];
+    links?: {
+      webmasters?: string;
+      youtube?: string;
+    };
+    isActive?: boolean;
+    duration?: string;
+  }
 
-    type VideoDataStateType = {
-        videoList: VideoDataType[];
-    }
-    
+  type VideoDataStateType = {
+    videoList: VideoDataType[];
+  }
+
   interface TopButtonProps {
     topButtonTagOne?: string;
     topButtonTagTwo?: string;
@@ -386,62 +388,62 @@ declare global {
     className?: string;
     title?: React.ReactNode | string;
   }
-   interface LoginComponentProps {
-     handleLoginClick: () => Promise<boolean>;
-     handleOnForgetPasswordClick: () => void;
-   }
+  interface LoginComponentProps {
+    handleLoginClick: () => Promise<boolean>;
+    handleOnForgetPasswordClick: () => void;
+  }
 
-    interface LoginProps {
-     className?: string;
-     style?: React.CSSProperties;
-     bgColor?: string;
-     textColor?: string;
-     closeModal?: () => void;
-   }
-   interface CreatePasswordProps {
-     handleOnCreateNewPassword?: () => void;
-   }
-   interface OtpVerificationProps {
-     handleOnSendOtp: () => Promise<boolean>;
-     verifyOtp: (otp: string) => Promise<boolean>;
-     onBackClick: () => void;
-   }
-   type LoginUser = {
-     email: string;
-     password: string;
-   };
-   type updatePaidUserInput = {
-     email: String;
-     updatedNewData: UpdatePaidDataType;
-   };
-   type UpdatePaidDataType = {
-     username?: string;
-     contact?: string;
-     profileImg?: PaidProfileImageInput;
-     batchCode?: string;
-     sessionPreference?: SessionPreferenceEnum;
-     professionalStatus?: string;
-     college?: string;
-     expectedSalary?: string;
-     socialHandles?: SocialMediaHandles;
-     address?: string;
-     password?: string;
-   };
-   interface LoginState {
-     email: string;
-     isOtpSend: boolean;
-     isOtpValid: boolean;
-     isOtpSending: boolean;
-     password: string;
-   }
-   interface ModalProps {
-     className?: string;
-     style?: React.CSSProperties;
-     bgColor?: string;
-     children?: React.ReactNode;
-     isClosable?: boolean;
-     onClose?: () => void;
-     isOpen?: boolean;
-   }
+  interface LoginProps {
+    className?: string;
+    style?: React.CSSProperties;
+    bgColor?: string;
+    textColor?: string;
+    closeModal?: () => void;
+  }
+  interface CreatePasswordProps {
+    handleOnCreateNewPassword?: () => void;
+  }
+  interface OtpVerificationProps {
+    handleOnSendOtp: () => Promise<boolean>;
+    verifyOtp: (otp: string) => Promise<boolean>;
+    onBackClick: () => void;
+  }
+  type LoginUser = {
+    email: string;
+    password: string;
+  };
+  type updatePaidUserInput = {
+    email: String;
+    updatedNewData: UpdatePaidDataType;
+  };
+  type UpdatePaidDataType = {
+    username?: string;
+    contact?: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    password?: string;
+  };
+  interface LoginState {
+    email: string;
+    isOtpSend: boolean;
+    isOtpValid: boolean;
+    isOtpSending: boolean;
+    password: string;
+  }
+  interface ModalProps {
+    className?: string;
+    style?: React.CSSProperties;
+    bgColor?: string;
+    children?: React.ReactNode;
+    isClosable?: boolean;
+    onClose?: () => void;
+    isOpen?: boolean;
+  }
 }
 export { };
