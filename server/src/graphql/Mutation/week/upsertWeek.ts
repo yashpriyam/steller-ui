@@ -4,7 +4,7 @@ import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const upsertWeek = async (
     parent: undefined,
-    args: { weekData: WeekSchemaType }
+    args: { weekData: CreateWeekDataType }
 ): Promise<WeekDataOutputType> => {
     const { WEEK_CREATION_FAILED } = errorMessages.WEEK_MODEL;
     const errorData: CustomResponseType = {
@@ -22,7 +22,7 @@ export const upsertWeek = async (
             title,
             days,
         } = weekData;
-        const newWeekData: WeekDataType = await weekModel.findOneAndUpdate(
+        const newWeekData: CreateWeekDataType = await weekModel.findOneAndUpdate(
             { weekNumber },
             {
                 weekNumber,
@@ -40,7 +40,6 @@ export const upsertWeek = async (
             response: newWeekData
                 ? {
                     message: WEEK_CREATION_SUCCESS,
-
                     status: statusCodes.OK,
                 }
                 : errorData,

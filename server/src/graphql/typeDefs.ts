@@ -53,7 +53,7 @@ const typeDefs = gql`
     updatePaidUserPassword(
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
-    upsertWeek( weekData : UpsertWeekDataInputType) : UpsertWeekDataOutputType
+    upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -478,7 +478,7 @@ const typeDefs = gql`
     title: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
-    weekNumber: Int!
+    weekNumber: Int
     days: [String]
   }
   type WeekDataType {

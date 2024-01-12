@@ -411,15 +411,7 @@ declare global {
     email: String;
     password?: string;
   };
-  type WeekSchemaType = {
-    description?: string;
-    title?: string;
-    isActive?: boolean;
-    isDisabledForUnpaidUsers?: boolean;
-    weekNumber: number;
-    days?: string[];
-  }
-  type WeekDataType = {
+  type CreateWeekDataType = {
     description?: string;
     title?: string;
     isActive?: boolean;
@@ -428,7 +420,7 @@ declare global {
     days?: string[];
   }
   type WeekDataOutputType = {
-    weekData ?: WeekDataType;
+    weekData?: CreateWeekDataType;
     response : CustomResponseType;
   }
 }
