@@ -9,12 +9,13 @@ import { useLocation } from "react-router-dom";
 const App = () => {
   const { sidebarData, monorepoPaths } = useAppData();
   const { pathname } = useLocation();
+  const isNotMonorepoPath = !monorepoPaths[pathname];
   return (
     <div className="app-container">
       {
-        !monorepoPaths[pathname] && (<Sidebar {...sidebarData} />)
+        isNotMonorepoPath && (<Sidebar {...sidebarData} />)
       }
-      <div className="app-section">
+      <div className={`app-section ${isNotMonorepoPath && 'portal-app-section'}`}>
         <RouteList />
         <MonorepoIndex />
       </div>
