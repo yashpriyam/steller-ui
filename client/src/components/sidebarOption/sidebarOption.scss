@@ -1,0 +1,28 @@
+@import "../variables.scss";
+
+.sidebar-option-container{
+    padding: 10px;
+    min-width: 100%;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    border: 1px solid transparent;
+    color: $primaryTextColor;
+    &:hover{
+        border: 1px solid $primaryTextColor;
+        border-radius: 5px;
+    }
+    .sidebar-option-img{
+        height: 25px;
+    }
+    .option-text{
+        font-size: $mediumFontSize;
+    }
+    .item-count{
+        border: 1px solid $borderGrey;
+        padding: 5px;
+        margin-left: 10px;
+    }
+}

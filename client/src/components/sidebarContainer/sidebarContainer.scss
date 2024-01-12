@@ -1,0 +1,10 @@
+@import "../variables.scss";
+.sidebar-container-wrapper{
+    .sidebar-container-heading{
+         color: $primaryTextColor;
+    }
+    .sidebar-container-children{
+        padding: 5px;
+        padding-top: 10px;
+    }
+}

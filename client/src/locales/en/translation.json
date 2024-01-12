@@ -19,7 +19,6 @@
     "error_on_login":"Invalid Email and Password!",
     "error_on_password_not_match":"The passwords you entered do not match.",
     "forget_password":"Forget password ?",
-    "greeting": "Hello World!",
     "invalid_email":"Invalid Email",
     "invalid_otp":"Invalid OTP",
     "login": "Login",
@@ -31,5 +30,10 @@
     "skip":"Skip for now",
     "send_otp":"Send OTP",
     "verify_otp":"Verify OTP",
-    "verification":"Verification"
+    "verification":"Verification",
+    "profile": "Profile",
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "scheduling": "Scheduling",
+    "log_out": "Log out"
 }
