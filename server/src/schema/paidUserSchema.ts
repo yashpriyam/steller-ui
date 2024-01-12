@@ -68,9 +68,8 @@ const paidUserSchema = new mongoose.Schema({
     required: false,
   },
   password: {
-    hash: String,
-    salt: String,
-  },
+    type:String
+  }
 });
 
 const paidUser = mongoose.model("PaidUser", paidUserSchema);

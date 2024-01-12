@@ -1,26 +1,12 @@
 import * as React from "react";
-const LeftArrow: React.FC<React.SVGProps<SVGSVGElement>>  = (props) => (
+const LeftArrow: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
-    id="Layer_1"
+    className="svg-icon"
+    viewBox="0 0 1024 1024"
+    version="1.1"
     xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    width="20px"
-    height="20px"
-    viewBox="0 0 64 64"
-    enableBackground="new 0 0 64 64"
-    xmlSpace="preserve"
-    {...props}
   >
-    <g>
-      <polyline
-        fill="none"
-        stroke="#ffffff"
-        strokeWidth={2}
-        strokeLinejoin="bevel"
-        strokeMiterlimit={10}
-        points="37,15 20,32  37,49  "
-      />
-    </g>
+    <path fill="white" d="M853.333333 469.333333H334.08l238.293333-238.293333L512 170.666667 170.666667 512l341.333333 341.333333 60.373333-60.373333L334.08 554.666667H853.333333v-85.333334z" />
   </svg>
 );
 export default LeftArrow;

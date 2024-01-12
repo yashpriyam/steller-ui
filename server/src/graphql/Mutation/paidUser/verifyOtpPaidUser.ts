@@ -17,7 +17,7 @@ export const verifyOtpPaidUser = async (
     const { data } = args;
     const { email, emailOtp } = data;
     if (isValidEmail(email)) {
-      const userExist = await paidUser.exists({ email });
+      const userExist = await paidUser.exists({ email });      
       if (userExist) {
         const otpDetails = await otpModel.findOne({
           email,
@@ -25,19 +25,9 @@ export const verifyOtpPaidUser = async (
           expiresAt: {
             $gte: new Date(),
           },
-        });
+        });        
         if (!otpDetails) {
           return errorData;
-        }
-        const jwtSecret = process.env.JWT_SECRET;
-        const jwtToken = process.env.JWT_TOKEN;
-        if (jwtSecret && jwtToken) {
-          const token = jwt.sign({ email, userExist }, jwtSecret, {
-            expiresIn: "1h",
-          });
-          res.cookie(jwtToken, token, {
-            httpOnly: true,
-          });
         }
         return {
           message: OTP_VERIFIED_SUCCESS,

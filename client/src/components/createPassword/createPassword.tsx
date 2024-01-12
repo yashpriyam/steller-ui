@@ -12,7 +12,7 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
 }) => {
   const currentData: LoginState = useSelector((state: any) => state.login);
   const dispatch = useDispatch();
-  const { setPassword } = loginAction;
+  const { setPassword, setIsSending } = loginAction;
   const [passwordData, setPasswordData] = useState({
     confirmPassword: "",
     passwordMatch: false,
@@ -39,8 +39,10 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
       passwordMatch: value === currentData.password,
     });
   };
-  const handleCreatePasswordButton = () => {
-    handleOnCreateNewPassword();
+  const handleCreatePasswordButton = async () => {
+    dispatch(setIsSending(true));
+    await handleOnCreateNewPassword();
+    dispatch(setIsSending(true));
   };
 
   return (
@@ -70,12 +72,20 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
         text={t("create_password")}
         isDisabled={!passwordData.passwordMatch}
         onClick={handleCreatePasswordButton}
+        isLoading={currentData.isOtpSending}
+        iconPosition="center"
       />
-      {!passwordData.passwordMatch && passwordData.confirmPassword && (
-        <div className="error-container">
+      {
+        <div
+          className={`error-container ${
+            !passwordData.passwordMatch &&
+            passwordData.confirmPassword &&
+            "show-error"
+          }`}
+        >
           {t("error_on_password_not_match")}
         </div>
-      )}
+      }
       <div className="password-description">
         <h6 className="password-requirement-header">
           {t("password_required_head")}
