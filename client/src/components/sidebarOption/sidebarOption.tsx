@@ -9,7 +9,7 @@ export const SidebarOption = ({
   onClick = () => {}
 }: SidebarOptionInterface) => {
   return (
-    <div onClick={onClick} className='sidebar-option-container'>
+    <div tabIndex={1} onClick={onClick} className='sidebar-option-container'>
       {
         React.isValidElement(image)
         ? (image)
