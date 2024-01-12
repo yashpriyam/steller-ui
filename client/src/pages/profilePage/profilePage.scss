@@ -138,14 +138,7 @@
     color: $gray;
 }
 
-a {
-    color: $link-color;
-    text-decoration: none;
 
-    &:hover {
-        color: $link-hover-color;
-    }
-}
 
 @media (max-width: $screenMd) {
     .main-container {
@@ -229,7 +222,7 @@ a {
             display: flex;
             justify-content: space-around;
 
-            a {
+            .nav-bar-a {
                 color: #f2f2f2;
                 text-align: center;
                 padding: 10px 5px;
@@ -284,7 +277,7 @@ a {
 
         .nav-bar {
 
-            a {
+            .nav-bar-a {
                 padding: 9px 1px;
                 font-size: $smallFontSize;
             }

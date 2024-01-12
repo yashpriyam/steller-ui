@@ -243,11 +243,11 @@ const ProfilePage = () => {
                     </div>
                 )}
                 <div className='nav-bar'>
-                    <a href="#experience">Experience</a>
-                    <a href="#skill">Skill</a>
-                    <a href="#education">Education</a>
-                    <a href="#achievements">Achievements</a>
-                    <a href="#project">Project</a>
+                    <a className='nav-bar-a' href="#experience">Experience</a>
+                    <a className='nav-bar-a' href="#skill">Skill</a>
+                    <a className='nav-bar-a' href="#education">Education</a>
+                    <a className='nav-bar-a' href="#achievements">Achievements</a>
+                    <a className='nav-bar-a' href="#project">Project</a>
                 </div>
                 <div className="main-content">
                     <Accordion className='accordian-mobile-view' title='Experience'>
