@@ -10,6 +10,7 @@ const typeDefs = gql`
       filterData: GetQuestionsFilterInput
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
+    getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
   }
 
   type Mutation {
@@ -472,6 +473,26 @@ const typeDefs = gql`
     email: String!
     password: String
   }
+  input WeekDataInputType {
+    description: String
+    title: String
+    isActive: Boolean
+    isDisabledForUnpaidUsers: Boolean
+    weekNumber: Int
+    days: [String]
+  } 
+  type WeekDataType {
+    description: String
+    title: String
+    isActive: Boolean
+    isDisabledForUnpaidUsers: Boolean
+    weekNumber: Int
+    days: [String]
+  }
+  type WeekDataOutputType {
+    weekData: [WeekDataType]
+    response: CustomResponseType
+  }  
   scalar DateTime
   scalar JSON
 `;

@@ -416,7 +416,19 @@ declare global {
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    weekNumber: number;
+    weekNumber?: number;
     days?: string[];
   }
+  type WeekDataType = {
+    description?: string;
+    title?: string;
+    isActive?: boolean;
+    isDisabledForUnpaidUsers?: boolean;
+    weekNumber?: number;
+    days?: string[];
+  }
+  type AllWeekOutputDataType = {
+    weekData?: WeekDataType[];
+    response: CustomResponseType;
+  };
 }

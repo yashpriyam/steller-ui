@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
-
+import { dayModel } from "./daySchema";
 const { ObjectId } = mongoose.Schema.Types;
 
 const weekSchema = new Schema<WeekSchemaType>({
@@ -19,10 +19,8 @@ const weekSchema = new Schema<WeekSchemaType>({
     },
     weekNumber: {
         type: Number,
-        required: true,
-        unique: true
     },
-    days: [{ type: ObjectId, ref: 'dayModel' }],
+    days: [{ type: ObjectId, ref: dayModel }],
 });
 
 export const weekModel = model<WeekSchemaType>('week', weekSchema);
