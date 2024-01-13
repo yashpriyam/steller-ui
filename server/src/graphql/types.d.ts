@@ -412,20 +412,22 @@ declare global {
     password?: string;
   };
   type WeekSchemaType = {
+    batchCode?: string;
+    weekNumber?: number;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    weekNumber?: number;
-    days?: string[];
+    days?: ObjectId[];
   }
   type WeekDataType = {
+    batchCode?: string;
+    weekNumber?: number;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    weekNumber?: number;
-    days?: string[];
+    days?: ObjectId[];
   }
   type AllWeekOutputDataType = {
     weekData?: WeekDataType[];

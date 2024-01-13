@@ -473,25 +473,36 @@ const typeDefs = gql`
     email: String!
     password: String
   }
-  input WeekDataInputType {
-    description: String
+  type DaySchemaType {
+    batchCode: String
+    dayNumber: Int
     title: String
+    description: String
+    topics: [String]
+    notes: [String]
+    videos: [String]
+    questions: [String]
+}
+  input WeekDataInputType {
+    batchCode: String
+    weekNumber: Int
+    title: String
+    description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
-    weekNumber: Int
-    days: [String]
   } 
   type WeekDataType {
-    description: String
+    batchCode: String
+    weekNumber: Int
     title: String
+    description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
-    weekNumber: Int
-    days: [String]
+    days: [DaySchemaType]
   }
   type WeekDataOutputType {
     weekData: [WeekDataType]
-    response: CustomResponseType
+    response: CustomResponseType!
   }  
   scalar DateTime
   scalar JSON

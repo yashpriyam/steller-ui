@@ -45,5 +45,6 @@ export const localMessages = Object.freeze({
   },
   WEEK_MODEL: {
     WEEK_FOUND: "week data found successfully",
+    DAYS: "days",
   },
 });

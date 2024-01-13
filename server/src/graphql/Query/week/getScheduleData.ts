@@ -1,6 +1,5 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { dayModel, weekModel } from "@models";
-import { removeNullAndUndefinedKeys } from "@utils";
+import { weekModel } from "@models";
 
 export const getScheduleData = async (
     parent: undefined,
@@ -12,26 +11,9 @@ export const getScheduleData = async (
         message: WEEK_NOT_FOUND,
     }
     try {
-        const { WEEK_FOUND } = localMessages.WEEK_MODEL;
+        const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
         const { weekDataFilter } = args;
-        const {
-            description,
-            isActive,
-            isDisabledForUnpaidUsers,
-            title,
-            weekNumber
-        }: WeekDataType = weekDataFilter;
-        console.log({weekDataFilter});
-        const modifiedFilterData : object =  removeNullAndUndefinedKeys({
-            description,
-            isActive,
-            isDisabledForUnpaidUsers,
-            title,
-            weekNumber
-        })
-        console.log({ modifiedFilterData });
-        const weekData: WeekDataType[] = await weekModel.find(modifiedFilterData).populate("days");
-        console.log({weekData})
+        const weekData: WeekDataType[] = await weekModel.find(weekDataFilter).populate(DAYS);
         return {
             weekData,
             response: weekData.length ? {
@@ -40,7 +22,6 @@ export const getScheduleData = async (
             } : errorData,
         };
     } catch (err) {
-        console.log(err)
         return {
             response: errorData,
         };

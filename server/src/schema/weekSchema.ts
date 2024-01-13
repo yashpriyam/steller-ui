@@ -3,6 +3,12 @@ import { dayModel } from "./daySchema";
 const { ObjectId } = mongoose.Schema.Types;
 
 const weekSchema = new Schema<WeekSchemaType>({
+    batchCode: {
+        type: String,
+    },
+    weekNumber: {
+        type: Number,
+    },
     description: {
         type: String
     },
@@ -16,9 +22,6 @@ const weekSchema = new Schema<WeekSchemaType>({
     isDisabledForUnpaidUsers: {
         type: Boolean,
         default: true,
-    },
-    weekNumber: {
-        type: Number,
     },
     days: [{ type: ObjectId, ref: dayModel }],
 });
