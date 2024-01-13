@@ -414,15 +414,6 @@ declare global {
     email: String;
     password?: string;
   };
-  type WeekSchemaType = {
-    batchCode?: string;
-    weekNumber?: number;
-    description?: string;
-    title?: string;
-    isActive?: boolean;
-    isDisabledForUnpaidUsers?: boolean;
-    days?: ObjectId[];
-  }
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
