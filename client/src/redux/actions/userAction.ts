@@ -16,7 +16,7 @@ export const useUser = () => {
     occupation,
     sessionPreference,
     expectedSalary,
-    emailOtp,
+    // emailOtp,
     collegeName,
   }: RegisterUserData) => {
     const response = await apolloClient.mutate({
@@ -30,7 +30,7 @@ export const useUser = () => {
           occupation,
           sessionPreference,
           expectedSalary,
-          emailOtp,
+          // emailOtp,
           collegeName,
         },
       },
