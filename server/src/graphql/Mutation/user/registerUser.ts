@@ -26,7 +26,7 @@ export const registerUser = async (
       occupation,
       sessionPreference,
       expectedSalary,
-      emailOtp,
+      // emailOtp,
       collegeName,
     } = data;
 
@@ -36,19 +36,19 @@ export const registerUser = async (
       throw new UserInputError(errorMessages.USER.INVALID_PHONE_NUMBER);
     }
 
-    const otpDetails = await otpModel.findOne({
-      email,
-      emailOtp,
-      expiresAt: {
-        $gte: new Date()
-      }
-    })
+    // const otpDetails = await otpModel.findOne({
+    //   email,
+    //   emailOtp,
+    //   expiresAt: {
+    //     $gte: new Date()
+    //   }
+    // })
 
-    if(!otpDetails){
-      return;
-    }
+    // if(!otpDetails){
+    //   return;
+    // }
 
-    otpDetails.isEmailVerified = true;
+    // otpDetails.isEmailVerified = true;
 
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
 
@@ -81,7 +81,6 @@ export const registerUser = async (
         ...getRegistrationEmailForAdmin(emailDetails),
         to: process.env.SENDER_EMAIL || "",
       }),
-       otpDetails.save()
     ]);
 
     const token = jwt.sign({ user: savedUser }, process.env.JWT_SECRET_VALUE || "");

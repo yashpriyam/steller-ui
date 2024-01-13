@@ -38,7 +38,6 @@ const typeDefs = gql`
       updateQuestionData: UpdateQuestionInputType!
     ): UpdateQuestionOutputType
     sendOtp(email: String!): OtpUserOutputType
-    sendOtpToRegisteredUser(email: String!): OtpUserOutputType
     createQuestionAttemptByUser(
       questionAttemptData: QuestionAttemptType!
     ): QuestionAttemptOutputType
@@ -157,7 +156,6 @@ const typeDefs = gql`
     occupation: String
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
-    emailOtp: String!
     collegeName: String
   }
 

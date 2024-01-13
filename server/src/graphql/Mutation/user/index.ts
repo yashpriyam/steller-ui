@@ -1,2 +1,2 @@
 export { registerUser } from "./registerUser";
-export { sendOtpToRegisteredUser } from "./sendOtpToRegisteredUser";
+// export { sendOtpToRegisteredUser } from "./sendOtpToRegisteredUser";
