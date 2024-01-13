@@ -3,6 +3,7 @@ export const errorMessages = Object.freeze({
     INVALID_EMAIL: "invalid email address",
     INVALID_PHONE_NUMBER: "invalid phone number",
     INVALID_USER_PROFILE_IMAGE: "Failed to get profile image",
+    USER_EXIST:"user already registerd",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",

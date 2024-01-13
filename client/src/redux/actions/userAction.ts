@@ -34,7 +34,7 @@ export const useUser = () => {
       },
     });
     dispatch(actions.setRegisterUser(response.data));
-    return response;
+    return {response};
   };
 
   const sendOtpApi = async (email: string) => {
