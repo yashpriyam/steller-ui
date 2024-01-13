@@ -26,7 +26,6 @@ export const registerUser = async (
       occupation,
       sessionPreference,
       expectedSalary,
-      // emailOtp,
       collegeName,
     } = data;
 
@@ -35,20 +34,6 @@ export const registerUser = async (
     } else if (!isValidPhoneNumber(phoneNumber)) {
       throw new UserInputError(errorMessages.USER.INVALID_PHONE_NUMBER);
     }
-
-    // const otpDetails = await otpModel.findOne({
-    //   email,
-    //   emailOtp,
-    //   expiresAt: {
-    //     $gte: new Date()
-    //   }
-    // })
-
-    // if(!otpDetails){
-    //   return;
-    // }
-
-    // otpDetails.isEmailVerified = true;
 
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
 

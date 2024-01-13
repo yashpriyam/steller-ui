@@ -38,7 +38,6 @@ declare global {
     occupation?: string;
     sessionPreference?: SessionPreferenceEnum;
     expectedSalary?: string;
-    // emailOtp: string;
     collegeName?: string;
   };
 

@@ -66,7 +66,7 @@ const Registerpage = () => {
           collegeName: whichcollegeyouarefrom
         })
         if (!response?.data?.registerUser) {
-          // Toast.error("Incorrect otp");
+          Toast.error("Something went wrong");
         } else  {
           dispatcher({ type: "SUBMIT_FORM", payload: response.data.data });
           Toast.success("Form Submitted Successfully");
