@@ -1,0 +1,1 @@
+export { getScheduleData } from "./getScheduleData";

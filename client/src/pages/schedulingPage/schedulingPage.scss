@@ -8,58 +8,50 @@
   gap: 30px;
   background-color: $primaryBgColor;
   font-family: $primaryFontFamily;
-  
+  color: $primaryTextColor;
+
   .scheduling-page-accordion {
     padding-top: 0;
     display: flex;
     flex-direction: column;
-    width: 75%;
     gap: 20px;
 
     .accordion-content-wrapper {
       position: relative;
       display: flex;
       flex-direction: column;
+      align-items: center;
       justify-content: center;
-      padding: 0;
       gap: 30px;
 
       .accordion-description {
         display: flex;
         flex-direction: column;
-        line-height: normal;
-        width: 100%;
-        margin-left: 0px;
-        font-size: $subHeaderFontSize;
-        padding: 0px 50px;
-        text-align: justify;
+        font-size: $titleFontSize;
+        color: $sencondaryTextColor;
       }
 
       .daylist-container {
         display: flex;
-        gap: 35px;
-        display: flex;
-        line-height: normal;
+        align-items: center;
+        justify-content: center;
         flex-wrap: wrap;
-        width: 100%;
-        padding: 0px 50px;
-        padding-bottom: 50px;
+        padding: 10px;
 
         .day-container {
-          display: flex;
+          display: flex;  
           align-items: center;
           color: $primaryColor;
-          padding: 50px;
-          border-radius: 40px;
-          border: 2px solid $videoHutBorderColor;
-          background: radial-gradient(50% 50% at 0% 0%, $radialGradient 100%);
+          padding: 10px;
+          border-radius: 7px;
+          border: 1px solid $videoHutBorderColor;
+          width: 48vw;
+          background-color: $Gray35;
           transition: all 0.3s;
           display: flex;
           flex-direction: column;
-          gap: 20px;
-          &:hover {
-            box-shadow: 0px 0px 30px 5px $primaryBgColorOnHover;
-          }
+          margin-bottom: 10px;
+          gap: 10px;
 
           .day-header {
             display: flex;
@@ -76,7 +68,7 @@
               .topic-tag {
                 transition: 0.3s;
                 padding: 5px;
-                border-radius: 10%;
+                border-radius: 5px;
                 background-color: rgba(132, 131, 131, 0.15);
                 &:hover {
                   transform: scale(110%);
@@ -91,7 +83,7 @@
                 top: 0px;
                 transition: 1s;
               }
-              .show-hidden-tag{
+              .show-hidden-tag {
                 display: flex;
                 opacity: 1;
               }
@@ -101,7 +93,7 @@
               .css {
                 color: $accent-color-3;
               }
-              .js{
+              .js {
                 color: $accent-color-4;
               }
               .react {
@@ -110,7 +102,7 @@
             }
           }
           .day-title {
-            font-size: $subHeaderFontSize;
+            font-size: $textFontSize;
             font-family: $secondaryFontFamily;
           }
 
@@ -120,23 +112,20 @@
 
           .buttons-wrapper {
             display: flex;
-            gap: 15px;
-            align-items: center;
+            gap: 5px;
             flex-wrap: wrap;
+            width: 45vw;
 
             .button {
               border: 1px solid $videoHutBorderColor;
               background-color: $secondaryBorderColorHighlighted;
               color: $primaryColor;
-              border-radius: 15px;
+              border-radius: 5px;
               transition: all 0.3s;
 
               &:hover {
-                background-color: $primaryBgColor;
-                box-shadow: 0px 0px 5px 2px $primaryBgColorOnHover;
-                transition: 0.3s;
-                border-color: transparent;
-                transform: scale(110%);
+                color: $sencondaryTextColor;
+                background-color: $Gray43;
               }
             }
           }
@@ -191,25 +180,32 @@
   }
 }
 
-@media (max-width : $screenXs){
-  .scheduling-page{
-    .scheduling-page-accordion{  
+@media (max-width: $screenXs) {
+  .scheduling-page {
+    .scheduling-page-accordion {
       .accordion-content-wrapper {
         .accordion-description {
           padding: 0px 15px;
           font-size: $mediumFontSize;
         }
-        
+
         .daylist-container {
           padding: 0px 15px;
+          
           .day-container {
             border-radius: 10px;
             padding: 20px;
-            
+            width: 100%;
+
             .day-header {
               flex-direction: column;
               gap: 10px;
               transition: 0.5s;
+            }
+            .buttons-wrapper {
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
             .day-description {
               font-size: $smallFontSize;
@@ -220,4 +216,3 @@
     }
   }
 }
-    

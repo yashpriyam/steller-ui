@@ -50,4 +50,8 @@ export const localMessages = Object.freeze({
     USER_PASSWPRD_UPDATION_SUCCESS: "password updation successfully",
     USER_LOGIN_SUCCESS:"login successfully",
   },
+  WEEK_MODEL: {
+    WEEK_FOUND: "week data found successfully",
+    DAYS: "days",
+  },
 });

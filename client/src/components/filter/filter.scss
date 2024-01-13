@@ -1,56 +1,55 @@
 @import "../variables.scss";
 .scheduling-page-filter-container {
-    width: 20%;
-    height: fit-content;
-    background-color: $fadedGrayPrimary;
-    border-radius: 5px;
-    padding: 5px 10px;
-    display: flex;
+  width: 20%;
+  height: fit-content;
+  background-color: $Gray35;
+  border-radius: 7px;
+  padding: 20px;
+  border: 1px solid $Gray29;
 
-    .filter-sub-container {
-      font-size: $largerFontSize;
+  .filter-sub-container {
+    .filter-heading {
+      border-bottom: 1px solid $lightGreyPrimary;
+      font-size: $titleFontSize;
+    }
 
-      .filter-heading {
-        border-bottom: 1px solid $lightGreyPrimary;
-      }
+    .checkbox-content {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
 
-      .checkbox-content {
+      .checkbox-wrapper {
         display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 10px;
+        gap: 5px;
+        align-items: center;
 
-        .checkbox-wrapper {
-          display: flex;
-          gap: 5px;
-          align-items: center;
+        .checkbox-input {
+          width: 15px;
+          height: 15px;
+          cursor: pointer;
+        }
 
-          .checkbox-input {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-          }
-
-          .checkbox-label {
-            font-size: $mediumFontSize;
-            cursor: pointer;
-          }
+        .checkbox-label {
+          font-size: $mediumFontSize;
+          color: $sencondaryTextColor;
+          cursor: pointer;
         }
       }
     }
+  }
 }
 
 @media (max-width: $screenMd) {
+  .scheduling-page-filter-container {
+    width: 100%;
 
-    .scheduling-page-filter-container {
+    .checkbox-content {
+      flex-direction: row;
       width: 100%;
-
-      .checkbox-content {
-        flex-direction: row;
-        width: 100%;
-      }
-      .filter-sub-container {
-        margin: 0;
-      }
     }
+    .filter-sub-container {
+      margin: 0;
+    }
+  }
 }

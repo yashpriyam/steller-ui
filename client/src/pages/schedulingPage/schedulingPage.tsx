@@ -40,17 +40,17 @@ const SchedulingPage: React.FC<SchedulingPageProps> = ({
         {accordionData.map((accordion, index) => (
           <Accordion title={accordion.title} disabled={accordion.isDisabled}>
             <div className="accordion-content-wrapper">
-              <div className="accordion-description">
-                {accordion.description}
-              </div>
               <div className="daylist-container">
                 {accordion?.days?.map((dayInfo, index) => {
                   const tags = dayInfo?.tags;
                   const tagsLength = tags?.length;
                   return (
-                    <div className="day-container" onClick={()=>{
-                      navigate(`/day/${dayInfo.dayNumber}`);
-                    }}>
+                    <div
+                      className="day-container"
+                      onClick={() => {
+                        navigate(`/day/${dayInfo.dayNumber}`);
+                      }}
+                    >
                       <div className="day-header">
                         <strong className="day-title">{dayInfo.title}</strong>
                         <div className="topic-tags">
@@ -86,10 +86,6 @@ const SchedulingPage: React.FC<SchedulingPageProps> = ({
                           )}
                         </div>
                       </div>
-                      <p className="day-description">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing
-                        elit. Saepe nisi velit repudiandae ad fuga accusamus.
-                      </p>
                       <div className="buttons-wrapper">
                         <Button text="Assignments" className="button" />
                         <Button text="Notes" className="button" />
