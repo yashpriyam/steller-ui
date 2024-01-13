@@ -31,7 +31,7 @@
       position: relative;
       .accordion-dropdown-arrow {
         position: absolute;
-        transform: rotate(180deg);
+        transform: rotate(0deg);
         transition: 0.1s;
         top: 10%;
       }
@@ -43,7 +43,7 @@
 
       .accordion-dropdown-arrow-active {
         top: 10%;
-        transform: rotate(0deg);
+        transform: rotate(180deg);
       }
 
       .position-right {
