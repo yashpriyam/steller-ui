@@ -157,7 +157,6 @@ const typeDefs = gql`
     occupation: String
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
-    emailOtp: String!
     collegeName: String
   }
 

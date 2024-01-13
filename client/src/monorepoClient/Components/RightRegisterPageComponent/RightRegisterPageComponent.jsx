@@ -13,8 +13,8 @@ const RightRegisterPageComponent = ({
   handleSubmitForm = () => {},
   setFinishedPage,
   isLoading,
-  sendOtp,
-  showSendOtpButton,
+  // sendOtp,
+  // showSendOtpButton,
 }) => {
   const [resetForm, setResetForm] = useState(false);
   // const [paymentStatus, setPaymentStatus] = useState(false);
@@ -34,14 +34,14 @@ const RightRegisterPageComponent = ({
           setFinishedPage={setFinishedPage}
           resetForm={resetForm}
         />
-        {showSendOtpButton && (
+        {/* {showSendOtpButton && (
           <>
             <br />
             <ButtonComponent onClick={sendOtp} className="resendOtpBtn">
               Resend otp
             </ButtonComponent>
           </>
-        )}
+        )} */}
         {
           <div className={`submitButton`}>
             <div className="buttons">
