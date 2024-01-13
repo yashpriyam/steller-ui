@@ -13,6 +13,7 @@ interface AccordionProps {
   iconPosition?: "left" | "center" | "right";
   titlePosition?: "left" | "center" | "right";
   disabled?: boolean;
+  subTitle?:string;
 }
 
 const Accordion: React.FC<AccordionProps> = ({
@@ -25,6 +26,7 @@ const Accordion: React.FC<AccordionProps> = ({
   iconPosition = "right",
   titlePosition = "left",
   disabled = false,
+  subTitle
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const accordionRef = useRef<HTMLDivElement | null>(null);
@@ -52,6 +54,11 @@ const Accordion: React.FC<AccordionProps> = ({
         {title && (
           <div className={`accordion-title position-${titlePosition}`}>
             {title}
+          </div>
+        )}
+        {subTitle && (
+          <div className={`accordion-sub-title`}>
+            {subTitle}
           </div>
         )}
 

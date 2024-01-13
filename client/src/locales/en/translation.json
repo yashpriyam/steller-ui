@@ -30,10 +30,14 @@
     "skip":"Skip for now",
     "send_otp":"Send OTP",
     "verify_otp":"Verify OTP",
-    "verification":"Verification",
+    "verification":"Email Verification",
     "profile": "Profile",
     "home": "Home",
     "dashboard": "Dashboard",
     "schedule": "Schedule",
-    "log_out": "Log out"
+    "logout": "Logout",
+    "login_success":"login successfully",
+    "password_created_success":"password created successfully!",
+    "otp_sent_success":"Otp sent successfully",
+    "otp_verified_success":"Otp sent successfully"
 }

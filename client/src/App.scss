@@ -9,14 +9,17 @@
     .app-section{
         width: 100vw;
         height: 100vh;
+        z-index: 0;
         overflow-x: scroll;
+    }
+    .portal-app-section{
         background-color: $primaryBgColor;
     }
 }
 
 @media screen and (max-width: 425px) {
     .app-container{
-        .app-section{
+        .portal-app-section{
             height: calc(100vh - 90px);
         }
     }

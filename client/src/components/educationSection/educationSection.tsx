@@ -1,20 +1,21 @@
+import React from 'react';
 import "./educationSection.scss"
 
-export const EducationalSection: React.FC<{ education: EducationalData; handleFieldUpdate: Function; isEdit: boolean; index: number }> = ({ education, handleFieldUpdate, isEdit, index }) => {
+export const EducationalSection: React.FC<{ education: EducationalData; mobileViewOn?: boolean, handleFieldUpdate: Function; isEdit: boolean; index: number }> = ({ education, mobileViewOn = false, handleFieldUpdate, isEdit, index }) => {
 
     const handleBlur = (e: React.FocusEvent<HTMLSpanElement>, fieldPath: string) => {
         handleFieldUpdate(`educationalData.${index}.${fieldPath}`, e.currentTarget.innerText);
     };
     return (
         <div className="education box" id="education">
-            <div
+            {!mobileViewOn && <div
                 onBlur={(e) => handleBlur(e, `.instituteName`)}
                 contentEditable={isEdit}
                 suppressContentEditableWarning={true}
                 className="instituteName"
             >
                 {education.instituteName}
-            </div>
+            </div>}
             <div
                 onBlur={(e) => handleBlur(e, `.course`)}
                 contentEditable={isEdit}
@@ -36,7 +37,7 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
                         suppressContentEditableWarning={true}
                     >
                         {education.startDate}
-                    </span> -&nbsp;
+                    </span> <span>-</span>
                     <span
 
                         onBlur={(e) => handleBlur(e, `.endDate`)}
@@ -57,3 +58,4 @@ export const EducationalSection: React.FC<{ education: EducationalData; handleFi
         </div>
     );
 };
+
