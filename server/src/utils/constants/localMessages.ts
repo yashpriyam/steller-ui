@@ -42,5 +42,8 @@ export const localMessages = Object.freeze({
   },
   QUESTION_ATTEMPT_MODEL : {
     QUESTION_ATTEMPT_SUCCESS: "your response has been submitted successfully"
+  },
+  USER: {
+    USER_REGISTERED_SUCCESSFULLY:"registered successfully"
   }
 });

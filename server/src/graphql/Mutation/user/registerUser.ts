@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User, otpModel } from "@models";
+import { User } from "@models";
 import {
   getRegistrationEmailForAdmin,
   getRegistrationEmailForUser,
@@ -8,13 +8,15 @@ import {
   isValidPhoneNumber,
 } from "@utils";
 import { UserInputError } from "apollo-server-express";
-import { errorMessages } from "@constants";
+import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const registerUser = async (
   _parent: undefined,
   args: { data: RegisterType },
   { res }: ContextType,
-): Promise<RegisterType | UserInputError | unknown> => {
+): Promise<RegisterOutputType | UserInputError | unknown> => {
+  const { USER_EXIST } = errorMessages.USER;
+  const { USER_REGISTERED_SUCCESSFULLY} = localMessages.USER;
   try {
     const { data } = args;
 
@@ -33,6 +35,16 @@ export const registerUser = async (
       throw new UserInputError(errorMessages.USER.INVALID_EMAIL);
     } else if (!isValidPhoneNumber(phoneNumber)) {
       throw new UserInputError(errorMessages.USER.INVALID_PHONE_NUMBER);
+    }
+
+    const isUserExist = await User.exists({ email });
+    if (isUserExist) {
+      return {
+        response: {
+          status: statusCodes.BAD_REQUEST,
+          message:USER_EXIST
+        }
+      }
     }
 
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
@@ -56,7 +68,16 @@ export const registerUser = async (
       email,
       time,
     };
-
+    const userData:RegisterType = {
+      email: savedUser.email,
+      name: savedUser.name,
+      phoneNumber: savedUser.phoneNumber,
+      collegeName: savedUser.collegeName,
+      expectedSalary: savedUser.expectedSalary,
+      isJobSeeker: savedUser.isJobSeeker,
+      occupation: savedUser.occupation,
+      sessionPreference:savedUser.sessionPreference,
+    }
     await Promise.allSettled([
       sendEmail({
         ...getRegistrationEmailForUser(emailDetails),
@@ -70,7 +91,13 @@ export const registerUser = async (
 
     const token = jwt.sign({ user: savedUser }, process.env.JWT_SECRET_VALUE || "");
     res.cookie(process.env.JWT_SECRET_KEY || "", token);
-    return savedUser;
+    return {
+      userData,
+      response: {
+        message: USER_REGISTERED_SUCCESSFULLY,
+        status:statusCodes.OK,
+      }
+    };
   } catch (error) {
     return error;
   }
