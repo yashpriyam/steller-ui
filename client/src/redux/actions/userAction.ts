@@ -2,7 +2,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { apolloClient } from "../../graphql/apolloClient/apolloClient";
 import { actions, selectUser } from "../slices/user/userSlice";
 import { REGISTER_USER } from "../../graphql/mutation/user/registerUser";
-import { SEND_OTP } from "../../graphql/mutation/otp/sendOtp";
+import { VERIFY_USER_OTP } from "../../graphql/mutation/verifyUserOtp/verifyUserOtp";
+import { UPDATE_USER_PASSWORD } from "../../graphql/mutation/updateUserPassword/updateUserPassword";
+import { LOGIN } from "../../graphql/mutation/login/login";
+import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/sendUserOtp/sendUserOtp";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -34,21 +37,73 @@ export const useUser = () => {
       },
     });
     dispatch(actions.setRegisterUser(response.data));
-    return {response};
+    return { response };
   };
 
   const sendOtpApi = async (email: string) => {
     const response = await apolloClient.mutate({
-      mutation: SEND_OTP,
+      mutation: SEND_OTP_REGISTER_USER,
       variables: {
         email,
       },
     });
     return {
       response,
-      status: response?.data?.sendOtp?.response?.status,
+      status: response?.data?.sendOtpToRegisteredUser?.response?.status,
     };
   };
 
-  return { user, registerUser, sendOtpApi };
+  const loginUserApi = async ({ email, password }: LoginUser) => {
+    const response = await apolloClient.mutate({
+      mutation: LOGIN,
+      variables: {
+        data: {
+          email,
+          password,
+        },
+      },
+    });
+    return response;
+  };
+
+  const verifyUserOtpApi = async (email: string, otp: string) => {
+    const response = await apolloClient.mutate({
+      mutation: VERIFY_USER_OTP,
+      variables: {
+        data: {
+          email,
+          emailOtp: otp,
+        },
+      },
+    });    
+    return {
+      response,
+    };
+  };
+
+    const updateUserPasswordApi = async (
+      email: string,
+      password: string
+    ) => {      
+      const response = await apolloClient.mutate({
+        mutation: UPDATE_USER_PASSWORD,
+        variables: {
+          data: {
+            email,
+            password,
+          },
+        },
+      });      
+      return {
+        response,
+      };
+    };
+  return {
+    user,
+    registerUser,
+    sendOtpApi,
+    verifyUserOtpApi,
+    updateUserPasswordApi,
+    loginUserApi,
+  };
 };

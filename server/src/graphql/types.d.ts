@@ -499,4 +499,9 @@ declare global {
     }>;
   }
 
+  type UpdateUserPasswordInput = {
+    email: stringtring;
+    password: string;
+  }
+
 }
