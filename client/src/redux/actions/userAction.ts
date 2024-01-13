@@ -6,7 +6,7 @@ import { SEND_OTP } from "../../graphql/mutation/otp/sendOtp";
 
 export const useUser = () => {
   const dispatch = useDispatch();
-  const users = useSelector(selectUser);
+  const user = useSelector(selectUser);
 
   const registerUser = async ({
     name,
@@ -16,7 +16,6 @@ export const useUser = () => {
     occupation,
     sessionPreference,
     expectedSalary,
-    emailOtp,
     collegeName,
   }: RegisterUserData) => {
     const response = await apolloClient.mutate({
@@ -30,13 +29,12 @@ export const useUser = () => {
           occupation,
           sessionPreference,
           expectedSalary,
-          emailOtp,
           collegeName,
         },
       },
     });
     dispatch(actions.setRegisterUser(response.data));
-    return response;
+    return {response};
   };
 
   const sendOtpApi = async (email: string) => {
@@ -52,5 +50,5 @@ export const useUser = () => {
     };
   };
 
-  return { users, registerUser, sendOtpApi };
+  return { user, registerUser, sendOtpApi };
 };

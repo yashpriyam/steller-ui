@@ -1,11 +1,11 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import LeftArrow from "../../icons/LeftArrow";
 import { useTranslation } from "react-i18next";
 import { InputComponent } from "../input/inputComponent";
 import { Button } from "../button/button";
-import { isValidEmail } from "../../utils/isValidEmail";
 import "./otpVerification.scss";
+import toast from "../../utils/toast"
 import { loginAction } from "../../redux/slices/login/loginSlice";
 
 export const OtpVerification: React.FC<OtpVerificationProps> = ({
@@ -18,41 +18,63 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
   const { setEmail, setIsOtpValid, setIsOtpSend, setIsSending } = loginAction;
   const { t } = useTranslation();
   const [otp, setOtp] = useState("");
-  const [error, setError] = useState("");
+  const [disable, setDisable] = useState(true);
+  const [timerCount, setTimer] = useState(60);
 
   const handleEmailInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setError("");
     dispatch(setEmail(e.target.value));
   };
   const handleOtpInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setError("");
     setOtp(e.target.value);
   };
   const handleOnSendOtpClick = async () => {
     dispatch(setIsSending(true));
     const otpSend = await handleOnSendOtp();
     dispatch(setIsSending(false));
-    otpSend ? setError("") : setError(t("invalid_email"));
-    dispatch(setIsOtpSend(otpSend));
+    if (otpSend) {
+      toast.success(t("otp_sent_success"));
+      setTimer(60);
+      dispatch(setIsOtpSend(otpSend));
+    } else {
+      toast.error(t("invalid_email"));
+    }
   };
   const handleOnVerifyOtpClick = async () => {
+    dispatch(setIsSending(true));
     const isOtpValid = await verifyOtp(otp);
-    setError(
-      isOtpValid ? "" : t("invalid_otp")
-    );
+    dispatch(setIsSending(false));
+    isOtpValid ? toast.success(t("otp_verified_success")) : toast.error(t("invalid_otp"));
     dispatch(setIsOtpValid(isOtpValid));
     setOtp("");
   };
   const handleOnResendOtpClick = async () => {
-    const validEmail = isValidEmail(currentData.email);
-    validEmail && handleOnSendOtp();
+    if (disable) return;
+    const otpSend = await handleOnSendOtp();
+    if (otpSend) {
+      toast.success(t("otp_sent_success"));
+      dispatch(setIsOtpSend(true))
+      setDisable(true);
+      setTimer(60);
+    } else {
+      toast.error(t("invalid_email"));
+    }
     setOtp("");
-    setError("");
   };
+  useEffect(() => {
+    let interval = setInterval(() => {
+      setTimer((lastTimerCount) => {
+        lastTimerCount <= 1 && clearInterval(interval);
+        if (lastTimerCount <= 1) setDisable(false);
+        return lastTimerCount - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [disable]);
   return (
     <div className="verification-page-wrapper">
-      <div className="back-arrow">
-        <LeftArrow onClick={onBackClick} />
+      <div className="back-arrow" onClick={onBackClick}>
+        <LeftArrow />
       </div>
       <h1 className="heading-container">{t("verification")}</h1>
       <InputComponent
@@ -82,19 +104,17 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
               ? handleOnVerifyOtpClick
               : handleOnSendOtpClick
           }
-          isDisabled={
-            currentData.isOtpSending || (currentData.isOtpSend && !Boolean(otp))
-          }
         />
-        {currentData.isOtpSend && (
-          <Button
-            className="send-verify-otp"
-            text={t("resend")}
-            onClick={handleOnResendOtpClick}
-          />
-        )}
+        <div
+          className={`resend-otp ${
+            currentData.isOtpSend && "resend-otp-start"
+          }`}
+          onClick={() => handleOnResendOtpClick()}
+        >
+          Didn't receive code?
+          {disable ? ` Resend OTP in  ${timerCount}s ` : " Resend OTP"}
+        </div>
       </div>
-      {error && <div className="error-container">{t(error)}</div>}
     </div>
   );
 };

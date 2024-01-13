@@ -39,6 +39,7 @@ const DayContentPage: React.FC<DayPagePropsInterface> = ({
   };
   useEffect(() => {
     getAllDataRequest(contentDayNumber);
+    // eslint-disable-next-line
   }, [dayContent, dayNumber]);
   return (
     <div className={`main-daycontextpage-container ${className}`}>
@@ -67,13 +68,10 @@ const DayContentPage: React.FC<DayPagePropsInterface> = ({
           {videoContext &&
             videoList.map((video) => {
               const {
-                dayNumber,
                 description,
                 duration,
-                isActive,
                 links,
                 title,
-                topics,
                 videoNumber,
               } = video;
               return (
@@ -106,13 +104,10 @@ const DayContentPage: React.FC<DayPagePropsInterface> = ({
           {notesContext &&
             noteList.map((note) => {
               const {
-                dayNumber,
                 description,
                 estimatedReadingTime,
-                link,
                 noOfPages,
                 title,
-                topics,
               } = note;
               return (
                 <div className="video-note-content-wrapper">

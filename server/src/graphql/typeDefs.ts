@@ -10,6 +10,7 @@ const typeDefs = gql`
       filterData: GetQuestionsFilterInput
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
+    getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
   }
 
   type Mutation {
@@ -158,7 +159,6 @@ const typeDefs = gql`
     occupation: String
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
-    emailOtp: String!
     collegeName: String
   }
 
@@ -168,14 +168,18 @@ const typeDefs = gql`
   }
 
   type RegistrationOutputDataType {
+    userData:RegisterOutputType
+    response :CustomResponseType!
+  }
+  type RegisterOutputType{
     name: String!
     email: String!
     phoneNumber: String!
-    isJobSeeker: Boolean!
-    occupation: String!
-    sessionPreference: SessionPreferenceEnum!
-    expectedSalary: String!
-    collegeName: String!
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: SessionPreferenceEnum
+    expectedSalary: String
+    collegeName: String
   }
   input CreateNotesInputType {
     link: String!
@@ -473,21 +477,44 @@ const typeDefs = gql`
     email: String!
     password: String
   }
-  input UpsertWeekDataInputType {
-    description: String
+  type DaySchemaType {
+    batchCode: String
+    dayNumber: Int
     title: String
+    description: String
+    topics: [String]
+    notes: [String]
+    videos: [String]
+    questions: [String]
+}
+  input WeekDataInputType {
+    batchCode: String
+    weekNumber: Int
+    title: String
+    description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
-    weekNumber: Int
-    days: [String]
-  }
+  } 
   type WeekDataType {
+    batchCode: String
+    weekNumber: Int
+    title: String
+    description: String
+    isActive: Boolean
+    isDisabledForUnpaidUsers: Boolean
+    days: [DaySchemaType]
+  }
+  type WeekDataOutputType {
+    weekData: [WeekDataType]
+    response: CustomResponseType!
+  }  
+  input UpsertWeekDataInputType {
+    batchCode: String!
     description: String
     title: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
-    weekNumber: Int
-    days: [String]
+    weekNumber: Int!
   }
   type UpsertWeekDataOutputType {
     weekData: WeekDataType

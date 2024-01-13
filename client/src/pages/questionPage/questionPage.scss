@@ -1,7 +1,8 @@
+@import '../../components/variables.scss';
 .question-page-container{
     height: 100vh;
-    width: 100vw;
-    background-color: black;
+    width: 100%;
+    background-color: $primaryBgColor;
     overflow-x: scroll;
     .question-page-sub-container{
         height: 40px;

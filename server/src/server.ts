@@ -28,6 +28,11 @@ const PORT = process.env.PORT || 8080;
       "http://localhost:3001",
       "http://localhost:3000",
       "https://studio.apollographql.com",
+      "https://webmaster-portal-git-deployment-yashpriyam.vercel.app",
+      "https://webmaster-portal-git-dev-yashpriyam.vercel.app",
+      "https://webmaster-portal-git-staging-yashpriyam.vercel.app",
+      "https://webmaster-portal-yashpriyam.vercel.app",
+      "https://webmaster-portal.vercel.app"
     ],
     credentials: true,
   };

@@ -3,6 +3,7 @@ export const errorMessages = Object.freeze({
     INVALID_EMAIL: "invalid email address",
     INVALID_PHONE_NUMBER: "invalid phone number",
     INVALID_USER_PROFILE_IMAGE: "Failed to get profile image",
+    USER_EXIST:"user already registerd",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
@@ -51,5 +52,6 @@ export const errorMessages = Object.freeze({
   },
   WEEK_MODEL: {
     WEEK_CREATION_FAILED: "unable to insert week data",
+    WEEK_NOT_FOUND: "week data not found",
   },
 });

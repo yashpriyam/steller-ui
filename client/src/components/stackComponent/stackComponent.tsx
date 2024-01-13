@@ -15,7 +15,7 @@ export const StackComponent: React.FC<StackComponentProps> = ({
       return (
         <div className="stack-element">
           <div className="stack-icon-box">
-            <img className="stack-icon-image" src={items.icon} />
+            <img className="stack-icon-image" src={items.icon} alt="" />
           </div>
           <div className="element-title-box">
             <p className="elemet-box-title">{items.title}</p>
@@ -31,7 +31,7 @@ export const StackComponent: React.FC<StackComponentProps> = ({
       return (
         <div className="stack-element">
           <div className="stack-icon-box">
-            <img className="stack-icon-image" src={items.icon} />
+            <img className="stack-icon-image" src={items.icon} alt="" />
           </div>
           <div className="element-title-box">
             <p className="elemet-box-title">{items.title}</p>

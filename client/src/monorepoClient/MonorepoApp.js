@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import "./App.scss";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Homepage from "./Pages/Homepage/Homepage";
 import Registerpage from "./Pages/Registerpage/Registerpage";
 import Navbar from "./Components/Navbar/Navbar";
@@ -11,7 +11,7 @@ import { AppStateContext } from "./AppState/appState.context";
 import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import DummyComponentForWhatsapp from "./helpers/utils/dummyComp";
 import { useUserActivity } from "../redux/actions/userActivityAction";
-import { deleteCookieByKey } from "../utils/index";
+import { deleteCookie } from "../utils/index";
 
 function MonorepoApp() {
   // Google Analytics Id
@@ -22,6 +22,7 @@ function MonorepoApp() {
   const phoneNumber = new URLSearchParams(window.location.search)?.get("n");
   const { upsertUserActivity } = useUserActivity();
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const userActivityRequest = async () => {
     try {
@@ -42,9 +43,13 @@ function MonorepoApp() {
 
   const profileMenuOptions = [
     {
+      value: "Profile",
+      onClick: () => navigate("/profile") 
+    },
+    {
       value: "Log out",
       onClick: () => {
-        deleteCookieByKey(process.env.REACT_APP_JWT_SECRET_KEY);
+        deleteCookie(process.env.REACT_APP_JWT_SECRET_KEY);
         setIsLoggedIn(false);
       },
     },
