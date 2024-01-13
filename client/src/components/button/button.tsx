@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import "./button.scss";
 import { Loader } from "../loader/loader";
 interface ButtonProps {
@@ -20,7 +20,7 @@ interface ButtonProps {
 export const Button: React.FC<ButtonProps> = ({
   onClick = (e: React.MouseEvent<HTMLButtonElement>) => {},
   onHover = (e: React.MouseEvent<HTMLButtonElement>) => {},
-  size = "medium",
+  size = "small",
   variant = "outlined",
   iconPosition = "left",
   text = "submit",

@@ -35,14 +35,14 @@ const SchedulingPage: React.FC<SchedulingPageProps> = ({
   const navigate = useNavigate();
   return (
     <div className={`scheduling-page ${className}`} style={style}>
-      <Filter />
+      <Filter />  
       <div className="scheduling-page-accordion">
         {accordionData.map((accordion, index) => (
           <Accordion title={accordion.title} disabled={accordion.isDisabled}>
             <div className="accordion-content-wrapper">
-              <div className="accordion-description">
+              {/* <div className="accordion-description">
                 {accordion.description}
-              </div>
+              </div> */}
               <div className="daylist-container">
                 {accordion?.days?.map((dayInfo, index) => {
                   const tags = dayInfo?.tags;
@@ -86,10 +86,10 @@ const SchedulingPage: React.FC<SchedulingPageProps> = ({
                           )}
                         </div>
                       </div>
-                      <p className="day-description">
+                      {/* <p className="day-description">
                         Lorem ipsum dolor sit amet consectetur, adipisicing
                         elit. Saepe nisi velit repudiandae ad fuga accusamus.
-                      </p>
+                      </p> */}
                       <div className="buttons-wrapper">
                         <Button text="Assignments" className="button" />
                         <Button text="Notes" className="button" />

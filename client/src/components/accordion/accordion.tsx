@@ -26,7 +26,7 @@ const Accordion: React.FC<AccordionProps> = ({
   iconPosition = "right",
   titlePosition = "left",
   disabled = false,
-  subTitle
+  subTitle="subtitle"
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const accordionRef = useRef<HTMLDivElement | null>(null);
@@ -51,9 +51,10 @@ const Accordion: React.FC<AccordionProps> = ({
       ref={accordionRef}
     >
       <div className="accordion-header" onClick={handleClick}>
-        {title && (
+      <div className="title-subtitle">
+      {title && (
           <div className={`accordion-title position-${titlePosition}`}>
-            {title}
+            {title} 
           </div>
         )}
         {subTitle && (
@@ -61,12 +62,15 @@ const Accordion: React.FC<AccordionProps> = ({
             {subTitle}
           </div>
         )}
+      </div>
 
-        {React.isValidElement(icon) ? (
+       <div className="arrow-icon">
+       {React.isValidElement(icon) ? (
           <span className={iconClass}>{icon}</span>
         ) : (
           <img className={`image ${iconClass}`} src={`${icon}`} alt="altText" />
         )}
+       </div>
       </div>
       <div
         className={`accordion-content ${

@@ -1,71 +1,62 @@
 @import "../variables.scss";
 
 .accordion-container {
-  width: 100%;
-  height: fit-content;
-  font-family: "Nunito";
-  background-color: $primaryColor;
-  background: radial-gradient(50% 50% at 0% 0%, $radialGradient 100%);
-  box-shadow: 0 0 5px 1px $fadedGrayPrimary;
-  border-radius: 30px;
+  width: 50vw;
+  border-radius: 7px;
   border: 1px solid $videoHutBorderColor;
-
 
   .accordion-header {
     font-size: $subHeaderFontSize;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 60px 50px;
+    padding: 5px 20px 5px 20px;
     cursor: pointer;
-    position: relative;
 
-
-    .accordion-title {
-      font-size: $headerFontSize;
-      padding: 10px;
-      font-weight: 800;
-      color: $fadedGraySecondary;
-      white-space: wrap;
+    .title-subtitle {
+      .accordion-title {
+        font-size: $mediumLargFontSize;
+        font-weight: bold;
+        white-space: wrap;
+      }
+      .accordion-sub-title {
+        font-size: $titleFontSize;
+        color: $sencondaryTextColor;
+      }
     }
 
-    .accordion-sub-title {
-      font-size: $subHeaderFontSize;
-      padding: 0;
-      font-weight: 500;
-      color: $fadedGraySecondary;
-      white-space: wrap;
-      padding: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .accordion-dropdown-arrow {
-      position: absolute;
-      z-index: 0;
-      transform: rotate(180deg);
-      transition: 0.1s;
-    }
-
-    .image {
-      width: 20px;
+    .arrow-icon {
       height: 20px;
-    }
+      width: 20px;
+      position: relative;
+      .accordion-dropdown-arrow {
+        position: absolute;
+        transform: rotate(180deg);
+        transition: 0.1s;
+        top: 10%;
+      }
 
-    .accordion-dropdown-arrow-active {
-      transform: rotate(0deg);
-    }
+      .image {
+        width: 20px;
+        height: 20px;
+      }
 
-    .position-right {
-      right: 30px;
-    }
+      .accordion-dropdown-arrow-active {
+        top: 10%;
+        transform: rotate(0deg);
+      }
 
-    .position-left {
-      left: 30px;
-    }
+      .position-right {
+        right: 30px;
+      }
 
-    .position-center {
-      left: 50%;
+      .position-left {
+        left: 30px;
+      }
+
+      .position-center {
+        left: 50%;
+      }
     }
   }
 
@@ -126,6 +117,7 @@
 //480
 @media (max-width: $screenXs) {
   .accordion-container {
+    width: 100%;
     .accordion-header {
       .accordion-title {
         font-size: $largerFontSize;
