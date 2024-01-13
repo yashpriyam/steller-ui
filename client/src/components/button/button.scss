@@ -1,14 +1,14 @@
 @import '../../components/variables.scss';
 
 .button-component {
-  padding: 10px 20px;
+  padding: 10px 20px 10px 20px;
   border-radius: 5px;
   border: none;
   text-align: center;
   cursor: pointer;
   background-color: $primaryBg;
   color: $sencondaryBg;
-  font-weight: 550;
+  font-weight: bold;
   &:disabled {
     cursor: default;
     opacity: 0.6;

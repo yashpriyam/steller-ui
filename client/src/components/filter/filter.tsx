@@ -17,7 +17,7 @@ export const Filter : React.FC<FilterProps> = ({
             {checkboxData.map((option) => (
               <div className="checkbox-wrapper">
                 <input className="checkbox-input" type="checkbox" id={option} />
-                <label className="checkbox label" htmlFor={option}>
+                <label className="checkbox-label" htmlFor={option}>
                   {option}
                 </label>
               </div>
