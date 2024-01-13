@@ -49,5 +49,8 @@ export const errorMessages = Object.freeze({
     PAID_USER_ALREADY_EXIST: "user already exists",
     PAID_USER_UPDATION_FAILED: "unable to update paid user data",
     PAID_USER_LOGIN_FAILED: "invalid email and password",
-  }
+  },
+  WEEK_MODEL: {
+    WEEK_NOT_FOUND: "week data not found",
+  },
 });

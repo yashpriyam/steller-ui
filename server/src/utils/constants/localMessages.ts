@@ -45,5 +45,9 @@ export const localMessages = Object.freeze({
   },
   USER: {
     USER_REGISTERED_SUCCESSFULLY:"registered successfully"
-  }
+  },
+  WEEK_MODEL: {
+    WEEK_FOUND: "week data found successfully",
+    DAYS: "days",
+  },
 });

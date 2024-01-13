@@ -414,13 +414,14 @@ declare global {
     email: String;
     password?: string;
   };
-  type WeekSchemaType = {
+  type WeekDataType = {
+    batchCode?: string;
+    weekNumber?: number;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    weekNumber: number;
-    days?: string[];
+    days?: ObjectId[];
   }
 
 
@@ -499,4 +500,8 @@ declare global {
     }>;
   }
 
+  type AllWeekDataOutputType = {
+    weekData?: WeekDataType[];
+    response: CustomResponseType;
+  };
 }
