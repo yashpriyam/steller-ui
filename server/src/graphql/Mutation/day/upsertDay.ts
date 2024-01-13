@@ -1,4 +1,4 @@
-import { dayModel } from "@models";
+import { dayModel, weekModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const upsertDay = async (
@@ -13,18 +13,19 @@ export const upsertDay = async (
   try {
     const { DAY_CREATION_SUCCESS } = localMessages.DAY_MODEL;
     const { dayData } = args;
-    const { 
-        dayNumber, 
-        description, 
-        notes, 
-        questions, 
-        title, 
-        topics, 
-        videos,
-        weekNumber
+    const {
+      dayNumber,
+      description,
+      notes,
+      questions,
+      title,
+      topics,
+      videos,
+      weekNumber,
+      batchCode,
     } = dayData;
-    const newDayData: CreateDayDataType = await dayModel.findOneAndUpdate(
-      { dayNumber },
+    let newDayData: CreateDayDataType = await dayModel.findOneAndUpdate(
+      { weekNumber, dayNumber },
       {
         dayNumber,
         description,
@@ -32,21 +33,35 @@ export const upsertDay = async (
         questions,
         title,
         topics,
-        videos, 
+        videos,
         weekNumber,
+        batchCode,
       },
       { new: true, upsert: true }
     );
+    console.log({ newDayData });
+    if (newDayData) {
+      const newWeekData: WeekSchemaType | null =
+        await weekModel.findOneAndUpdate(
+          { weekNumber },
+          {
+            $push: { days: newDayData._id },
+          },
+          { new: true, upsert: true }
+        );
+      console.log({ newWeekData });
+    }
     return {
       dayData: newDayData,
       response: newDayData
         ? {
-            message: DAY_CREATION_SUCCESS,
-            status: statusCodes.OK,
-          }
+          message: DAY_CREATION_SUCCESS,
+          status: statusCodes.OK,
+        }
         : errorData,
     };
   } catch (err) {
+    console.log(err)
     return {
       response: errorData,
     };

@@ -54,6 +54,7 @@ const typeDefs = gql`
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
     upsertDay(dayData: UpsertDayDataInputType!) : DayDataOutputType
+    deleteAllDay(dayData: DeleteDayDataInputType): DayDataOutputType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -474,18 +475,22 @@ const typeDefs = gql`
     password: String
   }
   input UpsertDayDataInputType {
+    batchCode: String!
+    dayNumber: Int!
+    weekNumber: Int!
     title: String
     description: String
-    dayNumber: Int!
     topics: [String]
     notes: [String]
     videos: [String]
     questions: [String]
   }
   type DayDataType {
+    batchCode: String
+    dayNumber: Int
+    weekNumber: Int
     title: String
     description: String
-    dayNumber: Int
     topics: [String]
     notes: [String]
     videos: [String]
@@ -494,6 +499,17 @@ const typeDefs = gql`
   type DayDataOutputType {
     dayData: DayDataType
     response: CustomResponseType!
+  }
+  input DeleteDayDataInputType {
+    batchCode: String
+    dayNumber: Int
+    weekNumber: Int
+    title: String
+    description: String
+    topics: [String]
+    notes: [String]
+    videos: [String]
+    questions: [String]
   }
   scalar DateTime
   scalar JSON

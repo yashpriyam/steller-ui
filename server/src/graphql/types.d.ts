@@ -350,14 +350,16 @@ declare global {
     image: string;
   }
   type CreateDayDataType = {
+    _id?: ObjectId;
+    batchCode?: string;
+    weekNumber?: number;
+    dayNumber?: number;
     title?: string;
     description?: string;
-    dayNumber?: number;
     topics?: string[];
     notes?: string[];
     videos?: string[];
     questions?: string[];
-    weekNumber?: number;
   };
   type loginUserInputType = {
     email: string;
@@ -417,11 +419,12 @@ declare global {
     response: CustomResponseType;
   }
   type WeekSchemaType = {
+    batchCode?: string;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    weekNumber: number;
+    weekNumber?: number;
     days?: string[];
   }
 

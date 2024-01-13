@@ -14,4 +14,4 @@ export {
   verifyOtpPaidUser,
   updatePaidUserPassword,
 } from "./paidUser/index";
-export { upsertDay } from "./day/index";
+export { upsertDay, deleteAllDay } from "./day/index";

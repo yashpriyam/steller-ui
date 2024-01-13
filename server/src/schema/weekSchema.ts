@@ -3,6 +3,9 @@ import mongoose, { Schema, model } from 'mongoose';
 const { ObjectId } = mongoose.Schema.Types;
 
 const weekSchema = new Schema<WeekSchemaType>({
+    batchCode: {
+        type: String,
+    },
     description: {
         type: String
     },
