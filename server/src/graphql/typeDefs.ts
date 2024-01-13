@@ -158,7 +158,6 @@ const typeDefs = gql`
     occupation: String
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
-    emailOtp: String!
     collegeName: String
   }
 
@@ -168,14 +167,18 @@ const typeDefs = gql`
   }
 
   type RegistrationOutputDataType {
+    userData:RegisterOutputType
+    response :CustomResponseType!
+  }
+  type RegisterOutputType{
     name: String!
     email: String!
     phoneNumber: String!
-    isJobSeeker: Boolean!
-    occupation: String!
-    sessionPreference: SessionPreferenceEnum!
-    expectedSalary: String!
-    collegeName: String!
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: SessionPreferenceEnum
+    expectedSalary: String
+    collegeName: String
   }
   input CreateNotesInputType {
     link: String!

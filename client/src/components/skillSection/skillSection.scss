@@ -1,2 +1,9 @@
+
 .skill {
+    .accordion-child-skill {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-block: 10px;
+    }
 }

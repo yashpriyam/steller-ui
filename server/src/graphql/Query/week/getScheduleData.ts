@@ -4,7 +4,7 @@ import { weekModel } from "@models";
 export const getScheduleData = async (
     parent: undefined,
     args: { weekDataFilter: WeekDataType }
-): Promise<AllWeekOutputDataType> => {
+): Promise<AllWeekDataOutputType> => {
     const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
     const errorData: CustomResponseType = {
         status: statusCodes.BAD_REQUEST,

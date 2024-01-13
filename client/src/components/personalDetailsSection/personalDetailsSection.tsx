@@ -1,5 +1,5 @@
 import "./personalDetailsSection.scss"
-export const PersonalDetailSection: React.FC<{ data: SocialDetail; handleFieldUpdate: Function; isEdit: boolean }> = ({ data, handleFieldUpdate, isEdit }) => {
+export const PersonalDetailSection: React.FC<{ data?: SocialDetail; handleFieldUpdate: Function; isEdit: boolean }> = ({ data={}, handleFieldUpdate, isEdit }) => {
     return (
         <div className="personal-details-card">
             <div

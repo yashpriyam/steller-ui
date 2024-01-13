@@ -30,17 +30,20 @@ declare global {
     offline = "offline",
   }
 
+  type RegisterOutputType = {
+    userData?: RegisterType;
+    response: CustomResponseType;
+  };  
   type RegisterType = {
     name: string;
     email: string;
     phoneNumber: string;
     isJobSeeker?: boolean;
     occupation?: string;
-    sessionPreference?: SessionPreferenceEnum;
+    sessionPreference?: "online"|"offline";
     expectedSalary?: string;
-    emailOtp: string;
     collegeName?: string;
-  };
+  }
 
   type ProgramDataType = {
     programType: string;
@@ -333,7 +336,7 @@ declare global {
     status: number;
     message: string;
   };
-  type EmailOtpDataType = { 
+  type EmailOtpDataType = {
     otpData: { emailOtp : string};
     emailValidityMinutes: number;
   };
@@ -429,7 +432,84 @@ declare global {
     isDisabledForUnpaidUsers?: boolean;
     days?: ObjectId[];
   }
-  type AllWeekOutputDataType = {
+
+
+  interface paidUserSchemaType {
+    username: string;
+    email: string;
+    contact: string;
+    profileImg?: {
+      publicId?: string;
+      secureUrl?: string;
+    };
+    batchCode?: string;
+    sessionPreference?: string;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: {
+      linkedIn?: string;
+      github?: string;
+      medium?: string;
+      portfolio?: string;
+    };
+    address?: string;
+    password?: string;
+    personalDetail?: {
+      fullName: string;
+      headline?: string;
+    };
+    socialDetail?: {
+      address: {
+        colony?: string;
+        city?: string;
+      };
+      phoneNumber?: string;
+      gmail?: string;
+      githubLink?: string;
+      linkedInLink?: string;
+    };
+    experienceData?: Array<{
+      companyName?: string;
+      companyLocation?: string;
+      role?: string;
+      startDate?: string;
+      endDate?: string;
+      description?: string[];
+      techStack?: string[];
+    }>;
+    projectsData?: Array<{
+      heading?: string;
+      description?: string[];
+      deployLink?: string;
+      gitHubLink?: string;
+      techStack?: string[];
+    }>;
+    skillsData?: {
+      language?: string[];
+      frontend?: string[];
+      backend?: string[];
+      database?: string[];
+      versionControl?: string[];
+      cIcD?: string[];
+    };
+    educationalData?: Array<{
+      instituteName?: string;
+      location?: string;
+      course?: string;
+      startDate?: string;
+      endDate?: string;
+      cgpa?: string;
+    }>;
+    achievementsData?: Array<{
+      icon?: string;
+      header?: string;
+      description?: string;
+      links?: string;
+    }>;
+  }
+
+  type AllWeekDataOutputType = {
     weekData?: WeekDataType[];
     response: CustomResponseType;
   };

@@ -5,11 +5,11 @@ export const NewsDrop: React.FC<NewsDropProps> = ({
   newsDropTitile,
   newsDropElements = [],
 }: NewsDropProps) => {
-  const newsDropData = newsDropElements.map((items, index) => {
+  const newsDropData = newsDropElements.map((items) => {
     return (
       <div className="images-card">
         <div className="image-div">
-          <img className="news-image" src={items.image} />
+          <img className="news-image" src={items.image} alt="" />
         </div>
         <div className="image-title-data">
           <p className="titles-image">{items.title}</p>

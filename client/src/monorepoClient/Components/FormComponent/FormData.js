@@ -137,15 +137,15 @@ const PersonalInfoFormData = [
       "Above 12 LPA",
     ]
   ),
-  new FormInputTypeShape(
-    formInputType.TEXT_INPUT_FIELD,
-    "Otp",
-    "Enter otp sent on your email address",
-    true,
-    false,
-    [],
-    1
-  ),
+  // new FormInputTypeShape(
+  //   formInputType.TEXT_INPUT_FIELD,
+  //   "Otp",
+  //   "Enter otp sent on your email address",
+  //   true,
+  //   false,
+  //   [],
+  //   1
+  // ),
 ];
 
 const ProfessionalInfoFormData = [
