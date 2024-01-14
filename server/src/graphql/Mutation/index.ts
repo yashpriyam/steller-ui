@@ -1,5 +1,10 @@
 export { login } from "./auth/login";
-export { registerUser,sendOtpToRegisteredUser } from "./user/index";
+export {
+  registerUser,
+  sendOtpToRegisteredUser,
+  verifyUserOtp,
+  updateUserPassword,
+} from "./user/index";
 export { createTransaction } from "./transaction/createTransaction";
 export { createNotes, deleteNotesById, updateNotesById } from "./notes/index";
 export { createVideo, deleteVideoById, updateVideoById } from "./video/index";

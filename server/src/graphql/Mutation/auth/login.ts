@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { paidUser } from "@models";
+import { User } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const login = async (
@@ -8,16 +8,17 @@ export const login = async (
   args: { data: loginUserInputType },
   { res }: ContextType
 ): Promise<CustomResponseType | unknown> => {
-  const { PAID_USER_LOGIN_SUCCESS } = localMessages.PAID_USER_MODEL;
-  const { PAID_USER_LOGIN_FAILED } = errorMessages.PAID_USER_MODEL;
+  const { USER_LOGIN_SUCCESS } = localMessages.USER;
+  const { USER_LOGIN_FAILED } = errorMessages.USER;
   const errorData: CustomResponseType = {
-    message: PAID_USER_LOGIN_FAILED,
+    message: USER_LOGIN_FAILED,
     status: statusCodes.BAD_REQUEST,
   };
   try {
     const { email, password } = args.data;
-    const user = await paidUser.findOne({ email });
-    const isValidPassword = bcrypt.compare(password, user?.password || "");
+    const lowerCaseEmail = email.toLowerCase();
+    const user = await User.findOne({ email:lowerCaseEmail });
+    const isValidPassword =await bcrypt.compare(password, user?.password || "");
     if (!user || !isValidPassword) {
       return {
         response: errorData,
@@ -30,7 +31,7 @@ export const login = async (
     }
     return {
       response: {
-        message: PAID_USER_LOGIN_SUCCESS,
+        message: USER_LOGIN_SUCCESS,
         status: statusCodes.OK,
       },
     };

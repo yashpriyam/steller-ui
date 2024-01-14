@@ -9,10 +9,13 @@
   .back-arrow {
     width: fit-content;
     height: fit-content;
+    cursor: pointer;
     border-radius: 50%;
     display: flex;
     position: absolute;
+    left: -20px;
     top: -30px;
+    left: -20px;
     align-items: center;
     justify-content: center;
     &:hover {
@@ -26,14 +29,17 @@
     }
   }
   .heading-container {
-    // margin: 10px 0;
     color: $primaryColor;
   }
   .input-component {
     height: 75px;
     width: 100%;
+    &:disabled {
+      opacity: 0.5;
+      border: none;
+    }
   }
-  .button-container {
+  .button-container-verification {
     width: 100%;
     display: flex;
     gap: 10px;
@@ -45,6 +51,9 @@
       align-items: center;
       display: flex;
       justify-content: center;
+      &:hover{
+        background-color: $fadedGrayPrimary;
+      }
       &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
@@ -53,14 +62,14 @@
     .resend-otp {
       color: $primaryColor;
       font-size: $smallFontSize;
-      cursor: not-allowed;
-      visibility: hidden;
-      &:hover {
+    }
+    .resend-otp-disable {
+      cursor:default;
+    }
+    .resend-otp-enable {
+      cursor: pointer;
+      &:hover{
         color: $lightBlue;
-      }
-      &.resend-otp-start {
-        cursor: pointer;
-        visibility: visible;
       }
     }
   }

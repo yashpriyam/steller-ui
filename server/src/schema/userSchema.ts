@@ -11,6 +11,7 @@ const userSchema = new mongoose.Schema(
     email: { type: String, required: true },
     name: { type: String, required: true },
     phoneNumber: { type: String, required: true },
+    password: { type: String, required: false },
     isJobSeeker: { type: Boolean, default: false },
     occupation: { type: String },
     sessionPreference: {
