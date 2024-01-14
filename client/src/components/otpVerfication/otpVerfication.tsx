@@ -15,7 +15,7 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
 }) => {
   const currentData: LoginState = useSelector((state: any) => state.login);
   const dispatch = useDispatch();
-  const { setEmail, setIsOtpValid, setIsOtpSend, setIsSending } = loginAction;
+  const { setEmail, setIsOtpValid, setIsOtpSend, setIsSending,setPassword } = loginAction;
   const { t } = useTranslation();
   const [otp, setOtp] = useState("");
   const [disable, setDisable] = useState(true);
@@ -43,7 +43,13 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
     dispatch(setIsSending(true));
     const isOtpValid = await verifyOtp(otp);
     dispatch(setIsSending(false));
-    isOtpValid ? toast.success(t("otp_verified_success")) : toast.error(t("invalid_otp"));
+    if (isOtpValid) {
+      dispatch(setPassword(""));
+      dispatch(setIsOtpSend(false));
+      dispatch(setIsOtpValid(false));
+      dispatch(setIsSending(false));
+      toast.success(t("otp_verified_success"))
+    }else toast.error(t("invalid_otp"));
     dispatch(setIsOtpValid(isOtpValid));
     setOtp("");
   };
@@ -86,14 +92,14 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
         errorMessage={t("invalid_email")}
       />
       <InputComponent
-        className="input-component"
+        className={`input-component`}
         type="number"
         value={otp}
         placeholder={t("enter_otp")}
         onChange={handleOtpInputChange}
         disabled={!currentData.isOtpSend}
       />
-      <div className="button-container">
+      <div className="button-container-verification">
         <Button
           text={currentData.isOtpSend ? t("verify_otp") : t("send_otp")}
           className="send-verify-otp"
@@ -105,15 +111,13 @@ export const OtpVerification: React.FC<OtpVerificationProps> = ({
               : handleOnSendOtpClick
           }
         />
-        <div
-          className={`resend-otp ${
-            currentData.isOtpSend && "resend-otp-start"
-          }`}
+        {currentData.isOtpSend&&<div
+          className={`resend-otp ${disable?"resend-otp-disable":"resend-otp-enable"}`}
           onClick={() => handleOnResendOtpClick()}
         >
           Didn't receive code?
           {disable ? ` Resend OTP in  ${timerCount}s ` : " Resend OTP"}
-        </div>
+        </div>}
       </div>
     </div>
   );

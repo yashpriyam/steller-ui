@@ -3,7 +3,9 @@ export const errorMessages = Object.freeze({
     INVALID_EMAIL: "invalid email address",
     INVALID_PHONE_NUMBER: "invalid phone number",
     INVALID_USER_PROFILE_IMAGE: "Failed to get profile image",
-    USER_EXIST:"user already registerd",
+    USER_EXIST: "user already registerd",
+    USER_PASSWPRD_UPDATION_FAILED: "password updation failed",
+    USER_LOGIN_FAILED:"invalid email and password",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
@@ -44,7 +46,7 @@ export const errorMessages = Object.freeze({
     FAILED_TO_UPLOAD_IMAGE: "Failed to upload image",
     NO_PUBLIC_ID_PROVIDED: "No public ID found",
   },
-   PAID_USER_MODEL: {
+  PAID_USER_MODEL: {
     PAID_USER_CREATION_FAILED: "unable to insert paid user data",
     PAID_USER_ALREADY_EXIST: "user already exists",
     PAID_USER_UPDATION_FAILED: "unable to update paid user data",

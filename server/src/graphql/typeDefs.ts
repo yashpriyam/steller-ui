@@ -54,6 +54,8 @@ const typeDefs = gql`
     updatePaidUserPassword(
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
+    verifyUserOtp(data:VerifyOtpPaidUserInputType!):CustomResponseType
+    updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
   }
   type UpdateProfilePictureOutput {
     public_id: String

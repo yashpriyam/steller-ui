@@ -517,4 +517,9 @@ declare global {
     weekData?: WeekDataType[];
     response: CustomResponseType;
   };
+  type UpdateUserPasswordInput = {
+    email: stringtring;
+    password: string;
+  }
+
 }
