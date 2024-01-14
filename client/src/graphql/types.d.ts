@@ -251,8 +251,19 @@ declare global {
     type: "single" | "multi"
   }
 
+
+  type AttemptedQuestionDataType = {
+    userId: string;
+    questionId: QuestionDataType,
+    isCorrect: boolean
+    response: QuestionOptionType[]
+  }
   interface QuestionStateInterface {
-    questionList: QuestionDataType[];
+    attemptedQuestions: AttemptedQuestionDataType[]
+    nonAttemptedQuestions: QuestionDataType[];
+    totalAttemptedQuestions: number;
+    totalNonAttemptedQuestions: number;
+    totalQuestions: number;
   }
 
   type QuestionDataType = {
@@ -303,6 +314,8 @@ declare global {
     isLoading: boolean;
     errorMsg?: string;
     successMsg?: string;
+    isAnswered?: boolean;
+    isCorrect?: boolean;
   }
 
   type QuestionSelectedValueType = {
@@ -318,6 +331,7 @@ declare global {
     text?: string;
     imageUrl?: string;
     iframe?: string;
+    isChecked?: boolean;
   };
 
   interface QuestionAttemptStateInterface {
@@ -328,6 +342,7 @@ declare global {
     imageUrl?: string;
     text?: string;
     iframe?: string;
+    isChecked?: boolean;
   };
 
   type VideoDataType = {

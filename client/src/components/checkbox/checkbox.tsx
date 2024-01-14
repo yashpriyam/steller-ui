@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./checkbox.scss";
 import { CheckboxIcon } from "../../icons/index";
 
@@ -14,6 +14,20 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   type = "multi"
 }) => {
   const [selectedValues, setSelectedValues] = useState<Record<number, CheckboxValueType>>({});
+
+  const initializeSelectedValues = () => {
+    const initialSelectedValues: Record<number, CheckboxValueType> = {};
+    options.map((optionData, index) => {
+      if(optionData.isChecked){
+        initialSelectedValues[index] = optionData;
+      }
+    });
+    setSelectedValues(initialSelectedValues);
+  }
+
+  useEffect(()=> {
+    initializeSelectedValues()
+  },[])
 
   const validTypes = {
     SINGLE: "single",
@@ -31,7 +45,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       newselectedValues[index] = options[index];
     }
     setSelectedValues(newselectedValues);
-
     onSelect(options[index], newselectedValues);
   }
 
@@ -41,6 +54,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       newValues[index] = options[index];
     }
     setSelectedValues(newValues)
+    onSelect(options[index], newValues);
   }
 
   const handleCheckboxChange = (index: number) => {

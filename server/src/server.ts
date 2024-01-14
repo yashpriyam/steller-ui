@@ -1,4 +1,4 @@
-import 'module-alias/register';
+import "module-alias/register";
 import { ApolloServer } from "apollo-server-express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -7,12 +7,13 @@ import typeDefs from "./graphql/typeDefs";
 import Connection from "./db/conn";
 import express from "express";
 import cookieParser from "cookie-parser";
-import cloudinaryConfiguration from './db/cloudinaryConf';
+import cloudinaryConfiguration from "./db/cloudinaryConf";
+import jwt from "jsonwebtoken";
 const PORT = process.env.PORT || 8080;
 
 (async () => {
   const app: express.Application = express();
-  app.use(express.json({limit: '50mb'}));
+  app.use(express.json({ limit: "50mb" }));
 
   // dotenv configuration
   dotenv.config();
@@ -32,7 +33,7 @@ const PORT = process.env.PORT || 8080;
       "https://webmaster-portal-git-dev-yashpriyam.vercel.app",
       "https://webmaster-portal-git-staging-yashpriyam.vercel.app",
       "https://webmaster-portal-yashpriyam.vercel.app",
-      "https://webmaster-portal.vercel.app"
+      "https://webmaster-portal.vercel.app",
     ],
     credentials: true,
   };
@@ -41,7 +42,22 @@ const PORT = process.env.PORT || 8080;
   app.use(cors(corsOption));
   app.use(cookieParser());
 
-  const server = new ApolloServer({ typeDefs, resolvers, context: ({ req, res }) => ({ req, res }) });
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: ({ req, res }) => {
+      const token = req.cookies[process.env.JWT_SECRET_KEY || ""];
+      let contextData;
+      try {
+        if (token) {
+          contextData = jwt.verify(token, process.env.JWT_SECRET_VALUE || "");
+        }
+      } catch (err) {
+        console.log({ err });
+      }
+      return { req, res, contextData };
+    },
+  });
   await server.start();
   await server.applyMiddleware({ app, path: "/graphql", cors: false });
 

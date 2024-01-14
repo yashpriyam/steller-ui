@@ -5,6 +5,7 @@ declare global {
   type ContextType = {
     req: Request;
     res: Response;
+    contextData: { user: RegisterType }
   };
 
   type MailResponseType = {
@@ -35,6 +36,7 @@ declare global {
     response: CustomResponseType;
   };  
   type RegisterType = {
+    _id?: string;
     name: string;
     email: string;
     phoneNumber: string;
@@ -189,9 +191,11 @@ declare global {
     text: string 
     imageUrl?: string;
     iframe?: string; 
+    isChecked?: boolean;
   }
 
   type QuestionSchemaType = {
+    _id: string;
     title: QuestionInfoType[];
     questionType: QuestionTypeEnum;
     options: QuestionInfoType[];
@@ -205,10 +209,26 @@ declare global {
     text: string;
     imageUrl?: string;
     iframe?: string; 
+    isChecked?: boolean;
   }
 
-  type AllQuestionDataType = {
-    id: ObjectId;
+  type GetAllQuestionDataReturnType = {
+    allAttemptedQuestions: AllAttemptedQuestionDataType[],
+    allNonAttemptedQuestions: AllNonAttemptedQuestionType[],
+    totalAttemptedQuestions: number;
+    totalNonAttemptedQuestions: number;
+    totalQuestions: number;
+  }
+
+  type AllAttemptedQuestionDataType = {
+    userId: string;
+    questionId: AllNonAttemptedQuestionType;
+    isCorrect: boolean;
+    response: QuestionOptionType[]
+  }
+
+  type AllNonAttemptedQuestionType = {
+    _id: string;
     title: QuestionOptionType[];
     questionType: QuestionTypeEnum;
     options: QuestionOptionType[];
@@ -216,6 +236,8 @@ declare global {
     marks: number;
     batchCode: string;
     meta: QuestionMetaData;
+    isAnswered?: boolean;
+    isCorrect?: boolean;
   }
 
   type QuestionMetaData = {

@@ -392,8 +392,39 @@ const typeDefs = gql`
     isArchived: Boolean
     type: QuestionMetaType
   }
+
+ type AttemptQuestionOptionOutputType  {
+   text: String
+   imageUrl: String
+   iframe: String
+   isChecked: Boolean
+ }
+
+  type AttemptedQuestionIdDataType  {
+    id: String
+    title: [QuestionOptionOutputType!]!
+    batchCode: String!
+    options: [AttemptQuestionOptionOutputType!]!
+    questionType: QuestionType!
+    answer: [QuestionOptionOutputType!]!
+    marks: Int!
+    meta: QuestionMetaOutput!
+  }
+
+  type AttemptedQuestionDataType {
+    userId: ID
+    questionId: AttemptedQuestionIdDataType!
+    response: [QuestionOptionOutputType]
+    isCorrect: Boolean
+    timestamp: DateTime
+  }
+
   type GetAllQuestionsOutputType {
-    questionData: [QuestionDataType]
+    attemptedQuestions: [AttemptedQuestionDataType]
+    nonAttemptedQuestions: [QuestionDataType]
+    totalAttemptedQuestions: Int
+    totalNonAttemptedQuestions: Int
+    totalQuestions: Int
     response: CustomResponseType
   }
   input QuestionAttemptType {

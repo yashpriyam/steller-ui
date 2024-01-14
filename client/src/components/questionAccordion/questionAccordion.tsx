@@ -10,13 +10,15 @@ const QuestionAccordion = ({
   onSubmit,
   isLoading,
   errorMsg,
-  successMsg
+  successMsg,
+  isAnswered,
+  isCorrect
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
-  const { title, options, isAnswered, isCorrect, questionType } = questionData;
+  const { title, options, questionType } = questionData;
   const [fillupValue, setFillupValue] = useState<string>("");
   const isFillupType = questionType === "fillup";
-  const isSubmitBtnDisabled: boolean = isFillupType ? !fillupValue : (!!selectedValues.length || isLoading);
+  const isSubmitBtnDisabled: boolean = isFillupType ? !fillupValue : (!selectedValues.length || isLoading);
   return (
     <Accordion className={`question-title`} title={<div className='question-title'>
       {title[0]?.text}
