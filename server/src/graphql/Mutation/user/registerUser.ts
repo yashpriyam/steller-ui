@@ -30,14 +30,14 @@ export const registerUser = async (
       expectedSalary,
       collegeName,
     } = data;
-
-    if (!isValidEmail(email)) {
+    const lowerCaseEmail = email.toLowerCase();
+    if (!isValidEmail(lowerCaseEmail)) {
       throw new UserInputError(errorMessages.USER.INVALID_EMAIL);
     } else if (!isValidPhoneNumber(phoneNumber)) {
       throw new UserInputError(errorMessages.USER.INVALID_PHONE_NUMBER);
     }
 
-    const isUserExist = await User.exists({ email });
+    const isUserExist = await User.exists({ email:lowerCaseEmail });
     if (isUserExist) {
       return {
         response: {
@@ -48,10 +48,9 @@ export const registerUser = async (
     }
 
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
-
     const savedUser = await User.create({
       name: capitalizedName,
-      email,
+      email:lowerCaseEmail,
       phoneNumber,
       isJobSeeker,
       occupation,
@@ -65,7 +64,7 @@ export const registerUser = async (
     const emailDetails: EmailType = {
       name: capitalizedName,
       phoneNumber,
-      email,
+      email:lowerCaseEmail,
       time,
     };
     const userData:RegisterType = {
@@ -81,7 +80,7 @@ export const registerUser = async (
     await Promise.allSettled([
       sendEmail({
         ...getRegistrationEmailForUser(emailDetails),
-        to: email,
+        to: lowerCaseEmail,
       }),
       sendEmail({
         ...getRegistrationEmailForAdmin(emailDetails),
