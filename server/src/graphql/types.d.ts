@@ -177,6 +177,7 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
+    fillup = "fillup"
   }
 
   enum QuestionMetaType {

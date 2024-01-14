@@ -3,6 +3,7 @@ import Accordion from '../accordion/accordion';
 import './questionAccordion.scss'
 import { Checkbox } from '../checkbox/checkbox';
 import { Button } from '../button/button';
+import { InputComponent } from '../../components/input/inputComponent';
 
 const QuestionAccordion = ({
   questionData,
@@ -12,7 +13,10 @@ const QuestionAccordion = ({
   successMsg
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
-  const { title, options, isAnswered, isCorrect } = questionData;
+  const { title, options, isAnswered, isCorrect, questionType } = questionData;
+  const [fillupValue, setFillupValue] = useState<string>("");
+  const isFillupType = questionType === "fillup";
+  const isSubmitBtnDisabled: boolean = isFillupType ? !fillupValue : (!!selectedValues.length || isLoading);
   return (
     <Accordion className={`question-title`} title={<div className='question-title'>
       {title[0]?.text}
@@ -39,20 +43,25 @@ const QuestionAccordion = ({
           }
           <div className='question-option-container'>
             {
-              <Checkbox onSelect={(index, selectedValues) => setSelectedValues(Object.values(selectedValues))} isIncorrect={isAnswered && !isCorrect} options={options} className='question-checkbox' />
+              isFillupType ? (
+                <InputComponent className='question-fillup-input' type="text" onChange={(e) => setFillupValue(e.target.value)} value={fillupValue} />
+              ) : (<Checkbox onSelect={(index, selectedValues) => setSelectedValues(Object.values(selectedValues))} isIncorrect={isAnswered && !isCorrect} options={options} className='question-checkbox' type={isFillupType ? "multi" : "single"} />)
             }
           </div>
-         {
-          isAnswered && (isCorrect ? (
-            <div className='question-correct-ans'>
-              {successMsg}
-            </div>
-          ) : ( <div className='question-incorrect-ans'>
-          { errorMsg }
-        </div>))
-         }
+          {
+            isAnswered && !isFillupType && (isCorrect ? (
+              <div className='question-correct-ans'>
+                {successMsg}
+              </div>
+            ) : (<div className='question-incorrect-ans'>
+              {errorMsg}
+            </div>))
+          }
+          {
+            isAnswered && isFillupType && (<iframe src={fillupValue}></iframe>)
+          }
           <div className='question-submit-btn-wrapper'>
-            <Button isLoading={isLoading} isDisabled={!selectedValues.length || isLoading} onClick={() => onSubmit(questionData, selectedValues)} iconPosition="center" className='question-submit-btn' />
+            <Button isLoading={isLoading} isDisabled={isSubmitBtnDisabled} onClick={() => onSubmit(questionData, selectedValues)} iconPosition="center" className='question-submit-btn' />
           </div>
         </div>
       </div>

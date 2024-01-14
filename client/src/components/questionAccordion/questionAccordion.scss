@@ -29,6 +29,9 @@
             padding-top: 15px;
             color: $accent-color-3;
         }
+        .question-accordion-answer-iframe{
+            margin-top: 10px;
+        }
     }
 }
 .question-title{
@@ -45,4 +48,7 @@
     margin-top: 20px;
     padding: 0px 15px;
     padding-bottom: 15px;
+}
+.question-fillup-input{
+    margin-top: 10px;
 }

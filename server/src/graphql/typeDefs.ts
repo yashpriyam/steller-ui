@@ -291,6 +291,7 @@ const typeDefs = gql`
   enum QuestionType {
     multi
     single
+    fillup
   }
   input QuestionMeta {
     topic: String!

@@ -11,10 +11,16 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   textColor,
   direction = "column",
   title,
+  type = "multi"
 }) => {
   const [selectedValues, setSelectedValues] = useState<Record<number, CheckboxValueType>>({});
 
-  const handleCheckboxChange = (index: number) => {
+  const validTypes = {
+    SINGLE: "single",
+    MULTI: "multi",
+  }
+
+  const handleMultiSelectChange = (index: number) => {
     const newselectedValues = {
       ...selectedValues
     };
@@ -27,6 +33,25 @@ export const Checkbox: React.FC<CheckboxProps> = ({
     setSelectedValues(newselectedValues);
 
     onSelect(options[index], newselectedValues);
+  }
+
+  const handleSingleSelectChange = (index: number) => {
+    const newValues:Record<number, CheckboxValueType> = {};
+    if(!selectedValues[index]){
+      newValues[index] = options[index];
+    }
+    setSelectedValues(newValues)
+  }
+
+  const handleCheckboxChange = (index: number) => {
+    switch(type){
+      case validTypes.SINGLE:
+        handleSingleSelectChange(index);
+        break;
+      case validTypes.MULTI:
+        handleMultiSelectChange(index);
+        break;
+    }
   };
 
   return (

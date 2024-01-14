@@ -2,7 +2,8 @@ import { Schema, model } from "mongoose";
 
 const questionTypes = {
     multi: "multi",
-    single: "single"
+    single: "single",
+    fillup: "fillup"
 }
 const questionDurationTypes = {
     timed: "timed",

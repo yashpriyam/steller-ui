@@ -248,6 +248,7 @@ declare global {
     direction?: "row" | "column";
     title?: string;
     isIncorrect?: boolean;
+    type: "single" | "multi"
   }
 
   interface QuestionStateInterface {
@@ -285,6 +286,7 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
+    fillup = "fillup"
   }
 
   interface QuestionResponseType {
