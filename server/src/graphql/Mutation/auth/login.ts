@@ -16,7 +16,8 @@ export const login = async (
   };
   try {
     const { email, password } = args.data;
-    const user = await User.findOne({ email });
+    const lowerCaseEmail = email.toLowerCase();
+    const user = await User.findOne({ email:lowerCaseEmail });
     const isValidPassword =await bcrypt.compare(password, user?.password || "");
     if (!user || !isValidPassword) {
       return {

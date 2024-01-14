@@ -16,7 +16,9 @@ export const updateUserPassword = async (
   try {
     const { data } = args;
     const { email, password } = data;
-    if (!isValidEmail(email)) {
+    const lowerCaseEmail = email.toLowerCase();
+
+    if (!isValidEmail(lowerCaseEmail)) {
       return {
         response: {
           message: INVALID_EMAIL,
@@ -31,7 +33,7 @@ export const updateUserPassword = async (
       encodePassword = hash;
     }
     const updatedPaidUser = await User.findOneAndUpdate(
-      { email },
+      { email:lowerCaseEmail },
       { password: encodePassword },
       { upsert: true, new: true }
     );
