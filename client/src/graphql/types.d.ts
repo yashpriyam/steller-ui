@@ -256,10 +256,10 @@ declare global {
 
   type QuestionDataType = {
     id: string;
-    question: ImageAndTextType[];
+    title: QuestionOptionType[];
     questionType: QuestionTypeEnum;
-    options: ImageAndTextType[];
-    answer: ImageAndTextType[];
+    options: QuestionOptionType[];
+    answer: QuestionOptionType[];
     marks: number;
     batchCode: string;
     meta: QuestionMetaDataType;
@@ -304,25 +304,28 @@ declare global {
   }
 
   type QuestionSelectedValueType = {
-    text: string | null;
+    text?: string;
     value?: string;
-    imageUrl: string | null;
+    imageUrl?: string;
+    iframe?: string;
     __typename?: string;
   };
 
   type CheckboxValueType = {
-    text: string | null;
     value?: string;
-    imageUrl: string | null;
+    text?: string;
+    imageUrl?: string;
+    iframe?: string;
   };
 
   interface QuestionAttemptStateInterface {
     isLoading: boolean;
   }
 
-  type ImageAndTextType = {
-    imageUrl: string | null;
-    text: string | null;
+  type QuestionOptionType = {
+    imageUrl?: string;
+    text?: string;
+    iframe?: string;
   };
 
   type VideoDataType = {

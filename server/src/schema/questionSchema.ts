@@ -1,6 +1,6 @@
-import mongoose, { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const questionTypes ={
+const questionTypes = {
     multi: "multi",
     single: "single"
 }
@@ -9,15 +9,15 @@ const questionDurationTypes = {
     recorded: "recorded"
 }
 const questionSchema = new Schema<QuestionSchemaType>({
-  question: { type: [{ imageUrl: String, text: String }], required: true },
+  title: { type: [{ imageUrl: String, text: String, iframe: String }], required: true },
   batchCode: { type: String, required: true },
-  options: { type: [{ imageUrl: String, text: String }], required: true },
+  options: { type: [{ imageUrl: String, text: String, iframe: String }], required: true },
   questionType: {
     type: String,
     enum: questionTypes,
     required: true,
   },
-  answer: { type: [{ imageUrl: String, text: String }], required: true },
+  answer: { type: [{ imageUrl: String, text: String, iframe: String }], required: true },
   marks: { type: Number, default: 1 },
   meta: {
     topic: { type: String, required: true },
@@ -26,7 +26,7 @@ const questionSchema = new Schema<QuestionSchemaType>({
     isArchived: { type: Boolean, required: true },
     type: {
       type: String,
-      enum:questionDurationTypes,
+      enum: questionDurationTypes,
       required: true,
     },
     expiresInMins: { type: Number, required: true },

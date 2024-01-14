@@ -12,15 +12,15 @@ const QuestionAccordion = ({
   successMsg
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
-  const { question, options, isAnswered, isCorrect } = questionData;
+  const { title, options, isAnswered, isCorrect } = questionData;
   return (
     <Accordion className={`question-title`} title={<div className='question-title'>
-      {question[0]?.text}
+      {title[0]?.text}
     </div>}>
       <div className='question-accordion-container'>
         <div className='question-container'>
           {
-            question.map((titleData: ImageAndTextType, index: number) => <div key={index} className='question-title-sub-container'>
+            title.map((titleData: QuestionOptionType, index: number) => <div key={index} className='question-title-sub-container'>
               {
                 Boolean(index) && (<div className='question-title-text'>
                   {
@@ -30,6 +30,9 @@ const QuestionAccordion = ({
               }
               {
                 titleData?.imageUrl && (<img className='question-title-img' src={titleData.imageUrl} alt="" />)
+              }
+              {
+                titleData?.iframe && (<iframe className='question-accordion-head-iframe' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" src={titleData.iframe}></iframe>)
               }
             </div>)
 

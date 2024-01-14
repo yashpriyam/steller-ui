@@ -3,20 +3,26 @@ import { gql } from "@apollo/client";
 export const GET_ALL_QUESTIONS = gql`
   query GetAllQuestions($filterData: GetQuestionsFilterInput) {
     getAllQuestions(filterData: $filterData) {
-      response {
-        status
-        message
-      }
       questionData {
-        questionType
-        question {
-          imageUrl
+        id
+        title {
           text
+          imageUrl
+          iframe
         }
+        batchCode
         options {
-          imageUrl
           text
+          imageUrl
+          iframe
         }
+        questionType
+        answer {
+          text
+          imageUrl
+          iframe
+        }
+        marks
         meta {
           topic
           day
@@ -26,13 +32,10 @@ export const GET_ALL_QUESTIONS = gql`
           expiresInMins
           isOpenable
         }
-        marks
-        batchCode
-        answer {
-          imageUrl
-          text
-        }
-        id
+      }
+      response {
+        status
+        message
       }
     }
   }

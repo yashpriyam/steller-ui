@@ -5,7 +5,7 @@ import { CheckboxIcon } from "../../icons/index";
 export const Checkbox: React.FC<CheckboxProps> = ({
   className,
   options = [],
-  onSelect = () => {},
+  onSelect = () => { },
   bgColor,
   style,
   textColor,
@@ -25,7 +25,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       newselectedValues[index] = options[index];
     }
     setSelectedValues(newselectedValues);
-    
+
     onSelect(options[index], newselectedValues);
   };
 
@@ -57,12 +57,17 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                 </div>
               )}
             </div>
-            <label className="label-text" style={{ color: textColor }}>
-              {option?.text}
-            </label>
-          {
-            option?.imageUrl && (<img className="checkbox-comp-option-img" src={option?.imageUrl} alt="" />)
-          }
+            <div className="checkbox-option-container">
+              <label className="label-text" style={{ color: textColor }}>
+                {option?.text}
+              </label>
+              {
+                option?.imageUrl && (<img className="checkbox-comp-option-img" src={option?.imageUrl} alt="" />)
+              }
+              {
+                option?.iframe && (<iframe src={option.iframe} width="100%" />)
+              }
+            </div>
           </div>
         ))}
       </div>

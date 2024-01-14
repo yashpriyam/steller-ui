@@ -184,22 +184,34 @@ declare global {
     recorded = "recorded",
   }
 
+  type QuestionInfoType = {
+    text: string 
+    imageUrl?: string;
+    iframe?: string; 
+  }
+
   type QuestionSchemaType = {
-    question: { imageUrl: string; text: string }[];
+    title: QuestionInfoType[];
     questionType: QuestionTypeEnum;
-    options: { imageUrl: string; text: string }[];
-    answer: { imageUrl: string; text: string }[];
+    options: QuestionInfoType[];
+    answer: QuestionInfoType[];
     marks: number;
     batchCode: string;
     meta: QuestionMetaData;
   };
 
+  type QuestionOptionType = {
+    text: string;
+    imageUrl?: string;
+    iframe?: string; 
+  }
+
   type AllQuestionDataType = {
     id: ObjectId;
-    question: { imageUrl: string; text: string }[];
+    title: QuestionOptionType[];
     questionType: QuestionTypeEnum;
-    options: { imageUrl: string; text: string }[];
-    answer: { imageUrl: string; text: string }[];
+    options: QuestionOptionType[];
+    answer: QuestionOptionType[];
     marks: number;
     batchCode: string;
     meta: QuestionMetaData;
@@ -235,7 +247,7 @@ declare global {
   type QuestionAttemptSchemaType = {
     userId: ObjectId;
     questionId: ObjectId;
-    response: { imageUrl: string; text: string }[];
+    response: QuestionInfoType[];
     isCorrect?: boolean;
     timestamp: Date;
   };
@@ -273,10 +285,10 @@ declare global {
     updates: QuestionData;
   };
   type QuestionData = {
-    question?: [{ imageUrl: string; text: string }];
-    options?: [{ imageUrl: string; text: string }];
+    title?: QuestionOptionType[];
+    options?: QuestionOptionType[];
     questionType?: QuestionTypeEnum;
-    answer?: [{ imageUrl: string; text: string }];
+    answer?: QuestionOptionType[];
     marks?: number;
     batchCode?: string;
     meta: QuestioinMetaDataUpdate;
@@ -295,10 +307,10 @@ declare global {
     response: CustomResponseType;
   };
   type QuestionDataType = {
-    question: [{ imageUrl: string; text: string }];
-    options: [{ imageUrl: string; text: string }];
+    title: QuestionOptionType[];
+    options: QuestionOptionType[];
     questionType: QuestionTypeEnum;
-    answer: [{ imageUrl: string; text: string }];
+    answer: QuestionOptionType[];
     marks: number;
     batchCode: string;
     meta: QuestionUpdateOutputMetaData;
@@ -343,7 +355,8 @@ declare global {
 
   interface QuestionResponseType {
     text: string;
-    imageUrl: string;
+    imageUrl?: string;
+    iframe?: string;
   }
   interface UploadImageArgumentType {
     images: string | string[];
