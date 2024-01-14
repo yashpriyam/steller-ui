@@ -1,11 +1,11 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import { User, otpModel } from "@models";
 import { isValidEmail } from "@utils";
-import jwt from "jsonwebtoken"
+import jwt from "jsonwebtoken";
 export const verifyUserOtp = async (
   _parent: undefined,
   args: { data: { email: string; emailOtp: string } },
-  {res}:ContextType
+  { res }: ContextType
 ): Promise<CustomResponseType | unknown> => {
   const { OTP_VERIFIED_SUCCESS } = localMessages.OTP_MODEL;
   const { OTP_EMAIL_NOT_EXIST, OTP_EMAIL_INVALID } = errorMessages.OTP_MODEL;
@@ -16,11 +16,12 @@ export const verifyUserOtp = async (
   try {
     const { data } = args;
     const { email, emailOtp } = data;
-    if (isValidEmail(email)) {
-      const userExist = await User.findOne({ email });
+    const lowerCaseEmail = email.toLowerCase();
+    if (isValidEmail(lowerCaseEmail)) {
+      const userExist = await User.findOne({ email: lowerCaseEmail });
       if (userExist) {
         const otpDetails = await otpModel.findOne({
-          email,
+          email: lowerCaseEmail,
           emailOtp,
           expiresAt: {
             $gte: new Date(),
@@ -31,7 +32,7 @@ export const verifyUserOtp = async (
         }
         const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
         if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
-          const token = jwt.sign({ user:userExist }, JWT_SECRET_VALUE);
+          const token = jwt.sign({ user: userExist }, JWT_SECRET_VALUE);
           res.cookie(JWT_SECRET_KEY, token);
         }
         return {

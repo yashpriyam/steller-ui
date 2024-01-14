@@ -11,8 +11,8 @@ export const sendOtpToRegisteredUser = async (
     const { INVALID_EMAIL } = errorMessages.USER;
     try {
         const { email } = args;
-
-        if (!isValidEmail(email)) {
+    const lowerCaseEmail = email.toLowerCase();
+        if (!isValidEmail(lowerCaseEmail)) {
             return {
                 response: {
                     message: INVALID_EMAIL,
@@ -20,7 +20,7 @@ export const sendOtpToRegisteredUser = async (
                 },
             };
         }
-      const userData = await User.exists({ email });      
+      const userData = await User.exists({ email:lowerCaseEmail });      
 
         if (!userData) {
             return {
@@ -36,7 +36,7 @@ export const sendOtpToRegisteredUser = async (
         const expiresAt = timeAfterMins(emailValidityMinutes);
 
         const otpData: CreateUserOtpType = await otpModel.findOneAndUpdate(
-          { email },
+          { email:lowerCaseEmail },
           {
             emailOtp,
             expiresAt
@@ -47,7 +47,7 @@ export const sendOtpToRegisteredUser = async (
         await sendEmail({
             subject: EMAIL_VERIFICATION_SUBJECT,
             html: getEmailVerificationMessage({otpData,emailValidityMinutes}),
-            to: email,
+            to: lowerCaseEmail,
         });
 
         return {
