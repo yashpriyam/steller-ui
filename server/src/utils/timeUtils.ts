@@ -1,3 +1,5 @@
+export const currentTimeInLocaleString = new Date().toLocaleString();
+
 export function convertUTCtoIST(): string {
   const utcDate = new Date();
   utcDate.setHours(utcDate.getHours() + 5);
