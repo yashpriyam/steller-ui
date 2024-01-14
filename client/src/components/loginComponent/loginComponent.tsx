@@ -14,7 +14,7 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
   const { t } = useTranslation();
   const currentData: LoginState = useSelector((state: any) => state.login);
   const dispatch = useDispatch();
-  const { setEmail, setPassword } = loginAction;
+  const { setEmail, setPassword,setIsSending } = loginAction;
   const setEmailOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value;
     dispatch(setEmail(email));
@@ -24,7 +24,9 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
     dispatch(setPassword(password));
   };
   const handleOnLoginButtonClick = async () => {
+    dispatch(setIsSending(true));
     const isLogin = await handleLoginClick();
+    dispatch(setIsSending(false))
     dispatch(setEmail(""));
     dispatch(setPassword(""));
     isLogin ?Toast.success(t("login_success")): Toast.error(t("error_on_login"));
@@ -60,6 +62,8 @@ export const LoginComponent: React.FC<LoginComponentProps> = ({
         className="login-button"
         onClick={handleOnLoginButtonClick}
         text={t("login")}
+        isLoading={currentData.isOtpSending}
+        iconPosition="center"
         isDisabled={!(currentData.email && currentData.password)}
       />
     </div>

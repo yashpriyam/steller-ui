@@ -26,13 +26,18 @@
     }
   }
   .login-button {
-    width: 100%;
-    margin-top: 10px;
-    font-size: $largerFontSize;
-    &:disabled{
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
+     height: 50px;
+      width: 100%;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      &:hover{
+        background-color: $fadedGrayPrimary;
+      }
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
   }
   .error-container {
     width: 100%;
