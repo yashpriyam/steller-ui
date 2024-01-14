@@ -10,6 +10,7 @@ const typeDefs = gql`
       filterData: GetQuestionsFilterInput
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
+    getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
   }
 
   type Mutation {
@@ -54,7 +55,6 @@ const typeDefs = gql`
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
     upsertDay(dayData: UpsertDayDataInputType!) : DayDataOutputType
-    deleteAllDay(dayData: DeleteDayDataInputType): DayDataOutputType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -159,7 +159,6 @@ const typeDefs = gql`
     occupation: String
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
-    emailOtp: String!
     collegeName: String
   }
 
@@ -169,14 +168,18 @@ const typeDefs = gql`
   }
 
   type RegistrationOutputDataType {
+    userData:RegisterOutputType
+    response :CustomResponseType!
+  }
+  type RegisterOutputType{
     name: String!
     email: String!
     phoneNumber: String!
-    isJobSeeker: Boolean!
-    occupation: String!
-    sessionPreference: SessionPreferenceEnum!
-    expectedSalary: String!
-    collegeName: String!
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: SessionPreferenceEnum
+    expectedSalary: String
+    collegeName: String
   }
   input CreateNotesInputType {
     link: String!
@@ -474,6 +477,27 @@ const typeDefs = gql`
     email: String!
     password: String
   }
+  input WeekDataInputType {
+    batchCode: String
+    weekNumber: Int
+    title: String
+    description: String
+    isActive: Boolean
+    isDisabledForUnpaidUsers: Boolean
+  } 
+  type WeekDataType {
+    batchCode: String
+    weekNumber: Int
+    title: String
+    description: String
+    isActive: Boolean
+    isDisabledForUnpaidUsers: Boolean
+    days: [DayDataType]
+  }
+  type WeekDataOutputType {
+    weekData: [WeekDataType]
+    response: CustomResponseType!
+  }  
   input UpsertDayDataInputType {
     batchCode: String!
     dayNumber: Int!
@@ -481,9 +505,6 @@ const typeDefs = gql`
     title: String
     description: String
     topics: [String]
-    notes: [String]
-    videos: [String]
-    questions: [String]
   }
   type DayDataType {
     batchCode: String
@@ -492,24 +513,13 @@ const typeDefs = gql`
     title: String
     description: String
     topics: [String]
-    notes: [String]
-    videos: [String]
-    questions: [String]
+    notes: [NotesDataType]
+    videos: [videoDataType]
+    questions: [QuestionDataType]
   }
   type DayDataOutputType {
     dayData: DayDataType
     response: CustomResponseType!
-  }
-  input DeleteDayDataInputType {
-    batchCode: String
-    dayNumber: Int
-    weekNumber: Int
-    title: String
-    description: String
-    topics: [String]
-    notes: [String]
-    videos: [String]
-    questions: [String]
   }
   scalar DateTime
   scalar JSON

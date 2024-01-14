@@ -16,7 +16,6 @@ export const useUser = () => {
     occupation,
     sessionPreference,
     expectedSalary,
-    emailOtp,
     collegeName,
   }: RegisterUserData) => {
     const response = await apolloClient.mutate({
@@ -30,13 +29,12 @@ export const useUser = () => {
           occupation,
           sessionPreference,
           expectedSalary,
-          emailOtp,
           collegeName,
         },
       },
     });
     dispatch(actions.setRegisterUser(response.data));
-    return response;
+    return {response};
   };
 
   const sendOtpApi = async (email: string) => {

@@ -1,8 +1,9 @@
 import mongoose, { Schema, model } from "mongoose";
+import { notesModel, videoModel, questionModel } from "./index";
 
 const { ObjectId } = mongoose.Schema.Types;
 
-const daySchema = new Schema<CreateDayDataType>({
+const daySchema = new Schema<DayDataType>({
   batchCode: {
     type: String,
   },
@@ -24,21 +25,21 @@ const daySchema = new Schema<CreateDayDataType>({
   notes: [
     {
       type: ObjectId,
-      ref: "notesModel",
+      ref: notesModel,
     },
   ],
   videos: [
     {
       type: ObjectId,
-      ref: "videoModel",
+      ref: videoModel,
     },
   ],
   questions: [
     {
       type: ObjectId,
-      ref: "questionModel",
+      ref: questionModel,
     },
   ],
 });
 
-export const dayModel = model<CreateDayDataType>("day", daySchema);
+export const dayModel = model<DayDataType>("day", daySchema);

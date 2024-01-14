@@ -3,7 +3,7 @@ import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const upsertDay = async (
   parent: undefined,
-  args: { dayData: CreateDayDataType }
+  args: { dayData: DayDataType }
 ): Promise<DayDataOutputType> => {
   const { DAY_CREATION_FAILED } = errorMessages.DAY_MODEL;
   const errorData: CustomResponseType = {
@@ -24,8 +24,13 @@ export const upsertDay = async (
       weekNumber,
       batchCode,
     } = dayData;
-    let newDayData: CreateDayDataType = await dayModel.findOneAndUpdate(
-      { weekNumber, dayNumber },
+    if(!dayNumber || !weekNumber || !batchCode) {
+      return{
+        response:errorData,
+      }
+    }
+    const updatedDayData: DayDataType = await dayModel.findOneAndUpdate(
+      { batchCode, weekNumber, dayNumber },
       {
         dayNumber,
         description,
@@ -39,21 +44,18 @@ export const upsertDay = async (
       },
       { new: true, upsert: true }
     );
-    console.log({ newDayData });
-    if (newDayData) {
-      const newWeekData: WeekSchemaType | null =
+    if (updatedDayData) {
         await weekModel.findOneAndUpdate(
           { weekNumber },
           {
-            $push: { days: newDayData._id },
+            $push: { days: updatedDayData._id },
           },
           { new: true, upsert: true }
         );
-      console.log({ newWeekData });
     }
     return {
-      dayData: newDayData,
-      response: newDayData
+      dayData: updatedDayData,
+      response: updatedDayData
         ? {
           message: DAY_CREATION_SUCCESS,
           status: statusCodes.OK,
@@ -61,7 +63,6 @@ export const upsertDay = async (
         : errorData,
     };
   } catch (err) {
-    console.log(err)
     return {
       response: errorData,
     };

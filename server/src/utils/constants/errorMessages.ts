@@ -3,6 +3,7 @@ export const errorMessages = Object.freeze({
     INVALID_EMAIL: "invalid email address",
     INVALID_PHONE_NUMBER: "invalid phone number",
     INVALID_USER_PROFILE_IMAGE: "Failed to get profile image",
+    USER_EXIST:"user already registerd",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
@@ -48,6 +49,9 @@ export const errorMessages = Object.freeze({
     PAID_USER_ALREADY_EXIST: "user already exists",
     PAID_USER_UPDATION_FAILED: "unable to update paid user data",
     PAID_USER_LOGIN_FAILED: "invalid email and password",
+  },
+  WEEK_MODEL: {
+    WEEK_NOT_FOUND: "week data not found",
   },
   DAY_MODEL: {
     DAY_CREATION_FAILED: "unable to insert day data",

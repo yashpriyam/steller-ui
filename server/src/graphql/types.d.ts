@@ -30,17 +30,20 @@ declare global {
     offline = "offline",
   }
 
+  type RegisterOutputType = {
+    userData?: RegisterType;
+    response: CustomResponseType;
+  };  
   type RegisterType = {
     name: string;
     email: string;
     phoneNumber: string;
     isJobSeeker?: boolean;
     occupation?: string;
-    sessionPreference?: SessionPreferenceEnum;
+    sessionPreference?: "online"|"offline";
     expectedSalary?: string;
-    emailOtp: string;
     collegeName?: string;
-  };
+  }
 
   type ProgramDataType = {
     programType: string;
@@ -349,7 +352,7 @@ declare global {
   interface ImageUploadArgs {
     image: string;
   }
-  type CreateDayDataType = {
+  type DayDataType = {
     _id?: ObjectId;
     batchCode?: string;
     weekNumber?: number;
@@ -357,9 +360,9 @@ declare global {
     title?: string;
     description?: string;
     topics?: string[];
-    notes?: string[];
-    videos?: string[];
-    questions?: string[];
+    notes?: ObjectId[];
+    videos?: ObjectId[];
+    questions?: ObjectId[];
   };
   type loginUserInputType = {
     email: string;
@@ -415,17 +418,18 @@ declare global {
     password?: string;
   };
   type DayDataOutputType = {
-    dayData?: CreateDayDataType;
+    dayData?: DayDataType;
     response: CustomResponseType;
   }
-  type WeekSchemaType = {
+  type WeekDataType = {
+    batchCode?: string;
+    weekNumber?: number;
     batchCode?: string;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    weekNumber?: number;
-    days?: string[];
+    days?: ObjectId[];
   }
 
 
@@ -504,4 +508,8 @@ declare global {
     }>;
   }
 
+  type AllWeekDataOutputType = {
+    weekData?: WeekDataType[];
+    response: CustomResponseType;
+  };
 }

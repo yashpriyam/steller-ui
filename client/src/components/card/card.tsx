@@ -25,7 +25,6 @@ export const Card: React.FC<CardProps> = ({
     dayNumber,
     description,
     duration,
-    isActive,
     links,
     title,
     videoNumber,
