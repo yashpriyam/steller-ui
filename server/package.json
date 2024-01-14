@@ -31,16 +31,14 @@
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.7",
     "nodemon": "^3.0.2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "@types/cookie-parser": "^1.4.6",
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.5"
   },
   "_moduleAliases": {
     "@utils": "src/utils/index",
     "@constants": "src/utils/constants/index",
     "@models": "src/schema/index"
-  },
-  "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/cookie-parser": "^1.4.6",
-    "@types/jsonwebtoken": "^9.0.5"
   }
 }
