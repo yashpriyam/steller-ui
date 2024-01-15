@@ -55,4 +55,7 @@ export const errorMessages = Object.freeze({
   WEEK_MODEL: {
     WEEK_NOT_FOUND: "week data not found",
   },
+  MSG: {
+    UNAUTHORIZED_USER: "unauthorized user"
+  }
 });

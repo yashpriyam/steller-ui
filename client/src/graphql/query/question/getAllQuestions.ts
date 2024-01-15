@@ -3,20 +3,21 @@ import { gql } from "@apollo/client";
 export const GET_ALL_QUESTIONS = gql`
   query GetAllQuestions($filterData: GetQuestionsFilterInput) {
     getAllQuestions(filterData: $filterData) {
-      response {
-        status
-        message
-      }
-      questionData {
-        questionType
-        question {
-          imageUrl
-          text
-        }
+      nonAttemptedQuestions {
+        id
+        batchCode
         options {
-          imageUrl
           text
+          imageUrl
+          iframe
         }
+        questionType
+        answer {
+          text
+          imageUrl
+          iframe
+        }
+        marks
         meta {
           topic
           day
@@ -26,14 +27,60 @@ export const GET_ALL_QUESTIONS = gql`
           expiresInMins
           isOpenable
         }
-        marks
-        batchCode
-        answer {
-          imageUrl
+        title {
           text
+          imageUrl
+          iframe
         }
-        id
       }
+      attemptedQuestions {
+        userId
+        questionId {
+          id
+          title {
+            text
+            imageUrl
+            iframe
+          }
+          batchCode
+          options {
+            text
+            imageUrl
+            iframe
+            isChecked
+          }
+          questionType
+          answer {
+            text
+            imageUrl
+            iframe
+          }
+          marks
+          meta {
+            topic
+            day
+            isActive
+            isArchived
+            type
+            expiresInMins
+            isOpenable
+          }
+        }
+        response {
+          text
+          imageUrl
+          iframe
+        }
+        isCorrect
+        timestamp
+      }
+      response {
+        status
+        message
+      }
+      totalAttemptedQuestions
+      totalNonAttemptedQuestions
+      totalQuestions
     }
   }
 `;

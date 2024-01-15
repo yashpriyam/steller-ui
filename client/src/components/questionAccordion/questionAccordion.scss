@@ -2,6 +2,10 @@
 .question-accordion-container{
     .question-container{
         padding: 0 30px;
+        .question-accordion-head-iframe{
+            height: 30vw;
+            width: 50vw;
+        }
         .question-title-sub-container{
             display: flex;
             flex-direction: column;
@@ -25,6 +29,9 @@
             padding-top: 15px;
             color: $accent-color-3;
         }
+        .question-accordion-answer-iframe{
+            margin-top: 10px;
+        }
     }
 }
 .question-title{
@@ -41,4 +48,7 @@
     margin-top: 20px;
     padding: 0px 15px;
     padding-bottom: 15px;
+}
+.question-fillup-input{
+    margin-top: 10px;
 }

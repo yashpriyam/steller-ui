@@ -5,6 +5,7 @@ declare global {
   type ContextType = {
     req: Request;
     res: Response;
+    contextData: { user: RegisterType }
   };
 
   type MailResponseType = {
@@ -35,6 +36,7 @@ declare global {
     response: CustomResponseType;
   };  
   type RegisterType = {
+    _id?: string;
     name: string;
     email: string;
     phoneNumber: string;
@@ -177,6 +179,7 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
+    fillup = "fillup"
   }
 
   enum QuestionMetaType {
@@ -184,25 +187,57 @@ declare global {
     recorded = "recorded",
   }
 
+  type QuestionInfoType = {
+    text: string 
+    imageUrl?: string;
+    iframe?: string; 
+    isChecked?: boolean;
+  }
+
   type QuestionSchemaType = {
-    question: { imageUrl: string; text: string }[];
+    _id: string;
+    title: QuestionInfoType[];
     questionType: QuestionTypeEnum;
-    options: { imageUrl: string; text: string }[];
-    answer: { imageUrl: string; text: string }[];
+    options: QuestionInfoType[];
+    answer: QuestionInfoType[];
     marks: number;
     batchCode: string;
     meta: QuestionMetaData;
   };
 
-  type AllQuestionDataType = {
-    id: ObjectId;
-    question: { imageUrl: string; text: string }[];
+  type QuestionOptionType = {
+    text: string;
+    imageUrl?: string;
+    iframe?: string; 
+    isChecked?: boolean;
+  }
+
+  type GetAllQuestionDataReturnType = {
+    allAttemptedQuestions: AllAttemptedQuestionDataType[],
+    allNonAttemptedQuestions: AllNonAttemptedQuestionType[],
+    totalAttemptedQuestions: number;
+    totalNonAttemptedQuestions: number;
+    totalQuestions: number;
+  }
+
+  type AllAttemptedQuestionDataType = {
+    userId: string;
+    questionId: AllNonAttemptedQuestionType;
+    isCorrect: boolean;
+    response: QuestionOptionType[]
+  }
+
+  type AllNonAttemptedQuestionType = {
+    _id: string;
+    title: QuestionOptionType[];
     questionType: QuestionTypeEnum;
-    options: { imageUrl: string; text: string }[];
-    answer: { imageUrl: string; text: string }[];
+    options: QuestionOptionType[];
+    answer: QuestionOptionType[];
     marks: number;
     batchCode: string;
     meta: QuestionMetaData;
+    isAnswered?: boolean;
+    isCorrect?: boolean;
   }
 
   type QuestionMetaData = {
@@ -235,7 +270,7 @@ declare global {
   type QuestionAttemptSchemaType = {
     userId: ObjectId;
     questionId: ObjectId;
-    response: { imageUrl: string; text: string }[];
+    response: QuestionInfoType[];
     isCorrect?: boolean;
     timestamp: Date;
   };
@@ -273,10 +308,10 @@ declare global {
     updates: QuestionData;
   };
   type QuestionData = {
-    question?: [{ imageUrl: string; text: string }];
-    options?: [{ imageUrl: string; text: string }];
+    title?: QuestionOptionType[];
+    options?: QuestionOptionType[];
     questionType?: QuestionTypeEnum;
-    answer?: [{ imageUrl: string; text: string }];
+    answer?: QuestionOptionType[];
     marks?: number;
     batchCode?: string;
     meta: QuestioinMetaDataUpdate;
@@ -295,10 +330,10 @@ declare global {
     response: CustomResponseType;
   };
   type QuestionDataType = {
-    question: [{ imageUrl: string; text: string }];
-    options: [{ imageUrl: string; text: string }];
+    title: QuestionOptionType[];
+    options: QuestionOptionType[];
     questionType: QuestionTypeEnum;
-    answer: [{ imageUrl: string; text: string }];
+    answer: QuestionOptionType[];
     marks: number;
     batchCode: string;
     meta: QuestionUpdateOutputMetaData;
@@ -343,7 +378,8 @@ declare global {
 
   interface QuestionResponseType {
     text: string;
-    imageUrl: string;
+    imageUrl?: string;
+    iframe?: string;
   }
   interface UploadImageArgumentType {
     images: string | string[];
