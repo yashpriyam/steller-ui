@@ -56,6 +56,7 @@ const typeDefs = gql`
     ): CustomResponseType
     verifyUserOtp(data:VerifyOtpPaidUserInputType!):CustomResponseType
     updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
+    upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -542,6 +543,18 @@ const typeDefs = gql`
     weekData: [WeekDataType]
     response: CustomResponseType!
   }  
+  input UpsertWeekDataInputType {
+    batchCode: String!
+    description: String
+    title: String
+    isActive: Boolean
+    isDisabledForUnpaidUsers: Boolean
+    weekNumber: Int!
+  }
+  type UpsertWeekDataOutputType {
+    weekData: WeekDataType
+    response: CustomResponseType!
+  }
   scalar DateTime
   scalar JSON
 `;

@@ -51,6 +51,7 @@ export const localMessages = Object.freeze({
     USER_LOGIN_SUCCESS:"login successfully",
   },
   WEEK_MODEL: {
+    WEEK_CREATION_SUCCESS: "Week data inserted successfully",
     WEEK_FOUND: "week data found successfully",
     DAYS: "days",
   },

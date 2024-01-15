@@ -19,3 +19,4 @@ export {
   verifyOtpPaidUser,
   updatePaidUserPassword,
 } from "./paidUser/index";
+export { upsertWeek } from "./week/index";

@@ -545,4 +545,8 @@ declare global {
     password: string;
   }
 
+  type WeekDataOutputType = {
+    weekData?: WeekDataType;
+    response: CustomResponseType;
+  }
 }
