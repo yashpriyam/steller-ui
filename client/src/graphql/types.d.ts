@@ -1,4 +1,4 @@
-import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction } from "react";
+import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction, ReactNode } from "react";
 
 declare global {
 
@@ -474,6 +474,46 @@ declare global {
   type SetCookieArgsType = {
     key: string;
     value: string;
+  }
+  type WeekDataType = {
+    batchCode?: string;
+    weekNumber?: number;
+    description?: string;
+    title?: string;
+    isActive?: boolean;
+    isDisabledForUnpaidUsers?: boolean;
+    days?: ObjectId[];
+  }
+  type ScheduleDataStateType = {
+    weekList: WeekDataType[];
+  }
+  type DayDataType = {
+    _id?: ObjectId;
+    batchCode?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    title?: string;
+    description?: string;
+    topics?: string[];
+    notes?: ObjectId[];
+    videos?: ObjectId[];
+    questions?: ObjectId[];
+  };
+  interface AccordionPropsInterface {
+    className?: string;
+    title?: ReactNode | string;
+    children?: ReactNode;
+    style?: CSSProperties;
+    icon?: ReactNode | string;
+    closeOnOutsideClick?: boolean;
+    iconPosition?: "left" | "center" | "right";
+    titlePosition?: "left" | "center" | "right";
+    disabled?: boolean;
+    subTitle?: string;
+  }
+  interface SchedulePagePropsInterface {
+    className?: string;
+    style?: CSSProperties;
   }
 }
 export { };

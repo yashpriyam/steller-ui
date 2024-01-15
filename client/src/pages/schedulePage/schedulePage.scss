@@ -47,12 +47,15 @@
           border: 1px solid $videoHutBorderColor;
           width: 48vw;
           background-color: $Gray35;
+          background: radial-gradient(50% 50% at 0% 0%, $radialGradient 100%);
           transition: all 0.3s;
           display: flex;
           flex-direction: column;
           margin-bottom: 10px;
           gap: 10px;
-
+          &:hover{
+            cursor: pointer;
+          }
           .day-header {
             display: flex;
             align-items: center;

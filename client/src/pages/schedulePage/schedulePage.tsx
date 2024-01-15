@@ -1,0 +1,139 @@
+import "./schedulePage.scss";
+import Accordion from "../../components/accordion/accordion";
+import { Button } from "../../components/button/button";
+import React, { useEffect } from "react";
+import { Filter } from "../../components/filter/filter";
+import { useNavigate } from "react-router-dom";
+import { useWeek } from "../../redux/actions/scheduleAction";
+
+const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
+  className,
+  style,
+}: SchedulePagePropsInterface) => {
+  const navigate = useNavigate();
+  const { weekData, getScheduleData } = useWeek();
+  const { weekList } = weekData;
+  const getScheduleDataApi = async () => {
+    await getScheduleData({});
+  };
+  const handleButtonNavigation = (path: string)=>{
+    navigate(path);
+  };
+  useEffect(() => {
+    getScheduleDataApi();
+  }, []);
+  return (
+    <div className={`scheduling-page ${className}`} style={style}>
+      <Filter />
+      <div className="scheduling-page-accordion">
+        {weekList.map((week, index) => {
+          console.log({ week });
+          const {
+            batchCode,
+            days,
+            description,
+            isActive,
+            isDisabledForUnpaidUsers,
+            title,
+            weekNumber,
+          } = week;
+          return (
+            isActive && (
+              <Accordion
+                title={title}
+              // disabled={accordion.isDisabledForUnpaidUsers}
+              >
+                <div key={index} className="accordion-content-wrapper">
+                  {description && (
+                    <div className="week-description">{description}</div>
+                  )}
+                  <div key={index} className="daylist-container">
+                    {days?.map((day: DayDataType, index) => {
+                      const {
+                        dayNumber,
+                        description,
+                        title,
+                        topics: tags,
+                      } = day;
+                      const tagsLength = tags?.length;
+                      return (
+                        <div
+                          key={index}
+                          className="day-container"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/day/${dayNumber}`);
+                          }}
+                        >
+                          <div className="day-header">
+                            <strong className="day-title">{title}</strong>
+                            {description && <p>{description}</p>}
+                            <div className="topic-tags">
+                              {tags
+                                ?.slice(0, 2)
+                                .map((tag: string, idx: number) => (
+                                  <span
+                                    className={`topic-tag ${tag.toLowerCase()}`}
+                                  >
+                                    {tag}
+                                  </span>
+                                ))}
+                              {tagsLength && tagsLength === 3 && (
+                                <span
+                                  className={`topic-tag ${tags[2]?.toLowerCase()}`}
+                                >
+                                  {tags[2]}
+                                </span>
+                              )}
+                              {tagsLength && tagsLength > 3 && (
+                                <>
+                                  <span className="hidden-tags">
+                                    {tags.slice(3).map((tag, idx: number) => (
+                                      <span
+                                        className={`topic-tag  ${tag.toLowerCase()}`}
+                                      >
+                                        {tag}
+                                      </span>
+                                    ))}
+                                  </span>
+                                  <span className="topic-tag show-tags">{`+${tagsLength - 2
+                                    }`}</span>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                          <div className="buttons-wrapper">
+                            <Button
+                              text="Questions"
+                              className="button"
+                              onClick={(e) =>{
+                                  e.stopPropagation();
+                                  handleButtonNavigation("/question")
+                                }
+                              }
+                            />
+                            <Button text="Notes" className="button" />
+                            <Button
+                              text="Videos"
+                              className="button"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleButtonNavigation("/videos");
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </Accordion>
+            )
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default SchedulingPage;
