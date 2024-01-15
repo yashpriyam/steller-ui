@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema(
       default: convertUTCtoIST(),
     },
     collegeName: { type: String },
+    profileImage : {
+      publicId: String,
+      secureUrl: String,
+    }
   },
   { timestamps: true }
 );

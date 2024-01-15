@@ -1,0 +1,1 @@
+export const isLoggedIn = (contextData: { user: RegisterType }) => contextData && contextData.user;

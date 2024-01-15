@@ -7,9 +7,11 @@ export const createQuestionAttemptByUser = async (
   args: { questionAttemptData: QuestionAttemptSchemaType },
   { contextData }: ContextType
 ): Promise<any | unknown> => {
+
   const { QUESTION_ATTEMPT_SUCCESS } = localMessages.QUESTION_ATTEMPT_MODEL;
   const { UNAUTHORIZED_USER } = errorMessages.MSG;
   const { QUESTION_ATTEMPT_FAILED } = errorMessages.QUESTION_ATTEMPT_MODEL;
+
   if (!contextData || !contextData.user)
     return {
       message: UNAUTHORIZED_USER,
@@ -28,8 +30,6 @@ export const createQuestionAttemptByUser = async (
     const question = await questionModel.findById(questionId);
 
     const isCorrect = isCorrectAnswer(response, question!.answer);
-    console.log({ response });
-
     const createdQuestionAttemtData: QuestionAttemptSchemaType =
       await questionAttempt.create({
         isCorrect,
