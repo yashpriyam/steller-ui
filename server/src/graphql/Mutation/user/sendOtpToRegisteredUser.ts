@@ -11,23 +11,22 @@ export const sendOtpToRegisteredUser = async (
     const { INVALID_EMAIL } = errorMessages.USER;
     try {
         const { email } = args;
-
-        if (!isValidEmail(email)) {
+    const lowerCaseEmail = email.toLowerCase();
+        if (!isValidEmail(lowerCaseEmail)) {
             return {
                 response: {
                     message: INVALID_EMAIL,
-                    status: statusCodes.OK,
+                    status: statusCodes.BAD_REQUEST,
                 },
             };
         }
-
-        const userData = await User.findOne({ email });
+      const userData = await User.exists({ email:lowerCaseEmail });      
 
         if (!userData) {
             return {
                 response: {
                     message: UNREGISTERED_EMAIL,
-                    status: statusCodes.OK,
+                    status: statusCodes.BAD_REQUEST,
                 },
             };
         }
@@ -36,12 +35,19 @@ export const sendOtpToRegisteredUser = async (
         const emailOtp = getRandomNumOfDigits(6);
         const expiresAt = timeAfterMins(emailValidityMinutes);
 
-        const otpData: CreateUserOtpType = await otpModel.create({ email, emailOtp, expiresAt });
+        const otpData: CreateUserOtpType = await otpModel.findOneAndUpdate(
+          { email:lowerCaseEmail },
+          {
+            emailOtp,
+            expiresAt
+          },
+          { upsert: true, new: true }
+        );
 
         await sendEmail({
             subject: EMAIL_VERIFICATION_SUBJECT,
             html: getEmailVerificationMessage({otpData,emailValidityMinutes}),
-            to: email,
+            to: lowerCaseEmail,
         });
 
         return {

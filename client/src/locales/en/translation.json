@@ -39,5 +39,6 @@
     "login_success":"login successfully",
     "password_created_success":"password created successfully!",
     "otp_sent_success":"Otp sent successfully",
-    "otp_verified_success":"Otp sent successfully"
+    "otp_verified_success":"Otp verified successfully",
+    "password_creatioin_failed":"password creation failed"
 }

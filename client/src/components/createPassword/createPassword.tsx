@@ -42,7 +42,7 @@ export const CreatePassword: React.FC<CreatePasswordProps> = ({
   const handleCreatePasswordButton = async () => {
     dispatch(setIsSending(true));
     await handleOnCreateNewPassword();
-    dispatch(setIsSending(true));
+    dispatch(setIsSending(false));
   };
 
   return (

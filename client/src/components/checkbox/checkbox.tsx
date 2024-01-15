@@ -1,20 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./checkbox.scss";
 import { CheckboxIcon } from "../../icons/index";
 
 export const Checkbox: React.FC<CheckboxProps> = ({
   className,
   options = [],
-  onSelect = () => {},
+  onSelect = () => { },
   bgColor,
   style,
   textColor,
   direction = "column",
   title,
+  type = "multi"
 }) => {
   const [selectedValues, setSelectedValues] = useState<Record<number, CheckboxValueType>>({});
 
-  const handleCheckboxChange = (index: number) => {
+  const initializeSelectedValues = () => {
+    const initialSelectedValues: Record<number, CheckboxValueType> = {};
+    options.map((optionData, index) => {
+      if(optionData.isChecked){
+        initialSelectedValues[index] = optionData;
+      }
+    });
+    setSelectedValues(initialSelectedValues);
+  }
+
+  useEffect(()=> {
+    initializeSelectedValues()
+  },[])
+
+  const validTypes = {
+    SINGLE: "single",
+    MULTI: "multi",
+  }
+
+  const handleMultiSelectChange = (index: number) => {
     const newselectedValues = {
       ...selectedValues
     };
@@ -25,8 +45,27 @@ export const Checkbox: React.FC<CheckboxProps> = ({
       newselectedValues[index] = options[index];
     }
     setSelectedValues(newselectedValues);
-    
     onSelect(options[index], newselectedValues);
+  }
+
+  const handleSingleSelectChange = (index: number) => {
+    const newValues:Record<number, CheckboxValueType> = {};
+    if(!selectedValues[index]){
+      newValues[index] = options[index];
+    }
+    setSelectedValues(newValues)
+    onSelect(options[index], newValues);
+  }
+
+  const handleCheckboxChange = (index: number) => {
+    switch(type){
+      case validTypes.SINGLE:
+        handleSingleSelectChange(index);
+        break;
+      case validTypes.MULTI:
+        handleMultiSelectChange(index);
+        break;
+    }
   };
 
   return (
@@ -57,12 +96,17 @@ export const Checkbox: React.FC<CheckboxProps> = ({
                 </div>
               )}
             </div>
-            <label className="label-text" style={{ color: textColor }}>
-              {option?.text}
-            </label>
-          {
-            option?.imageUrl && (<img className="checkbox-comp-option-img" src={option?.imageUrl} alt="" />)
-          }
+            <div className="checkbox-option-container">
+              <label className="label-text" style={{ color: textColor }}>
+                {option?.text}
+              </label>
+              {
+                option?.imageUrl && (<img className="checkbox-comp-option-img" src={option?.imageUrl} alt="" />)
+              }
+              {
+                option?.iframe && (<iframe src={option.iframe} width="100%" />)
+              }
+            </div>
           </div>
         ))}
       </div>

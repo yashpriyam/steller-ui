@@ -22,11 +22,6 @@ export const upsertWeek = async (
             title,
             batchCode,
         } = weekData;
-        if(!weekNumber || !batchCode) {
-            return {
-                response: errorData
-            }
-        }
         const updatedWeekData: WeekDataType = await weekModel.findOneAndUpdate(
             { batchCode, weekNumber },
             {
