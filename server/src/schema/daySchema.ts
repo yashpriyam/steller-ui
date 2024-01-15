@@ -3,7 +3,7 @@ import { notesModel, videoModel, questionModel } from "./index";
 
 const { ObjectId } = mongoose.Schema.Types;
 
-const daySchema = new Schema<DayDataType>({
+const daySchema = new Schema<DaySchemaType>({
   batchCode: {
     type: String,
   },
@@ -42,4 +42,4 @@ const daySchema = new Schema<DayDataType>({
   ],
 });
 
-export const dayModel = model<DayDataType>("day", daySchema);
+export const dayModel = model<DaySchemaType>("day", daySchema);

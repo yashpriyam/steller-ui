@@ -3,7 +3,7 @@ import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const createDay = async (
   parent: undefined,
-  args: { dayData: DayDataType }
+  args: { dayData: DaySchemaType }
 ): Promise<DayDataOutputType> => {
   const { DAY_CREATION_FAILED } = errorMessages.DAY_MODEL;
   const errorData: CustomResponseType = {

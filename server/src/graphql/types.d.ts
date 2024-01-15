@@ -388,17 +388,17 @@ declare global {
   interface ImageUploadArgs {
     image: string;
   }
-  type DayDataType = {
-    _id?: ObjectId;
+  type DaySchemaType = {
+    _id?: string;
     batchCode?: string;
     weekNumber?: number;
     dayNumber?: number;
     title?: string;
     description?: string;
     topics?: string[];
-    notes?: ObjectId[];
-    videos?: ObjectId[];
-    questions?: ObjectId[];
+    notes?: string[];
+    videos?: string[];
+    questions?: string[];
   };
   type loginUserInputType = {
     email: string;
@@ -454,7 +454,7 @@ declare global {
     password?: string;
   };
   type DayDataOutputType = {
-    dayData?: DayDataType;
+    dayData?: DaySchemaType;
     response: CustomResponseType;
   }
   type WeekDataType = {
@@ -465,7 +465,7 @@ declare global {
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    days?: ObjectId[];
+    days?: string[];
   }
 
 

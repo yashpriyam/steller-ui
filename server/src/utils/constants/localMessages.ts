@@ -58,6 +58,6 @@ export const localMessages = Object.freeze({
   DAY_MODEL : {
     DAY_CREATION_SUCCESS: "Day data inserted successfully",
     DAY_EXIST: "Day already exists",
-    WEEK_DOES_NOT_EXIST_TO_INSERT_DAY: "Week does'nt exist to insert day data",
+    WEEK_DOES_NOT_EXIST_TO_INSERT_DAY: "Week doesn't exist to insert day data",
   },
 });

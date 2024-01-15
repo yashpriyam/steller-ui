@@ -57,7 +57,7 @@ const typeDefs = gql`
     verifyUserOtp(data:VerifyOtpPaidUserInputType!):CustomResponseType
     updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
     upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
-    createDay(dayData: UpsertDayDataInputType!) : DayDataOutputType
+    createDay(dayData: DayDataInputType!) : DayDataOutputType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -528,7 +528,7 @@ const typeDefs = gql`
     description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
-    days: [DayDataType]
+    days: [DaySchemaType]
   }
   type WeekDataOutputType {
     weekData: [WeekDataType]
@@ -546,7 +546,7 @@ const typeDefs = gql`
     weekData: WeekDataType
     response: CustomResponseType!
   } 
-  input UpsertDayDataInputType {
+  input DayDataInputType {
     batchCode: String!
     dayNumber: Int!
     weekNumber: Int!
@@ -554,7 +554,7 @@ const typeDefs = gql`
     description: String
     topics: [String]
   }
-  type DayDataType {
+  type DaySchemaType {
     batchCode: String
     dayNumber: Int
     weekNumber: Int
@@ -566,7 +566,7 @@ const typeDefs = gql`
     questions: [QuestionDataType]
   }
   type DayDataOutputType {
-    dayData: DayDataType
+    dayData: DaySchemaType
     response: CustomResponseType!
   }
   scalar DateTime
