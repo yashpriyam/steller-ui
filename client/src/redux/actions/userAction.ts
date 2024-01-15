@@ -7,7 +7,7 @@ import { UPDATE_USER_PASSWORD } from "../../graphql/mutation/updateUserPassword/
 import { LOGIN } from "../../graphql/mutation/login/login";
 import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/sendUserOtp/sendUserOtp";
 
-export const useUser = ():any => {
+export const useUser = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
