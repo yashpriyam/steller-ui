@@ -15,7 +15,9 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-
+    .no-data-found{
+      font-size: $largerFontSize;
+    }
     .accordion-content-wrapper {
       position: relative;
       display: flex;
@@ -24,7 +26,7 @@
       justify-content: center;
       gap: 30px;
 
-      .accordion-description {
+      .week-description {
         display: flex;
         flex-direction: column;
         font-size: $titleFontSize;

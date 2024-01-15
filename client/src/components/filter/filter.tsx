@@ -4,13 +4,17 @@ interface FilterProps {
   className?: string;
   checkboxData?: string[];
   style?: object;
+  filter?: string[];
+  setFilter?: (value: string[]) => {};
 }
-const checkboxDataList = ["Topic", "Week", "HTML", "CSS", "JavaScript"];
 export const Filter: React.FC<FilterProps> = ({
   className,
-  checkboxData=checkboxDataList,
+  checkboxData=[],
   style,
+  filter,
+  setFilter
 }: FilterProps) => {
+  
   return (
     <div
       className={`scheduling-page-filter-container ${className}`}

@@ -67,7 +67,7 @@ export const InputComponent: FC<InputProps> = ({
           onMouseEnter={onHover}
           disabled={disabled}
         />
-        {constantValues[type] && (
+        {constantValues[type] === "password" && (
           <span className="password-visible" onClick={handleShowPassword}>
             {showPassword ? <OpenLockIcon /> : <CloseLockIcon />}
           </span>

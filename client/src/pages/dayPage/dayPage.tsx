@@ -22,7 +22,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
   const { questions, getAllQuestions } = useQuestions();
   const { videoList } = videoData;
   const { noteList } = noteData;
-  const { questionList } = questions;
+  // const { questionList } = questions;
   const { questionAttempt, createQuestionAttemptByUser } = useQuestionAttempt();
   const { isLoading } = questionAttempt;
   const { t } = useTranslation();
@@ -219,7 +219,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
             }`}
             onScroll={() => setActiveScrollbar(true)}
           >
-            {questionList?.map((questionData, index) => {
+            {/* {questionList?.map((questionData, index) => {
               return (
                 <div className="question-content-wrapper">
                   <div
@@ -238,7 +238,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
                   </div>
                 </div>
               );
-            })}
+            })} */}
           </div>
         </div>
       </div>

@@ -5,16 +5,13 @@ import {
   authenticateObject,
   authenticateReducer,
 } from "./reducers/authenticate.reducer";
-import { getCookie } from "../helpers/utils/cookieUtils";
+import { useUser } from "../../redux/actions/userAction";
 export const AppStateContext = createContext();
 
 export const AppStateContextProvider = ({ children }) => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useLayoutEffect(() => {
-setIsLoggedIn(!!getCookie(process.env.REACT_APP_JWT_SECRET_KEY));
-  }, []);
+  const { user, setIsLoggedIn } = useUser();
+  const { isLoggedIn } = user;
 
   const globalStateAndDispatch = useReducer(globalReducer, globalObject);
 

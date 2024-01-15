@@ -53,6 +53,10 @@ export const errorMessages = Object.freeze({
     PAID_USER_LOGIN_FAILED: "invalid email and password",
   },
   WEEK_MODEL: {
+    WEEK_CREATION_FAILED: "unable to insert week data",
     WEEK_NOT_FOUND: "week data not found",
   },
+  MSG: {
+    UNAUTHORIZED_USER: "unauthorized user"
+  }
 });

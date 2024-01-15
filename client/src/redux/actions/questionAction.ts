@@ -9,16 +9,20 @@ export const useQuestions = () => {
   const questions = useSelector(selectQuestions);
   const dispatch = useDispatch();
   const getAllQuestions = async () => {
-    const response = await apolloClient.query({
-      query: GET_ALL_QUESTIONS,
-      variables: {
-        filterData: {
-          isActive: true,
+    try {
+      const response = await apolloClient.query({
+        query: GET_ALL_QUESTIONS,
+        variables: {
+          filterData: {
+            isActive: true,
+          },
         },
-      },
-    });
-    dispatch(actions.setQuestions(response.data));
-    return response;
+      });
+      dispatch(actions.setQuestions(response.data));
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return {

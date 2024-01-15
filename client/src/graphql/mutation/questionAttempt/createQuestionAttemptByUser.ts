@@ -11,6 +11,7 @@ export const CREATE_QUESTION_ATTEMPT_BY_USER = gql`
         response {
           imageUrl
           text
+          iframe
         }
         isCorrect
         timestamp

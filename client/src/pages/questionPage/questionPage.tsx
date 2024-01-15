@@ -10,10 +10,11 @@ const QuestionPage = () => {
     const { questions, getAllQuestions } = useQuestions();
     const { questionAttempt, createQuestionAttemptByUser } = useQuestionAttempt();
     const { isLoading } = questionAttempt;
-    const { questionList } = questions;
+    const { nonAttemptedQuestions, attemptedQuestions } = questions;
     const { t } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
     const onSubmit = async (question: QuestionDataType, selectedValues: QuestionSelectedValueType[]) => {
+        console.log({ selectedValues })
         const filteredData = selectedValues.map(selectedValue => ({
             imageUrl: selectedValue.imageUrl,
             text: selectedValue.text
@@ -33,7 +34,10 @@ const QuestionPage = () => {
         <div className='question-page-container'>
             <div className='question-page-sub-container'>
                 {
-                    questionList.map((questionData, index) => <QuestionAccordion key={index} questionData={questionData} onSubmit={onSubmit} isLoading={isLoading} errorMsg={t('incorrect_answer')} successMsg={t('correct_answer')} />)
+                    attemptedQuestions.map((attemptedData: AttemptedQuestionDataType, index) => <QuestionAccordion key={index} questionData={attemptedData.questionId} onSubmit={onSubmit} isLoading={isLoading} errorMsg={t('incorrect_answer')} successMsg={t('correct_answer')} isAnswered={true} isCorrect={attemptedData.isCorrect} />)
+                }
+                {
+                    nonAttemptedQuestions.map((questionData, index) => <QuestionAccordion key={index} questionData={questionData} onSubmit={onSubmit} isLoading={isLoading} errorMsg={t('incorrect_answer')} successMsg={t('correct_answer')} />)
                 }
             </div>
         </div>
