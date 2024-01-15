@@ -19,8 +19,13 @@ export const Login: React.FC<LoginProps> = ({
 }: LoginProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { verifyUserOtpApi, sendOtpApi, updateUserPasswordApi, loginUserApi } =
-    useUser();
+  const {
+    verifyUserOtpApi,
+    sendOtpApi,
+    updateUserPasswordApi,
+    loginUserApi,
+    setIsLoggedIn,
+  } = useUser();
   const dispatch = useDispatch();
   const currentData: LoginState = useSelector((state: any) => state.login);
   const { setPassword, setEmail, setIsSending,setIsOtpValid,setIsOtpSend } = loginAction;
@@ -45,7 +50,8 @@ export const Login: React.FC<LoginProps> = ({
         dispatch(setIsOtpSend(false))
         dispatch(setIsOtpValid(false))
         closeModal();
-        navigate("/dashboard");
+        setIsLoggedIn(true)
+        navigate("/schedule");
         return true;
       }
       return false;
@@ -64,7 +70,10 @@ export const Login: React.FC<LoginProps> = ({
     try {
       const response = await verifyUserOtpApi(currentData.email, otp);
       const isValidOtp = response.response.data.verifyUserOtp.status === 200;
-      isValidOtp && setCurrentScreen(presentScreen.CREATE_PASSWORD);
+      if (isValidOtp) {
+        setIsLoggedIn(true)
+        setCurrentScreen(presentScreen.CREATE_PASSWORD);
+      }
       return isValidOtp;
     } catch (error) {
       return false;
@@ -93,7 +102,7 @@ export const Login: React.FC<LoginProps> = ({
         dispatch(setIsOtpValid(false));
         dispatch(setIsSending(false));
         closeModal();
-        navigate("/dashboard");
+        navigate("/schedule");
       } else {
         Toast.error(t("password_creation_failed"))
       }

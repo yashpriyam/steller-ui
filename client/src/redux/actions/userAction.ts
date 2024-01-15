@@ -98,6 +98,11 @@ export const useUser = () => {
         response,
       };
     };
+
+    const setIsLoggedIn  = (isLoggedIn: boolean) => {
+      dispatch(actions.setIsLoggedIn(isLoggedIn))
+    } 
+
   return {
     user,
     registerUser,
@@ -105,5 +110,6 @@ export const useUser = () => {
     verifyUserOtpApi,
     updateUserPasswordApi,
     loginUserApi,
+    setIsLoggedIn
   };
 };

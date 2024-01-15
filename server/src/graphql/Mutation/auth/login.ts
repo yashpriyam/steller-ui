@@ -17,16 +17,18 @@ export const login = async (
   try {
     const { email, password } = args.data;
     const lowerCaseEmail = email.toLowerCase();
-    const user = await User.findOne({ email:lowerCaseEmail });
+    const user = await User.findOne({ email: lowerCaseEmail });
     const isValidPassword =await bcrypt.compare(password, user?.password || "");
     if (!user || !isValidPassword) {
       return {
         response: errorData,
       };
     }
+    const userInfo = user.toObject();
+    delete userInfo.password;
     const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
     if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
-      const token = jwt.sign({user}, JWT_SECRET_VALUE);
+      const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
       res.cookie(JWT_SECRET_KEY,token);
     }
     return {
