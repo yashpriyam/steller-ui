@@ -7,7 +7,7 @@ import { UPDATE_USER_PASSWORD } from "../../graphql/mutation/updateUserPassword/
 import { LOGIN } from "../../graphql/mutation/login/login";
 import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/sendUserOtp/sendUserOtp";
 
-export const useUser = () => {
+export const useUser = ():any => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -98,6 +98,11 @@ export const useUser = () => {
         response,
       };
     };
+
+    const setIsLoggedIn  = (isLoggedIn: boolean) => {
+      dispatch(actions.setIsLoggedIn(isLoggedIn))
+    } 
+
   return {
     user,
     registerUser,
@@ -105,5 +110,6 @@ export const useUser = () => {
     verifyUserOtpApi,
     updateUserPasswordApi,
     loginUserApi,
+    setIsLoggedIn
   };
 };
