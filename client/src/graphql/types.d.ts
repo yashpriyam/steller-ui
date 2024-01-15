@@ -248,18 +248,30 @@ declare global {
     direction?: "row" | "column";
     title?: string;
     isIncorrect?: boolean;
+    type: "single" | "multi"
   }
 
+
+  type AttemptedQuestionDataType = {
+    userId: string;
+    questionId: QuestionDataType,
+    isCorrect: boolean
+    response: QuestionOptionType[]
+  }
   interface QuestionStateInterface {
-    questionList: QuestionDataType[];
+    attemptedQuestions: AttemptedQuestionDataType[]
+    nonAttemptedQuestions: QuestionDataType[];
+    totalAttemptedQuestions: number;
+    totalNonAttemptedQuestions: number;
+    totalQuestions: number;
   }
 
   type QuestionDataType = {
     id: string;
-    question: ImageAndTextType[];
+    title: QuestionOptionType[];
     questionType: QuestionTypeEnum;
-    options: ImageAndTextType[];
-    answer: ImageAndTextType[];
+    options: QuestionOptionType[];
+    answer: QuestionOptionType[];
     marks: number;
     batchCode: string;
     meta: QuestionMetaDataType;
@@ -285,6 +297,7 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
+    fillup = "fillup"
   }
 
   interface QuestionResponseType {
@@ -301,28 +314,35 @@ declare global {
     isLoading: boolean;
     errorMsg?: string;
     successMsg?: string;
+    isAnswered?: boolean;
+    isCorrect?: boolean;
   }
 
   type QuestionSelectedValueType = {
-    text: string | null;
+    text?: string;
     value?: string;
-    imageUrl: string | null;
+    imageUrl?: string;
+    iframe?: string;
     __typename?: string;
   };
 
   type CheckboxValueType = {
-    text: string | null;
     value?: string;
-    imageUrl: string | null;
+    text?: string;
+    imageUrl?: string;
+    iframe?: string;
+    isChecked?: boolean;
   };
 
   interface QuestionAttemptStateInterface {
     isLoading: boolean;
   }
 
-  type ImageAndTextType = {
-    imageUrl: string | null;
-    text: string | null;
+  type QuestionOptionType = {
+    imageUrl?: string;
+    text?: string;
+    iframe?: string;
+    isChecked?: boolean;
   };
 
   type VideoDataType = {

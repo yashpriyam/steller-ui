@@ -56,7 +56,8 @@ const typeDefs = gql`
     ): CustomResponseType
     verifyUserOtp(data:VerifyOtpPaidUserInputType!):CustomResponseType
     updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
-    upsertDay(dayData: UpsertDayDataInputType!) : DayDataOutputType
+    upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
+    createDay(dayData: UpsertDayDataInputType!) : DayDataOutputType
   }
   type UpdateProfilePictureOutput {
     public_id: String
@@ -276,21 +277,23 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   input CreateQuestionInputType {
-    question: [Option!]!
+    title: [QuestionOptionInputType!]!
     batchCode: String!
-    options: [Option!]!
+    options: [QuestionOptionInputType!]!
     questionType: QuestionType!
-    answer: [Option!]!
+    answer: [QuestionOptionInputType!]!
     marks: Int!
     meta: QuestionMeta!
   }
-  input Option {
-    imageUrl: String
+  input QuestionOptionInputType {
     text: String!
+    imageUrl: String
+    iframe: String
   }
   enum QuestionType {
     multi
     single
+    fillup
   }
   input QuestionMeta {
     topic: String!
@@ -307,11 +310,11 @@ const typeDefs = gql`
   }
   type QuestionDataType {
     id: String
-    question: [OptionOutput!]!
+    title: [QuestionOptionOutputType!]!
     batchCode: String!
-    options: [OptionOutput!]!
+    options: [QuestionOptionOutputType!]!
     questionType: QuestionType!
-    answer: [OptionOutput!]!
+    answer: [QuestionOptionOutputType!]!
     marks: Int!
     meta: QuestionMetaOutput!
   }
@@ -324,10 +327,7 @@ const typeDefs = gql`
     expiresInMins: Int!
     isOpenable: Boolean!
   }
-  type OptionOutput {
-    imageUrl: String
-    text: String!
-  }
+
   enum QuestionMetaType {
     timed
     recorded
@@ -338,7 +338,7 @@ const typeDefs = gql`
   }
 
   input UpdatesQuestionInput {
-    question: [UpdateOptionInput]
+    title: [UpdateOptionInput]
     batchCode: String
     options: [UpdateOptionInput]
     questionType: QuestionType
@@ -363,18 +363,21 @@ const typeDefs = gql`
     questionData: QuestionDataOutput
     response: CustomResponseType!
   }
+
+  type QuestionOptionOutputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+  }
+
   type QuestionDataOutput {
-    question: [UpdateOptionOutput]
+    title: [QuestionOptionOutputType]
     batchCode: String
-    options: [UpdateOptionOutput]
+    options: [QuestionOptionOutputType]
     questionType: QuestionType
-    answer: [UpdateOptionOutput]
+    answer: [QuestionOptionOutputType]
     marks: Int
     meta: QuestionMetaOutput
-  }
-  type UpdateOptionOutput {
-    imageUrl: String
-    text: String
   }
   type QuestionMetaOutput {
     topic: String
@@ -391,14 +394,45 @@ const typeDefs = gql`
     isArchived: Boolean
     type: QuestionMetaType
   }
+
+ type AttemptQuestionOptionOutputType  {
+   text: String
+   imageUrl: String
+   iframe: String
+   isChecked: Boolean
+ }
+
+  type AttemptedQuestionIdDataType  {
+    id: String
+    title: [QuestionOptionOutputType!]!
+    batchCode: String!
+    options: [AttemptQuestionOptionOutputType!]!
+    questionType: QuestionType!
+    answer: [QuestionOptionOutputType!]!
+    marks: Int!
+    meta: QuestionMetaOutput!
+  }
+
+  type AttemptedQuestionDataType {
+    userId: ID
+    questionId: AttemptedQuestionIdDataType!
+    response: [QuestionOptionOutputType]
+    isCorrect: Boolean
+    timestamp: DateTime
+  }
+
   type GetAllQuestionsOutputType {
-    questionData: [QuestionDataType]
+    attemptedQuestions: [AttemptedQuestionDataType]
+    nonAttemptedQuestions: [QuestionDataType]
+    totalAttemptedQuestions: Int
+    totalNonAttemptedQuestions: Int
+    totalQuestions: Int
     response: CustomResponseType
   }
   input QuestionAttemptType {
     userId: String!
     questionId: String!
-    response: [Option]!
+    response: [QuestionOptionInputType]!
     isCorrect: Boolean
   }
   type QuestionAttemptOutputType {
@@ -408,7 +442,7 @@ const typeDefs = gql`
   type QuestionAttemptDataType {
     userId: ID
     questionId: ID
-    response: [UpdateOptionOutput]
+    response: [QuestionOptionOutputType]
     isCorrect: Boolean
     timestamp: DateTime
   }
@@ -500,6 +534,18 @@ const typeDefs = gql`
     weekData: [WeekDataType]
     response: CustomResponseType!
   }  
+  input UpsertWeekDataInputType {
+    batchCode: String!
+    description: String
+    title: String
+    isActive: Boolean
+    isDisabledForUnpaidUsers: Boolean
+    weekNumber: Int!
+  }
+  type UpsertWeekDataOutputType {
+    weekData: WeekDataType
+    response: CustomResponseType!
+  } 
   input UpsertDayDataInputType {
     batchCode: String!
     dayNumber: Int!

@@ -26,7 +26,7 @@ const Accordion: React.FC<AccordionProps> = ({
   iconPosition = "right",
   titlePosition = "left",
   disabled = false,
-  subTitle="subtitle"
+  subTitle
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const accordionRef = useRef<HTMLDivElement | null>(null);
