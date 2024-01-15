@@ -10,7 +10,8 @@ import {
 import { UserInputError } from "apollo-server-express";
 import { User } from "../../../schema/userSchema";
 
-const USER_PROFILE_PICTURES_FOLDER = "Web Masters/Profile Pictures";
+const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
+
 
 export const updateProfilePicture = async (
   _: undefined,
@@ -34,7 +35,7 @@ export const updateProfilePicture = async (
 
     const { publicId, secureUrl } = response;
 
-    const updatedUser = await User.findByIdAndUpdate(
+    await User.findByIdAndUpdate(
       userId,
       {
         profileImage: {
@@ -44,11 +45,11 @@ export const updateProfilePicture = async (
       },
       { new: true }
     );
-
-    if (!updatedUser) {
-      throw new Error("User not found");
-    }
     return response;
   } catch (error) {
+    return {
+    message: errorMessages.USER.UPLOAD_IMAGE_FAILED,
+    status: statusCodes.BAD_REQUEST
+    }
   }
 };

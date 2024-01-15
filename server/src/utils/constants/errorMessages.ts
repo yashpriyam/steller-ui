@@ -6,6 +6,8 @@ export const errorMessages = Object.freeze({
     USER_EXIST: "user already registerd",
     USER_PASSWPRD_UPDATION_FAILED: "password updation failed",
     USER_LOGIN_FAILED:"invalid email and password",
+    UPLOAD_IMAGE_FAILED: "failed to upload image",
+
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
@@ -58,5 +60,7 @@ export const errorMessages = Object.freeze({
   },
   MSG: {
     UNAUTHORIZED_USER: "unauthorized user"
-  }
+  },
+
+  
 });

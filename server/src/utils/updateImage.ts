@@ -8,11 +8,13 @@ export const updateImage = async (
   publicId: string
 ): Promise<UploadImageReturnType> => {
   try {
-    const { public_id, secure_url: secureUrl } =
-      await cloudinary.v2.uploader.upload(image, {
+    const { secure_url: secureUrl } = await cloudinary.v2.uploader.upload(
+      image,
+      {
         folder,
         public_id: publicId,
-      });
+      }
+    );
     console.log({ publicId, secureUrl });
     return { publicId, secureUrl };
   } catch (error) {
