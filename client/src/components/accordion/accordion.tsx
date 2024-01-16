@@ -1,22 +1,9 @@
-import React, { MouseEventHandler, useState, useRef, ReactNode } from "react";
+import React, { MouseEventHandler, useState, useRef } from "react";
 import "./accordion.scss";
 import DropDownIcon from "../../icons/dropDownIcon";
 import useOnOutsideClick from "../../hooks/useOnOutsideClick";
 
-interface AccordionProps {
-  className?: string;
-  title?: ReactNode | string;
-  children?: ReactNode;
-  style?: object;
-  icon?: ReactNode | string;
-  closeOnOutsideClick?: boolean;
-  iconPosition?: "left" | "center" | "right";
-  titlePosition?: "left" | "center" | "right";
-  disabled?: boolean;
-  subTitle?:string;
-}
-
-const Accordion: React.FC<AccordionProps> = ({
+const Accordion: React.FC<AccordionPropsInterface> = ({
   className,
   title,
   children,
@@ -26,8 +13,8 @@ const Accordion: React.FC<AccordionProps> = ({
   iconPosition = "right",
   titlePosition = "left",
   disabled = false,
-  subTitle
-}: AccordionProps) => {
+  subTitle,
+}: AccordionPropsInterface) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const accordionRef = useRef<HTMLDivElement | null>(null);
   const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {

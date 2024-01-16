@@ -47,7 +47,7 @@ const typeDefs = gql`
       image: String
       size: Int
       name: String
-    ): [UpdateProfilePictureOutput]
+    ): UpdateProfilePictureOutput
     createPaidUser(data: PaidUserInputType): PaidUserOutputType
     sendOtpToPaidUser(email: String!): CustomResponseType
     verifyOtpPaidUser(data: VerifyOtpPaidUserInputType!): CustomResponseType
@@ -59,9 +59,15 @@ const typeDefs = gql`
     upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
     createDay(dayData: DayDataInputType!) : DayDataOutputType
   }
+
+  type ProfileImageType {
+    publicId: String
+    secureUrl: String
+  }
+
   type UpdateProfilePictureOutput {
-    public_id: String
-    secure_url: String
+    profileImage: ProfileImageType
+    response: CustomResponseType!
   }
 
   type CustomResponseType {

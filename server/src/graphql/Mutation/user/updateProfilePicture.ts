@@ -1,25 +1,67 @@
-import { errorMessages } from "@constants";
-import { deleteImage, getImage, uploadImage } from "@utils";
-import { UserInputError } from "apollo-server-express";
+import { localMessages, errorMessages, statusCodes } from "@constants";
+import {
+  getUnauthorizedResponse,
+  isLoggedIn,
+  updateImage,
+  uploadImage,
+} from "@utils";
 
-const USER_PROFILE_PICTURES_FOLDER = "Web Masters/Profile Pictures";
+import { User } from "../../../schema/userSchema";
+
+const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
 
 export const updateProfilePicture = async (
   _: undefined,
-  { image }: ImageUploadArgs
+  { image }: ImageUploadArgs,
+  { contextData }: ContextType
 ) => {
+  if (!isLoggedIn(contextData)) {
+    return getUnauthorizedResponse();
+  }
+  const userData = contextData.user;
+  const userId = userData._id;
+  const errorResponse = {
+    response: {
+      message: errorMessages.USER.UPLOAD_IMAGE_FAILED,
+      status: statusCodes.BAD_REQUEST,
+    },
+  };
   try {
     if (!image) {
-      throw new UserInputError(errorMessages.USER.INVALID_USER_PROFILE_IMAGE);
+      return errorResponse;
     }
 
-    const response = await uploadImage({
-      images: image,
-      folder: USER_PROFILE_PICTURES_FOLDER,
-    });
+    const response = userData?.profileImage?.publicId
+      ? await updateImage(
+          image,
+          USER_PROFILE_PICTURES_FOLDER,
+          userData.profileImage.publicId
+        )
+      : await uploadImage(image, USER_PROFILE_PICTURES_FOLDER);
 
-    return response;
+    const { publicId, secureUrl } = response;
+
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        profileImage: {
+          publicId,
+          secureUrl,
+        },
+      },
+      { new: true }
+    );
+    return {
+      profileImage: {
+        publicId,
+        secureUrl,
+      },
+      response: {
+        status: statusCodes.OK,
+        message: localMessages.USER.PROFILE_IMAGE_UPLOADED,
+      },
+    };
   } catch (error) {
-    console.log(error);
+    return errorResponse;
   }
 };

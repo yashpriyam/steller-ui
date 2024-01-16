@@ -45,6 +45,12 @@ declare global {
     sessionPreference?: "online"|"offline";
     expectedSalary?: string;
     collegeName?: string;
+    profileImage?: CloudinaryImageType;
+  }
+
+  type CloudinaryImageType = {
+    publicId: string;
+    secureUrl: string;
   }
 
   type ProgramDataType = {
@@ -381,10 +387,20 @@ declare global {
     imageUrl?: string;
     iframe?: string;
   }
-  interface UploadImageArgumentType {
-    images: string | string[];
+  interface UploadImageListArgumentType {
+    images: string[];
     folder: string;
   }
+  interface UploadImageArgumentType {
+    image: string;
+    folder: string
+  }
+
+  type UploadImageReturnType = {
+    publicId: string;
+    secureUrl: string;
+  }
+
   interface ImageUploadArgs {
     image: string;
   }

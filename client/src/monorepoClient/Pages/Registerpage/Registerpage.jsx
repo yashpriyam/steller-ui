@@ -15,7 +15,6 @@ import { setCookie } from "../../helpers/utils/cookieUtils";
 import { useUser } from "../../../redux/actions/userAction";
 
 const Registerpage = () => {
-  const { setIsLoggedIn } = useContext(AppStateContext);
   const [formData, setFormData] = useState("");
   const [formStep, setFormStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,9 +22,9 @@ const Registerpage = () => {
   const [finishedPage, setFinishedPage] = useState(0);
   const isEmailValid = isValidEmail(formData.email);
   const { darkMode } = useContext(ThemeContext);
-  const { authenticateStateAndDispatch } = useContext(AppStateContext);
+  const { authenticateStateAndDispatch, setIsLoggedIn } = useContext(AppStateContext);
   const userDataCookieName = "userData";
-  const { registerUser, sendOtpApi } = useUser();
+  const { registerUser } = useUser();
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
