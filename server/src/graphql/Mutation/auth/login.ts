@@ -32,7 +32,7 @@ export const login = async (
       res.cookie(JWT_SECRET_KEY,token, {
         sameSite: "none",
         secure: true,
-        domain: req.headers.origin?.slice(8)
+        domain: req.hostname
       });
     }
     return {
