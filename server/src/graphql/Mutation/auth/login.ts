@@ -28,11 +28,12 @@ export const login = async (
     delete userInfo.password;
     const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
     if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
+      console.log({ hostname: req.hostname,headers: req.headers })
       const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
       res.cookie(JWT_SECRET_KEY,token, {
         sameSite: "none",
         secure: true,
-        domain: req.hostname
+        domain: "webmaster-portal-git-dev-yashpriyam.vercel.app"
       });
     }
     return {
