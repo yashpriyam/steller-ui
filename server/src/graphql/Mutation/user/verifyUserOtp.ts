@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const verifyUserOtp = async (
   _parent: undefined,
   args: { data: { email: string; emailOtp: string } },
-  { res }: ContextType
+  { res, req }: ContextType
 ): Promise<CustomResponseType | unknown> => {
   const { OTP_VERIFIED_SUCCESS } = localMessages.OTP_MODEL;
   const { OTP_EMAIL_NOT_EXIST, OTP_EMAIL_INVALID } = errorMessages.OTP_MODEL;
