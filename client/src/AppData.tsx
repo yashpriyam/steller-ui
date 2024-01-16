@@ -30,30 +30,31 @@ export const useAppData = (): UseAppDataReturnType => {
 
   const sidebarData: SidebarProps = {
     options: [
-      {
-        text: t('profile'),
-        image: <AvatarIcon isDarkMode={true} />,
-        url: "/profile",
-      },
+      // {
+      //   text: t('profile'),
+      //   image: <AvatarIcon isDarkMode={true} />,
+      //   url: "/profile",
+      // },
       {
         text: t('home'),
         image: <HomeIcon isDarkMode={true} />,
         url: "/"
-      }, {
-        text: t('dashboard'),
-        image: <DashboardIcon isDarkMode={true} />,
-        url: "/dashboard"
-      },
+      }, 
+      // {
+      //   text: t('dashboard'),
+      //   image: <DashboardIcon isDarkMode={true} />,
+      //   url: "/dashboard"
+      // },
       {
         text: t('schedule'),
         image: <ScheduleIcon isDarkMode={true} />,
         url: "/schedule"
       },
-      {
-        text: t('questions'),
-        image: <QuestionIcon isDarkMode={true} />,
-        url: "/questions"
-      },
+      // {
+      //   text: t('questions'),
+      //   image: <QuestionIcon isDarkMode={true} />,
+      //   url: "/questions"
+      // },
     ],
     optionAtLast: {
       text: t(isLoggedIn ? 'logout' : 'login'),

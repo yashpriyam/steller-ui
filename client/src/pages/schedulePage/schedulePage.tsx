@@ -26,10 +26,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   }, []);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
-      <Filter
+      {/* <Filter
         checkboxData={checkboxDataList}
         filter={filter}
-      />
+      /> */}
       <div className="scheduling-page-accordion">
         {weekList.length ? (
           weekList.map((week, index) => {
