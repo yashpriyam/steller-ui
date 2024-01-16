@@ -420,6 +420,10 @@ declare global {
     email: string;
     password: string;
   };
+  type loginOutputType = {
+    response: CustomResponseType;
+    credentials: string;
+  }
   type PaidProfileImageInput = {
     publicId?: string;
     secureUrl?: string;

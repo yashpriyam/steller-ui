@@ -459,6 +459,7 @@ const typeDefs = gql`
   }
   type LoginUserDataOutputType {
     response: CustomResponseType!
+    credentials: String
   }
   input PaidProfileImageInput {
     publicId: String

@@ -7,7 +7,7 @@ export const login = async (
   _parent: undefined,
   args: { data: loginUserInputType },
   { res, req }: ContextType
-): Promise<CustomResponseType | unknown> => {
+): Promise<loginOutputType | unknown> => {
   const { USER_LOGIN_SUCCESS } = localMessages.USER;
   const { USER_LOGIN_FAILED } = errorMessages.USER;
   const errorData: CustomResponseType = {
@@ -27,20 +27,17 @@ export const login = async (
     const userInfo = user.toObject();
     delete userInfo.password;
     const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
+    let token;
     if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
-      console.log({ hostname: req.hostname,headers: req.headers })
-      const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
-      res.cookie(JWT_SECRET_KEY,token, {
-        sameSite: "none",
-        secure: true,
-        domain: "webmaster-portal-git-dev-yashpriyam.vercel.app"
-      });
+      token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
+      res.cookie(JWT_SECRET_KEY,token);
     }
     return {
       response: {
         message: USER_LOGIN_SUCCESS,
         status: statusCodes.OK,
       },
+      credentials: token 
     };
   } catch (error) {
     return {
