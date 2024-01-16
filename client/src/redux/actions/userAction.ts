@@ -91,6 +91,7 @@ export const useUser = () => {
     });
     return {
       response,
+      status: response?.data?.verifyUserOtp?.credentials?.response?.status
     };
   };
 

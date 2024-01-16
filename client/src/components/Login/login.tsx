@@ -68,8 +68,8 @@ export const Login: React.FC<LoginProps> = ({
   };
   const handleOnVerifyOtp = async (otp: string): Promise<boolean> => {
     try {
-      const response = await verifyUserOtpApi(currentData.email, otp);
-      const isValidOtp = response.response.data.verifyUserOtp.status === 200;
+      const { status } = await verifyUserOtpApi(currentData.email, otp);
+      const isValidOtp = status === 200;
       if (isValidOtp) {
         setIsLoggedIn(true)
         setCurrentScreen(presentScreen.CREATE_PASSWORD);
