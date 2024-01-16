@@ -15,7 +15,6 @@ export const updateImage = async (
         public_id: publicId,
       }
     );
-    console.log({ publicId, secureUrl });
     return { publicId, secureUrl };
   } catch (error) {
     throw new UserInputError(errorMessages.IMAGE.FAILED_TO_UPLOAD_IMAGE);
