@@ -522,16 +522,6 @@ const typeDefs = gql`
     email: String!
     password: String
   }
-  type DaySchemaType {
-    batchCode: String
-    dayNumber: Int
-    title: String
-    description: String
-    topics: [String]
-    notes: [String]
-    videos: [String]
-    questions: [String]
-  }
   input WeekDataInputType {
     batchCode: String
     weekNumber: Int
