@@ -58,6 +58,7 @@ const typeDefs = gql`
     updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
     upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
     createDay(dayData: DayDataInputType!) : DayDataOutputType
+    updateDay(dayData: DayDataInputType!) : DayDataOutputType
   }
 
   type ProfileImageType {
