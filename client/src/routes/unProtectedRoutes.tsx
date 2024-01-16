@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import HomePage from "../pages/homePage/homePage";
-import SchedulingPage from "../pages/schedulingPage/schedulingPage";
+import SchedulePage from "../pages/schedulePage/schedulePage";
 import { Dashboard } from "../pages/dashboard/dashboard";
 import DayPage from "../pages/dayPage/dayPage";
 import DayContentPage from "../pages/dayContextPage/dayContextPage";
@@ -10,7 +10,7 @@ import VideosPage from "../pages/videosPage/videosPage";
 
 const unProtectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/homePage": <HomePage />,
-  "/schedule": <SchedulingPage/>,
+  "/schedule": <SchedulePage/>,
   "/dashboard":<Dashboard/>,
   "/day/:dayNumber" : <DayPage/>,
   "/day/:dayNumber/:dayContent": <DayContentPage />,
