@@ -63,5 +63,6 @@ export const errorMessages = Object.freeze({
   },
   DAY_MODEL: {
     DAY_CREATION_FAILED: "unable to insert day data",
+    DAY_UPDATION_FAILED: "unable to update day data",
   },
 });
