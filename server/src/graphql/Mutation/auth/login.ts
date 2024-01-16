@@ -33,7 +33,7 @@ export const login = async (
       res.cookie(JWT_SECRET_KEY,token, {
         sameSite: "none",
         secure: true,
-        domain: "webmaster-portal-git-dev-yashpriyam.vercel.app"
+        domain: "https://webmaster-portal-git-dev-yashpriyam.vercel.app"
       });
     }
     return {
