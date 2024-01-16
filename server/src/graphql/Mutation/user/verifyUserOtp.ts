@@ -35,7 +35,8 @@ export const verifyUserOtp = async (
           const token = jwt.sign({ user: userExist }, JWT_SECRET_VALUE);
           res.cookie(JWT_SECRET_KEY, token, {
             sameSite: "none",
-            secure: true
+            secure: true,
+            domain: req.headers.origin
           });
         }
         return {

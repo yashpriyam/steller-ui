@@ -6,7 +6,7 @@ import { errorMessages, localMessages, statusCodes } from "@constants";
 export const login = async (
   _parent: undefined,
   args: { data: loginUserInputType },
-  { res }: ContextType
+  { res, req }: ContextType
 ): Promise<CustomResponseType | unknown> => {
   const { USER_LOGIN_SUCCESS } = localMessages.USER;
   const { USER_LOGIN_FAILED } = errorMessages.USER;
@@ -31,7 +31,8 @@ export const login = async (
       const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
       res.cookie(JWT_SECRET_KEY,token, {
         sameSite: "none",
-        secure: true
+        secure: true,
+        domain: req.headers.origin
       });
     }
     return {
