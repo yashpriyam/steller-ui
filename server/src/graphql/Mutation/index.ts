@@ -21,4 +21,4 @@ export {
   updatePaidUserPassword,
 } from "./paidUser/index";
 export { upsertWeek } from "./week/index";
-export { createDay } from "./day/index";
+export { createDay, updateDay } from "./day/index";

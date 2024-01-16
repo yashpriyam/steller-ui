@@ -7,6 +7,7 @@ export const LOGIN = gql`
         status
         message
       }
+      credentials
     }
   }
 `;

@@ -477,6 +477,7 @@ declare global {
       image: string | React.ReactNode;
       url: string;
       text: string;
+      openNewPage?: boolean;
     }[],
     optionAtLast?: {
       text: string;
@@ -489,6 +490,7 @@ declare global {
     monorepoPaths: Record<string, boolean>;
     isLoginModalOpen: boolean;
     setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
+    isLoggedIn: boolean;
   }
 
   type SetCookieArgsType = {

@@ -6,8 +6,8 @@ import { errorMessages, localMessages, statusCodes } from "@constants";
 export const login = async (
   _parent: undefined,
   args: { data: loginUserInputType },
-  { res }: ContextType
-): Promise<CustomResponseType | unknown> => {
+  { res, req }: ContextType
+): Promise<loginOutputType | unknown> => {
   const { USER_LOGIN_SUCCESS } = localMessages.USER;
   const { USER_LOGIN_FAILED } = errorMessages.USER;
   const errorData: CustomResponseType = {
@@ -27,8 +27,9 @@ export const login = async (
     const userInfo = user.toObject();
     delete userInfo.password;
     const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
+    let token;
     if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
-      const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
+      token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
       res.cookie(JWT_SECRET_KEY,token);
     }
     return {
@@ -36,6 +37,7 @@ export const login = async (
         message: USER_LOGIN_SUCCESS,
         status: statusCodes.OK,
       },
+      credentials: token 
     };
   } catch (error) {
     return {
