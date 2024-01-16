@@ -29,7 +29,8 @@ const PORT = process.env.PORT || 8080;
   Connection(process.env.MONGODB_URI);
 
   const corsOption = {
-    origin: [
+    origin: true
+    /* [
       "http://localhost:3001",
       "http://localhost:3000",
       "https://studio.apollographql.com",
@@ -39,6 +40,7 @@ const PORT = process.env.PORT || 8080;
       "https://webmaster-portal-yashpriyam.vercel.app",
       "https://webmaster-portal.vercel.app",
     ],
+    */
     credentials: true,
   };
 
