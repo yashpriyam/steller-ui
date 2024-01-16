@@ -21,7 +21,7 @@ const App = () => {
       {
         isLoginModalOpen && (<Modal> <Login closeModal={() => setIsLoginModalOpen(false)} /> </Modal>)
       }
-      <div className={`app-section ${isNotMonorepoPath && 'portal-app-section'}`}>
+      <div className={`app-section ${isLoggedIn && isNotMonorepoPath && 'portal-app-section'} ${!isLoggedIn && 'app-log-out' }`}>
         <RouteList />
         <MonorepoIndex />
       </div>
