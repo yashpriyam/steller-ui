@@ -46,6 +46,8 @@
     "error": "Error",
     "forbidden": "forbidden",
     "code": "code",
-    "go_back": "Go Back"
+    "go_back": "Go Back",
+    "join_meet": "Join meet",
+    "meet": "meet"
 
 }

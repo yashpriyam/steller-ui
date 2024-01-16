@@ -1,5 +1,5 @@
 import * as React from "react";
-export const ZoomMeetIcon: React.FC<SvgIconProps> = ({
+export const MeetIcon: React.FC<SvgIconProps> = ({
     height = "25px",
     width = "25px",
     isDarkMode,

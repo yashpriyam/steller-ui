@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, ZoomMeetIcon } from "./icons/index";
+import { AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon } from "./icons/index";
 import { useTranslation } from 'react-i18next';
 import { useUser } from './redux/actions/userAction';
 import { useDispatch } from 'react-redux';
@@ -52,7 +52,7 @@ export const useAppData = (): UseAppDataReturnType => {
       },
       {
         text: 'Meet',
-        image: <ZoomMeetIcon isDarkMode={true} />,
+        image: <MeetIcon isDarkMode={true} />,
         url: process.env.REACT_APP_CLASS_MEET_URL || "",
         openNewPage: true
       },
