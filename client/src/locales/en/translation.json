@@ -42,7 +42,7 @@
     "otp_verified_success":"Otp verified successfully",
     "password_creatioin_failed":"password creation failed",
     "access_denied": "Access Denied",
-    "you_dont_have_permission_to_view_this_page": "You dont have permission to view this Page. Login to view this Page",
+    "you_dont_have_permission_to_view_this_page": "You don't have permission to view this Page. Login to view this Page",
     "error": "Error",
     "forbidden": "forbidden",
     "code": "code",
