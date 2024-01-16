@@ -89,17 +89,14 @@ export const registerUser = async (
     ]);
 
     const token = jwt.sign({ user: savedUser }, process.env.JWT_SECRET_VALUE || "");
-    res.cookie(process.env.JWT_SECRET_KEY || "", token, {
-      sameSite: "none",
-      secure: true,
-      domain: req.hostname
-    });
+    res.cookie(process.env.JWT_SECRET_KEY || "", token);
     return {
       userData,
       response: {
         message: USER_REGISTERED_SUCCESSFULLY,
         status:statusCodes.OK,
-      }
+      },
+      credentials: token
     };
   } catch (error) {
     return error;

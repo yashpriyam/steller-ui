@@ -177,8 +177,9 @@ const typeDefs = gql`
   }
 
   type RegistrationOutputDataType {
-    userData:RegisterOutputType
-    response :CustomResponseType!
+    userData: RegisterOutputType
+    response: CustomResponseType!
+    credentials: String
   }
   type RegisterOutputType{
     name: String!

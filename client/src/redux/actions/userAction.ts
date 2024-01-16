@@ -37,6 +37,10 @@ export const useUser = () => {
         },
       },
     });
+    setCookie({
+      key: process.env.REACT_APP_JWT_SECRET_KEY || "",
+      value: response?.data?.registerUser?.credentials,
+    });
     dispatch(actions.setRegisterUser(response.data));
     return { response };
   };
