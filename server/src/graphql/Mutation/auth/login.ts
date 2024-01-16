@@ -31,9 +31,9 @@ export const login = async (
       console.log({ hostname: req.hostname,headers: req.headers })
       const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
       res.cookie(JWT_SECRET_KEY,token, {
-        // sameSite: "none",
-        // secure: true,
-        // domain: "https://webmaster-portal-git-dev-yashpriyam.vercel.app"
+        sameSite: "none",
+        secure: true,
+        domain: "webmaster-portal-git-dev-yashpriyam.vercel.app"
       });
     }
     return {
