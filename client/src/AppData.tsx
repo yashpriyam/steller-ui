@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon } from "./icons/index";
+import { AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, ZoomMeetIcon } from "./icons/index";
 import { useTranslation } from 'react-i18next';
 import { useUser } from './redux/actions/userAction';
 import { useDispatch } from 'react-redux';
@@ -39,7 +39,7 @@ export const useAppData = (): UseAppDataReturnType => {
         text: t('home'),
         image: <HomeIcon isDarkMode={true} />,
         url: "/"
-      }, 
+      },
       // {
       //   text: t('dashboard'),
       //   image: <DashboardIcon isDarkMode={true} />,
@@ -49,6 +49,11 @@ export const useAppData = (): UseAppDataReturnType => {
         text: t('schedule'),
         image: <ScheduleIcon isDarkMode={true} />,
         url: "/schedule"
+      },
+      {
+        text: 'Meet',
+        image: <ZoomMeetIcon isDarkMode={true} />,
+        url: process.env.REACT_APP_CLASS_MEET_URL || "",
       },
       // {
       //   text: t('questions'),
