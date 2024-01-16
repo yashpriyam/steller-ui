@@ -405,13 +405,16 @@ declare global {
     image: string;
   }
   type DaySchemaType = {
-    title: string;
-    description: string;
-    dayNumber: Number;
-    topics: string[];
-    notes: string[];
-    videos: string[];
-    questions: string[];
+    _id?: string;
+    batchCode?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    title?: string;
+    description?: string;
+    topics?: string[];
+    notes?: string[];
+    videos?: string[];
+    questions?: string[];
   };
   type loginUserInputType = {
     email: string;
@@ -460,20 +463,25 @@ declare global {
     expectedSalary?: string;
     socialHandles?: SocialMediaHandles;
     address?: string;
-    sessionPreference? = SessionPreferenceEnum;
+    sessionPreference?: SessionPreferenceEnum;
   };
   type updatePaidUserPasswordInput = {
     email: String;
     password?: string;
   };
+  type DayDataOutputType = {
+    dayData?: DaySchemaType;
+    response: CustomResponseType;
+  }
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
+    batchCode?: string;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
-    days?: ObjectId[];
+    days?: string[];
   }
 
 
