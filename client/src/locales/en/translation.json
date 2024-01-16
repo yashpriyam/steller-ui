@@ -40,5 +40,12 @@
     "password_created_success":"password created successfully!",
     "otp_sent_success":"Otp sent successfully",
     "otp_verified_success":"Otp verified successfully",
-    "password_creatioin_failed":"password creation failed"
+    "password_creatioin_failed":"password creation failed",
+    "access_denied": "Access Denied",
+    "you_dont_have_permission_to_view_this_page": "You dont have permission to view this Page. Login to view this Page",
+    "error": "Error",
+    "forbidden": "forbidden",
+    "code": "code",
+    "go_back": "Go Back"
+
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Routes } from 'react-router-dom';
-import { getUnProtectedRoutes } from './unProtectedRoutes';
-import { getProtectedRoutes } from './protectedRoutes';
+import { UnProtectedRoutes } from './unProtectedRoutes';
+import { ProtectedRoutes } from './protectedRoutes';
 
 const RouteList: React.FC = () => {
   return (
-    <Routes>
-      {getUnProtectedRoutes()}
-      {getProtectedRoutes()}
-    </Routes>
+    <>
+      <UnProtectedRoutes />
+      <ProtectedRoutes />
+    </>
   );
 };
 

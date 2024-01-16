@@ -489,6 +489,7 @@ declare global {
     monorepoPaths: Record<string, boolean>;
     isLoginModalOpen: boolean;
     setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
+    isLoggedIn: boolean;
   }
 
   type SetCookieArgsType = {

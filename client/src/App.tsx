@@ -9,14 +9,14 @@ import { Modal } from "./components/Modal/modal";
 import { Login } from "./components/Login/login";
 
 const App = () => {
-  const { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen } = useAppData();
+  const { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn } = useAppData();
   const { pathname } = useLocation();
   const isNotMonorepoPath = !monorepoPaths[pathname];
 
   return (
     <div className="app-container">
       {
-        isNotMonorepoPath && (<Sidebar {...sidebarData} />)
+        isLoggedIn && isNotMonorepoPath && (<Sidebar {...sidebarData} />)
       }
       {
         isLoginModalOpen && (<Modal> <Login closeModal={() => setIsLoginModalOpen(false)} /> </Modal>)

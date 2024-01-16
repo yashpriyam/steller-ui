@@ -61,5 +61,5 @@ export const useAppData = (): UseAppDataReturnType => {
       onClick: () => isLoggedIn ? logOut() : setIsLoginModalOpen(true)
     }
   }
-  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen }
+  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
 }
