@@ -13,7 +13,7 @@ export const GET_SCHEDULE_DATA = gql`
         days {
           batchCode
           dayNumber
-          # weekNumber
+          weekNumber
           title
           description
           topics
