@@ -33,7 +33,10 @@ export const verifyUserOtp = async (
         const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
         if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
           const token = jwt.sign({ user: userExist }, JWT_SECRET_VALUE);
-          res.cookie(JWT_SECRET_KEY, token);
+          res.cookie(JWT_SECRET_KEY, token, {
+            sameSite: "none",
+            secure: true
+          });
         }
         return {
           message: OTP_VERIFIED_SUCCESS,

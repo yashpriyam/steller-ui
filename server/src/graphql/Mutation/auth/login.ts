@@ -31,7 +31,7 @@ export const login = async (
       const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
       res.cookie(JWT_SECRET_KEY,token, {
         sameSite: "none",
-        secure: false
+        secure: true
       });
     }
     return {
