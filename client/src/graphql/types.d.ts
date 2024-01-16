@@ -477,6 +477,7 @@ declare global {
       image: string | React.ReactNode;
       url: string;
       text: string;
+      openNewPage?: boolean;
     }[],
     optionAtLast?: {
       text: string;

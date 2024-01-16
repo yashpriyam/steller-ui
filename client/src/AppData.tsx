@@ -54,6 +54,7 @@ export const useAppData = (): UseAppDataReturnType => {
         text: 'Meet',
         image: <ZoomMeetIcon isDarkMode={true} />,
         url: process.env.REACT_APP_CLASS_MEET_URL || "",
+        openNewPage: true
       },
       // {
       //   text: t('questions'),

@@ -14,6 +14,13 @@ export const Sidebar = ({
     const lastOption = optionAtLast && (
         <SidebarOption showText={isOpen} text={optionAtLast.text} image={<LogOutIcon
             isDarkMode={true} />} />)
+    const onOptionClick = (url: string, openNewPage: boolean) => {
+        if (openNewPage) {
+            window.open(url, "_blank");
+        } else {
+            navigate(url)
+        }
+    }
     return (
         <div className='sidebar-main-container'>
             <div className={`sidebar-arrow-icon ${!isOpen && 'left-side-arrow'}`} onClick={() => setIsOpen(!isOpen)}> <LeftArrowIcon /> </div>
@@ -21,12 +28,12 @@ export const Sidebar = ({
                 <SidebarContainer>
                     {
                         options.map((data, index) => {
-                            return <SidebarOption onClick={() => navigate(data.url)} key={index} showText={isOpen} text={data.text} image={data.image} />
+                            return <SidebarOption onClick={() => onOptionClick(data.url, Boolean(data.openNewPage))} key={index} showText={isOpen} text={data.text} image={data.image} />
                         })
                     }
                     <div className='sidebar-last-option-btn sidebar-btn-mobile-view' onClick={optionAtLast?.onClick}>
-                {lastOption}
-            </div>
+                        {lastOption}
+                    </div>
                 </SidebarContainer>
             </div>
             <div className='sidebar-last-option-btn' onClick={optionAtLast?.onClick}>
