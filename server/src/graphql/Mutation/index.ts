@@ -4,6 +4,7 @@ export {
   sendOtpToRegisteredUser,
   verifyUserOtp,
   updateUserPassword,
+  updateCoverImage
 } from "./user/index";
 export { createTransaction } from "./transaction/createTransaction";
 export { createNotes, deleteNotesById, updateNotesById } from "./notes/index";
