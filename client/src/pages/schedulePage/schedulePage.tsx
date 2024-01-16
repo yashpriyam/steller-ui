@@ -46,7 +46,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
               isActive && (
                 <Accordion
                   title={title}
-                  // disabled={isDisabledForUnpaidUsers}
+                  disabled={isDisabledForUnpaidUsers}
                 >
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
@@ -67,47 +67,51 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             className="day-container"
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigate(`/day/${dayNumber}`);
+                              navigate(`/day/${dayNumber}?weekNumber=${weekNumber}`);
                             }}
                           >
                             <div className="day-header">
                               <strong className="day-title">{title}</strong>
-                              {description && <p>{description}</p>}
-                              <div className="topic-tags">
-                                {tags
-                                  ?.slice(0, 2)
-                                  .map((tag: string, idx: number) => (
+                              {tagsLength && (
+                                <div className="topic-tags">
+                                  {tags
+                                    ?.slice(0, 2)
+                                    .map((tag: string, idx: number) => (
+                                      <span
+                                        className={`topic-tag ${tag.toLowerCase()}`}
+                                      >
+                                        {tag.toUpperCase()}
+                                      </span>
+                                    ))}
+                                  {tagsLength === 3 && (
                                     <span
-                                      className={`topic-tag ${tag.toLowerCase()}`}
+                                      className={`topic-tag ${tags[2]?.toLowerCase()}`}
                                     >
-                                      {tag}
+                                      {tags[2].toUpperCase()}
                                     </span>
-                                  ))}
-                                {tagsLength && tagsLength === 3 && (
-                                  <span
-                                    className={`topic-tag ${tags[2]?.toLowerCase()}`}
-                                  >
-                                    {tags[2]}
-                                  </span>
-                                )}
-                                {tagsLength && tagsLength > 3 && (
-                                  <>
-                                    <span className="hidden-tags">
-                                      {tags.slice(3).map((tag, idx: number) => (
-                                        <span
-                                          className={`topic-tag  ${tag.toLowerCase()}`}
-                                        >
-                                          {tag}
-                                        </span>
-                                      ))}
-                                    </span>
-                                    <span className="topic-tag show-tags">{`+${
-                                      tagsLength - 2
-                                    }`}</span>
-                                  </>
-                                )}
-                              </div>
+                                  )}
+                                  {tagsLength > 3 && (
+                                    <>
+                                      <span className="hidden-tags">
+                                        {tags
+                                          .slice(3)
+                                          .map((tag, idx: number) => (
+                                            <span
+                                              className={`topic-tag  ${tag.toLowerCase()}`}
+                                            >
+                                              {tag.toUpperCase()}
+                                            </span>
+                                          ))}
+                                      </span>
+                                      <span className="topic-tag show-tags">{`+${
+                                        tagsLength - 2
+                                      }`}</span>
+                                    </>
+                                  )}
+                                </div>
+                              )}
                             </div>
+                            {description && <div className="day-description">{description}</div>}
                             <div className="buttons-wrapper">
                               <Button
                                 text="Questions"

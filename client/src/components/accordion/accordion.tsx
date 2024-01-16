@@ -8,7 +8,7 @@ const Accordion: React.FC<AccordionPropsInterface> = ({
   title,
   children,
   style,
-  icon = <DropDownIcon />,
+  icon = <DropDownIcon isDarkMode={true} />,
   closeOnOutsideClick = false,
   iconPosition = "right",
   titlePosition = "left",

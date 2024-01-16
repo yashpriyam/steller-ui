@@ -1,22 +1,24 @@
 @import "../../components/variables.scss";
 
 .scheduling-page {
-  height: 100%;
-  width: 100%;
+  min-height: 100%;
+  max-width: 100%;
   display: flex;
   padding: 20px 10px;
   gap: 30px;
   background-color: $primaryBgColor;
   font-family: $primaryFontFamily;
   color: $primaryTextColor;
-
   .scheduling-page-accordion {
+    width: 100%;
     padding-top: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
     .no-data-found{
-      font-size: $largerFontSize;
+      width: 100%;
+      font-size: $extraLargFontsize;
+      text-align: center;
     }
     .accordion-content-wrapper {
       position: relative;
@@ -42,14 +44,12 @@
 
         .day-container {
           display: flex;  
-          align-items: center;
           color: $primaryColor;
           padding: 10px;
           border-radius: 7px;
           border: 1px solid $videoHutBorderColor;
           width: 48vw;
           background-color: $Gray35;
-          background: radial-gradient(50% 50% at 0% 0%, $radialGradient 100%);
           transition: all 0.3s;
           display: flex;
           flex-direction: column;
@@ -63,13 +63,18 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
+            @media (max-width:$screenSm){
+              flex-direction: column;
+            }
 
             .topic-tags {
               display: flex;
               gap: 10px;
               position: relative;
               font-size: $smallFontSize;
-
+              @media (max-width:$screenSm ){
+                font-size: $extraSmallFontSize;
+              }
               .topic-tag {
                 transition: 0.3s;
                 padding: 5px;
@@ -77,6 +82,9 @@
                 background-color: rgba(132, 131, 131, 0.15);
                 &:hover {
                   transform: scale(110%);
+                }
+                @media (max-width:$screenSm ){
+                  padding: 2px 3px;
                 }
               }
               .hidden-tags {
@@ -112,6 +120,7 @@
           }
 
           .day-description {
+            color: $sencondaryTextColor;
             font-size: $largerFontSize;
           }
 
@@ -173,10 +182,10 @@
           .day-container {
             border-radius: 25px;
             padding: 20px;
+            align-items: center;
             transition: 0.5s;
-
             .day-description {
-              font-size: $largerFontSize;
+              font-size: $mediumFontSize;
             }
           }
         }
@@ -199,12 +208,12 @@
           
           .day-container {
             border-radius: 10px;
-            padding: 20px;
+            padding: 10px;
             width: 100%;
 
             .day-header {
               flex-direction: column;
-              gap: 10px;
+              gap: 5px;
               transition: 0.5s;
             }
             .buttons-wrapper {
