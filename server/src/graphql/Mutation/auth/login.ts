@@ -30,7 +30,8 @@ export const login = async (
     if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
       const token = jwt.sign({ user: userInfo }, JWT_SECRET_VALUE);
       res.cookie(JWT_SECRET_KEY,token, {
-        sameSite: "none"
+        sameSite: "none",
+        secure: false
       });
     }
     return {
