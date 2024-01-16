@@ -92,7 +92,7 @@ export const registerUser = async (
     res.cookie(process.env.JWT_SECRET_KEY || "", token, {
       sameSite: "none",
       secure: true,
-      domain: req.headers.origin
+      domain: req.headers.origin?.slice(8)
     });
     return {
       userData,
