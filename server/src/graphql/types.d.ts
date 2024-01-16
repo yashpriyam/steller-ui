@@ -374,6 +374,12 @@ declare global {
     questionData: [AllQuestionDataType];
     response: CustomResponseType;
   };
+
+  type UserOtpOutputType = {
+    response: CustomResponseType;
+    credentials?: string;
+  }
+
   type CustomResponseType = {
     status: number;
     message: string;

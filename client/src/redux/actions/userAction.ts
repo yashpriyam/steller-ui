@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { apolloClient } from "../../graphql/apolloClient/apolloClient";
 import { actions, selectUser } from "../slices/user/userSlice";
 import { REGISTER_USER } from "../../graphql/mutation/user/registerUser";
-import { VERIFY_USER_OTP } from "../../graphql/mutation/verifyUserOtp/verifyUserOtp";
+import { VERIFY_USER_OTP } from "../../graphql/mutation/user/verifyUserOtp";
 import { UPDATE_USER_PASSWORD } from "../../graphql/mutation/updateUserPassword/updateUserPassword";
 import { LOGIN } from "../../graphql/mutation/login/login";
 import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/sendUserOtp/sendUserOtp";
@@ -84,6 +84,10 @@ export const useUser = () => {
           emailOtp: otp,
         },
       },
+    });
+    setCookie({
+      key: process.env.REACT_APP_JWT_SECRET_KEY || "",
+      value: response?.data?.verifyUserOtp?.credentials,
     });
     return {
       response,
