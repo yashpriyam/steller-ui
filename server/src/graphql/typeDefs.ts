@@ -54,7 +54,7 @@ const typeDefs = gql`
     updatePaidUserPassword(
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
-    verifyUserOtp(data:VerifyOtpPaidUserInputType!):CustomResponseType
+    verifyUserOtp(data:VerifyOtpPaidUserInputType!): UserOtpOutputType
     updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
     upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
     createDay(dayData: DayDataInputType!) : DayDataOutputType
@@ -68,6 +68,11 @@ const typeDefs = gql`
   type UpdateProfilePictureOutput {
     profileImage: ProfileImageType
     response: CustomResponseType!
+  }
+
+  type UserOtpOutputType {
+    response: CustomResponseType
+    credentials: String
   }
 
   type CustomResponseType {
@@ -177,8 +182,9 @@ const typeDefs = gql`
   }
 
   type RegistrationOutputDataType {
-    userData:RegisterOutputType
-    response :CustomResponseType!
+    userData: RegisterOutputType
+    response: CustomResponseType!
+    credentials: String
   }
   type RegisterOutputType{
     name: String!
@@ -459,6 +465,7 @@ const typeDefs = gql`
   }
   type LoginUserDataOutputType {
     response: CustomResponseType!
+    credentials: String
   }
   input PaidProfileImageInput {
     publicId: String

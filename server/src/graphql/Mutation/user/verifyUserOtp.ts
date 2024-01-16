@@ -6,12 +6,14 @@ export const verifyUserOtp = async (
   _parent: undefined,
   args: { data: { email: string; emailOtp: string } },
   { res, req }: ContextType
-): Promise<CustomResponseType | unknown> => {
+): Promise<UserOtpOutputType | unknown> => {
   const { OTP_VERIFIED_SUCCESS } = localMessages.OTP_MODEL;
   const { OTP_EMAIL_NOT_EXIST, OTP_EMAIL_INVALID } = errorMessages.OTP_MODEL;
-  const errorData: CustomResponseType = {
-    message: OTP_EMAIL_INVALID,
-    status: statusCodes.BAD_REQUEST,
+  const errorData: UserOtpOutputType = {
+    response: {
+      message: OTP_EMAIL_INVALID,
+      status: statusCodes.BAD_REQUEST,
+    }
   };
   try {
     const { data } = args;
@@ -31,22 +33,24 @@ export const verifyUserOtp = async (
           return errorData;
         }
         const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
+        let token;
         if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {
-          const token = jwt.sign({ user: userExist }, JWT_SECRET_VALUE);
-          res.cookie(JWT_SECRET_KEY, token, {
-            sameSite: "none",
-            secure: true,
-            domain: req.hostname
-          });
+          token = jwt.sign({ user: userExist }, JWT_SECRET_VALUE);
+          res.cookie(JWT_SECRET_KEY, token);
         }
         return {
-          message: OTP_VERIFIED_SUCCESS,
-          status: statusCodes.OK,
+          response: {
+            message: OTP_VERIFIED_SUCCESS,
+            status: statusCodes.OK,
+          },
+          credentials: token
         };
       } else {
         return {
-          message: OTP_EMAIL_NOT_EXIST,
-          status: statusCodes.BAD_REQUEST,
+          response: {
+            message: OTP_EMAIL_NOT_EXIST,
+            status: statusCodes.BAD_REQUEST,
+          }
         };
       }
     } else return errorData;

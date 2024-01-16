@@ -34,6 +34,7 @@ declare global {
   type RegisterOutputType = {
     userData?: RegisterType;
     response: CustomResponseType;
+    credentials?: string;
   };  
   type RegisterType = {
     _id?: string;
@@ -373,6 +374,12 @@ declare global {
     questionData: [AllQuestionDataType];
     response: CustomResponseType;
   };
+
+  type UserOtpOutputType = {
+    response: CustomResponseType;
+    credentials?: string;
+  }
+
   type CustomResponseType = {
     status: number;
     message: string;
@@ -420,6 +427,10 @@ declare global {
     email: string;
     password: string;
   };
+  type loginOutputType = {
+    response: CustomResponseType;
+    credentials?: string;
+  }
   type PaidProfileImageInput = {
     publicId?: string;
     secureUrl?: string;
