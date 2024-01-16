@@ -29,7 +29,7 @@ const PORT = process.env.PORT || 8080;
   Connection(process.env.MONGODB_URI);
 
   const corsOption = {
-    origin: true
+    origin: true,
     /* [
       "http://localhost:3001",
       "http://localhost:3000",
