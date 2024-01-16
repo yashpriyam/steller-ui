@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import { Filter } from "../../components/filter/filter";
 import { useNavigate } from "react-router-dom";
 import { useWeek } from "../../redux/actions/scheduleAction";
+import { MeetIcon } from "../../icons/index";
+import { useTranslation } from "react-i18next";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
 
 const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
@@ -12,24 +14,34 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   style,
 }: SchedulePagePropsInterface) => {
   const [filter, setFilter] = useState<string[]>([])
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
   const { weekList } = weekData;
   const getScheduleDataApi = async () => {
     await getScheduleData({});
   };
-  const handleButtonNavigation = (path: string)=>{
+  const handleButtonNavigation = (path: string) => {
     navigate(path);
   };
+  const onJoinMeetClick = () => {
+    window.open(process.env.REACT_APP_CLASS_MEET_URL, "_blank");
+  }
   useEffect(() => {
     getScheduleDataApi();
   }, []);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
-      <Filter
+      {/* <Filter
         checkboxData={checkboxDataList}
         filter={filter}
-      />
+      /> */}
+      <div className="schedule-page-meet-container">
+        <div onClick={onJoinMeetClick} className="schedule-page-meet-btn">
+          <MeetIcon isDarkMode={true} />
+          {t('join_meet')}
+        </div>
+      </div>
       <div className="scheduling-page-accordion">
         {weekList.length ? (
           weekList.map((week, index) => {
@@ -46,7 +58,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
               isActive && (
                 <Accordion
                   title={title}
-                  // disabled={isDisabledForUnpaidUsers}
+                // disabled={isDisabledForUnpaidUsers}
                 >
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
@@ -101,9 +113,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                         </span>
                                       ))}
                                     </span>
-                                    <span className="topic-tag show-tags">{`+${
-                                      tagsLength - 2
-                                    }`}</span>
+                                    <span className="topic-tag show-tags">{`+${tagsLength - 2
+                                      }`}</span>
                                   </>
                                 )}
                               </div>

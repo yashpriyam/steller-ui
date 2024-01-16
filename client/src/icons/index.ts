@@ -6,3 +6,4 @@ export { ScheduleIcon } from "./scheduleIcon";
 export { LogOutIcon } from "./logOutIcon";
 export { LeftArrowIcon } from "./leftArrowIcon";
 export { AvatarIcon } from "./avatarIcon";
+export { MeetIcon } from "./meetIcon"
