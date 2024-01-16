@@ -59,6 +59,7 @@ const typeDefs = gql`
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
     upsertWeek(weekData: UpsertWeekDataInputType!): UpsertWeekDataOutputType
+    createDay(dayData: DayDataInputType!) : DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
   }
 
@@ -562,6 +563,29 @@ const typeDefs = gql`
   }
   type UpsertWeekDataOutputType {
     weekData: WeekDataType
+    response: CustomResponseType!
+  } 
+  input DayDataInputType {
+    batchCode: String!
+    dayNumber: Int!
+    weekNumber: Int!
+    title: String
+    description: String
+    topics: [String]
+  }
+  type DaySchemaType {
+    batchCode: String
+    dayNumber: Int
+    weekNumber: Int
+    title: String
+    description: String
+    topics: [String]
+    notes: [NotesDataType]
+    videos: [videoDataType]
+    questions: [QuestionDataType]
+  }
+  type DayDataOutputType {
+    dayData: DaySchemaType
     response: CustomResponseType!
   }
   input CoverImageInputType {

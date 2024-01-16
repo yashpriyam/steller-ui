@@ -61,6 +61,7 @@ export const errorMessages = Object.freeze({
   MSG: {
     UNAUTHORIZED_USER: "unauthorized user"
   },
-
-  
+  DAY_MODEL: {
+    DAY_CREATION_FAILED: "unable to insert day data",
+  },
 });
