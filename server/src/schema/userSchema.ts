@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { convertUTCtoIST } from "@utils";
 
 const sessionPreferences = Object.freeze({
@@ -6,7 +6,7 @@ const sessionPreferences = Object.freeze({
   offline: "offline",
 });
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema<UserSchemaType>(
   {
     email: { type: String, required: true },
     name: { type: String, required: true },
@@ -25,18 +25,19 @@ const userSchema = new mongoose.Schema(
       default: convertUTCtoIST(),
     },
     collegeName: { type: String },
-    profileImage : {
+    profileImage: {
       publicId: String,
       secureUrl: String,
     },
     coverImage: {
       publicId: String,
       secureUrl: String,
-    }
+    },
+    userProfile: { type: Types.ObjectId, ref: "userProfile" },
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("user", userSchema);
+const User = mongoose.model<UserSchemaType>("user", userSchema);
 
 export { User };

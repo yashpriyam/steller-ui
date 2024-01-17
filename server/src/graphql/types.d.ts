@@ -661,4 +661,20 @@ declare global {
     achievementsData?: AchievementsDataType[];
   }
 
+  interface UserSchemaType {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    password?: string;
+    isJobSeeker: boolean;
+    occupation?: string;
+    sessionPreference: 'online' | 'offline';
+    expectedSalary?: string;
+    IST: string;
+    collegeName?: string;
+    profileImage?: UserProfile;
+    coverImage?: UserProfile;
+    userProfile?: Types.ObjectId;
+  }
+
 }
