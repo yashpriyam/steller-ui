@@ -35,7 +35,7 @@ declare global {
     userData?: RegisterType;
     response: CustomResponseType;
     credentials?: string;
-  };  
+  };
   type RegisterType = {
     _id?: string;
     name: string;
@@ -585,8 +585,77 @@ declare global {
     weekData?: WeekDataType;
     response: CustomResponseType;
   };
-  
+
   type ImageInputType = {
     image: string;
   };
+  interface Address {
+    colony?: string;
+    city?: string;
+}
+
+interface ExperienceData {
+    companyName?: string;
+    companyLocation?: string;
+    role?: string;
+    startDate?: string;
+    endDate?: string;
+    description?: string[];
+    techStack?: string[];
+}
+
+interface ProjectsData {
+    heading?: string;
+    description?: string[];
+    deployLink?: string;
+    gitHubLink?: string;
+    techStack?: string[];
+}
+
+interface SkillsData {
+    language?: string[];
+    frontend?: string[];
+    backend?: string[];
+    database?: string[];
+    versionControl?: string[];
+    cIcD?: string[];
+}
+
+interface EducationalData {
+    instituteName?: string;
+    location?: string;
+    course?: string;
+    startDate?: string;
+    endDate?: string;
+    cgpa?: string;
+}
+
+interface AchievementsData {
+    icon?: string;
+    header?: string;
+    description?: string;
+    links?: string;
+}
+
+interface UserProfileDocument extends Document {
+    userId: { type: Types.ObjectId; ref: string };
+
+    personalDetails: {
+        fullName: string;
+        email: string;
+        phoneNumber: string;
+        headline?: string;
+        address?: Address;
+    };
+    socialDetail?: {
+        githubLink?: string;
+        linkedInLink?: string;
+    };
+    experienceData?: ExperienceData[];
+    projectsData?: ProjectsData[];
+    skillsData?: SkillsData;
+    educationalData?: EducationalData[];
+    achievementsData?: AchievementsData[];
+}
+
 }
