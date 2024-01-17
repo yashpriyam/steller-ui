@@ -1,6 +1,7 @@
 import { questionAttempt, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import isCorrectAnswer from "../../../utils/isCorrectAnswer";
+import { updateOptions } from "../../../utils/updateOptions";
 
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
@@ -30,13 +31,17 @@ export const createQuestionAttemptByUser = async (
     const question = await questionModel.findById(questionId);
 
     const isCorrect = isCorrectAnswer(response, question!.answer);
+    const updatedResponse = updateOptions(response, question?.options);
+    console.log({updatedResponse})
     const createdQuestionAttemtData: QuestionAttemptSchemaType =
       await questionAttempt.create({
         isCorrect,
         questionId,
         userId,
-        response,
+        response:updatedResponse,
       });
+    console.log({...createdQuestionAttemtData});
+    
     const responseData: CustomResponseType = createdQuestionAttemtData
       ? {
           message: QUESTION_ATTEMPT_SUCCESS,
