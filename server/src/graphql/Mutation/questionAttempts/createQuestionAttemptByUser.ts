@@ -29,19 +29,15 @@ export const createQuestionAttemptByUser = async (
     const { questionAttemptData } = args;
     const { questionId, response } = questionAttemptData;
     const question = await questionModel.findById(questionId);
-
     const isCorrect = isCorrectAnswer(response, question!.answer);
     const updatedResponse = updateOptions(response, question?.options);
-    console.log({updatedResponse})
     const createdQuestionAttemtData: QuestionAttemptSchemaType =
       await questionAttempt.create({
         isCorrect,
         questionId,
         userId,
         response:updatedResponse,
-      });
-    console.log({...createdQuestionAttemtData});
-    
+      });    
     const responseData: CustomResponseType = createdQuestionAttemtData
       ? {
           message: QUESTION_ATTEMPT_SUCCESS,
