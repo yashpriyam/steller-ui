@@ -13,6 +13,9 @@ export const updateCoverImage = async (
   args: { data: ImageInputType },
   { contextData }: ContextType
 ) => {
+  if (!isLoggedIn(contextData)) {
+    return getUnauthorizedResponse();
+  }
   const { data } = args;
   const { image } = data;
   const USER_COVER_IMAGE_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
@@ -25,9 +28,6 @@ export const updateCoverImage = async (
     status: statusCodes.BAD_REQUEST,
   };
   try {
-    if (!isLoggedIn(contextData)) {
-      return getUnauthorizedResponse();
-    }
     if (!image) {
       return errorResponse;
     }
