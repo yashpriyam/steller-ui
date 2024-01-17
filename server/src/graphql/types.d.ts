@@ -592,9 +592,9 @@ declare global {
   interface Address {
     colony?: string;
     city?: string;
-}
+  }
 
-interface ExperienceData {
+  interface ExperienceData {
     companyName?: string;
     companyLocation?: string;
     role?: string;
@@ -602,60 +602,63 @@ interface ExperienceData {
     endDate?: string;
     description?: string[];
     techStack?: string[];
-}
+  }
 
-interface ProjectsData {
+  interface ProjectsData {
     heading?: string;
     description?: string[];
     deployLink?: string;
     gitHubLink?: string;
     techStack?: string[];
-}
+  }
 
-interface SkillsData {
+  interface SkillsData {
     language?: string[];
     frontend?: string[];
     backend?: string[];
     database?: string[];
     versionControl?: string[];
     cIcD?: string[];
-}
+  }
 
-interface EducationalData {
+  interface EducationalData {
     instituteName?: string;
     location?: string;
     course?: string;
     startDate?: string;
     endDate?: string;
     cgpa?: string;
-}
+  }
 
-interface AchievementsData {
+  interface AchievementsData {
     icon?: string;
     header?: string;
     description?: string;
     links?: string;
-}
+  }
 
-interface UserProfileDocument extends Document {
-    userId: { type: Types.ObjectId; ref: string };
+  interface PersonalDetail {
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    headline?: string;
+    address?: Address;
+  }
 
-    personalDetails: {
-        fullName: string;
-        email: string;
-        phoneNumber: string;
-        headline?: string;
-        address?: Address;
-    };
-    socialDetail?: {
-        githubLink?: string;
-        linkedInLink?: string;
-    };
+  interface SocialDetail {
+    githubLink?: string;
+    linkedInLink?: string;
+  }
+
+  interface UserProfileSchema extends Document {
+    userId: Types.ObjectId;
+    personalDetails?: PersonalDetail;
+    socialDetail?: SocialDetail;
     experienceData?: ExperienceData[];
     projectsData?: ProjectsData[];
     skillsData?: SkillsData;
     educationalData?: EducationalData[];
     achievementsData?: AchievementsData[];
-}
+  }
 
 }

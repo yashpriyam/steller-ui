@@ -1,8 +1,10 @@
+
 import { Schema, model, Types } from 'mongoose';
+import { User } from './userSchema';
 
 
-const userProfileSchema = new Schema<UserProfileDocument>({
-    userId: { type: Types.ObjectId, ref: 'User' },
+const userProfileSchema = new Schema<UserProfileSchema>({
+    userId: { type: Types.ObjectId, ref: User },
     personalDetails: {
         fullName: { type: String, required: true },
         email: { type: String, required: true },
@@ -57,6 +59,6 @@ const userProfileSchema = new Schema<UserProfileDocument>({
     }],
 });
 
-const UserProfile = model<UserProfileDocument>('UserProfile', userProfileSchema);
+const UserProfileModal = model<UserProfileSchema>('UserProfile', userProfileSchema);
 
-export default UserProfile;
+export default UserProfileModal;
