@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import Accordion from "../accordion/accordion";
 import "./questionAccordion.scss";
 import { Checkbox } from "../checkbox/checkbox";
