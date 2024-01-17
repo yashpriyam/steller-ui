@@ -59,6 +59,6 @@ const userProfileSchema = new Schema<UserProfileSchema>({
     }],
 });
 
-const UserProfileModal = model<UserProfileSchema>('UserProfile', userProfileSchema);
+const UserProfileModal = model<UserProfileSchema>('userProfile', userProfileSchema);
 
 export default UserProfileModal;

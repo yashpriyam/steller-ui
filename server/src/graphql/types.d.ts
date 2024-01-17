@@ -589,12 +589,12 @@ declare global {
   type ImageInputType = {
     image: string;
   };
-  interface Address {
+  interface AddressType {
     colony?: string;
     city?: string;
   }
 
-  interface ExperienceData {
+  interface ExperienceDataType {
     companyName?: string;
     companyLocation?: string;
     role?: string;
@@ -604,7 +604,7 @@ declare global {
     techStack?: string[];
   }
 
-  interface ProjectsData {
+  interface ProjectsDataType {
     heading?: string;
     description?: string[];
     deployLink?: string;
@@ -612,7 +612,7 @@ declare global {
     techStack?: string[];
   }
 
-  interface SkillsData {
+  interface SkillsDataType {
     language?: string[];
     frontend?: string[];
     backend?: string[];
@@ -621,7 +621,7 @@ declare global {
     cIcD?: string[];
   }
 
-  interface EducationalData {
+  interface EducationalDataType {
     instituteName?: string;
     location?: string;
     course?: string;
@@ -630,14 +630,14 @@ declare global {
     cgpa?: string;
   }
 
-  interface AchievementsData {
+  interface AchievementsDataType {
     icon?: string;
     header?: string;
     description?: string;
     links?: string;
   }
 
-  interface PersonalDetail {
+  interface PersonalDetailType {
     fullName: string;
     email: string;
     phoneNumber: string;
@@ -645,20 +645,20 @@ declare global {
     address?: Address;
   }
 
-  interface SocialDetail {
+  interface SocialDetailType {
     githubLink?: string;
     linkedInLink?: string;
   }
 
-  interface UserProfileSchema extends Document {
+  interface UserProfileSchema {
     userId: Types.ObjectId;
-    personalDetails?: PersonalDetail;
-    socialDetail?: SocialDetail;
-    experienceData?: ExperienceData[];
-    projectsData?: ProjectsData[];
-    skillsData?: SkillsData;
-    educationalData?: EducationalData[];
-    achievementsData?: AchievementsData[];
+    personalDetails?: PersonalDetailType;
+    socialDetail?: SocialDetailType;
+    experienceData?: ExperienceDataType[];
+    projectsData?: ProjectsDataType[];
+    skillsData?: SkillsDataType;
+    educationalData?: EducationalDataType[];
+    achievementsData?: AchievementsDataType[];
   }
 
 }
