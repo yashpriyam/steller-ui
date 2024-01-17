@@ -59,4 +59,4 @@ const userProfileSchema = new Schema<UserProfileSchemaType>({
     }],
 });
 
-export const UserProfileModel = model<UserProfileSchemaType>('userProfile', userProfileSchema);
+export const userProfileModel = model<UserProfileSchemaType>('userProfile', userProfileSchema);
