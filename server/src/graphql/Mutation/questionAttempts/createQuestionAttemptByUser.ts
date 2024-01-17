@@ -1,14 +1,13 @@
 import { questionAttempt, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import isCorrectAnswer from "../../../utils/isCorrectAnswer";
-import { updateOptions } from "../../../utils/updateOptions";
+import { getCheckedOptions } from "../../../utils/getCheckedOptions";
 
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
   args: { questionAttemptData: QuestionAttemptSchemaType },
   { contextData }: ContextType
 ): Promise<any | unknown> => {
-
   const { QUESTION_ATTEMPT_SUCCESS } = localMessages.QUESTION_ATTEMPT_MODEL;
   const { UNAUTHORIZED_USER } = errorMessages.MSG;
   const { QUESTION_ATTEMPT_FAILED } = errorMessages.QUESTION_ATTEMPT_MODEL;
@@ -30,14 +29,14 @@ export const createQuestionAttemptByUser = async (
     const { questionId, response } = questionAttemptData;
     const question = await questionModel.findById(questionId);
     const isCorrect = isCorrectAnswer(response, question!.answer);
-    const updatedResponse = updateOptions(response, question?.options);
+    const updatedResponse = getCheckedOptions(response, question?.options);
     const createdQuestionAttemtData: QuestionAttemptSchemaType =
       await questionAttempt.create({
         isCorrect,
         questionId,
         userId,
-        response:updatedResponse,
-      });    
+        response: updatedResponse,
+      });
     const responseData: CustomResponseType = createdQuestionAttemtData
       ? {
           message: QUESTION_ATTEMPT_SUCCESS,
