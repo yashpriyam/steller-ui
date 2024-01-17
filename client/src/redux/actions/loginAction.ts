@@ -37,7 +37,7 @@ export const useLogin = () => {
           emailOtp:otp,
        }
       },
-    });    
+    });
     return {
       response,
     };
