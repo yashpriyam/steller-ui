@@ -3,7 +3,7 @@ import { Schema, model, Types } from 'mongoose';
 import { User } from './userSchema';
 
 
-const userProfileSchema = new Schema<UserProfileSchema>({
+const userProfileSchema = new Schema<UserProfileSchemaType>({
     userId: { type: Types.ObjectId, ref: User },
     personalDetails: {
         fullName: { type: String, required: true },
@@ -59,5 +59,5 @@ const userProfileSchema = new Schema<UserProfileSchema>({
     }],
 });
 
-export const UserProfileModal = model<UserProfileSchema>('userProfile', userProfileSchema);
+export const UserProfileModel = model<UserProfileSchemaType>('userProfile', userProfileSchema);
 

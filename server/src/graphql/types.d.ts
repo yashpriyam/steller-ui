@@ -642,7 +642,7 @@ declare global {
     email: string;
     phoneNumber: string;
     headline?: string;
-    address?: Address;
+    address?: AddressType;
   }
 
   interface SocialDetailType {
@@ -650,7 +650,7 @@ declare global {
     linkedInLink?: string;
   }
 
-  interface UserProfileSchema {
+  interface UserProfileSchemaType {
     userId: Types.ObjectId;
     personalDetails?: PersonalDetailType;
     socialDetail?: SocialDetailType;
