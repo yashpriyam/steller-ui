@@ -35,7 +35,7 @@ declare global {
     userData?: RegisterType;
     response: CustomResponseType;
     credentials?: string;
-  };  
+  };
   type RegisterType = {
     _id?: string;
     name: string;
@@ -585,8 +585,96 @@ declare global {
     weekData?: WeekDataType;
     response: CustomResponseType;
   };
-  
+
   type ImageInputType = {
     image: string;
   };
+  interface AddressType {
+    colony?: string;
+    city?: string;
+  }
+
+  interface ExperienceDataType {
+    companyName?: string;
+    companyLocation?: string;
+    role?: string;
+    startDate?: string;
+    endDate?: string;
+    description?: string[];
+    techStack?: string[];
+  }
+
+  interface ProjectsDataType {
+    heading?: string;
+    description?: string[];
+    deployLink?: string;
+    gitHubLink?: string;
+    techStack?: string[];
+  }
+
+  interface SkillsDataType {
+    language?: string[];
+    frontend?: string[];
+    backend?: string[];
+    database?: string[];
+    versionControl?: string[];
+    cIcD?: string[];
+  }
+
+  interface EducationalDataType {
+    instituteName?: string;
+    location?: string;
+    course?: string;
+    startDate?: string;
+    endDate?: string;
+    cgpa?: string;
+  }
+
+  interface AchievementsDataType {
+    icon?: string;
+    header?: string;
+    description?: string;
+    links?: string;
+  }
+
+  interface PersonalDetailType {
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    headline?: string;
+    address?: AddressType;
+  }
+
+  interface SocialDetailType {
+    githubLink?: string;
+    linkedInLink?: string;
+  }
+
+  interface UserProfileSchemaType {
+    userId: Types.ObjectId;
+    personalDetails?: PersonalDetailType;
+    socialDetail?: SocialDetailType;
+    experienceData?: ExperienceDataType[];
+    projectsData?: ProjectsDataType[];
+    skillsData?: SkillsDataType;
+    educationalData?: EducationalDataType[];
+    achievementsData?: AchievementsDataType[];
+  }
+
+  interface UserSchemaType {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    password?: string;
+    isJobSeeker: boolean;
+    occupation?: string;
+    sessionPreference: 'online' | 'offline';
+    expectedSalary?: string;
+    IST: string;
+    collegeName?: string;
+    profileImage?: UserProfile;
+    coverImage?: UserProfile;
+    userProfile?: Types.ObjectId;
+  }
+
 }
