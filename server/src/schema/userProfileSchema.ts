@@ -1,10 +1,10 @@
 
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model } from 'mongoose';
 import { User } from './userSchema';
 
 
 const userProfileSchema = new Schema<UserProfileSchemaType>({
-    userId: { type: Types.ObjectId, ref: User },
+    userId: { type: Schema.Types.ObjectId, ref: User },
     personalDetails: {
         fullName: { type: String, },
         email: { type: String, },

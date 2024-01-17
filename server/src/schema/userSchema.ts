@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
 import { convertUTCtoIST } from "@utils";
 
 const sessionPreferences = Object.freeze({
@@ -33,7 +33,7 @@ const userSchema = new mongoose.Schema<UserSchemaType>(
       publicId: String,
       secureUrl: String,
     },
-    userProfile: { type: Types.ObjectId, ref: "userProfile" },
+    userProfile: { type: mongoose.Schema.Types.ObjectId, ref: "userProfile" },
   },
   { timestamps: true }
 );
