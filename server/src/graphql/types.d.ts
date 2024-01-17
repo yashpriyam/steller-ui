@@ -574,6 +574,7 @@ declare global {
     weekData?: WeekDataType;
     response: CustomResponseType;
   };
+  
   type ImageInputType = {
     image: string;
   };
