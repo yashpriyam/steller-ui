@@ -6,9 +6,9 @@ import { User } from './userSchema';
 const userProfileSchema = new Schema<UserProfileSchemaType>({
     userId: { type: Types.ObjectId, ref: User },
     personalDetails: {
-        fullName: { type: String, required: true },
-        email: { type: String, required: true },
-        phoneNumber: { type: String, required: true },
+        fullName: { type: String, },
+        email: { type: String, },
+        phoneNumber: { type: String, },
         headline: { type: String },
         address: {
             colony: { type: String },
@@ -60,4 +60,3 @@ const userProfileSchema = new Schema<UserProfileSchemaType>({
 });
 
 export const UserProfileModel = model<UserProfileSchemaType>('userProfile', userProfileSchema);
-
