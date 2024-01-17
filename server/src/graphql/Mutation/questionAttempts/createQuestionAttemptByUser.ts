@@ -1,8 +1,6 @@
 import { questionAttempt, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
-import isCorrectAnswer from "../../../utils/isCorrectAnswer";
-import { getCheckedOptions } from "../../../utils/getCheckedOptions";
-
+import { isCorrectAnswer, getCheckedOptions } from "@utils";
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
   args: { questionAttemptData: QuestionAttemptSchemaType },
