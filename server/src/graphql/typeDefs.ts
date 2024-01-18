@@ -7,7 +7,8 @@ const typeDefs = gql`
     getNotes(filterData: GetNotesFilterInputType): getNotesOutputType
     getVideo(videoDataFilter: VideoInputFilterType): VideoOutputDataType
     getAllQuestions(
-      filterData: GetQuestionsFilterInput
+      filterData: FilterData
+      pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
     getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
@@ -408,13 +409,15 @@ const typeDefs = gql`
     expiresInMins: Int
     isOpenable: Boolean
   }
-  input GetQuestionsFilterInput {
+  input FilterData {
     topic: String
     isActive: Boolean
     isArchived: Boolean
     week: Int
     day: Int
     batchCode: String
+  }
+  input Pagination {
     skip: Int
     limit: Int
   }
@@ -452,6 +455,7 @@ const typeDefs = gql`
     questions: [AttemptedQuestionDataType]
     totalCorrectQuestions: Int
     totalUnAttemptedQuestions: Int
+    totalInCorrectQuestions:Int
     totalQuestions: Int
     response: CustomResponseType
   }

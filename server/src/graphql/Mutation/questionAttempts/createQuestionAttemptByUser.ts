@@ -1,6 +1,6 @@
 import { questionAttempt, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
-import { isCorrectAnswer, getCheckedOptions } from "@utils";
+import { isCorrectAnswer, getCheckedOptions, isLoggedIn } from "@utils";
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
   args: { questionAttemptData: QuestionAttemptSchemaType },
@@ -10,11 +10,14 @@ export const createQuestionAttemptByUser = async (
   const { UNAUTHORIZED_USER } = errorMessages.MSG;
   const { QUESTION_ATTEMPT_FAILED } = errorMessages.QUESTION_ATTEMPT_MODEL;
 
-  if (!contextData || !contextData.user)
+  if (!isLoggedIn(contextData)) {
     return {
-      message: UNAUTHORIZED_USER,
-      status: statusCodes.UNAUTHORIZED_USER,
+      response: {
+        status: statusCodes.UNAUTHORIZED_USER,
+        message: UNAUTHORIZED_USER,
+      },
     };
+  }
   const userData = contextData.user;
   const userId = userData._id;
 

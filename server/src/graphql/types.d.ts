@@ -368,16 +368,18 @@ declare global {
   type OtpUserOutputType = {
     response: CustomResponseType;
   };
-  type filterInputType = {
+  type filterDataType = {
     topic?: string;
     isActive?: boolean;
     isArchived?: boolean;
     bactchCode?: string;
     day?: number;
     week?: number;
+  };
+  type pagination = {
     skip: number;
     limit: number;
-  };
+  }
   type AllQuestionDataType = {
     _id: string;
     isAnswered: boolean;
@@ -390,9 +392,10 @@ declare global {
   };
   type QuestionsReturnType = {
     questions: [AllQuestionDataType];
-    totalQuestions:number;
-    totalCorrectQuestions: number
-    totalUnAttemptedQuestions:number;
+    totalQuestions: number;
+    totalCorrectQuestions: number;
+    totalInCorrectQuestions:number;
+    totalUnAttemptedQuestions: number;
     response: CustomResponseType;
   };
 

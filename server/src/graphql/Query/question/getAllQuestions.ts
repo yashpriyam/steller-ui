@@ -1,17 +1,17 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { questionAttempt, questionModel } from "@models";
-import { removeNullAndUndefinedKeys } from "@utils";
+import { isLoggedIn } from "@utils";
 import mongoose from "mongoose";
 
 export const getAllQuestions = async (
   _parent: undefined,
-  args: { filterData: filterInputType },
+  args: { filterData: filterDataType; pagination: pagination },
   { contextData }: ContextType
 ): Promise<QuestionsReturnType | unknown> => {
   const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
   const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
   const { UNAUTHORIZED_USER } = errorMessages.MSG;
-  if (!contextData || !contextData.user) {
+  if (!isLoggedIn(contextData)) {
     return {
       response: {
         status: statusCodes.UNAUTHORIZED_USER,
@@ -25,12 +25,9 @@ export const getAllQuestions = async (
     status: statusCodes.BAD_REQUEST,
   };
   try {
-    const { filterData } = args;
-    const {
-      skip,
-      limit,
-      ...filteredData
-    }: { [key: string]: string | number | boolean } = filterData;
+    const { filterData, pagination } = args;
+    const { limit, skip } = pagination;
+    const filteredData: Record<string, string | number | boolean> = filterData;
     const updatedFields: Record<string, string | number | boolean> = {};
     for (const key in filteredData) {
       if (filteredData.hasOwnProperty(key)) {
@@ -57,7 +54,7 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
-      const updatedQuestionData = { ...questionData, isAnswered :false };
+      const updatedQuestionData = { ...questionData, isAnswered: false };
       const attemptData = questionAttemptIdMap[questionData._id.toString()];
       if (attemptData) {
         if (attemptData.isCorrect) {
@@ -76,10 +73,12 @@ export const getAllQuestions = async (
       : errorData;
     const totalUnAttemptedQuestions =
       questionList.length - questionAttemptList.length;
+    const totalInCorrectQuestions = questionList.length - totalCorrectQuestions;
     return {
       questions: updatedQuestionList,
       totalQuestions: questionList.length,
-      totalCorrectQuestions: totalCorrectQuestions,
+      totalCorrectQuestions,
+      totalInCorrectQuestions,
       totalUnAttemptedQuestions,
       response,
     };
