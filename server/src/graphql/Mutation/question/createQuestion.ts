@@ -10,9 +10,9 @@ export const createQuestion = async (_parent: undefined, args: { questionData: Q
     
     try {
         const { questionData } = args;        
-        const { title, questionType, answer, batchCode, marks, options, meta } = questionData;
+        const { title, questionType, answer,  marks, options, meta } = questionData;
         const createdQuestionData: QuestionSchemaType = await questionModel.create({
-            title, questionType, batchCode, marks, options, answer, meta
+            title, questionType, marks, options, answer, meta
         })        
             const response: CustomResponseType = createdQuestionData
               ? {

@@ -28,12 +28,22 @@ export const createQuestionAttemptByUser = async (
     const question = await questionModel.findById(questionId);
     const isCorrect = isCorrectAnswer(response, question!.answer);
     const updatedResponse = getCheckedOptions(response, question?.options);
+    const existingQuestionAttempt = await questionAttempt.findOne({
+      questionId,
+      userId,
+      isLatest: true
+    });
+    if (existingQuestionAttempt) {
+      existingQuestionAttempt.isLatest = false;
+      await existingQuestionAttempt.save();
+    }
     const createdQuestionAttemtData: QuestionAttemptSchemaType =
       await questionAttempt.create({
         isCorrect,
         questionId,
         userId,
         response: updatedResponse,
+        isLatest: true,
       });
     const responseData: CustomResponseType = createdQuestionAttemtData
       ? {
