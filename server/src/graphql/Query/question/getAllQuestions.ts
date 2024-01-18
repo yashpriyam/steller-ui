@@ -1,6 +1,6 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { questionAttempt, questionModel } from "@models";
-import { isLoggedIn } from "@utils";
+import { isLoggedIn, getUnauthorizedResponse } from "@utils";
 import mongoose from "mongoose";
 
 export const getAllQuestions = async (
@@ -10,14 +10,8 @@ export const getAllQuestions = async (
 ): Promise<QuestionsReturnType | unknown> => {
   const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
   const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
-  const { UNAUTHORIZED_USER } = errorMessages.MSG;
   if (!isLoggedIn(contextData)) {
-    return {
-      response: {
-        status: statusCodes.UNAUTHORIZED_USER,
-        message: UNAUTHORIZED_USER,
-      },
-    };
+    getUnauthorizedResponse();
   }
   const userData = contextData.user;
   const errorData: CustomResponseType = {
