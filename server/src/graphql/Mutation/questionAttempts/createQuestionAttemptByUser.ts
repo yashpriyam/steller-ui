@@ -10,7 +10,7 @@ export const createQuestionAttemptByUser = async (
   const { QUESTION_ATTEMPT_FAILED } = errorMessages.QUESTION_ATTEMPT_MODEL;
 
   if (!isLoggedIn(contextData)) {
-    getUnauthorizedResponse();
+   return getUnauthorizedResponse();
   }
   const userData = contextData.user;
   const userId = userData._id;

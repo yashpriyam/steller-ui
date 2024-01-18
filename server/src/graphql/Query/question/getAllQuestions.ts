@@ -11,7 +11,7 @@ export const getAllQuestions = async (
   const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
   const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
   if (!isLoggedIn(contextData)) {
-    getUnauthorizedResponse();
+    return getUnauthorizedResponse();
   }
   const userData = contextData.user;
   const errorData: CustomResponseType = {
