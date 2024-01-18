@@ -20,9 +20,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
   const { weekList } = weekData;
-  const getScheduleDataApi = async () => {
+  const getScheduleDataApi = async (delay: number = 0) => {
     await getScheduleData({});
-    setTimeout(() => setIsLoading(false), 800);
+    setTimeout(() => setIsLoading(false), delay);
   };
   const handleButtonNavigation = (path: string) => {
     navigate(path);
