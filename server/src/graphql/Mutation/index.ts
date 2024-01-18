@@ -4,6 +4,7 @@ export {
   sendOtpToRegisteredUser,
   verifyUserOtp,
   updateUserPassword,
+  updateCoverImage
 } from "./user/index";
 export { createTransaction } from "./transaction/createTransaction";
 export { createNotes, deleteNotesById, updateNotesById } from "./notes/index";
@@ -20,4 +21,4 @@ export {
   updatePaidUserPassword,
 } from "./paidUser/index";
 export { upsertWeek } from "./week/index";
-export { createDay } from "./day/index";
+export { createDay, updateDay } from "./day/index";

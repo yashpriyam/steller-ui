@@ -1,0 +1,25 @@
+@import "../../components/variables.scss";
+
+.unauth-page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    gap: 5px;
+    .unauth-sub-heading{
+        text-align: center;
+    }
+    .unauth-page-code-heading {
+        color: $red;
+    }
+    .unauth-page-code {
+        color: $red;
+        text-decoration: underline;
+    }
+    .go-back-link{
+        color: $blue;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}

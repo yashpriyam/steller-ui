@@ -54,10 +54,12 @@ const typeDefs = gql`
     updatePaidUserPassword(
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
-    verifyUserOtp(data:VerifyOtpPaidUserInputType!):CustomResponseType
+    verifyUserOtp(data:VerifyOtpPaidUserInputType!): UserOtpOutputType
     updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
     upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
     createDay(dayData: DayDataInputType!) : DayDataOutputType
+    updateDay(dayData: DayDataInputType!) : DayDataOutputType
+    updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
   }
 
   type ProfileImageType {
@@ -68,6 +70,11 @@ const typeDefs = gql`
   type UpdateProfilePictureOutput {
     profileImage: ProfileImageType
     response: CustomResponseType!
+  }
+
+  type UserOtpOutputType {
+    response: CustomResponseType
+    credentials: String
   }
 
   type CustomResponseType {
@@ -177,10 +184,11 @@ const typeDefs = gql`
   }
 
   type RegistrationOutputDataType {
-    userData:RegisterOutputType
-    response :CustomResponseType!
+    userData: RegisterOutputType
+    response: CustomResponseType!
+    credentials: String
   }
-  type RegisterOutputType{
+  type RegisterOutputType {
     name: String!
     email: String!
     phoneNumber: String!
@@ -401,14 +409,14 @@ const typeDefs = gql`
     type: QuestionMetaType
   }
 
- type AttemptQuestionOptionOutputType  {
-   text: String
-   imageUrl: String
-   iframe: String
-   isChecked: Boolean
- }
+  type AttemptQuestionOptionOutputType {
+    text: String
+    imageUrl: String
+    iframe: String
+    isChecked: Boolean
+  }
 
-  type AttemptedQuestionIdDataType  {
+  type AttemptedQuestionIdDataType {
     id: String
     title: [QuestionOptionOutputType!]!
     batchCode: String!
@@ -459,6 +467,7 @@ const typeDefs = gql`
   }
   type LoginUserDataOutputType {
     response: CustomResponseType!
+    credentials: String
   }
   input PaidProfileImageInput {
     publicId: String
@@ -526,7 +535,7 @@ const typeDefs = gql`
     description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
-  } 
+  }
   type WeekDataType {
     batchCode: String
     weekNumber: Int
@@ -539,7 +548,7 @@ const typeDefs = gql`
   type WeekDataOutputType {
     weekData: [WeekDataType]
     response: CustomResponseType!
-  }  
+  }
   input UpsertWeekDataInputType {
     batchCode: String!
     description: String
@@ -575,6 +584,18 @@ const typeDefs = gql`
     dayData: DaySchemaType
     response: CustomResponseType!
   }
+  input CoverImageInputType {
+    image: String!
+  }
+  type CoverImageType {
+    publicId: String
+    secureUrl: String
+  }
+  type UpdateImageOutputType {
+    coverImageData: CoverImageType
+    response: CustomResponseType!
+  }
+
   scalar DateTime
   scalar JSON
 `;

@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema(
     profileImage : {
       publicId: String,
       secureUrl: String,
+    },
+    coverImage: {
+      publicId: String,
+      secureUrl: String,
     }
   },
   { timestamps: true }

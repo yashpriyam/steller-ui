@@ -43,8 +43,8 @@ function MonorepoApp() {
 
   const profileMenuOptions = [
     {
-      value: "Profile",
-      onClick: () => navigate("/profile") 
+      value: "Schedule",
+      onClick: () => navigate("/schedule") 
     },
     {
       value: "Log out",

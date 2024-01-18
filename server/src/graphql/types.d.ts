@@ -5,7 +5,7 @@ declare global {
   type ContextType = {
     req: Request;
     res: Response;
-    contextData: { user: RegisterType }
+    contextData: { user: RegisterType };
   };
 
   type MailResponseType = {
@@ -34,6 +34,7 @@ declare global {
   type RegisterOutputType = {
     userData?: RegisterType;
     response: CustomResponseType;
+    credentials?: string;
   };  
   type RegisterType = {
     _id?: string;
@@ -42,16 +43,17 @@ declare global {
     phoneNumber: string;
     isJobSeeker?: boolean;
     occupation?: string;
-    sessionPreference?: "online"|"offline";
+    sessionPreference?: "online" | "offline";
     expectedSalary?: string;
     collegeName?: string;
     profileImage?: CloudinaryImageType;
-  }
+    coverImage?: CloudinaryImageType;
+  };
 
   type CloudinaryImageType = {
     publicId: string;
     secureUrl: string;
-  }
+  };
 
   type ProgramDataType = {
     programType: string;
@@ -185,7 +187,7 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
-    fillup = "fillup"
+    fillup = "fillup",
   }
 
   enum QuestionMetaType {
@@ -194,11 +196,11 @@ declare global {
   }
 
   type QuestionInfoType = {
-    text: string 
+    text: string;
     imageUrl?: string;
-    iframe?: string; 
+    iframe?: string;
     isChecked?: boolean;
-  }
+  };
 
   type QuestionSchemaType = {
     _id: string;
@@ -214,24 +216,24 @@ declare global {
   type QuestionOptionType = {
     text: string;
     imageUrl?: string;
-    iframe?: string; 
+    iframe?: string;
     isChecked?: boolean;
-  }
+  };
 
   type GetAllQuestionDataReturnType = {
-    allAttemptedQuestions: AllAttemptedQuestionDataType[],
-    allNonAttemptedQuestions: AllNonAttemptedQuestionType[],
+    allAttemptedQuestions: AllAttemptedQuestionDataType[];
+    allNonAttemptedQuestions: AllNonAttemptedQuestionType[];
     totalAttemptedQuestions: number;
     totalNonAttemptedQuestions: number;
     totalQuestions: number;
-  }
+  };
 
   type AllAttemptedQuestionDataType = {
     userId: string;
     questionId: AllNonAttemptedQuestionType;
     isCorrect: boolean;
-    response: QuestionOptionType[]
-  }
+    response: QuestionOptionType[];
+  };
 
   type AllNonAttemptedQuestionType = {
     _id: string;
@@ -244,7 +246,7 @@ declare global {
     meta: QuestionMetaData;
     isAnswered?: boolean;
     isCorrect?: boolean;
-  }
+  };
 
   type QuestionMetaData = {
     topic: string;
@@ -373,12 +375,18 @@ declare global {
     questionData: [AllQuestionDataType];
     response: CustomResponseType;
   };
+
+  type UserOtpOutputType = {
+    response: CustomResponseType;
+    credentials?: string;
+  }
+
   type CustomResponseType = {
     status: number;
     message: string;
   };
   type EmailOtpDataType = {
-    otpData: { emailOtp : string};
+    otpData: { emailOtp: string };
     emailValidityMinutes: number;
   };
 
@@ -393,13 +401,13 @@ declare global {
   }
   interface UploadImageArgumentType {
     image: string;
-    folder: string
+    folder: string;
   }
 
   type UploadImageReturnType = {
     publicId: string;
     secureUrl: string;
-  }
+  };
 
   interface ImageUploadArgs {
     image: string;
@@ -420,6 +428,10 @@ declare global {
     email: string;
     password: string;
   };
+  type loginOutputType = {
+    response: CustomResponseType;
+    credentials?: string;
+  }
   type PaidProfileImageInput = {
     publicId?: string;
     secureUrl?: string;
@@ -567,10 +579,14 @@ declare global {
   type UpdateUserPasswordInput = {
     email: stringtring;
     password: string;
-  }
+  };
 
   type WeekDataOutputType = {
     weekData?: WeekDataType;
     response: CustomResponseType;
-  }
+  };
+  
+  type ImageInputType = {
+    image: string;
+  };
 }

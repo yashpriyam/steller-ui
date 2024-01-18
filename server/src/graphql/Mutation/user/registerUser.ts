@@ -13,7 +13,7 @@ import { errorMessages, localMessages, statusCodes } from "@constants";
 export const registerUser = async (
   _parent: undefined,
   args: { data: RegisterType },
-  { res }: ContextType,
+  { res, req }: ContextType,
 ): Promise<RegisterOutputType | UserInputError | unknown> => {
   const { USER_EXIST } = errorMessages.USER;
   const { USER_REGISTERED_SUCCESSFULLY} = localMessages.USER;
@@ -95,7 +95,8 @@ export const registerUser = async (
       response: {
         message: USER_REGISTERED_SUCCESSFULLY,
         status:statusCodes.OK,
-      }
+      },
+      credentials: token
     };
   } catch (error) {
     return error;
