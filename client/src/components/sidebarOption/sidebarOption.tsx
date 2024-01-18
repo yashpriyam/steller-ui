@@ -15,7 +15,7 @@ export const SidebarOption = ({
         ? (image)
         : (<img className='sidebar-option-img' src={typeof image === "string" ? image : ""} alt="" />)
       }
-      { showText && <span className='option-text'>{text}</span> }
+      <span className={`${showText ? 'option-text' : 'hovered-option-text'}`}>{text}</span>
       {
        showText && count !== undefined && <span className='item-count'>{count}</span>
       }
