@@ -59,10 +59,13 @@ export const errorMessages = Object.freeze({
     WEEK_NOT_FOUND: "week data not found",
   },
   MSG: {
-    UNAUTHORIZED_USER: "unauthorized user"
+    UNAUTHORIZED_USER: "unauthorized user",
   },
   DAY_MODEL: {
     DAY_CREATION_FAILED: "unable to insert day data",
     DAY_UPDATION_FAILED: "unable to update day data",
+  },
+  SLACK: {
+    INVALID_CONTENT: "This content can't be displayed",
   },
 });
