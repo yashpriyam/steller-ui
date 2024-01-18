@@ -29,9 +29,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   };
   const onJoinMeetClick = () => {
     window.open(process.env.REACT_APP_CLASS_MEET_URL, "_blank");
-  }
+  };
   useEffect(() => {
-    getScheduleDataApi();
+    getScheduleDataApi(800);
   }, []);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
@@ -42,7 +42,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
       <div className="schedule-page-meet-container">
         <div onClick={onJoinMeetClick} className="schedule-page-meet-btn">
           <MeetIcon isDarkMode={true} />
-          {t('join_meet')}
+          {t("join_meet")}
         </div>
       </div>
       <div className="scheduling-page-accordion">
@@ -51,9 +51,11 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             baseColor="gray"
             highlightColor="lightgray"
             count={4}
-            height="35px"
+            height={40}
+            style={{ display: "block", background: "gray" }}
           />
-        ) : Boolean(weekList.length) ? (
+        ) : (
+          Boolean(weekList.length) &&
           weekList.map((week, index) => {
             const {
               batchCode,
@@ -66,10 +68,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             } = week;
             return (
               isActive && (
-                <Accordion 
-                  title={title} 
-                disabled={isDisabledForUnpaidUsers}
-                >
+                <Accordion title={title} disabled={isDisabledForUnpaidUsers}>
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
                       <div className="week-description">{description}</div>
@@ -89,7 +88,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             className="day-container"
                             onClick={(e) => {
                               e.stopPropagation();
-                              navigate(`/day/${dayNumber}?weekNumber=${weekNumber}`);
+                              navigate(
+                                `/day/${dayNumber}?weekNumber=${weekNumber}`
+                              );
                             }}
                           >
                             <div className="day-header">
@@ -125,9 +126,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                             </span>
                                           ))}
                                       </span>
-                                      <span className="topic-tag show-tags">{`+${
-                                        tagsLength - 2
-                                      }`}</span>
+                                      <span className="topic-tag show-tags">{`+${tagsLength - 2
+                                        }`}</span>
                                     </>
                                   )}
                                 </div>
@@ -140,7 +140,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             )}
                             <div className="buttons-wrapper">
                               <Button
-                                text="Questions"
+                                text={t("questions")}
                                 isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
@@ -149,7 +149,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 }}
                               />
                               <Button
-                                text="Notes"
+                                text={t("notes")}
                                 isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
@@ -158,7 +158,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 }}
                               />
                               <Button
-                                text="Videos"
+                                text={t("videos")}
                                 isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
@@ -176,9 +176,6 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
               )
             );
           })
-        ) : (
-          // <div className="no-data-found">No Data Found !</div>
-          <></>
         )}
       </div>
     </div>
