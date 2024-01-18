@@ -285,6 +285,20 @@ declare global {
     timestamp: Date;
     isLatest?: boolean;
   };
+  type QuestionAttemptInputType = {
+    questionId: ObjectId;
+    response: QuestionInfoType[];
+  };
+  type QuestionAttemtDataType = {
+    userId: ObjectId;
+    questionId: ObjectId;
+    response: QuestionInfoType[];
+    isCorrect?: boolean;
+  };
+  type QuestionAttemptOutputType = {
+    questionData: QuestionAttemtDataType;
+    response: responseData;
+  };
 
   type UserActivityInputType = {
     phoneNumber?: string;
@@ -383,6 +397,7 @@ declare global {
   type AllQuestionDataType = {
     _id: string;
     isAnswered: boolean;
+    isCorrect: boolean;
     title: QuestionInfoType[];
     questionType: QuestionTypeEnum;
     options: QuestionInfoType[];

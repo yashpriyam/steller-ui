@@ -1,11 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: QuestionStateInterface = {
-  attemptedQuestions: [],
-  nonAttemptedQuestions: [],
-  totalAttemptedQuestions: 0,
-  totalNonAttemptedQuestions: 0,
-  totalQuestions: 0,
 };
 
 export const questionSlice = createSlice({
@@ -14,28 +9,30 @@ export const questionSlice = createSlice({
   reducers: {
     setQuestions: (state, action) => {
       const {
-        attemptedQuestions,
-        nonAttemptedQuestions,
-        totalAttemptedQuestions,
-        totalNonAttemptedQuestions,
+        questions,
+        totalCorrectQuestions,
+        totalInCorrectQuestions,
         totalQuestions,
-      } = action.payload?.getAllQuestions;
-      state.attemptedQuestions = attemptedQuestions;
-      state.nonAttemptedQuestions = nonAttemptedQuestions;
-      state.totalAttemptedQuestions = totalAttemptedQuestions;
-      state.totalNonAttemptedQuestions = totalNonAttemptedQuestions;
+        totalUnAttemptedQuestions,
+        response,
+      } = action.payload.getAllQuestions;
+      state.questions = questions;
       state.totalQuestions = totalQuestions;
+      state.totalCorrectQuestions = totalCorrectQuestions;
+      state.totalInCorrectQuestions = totalInCorrectQuestions;
+      state.totalUnAttemptedQuestions = totalUnAttemptedQuestions;
+      state.response = response;
     },
     setQuestionResponse: (state, action) => {
-      // const { questionList } = state;
-      // const { questionId, isCorrect } = action?.payload;
-      // questionList.forEach(question => {
-      //   if(questionId === question.id){
-      //     question.isCorrect = isCorrect;
-      //     question.isAnswered = true;
-      //   }
-      // })
-      // state.questionList = [...questionList];
+      const { questions } = state;
+      const { questionId, isCorrect } = action?.payload;
+      questions?.forEach((question) => {
+        if (questionId === question?._id) {
+          question.isCorrect = isCorrect;
+          question.isAnswered = true;
+        }
+      });
+      state.questions = questions;
     },
   },
 });

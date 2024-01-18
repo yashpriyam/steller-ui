@@ -3,14 +3,14 @@ import { localMessages, errorMessages, statusCodes } from "@constants";
 import { isCorrectAnswer, getCheckedOptions, isLoggedIn, getUnauthorizedResponse } from "@utils";
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
-  args: { questionAttemptData: QuestionAttemptSchemaType },
+  args: { questionAttemptData: QuestionAttemptInputType },
   { contextData }: ContextType
-): Promise<any | unknown> => {
+): Promise<QuestionAttemptOutputType | unknown> => {
   const { QUESTION_ATTEMPT_SUCCESS } = localMessages.QUESTION_ATTEMPT_MODEL;
   const { QUESTION_ATTEMPT_FAILED } = errorMessages.QUESTION_ATTEMPT_MODEL;
 
   if (!isLoggedIn(contextData)) {
-   return getUnauthorizedResponse();
+    return getUnauthorizedResponse();
   }
   const userData = contextData.user;
   const userId = userData._id;
@@ -28,13 +28,13 @@ export const createQuestionAttemptByUser = async (
     const existingQuestionAttempt = await questionAttempt.findOne({
       questionId,
       userId,
-      isLatest: true
+      isLatest: true,
     });
     if (existingQuestionAttempt) {
       existingQuestionAttempt.isLatest = false;
       await existingQuestionAttempt.save();
     }
-    const createdQuestionAttemtData: QuestionAttemptSchemaType =
+    const createdQuestionAttemtData: QuestionAttemtDataType =
       await questionAttempt.create({
         isCorrect,
         questionId,
@@ -47,8 +47,7 @@ export const createQuestionAttemptByUser = async (
           message: QUESTION_ATTEMPT_SUCCESS,
           status: statusCodes.CREATED,
         }
-      : errorData;
-
+      : errorData;    
     return {
       questionData: createdQuestionAttemtData,
       response: responseData,
