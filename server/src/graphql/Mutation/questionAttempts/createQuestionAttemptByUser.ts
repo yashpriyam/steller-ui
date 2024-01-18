@@ -1,20 +1,17 @@
 import { questionAttempt, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
-import { isCorrectAnswer, getCheckedOptions } from "@utils";
+import { isCorrectAnswer, getCheckedOptions, isLoggedIn, getUnauthorizedResponse } from "@utils";
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
   args: { questionAttemptData: QuestionAttemptSchemaType },
   { contextData }: ContextType
 ): Promise<any | unknown> => {
   const { QUESTION_ATTEMPT_SUCCESS } = localMessages.QUESTION_ATTEMPT_MODEL;
-  const { UNAUTHORIZED_USER } = errorMessages.MSG;
   const { QUESTION_ATTEMPT_FAILED } = errorMessages.QUESTION_ATTEMPT_MODEL;
 
-  if (!contextData || !contextData.user)
-    return {
-      message: UNAUTHORIZED_USER,
-      status: statusCodes.UNAUTHORIZED_USER,
-    };
+  if (!isLoggedIn(contextData)) {
+   return getUnauthorizedResponse();
+  }
   const userData = contextData.user;
   const userId = userData._id;
 
@@ -28,12 +25,22 @@ export const createQuestionAttemptByUser = async (
     const question = await questionModel.findById(questionId);
     const isCorrect = isCorrectAnswer(response, question!.answer);
     const updatedResponse = getCheckedOptions(response, question?.options);
+    const existingQuestionAttempt = await questionAttempt.findOne({
+      questionId,
+      userId,
+      isLatest: true
+    });
+    if (existingQuestionAttempt) {
+      existingQuestionAttempt.isLatest = false;
+      await existingQuestionAttempt.save();
+    }
     const createdQuestionAttemtData: QuestionAttemptSchemaType =
       await questionAttempt.create({
         isCorrect,
         questionId,
         userId,
         response: updatedResponse,
+        isLatest: true,
       });
     const responseData: CustomResponseType = createdQuestionAttemtData
       ? {

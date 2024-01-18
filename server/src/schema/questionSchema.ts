@@ -1,22 +1,21 @@
 import { Schema, model } from "mongoose";
 
 const questionTypes = {
-    multi: "multi",
-    single: "single",
-    fillup: "fillup"
-}
+  multi: "multi",
+  single: "single",
+  fillup: "fillup",
+};
 const questionDurationTypes = {
-    timed: "timed",
-    recorded: "recorded"
-}
+  timed: "timed",
+  recorded: "recorded",
+};
 const questionSchema = new Schema<QuestionSchemaType>({
   title: {
     type: [{ imageUrl: String, text: String, iframe: String }],
     required: true,
   },
-  batchCode: { type: String, required: true },
   options: {
-    type: [{ imageUrl: String, text: String, iframe: String}],
+    type: [{ imageUrl: String, text: String, iframe: String }],
     required: true,
   },
   questionType: {
@@ -31,6 +30,8 @@ const questionSchema = new Schema<QuestionSchemaType>({
   marks: { type: Number, default: 1 },
   meta: {
     topic: { type: String, required: true },
+    batchCode: { type: String, required: true },
+    week: { type: Number, required: true },
     day: { type: Number, required: true },
     isActive: { type: Boolean, required: true },
     isArchived: { type: Boolean, required: true },
@@ -44,5 +45,7 @@ const questionSchema = new Schema<QuestionSchemaType>({
   },
 });
 
-export const questionModel = model<QuestionSchemaType>("question", questionSchema);
-
+export const questionModel = model<QuestionSchemaType>(
+  "question",
+  questionSchema
+);
