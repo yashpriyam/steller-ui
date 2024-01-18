@@ -7,7 +7,8 @@ const typeDefs = gql`
     getNotes(filterData: GetNotesFilterInputType): getNotesOutputType
     getVideo(videoDataFilter: VideoInputFilterType): VideoOutputDataType
     getAllQuestions(
-      filterData: GetQuestionsFilterInput
+      filterData: FilterData
+      pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
     getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
@@ -54,11 +55,13 @@ const typeDefs = gql`
     updatePaidUserPassword(
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
-    verifyUserOtp(data:VerifyOtpPaidUserInputType!): UserOtpOutputType
-    updateUserPassword(data:updatePaidUserPasswordInputType!):CustomResponseType
-    upsertWeek( weekData: UpsertWeekDataInputType!) : UpsertWeekDataOutputType
-    createDay(dayData: DayDataInputType!) : DayDataOutputType
-    updateDay(dayData: DayDataInputType!) : DayDataOutputType
+    verifyUserOtp(data: VerifyOtpPaidUserInputType!): UserOtpOutputType
+    updateUserPassword(
+      data: updatePaidUserPasswordInputType!
+    ): CustomResponseType
+    upsertWeek(weekData: UpsertWeekDataInputType!): UpsertWeekDataOutputType
+    createDay(dayData: DayDataInputType!): DayDataOutputType
+    updateDay(dayData: DayDataInputType!): DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
   }
 
@@ -292,7 +295,6 @@ const typeDefs = gql`
   }
   input CreateQuestionInputType {
     title: [QuestionOptionInputType!]!
-    batchCode: String!
     options: [QuestionOptionInputType!]!
     questionType: QuestionType!
     answer: [QuestionOptionInputType!]!
@@ -311,6 +313,8 @@ const typeDefs = gql`
   }
   input QuestionMeta {
     topic: String!
+    batchCode: String!
+    week: Int!
     day: Int!
     isActive: Boolean!
     isArchived: Boolean!
@@ -325,7 +329,6 @@ const typeDefs = gql`
   type QuestionDataType {
     id: String
     title: [QuestionOptionOutputType!]!
-    batchCode: String!
     options: [QuestionOptionOutputType!]!
     questionType: QuestionType!
     answer: [QuestionOptionOutputType!]!
@@ -335,6 +338,8 @@ const typeDefs = gql`
   type QuestionMetaOutput {
     topic: String!
     day: Int!
+    week: Int!
+    batchCode: String!
     isActive: Boolean!
     isArchived: Boolean!
     type: QuestionMetaType!
@@ -353,7 +358,6 @@ const typeDefs = gql`
 
   input UpdatesQuestionInput {
     title: [UpdateOptionInput]
-    batchCode: String
     options: [UpdateOptionInput]
     questionType: QuestionType
     answer: [UpdateOptionInput]
@@ -366,6 +370,8 @@ const typeDefs = gql`
   }
   input QuestionMetaInput {
     topic: String
+    batchCode: String
+    week: Int
     day: Int
     isActive: Boolean
     isArchived: Boolean
@@ -386,7 +392,6 @@ const typeDefs = gql`
 
   type QuestionDataOutput {
     title: [QuestionOptionOutputType]
-    batchCode: String
     options: [QuestionOptionOutputType]
     questionType: QuestionType
     answer: [QuestionOptionOutputType]
@@ -396,17 +401,25 @@ const typeDefs = gql`
   type QuestionMetaOutput {
     topic: String
     day: Int
+    week: Int
+    batchCode: String
     isActive: Boolean
     isArchived: Boolean
     type: QuestionMetaType
     expiresInMins: Int
     isOpenable: Boolean
   }
-  input GetQuestionsFilterInput {
+  input FilterData {
     topic: String
     isActive: Boolean
     isArchived: Boolean
-    type: QuestionMetaType
+    week: Int
+    day: Int
+    batchCode: String
+  }
+  input Pagination {
+    skip: Int
+    limit: Int
   }
 
   type AttemptQuestionOptionOutputType {
@@ -428,18 +441,21 @@ const typeDefs = gql`
   }
 
   type AttemptedQuestionDataType {
-    userId: ID
-    questionId: AttemptedQuestionIdDataType!
-    response: [QuestionOptionOutputType]
-    isCorrect: Boolean
-    timestamp: DateTime
+    _id: String
+    isAnswered: Boolean
+    title: [QuestionOptionOutputType]
+    questionType: QuestionType
+    options: [AttemptQuestionOptionOutputType]
+    answer: [AttemptQuestionOptionOutputType]
+    marks: Int
+    meta: QuestionMetaOutput
   }
 
   type GetAllQuestionsOutputType {
-    attemptedQuestions: [AttemptedQuestionDataType]
-    nonAttemptedQuestions: [QuestionDataType]
-    totalAttemptedQuestions: Int
-    totalNonAttemptedQuestions: Int
+    questions: [AttemptedQuestionDataType]
+    totalCorrectQuestions: Int
+    totalUnAttemptedQuestions: Int
+    totalInCorrectQuestions:Int
     totalQuestions: Int
     response: CustomResponseType
   }
@@ -560,7 +576,7 @@ const typeDefs = gql`
   type UpsertWeekDataOutputType {
     weekData: WeekDataType
     response: CustomResponseType!
-  } 
+  }
   input DayDataInputType {
     batchCode: String!
     dayNumber: Int!

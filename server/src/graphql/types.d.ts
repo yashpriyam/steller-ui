@@ -35,7 +35,7 @@ declare global {
     userData?: RegisterType;
     response: CustomResponseType;
     credentials?: string;
-  };  
+  };
   type RegisterType = {
     _id?: string;
     name: string;
@@ -209,7 +209,6 @@ declare global {
     options: QuestionInfoType[];
     answer: QuestionInfoType[];
     marks: number;
-    batchCode: string;
     meta: QuestionMetaData;
   };
 
@@ -229,10 +228,11 @@ declare global {
   };
 
   type AllAttemptedQuestionDataType = {
-    userId: string;
-    questionId: AllNonAttemptedQuestionType;
+    userId: ObjectId;
+    questionId: ObjectId;
     isCorrect: boolean;
     response: QuestionOptionType[];
+    timestamp: Date;
   };
 
   type AllNonAttemptedQuestionType = {
@@ -251,6 +251,8 @@ declare global {
   type QuestionMetaData = {
     topic: string;
     day: number;
+    week: number;
+    batchCode: string;
     isActive: boolean;
     isArchived: boolean;
     type: QuestionMetaType;
@@ -281,6 +283,7 @@ declare global {
     response: QuestionInfoType[];
     isCorrect?: boolean;
     timestamp: Date;
+    isLatest?: boolean;
   };
 
   type UserActivityInputType = {
@@ -365,21 +368,41 @@ declare global {
   type OtpUserOutputType = {
     response: CustomResponseType;
   };
-  type filterInputType = {
+  type filterDataType = {
     topic?: string;
     isActive?: boolean;
-    isArchived?: Boolean;
-    type?: QuestionMetaType;
+    isArchived?: boolean;
+    bactchCode?: string;
+    day?: number;
+    week?: number;
+  };
+  type pagination = {
+    skip: number;
+    limit: number;
+  }
+  type AllQuestionDataType = {
+    _id: string;
+    isAnswered: boolean;
+    title: QuestionInfoType[];
+    questionType: QuestionTypeEnum;
+    options: QuestionInfoType[];
+    answer: QuestionInfoType[];
+    marks: number;
+    meta: QuestionMetaData;
   };
   type QuestionsReturnType = {
-    questionData: [AllQuestionDataType];
+    questions: [AllQuestionDataType];
+    totalQuestions: number;
+    totalCorrectQuestions: number;
+    totalInCorrectQuestions:number;
+    totalUnAttemptedQuestions: number;
     response: CustomResponseType;
   };
 
   type UserOtpOutputType = {
     response: CustomResponseType;
     credentials?: string;
-  }
+  };
 
   type CustomResponseType = {
     status: number;
@@ -431,7 +454,7 @@ declare global {
   type loginOutputType = {
     response: CustomResponseType;
     credentials?: string;
-  }
+  };
   type PaidProfileImageInput = {
     publicId?: string;
     secureUrl?: string;
@@ -484,7 +507,7 @@ declare global {
   type DayDataOutputType = {
     dayData?: DaySchemaType;
     response: CustomResponseType;
-  }
+  };
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
@@ -494,8 +517,7 @@ declare global {
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: string[];
-  }
-
+  };
 
   interface paidUserSchemaType {
     username: string;
@@ -585,8 +607,99 @@ declare global {
     weekData?: WeekDataType;
     response: CustomResponseType;
   };
-  
+
   type ImageInputType = {
     image: string;
+  };
+  interface AddressType {
+    colony?: string;
+    city?: string;
+  }
+
+  interface ExperienceDataType {
+    companyName?: string;
+    companyLocation?: string;
+    role?: string;
+    startDate?: string;
+    endDate?: string;
+    description?: string[];
+    techStack?: string[];
+  }
+
+  interface ProjectsDataType {
+    heading?: string;
+    description?: string[];
+    deployLink?: string;
+    gitHubLink?: string;
+    techStack?: string[];
+  }
+
+  interface SkillsDataType {
+    language?: string[];
+    frontend?: string[];
+    backend?: string[];
+    database?: string[];
+    versionControl?: string[];
+    cIcD?: string[];
+  }
+
+  interface EducationalDataType {
+    instituteName?: string;
+    location?: string;
+    course?: string;
+    startDate?: string;
+    endDate?: string;
+    cgpa?: string;
+  }
+
+  interface AchievementsDataType {
+    icon?: string;
+    header?: string;
+    description?: string;
+    links?: string;
+  }
+
+  interface PersonalDetailType {
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    headline?: string;
+    address?: AddressType;
+  }
+
+  interface SocialDetailType {
+    githubLink?: string;
+    linkedInLink?: string;
+  }
+
+  interface UserProfileSchemaType {
+    userId: Types.ObjectId;
+    personalDetails?: PersonalDetailType;
+    socialDetail?: SocialDetailType;
+    experienceData?: ExperienceDataType[];
+    projectsData?: ProjectsDataType[];
+    skillsData?: SkillsDataType;
+    educationalData?: EducationalDataType[];
+    achievementsData?: AchievementsDataType[];
+  }
+
+  interface UserSchemaType {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    password?: string;
+    isJobSeeker: boolean;
+    occupation?: string;
+    sessionPreference: "online" | "offline";
+    expectedSalary?: string;
+    IST: string;
+    collegeName?: string;
+    profileImage?: UserProfile;
+    coverImage?: UserProfile;
+    userProfile?: Types.ObjectId;
+  }
+
+  type QuestionAttemptIdMapType = {
+    [key: string]: QuestionAttemptSchemaType;
   };
 }
