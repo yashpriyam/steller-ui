@@ -10,6 +10,9 @@
   background-color: $primaryBgColor;
   font-family: $primaryFontFamily;
   color: $primaryTextColor;
+  &::-webkit-scrollbar{
+    display: none;
+  }
 
   .schedule-page-meet-container{
     width: 100%;

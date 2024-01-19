@@ -10,15 +10,32 @@
     gap: 10px;
     border: 1px solid transparent;
     color: $primaryTextColor;
-    &:hover{
-        border: 1px solid $primaryTextColor;
-        border-radius: 5px;
+    position: relative;
+    &:hover > .hovered-option-text{
+        opacity: 1;
+        z-index: 100;
+    }
+    &:focus{
+        background-color: $fadedBlackColor;
+        border-radius: 10px;
     }
     .sidebar-option-img{
         height: 25px;
     }
     .option-text{
         font-size: $mediumFontSize;
+    }
+    .hovered-option-text{
+        position: absolute;
+        font-size: $mediumFontSize;
+        top: 8px;
+        left: 45px;
+        opacity: 0;
+        background-color: $secondaryBgColor;
+        border-radius: 15px;
+        padding: 7px 15px;
+        z-index: -100;
+        transition: opacity 0.5s;
     }
     .item-count{
         border: 1px solid $borderGrey;
@@ -30,7 +47,10 @@
 @media screen and (max-width: 425px) {
     .sidebar-option-container{
         min-width: fit-content;
-        .option-text{
+        flex-direction: column;
+        gap: 5px;
+        
+        .hovered-option-text{
             display: none;
         }
     }
