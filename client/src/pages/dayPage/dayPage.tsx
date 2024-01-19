@@ -198,7 +198,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
               className={`icon ${toggleSidebar && "rotate-icon"}`}
               onClick={handleToggleSidebar}
             >
-              <DropDownIcon color="black" />
+              <DropDownIcon isDarkMode={true} />
             </span>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: ScheduleDataStateType = {
     weekList: [],
+    isScheduleDataLoading: true,
 };
 
 export const weekSlice = createSlice({
@@ -11,6 +12,9 @@ export const weekSlice = createSlice({
         setSchedule: (state, action) => {
             state.weekList = action.payload?.weekData;
         },
+        setIsScheduleDataLoading:(state, action) => {
+            state.isScheduleDataLoading = action.payload;
+        }
     },
 });
 

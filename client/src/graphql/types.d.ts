@@ -513,6 +513,7 @@ declare global {
   }
   type ScheduleDataStateType = {
     weekList: WeekDataType[];
+    isScheduleDataLoading: boolean;
   }
   type DayDataType = {
     _id?: ObjectId;

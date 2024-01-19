@@ -1,6 +1,6 @@
 @import "./components/variables.scss";
 .app-container{
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     color: $primaryTextColor;
     font-family: 'Roboto', sans-serif;
@@ -14,6 +14,9 @@
         height: 100vh;
         z-index: 0;
         overflow-x: scroll;
+        &::-webkit-scrollbar{
+            display: none;
+        }
     }
     .portal-app-section{
         background-color: $primaryBgColor;
