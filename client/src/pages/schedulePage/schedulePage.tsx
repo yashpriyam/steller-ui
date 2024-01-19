@@ -20,9 +20,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const { weekData, getScheduleData } = useWeek();
   const { weekList, isScheduleDataLoading } = weekData;
  
-  const handleNavigation = (e:React.MouseEvent<HTMLElement>,path: string) => {
+  const handleNavigation = (e:React.MouseEvent<HTMLElement>,path?: string) => {
     e.stopPropagation();
-    navigate(path);
+    if(path) navigate(path);
   };
   
   const onJoinMeetClick = () => {
@@ -50,7 +50,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             style={{ display: "block", background: "lightGray" }}
           />
         ) : (
-          Boolean(weekList.length) &&
+          Boolean(weekList?.length) &&
           weekList.map((week, index) => {
             const {
               batchCode,
@@ -86,7 +86,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             ) => {
                               handleNavigation(
                                 e,
-                                `/day/${dayNumber}?weekNumber=${weekNumber}`
+                                // `/day/${dayNumber}?weekNumber=${weekNumber}` 
+                                // commented navigation to dayPage until data is inserted to it.
                               );
                             }}
                           >

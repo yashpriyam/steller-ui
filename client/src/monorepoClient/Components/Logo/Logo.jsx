@@ -22,17 +22,19 @@ const Logo = ({ width, height }) => {
 
   useEffect(() => {
     const scroll = () => {
-      if (pathName) {
-        if (darkMode) {
-          setLogo(WhiteLogo);
-        } else {
-          if (window.scrollY > 50) {
-            setLogo(LogoImage);
-          } else {
-            setLogo(WhiteLogo);
-          }
-        }
-      } else if (darkMode) {
+      // Not removing this code, might be useful for later
+      // if (pathName) {
+      //   if (darkMode) {
+      //     setLogo(WhiteLogo);
+      //   } else {
+      //     if (window.scrollY > 50) {
+      //       setLogo(LogoImage);
+      //     } else {
+      //       setLogo(WhiteLogo);
+      //     }
+      //   }
+      // } else
+      if (darkMode) {
         setLogo(WhiteLogo);
       } else {
         setLogo(LogoImage);

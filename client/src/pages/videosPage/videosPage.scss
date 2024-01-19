@@ -2,7 +2,7 @@
 
 
 .video-page{
-    width: 100vw;
+    max-width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -11,18 +11,23 @@
     font-family: $secondaryFontFamily;
     gap: 20px;
     align-items: center;
-
-    
+    overflow-x: hidden;
+    @media (max-width: 300px){
+        overflow-x:visible;
+    }
 
     .videos-container{
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
         .content-title{
-            width: 100%;
+            max-width: 100%;
             font-size: $headerFontSize;
             text-align: center;
             letter-spacing: 5px;
         }
         .videos-wrapper{
-            width: 100vw;
+            max-width: 100%;
             display: flex;
             justify-content: center;
             gap: 10px;

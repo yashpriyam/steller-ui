@@ -1,4 +1,7 @@
 @import "./components/variables.scss";
+body{
+    overflow: hidden;
+}
 .app-container{
     min-height: 100vh;
     width: 100vw;
