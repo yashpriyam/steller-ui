@@ -25,7 +25,7 @@ const logMessage = (status: string, message: string) => {
 // Render web services go to sleep when inactive for more than 15 minutes, so this will ping them every 10 minutes.
 // https://community.render.com/t/do-web-services-on-a-free-tier-go-to-sleep-after-some-time-inactive/3303
 
-const pingServer = cron.schedule("*/10 * * * * *", async () => {
+const pingServer = cron.schedule("*/10 * * * *", async () => {
   const apiUrl: string = process.env.SERVER_URL ?? "";
   const query: string = '{"query":"query { __typename }"}';
 
