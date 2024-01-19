@@ -443,6 +443,7 @@ const typeDefs = gql`
   type AttemptedQuestionDataType {
     _id: String
     isAnswered: Boolean
+    isCorrect:Boolean
     title: [QuestionOptionOutputType]
     questionType: QuestionType
     options: [AttemptQuestionOptionOutputType]
@@ -455,15 +456,13 @@ const typeDefs = gql`
     questions: [AttemptedQuestionDataType]
     totalCorrectQuestions: Int
     totalUnAttemptedQuestions: Int
-    totalInCorrectQuestions:Int
+    totalInCorrectQuestions: Int
     totalQuestions: Int
     response: CustomResponseType
   }
   input QuestionAttemptType {
-    userId: String!
     questionId: String!
     response: [QuestionOptionInputType]!
-    isCorrect: Boolean
   }
   type QuestionAttemptOutputType {
     questionData: QuestionAttemptDataType
@@ -472,9 +471,14 @@ const typeDefs = gql`
   type QuestionAttemptDataType {
     userId: ID
     questionId: ID
-    response: [QuestionOptionOutputType]
+    response: [QuestionAttemptResponseType]
     isCorrect: Boolean
-    timestamp: DateTime
+  }
+  type QuestionAttemptResponseType {
+    text: String
+    imageUrl: String
+    iframe: String
+    isChecked: Boolean
   }
 
   input LoginUserDataInputType {

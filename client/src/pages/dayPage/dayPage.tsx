@@ -20,9 +20,9 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
   const { questions, getAllQuestions } = useQuestions();
+  const { questions:questionList } = questions||[];
   const { videoList } = videoData;
   const { noteList } = noteData;
-  // const { questionList } = questions;
   const { questionAttempt, createQuestionAttemptByUser } = useQuestionAttempt();
   const { isLoading } = questionAttempt;
   const { t } = useTranslation();
@@ -41,7 +41,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
       text: selectedValue.text,
     }));
     try {
-      await createQuestionAttemptByUser(filteredData, question.id);
+      const response = await createQuestionAttemptByUser(filteredData, question._id);      
     } catch (err) {
       console.log(err);
     }
@@ -57,7 +57,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
   const getAllDataRequest = async (dayNumber: number) => {
     await getAllVideos({ dayNumber });
     await getAllNotes({ dayNumber });
-    await getAllQuestions(); // currently there are no filters in getAllQuestions api @dhananjayadav
+    await getAllQuestions({}); 
   };
   useEffect(() => {
     getAllDataRequest(contentDayNumber);
@@ -219,26 +219,30 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
             }`}
             onScroll={() => setActiveScrollbar(true)}
           >
-            {/* {questionList?.map((questionData, index) => {
-              return (
-                <div className="question-content-wrapper">
-                  <div
-                    className={`question-content ${
-                      toggleSidebar && "resize-ques-card-height"
-                    }`}
-                  >
-                    <QuestionAccordion
-                      key={index}
-                      questionData={questionData}
-                      onSubmit={onSubmit}
-                      isLoading={isLoading}
-                      errorMsg={t("incorrect_answer")}
-                      successMsg={t("correct_answer")}
-                    />
+            { 
+              questionList?.map((questionData,index) => {
+                return (
+                  <div className="question-content-wrapper">
+                    <div
+                      className={`question-content ${
+                        toggleSidebar && "resize-ques-card-height"
+                      }`}
+                    >
+                      <QuestionAccordion
+                        key={index}
+                        questionData={questionData}
+                        onSubmit={onSubmit}
+                        isLoading={isLoading}
+                        isCorrect={questionData.isCorrect}
+                        isAnswered={questionData.isAnswered}
+                        errorMsg={t("incorrect_answer")}
+                        successMsg={t("correct_answer")}
+                      />
+                    </div>
                   </div>
-                </div>
-              );
-            })} */}
+                );
+              })
+            }
           </div>
         </div>
       </div>

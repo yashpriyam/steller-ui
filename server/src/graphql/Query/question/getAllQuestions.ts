@@ -7,12 +7,12 @@ export const getAllQuestions = async (
   _parent: undefined,
   args: { filterData: filterDataType; pagination: pagination },
   { contextData }: ContextType
-): Promise<QuestionsReturnType | unknown> => {
+): Promise<QuestionsReturnType | unknown> => {  
   const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
   const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
   if (!isLoggedIn(contextData)) {
     return getUnauthorizedResponse();
-  }
+  }  
   const userData = contextData.user;
   const errorData: CustomResponseType = {
     message: QUESTION_NOT_FOUND,
@@ -33,7 +33,7 @@ export const getAllQuestions = async (
       .find(updatedFields)
       .skip(skip)
       .limit(limit)
-      .lean();
+      .lean();    
     const questionIdList = questionList.map((question) => question._id);
     const questionAttemptList: AllAttemptedQuestionDataType[] =
       await questionAttempt.find({
@@ -48,11 +48,16 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
-      const updatedQuestionData = { ...questionData, isAnswered: false };
+      const updatedQuestionData = {
+        ...questionData,
+        isAnswered: false,
+        isCorrect: false,
+      };
       const attemptData = questionAttemptIdMap[questionData._id.toString()];
       if (attemptData) {
         if (attemptData.isCorrect) {
           totalCorrectQuestions += 1;
+          updatedQuestionData.isCorrect = true;
         }
         updatedQuestionData.isAnswered = true;
         updatedQuestionData.options = attemptData.response;
@@ -64,7 +69,7 @@ export const getAllQuestions = async (
           message: QUESTION_FOUND_SUCCESS,
           status: statusCodes.OK,
         }
-      : errorData;
+      : errorData;    
     const totalUnAttemptedQuestions =
       questionList.length - questionAttemptList.length;
     const totalInCorrectQuestions = questionList.length - totalCorrectQuestions;
