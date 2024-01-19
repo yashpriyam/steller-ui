@@ -28,7 +28,6 @@ const QuestionPage = () => {
     }
   };
   const searchParam = searchParams.get("day");
-  //will use searchParam to filter Question data @Obliger0
   useEffect(() => {
       getAllQuestions({})
   }, [])

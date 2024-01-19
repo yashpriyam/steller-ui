@@ -57,7 +57,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
   const getAllDataRequest = async (dayNumber: number) => {
     await getAllVideos({ dayNumber });
     await getAllNotes({ dayNumber });
-    await getAllQuestions({week:1,day:1}); // currently there are no filters in getAllQuestions api @dhananjayadav
+    await getAllQuestions({}); 
   };
   useEffect(() => {
     getAllDataRequest(contentDayNumber);
@@ -251,21 +251,3 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
 };
 
 export default DayPage;
-
-
-{/* <div className="question-content-wrapper">
-                  <div
-                    className={`question-content ${
-                      toggleSidebar && "resize-ques-card-height"
-                    }`}
-                  >
-                    <QuestionAccordion
-                      key={index}
-                      questionData={questionData}
-                      onSubmit={onSubmit}
-                      isLoading={isLoading}
-                      errorMsg={t("incorrect_answer")}
-                      successMsg={t("correct_answer")}
-                    />
-                  </div>
-                </div> */}
