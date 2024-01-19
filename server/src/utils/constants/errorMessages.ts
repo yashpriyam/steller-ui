@@ -59,7 +59,7 @@ export const errorMessages = Object.freeze({
     WEEK_NOT_FOUND: "week data not found",
   },
   MSG: {
-    UNAUTHORIZED_USER: "unauthorized user"
+    UNAUTHORIZED_USER: "unauthorized user",
   },
   DAY_MODEL: {
     DAY_CREATION_FAILED: "unable to insert day data",
@@ -67,5 +67,8 @@ export const errorMessages = Object.freeze({
   },
   RESUME_MODEL: {
     RESUME_UPSERT_FAILED: "unable to insert resume data",
-  }
+  },
+  SLACK: {
+    INVALID_CONTENT: "This content can't be displayed",
+  },
 });

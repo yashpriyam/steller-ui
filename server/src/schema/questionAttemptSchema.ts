@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model } from "mongoose";
 
 const questionAttemptSchema = new Schema<QuestionAttemptSchemaType>(
   {
@@ -10,11 +10,17 @@ const questionAttemptSchema = new Schema<QuestionAttemptSchemaType>(
     },
     isCorrect: { type: Boolean },
     response: {
-      type: [{ imageUrl: String, text: String, iframe: String, isChecked:Boolean }],
+      type: [
+        { imageUrl: String, text: String, iframe: String, isChecked: Boolean },
+      ],
       required: true,
     },
+    isLatest: { type: Boolean },
   },
   { timestamps: true }
 );
 
-export const questionAttempt = model<QuestionAttemptSchemaType>('QuestionAttempt', questionAttemptSchema);
+export const questionAttempt = model<QuestionAttemptSchemaType>(
+  "QuestionAttempt",
+  questionAttemptSchema
+);

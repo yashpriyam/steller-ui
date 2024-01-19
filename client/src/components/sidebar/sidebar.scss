@@ -7,7 +7,7 @@
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 0 5px 2px $boxShadowGrey;
-    background-color: $primaryBgColor;
+    background-color: $secondaryBgColor;
     border-right: 1px solid $boxShadowGrey;
     position: relative;
     .sidebar-arrow-icon{
@@ -48,9 +48,14 @@
         bottom: 0%;
         transform: translate(0%, 0%);
         width: 100%;
+        overflow: auto;
         height: 90px;
         z-index: 10;
         flex-direction: row;
+
+        &::-webkit-scrollbar{
+            display:none;
+        }
         .sidebar-arrow-icon{
             display: none;
         }

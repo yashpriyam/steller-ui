@@ -3,6 +3,10 @@ import { gql } from "@apollo/client";
 const typeDefs = gql`
   type Query {
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
+    getAllQuestions(
+      filterData: FilterData
+      pagination: Pagination
+    ): GetAllQuestionsOutputType
   }
 
   type Mutation {
@@ -13,8 +17,11 @@ const typeDefs = gql`
     updatePaidUserPassword(
       data: updatePaidUserPasswordInputType!
     ): CustomResponseType
+    createQuestionAttemptByUser(
+      questionAttemptData: QuestionAttemptType!
+    ): QuestionAttemptOutputType
   }
-  
+
   type CustomResponseType {
     status: Int!
     message: String!
@@ -51,7 +58,7 @@ const typeDefs = gql`
     duration: String
   }
 
-  input OptionalLinksInput{
+  input OptionalLinksInput {
     webmasters: String
     youtube: String
   }
@@ -84,7 +91,7 @@ const typeDefs = gql`
   type LoginUserDataOutputType {
     response: CustomResponseType!
   }
-   type CustomResponseType {
+  type CustomResponseType {
     status: Int!
     message: String!
   }
@@ -92,9 +99,9 @@ const typeDefs = gql`
     email: String!
     emailOtp: String!
   }
-    input updatePaidUserPasswordInputType {
+  input updatePaidUserPasswordInputType {
     email: String!
-    password:String!
+    password: String!
   }
   type PaidUserOutputType {
     paidUserData: PaidUserData
@@ -112,6 +119,45 @@ const typeDefs = gql`
     expectedSalary: String
     socialHandles: SocialMediaHandlesOutput
     address: String
+  }
+
+  input FilterData {
+    topic: String
+    isActive: Boolean
+    isArchived: Boolean
+    week: Int
+    day: Int
+    batchCode: String
+  }
+  input Pagination {
+    skip: Int
+    limit: Int
+  }
+  input QuestionOptionInputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+  }
+  input QuestionAttemptType {
+    questionId: String!
+    response: [QuestionOptionInputType]!
+  }
+
+  type QuestionAttemptOutputType {
+    questionData: QuestionAttemptDataType
+    response: CustomResponseType!
+  }
+  type QuestionAttemptDataType {
+    userId: ID
+    questionId: ID
+    response: [QuestionAttemptResponseType]
+    isCorrect: Boolean
+  }
+  type QuestionAttemptResponseType {
+    text: String
+    imageUrl: String
+    iframe: String
+    isChecked: Boolean
   }
   scalar DateTime
   scalar JSON

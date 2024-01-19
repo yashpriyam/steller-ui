@@ -210,7 +210,6 @@ declare global {
     options: QuestionInfoType[];
     answer: QuestionInfoType[];
     marks: number;
-    batchCode: string;
     meta: QuestionMetaData;
   };
 
@@ -230,10 +229,11 @@ declare global {
   };
 
   type AllAttemptedQuestionDataType = {
-    userId: string;
-    questionId: AllNonAttemptedQuestionType;
+    userId: ObjectId;
+    questionId: ObjectId;
     isCorrect: boolean;
     response: QuestionOptionType[];
+    timestamp: Date;
   };
 
   type AllNonAttemptedQuestionType = {
@@ -252,6 +252,8 @@ declare global {
   type QuestionMetaData = {
     topic: string;
     day: number;
+    week: number;
+    batchCode: string;
     isActive: boolean;
     isArchived: boolean;
     type: QuestionMetaType;
@@ -282,6 +284,21 @@ declare global {
     response: QuestionInfoType[];
     isCorrect?: boolean;
     timestamp: Date;
+    isLatest?: boolean;
+  };
+  type QuestionAttemptInputType = {
+    questionId: ObjectId;
+    response: QuestionInfoType[];
+  };
+  type QuestionAttemtDataType = {
+    userId: ObjectId;
+    questionId: ObjectId;
+    response: QuestionInfoType[];
+    isCorrect?: boolean;
+  };
+  type QuestionAttemptOutputType = {
+    questionData: QuestionAttemtDataType;
+    response: responseData;
   };
 
   type UserActivityInputType = {
@@ -366,21 +383,42 @@ declare global {
   type OtpUserOutputType = {
     response: CustomResponseType;
   };
-  type filterInputType = {
+  type filterDataType = {
     topic?: string;
     isActive?: boolean;
-    isArchived?: Boolean;
-    type?: QuestionMetaType;
+    isArchived?: boolean;
+    bactchCode?: string;
+    day?: number;
+    week?: number;
+  };
+  type pagination = {
+    skip: number;
+    limit: number;
+  }
+  type AllQuestionDataType = {
+    _id: string;
+    isAnswered: boolean;
+    isCorrect: boolean;
+    title: QuestionInfoType[];
+    questionType: QuestionTypeEnum;
+    options: QuestionInfoType[];
+    answer: QuestionInfoType[];
+    marks: number;
+    meta: QuestionMetaData;
   };
   type QuestionsReturnType = {
-    questionData: [AllQuestionDataType];
+    questions: [AllQuestionDataType];
+    totalQuestions: number;
+    totalCorrectQuestions: number;
+    totalInCorrectQuestions:number;
+    totalUnAttemptedQuestions: number;
     response: CustomResponseType;
   };
 
   type UserOtpOutputType = {
     response: CustomResponseType;
     credentials?: string;
-  }
+  };
 
   type CustomResponseType = {
     status: number;
@@ -432,7 +470,7 @@ declare global {
   type loginOutputType = {
     response: CustomResponseType;
     credentials?: string;
-  }
+  };
   type PaidProfileImageInput = {
     publicId?: string;
     secureUrl?: string;
@@ -485,7 +523,7 @@ declare global {
   type DayDataOutputType = {
     dayData?: DaySchemaType;
     response: CustomResponseType;
-  }
+  };
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
@@ -495,8 +533,7 @@ declare global {
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: string[];
-  }
-
+  };
 
   interface paidUserSchemaType {
     username: string;
@@ -669,7 +706,7 @@ declare global {
     password?: string;
     isJobSeeker: boolean;
     occupation?: string;
-    sessionPreference: 'online' | 'offline';
+    sessionPreference: "online" | "offline";
     expectedSalary?: string;
     IST: string;
     collegeName?: string;
@@ -697,6 +734,9 @@ declare global {
   interface UpsertUserProfileOutputType {
     response: CustomResponseType;
     userProfile?: UserProfileSchemaType | null;
-  }
+  };
 
+  type QuestionAttemptIdMapType = {
+    [key: string]: QuestionAttemptSchemaType;
+  };
 }
