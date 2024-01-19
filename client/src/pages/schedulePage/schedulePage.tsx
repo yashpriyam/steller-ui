@@ -15,23 +15,21 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   style,
 }: SchedulePagePropsInterface) => {
   const [filter, setFilter] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
-  const { weekList } = weekData;
-  const getScheduleDataApi = async (delay: number = 0) => {
-    await getScheduleData({});
-    setTimeout(() => setIsLoading(false), delay);
-  };
-  const handleButtonNavigation = (path: string) => {
+  const { weekList, isScheduleDataLoading } = weekData;
+ 
+  const handleNavigation = (e:React.MouseEvent<HTMLElement>,path: string) => {
+    e.stopPropagation();
     navigate(path);
   };
+  
   const onJoinMeetClick = () => {
     window.open(process.env.REACT_APP_CLASS_MEET_URL, "_blank");
   };
   useEffect(() => {
-    getScheduleDataApi(800);
+    getScheduleData({});
   }, []);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
@@ -46,13 +44,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
         </div>
       </div>
       <div className="scheduling-page-accordion">
-        {isLoading ? (
+        {isScheduleDataLoading ? (
           <Skeleton
-            baseColor="gray"
-            highlightColor="lightgray"
             count={4}
-            height={40}
-            style={{ display: "block", background: "gray" }}
+            style={{ display: "block", background: "lightGray" }}
           />
         ) : (
           Boolean(weekList.length) &&
@@ -86,9 +81,11 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                           <div
                             key={index}
                             className="day-container"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              navigate(
+                            onClick={(
+                              e: React.MouseEvent<HTMLElement>
+                            ) => {
+                              handleNavigation(
+                                e,
                                 `/day/${dayNumber}?weekNumber=${weekNumber}`
                               );
                             }}
@@ -126,8 +123,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                             </span>
                                           ))}
                                       </span>
-                                      <span className="topic-tag show-tags">{`+${tagsLength - 2
-                                        }`}</span>
+                                      <span className="topic-tag show-tags">{`+${
+                                        tagsLength - 2
+                                      }`}</span>
                                     </>
                                   )}
                                 </div>
@@ -144,8 +142,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleButtonNavigation("/question");
+                                  handleNavigation(
+                                    e,
+                                    `/question?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
+                                  );
                                 }}
                               />
                               <Button
@@ -153,8 +153,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleButtonNavigation("/notes");
+                                  handleNavigation(
+                                    e,
+                                    `/notes?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
+                                  );
                                 }}
                               />
                               <Button
@@ -162,8 +164,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
-                                  e.stopPropagation();
-                                  handleButtonNavigation("/videos");
+                                  handleNavigation(
+                                    e,
+                                    `/videos?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
+                                  );
                                 }}
                               />
                             </div>

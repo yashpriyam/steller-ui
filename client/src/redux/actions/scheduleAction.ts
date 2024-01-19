@@ -14,23 +14,31 @@ export const useWeek = () => {
         description,
         batchCode,
     }: WeekDataType) => {
-        const response = await apolloClient.query({
-            query: GET_SCHEDULE_DATA,
-            variables: {
-                videoDataFilter: {
-                    weekNumber,
-                    title,
-                    isDisabledForUnpaidUsers,
-                    isActive,
-                    description,
-                    batchCode,
+        try {
+            dispatch(actions.setIsScheduleDataLoading(true));
+            const response = await apolloClient.query({
+                query: GET_SCHEDULE_DATA,
+                variables: {
+                    videoDataFilter: {
+                        weekNumber,
+                        title,
+                        isDisabledForUnpaidUsers,
+                        isActive,
+                        description,
+                        batchCode,
+                    },
                 },
-            },
-        });
-        dispatch(actions.setSchedule(response.data.getScheduleData));
-        return response;
-    };
+            });
+            dispatch(actions.setSchedule(response.data.getScheduleData));
+            return response;
+        } catch (err) {
+            console.log(err);
+        }
+        finally{
+            dispatch(actions.setIsScheduleDataLoading(false));
+        }
 
+    }
 
     return { weekData, getScheduleData };
 };
