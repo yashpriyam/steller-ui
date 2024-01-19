@@ -48,19 +48,24 @@ export const localMessages = Object.freeze({
   USER: {
     USER_REGISTERED_SUCCESSFULLY: "registered successfully",
     USER_PASSWPRD_UPDATION_SUCCESS: "password updation successfully",
-    USER_LOGIN_SUCCESS:"login successfully",
+    USER_LOGIN_SUCCESS: "login successfully",
     PROFILE_IMAGE_UPLOADED: "profile image uploaded successfully",
-    IMAGE_UPLOADED_SUCCESSFULLY:"image uploaded successfully"
+    IMAGE_UPLOADED_SUCCESSFULLY: "image uploaded successfully"
   },
   WEEK_MODEL: {
     WEEK_CREATION_SUCCESS: "Week data inserted successfully",
     WEEK_FOUND: "week data found successfully",
     DAYS: "days",
   },
-  DAY_MODEL : {
+  DAY_MODEL: {
     DAY_CREATION_SUCCESS: "Day data inserted successfully",
     DAY_EXIST: "Day already exists",
     WEEK_DOES_NOT_EXIST_TO_INSERT_DAY: "Week doesn't exist to insert day data",
     DAY_UPDATION_SUCCESS: "Day data updated successfully",
   },
+
+  RESUME_MODEL: {
+    RESUME_UPSERT_SUCCESS: "resume updated successfully",
+  }
+
 });

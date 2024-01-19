@@ -1,3 +1,4 @@
+import { UserProfileSchemaType } from '@models';
 import { Request, Response } from "express";
 import { ObjectId } from "mongoose";
 
@@ -712,6 +713,27 @@ declare global {
     profileImage?: UserProfile;
     coverImage?: UserProfile;
     userProfile?: Types.ObjectId;
+  }
+  interface UserProfileDataType {
+    personalDetails?: PersonalDetailType;
+    socialDetail?: SocialDetailType;
+    experienceData?: ExperienceDataType[];
+    projectsData?: ProjectsDataType[];
+    skillsData?: SkillsDataType;
+    educationalData?: EducationalDataType[];
+    achievementsData?: AchievementsDataType[];
+  }
+  interface UpsertUserProfileInputType {
+    userProfile?: UserProfileDataType;
+  }
+
+  interface CustomResponseType {
+    message: string;
+    status: number;
+  }
+  interface UpsertUserProfileOutputType {
+    response: CustomResponseType;
+    userProfile?: UserProfileSchemaType | null;
   };
 
   type QuestionAttemptIdMapType = {

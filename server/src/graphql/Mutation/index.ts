@@ -22,3 +22,4 @@ export {
 } from "./paidUser/index";
 export { upsertWeek } from "./week/index";
 export { createDay, updateDay } from "./day/index";
+export { upsertUserProfile } from "./userProfile/index";

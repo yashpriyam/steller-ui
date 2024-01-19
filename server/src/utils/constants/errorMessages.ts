@@ -5,7 +5,7 @@ export const errorMessages = Object.freeze({
     INVALID_USER_PROFILE_IMAGE: "Failed to get profile image",
     USER_EXIST: "user already registerd",
     USER_PASSWPRD_UPDATION_FAILED: "password updation failed",
-    USER_LOGIN_FAILED:"invalid email and password",
+    USER_LOGIN_FAILED: "invalid email and password",
     UPLOAD_IMAGE_FAILED: "failed to upload image",
 
   },
@@ -64,6 +64,9 @@ export const errorMessages = Object.freeze({
   DAY_MODEL: {
     DAY_CREATION_FAILED: "unable to insert day data",
     DAY_UPDATION_FAILED: "unable to update day data",
+  },
+  RESUME_MODEL: {
+    RESUME_UPSERT_FAILED: "unable to insert resume data",
   },
   SLACK: {
     INVALID_CONTENT: "This content can't be displayed",
