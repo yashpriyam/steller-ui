@@ -253,27 +253,32 @@ declare global {
 
 
   type AttemptedQuestionDataType = {
-    userId: string;
-    questionId: QuestionDataType,
-    isCorrect: boolean
-    response: QuestionOptionType[]
-  }
+    _id: string;
+    isAnswered: boolean;
+    title: QuestionInfoType[];
+    questionType: QuestionTypeEnum;
+    options: QuestionInfoType[];
+    answer: QuestionInfoType[];
+    marks: number;
+    meta: QuestionMetaDataType;
+    isCorrect?: boolean;
+  };
   interface QuestionStateInterface {
-    attemptedQuestions: AttemptedQuestionDataType[]
-    nonAttemptedQuestions: QuestionDataType[];
-    totalAttemptedQuestions: number;
-    totalNonAttemptedQuestions: number;
-    totalQuestions: number;
+    questions?: [AttemptedQuestionDataType];
+    totalQuestions?: number;
+    totalCorrectQuestions?: number;
+    totalInCorrectQuestions?: number;
+    totalUnAttemptedQuestions?: number;
+    response?: CustomResponseType;
   }
 
   type QuestionDataType = {
-    id: string;
+    _id: string;
     title: QuestionOptionType[];
     questionType: QuestionTypeEnum;
     options: QuestionOptionType[];
     answer: QuestionOptionType[];
     marks: number;
-    batchCode: string;
     meta: QuestionMetaDataType;
     isCorrect?: boolean;
     isAnswered?: boolean;
@@ -282,6 +287,8 @@ declare global {
   type QuestionMetaDataType = {
     topic: string;
     day: number;
+    week: number;
+    batchCode: string;
     isActive: boolean;
     isArchived: boolean;
     type: QuestionMetaType;
@@ -320,10 +327,8 @@ declare global {
 
   type QuestionSelectedValueType = {
     text?: string;
-    value?: string;
     imageUrl?: string;
     iframe?: string;
-    __typename?: string;
   };
 
   type CheckboxValueType = {
@@ -537,6 +542,16 @@ declare global {
   interface SchedulePagePropsInterface {
     className?: string;
     style?: CSSProperties;
+  }
+  interface GetAllQuestionProps {
+    day?:number;
+    week?:number;
+    batchCode?:string;
+    isActive?:boolean;
+    isArchived?:boolean;
+    topic?:string;
+    skip?:number;
+    limit?:number;
   }
 }
 export { };

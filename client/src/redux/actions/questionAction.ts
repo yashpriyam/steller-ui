@@ -8,13 +8,31 @@ import { useDispatch, useSelector } from "react-redux";
 export const useQuestions = () => {
   const questions = useSelector(selectQuestions);
   const dispatch = useDispatch();
-  const getAllQuestions = async () => {
+  const getAllQuestions = async ({
+    day,
+    week,
+    batchCode,
+    isActive,
+    isArchived,
+    topic,
+    skip,
+    limit,
+  }: GetAllQuestionProps) => {
     try {
       const response = await apolloClient.query({
         query: GET_ALL_QUESTIONS,
         variables: {
           filterData: {
-            isActive: true,
+            day,
+            week,
+            batchCode,
+            isActive,
+            isArchived,
+            topic,
+          },
+          pagination: {
+            skip,
+            limit,
           },
         },
       });
