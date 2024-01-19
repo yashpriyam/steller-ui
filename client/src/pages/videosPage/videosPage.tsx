@@ -42,7 +42,6 @@ const VideosPage: React.FC<VideosPageProps> = ({
                   tagPosition="left"
                   data={video}
                 >
-                  <span>Children</span>
                 </Card>
               )
           )}

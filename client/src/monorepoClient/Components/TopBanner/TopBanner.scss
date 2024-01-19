@@ -71,11 +71,11 @@
   .topBanner {
     padding-bottom: 300px;
     .heading {
-      font-size: 27px;
-      line-height: 55px;
+      font-size: 30px;
+      line-height: 75px;
     }
     .bannerContainer {
-      margin-top: 150px;
+      margin-top: 350px;
       margin-left: 40px;
       z-index: 3;
       width: 80%;
@@ -95,6 +95,41 @@
         //     }
         // }
       }
+    }
+  }
+}
+@media only screen and (max-width:600px){
+  .topBanner {
+    .heading {
+      font-size: 27px;
+      line-height: 70px;
+    }
+    .bannerContainer {
+      margin-top: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width:430px){
+  .topBanner {
+    .heading {
+      font-size: 23px;
+      line-height: 55px;
+    }
+  }
+}
+@media only screen and (max-width:316px){
+  .topBanner {
+    .heading {
+      font-size: 20px;
+      line-height: 50px;
+    }
+  }
+}
+@media only screen and (max-width:272px){
+  .topBanner {
+    .heading {
+      margin-top: 100px;
     }
   }
 }
