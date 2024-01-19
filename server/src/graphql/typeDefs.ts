@@ -60,6 +60,7 @@ const typeDefs = gql`
     createDay(dayData: DayDataInputType!) : DayDataOutputType
     updateDay(dayData: DayDataInputType!) : DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
+    upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
   }
 
   type ProfileImageType {
@@ -373,6 +374,7 @@ const typeDefs = gql`
     expiresInMins: Int
     isOpenable: Boolean
   }
+
   type UpdateQuestionOutputType {
     questionData: QuestionDataOutput
     response: CustomResponseType!
@@ -560,7 +562,7 @@ const typeDefs = gql`
   type UpsertWeekDataOutputType {
     weekData: WeekDataType
     response: CustomResponseType!
-  } 
+  }
   input DayDataInputType {
     batchCode: String!
     dayNumber: Int!
@@ -594,6 +596,154 @@ const typeDefs = gql`
   type UpdateImageOutputType {
     coverImageData: CoverImageType
     response: CustomResponseType!
+  }
+
+  input UserProfileInputType {
+    personalDetails: PersonalDetailsInputType
+    socialDetail: SocialDetailInputType
+    experienceData: [ExperienceDataInputType]
+    projectsData: [ProjectsDataInputType]
+    skillsData: SkillsDataInputType
+    educationalData: [EducationalDataInputType]
+    achievementsData: [AchievementsDataInputType]
+  }
+
+  input PersonalDetailsInputType {
+    fullName: String!
+    email: String
+    phoneNumber: String
+    headline: String
+    address: AddressInputType
+  }
+
+  input AddressInputType {
+    colony: String
+    city: String
+  }
+
+  input SocialDetailInputType {
+    githubLink: String
+    linkedInLink: String
+  }
+
+  input ExperienceDataInputType {
+    companyName: String
+    companyLocation: String
+    role: String
+    startDate: String
+    endDate: String
+    description: [String]
+    techStack: [String]
+  }
+
+  input ProjectsDataInputType {
+    heading: String
+    description: [String]
+    deployLink: String
+    gitHubLink: String
+    techStack: [String]
+  }
+
+  input SkillsDataInputType {
+    language: [String]
+    frontend: [String]
+    backend: [String]
+    database: [String]
+    versionControl: [String]
+    cIcD: [String]
+  }
+
+  input EducationalDataInputType {
+    instituteName: String
+    location: String
+    course: String
+    startDate: String
+    endDate: String
+    cgpa: String
+  }
+
+  input AchievementsDataInputType {
+    icon: String
+    header: String
+    description: String
+    links: String
+  }
+  type UserProfileOutputType {
+    personalDetails: PersonalDetailsOutputType
+    socialDetail: SocialDetailOutputType
+    experienceData: [ExperienceDataOutputType]
+    projectsData: [ProjectsDataOutputType]
+    skillsData: SkillsDataOutputType
+    educationalData: [EducationalDataOutputType]
+    achievementsData: [AchievementsDataOutputType]
+  }
+
+  type PersonalDetailsOutputType {
+    fullName: String!
+    email: String
+    phoneNumber: String
+    headline: String
+    address: AddressOutputType
+  }
+
+  type AddressOutputType {
+    colony: String
+    city: String
+  }
+
+  type SocialDetailOutputType {
+    githubLink: String
+    linkedInLink: String
+  }
+
+  type ExperienceDataOutputType {
+    companyName: String
+    companyLocation: String
+    role: String
+    startDate: String
+    endDate: String
+    description: [String]
+    techStack: [String]
+  }
+
+  type ProjectsDataOutputType {
+    heading: String
+    description: [String]
+    deployLink: String
+    gitHubLink: String
+    techStack: [String]
+  }
+
+  type SkillsDataOutputType {
+    language: [String]
+    frontend: [String]
+    backend: [String]
+    database: [String]
+    versionControl: [String]
+    cIcD: [String]
+  }
+
+  type EducationalDataOutputType {
+    instituteName: String
+    location: String
+    course: String
+    startDate: String
+    endDate: String
+    cgpa: String
+  }
+
+  type AchievementsDataOutputType {
+    icon: String
+    header: String
+    description: String
+    links: String
+  }
+  type UpsertUserProfileOutputType {
+    response: CustomResponseType
+    userProfile: UserProfileOutputType
+  }
+  input UpsertUserProfileInputType {
+    userProfile: UserProfileInputType
   }
 
   scalar DateTime
