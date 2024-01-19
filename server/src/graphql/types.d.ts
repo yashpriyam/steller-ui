@@ -712,7 +712,7 @@ declare global {
     profileImage?: UserProfile;
     coverImage?: UserProfile;
     userProfile?: Types.ObjectId;
-  }
+  };
 
   type QuestionAttemptIdMapType = {
     [key: string]: QuestionAttemptSchemaType;
