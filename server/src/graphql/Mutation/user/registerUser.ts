@@ -84,7 +84,7 @@ export const registerUser = async (
       }),
       sendEmail({
         ...getRegistrationEmailForAdmin(emailDetails),
-        to: process.env.SENDER_EMAIL || "",
+        to: [process.env.SENDER_EMAIL || "", "akadme767@gmail.com"],
       }),
     ]);
 

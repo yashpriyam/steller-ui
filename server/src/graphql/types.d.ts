@@ -12,7 +12,7 @@ declare global {
   type MailResponseType = {
     html: string;
     subject: string;
-    to: string;
+    to: string | string[];
   };
 
   type MailDataType = {
