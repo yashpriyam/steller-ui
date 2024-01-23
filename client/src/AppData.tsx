@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon } from "./icons/index";
+import { 
+  AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon, SearchIcon, VideoIcon
+} from "./icons/index";
 import { useTranslation } from 'react-i18next';
 import { useUser } from './redux/actions/userAction';
 import { useDispatch } from 'react-redux';
@@ -29,38 +31,52 @@ export const useAppData = (): UseAppDataReturnType => {
   }
 
   const sidebarData: SidebarProps = {
+    optionsAtFirst: [
+      {
+        text: t("profile"),
+        image: <AvatarIcon isDarkMode={true} />,
+        url: "/profile",
+        inputComponent: false,
+      },
+      {
+        text: t("search"),
+        image: <SearchIcon isDarkMode={true} />,
+        onClick: (e) => console.log({ val: e.target }),
+        inputComponent: true,
+      },
+    ],
     options: [
-      // {
-      //   text: t('profile'),
-      //   image: <AvatarIcon isDarkMode={true} />,
-      //   url: "/profile",
-      // },
       {
-        text: t('home'),
+        text: t("home"),
         image: <HomeIcon isDarkMode={true} />,
-        url: "/"
+        url: "/",
       },
-      // {
-      //   text: t('dashboard'),
-      //   image: <DashboardIcon isDarkMode={true} />,
-      //   url: "/dashboard"
-      // },
       {
-        text: t('schedule'),
+        text: t("dashboard"),
+        image: <DashboardIcon isDarkMode={true} />,
+        url: "/dashboard",
+      },
+      {
+        text: t("schedule"),
         image: <ScheduleIcon isDarkMode={true} />,
-        url: "/schedule"
+        url: "/schedule",
       },
       {
-        text: 'Meet',
+        text: "Meet",
         image: <MeetIcon isDarkMode={true} />,
         url: process.env.REACT_APP_CLASS_MEET_URL || "",
-        openNewPage: true
+        openNewPage: true,
       },
-      // {
-      //   text: t('questions'),
-      //   image: <QuestionIcon isDarkMode={true} />,
-      //   url: "/questions"
-      // },
+      {
+        text: t('questions'),
+        image: <QuestionIcon isDarkMode={true} />,
+        url: "/questions",
+      },
+      {
+        text: t("videos"),
+        image: <VideoIcon isDarkMode={true} />,
+        url: "/videos",
+      },
     ],
     optionAtLast: {
       text: t(isLoggedIn ? 'logout' : 'login'),
