@@ -36,6 +36,9 @@ export const SidebarOption = ({
         <span className={`${showText ? "option-text" : "hovered-option-text"}`}>
           {text}
         </span>
+        <span className="option-text-mobile-view">
+          {text}
+        </span>
       </div>
       <div className={`item-count-wrapper ${!showText && "item-count-wrapper-none"}`}>
         {showText && count !== undefined && (

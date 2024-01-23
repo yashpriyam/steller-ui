@@ -24,9 +24,7 @@ export const Sidebar = ({
     }
     return (
       <div
-        className={`sidebar-main-container ${
-          isOpen && "sidebar-main-container-collapse"
-        }`}
+        className="sidebar-main-container"
       >
         <div
           className={`sidebar-arrow-icon ${!isOpen && "left-side-arrow"}`}

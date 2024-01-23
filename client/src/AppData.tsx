@@ -32,18 +32,18 @@ export const useAppData = (): UseAppDataReturnType => {
 
   const sidebarData: SidebarProps = {
     optionsAtFirst: [
-      {
-        text: t("profile"),
-        image: <AvatarIcon isDarkMode={true} />,
-        url: "/profile",
-        inputComponent: false,
-      },
-      {
-        text: t("search"),
-        image: <SearchIcon isDarkMode={true} />,
-        onClick: (e) => console.log({ val: e.target }),
-        inputComponent: true,
-      },
+      // {
+      //   text: t("profile"),
+      //   image: <AvatarIcon isDarkMode={true} />,
+      //   url: "/profile",
+      //   inputComponent: false,
+      // },
+      // {
+      //   text: t("search"),
+      //   image: <SearchIcon isDarkMode={true} />,
+      //   onClick: (e) => console.log({ val: e.target }),
+      //   inputComponent: true,
+      // },
     ],
     options: [
       {
@@ -51,11 +51,11 @@ export const useAppData = (): UseAppDataReturnType => {
         image: <HomeIcon isDarkMode={true} />,
         url: "/",
       },
-      {
-        text: t("dashboard"),
-        image: <DashboardIcon isDarkMode={true} />,
-        url: "/dashboard",
-      },
+      // {
+      //   text: t("dashboard"),
+      //   image: <DashboardIcon isDarkMode={true} />,
+      //   url: "/dashboard",
+      // },
       {
         text: t("schedule"),
         image: <ScheduleIcon isDarkMode={true} />,
@@ -67,16 +67,16 @@ export const useAppData = (): UseAppDataReturnType => {
         url: process.env.REACT_APP_CLASS_MEET_URL || "",
         openNewPage: true,
       },
-      {
-        text: t('questions'),
-        image: <QuestionIcon isDarkMode={true} />,
-        url: "/questions",
-      },
-      {
-        text: t("videos"),
-        image: <VideoIcon isDarkMode={true} />,
-        url: "/videos",
-      },
+      // {
+      //   text: t('questions'),
+      //   image: <QuestionIcon isDarkMode={true} />,
+      //   url: "/questions",
+      // },
+      // {
+      //   text: t("videos"),
+      //   image: <VideoIcon isDarkMode={true} />,
+      //   url: "/videos",
+      // },
     ],
     optionAtLast: {
       text: t(isLoggedIn ? 'logout' : 'login'),

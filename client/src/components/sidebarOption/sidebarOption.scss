@@ -49,13 +49,21 @@
             z-index: -100;
             transition: opacity 0.5s;
         }
+        .option-text-mobile-view{
+            display: none;
+            @media (max-width:480px){
+                display: inline;
+                font-size: $smallFontSize;
+            }
+        }
     }
     .item-count-wrapper{
         .item-count{
             border: 1px solid $borderGrey;
-            padding: 5px 8px;
-            margin-left: 10px;
+            padding: 5px;
+            margin-left: 20px;
             border-radius: 5px;
+            font-size: 10px;
         }
         @media (max-width: 480px){
             display: none;
@@ -76,8 +84,8 @@
         height: fit-content;
         flex-direction: column;
         gap: 5px;
-        
-        .hovered-option-text{
+        padding: 5px;
+        .hovered-option-text, .option-text{
             display: none;
         }
     }
