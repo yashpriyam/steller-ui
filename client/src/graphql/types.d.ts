@@ -470,6 +470,7 @@ declare global {
     count?: string | number;
     showText?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
+    url?:string;
   }
 
   interface SidebarContainerProps {
@@ -487,7 +488,15 @@ declare global {
     optionAtLast?: {
       text: string;
       onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-    }
+    },
+    optionsAtFirst?: {
+      image: string | React.ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+      inputComponent?: boolean;
+      onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+    }[],
   }
 
   type UseAppDataReturnType = {

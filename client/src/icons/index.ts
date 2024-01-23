@@ -7,3 +7,5 @@ export { LogOutIcon } from "./logOutIcon";
 export { LeftArrowIcon } from "./leftArrowIcon";
 export { AvatarIcon } from "./avatarIcon";
 export { MeetIcon } from "./meetIcon"
+export { SearchIcon } from "./searchIcon";
+export { VideoIcon } from "./videoIcon";
