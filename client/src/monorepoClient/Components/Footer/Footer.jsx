@@ -23,6 +23,8 @@ const Footer = () => {
         <TextComponent className="description">
           {" "}
           Become a Top Notch Software Developer.
+          <div></div>
+          <span className="copyright-symbol">&#169;</span> 2024 Priyam Innovations Pvt. Ltd. All rights reserved.
         </TextComponent>
         {/* <div className="socialLinks">
           <ImageComponent src={Facebook} alt={"Facebook"} />
