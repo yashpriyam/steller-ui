@@ -65,6 +65,13 @@ const typeDefs = gql`
     updateDay(dayData: DayDataInputType!): DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
     upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
+    createFeePlan(feePlanData: FeePlanInput!): FeePlanDataOutputType!
+    createBatch(input: BatchInput!): BatchDataOutputType!
+    updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
+    updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
+    createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
+    getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
+    getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
   }
 
@@ -777,6 +784,140 @@ const typeDefs = gql`
   input UpsertUserProfileInputType {
     userProfile: UserProfileInputType
   }
+  input FeePlanInput {
+    batchCode: String
+    name: String!
+    description: String
+    installments: [InstallmentInput]
+    miscellaneous: JSON
+  }
+  
+  input InstallmentInput {
+    id: ID
+    amount: String
+    sequence: String!
+    dueDate: String!
+    accessWeeks: ID
+    miscellaneous: JSON
+  }
+  type FeePlanDataOutputType {
+    feePlanData: FeePlan
+    response: CustomResponseType!
+  }
+  type InstallmentInputType {
+    _id: ID
+    amount: String
+    sequence: String!
+    dueDate: String!
+    accessWeeks: ID
+    miscellaneous: JSON
+  }
+  type FeePlan {
+    _id: ID!
+    batchCode: String
+    name: String!
+    installments: [InstallmentInputType],
+    description: String!
+    miscellaneous: JSON
+  }
+
+  input BatchInput {
+    batchCode: String!
+    paymentType: ID
+    paidStudents: [ID]
+    registeredStudents: [ID]
+    demoStudents: [ID]
+    startDate: String
+  }
+  
+  type BatchDataOutputType {
+    batchData: Batch
+    response: CustomResponseType!
+  }
+  
+  type Batch {
+    _id: ID!
+    batchCode: String!
+    paymentType: FeePlan
+    demoStudents: [User]
+    paidStudents: [User]
+    registeredStudents: [User]
+    startDate: String
+  }
+  type User {
+    _id: ID!
+    email: String!
+    name: String!
+    phoneNumber: String!
+    password: String
+    isJobSeeker: Boolean!
+    occupation: String
+    sessionPreference: SessionPreference!
+    expectedSalary: String
+    IST: String!
+    collegeName: String
+    profileImage: UserProfile
+    coverImage: UserProfile
+    userProfile: ID
+  }
+  
+  type UserProfile {
+    url: String!
+    altText: String
+  }
+  
+  enum SessionPreference {
+    ONLINE
+    OFFLINE
+  }
+
+  input UserPaymentCreateInput {
+    user: ID!
+    batch: ID!
+    feePlan: ID!
+    installmentId: ID
+    image: ImageInput
+  }
+
+  input ImageInput {
+    publicId: String
+    secureUrl: String
+  }
+
+
+type UserPaymentData {
+  _id: ID
+  user: User!
+  batch: Batch!
+  feePlan: FeePlan!
+  installmentId: ID
+  isApproved: Boolean
+  isRejected: Boolean
+  isPending: UserPaymentPendingType
+  image: CoverImageType
+  createdAt: String
+  updatedAt: String
+}
+
+type UserPaymentPendingType {
+  totalAmount: String
+  totalPendingAmount: String
+}
+
+
+type UserPaymentDataOutput {
+  userPaymentData: UserPaymentData
+  response: CustomResponseType!
+}
+
+type UserAllPaymentDataOutputType  {
+  userPaymentData: [UserPaymentData]
+  response: CustomResponseType
+}
+type UserAllFeePlanDataOutputType {
+  feePlanData: [FeePlan]
+  response: CustomResponseType
+}
   type CitiesOutputType {
     cityData: [String]
     response: CustomResponseType!
