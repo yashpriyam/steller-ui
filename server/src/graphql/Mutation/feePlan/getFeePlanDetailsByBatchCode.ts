@@ -4,7 +4,7 @@ import { errorMessages, statusCodes, localMessages } from "@constants";
 export const getFeePlanDetailsByBatchCode = async (
   parent: undefined,
   args: { batchCode: string }
-): Promise<FeePlanDataOutputType> => {
+): Promise<UserAllFeePlanDataOutputType> => {
   const { FEE_PLAN_FETCH_FAILED } = errorMessages.FEE_PLAN_MODEL;
   const { FEE_PLAN_FETCHED_SUCCESSFULLY } = localMessages.FEE_PLAN_MODEL;
   const errorData: CustomResponseType = {
@@ -16,13 +16,13 @@ export const getFeePlanDetailsByBatchCode = async (
     const { batchCode } = args;
     if (!batchCode) return { response: errorData };
 
-    // Fetch fee plan details by batchCode
+    // Fetch all fee plan details for the given batchCode
     const feePlanDetails = await feePlanModel
-      .findOne({ batchCode })
+      .find({ batchCode })
       .exec();
 
     return {
-      feePlanData: feePlanDetails ?? undefined,
+      feePlanData: feePlanDetails,
       response: {
         message: FEE_PLAN_FETCHED_SUCCESSFULLY,
         status: statusCodes.OK,

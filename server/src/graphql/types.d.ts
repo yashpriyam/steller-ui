@@ -802,5 +802,9 @@ declare global {
     userPaymentData?: UserPaymentSchemaType[];
     response: CustomResponseType;
   }
+  type UserAllFeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType[];
+    response: CustomResponseType;
+  }
   
 }

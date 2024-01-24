@@ -70,7 +70,7 @@ const typeDefs = gql`
     updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
     createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
-    getFeePlanDetailsByBatchCode(batchCode: String!): FeePlanDataOutputType
+    getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
   }
 
   type ProfileImageType {
@@ -900,6 +900,10 @@ type UserPaymentDataOutput {
 
 type UserAllPaymentDataOutputType  {
   userPaymentData: [UserPaymentData]
+  response: CustomResponseType
+}
+type UserAllFeePlanDataOutputType {
+  feePlanData: [FeePlan]
   response: CustomResponseType
 }
 
