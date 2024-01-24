@@ -743,26 +743,40 @@ declare global {
   type BatchSchemaType = {
     _id?: string;
     batchNumber: number;
-    numberOfStudents: number;
     paymentType?: FeePlanSchemaType; 
-    users: PaidUserInputType[]; 
+    paidStudents: UserSchemaType[];
+    registeredStudents: UserSchemaType[];
+    demoStudents: UserSchemaType[];
   };
 
   type FeePlanSchemaType = {
     _id?: string;
-    type: '3_installments' | 'one_installment_and_remaining_after_job';
-    totalFee: number;
+    name?: string;
     description?: string;
+    installments: Installment[],
+    miscellaneous?: JSON
   };
+
+  type Installment = {
+    id? :string;
+    amount?: string;
+    sequence?: string;
+    dueDate?: Date; 
+    accessWeeks?: string[]; // we'll store week data here
+    miscellaneous?: JSON
+  }
 
   type UserPaymentSchemaType = {
     _id?: string;
     user: PaidUserInputType; 
     batch: BatchSchemaType; 
     feePlan: FeePlanSchemaType; 
-    paymentType?: string;
-    installmentNumber: number;
-    amount: number;
-  };
-  
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    }
+  };  
 }

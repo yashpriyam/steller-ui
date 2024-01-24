@@ -2,17 +2,35 @@ import mongoose, { model } from "mongoose";
 
 
 const feePlanSchema = new mongoose.Schema<FeePlanSchemaType>({
-  type: {
+  _id: {
     type: String,
-    enum: ['3_installments', 'one_installment_and_remaining_after_job'],
-    unique: true,
     required: true
   },
-  totalFee: {
-    type: Number,
-    required: true
+  name: {
+    type: String,
+    required: false
   },
   description: {
+    type: String,
+    required: false
+  },
+  installments: {
+    type: [
+      {
+        id: String,
+        amount: String,
+        sequence: String,
+        dueDate: Date,
+        accessWeeks: [String],
+        miscellaneous: {
+            type: String,
+            required: false
+          },
+      },
+    ],
+    required: false,
+  },
+  miscellaneous: {
     type: String,
     required: false
   }
