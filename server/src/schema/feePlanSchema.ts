@@ -24,7 +24,7 @@ const feePlanSchema = new mongoose.Schema<FeePlanSchemaType>({
             ref: weekModel
         },
         miscellaneous: {
-            type: String,
+            type: Object,
             required: false
           },
       },
@@ -32,7 +32,7 @@ const feePlanSchema = new mongoose.Schema<FeePlanSchemaType>({
     required: false,
   },
   miscellaneous: {
-    type: String,
+    type: Object,
     required: false
   }
 });
