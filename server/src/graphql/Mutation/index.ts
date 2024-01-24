@@ -25,4 +25,4 @@ export { createDay, updateDay } from "./day/index";
 export { upsertUserProfile } from "./userProfile/index";
 export { createFeePlan, updateFeePlan } from "./feePlan/index";
 export { createBatch, updateBatch } from "./batch/index";
-export { createUserPayment } from  "./userPaymentsHistory/index"
+export { createUserPayment, getUserPaymentsByUserId } from  "./userPaymentsHistory/index"

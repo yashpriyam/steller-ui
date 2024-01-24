@@ -69,7 +69,7 @@ const typeDefs = gql`
     updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
     updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
     createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
-
+    getUserPaymentsByUserId(userId: ID!): [UserPaymentDataOutput!]!
   }
 
   type ProfileImageType {
