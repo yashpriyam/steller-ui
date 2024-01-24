@@ -723,6 +723,7 @@ declare global {
     course?: string;
     branch?: string;
     location?: string;
+    feePlan?: string;
   }
   interface UserProfileDataType {
     personalDetails?: PersonalDetailType;

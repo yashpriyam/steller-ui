@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { convertUTCtoIST } from "@utils";
-
+import { feePlanModel } from "./feePlanSchema";
+const { ObjectId } = mongoose.Schema.Types;
 const sessionPreferences = Object.freeze({
   online: "online",
   offline: "offline",
@@ -33,7 +34,7 @@ const userSchema = new mongoose.Schema<UserSchemaType>(
       publicId: String,
       secureUrl: String,
     },
-    userProfile: { type: mongoose.Schema.Types.ObjectId, ref: "userProfile" },
+    userProfile: { type: ObjectId, ref: "userProfile" },
     location: {
       type: String,
     },
@@ -48,7 +49,11 @@ const userSchema = new mongoose.Schema<UserSchemaType>(
     },
     batchCode: {
       type: String,
-    }
+    },
+    feePlan: {
+      type: ObjectId,
+      ref: feePlanModel,
+    },
   },
   { timestamps: true }
 );
