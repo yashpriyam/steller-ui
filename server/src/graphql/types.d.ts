@@ -789,5 +789,10 @@ declare global {
     feePlanData?: FeePlanSchemaType;
     response: CustomResponseType;
   };
+
+  type UserPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType;
+    response:CustomResponseType;
+  }
   
 }

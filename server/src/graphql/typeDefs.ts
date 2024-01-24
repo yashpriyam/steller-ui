@@ -66,6 +66,10 @@ const typeDefs = gql`
     upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
     createFeePlan(feePlanData: FeePlanInput!): FeePlanDataOutputType!
     createBatch(input: BatchInput!): BatchDataOutputType!
+    updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
+    updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
+    createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
+
   }
 
   type ProfileImageType {
@@ -770,8 +774,8 @@ const typeDefs = gql`
   input FeePlanInput {
     batchCode: String
     name: String!
-    description: String!
-    installments: [InstallmentInput!]!
+    description: String
+    installments: [InstallmentInput]
     miscellaneous: JSON
   }
   
@@ -844,6 +848,45 @@ const typeDefs = gql`
     ONLINE
     OFFLINE
   }
+
+  input UserPaymentCreateInput {
+    user: ID!
+    batch: ID!
+    feePlan: ID!
+    installmentId: ID
+    image: ImageInput
+  }
+
+  input ImageInput {
+    publicId: String
+    secureUrl: String
+  }
+
+
+type UserPaymentData {
+  _id: ID
+  user: User!
+  batch: Batch!
+  feePlan: FeePlan!
+  installmentId: ID
+  isApproved: Boolean
+  isRejected: Boolean
+  isPending: UserPaymentPendingType
+  image: CoverImageType
+  createdAt: String
+  updatedAt: String
+}
+
+type UserPaymentPendingType {
+  totalAmount: String
+  totalPendingAmount: String
+}
+
+
+type UserPaymentDataOutput {
+  userPaymentData: UserPaymentData
+  response: CustomResponseType!
+}
 
   scalar DateTime
   scalar JSON

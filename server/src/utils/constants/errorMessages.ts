@@ -72,10 +72,18 @@ export const errorMessages = Object.freeze({
     INVALID_CONTENT: "This content can't be displayed",
   },
   BATCH_MODEL: {
-    BATCH_CREATION_FAILED: 'Failed to create batch.',
+    BATCH_CREATION_FAILED: "Batch creation failed.",
+    BATCH_UPDATE_FAILED: "Batch update failed.",
+    BATCH_DOES_NOT_EXIST: "Batch does not exist.",
+    BATCH_EXIST: "Batch with the same code already exists.",
   },
   FEE_PLAN_MODEL: {
     FEE_PLAN_CREATION_FAILED: 'Failed to create fee plan.',
     FEE_PLAN_EXIST: 'Fee plan with the same batch code already exists.',
+    FEE_PLAN_UPDATE_FAILED: "Fee plan update failed.",
+    FEE_PLAN_DOES_NOT_EXIST: "Fee plan does not exist.",
+  },
+  USER_PAYMENT_MODEL: {
+    USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
   },
 });
