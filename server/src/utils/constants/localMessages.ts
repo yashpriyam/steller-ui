@@ -77,6 +77,7 @@ export const localMessages = Object.freeze({
   FEE_PLAN_MODEL: {
     FEE_PLAN_CREATION_SUCCESS: 'Fee plan created successfully.',
     FEE_PLAN_UPDATE_SUCCESS: "Fee plan updated successfully.",
+    FEE_PLAN_FETCHED_SUCCESSFULLY: "Fee plan details fetched successfully.",
   },
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_SUCCESS: "User payment created successfully.",

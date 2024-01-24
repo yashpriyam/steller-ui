@@ -753,7 +753,7 @@ declare global {
     batchCode?: string;
     name?: string;
     description?: string;
-    installments: Installment[],
+    installments?: Installment[],
     miscellaneous?: JSON
   };
 
