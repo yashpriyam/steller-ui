@@ -77,4 +77,7 @@ export const localMessages = Object.freeze({
     FEE_PLAN_CREATION_SUCCESS: 'Fee plan created successfully.',
   },
 
+  MEETING_MODEL: {
+    MEETING_CREATED_SUCCESSFULLY: "Meeting created successfully"
+  }
 });

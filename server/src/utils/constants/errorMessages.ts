@@ -78,4 +78,9 @@ export const errorMessages = Object.freeze({
     FEE_PLAN_CREATION_FAILED: 'Failed to create fee plan.',
     FEE_PLAN_EXIST: 'Fee plan with the same batch code already exists.',
   },
+  MEETING_MODEL: {
+    MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED: "Meeting number and password is required",
+    DUBLICATE_MEETING_NUMBER: "Dublicate meeting number",
+    UNABLE_TO_CREATE_MEETING: "Unable to create meeting"
+  }
 });

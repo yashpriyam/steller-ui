@@ -798,4 +798,7 @@ declare global {
     isActive: boolean;
   }
   
+  type CreateMeetingArgsType = {
+    
+  }
 }
