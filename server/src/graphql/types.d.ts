@@ -739,4 +739,45 @@ declare global {
   type QuestionAttemptIdMapType = {
     [key: string]: QuestionAttemptSchemaType;
   };
+
+  type BatchSchemaType = {
+    batchCode: string;
+    paymentType?: FeePlanSchemaType; 
+    paidStudents: UserSchemaType[];
+    registeredStudents: UserSchemaType[];
+    demoStudents: UserSchemaType[];
+    startDate?: Date
+  };
+
+  type FeePlanSchemaType = {
+    batchCode?: string;
+    name?: string;
+    description?: string;
+    installments: Installment[],
+    miscellaneous?: JSON
+  };
+
+  type Installment = {
+    id? :string;
+    amount?: string;
+    sequence?: string;
+    dueDate?: Date; 
+    accessWeeks?: WeekDataType[]; // we'll store week data here
+    miscellaneous?: JSON
+  }
+
+  type UserPaymentSchemaType = {
+    _id?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType
+  };  
 }
