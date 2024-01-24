@@ -739,4 +739,30 @@ declare global {
   type QuestionAttemptIdMapType = {
     [key: string]: QuestionAttemptSchemaType;
   };
+
+  type BatchSchemaType = {
+    _id?: string;
+    batchNumber: number;
+    numberOfStudents: number;
+    paymentType?: FeePlanSchemaType; 
+    users: PaidUserInputType[]; 
+  };
+
+  type FeePlanSchemaType = {
+    _id?: string;
+    type: '3_installments' | 'one_installment_and_remaining_after_job';
+    totalFee: number;
+    description?: string;
+  };
+
+  type UserPaymentSchemaType = {
+    _id?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    paymentType?: string;
+    installmentNumber: number;
+    amount: number;
+  };
+  
 }
