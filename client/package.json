@@ -8,6 +8,7 @@
     "@types/node": "^16.18.59",
     "@types/react": "^18.2.31",
     "@types/react-dom": "^18.2.14",
+    "@zoomus/websdk": "^2.18.2",
     "axios": "^1.6.2",
     "date-fns": "^2.30.0",
     "i18next": "^23.6.0",
