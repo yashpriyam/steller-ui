@@ -743,9 +743,9 @@ declare global {
   type BatchSchemaType = {
     batchCode: string;
     paymentType?: FeePlanSchemaType; 
-    paidStudents: UserSchemaType[];
-    registeredStudents: UserSchemaType[];
-    demoStudents: UserSchemaType[];
+    paidStudents?: UserSchemaType[];
+    registeredStudents?: UserSchemaType[];
+    demoStudents?: UserSchemaType[];
     startDate?: Date
   };
 
@@ -780,4 +780,14 @@ declare global {
     },
     image?: ImageInputType
   };  
+   
+  type BatchDataOutputType = {
+    batchData?: BatchSchemaType;
+    response: CustomResponseType;
+  };
+  type FeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType;
+    response: CustomResponseType;
+  };
+  
 }
