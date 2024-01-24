@@ -32,8 +32,12 @@ export const updateBatch = async (
       ).populate('paymentType')
       .exec();
 
+      if (!updatedBatchData) {
+        return { response: errorData};
+      }
+
       return {
-        batchData: updatedBatchData ?? undefined,
+        batchData: updatedBatchData,
         response: {
           message: BATCH_UPDATE_SUCCESS,
           status: statusCodes.OK,

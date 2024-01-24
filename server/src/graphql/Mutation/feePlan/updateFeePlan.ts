@@ -33,8 +33,12 @@ export const updateFeePlan = async (
         { new: true }
       );
 
+      if (!updatedFeePlanData) {
+        return { response: errorData };
+      }
+
       return {
-        feePlanData: updatedFeePlanData ?? undefined,
+        feePlanData: updatedFeePlanData,
         response: {
           message: FEE_PLAN_UPDATE_SUCCESS,
           status: statusCodes.OK,
