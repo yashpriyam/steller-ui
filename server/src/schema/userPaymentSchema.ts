@@ -1,5 +1,5 @@
 import mongoose, { model } from "mongoose";
-import { User, batchModel, feePlanModel, paidUser } from "./index";
+import { User, batchModel, feePlanModel } from "./index";
 
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -32,7 +32,19 @@ const userPaymentSchema = new mongoose.Schema<UserPaymentSchemaType>({
           totalAmount: String,
           totalPendingAmount: String,
         },
+      },
+      image: {
+        publicId: {
+            type: String,
+            required: false,
+          },
+          secureUrl: {
+            type: String,
+            required: false,
+          },
       }
-});
+},
+{ timestamps: true }
+);
 
 export const userPaymentModel = model<UserPaymentSchemaType>("userPayment", userPaymentSchema);

@@ -1,5 +1,5 @@
 import mongoose, { Schema, model } from "mongoose";
-import { User, feePlanModel, paidUser } from "./index";
+import { User, feePlanModel } from "./index";
 
 
 const { ObjectId } = mongoose.Schema.Types;
@@ -30,7 +30,11 @@ const batchSchema = new mongoose.Schema<BatchSchemaType>({
         ref: User,
         required: false
       }
-    ]
+    ],
+    startDate: {
+        type: Date,
+    },
+
   });
   
   export const batchModel = model<BatchSchemaType>("batch", batchSchema);

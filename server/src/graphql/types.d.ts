@@ -746,6 +746,7 @@ declare global {
     paidStudents: UserSchemaType[];
     registeredStudents: UserSchemaType[];
     demoStudents: UserSchemaType[];
+    startDate?: Date
   };
 
   type FeePlanSchemaType = {
@@ -776,6 +777,7 @@ declare global {
     isPending?: {
       totalAmount?: string;
       totalPendingAmount?: string;
-    }
+    },
+    image?: ImageInputType
   };  
 }
