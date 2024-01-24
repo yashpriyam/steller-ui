@@ -741,8 +741,7 @@ declare global {
   };
 
   type BatchSchemaType = {
-    _id?: string;
-    batchNumber: number;
+    batchCode: string;
     paymentType?: FeePlanSchemaType; 
     paidStudents: UserSchemaType[];
     registeredStudents: UserSchemaType[];
@@ -750,7 +749,7 @@ declare global {
   };
 
   type FeePlanSchemaType = {
-    _id?: string;
+    batchCode?: string;
     name?: string;
     description?: string;
     installments: Installment[],

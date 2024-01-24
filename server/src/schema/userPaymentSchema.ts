@@ -17,7 +17,7 @@ const userPaymentSchema = new mongoose.Schema<UserPaymentSchemaType>({
         ref: feePlanModel, // Reference to the FeePlan model
       },
       installmentId: {
-        type: String,
+        type: ObjectId,
       },
       isApproved: {
         type: Boolean,

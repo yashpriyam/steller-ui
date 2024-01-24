@@ -4,37 +4,41 @@ import { weekModel } from "./weekSchema";
 const { ObjectId } = mongoose.Schema.Types;
 
 const feePlanSchema = new mongoose.Schema<FeePlanSchemaType>({
+  batchCode: {
+    type: String,
+    required: false,
+  },
   name: {
     type: String,
-    required: false
+    required: false,
   },
   description: {
     type: String,
-    required: false
+    required: false,
   },
   installments: {
     type: [
       {
-        id: String,
+        id: ObjectId,
         amount: String,
         sequence: String,
         dueDate: Date,
         accessWeeks: {
-            type: ObjectId,
-            ref: weekModel
+          type: ObjectId,
+          ref: weekModel,
         },
         miscellaneous: {
-            type: Object,
-            required: false
-          },
+          type: Object,
+          required: false,
+        },
       },
     ],
     required: false,
   },
   miscellaneous: {
     type: Object,
-    required: false
-  }
+    required: false,
+  },
 });
 
 export const feePlanModel = model<FeePlanSchemaType>("feePlan", feePlanSchema);

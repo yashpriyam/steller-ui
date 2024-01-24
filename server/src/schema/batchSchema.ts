@@ -5,8 +5,8 @@ import { User, feePlanModel, paidUser } from "./index";
 const { ObjectId } = mongoose.Schema.Types;
 
 const batchSchema = new mongoose.Schema<BatchSchemaType>({
-    batchNumber: {
-      type: Number,
+    batchCode: {
+      type: String,
       required: true
     },
     paymentType: {
