@@ -4,10 +4,6 @@ import { weekModel } from "./weekSchema";
 const { ObjectId } = mongoose.Schema.Types;
 
 const feePlanSchema = new mongoose.Schema<FeePlanSchemaType>({
-  _id: {
-    type: String,
-    required: false
-  },
   name: {
     type: String,
     required: false
