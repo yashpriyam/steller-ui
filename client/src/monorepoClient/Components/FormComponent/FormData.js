@@ -27,7 +27,9 @@ class FormInputTypeShape {
     isRequired = false,
     isDropdown = false,
     optionList = [],
-    parentFormStep = 0
+    parentFormStep = 0,
+    isDataList = false,
+    defaultValue = ""
   ) {
     this.type = type;
     this.labelName = labelName;
@@ -37,12 +39,15 @@ class FormInputTypeShape {
     this.optionList = optionList;
     this.parentFormStep = parentFormStep;
     this.labelId = labelName.replaceAll(/\W/g, "").toLowerCase();
+    this.isDataList = isDataList;
+    this.defaultValue = defaultValue;
   }
 }
 
 const formInputType = {
   TEXT: "TEXT_INPUT_FIELD",
   DROPDOWN_INPUT: "DROPDOWN_INPUT",
+  DATALIST: "DATALIST",
 };
 
 const PersonalInfoFormData = [
@@ -72,6 +77,16 @@ const PersonalInfoFormData = [
     false,
     [],
     1
+  ),
+  new FormInputTypeShape(
+    formInputType.DATALIST,
+    "Location",
+    "Enter your current location",
+    false,
+    false,
+    [],
+    0,
+    true
   ),
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,
@@ -112,16 +127,15 @@ const PersonalInfoFormData = [
       "Others",
     ],
     2
-  ),
-  new FormInputTypeShape(
-    formInputType.DROPDOWN_INPUT,
-    "You would attend the classes online or offline?",
-    "Looking for a job right now?",
-    false,
-    true,
-    ["Offline At Indrapuri Center", "Online"],
-    2
-  ),
+    ),
+    new FormInputTypeShape(
+      formInputType.DROPDOWN_INPUT,
+      "Select your relevant Branch",
+      "Branch",
+      false,
+      true,
+      ["C.S", "M.E", "E.C", "E.X", "I.T", "C.S.I.T"]
+      ),
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,
     "What's a good salary that can motivate you to accept a job offer?",
@@ -137,6 +151,42 @@ const PersonalInfoFormData = [
       "Above 12 LPA",
     ]
   ),
+  new FormInputTypeShape(
+    formInputType.DROPDOWN_INPUT,
+    "Select your Course year",
+    "Branch",
+    false,
+    true,
+    ["1st", "2nd", "3rd", "4th"]
+  ),
+  new FormInputTypeShape(
+    formInputType.DROPDOWN_INPUT,
+    "Select your Course",
+    "Course",
+    false,
+    true,
+    ["B.Tech", "B.E", "B.A", "B.Sc", "B.Com"]
+  ),
+  new FormInputTypeShape(
+    formInputType.DROPDOWN_INPUT,
+    "You would attend the classes online or offline?",
+    "Looking for a job right now?",
+    false,
+    true,
+    ["Offline At Indrapuri Center", "Online"],
+    2
+  ),
+  new FormInputTypeShape(
+    formInputType.DROPDOWN_INPUT,
+    "Select your preferred batch",
+    "Batch-code",
+    false,
+    true,
+    ["WMB1 - Starting - 29 jan 2024"],
+    0,
+    false,
+    "WMB1 - Starting - 29 jan 2024"
+    ),
   // new FormInputTypeShape(
   //   formInputType.TEXT_INPUT_FIELD,
   //   "Otp",

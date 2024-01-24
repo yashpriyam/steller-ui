@@ -71,4 +71,7 @@ export const errorMessages = Object.freeze({
   SLACK: {
     INVALID_CONTENT: "This content can't be displayed",
   },
+  CITIES: {
+    DATA_NOT_FOUND: "No data found",
+  }
 });

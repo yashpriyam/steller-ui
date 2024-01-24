@@ -34,6 +34,21 @@ const userSchema = new mongoose.Schema<UserSchemaType>(
       secureUrl: String,
     },
     userProfile: { type: mongoose.Schema.Types.ObjectId, ref: "userProfile" },
+    location: {
+      type: String,
+    },
+    courseYear: {
+      type: String,
+    },
+    course: {
+      type: String,
+    },
+    branch: {
+      type: String,
+    },
+    batchCode: {
+      type: String,
+    }
   },
   { timestamps: true }
 );

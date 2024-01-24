@@ -23,3 +23,4 @@ export {
 export { upsertWeek } from "./week/index";
 export { createDay, updateDay } from "./day/index";
 export { upsertUserProfile } from "./userProfile/index";
+export { insertCities } from "./cities/index";

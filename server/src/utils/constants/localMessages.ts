@@ -66,6 +66,8 @@ export const localMessages = Object.freeze({
 
   RESUME_MODEL: {
     RESUME_UPSERT_SUCCESS: "resume updated successfully",
-  }
-
+  },
+  CITIES: {
+    DATA_FOUND: "Data found",
+  },
 });

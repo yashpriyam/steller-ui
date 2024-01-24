@@ -11,3 +11,4 @@ export { questionModel } from "./questionSchema";
 export { otpModel } from "./otpSchema";
 export { weekModel } from "./weekSchema";
 export { userProfileModel } from "./userProfileSchema"
+export { cityModel } from "./citySchema";
