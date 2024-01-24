@@ -23,5 +23,6 @@ export {
 export { upsertWeek } from "./week/index";
 export { createDay, updateDay } from "./day/index";
 export { upsertUserProfile } from "./userProfile/index";
-export { createFeePlan } from "./feePlan/index"
-export { createBatch } from "./batch/index"
+export { createFeePlan, updateFeePlan } from "./feePlan/index";
+export { createBatch, updateBatch } from "./batch/index";
+export { createUserPayment } from  "./userPaymentsHistory/index"
