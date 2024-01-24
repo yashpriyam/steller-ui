@@ -85,5 +85,6 @@ export const errorMessages = Object.freeze({
   },
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
+    USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
   },
 });

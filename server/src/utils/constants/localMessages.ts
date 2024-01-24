@@ -80,6 +80,7 @@ export const localMessages = Object.freeze({
   },
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_SUCCESS: "User payment created successfully.",
+    USER_PAYMENTS_FETCHED_SUCCESSFULLY: "User payments fetched successfully"
   },
 
 });
