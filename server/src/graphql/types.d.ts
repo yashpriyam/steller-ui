@@ -778,7 +778,10 @@ declare global {
       totalAmount?: string;
       totalPendingAmount?: string;
     },
-    image?: ImageInputType
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+
   };  
    
   type BatchDataOutputType = {
@@ -792,7 +795,12 @@ declare global {
 
   type UserPaymentDataOutputType = {
     userPaymentData?: UserPaymentSchemaType;
-    response:CustomResponseType;
+    response: CustomResponseType;
+  }
+
+  type UserAllPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
   }
   
 }

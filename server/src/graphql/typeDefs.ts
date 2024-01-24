@@ -69,7 +69,7 @@ const typeDefs = gql`
     updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
     updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
     createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
-    getUserPaymentsByUserId(userId: ID!): [UserPaymentDataOutput!]!
+    getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
   }
 
   type ProfileImageType {
@@ -886,6 +886,11 @@ type UserPaymentPendingType {
 type UserPaymentDataOutput {
   userPaymentData: UserPaymentData
   response: CustomResponseType!
+}
+
+type UserAllPaymentDataOutputType  {
+  userPaymentData: [UserPaymentData]
+  response: CustomResponseType
 }
 
   scalar DateTime

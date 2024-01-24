@@ -4,7 +4,7 @@ import { errorMessages, statusCodes, localMessages } from "@constants";
 export const getUserPaymentsByUserId = async (
   parent: undefined,
   args: { userId: string }
-): Promise<UserPaymentDataOutputType[]> => {
+): Promise<UserAllPaymentDataOutputType> => {
 
 
   const { USER_PAYMENT_FETCH_FAILED } = errorMessages.USER_PAYMENT_MODEL;
@@ -17,7 +17,7 @@ export const getUserPaymentsByUserId = async (
 
   try {
     const { userId } = args;
-    if (!userId) return [{ response: errorData }];
+    if (!userId) return { response: errorData };
 
     // Fetch user payments by userId
     const userPayments = await userPaymentModel
@@ -25,18 +25,16 @@ export const getUserPaymentsByUserId = async (
   .populate('user batch feePlan')
   .exec();
 
-    // Map the user payment data to the expected format
-    const mappedUserPayments = userPayments.map((userPayment) => ({
-      userPaymentData: userPayment,
-      response: {
-        message: USER_PAYMENTS_FETCHED_SUCCESSFULLY,
-        status: statusCodes.OK,
-      },
-    }));
 
-    return mappedUserPayments;
+    return {
+        userPaymentData: userPayments,
+        response: {
+          message: USER_PAYMENTS_FETCHED_SUCCESSFULLY,
+          status: statusCodes.OK,
+        },
+      };
   } catch (err) {
     console.error(err);
-    return [{ response: errorData }];
+    return { response: errorData };
   }
 };
