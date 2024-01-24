@@ -14,3 +14,4 @@ export { userProfileModel } from "./userProfileSchema";
 export { feePlanModel } from "./feePlanSchema";
 export { batchModel } from "./batchSchema";
 export { userPaymentModel } from "./userPaymentSchema";
+export { meetingModel } from "./meetingSchema";
