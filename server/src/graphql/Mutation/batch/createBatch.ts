@@ -22,8 +22,6 @@ export const createBatch = async (
     
     const { batchCode, paymentType, demoStudents: demoStudentIds,paidStudents: paidStudentIds,registeredStudents: registeredStudentIds, startDate } = input;
     
-    // Validate required input fields
-    if (!batchCode || !startDate) return { response: errorData };
 
     // Check if the batch with the same code already exists
     const existingBatchData = await batchModel.findOne({ batchCode });
