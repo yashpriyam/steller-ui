@@ -82,6 +82,7 @@ export const errorMessages = Object.freeze({
     FEE_PLAN_EXIST: 'Fee plan with the same batch code already exists.',
     FEE_PLAN_UPDATE_FAILED: "Fee plan update failed.",
     FEE_PLAN_DOES_NOT_EXIST: "Fee plan does not exist.",
+    FEE_PLAN_FETCH_FAILED: "Failed to fetch fee plan details.",
   },
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",

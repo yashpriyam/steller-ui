@@ -753,7 +753,7 @@ declare global {
     batchCode?: string;
     name?: string;
     description?: string;
-    installments: Installment[],
+    installments?: Installment[],
     miscellaneous?: JSON
   };
 
@@ -800,6 +800,10 @@ declare global {
 
   type UserAllPaymentDataOutputType = {
     userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+  type UserAllFeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType[];
     response: CustomResponseType;
   }
   
