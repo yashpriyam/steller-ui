@@ -64,6 +64,8 @@ const typeDefs = gql`
     updateDay(dayData: DayDataInputType!): DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
     upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
+    createFeePlan(feePlanData: FeePlanInput!): FeePlanDataOutputType!
+    createBatch(input: BatchInput!): BatchDataOutputType!
   }
 
   type ProfileImageType {
@@ -764,6 +766,83 @@ const typeDefs = gql`
   }
   input UpsertUserProfileInputType {
     userProfile: UserProfileInputType
+  }
+  input FeePlanInput {
+    batchCode: String
+    name: String!
+    description: String!
+    installments: [InstallmentInput!]!
+    miscellaneous: JSON
+  }
+  
+  input InstallmentInput {
+    id: ID
+    amount: String
+    sequence: String!
+    dueDate: String!
+    accessWeeks: ID
+    miscellaneous: JSON
+  }
+  type FeePlanDataOutputType {
+    feePlanData: FeePlan
+    response: CustomResponseType!
+  }
+  type FeePlan {
+    _id: ID!
+    batchCode: String
+    name: String!
+    description: String!
+    miscellaneous: JSON
+  }
+
+  input BatchInput {
+    batchCode: String!
+    paymentType: ID
+    paidStudents: [ID]
+    registeredStudents: [ID]
+    demoStudents: [ID]
+    startDate: String
+  }
+  
+  type BatchDataOutputType {
+    batchData: Batch
+    response: CustomResponseType!
+  }
+  
+  type Batch {
+    _id: ID!
+    batchCode: String!
+    paymentType: FeePlan
+    demoStudents: [User]
+    paidStudents: [User]
+    registeredStudents: [User]
+    startDate: String
+  }
+  type User {
+    _id: ID!
+    email: String!
+    name: String!
+    phoneNumber: String!
+    password: String
+    isJobSeeker: Boolean!
+    occupation: String
+    sessionPreference: SessionPreference!
+    expectedSalary: String
+    IST: String!
+    collegeName: String
+    profileImage: UserProfile
+    coverImage: UserProfile
+    userProfile: ID
+  }
+  
+  type UserProfile {
+    url: String!
+    altText: String
+  }
+  
+  enum SessionPreference {
+    ONLINE
+    OFFLINE
   }
 
   scalar DateTime

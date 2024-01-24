@@ -66,6 +66,15 @@ export const localMessages = Object.freeze({
 
   RESUME_MODEL: {
     RESUME_UPSERT_SUCCESS: "resume updated successfully",
-  }
+  },
+
+  BATCH_MODEL: {
+    BATCH_CREATION_SUCCESS: 'Batch created successfully.',
+    WEEK_DOES_NOT_EXIST_TO_INSERT_BATCH: 'Week does not exist to insert batch.',
+    BATCH_EXIST: 'Batch with the same code already exists.',
+  },
+  FEE_PLAN_MODEL: {
+    FEE_PLAN_CREATION_SUCCESS: 'Fee plan created successfully.',
+  },
 
 });

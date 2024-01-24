@@ -71,4 +71,11 @@ export const errorMessages = Object.freeze({
   SLACK: {
     INVALID_CONTENT: "This content can't be displayed",
   },
+  BATCH_MODEL: {
+    BATCH_CREATION_FAILED: 'Failed to create batch.',
+  },
+  FEE_PLAN_MODEL: {
+    FEE_PLAN_CREATION_FAILED: 'Failed to create fee plan.',
+    FEE_PLAN_EXIST: 'Fee plan with the same batch code already exists.',
+  },
 });
