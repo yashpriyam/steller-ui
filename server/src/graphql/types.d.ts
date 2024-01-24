@@ -762,7 +762,7 @@ declare global {
     amount?: string;
     sequence?: string;
     dueDate?: Date; 
-    accessWeeks?: string[]; // we'll store week data here
+    accessWeeks?: WeekDataType[]; // we'll store week data here
     miscellaneous?: JSON
   }
 

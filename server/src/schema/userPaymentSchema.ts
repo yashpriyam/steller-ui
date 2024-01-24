@@ -7,17 +7,14 @@ const userPaymentSchema = new mongoose.Schema<UserPaymentSchemaType>({
     user: {
         type: ObjectId,
         ref: User, // Reference to the User model
-        required: true,
       },
       batch: {
         type: ObjectId,
-        ref: batchModel, 
-        required: true,
+        ref: batchModel
       },
       feePlan: {
         type: ObjectId,
         ref: feePlanModel, // Reference to the FeePlan model
-        required: true,
       },
       installmentId: {
         type: String,
