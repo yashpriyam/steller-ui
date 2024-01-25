@@ -52,5 +52,6 @@
     "title": "{{title}} : ",
     "estimated_reading_time": "Estimated Reading Time",
     "week": "Week",
-    "day": "Day"
+    "day": "Day",
+    "notes_error": "No notes found for selected date"
 }

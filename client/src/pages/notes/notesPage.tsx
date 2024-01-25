@@ -11,6 +11,7 @@ const Notes = () => {
   const dayNumber = queryParams.get('dayNumber');
   const weekNumber = queryParams.get('weekNumber');
   const { noteData, getAllNotes } = useNotes();
+  const noteSlideLink = noteData.noteList[0]?.link ?? "";
 
   useEffect(() => {
     getAllNotes({ dayNumber: Number(dayNumber) });
@@ -29,18 +30,22 @@ const Notes = () => {
             {dayNumber}
           </span>
         </div>
-        <div className="iframe-container">
-          <iframe
-            title="classes-notes"
-            loading="lazy"
-            src={`${process.env.REACT_APP_NOTES_URL}/${noteData.noteList[0]?.link}`}
-          ></iframe>
-          <p>{noteData.noteList[0]?.title}</p>
-          <p>
-            {t('title', { title: t('estimated_reading_time') })}
-            {noteData.noteList[0]?.estimatedReadingTime}
-          </p>
-        </div>
+        {noteSlideLink ? (
+          <div className="iframe-container">
+            <iframe
+              title="classes-notes"
+              loading="lazy"
+              src={`${process.env.REACT_APP_NOTES_URL}/${noteSlideLink}`}
+            ></iframe>
+            <p>{noteData.noteList[0]?.title}</p>
+            <p>
+              {t('title', { title: t('estimated_reading_time') })}
+              {noteData.noteList[0]?.estimatedReadingTime}
+            </p>
+          </div>
+        ) : (
+          <p className='notes-error'>{t("notes_error")}</p>
+        )}
       </div>
     </>
   );
