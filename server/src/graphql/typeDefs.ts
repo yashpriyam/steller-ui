@@ -13,6 +13,7 @@ const typeDefs = gql`
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
     getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
     getAllCities: CitiesOutputType
+    getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
   }
 
   type Mutation {
@@ -946,6 +947,30 @@ type UserAllFeePlanDataOutputType {
     cityData: [String]
     response: CustomResponseType!
   }
+
+  input MeetingListFilterInputType {
+    isActive: Boolean
+    isPaid: Boolean
+    scheduledAt: DateTime
+  }
+
+  type MeetingListOutputType {
+    meetingList: [MeetingDataType]
+    response: CustomResponseType
+  }
+
+
+  input MeetingListFilterInputType {
+    isActive: Boolean
+    isPaid: Boolean
+    scheduledAt: DateTime
+  }
+
+  type MeetingListOutputType {
+    meetingList: [MeetingDataType]
+    response: CustomResponseType
+  }
+
 
   scalar DateTime
   scalar JSON
