@@ -9,6 +9,7 @@ export const errorMessages = Object.freeze({
     UPLOAD_IMAGE_FAILED: "failed to upload image",
     USER_UPDATE_FAILED: "User update failed.",
     USER_NOT_FOUND: "User not found.",
+    USER_FETCH_FAILED: "Failed to fetch user information.",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",

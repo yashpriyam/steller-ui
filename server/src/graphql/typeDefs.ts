@@ -14,6 +14,7 @@ const typeDefs = gql`
     getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
+    getUser: UserDataOutputType!
   }
 
   type Mutation {
