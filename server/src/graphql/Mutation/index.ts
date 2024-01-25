@@ -26,3 +26,4 @@ export { upsertUserProfile } from "./userProfile/index";
 export { createFeePlan, updateFeePlan, getFeePlanDetailsByBatchCode } from "./feePlan/index";
 export { createBatch, updateBatch } from "./batch/index";
 export { createUserPayment, getUserPaymentsByUserId } from  "./userPaymentsHistory/index"
+export { createMeeting } from "./meeting";

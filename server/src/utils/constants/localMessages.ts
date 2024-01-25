@@ -84,4 +84,7 @@ export const localMessages = Object.freeze({
     USER_PAYMENTS_FETCHED_SUCCESSFULLY: "User payments fetched successfully"
   },
 
+  MEETING_MODEL: {
+    MEETING_CREATED_SUCCESSFULLY: "Meeting created successfully"
+  }
 });

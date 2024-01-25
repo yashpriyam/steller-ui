@@ -71,6 +71,7 @@ const typeDefs = gql`
     createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
     getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
+    createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
   }
 
   type ProfileImageType {
@@ -906,6 +907,29 @@ type UserAllFeePlanDataOutputType {
   feePlanData: [FeePlan]
   response: CustomResponseType
 }
+
+  input MeetingDataInputType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  type MeetingDataType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  type MeetingDataOutputType {
+    meetingData: MeetingDataType
+    response: CustomResponseType
+  }
 
   scalar DateTime
   scalar JSON

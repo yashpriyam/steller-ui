@@ -88,4 +88,9 @@ export const errorMessages = Object.freeze({
     USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
     USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
   },
+  MEETING_MODEL: {
+    MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED: "Meeting number and password is required",
+    DUBLICATE_MEETING_NUMBER: "Dublicate meeting number",
+    UNABLE_TO_CREATE_MEETING: "Unable to create meeting"
+  }
 });
