@@ -573,6 +573,7 @@ declare global {
   };
 
   type FeePlanSchemaType = {
+    _id?: string
     batchCode?: string;
     name?: string;
     description?: string;
@@ -648,6 +649,65 @@ declare global {
     index?: number
   }
 
+  type User = {
+    username?: string;
+    contact?: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    password?: string;
+  };
+
+
+  interface UserSchemaType {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    password?: string;
+    isJobSeeker: boolean;
+    occupation?: string;
+    sessionPreference: "online" | "offline";
+    expectedSalary?: string;
+    IST: string;
+    collegeName?: string;
+    profileImage?: UserProfile;
+    coverImage?: UserProfile;
+    userProfile?: Types.ObjectId;
+    batchCode?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    feePlan?: string;
+  }
+
+  type PartialUserSchemaType = {
+    email?: string;
+    name?: string;
+    phoneNumber?: string;
+    password?: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: string;
+    expectedSalary?: string;
+    IST?: string;
+    collegeName?: string;
+    location?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    batchCode?: string;
+    feePlan?: string;
+  };
+
+  type UpdateUserInput = {
+    feePlan?: string
+  };
 
 }
 export { };

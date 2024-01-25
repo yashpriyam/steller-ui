@@ -7,6 +7,8 @@ import { UPDATE_USER_PASSWORD } from "../../graphql/mutation/updateUserPassword/
 import { LOGIN } from "../../graphql/mutation/login/login";
 import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/sendUserOtp/sendUserOtp";
 import { setCookie } from "../../utils/index";
+import { UPDATE_USER_INFO } from "../../graphql/mutation/user/updateUserInfo";
+import { GET_USER } from "../../graphql/mutation/user/getUser";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -124,6 +126,38 @@ export const useUser = () => {
     dispatch(actions.setIsLoggedIn(isLoggedIn));
   };
 
+
+  const updateUserInfo = async (input: UpdateUserInput )=> {
+    const response = await apolloClient.mutate({
+      mutation: UPDATE_USER_INFO,
+      variables: {
+        input: {
+          ...input
+        }
+      },
+    });  
+    dispatch(actions.setUser(response.data.updateUser));      
+    return {
+      response,
+    };
+  }
+
+
+  const getUserData = async () => {
+    try {
+      const response = await apolloClient.query({
+        query: GET_USER
+      });
+      dispatch(actions.setUser(response.data.getUser));
+      return response;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  
+  
+
   return {
     user,
     registerUser,
@@ -132,5 +166,7 @@ export const useUser = () => {
     updateUserPasswordApi,
     loginUserApi,
     setIsLoggedIn,
+    updateUserInfo,
+    getUserData
   };
 };
