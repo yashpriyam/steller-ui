@@ -817,7 +817,18 @@ declare global {
   }
   
   type MeetingReturnType = {
-    meetingData?: MeetingSchemaType,
-    response: CustomResponseType
+    meetingData?: MeetingSchemaType;
+    response: CustomResponseType;
+  }
+
+  type MeetingListDataType = {
+    meetingList?: MeetingSchemaType[];
+    response: CustomResponseType;
+  }
+
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
   }
 }

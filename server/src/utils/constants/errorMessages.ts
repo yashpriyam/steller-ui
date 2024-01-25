@@ -7,7 +7,6 @@ export const errorMessages = Object.freeze({
     USER_PASSWPRD_UPDATION_FAILED: "password updation failed",
     USER_LOGIN_FAILED: "invalid email and password",
     UPLOAD_IMAGE_FAILED: "failed to upload image",
-
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
@@ -78,8 +77,8 @@ export const errorMessages = Object.freeze({
     BATCH_EXIST: "Batch with the same code already exists.",
   },
   FEE_PLAN_MODEL: {
-    FEE_PLAN_CREATION_FAILED: 'Failed to create fee plan.',
-    FEE_PLAN_EXIST: 'Fee plan with the same batch code already exists.',
+    FEE_PLAN_CREATION_FAILED: "Failed to create fee plan.",
+    FEE_PLAN_EXIST: "Fee plan with the same batch code already exists.",
     FEE_PLAN_UPDATE_FAILED: "Fee plan update failed.",
     FEE_PLAN_DOES_NOT_EXIST: "Fee plan does not exist.",
     FEE_PLAN_FETCH_FAILED: "Failed to fetch fee plan details.",
@@ -89,8 +88,10 @@ export const errorMessages = Object.freeze({
     USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
   },
   MEETING_MODEL: {
-    MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED: "Meeting number and password is required",
+    MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED:
+      "Meeting number and password is required",
     DUBLICATE_MEETING_NUMBER: "Dublicate meeting number",
-    UNABLE_TO_CREATE_MEETING: "Unable to create meeting"
-  }
+    UNABLE_TO_CREATE_MEETING: "Unable to create meeting",
+    UNABLE_TO_FIND_MEETING: "Unable to find meetings",
+  },
 });

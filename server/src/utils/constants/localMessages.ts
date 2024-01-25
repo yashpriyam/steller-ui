@@ -50,7 +50,7 @@ export const localMessages = Object.freeze({
     USER_PASSWPRD_UPDATION_SUCCESS: "password updation successfully",
     USER_LOGIN_SUCCESS: "login successfully",
     PROFILE_IMAGE_UPLOADED: "profile image uploaded successfully",
-    IMAGE_UPLOADED_SUCCESSFULLY: "image uploaded successfully"
+    IMAGE_UPLOADED_SUCCESSFULLY: "image uploaded successfully",
   },
   WEEK_MODEL: {
     WEEK_CREATION_SUCCESS: "Week data inserted successfully",
@@ -69,22 +69,24 @@ export const localMessages = Object.freeze({
   },
 
   BATCH_MODEL: {
-    BATCH_CREATION_SUCCESS: 'Batch created successfully.',
-    WEEK_DOES_NOT_EXIST_TO_INSERT_BATCH: 'Week does not exist to insert batch.',
-    BATCH_EXIST: 'Batch with the same code already exists.',
+    BATCH_CREATION_SUCCESS: "Batch created successfully.",
+    WEEK_DOES_NOT_EXIST_TO_INSERT_BATCH: "Week does not exist to insert batch.",
+    BATCH_EXIST: "Batch with the same code already exists.",
     BATCH_UPDATE_SUCCESS: "Batch updated successfully.",
   },
   FEE_PLAN_MODEL: {
-    FEE_PLAN_CREATION_SUCCESS: 'Fee plan created successfully.',
+    FEE_PLAN_CREATION_SUCCESS: "Fee plan created successfully.",
     FEE_PLAN_UPDATE_SUCCESS: "Fee plan updated successfully.",
     FEE_PLAN_FETCHED_SUCCESSFULLY: "Fee plan details fetched successfully.",
   },
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_SUCCESS: "User payment created successfully.",
-    USER_PAYMENTS_FETCHED_SUCCESSFULLY: "User payments fetched successfully"
+    USER_PAYMENTS_FETCHED_SUCCESSFULLY: "User payments fetched successfully",
   },
 
   MEETING_MODEL: {
-    MEETING_CREATED_SUCCESSFULLY: "Meeting created successfully"
-  }
+    MEETING_CREATED_SUCCESSFULLY: "Meeting created successfully",
+    NO_MEETING_FOUND: "No meeting data exists for given filter",
+    SUCCESSFULLY_FOUND_MEETING_DETAILS: "Successfully found meeting details",
+  },
 });
