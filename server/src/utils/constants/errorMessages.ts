@@ -7,6 +7,8 @@ export const errorMessages = Object.freeze({
     USER_PASSWPRD_UPDATION_FAILED: "password updation failed",
     USER_LOGIN_FAILED: "invalid email and password",
     UPLOAD_IMAGE_FAILED: "failed to upload image",
+    USER_UPDATE_FAILED: "User update failed.",
+    USER_NOT_FOUND: "User not found.",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",

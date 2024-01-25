@@ -3,3 +3,4 @@ export { sendOtpToRegisteredUser } from "./sendOtpToRegisteredUser";
 export { verifyUserOtp } from "./verifyUserOtp";
 export { updateUserPassword } from "./updateUserPassword";
 export { updateCoverImage } from "./updateCoverImage";
+export { updateUser } from "./updateUser"
