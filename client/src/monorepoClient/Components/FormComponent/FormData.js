@@ -127,15 +127,8 @@ const PersonalInfoFormData = [
       "Others",
     ],
     2
-    ),
-    new FormInputTypeShape(
-      formInputType.DROPDOWN_INPUT,
-      "Select your relevant Branch",
-      "Branch",
-      false,
-      true,
-      ["C.S/I.t", "A.I/M.L","M.E", "E.C", "E.X", "other"]
-      ),
+  ),
+
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,
     "What's a good salary that can motivate you to accept a job offer?",
@@ -153,6 +146,26 @@ const PersonalInfoFormData = [
   ),
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,
+    "Select your Course",
+    "Course",
+    false,
+    true,
+    [
+      "B.Tech",
+      "B.E",
+      "B.C.A",
+      "B.A",
+      "B.Sc",
+      "B.Com",
+      "B.Pharma",
+      "M.Sc",
+      "M.Tech",
+      "M.B.B.S",
+      "Others",
+    ]
+  ),
+  new FormInputTypeShape(
+    formInputType.DROPDOWN_INPUT,
     "Select your Course year",
     "Branch",
     false,
@@ -161,11 +174,11 @@ const PersonalInfoFormData = [
   ),
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,
-    "Select your Course",
-    "Course",
+    "Select your relevant Branch",
+    "Branch",
     false,
     true,
-    ["B.Tech", "B.E", "B.A", "B.Sc", "B.Com", "other"]
+    ["C.S", "C.E", "M.E", "E.C", "E.X", "Others"]
   ),
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,
@@ -182,11 +195,11 @@ const PersonalInfoFormData = [
     "Batch-code",
     false,
     true,
-    ["WMB1 - Starting - 29 jan 2024"],
+    ["WMB2 - Starting - 29 jan 2024"],
     0,
     false,
-    "WMB1 - Starting - 29 jan 2024"
-    ),
+    "WMB2 - Starting - 29 jan 2024"
+  ),
   // new FormInputTypeShape(
   //   formInputType.TEXT_INPUT_FIELD,
   //   "Otp",
