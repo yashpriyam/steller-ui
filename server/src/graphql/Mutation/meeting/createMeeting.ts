@@ -6,15 +6,15 @@ export const createMeeting = async (
   args: { data: MeetingSchemaType }
 ): Promise<MeetingReturnType> => {
   const { data } = args;
-  const { meetingNumber, password, link, isActive, scheduledAt, isPaid } = data;
+  const { meetingNumber, title, password, link, isActive, scheduledAt, isPaid } = data;
   const { BAD_REQUEST, OK } = statusCodes;
   const { MEETING_MODEL } = errorMessages;
   try {
-    if (!meetingNumber || !password) {
+    if (!meetingNumber || !password || !title) {
       return {
         response: {
           status: BAD_REQUEST,
-          message: MEETING_MODEL.MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED,
+          message: MEETING_MODEL.MEETING_NUMBER_PASSWORD_AND_TITLE_IS_REQUIRED,
         },
       };
     } else {
@@ -31,6 +31,7 @@ export const createMeeting = async (
       } else {
         const meetingData = await meetingModel.create({
           meetingNumber,
+          title,
           password,
           link,
           isActive,

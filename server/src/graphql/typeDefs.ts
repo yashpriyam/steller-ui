@@ -926,6 +926,7 @@ type UserAllFeePlanDataOutputType {
 
   input MeetingDataInputType {
     meetingNumber: String!
+    title: String!
     password: String!
     link: String
     isActive: Boolean
@@ -936,6 +937,7 @@ type UserAllFeePlanDataOutputType {
   type MeetingDataType {
     meetingNumber: String!
     password: String!
+    title: String!
     link: String
     isActive: Boolean
     scheduledAt: String

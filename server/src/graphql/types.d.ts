@@ -824,6 +824,7 @@ declare global {
   };
   type MeetingSchemaType = {
     meetingNumber: string;
+    title: string;
     password: string;
     link?: string;
     scheduledAt?: Date;

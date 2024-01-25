@@ -95,7 +95,7 @@ export const errorMessages = Object.freeze({
     INSERTION_FAILED: "Unable to insert cities data",
   },
   MEETING_MODEL: {
-    MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED:
+    MEETING_NUMBER_PASSWORD_AND_TITLE_IS_REQUIRED:
       "Meeting number and password is required",
     DUBLICATE_MEETING_NUMBER: "Dublicate meeting number",
     UNABLE_TO_CREATE_MEETING: "Unable to create meeting",
