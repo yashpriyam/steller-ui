@@ -1,5 +1,11 @@
 @import "./components/variables.scss";
 
+#zmmtg-root{
+    display: none;
+}
+#aria-notify-area{
+    display: none;
+}
 // this line will hide zoom warnings on UI
 iframe#webpack-dev-server-client-overlay{
     display: none;
