@@ -134,7 +134,7 @@ const PersonalInfoFormData = [
       "Branch",
       false,
       true,
-      ["C.S", "M.E", "E.C", "E.X", "I.T", "C.S.I.T"]
+      ["C.S/I.t", "A.I/M.L","M.E", "E.C", "E.X", "other"]
       ),
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,
@@ -165,7 +165,7 @@ const PersonalInfoFormData = [
     "Course",
     false,
     true,
-    ["B.Tech", "B.E", "B.A", "B.Sc", "B.Com"]
+    ["B.Tech", "B.E", "B.A", "B.Sc", "B.Com", "other"]
   ),
   new FormInputTypeShape(
     formInputType.DROPDOWN_INPUT,

@@ -220,7 +220,6 @@ const typeDefs = gql`
     course: String
     branch: String
     location: String
-    feePlan: String
   }
   input CreateNotesInputType {
     link: String!

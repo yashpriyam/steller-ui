@@ -89,6 +89,7 @@ export const errorMessages = Object.freeze({
     USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
   },
   CITIES: {
-    DATA_NOT_FOUND: "No data found",
+    DATA_NOT_FOUND: "No data found for cities",
+    INSERTION_FAILED: "Unable to insert cities data",
   },
 });

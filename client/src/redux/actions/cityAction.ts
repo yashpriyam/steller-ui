@@ -7,12 +7,16 @@ export const useCity = () => {
     const cities = useSelector(selectCity);
 
     const getAllCities = async () => {
-        const response = await apolloClient.query({
-            query: GET_CITIES,
-            variables: {},
-        });
-        dispatch(actions.setCity(response.data.getAllCities));
-        return response;
+        try {
+            const response = await apolloClient.query({
+                query: GET_CITIES,
+                variables: {},
+            });
+            dispatch(actions.setCity(response.data.getAllCities));
+            return response;
+        } catch (err) {
+            console.log(err);
+        }
     };
 
 

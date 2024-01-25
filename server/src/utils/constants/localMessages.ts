@@ -83,6 +83,7 @@ export const localMessages = Object.freeze({
     USER_PAYMENTS_FETCHED_SUCCESSFULLY: "User payments fetched successfully"
   },
   CITIES: {
-    DATA_FOUND: "Data found",
+    DATA_FOUND: "Successfully found cities data",
+    INSERTION_SUCCESS: "Successfully inserted cities data",
   },
 });
