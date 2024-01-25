@@ -25,7 +25,7 @@ const InputComponent = ({
 
   const [isOpen, setOpen] = useState(false);
   const {cities,getAllCities} = useCity();
-  const { cityList } = cities;
+  const { cityList = [] } = cities || {};
   useEffect(()=>{
     if(isDataList){
       getAllCities({})
@@ -90,7 +90,7 @@ const InputComponent = ({
             }}
           />
           <datalist id="options" className="datalist-container">
-            {cityList.map((option, index) => (
+            {cityList?.map((option, index) => (
               <option key={index} value={option} />
             ))}
           </datalist>
