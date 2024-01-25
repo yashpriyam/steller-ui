@@ -34,30 +34,39 @@ export const Sidebar = ({
           <LeftArrowIcon />{" "}
         </div>
         <div className="sidebar-main-sub-container">
-            <div className="sidebar-first-options-container">
-              {optionsAtFirst?.map((data, idx) => {
-                const {
-                  image,
-                  text,
-                  inputComponent,
-                  onClick,
-                  openNewPage,
-                  url,
-                } = data;
-                return (
-                  <SidebarOption
-                    key={idx}
-                    image={image}
-                    text={text}
-                    onClick={()=>onOptionClick(url,Boolean(openNewPage))}
-                    url={url}
-                    showText={isOpen}
-                  />
-                );
-              })}
-            </div>
+          <div
+            className={`sidebar-first-options-container ${
+              !isOpen && "sidebar-options-container-flex"
+            }`}
+          >
+            {optionsAtFirst?.map((data, idx) => {
+              const {
+                image,
+                text,
+                onClick,
+                openNewPage,
+                url,
+                isProfile,
+              } = data;
+              return (
+                <SidebarOption
+                  key={idx}
+                  image={image}
+                  text={text}
+                  onClick={() => onOptionClick(url, Boolean(openNewPage))}
+                  url={url}
+                  showText={isOpen}
+                  isProfile={isProfile}
+                />
+              );
+            })}
+          </div>
           <SidebarContainer>
-            <div className="sidebar-middle-options-container">
+            <div
+              className={`sidebar-middle-options-container ${
+                !isOpen && "sidebar-options-container-flex"
+              }`}
+            >
               {options.map((data, index) => {
                 return (
                   <SidebarOption
@@ -82,7 +91,9 @@ export const Sidebar = ({
           </SidebarContainer>
         </div>
         <div
-          className="sidebar-last-option-btn"
+          className={`sidebar-last-option-btn ${
+            !isOpen && "sidebar-options-container-flex"
+          }`}
           onClick={optionAtLast?.onClick}
         >
           {lastOption}

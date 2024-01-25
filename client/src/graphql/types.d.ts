@@ -470,6 +470,7 @@ declare global {
   }
 
   interface SidebarOptionInterface {
+    isProfile?: boolean;
     text: string | number;
     image: string | React.ReactNode;
     count?: string | number;
@@ -495,12 +496,12 @@ declare global {
       onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
     },
     optionsAtFirst?: {
-      image: string | React.ReactNode;
+      image: string | ReactNode;
       url?: string;
       text: string;
       openNewPage?: boolean;
-      inputComponent?: boolean;
-      onClick?: (e: React.MouseEvent<HTMLDivElement>) => void;
+      onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+      isProfile?: boolean;
     }[],
   }
 

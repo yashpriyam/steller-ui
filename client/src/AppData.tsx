@@ -32,17 +32,15 @@ export const useAppData = (): UseAppDataReturnType => {
 
   const sidebarData: SidebarProps = {
     optionsAtFirst: [
-      // {
-      //   text: t("profile"),
-      //   image: <AvatarIcon isDarkMode={true} />,
-      //   url: "/profile",
-      //   inputComponent: false,
-      // },
+      {
+        text: "Sujal Gotharwal",
+        image: <AvatarIcon width='40px' height='40px'/>,
+        url: "/profile",
+        isProfile: true,
+      },
       // {
       //   text: t("search"),
       //   image: <SearchIcon isDarkMode={true} />,
-      //   onClick: (e) => console.log({ val: e.target }),
-      //   inputComponent: true,
       // },
     ],
     options: [
@@ -68,7 +66,7 @@ export const useAppData = (): UseAppDataReturnType => {
         openNewPage: true,
       },
       // {
-      //   text: t('questions'),
+      //   text: t("questions"),
       //   image: <QuestionIcon isDarkMode={true} />,
       //   url: "/questions",
       // },
@@ -79,9 +77,9 @@ export const useAppData = (): UseAppDataReturnType => {
       // },
     ],
     optionAtLast: {
-      text: t(isLoggedIn ? 'logout' : 'login'),
-      onClick: () => isLoggedIn ? logOut() : setIsLoginModalOpen(true)
-    }
-  }
+      text: t(isLoggedIn ? "logout" : "login"),
+      onClick: () => (isLoggedIn ? logOut() : setIsLoginModalOpen(true)),
+    },
+  };
   return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
 }
