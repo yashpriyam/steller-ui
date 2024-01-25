@@ -852,4 +852,9 @@ declare global {
     response: CustomResponseType;
   }
 
+  type GetMeetingOutputType = {
+    meetingData?: MeetingSchemaType | null;
+    response: CustomResponseType
+  }
+
 }
