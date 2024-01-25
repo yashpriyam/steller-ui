@@ -19,7 +19,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
         <div className="paid-installments">
           <h2 className="installment-heading">Paid Installments</h2>
           <div className="installment-cards">
-            <ul>
+            <ul className='installment-item-constainer'>
               {paidInstallments?.map((installment) => (
                 <li key={installment.id} className="installment-item">
                   <p className="installment-info">
