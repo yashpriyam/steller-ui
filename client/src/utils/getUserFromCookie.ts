@@ -1,7 +1,7 @@
 import { getCookie } from "./getCookie";
 import {jwtDecode} from 'jwt-decode'; 
 
-const getUserFromCookies = () => {
+export const getUserFromCookies = () => {
   try {
     const userCookie = getCookie(process.env.REACT_APP_JWT_SECRET_KEY ?? ''); 
     if (userCookie) {
@@ -16,5 +16,3 @@ const getUserFromCookies = () => {
     return null;
   }
 };
-
-export default getUserFromCookies;

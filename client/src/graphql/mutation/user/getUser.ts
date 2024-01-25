@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const UPDATE_USER_INFO = gql`
-mutation UpdateUser($input: PartialUserSchemaType) {
-    updateUser(input: $input) {
+export const GET_USER = gql`
+query {
+    getUser {
       userData {
         email
         name
@@ -15,5 +15,6 @@ mutation UpdateUser($input: PartialUserSchemaType) {
         status
       }
     }
-  }  
+  }
+  
 `;

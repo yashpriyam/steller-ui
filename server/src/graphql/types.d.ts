@@ -848,7 +848,7 @@ declare global {
   }
   
   type UserDataOutputType = {
-    user?: UserSchemaType;
+    userData?: UserSchemaType;
     response: CustomResponseType;
   }
 

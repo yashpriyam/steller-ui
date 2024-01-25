@@ -31,11 +31,11 @@ export const updateUser = async (
       { _id: userId },
       { $set: { ...input, profileImage: undefined, coverImage: undefined } },
       { new: true }
-    );
+    );  
 
     return {
-      userData: updatedUserData,
-      response: updatedUserData
+        userData: updatedUserData ,
+        response: updatedUserData
         ? {
             message: localMessages.USER.USER_UPDATE_SUCCESS,
             status: statusCodes.OK,

@@ -3,26 +3,25 @@ import PaymentCard from "../../components/paymentCard/paymentCard";
 import { useUserPayments } from "../../redux/actions/getUserPayments";
 import { useFeePlans } from "../../redux/actions/feePlanActions";
 import "./UserPaymentPage.scss";
-import getUserFromCookies from "../../utils/getUserFromCookie";
 import { useUser } from "../../redux/actions/userAction";
 
 const UserPaymentPage: React.FC = () => {
   const [selectedFeePlan, setSelectedFeePlan] = useState<string | null>(null);
 
-  const user = getUserFromCookies();
 
   const { userPayments, getUserPayments } = useUserPayments();
   const { feePlans, getFeePlans } = useFeePlans();
-  const { updateUserInfo } = useUser();
+  const { updateUserInfo,getUserData, user } = useUser();
 
   const getData = async () => {
+    await getUserData()
     await getUserPayments("");
-    await getFeePlans(user?.batchCode ?? "");
+    await getFeePlans(user?.userData?.batchCode ?? "");
   };
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [user]);
 
   return (
     <div className="user-payment-page">
