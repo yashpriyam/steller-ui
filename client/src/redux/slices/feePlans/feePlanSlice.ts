@@ -18,5 +18,5 @@ export const feePlanSlice = createSlice({
 });
 
 export const { setFeePlans } = feePlanSlice.actions;
-export const selectFeePlans = (state: UserAllFeePlanDataOutputType) => state.feePlans;
+export const selectFeePlans = (state:{ feePlans: UserAllFeePlanDataOutputType}) => state.feePlans.feePlans;
 export default feePlanSlice.reducer;
