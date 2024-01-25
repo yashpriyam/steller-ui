@@ -753,7 +753,7 @@ declare global {
     batchCode?: string;
     name?: string;
     description?: string;
-    installments: Installment[],
+    installments?: Installment[],
     miscellaneous?: JSON
   };
 
@@ -778,7 +778,10 @@ declare global {
       totalAmount?: string;
       totalPendingAmount?: string;
     },
-    image?: ImageInputType
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+
   };  
    
   type BatchDataOutputType = {
@@ -789,6 +792,20 @@ declare global {
     feePlanData?: FeePlanSchemaType;
     response: CustomResponseType;
   };
+
+  type UserPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType;
+    response: CustomResponseType;
+  }
+
+  type UserAllPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+  type UserAllFeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType[];
+    response: CustomResponseType;
+  }
   
   type MeetingSchemaType = {
     meetingNumber: string;
