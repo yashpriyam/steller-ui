@@ -12,6 +12,7 @@ const typeDefs = gql`
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
     getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
+    getAllCities: CitiesOutputType
   }
 
   type Mutation {
@@ -72,6 +73,7 @@ const typeDefs = gql`
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
     getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
     createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
+    insertCities(citiesData: [String]!): CitiesOutputType
   }
 
   type ProfileImageType {
@@ -180,6 +182,7 @@ const typeDefs = gql`
   }
 
   input RegistrationInputType {
+    batchCode: String!
     name: String!
     email: String!
     phoneNumber: String!
@@ -188,6 +191,10 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
     collegeName: String
+    courseYear: String
+    course: String
+    branch: String
+    location: String
   }
 
   enum SessionPreferenceEnum {
@@ -201,6 +208,7 @@ const typeDefs = gql`
     credentials: String
   }
   type RegisterOutputType {
+    batchCode: String
     name: String!
     email: String!
     phoneNumber: String!
@@ -209,6 +217,10 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
     collegeName: String
+    courseYear: String
+    course: String
+    branch: String
+    location: String
   }
   input CreateNotesInputType {
     link: String!
@@ -929,6 +941,10 @@ type UserAllFeePlanDataOutputType {
   type MeetingDataOutputType {
     meetingData: MeetingDataType
     response: CustomResponseType
+  }
+  type CitiesOutputType {
+    cityData: [String]
+    response: CustomResponseType!
   }
 
   scalar DateTime

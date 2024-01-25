@@ -21,6 +21,11 @@ export const useUser = () => {
     sessionPreference,
     expectedSalary,
     collegeName,
+    courseYear,
+    course,
+    branch,
+    location,
+    batchCode,
   }: RegisterUserData) => {
     const response = await apolloClient.mutate({
       mutation: REGISTER_USER,
@@ -34,6 +39,11 @@ export const useUser = () => {
           sessionPreference,
           expectedSalary,
           collegeName,
+          courseYear,
+          course,
+          branch,
+          location,
+          batchCode,
         },
       },
     });
