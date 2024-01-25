@@ -15,6 +15,7 @@ import CrossIcon from '../../icons/CrossIcon';
 import Accordion from '../../components/accordion/accordion';
 import PaymentSection from '../../components/paymentSection/paymentSection';
 import { useUserPayments } from '../../redux/actions/getUserPayments';
+import { useFeePlans } from '../../redux/actions/feePlanActions';
 
 const dataProfile = {
     personalDetail: {
@@ -213,9 +214,12 @@ const ProfilePage = () => {
 
       const { getUserPayments, userPayments } = useUserPayments();
 
+      const {feePlans, getFeePlans} = useFeePlans()
+
      
      const getData = async ()=> {
         await getUserPayments('6523b3424f9e607c618395cf'); 
+        await getFeePlans('Batch2024')
      }
 
      useEffect(() => {
@@ -223,7 +227,8 @@ const ProfilePage = () => {
         
      }, [])
      console.log({
-        userPayments
+        userPayments,
+        feePlans
      });
      
      
