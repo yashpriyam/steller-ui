@@ -1,10 +1,6 @@
 import React from 'react';
 import './InstallmentCard.scss'; // Import the SCSS file
 
-interface InstallmentCardProps {
-  installment: Installment;
-  index?: number
-}
 
 const InstallmentCard: React.FC<InstallmentCardProps> = ({ installment, index=0 }) => {
   return (

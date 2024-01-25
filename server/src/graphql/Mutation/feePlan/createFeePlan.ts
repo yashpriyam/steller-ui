@@ -22,19 +22,6 @@ export const createFeePlan = async (
       return { response: errorData };
     }
 
-    // // Check if a fee plan with the same batchCode already exists
-    // if (batchCode) {
-    //   const existingFeePlan = await feePlanModel.findOne({ batchCode });
-    //   if (existingFeePlan) {
-    //     return {
-    //       response: {
-    //         message: FEE_PLAN_EXIST,
-    //         status: statusCodes.BAD_REQUEST,
-    //       },
-    //     };
-    //   }
-    // }
-
     // Create the fee plan in the database
     const newFeePlanData = await feePlanModel.create({
       batchCode,

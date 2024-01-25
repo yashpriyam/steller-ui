@@ -643,6 +643,10 @@ declare global {
     meetingData?: MeetingSchemaType,
     response: CustomResponseType
   }
+  interface InstallmentCardProps {
+    installment: Installment;
+    index?: number
+  }
 
 
 }
