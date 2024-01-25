@@ -16,6 +16,11 @@ export const REGISTER_USER = gql`
         email
         isJobSeeker
         expectedSalary
+        courseYear
+        course
+        branch
+        location
+        batchCode
       }
       credentials
     }

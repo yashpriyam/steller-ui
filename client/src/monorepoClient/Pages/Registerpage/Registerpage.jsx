@@ -51,7 +51,22 @@ const Registerpage = () => {
       try {
         setIsLoading(true);
         setCookie({ key: userDataCookieName, value: objectToBase64(formData) });
-        const { name, currentprofessionalstatus, email, otp, phonenumber, whatsagoodsalarythatcanmotivateyoutoacceptajoboffer, youwouldattendtheclassesonlineoroffline, whichcollegeyouarefrom } = formData;
+        const {
+          name,
+          currentprofessionalstatus,
+          email,
+          otp,
+          phonenumber,
+          whatsagoodsalarythatcanmotivateyoutoacceptajoboffer,
+          youwouldattendtheclassesonlineoroffline,
+          whichcollegeyouarefrom,
+          location,
+          selectyourcourse,
+          selectyourcourseyear,
+          selectyourrelevantbranch,
+          selectyourpreferredbatch,
+        } = formData;
+        const batchCode = selectyourpreferredbatch.split("-")[0].trim();
         const response = await registerUser({
           name,
           email,
@@ -60,7 +75,12 @@ const Registerpage = () => {
           expectedSalary: whatsagoodsalarythatcanmotivateyoutoacceptajoboffer,
           sessionPreference: youwouldattendtheclassesonlineoroffline.toLowerCase() === 'online' ? 'online' : "offline",
           isJobSeeker: true,
-          collegeName: whichcollegeyouarefrom
+          collegeName: whichcollegeyouarefrom,
+          branch: selectyourrelevantbranch,
+          location,
+          course: selectyourcourse,
+          courseYear:selectyourcourseyear,
+          batchCode,
         })
         if (response?.response.data?.registerUser?.response?.status === 400) {
           Toast.warning("Email is already registered. You can login");

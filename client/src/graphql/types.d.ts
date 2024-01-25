@@ -12,6 +12,11 @@ declare global {
     expectedSalary: string;
     emailOtp: string;
     collegeName: string;
+    courseYear: string;
+    course: string;
+    branch: string;
+    location: string;
+    batchCode: string;
   }
 
   interface Experience {
@@ -553,5 +558,92 @@ declare global {
     skip?:number;
     limit?:number;
   }
+  type CityDataStateType = {
+    cityList?: string[];
+  }
+
+  
+  type BatchSchemaType = {
+    batchCode: string;
+    paymentType?: FeePlanSchemaType; 
+    paidStudents?: UserSchemaType[];
+    registeredStudents?: UserSchemaType[];
+    demoStudents?: UserSchemaType[];
+    startDate?: Date
+  };
+
+  type FeePlanSchemaType = {
+    batchCode?: string;
+    name?: string;
+    description?: string;
+    installments?: Installment[],
+    miscellaneous?: JSON
+  };
+
+  type Installment = {
+    id? :string;
+    amount?: string;
+    sequence?: string;
+    dueDate?: Date; 
+    accessWeeks?: WeekDataType[]; // we'll store week data here
+    miscellaneous?: JSON
+  }
+
+  type UserPaymentSchemaType = {
+    _id?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+
+  };  
+   
+  type BatchDataOutputType = {
+    batchData?: BatchSchemaType;
+    response: CustomResponseType;
+  };
+  type FeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType;
+    response: CustomResponseType;
+  };
+
+  type UserPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType;
+    response: CustomResponseType;
+  }
+
+  type UserAllPaymentDataOutputType = {
+    userPayments?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+  type UserAllFeePlanDataOutputType = {
+    feePlans?: FeePlanSchemaType[];
+    response: CustomResponseType;
+  }
+  
+  type MeetingSchemaType = {
+    meetingNumber: string;
+    password: string;
+    link?: string;
+    scheduledAt?: Date;
+    isActive: boolean;
+    isPaid: boolean;
+  }
+  
+  type MeetingReturnType = {
+    meetingData?: MeetingSchemaType,
+    response: CustomResponseType
+  }
+
+
 }
 export { };

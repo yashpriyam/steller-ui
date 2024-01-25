@@ -1,0 +1,1 @@
+export { getAllCities } from "./getAllCities";

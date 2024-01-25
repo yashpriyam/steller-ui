@@ -13,6 +13,9 @@ import EditIcon from '../../icons/editIcon';
 import UploadIcon from '../../icons/fileUploadIcon';
 import CrossIcon from '../../icons/CrossIcon';
 import Accordion from '../../components/accordion/accordion';
+import PaymentSection from '../../components/paymentSection/paymentSection';
+import { useUserPayments } from '../../redux/actions/getUserPayments';
+import { useFeePlans } from '../../redux/actions/feePlanActions';
 
 const dataProfile = {
     personalDetail: {
@@ -170,12 +173,72 @@ const ProfilePage = () => {
 
     }, [isMobileView]);
 
+    const dummyFeePlanData = {
+        feePlanData: {
+          batchCode: 'Batch2024',
+          name: 'Installment Plan',
+          description: '3 installments with 5k each',
+          installments: [
+            {
+              id: '1',
+              amount: '5000',
+              sequence: '1',
+              dueDate: new Date('2024-02-01'),
+              accessWeeks: ['Week1', 'Week2'],
+              miscellaneous: {},
+            },
+            {
+              id: '2',
+              amount: '5000',
+              sequence: '2',
+              dueDate: new Date('2024-03-01'),
+              accessWeeks: ['Week3', 'Week4'],
+              miscellaneous: {},
+            },
+            {
+              id: '3',
+              amount: '5000',
+              sequence: '3',
+              dueDate: new Date('2024-04-01'),
+              accessWeeks: ['Week5', 'Week6'],
+              miscellaneous: {},
+            },
+          ],
+          miscellaneous: {},
+        },
+        response: {
+          message: 'Fee plan fetched successfully',
+          status: 200,
+        },
+      };
+
+      const { getUserPayments, userPayments } = useUserPayments();
+
+      const {feePlans, getFeePlans} = useFeePlans()
+
+     
+     const getData = async ()=> {
+        await getUserPayments('6523b3424f9e607c618395cf'); 
+        await getFeePlans('Batch2024')
+     }
+
+     useEffect(() => {
+        getData()
+        
+     }, [])
+     console.log({
+        userPayments,
+        feePlans
+     });
+     
+     
     return (
         isMobileView ? (
-            <div className={`main-container`}>
+            <div className={`profile-main-container`}>
                 <div className="button-container">
                     <button onClick={handleEditToggle}>{isEdit ? <SaveIcon /> : <EditIcon />}</button>
                 </div>
+                
                 <div className="header-container">
                     <div className="background-img-container">
                         <div className="background-upload-container">
@@ -292,7 +355,7 @@ const ProfilePage = () => {
 
                 </div>
             </div>) : (
-            <div className="main-container">
+            <div className="profile-main-container">
                 <div className="button-container">
                     <button onClick={handleEditToggle}>{isEdit ? <SaveIcon /> : <EditIcon />}</button>
                 </div>
@@ -393,6 +456,7 @@ const ProfilePage = () => {
                         </div>
                     </div>
                 </div>
+                <PaymentSection feePlanData={dummyFeePlanData} />
             </div>
         ))
 };

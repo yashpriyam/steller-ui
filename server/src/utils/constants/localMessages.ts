@@ -67,7 +67,6 @@ export const localMessages = Object.freeze({
   RESUME_MODEL: {
     RESUME_UPSERT_SUCCESS: "resume updated successfully",
   },
-
   BATCH_MODEL: {
     BATCH_CREATION_SUCCESS: "Batch created successfully.",
     WEEK_DOES_NOT_EXIST_TO_INSERT_BATCH: "Week does not exist to insert batch.",
@@ -83,10 +82,13 @@ export const localMessages = Object.freeze({
     USER_PAYMENT_CREATION_SUCCESS: "User payment created successfully.",
     USER_PAYMENTS_FETCHED_SUCCESSFULLY: "User payments fetched successfully",
   },
-
   MEETING_MODEL: {
     MEETING_CREATED_SUCCESSFULLY: "Meeting created successfully",
     NO_MEETING_FOUND: "No meeting data exists for given filter",
     SUCCESSFULLY_FOUND_MEETING_DETAILS: "Successfully found meeting details",
+  },  
+  CITIES: {
+    DATA_FOUND: "Successfully found cities data",
+    INSERTION_SUCCESS: "Successfully inserted cities data",
   },
-});
+);

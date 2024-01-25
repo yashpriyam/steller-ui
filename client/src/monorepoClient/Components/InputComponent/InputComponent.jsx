@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./InputComponent.scss";
 import InputDropdown from "../InputDropdown/InputDropdown";
+import { useCity } from "../../../redux/actions/cityAction";
 const InputComponent = ({
   inputProps,
   value,
@@ -18,17 +19,27 @@ const InputComponent = ({
     isDropdown = false,
     optionList = [],
     isRequired = false,
+    isDataList = false,
+    defaultValue,
   } = inputProps;
 
   const [isOpen, setOpen] = useState(false);
+  const {cities,getAllCities} = useCity();
+  const { cityList } = cities;
+  useEffect(()=>{
+    if(isDataList){
+      getAllCities({})
+    }
+  },[])
   return (
     <>
-      {isDropdown ? (
+      {isDropdown && (
         <div className="inputDropdownContainer">
           <InputDropdown
             className={`defaultInputDropdownClass ${className}`}
             optionList={optionList}
             value={value}
+            defaultValue={defaultValue}
             setDropDownValue={onChange}
             isOpen={isOpen}
             setOpen={setOpen}
@@ -39,7 +50,8 @@ const InputComponent = ({
             </label>
           </InputDropdown>
         </div>
-      ) : (
+      )}
+      {!isDropdown && !isDataList && (
         <div className="inputContainer">
           <input
             type={type}
@@ -52,6 +64,36 @@ const InputComponent = ({
             autoComplete={autoComplete}
             {...props}
           />
+          <label
+            htmlFor={type}
+            className={`defaultLabelClass absolute ${labelClass}`}
+          >
+            {labelName}{" "}
+            {isRequired && <span style={{ color: "red" }}> * </span>}
+          </label>
+        </div>
+      )}
+      {isDataList && (
+        <div className="inputContainer">
+          <input
+            type="text"
+            id={type}
+            list="options"
+            placeholder={placeholder}
+            className="defaultInputClass"
+            onChange={(e) => onChange(e.target.value)}
+            onBlur={(e) => {
+              const value = e.target.value;
+              if (value && !cityList.includes(value)) {
+                e.target.value = "";
+              }
+            }}
+          />
+          <datalist id="options" className="datalist-container">
+            {cityList.map((option, index) => (
+              <option key={index} value={option} />
+            ))}
+          </datalist>
           <label
             htmlFor={type}
             className={`defaultLabelClass absolute ${labelClass}`}
