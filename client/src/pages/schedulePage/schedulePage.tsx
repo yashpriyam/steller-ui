@@ -1,13 +1,15 @@
 import "./schedulePage.scss";
 import Accordion from "../../components/accordion/accordion";
 import { Button } from "../../components/button/button";
-import React, { useEffect, useState } from "react";
+import React, { ChangeEventHandler, MouseEvent, MouseEventHandler, useEffect, useState } from "react";
 import { Filter } from "../../components/filter/filter";
 import { useNavigate } from "react-router-dom";
 import { useWeek } from "../../redux/actions/scheduleAction";
 import { MeetIcon } from "../../icons/index";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
+import { UploadImage } from "../../components/uploadImage/uploadImage";
+import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
 
 const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
@@ -28,6 +30,18 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const onJoinMeetClick = () => {
     window.open(process.env.REACT_APP_CLASS_MEET_URL, "_blank");
   };
+  const handleUploadImage: ChangeEventHandler<HTMLInputElement> = async (e) => {
+    const files = e.target.files;
+    if(files) {
+        try{
+          const response = await readFileAsDataURL(files[0]);
+          console.log({response})
+          return response;
+        }catch(err){
+          console.log(err);
+        }
+    }
+  };
   useEffect(() => {
     getScheduleData({});
   }, []);
@@ -43,6 +57,11 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
           {t("join_meet")}
         </div>
       </div>
+      <UploadImage
+        multiple={true}
+        disable={false}
+        onChange={handleUploadImage}
+      />
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (
           <Skeleton
@@ -81,12 +100,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                           <div
                             key={index}
                             className="day-container"
-                            onClick={(
-                              e: React.MouseEvent<HTMLElement>
-                            ) => {
+                            onClick={(e: React.MouseEvent<HTMLElement>) => {
                               handleNavigation(
-                                e,
-                                // `/day/${dayNumber}?weekNumber=${weekNumber}` 
+                                e
+                                // `/day/${dayNumber}?weekNumber=${weekNumber}`
                                 // commented navigation to dayPage until data is inserted to it.
                               );
                             }}

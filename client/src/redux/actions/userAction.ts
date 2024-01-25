@@ -124,6 +124,14 @@ export const useUser = () => {
     dispatch(actions.setIsLoggedIn(isLoggedIn));
   };
 
+  const setProfileImage = async ( image: string) => {
+    // const response = await apolloClient.mutate({
+    //   // mutation: ,
+    //   // variables
+    // })
+ 
+  }
+
   return {
     user,
     registerUser,

@@ -643,7 +643,10 @@ declare global {
     meetingData?: MeetingSchemaType,
     response: CustomResponseType
   }
-
+  type ProfileImageType = {
+    publicId?: string
+    secureUrl?: string
+  }
 
 }
 export { };

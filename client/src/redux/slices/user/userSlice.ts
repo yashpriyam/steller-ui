@@ -3,7 +3,11 @@ import { getCookie } from "../../../utils/index";
 
 const initialState = {
   userData: null,
-  isLoggedIn: !!getCookie(process.env.REACT_APP_JWT_SECRET_KEY || "")
+  isLoggedIn: !!getCookie(process.env.REACT_APP_JWT_SECRET_KEY || ""),
+  profileImage:  {
+    publicId: "",
+    secureUrl: "",
+  },
 };
 
 export const userSlice = createSlice({
@@ -15,7 +19,11 @@ export const userSlice = createSlice({
     },
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = action?.payload;
-    }
+    },
+    setProfileImage: (state, action) => {
+      console.log({action})
+      state.profileImage = action.payload;
+    },
   },
 });
 
