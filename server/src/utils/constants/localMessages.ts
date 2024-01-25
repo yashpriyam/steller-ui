@@ -91,4 +91,4 @@ export const localMessages = Object.freeze({
     DATA_FOUND: "Successfully found cities data",
     INSERTION_SUCCESS: "Successfully inserted cities data",
   },
-);
+});
