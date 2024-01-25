@@ -6,6 +6,7 @@ const meetingSchema = new mongoose.Schema<MeetingSchemaType>({
     link: { type: String },
     scheduledAt: { type: Date },
     isActive: { type: Boolean, default: false },
+    isPaid: { type: Boolean, default: false }
 });
 
 export const meetingModel = mongoose.model<MeetingSchemaType>("meeting", meetingSchema);

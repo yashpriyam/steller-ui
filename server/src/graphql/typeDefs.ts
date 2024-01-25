@@ -914,14 +914,16 @@ type UserAllFeePlanDataOutputType {
     link: String
     isActive: Boolean
     scheduledAt: String
+    isPaid: Boolean
   }
 
   type MeetingDataType {
     meetingNumber: String!
     password: String!
     link: String
-    isActive: String
+    isActive: Boolean
     scheduledAt: String
+    isPaid: Boolean
   }
 
   type MeetingDataOutputType {

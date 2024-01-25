@@ -813,6 +813,7 @@ declare global {
     link?: string;
     scheduledAt?: Date;
     isActive: boolean;
+    isPaid: boolean;
   }
   
   type MeetingReturnType = {
