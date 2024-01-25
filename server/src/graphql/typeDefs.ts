@@ -937,7 +937,7 @@ type UserAllFeePlanDataOutputType {
   type MeetingDataType {
     meetingNumber: String!
     password: String!
-    title: String!
+    title: String
     link: String
     isActive: Boolean
     scheduledAt: String
@@ -957,18 +957,7 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     isPaid: Boolean
     scheduledAt: DateTime
-  }
-
-  type MeetingListOutputType {
-    meetingList: [MeetingDataType]
-    response: CustomResponseType
-  }
-
-
-  input MeetingListFilterInputType {
-    isActive: Boolean
-    isPaid: Boolean
-    scheduledAt: DateTime
+    title: String
   }
 
   type MeetingListOutputType {
