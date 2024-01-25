@@ -1,0 +1,38 @@
+.user-payment-page {
+  padding: 20px;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .payment-card {
+    margin-bottom: 15px;
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+}
+.button-wrapper {
+    margin-top: 20px;
+  }
+  
+  .button {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #2980b9; 
+    }
+  
+    &:disabled {
+      background-color: #bdc3c7;
+      cursor: not-allowed;
+    }
+  }
+}
