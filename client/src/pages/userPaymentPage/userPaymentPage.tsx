@@ -12,13 +12,12 @@ const UserPaymentPage: React.FC = () => {
  const {feePlans, getFeePlans} = useFeePlans()
 
   const getData = async ()=> {
-    await getUserPayments('6523b3424f9e607c618395cf'); 
+    await getUserPayments(''); 
     await getFeePlans('Batch2024')
  }
 
  useEffect(() => {
     getData()
-    
  }, [])
  
 

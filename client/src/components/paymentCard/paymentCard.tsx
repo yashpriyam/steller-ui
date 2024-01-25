@@ -12,8 +12,8 @@ const PaymentCard: React.FC<PaymentCardProps> = ({ feePlan }) => {
     <div className="payment-card"> 
     <h3>User Payment</h3>
     <p>BATCH CODE: {feePlan.batchCode}</p>
-    <p>TYPE: {feePlan.name}</p>
-    <p>TYPE: {feePlan.description}</p>
+    <p>NAME: {feePlan.name}</p>
+    <p>DESCRIPTION: {feePlan.description}</p>
     {feePlan.installments?.map((installment, id) => (
         <InstallmentCard key={installment.id} installment={installment} index={id} />
       ))}
