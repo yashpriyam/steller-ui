@@ -25,3 +25,4 @@ export { createDay, updateDay } from "./day/index";
 export { upsertUserProfile } from "./userProfile/index";
 export { createFeePlan } from "./feePlan/index"
 export { createBatch } from "./batch/index"
+export { createMeeting } from "./meeting";

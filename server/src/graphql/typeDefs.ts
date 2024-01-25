@@ -66,6 +66,7 @@ const typeDefs = gql`
     upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
     createFeePlan(feePlanData: FeePlanInput!): FeePlanDataOutputType!
     createBatch(input: BatchInput!): BatchDataOutputType!
+    createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
   }
 
   type ProfileImageType {
@@ -843,6 +844,27 @@ const typeDefs = gql`
   enum SessionPreference {
     ONLINE
     OFFLINE
+  }
+
+  input MeetingDataInputType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+  }
+
+  type MeetingDataType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: String
+    scheduledAt: String
+  }
+
+  type MeetingDataOutputType {
+    meetingData: MeetingDataType
+    response: CustomResponseType
   }
 
   scalar DateTime

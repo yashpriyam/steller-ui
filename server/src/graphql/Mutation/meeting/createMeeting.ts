@@ -4,7 +4,7 @@ import { meetingModel } from "@models";
 export const createMeeting = async (
   _parent: undefined,
   args: { data: MeetingSchemaType }
-) => {
+): Promise<MeetingReturnType> => {
   const { data } = args;
   const { meetingNumber, password, link, isActive, scheduledAt } = data;
   const { BAD_REQUEST, OK } = statusCodes;

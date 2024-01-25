@@ -798,7 +798,8 @@ declare global {
     isActive: boolean;
   }
   
-  type CreateMeetingArgsType = {
-    
+  type MeetingReturnType = {
+    meetingData?: MeetingSchemaType,
+    response: CustomResponseType
   }
 }
