@@ -12,6 +12,11 @@ declare global {
     expectedSalary: string;
     emailOtp: string;
     collegeName: string;
+    courseYear: string;
+    course: string;
+    branch: string;
+    location: string;
+    batchCode: string;
   }
 
   interface Experience {
@@ -552,6 +557,9 @@ declare global {
     topic?:string;
     skip?:number;
     limit?:number;
+  }
+  type CityDataStateType = {
+    cityList?: string[];
   }
 }
 export { };

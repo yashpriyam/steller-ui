@@ -49,6 +49,11 @@ declare global {
     collegeName?: string;
     profileImage?: CloudinaryImageType;
     coverImage?: CloudinaryImageType;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    batchCode?: string;
   };
 
   type CloudinaryImageType = {
@@ -713,6 +718,12 @@ declare global {
     profileImage?: UserProfile;
     coverImage?: UserProfile;
     userProfile?: Types.ObjectId;
+    batchCode?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    feePlan?: string;
   }
   interface UserProfileDataType {
     personalDetails?: PersonalDetailType;
@@ -807,6 +818,10 @@ declare global {
     response: CustomResponseType;
   }
   
+  type CitiesOutputType = { 
+    cityData?: string[];
+    response: CustomResponseType;
+  };
   type MeetingSchemaType = {
     meetingNumber: string;
     password: string;
