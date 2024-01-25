@@ -626,7 +626,7 @@ declare global {
     response: CustomResponseType;
   }
   type UserAllFeePlanDataOutputType = {
-    feePlanData?: FeePlanSchemaType[];
+    feePlans?: FeePlanSchemaType[];
     response: CustomResponseType;
   }
   

@@ -8,6 +8,7 @@ import {loginReducer} from "./slices/login/loginSlice";
 import weekSlice from "./slices/week/weekSlice";
 import userPaymentsSlice from "./slices/userPayments/userPaymentsSlice";
 import citySlice from "./slices/city/citySlice";
+import feePlanSlice from "./slices/feePlans/feePlanSlice";
 
 export default configureStore({
   reducer: {
@@ -20,5 +21,6 @@ export default configureStore({
     week: weekSlice,
     userPayments: userPaymentsSlice,
     city: citySlice,
+    feePlans: feePlanSlice
   },
 });
