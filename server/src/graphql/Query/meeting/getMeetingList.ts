@@ -1,5 +1,6 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import { meetingModel } from "@models";
+import { removeNullAndUndefinedKeys } from "@utils";
 
 export const getMeetingList = async (
   _parent: undefined,
@@ -9,11 +10,12 @@ export const getMeetingList = async (
     const { data } = args;
     const { isActive, isPaid, scheduledAt } = data;
     const { MEETING_MODEL } = localMessages;
-    const meetingList = await meetingModel.find({
+    const meetingFilter: GetMeetingListArgsType = removeNullAndUndefinedKeys({
       isActive,
       isPaid,
       scheduledAt,
     });
+    const meetingList = await meetingModel.find(meetingFilter);
     if (meetingList.length) {
       return {
         meetingList,
