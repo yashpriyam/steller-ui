@@ -1,0 +1,1 @@
+export { insertCities } from "./insertCities";

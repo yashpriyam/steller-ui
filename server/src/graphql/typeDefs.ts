@@ -12,6 +12,10 @@ const typeDefs = gql`
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
     getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
+    getAllCities: CitiesOutputType
+    getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
+    getUser: UserDataOutputType!
+    getMeetingByMeetingNumber(meetingNumber: String!): MeetingDataOutputType
   }
 
   type Mutation {
@@ -64,6 +68,16 @@ const typeDefs = gql`
     updateDay(dayData: DayDataInputType!): DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
     upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
+    createFeePlan(feePlanData: FeePlanInput!): FeePlanDataOutputType!
+    createBatch(input: BatchInput!): BatchDataOutputType!
+    updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
+    updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
+    createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
+    getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
+    getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
+    createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
+    insertCities(citiesData: [String]!): CitiesOutputType
+    updateUser(input: PartialUserSchemaType): UserDataOutputType
   }
 
   type ProfileImageType {
@@ -82,8 +96,8 @@ const typeDefs = gql`
   }
 
   type CustomResponseType {
-    status: Int!
-    message: String!
+    status: Int
+    message: String
   }
 
   type AllVideoOutputDataType {
@@ -172,6 +186,7 @@ const typeDefs = gql`
   }
 
   input RegistrationInputType {
+    batchCode: String!
     name: String!
     email: String!
     phoneNumber: String!
@@ -180,6 +195,10 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
     collegeName: String
+    courseYear: String
+    course: String
+    branch: String
+    location: String
   }
 
   enum SessionPreferenceEnum {
@@ -193,6 +212,7 @@ const typeDefs = gql`
     credentials: String
   }
   type RegisterOutputType {
+    batchCode: String
     name: String!
     email: String!
     phoneNumber: String!
@@ -201,6 +221,10 @@ const typeDefs = gql`
     sessionPreference: SessionPreferenceEnum
     expectedSalary: String
     collegeName: String
+    courseYear: String
+    course: String
+    branch: String
+    location: String
   }
   input CreateNotesInputType {
     link: String!
@@ -765,6 +789,233 @@ const typeDefs = gql`
   input UpsertUserProfileInputType {
     userProfile: UserProfileInputType
   }
+  input FeePlanInput {
+    batchCode: String
+    name: String!
+    description: String
+    installments: [InstallmentInput]
+    miscellaneous: JSON
+  }
+  
+  input InstallmentInput {
+    id: ID
+    amount: String
+    sequence: String!
+    dueDate: String!
+    accessWeeks: ID
+    miscellaneous: JSON
+  }
+  type FeePlanDataOutputType {
+    feePlanData: FeePlan
+    response: CustomResponseType!
+  }
+  type InstallmentInputType {
+    _id: ID
+    amount: String
+    sequence: String!
+    dueDate: String!
+    accessWeeks: ID
+    miscellaneous: JSON
+  }
+  type FeePlan {
+    _id: ID!
+    batchCode: String
+    name: String!
+    installments: [InstallmentInputType],
+    description: String!
+    miscellaneous: JSON
+  }
+
+  input BatchInput {
+    batchCode: String!
+    paymentType: ID
+    paidStudents: [ID]
+    registeredStudents: [ID]
+    demoStudents: [ID]
+    startDate: String
+  }
+  
+  type BatchDataOutputType {
+    batchData: Batch
+    response: CustomResponseType!
+  }
+  
+  type Batch {
+    _id: ID!
+    batchCode: String!
+    paymentType: FeePlan
+    demoStudents: [User]
+    paidStudents: [User]
+    registeredStudents: [User]
+    startDate: String
+  }
+  type User {
+    _id: ID!
+    email: String!
+    name: String!
+    phoneNumber: String!
+    password: String
+    isJobSeeker: Boolean!
+    occupation: String
+    sessionPreference: SessionPreference!
+    expectedSalary: String
+    IST: String!
+    collegeName: String
+    profileImage: UserProfile
+    coverImage: UserProfile
+    userProfile: ID
+  }
+  
+  type UserProfile {
+    url: String!
+    altText: String
+  }
+  
+  enum SessionPreference {
+    ONLINE
+    OFFLINE
+  }
+
+  input UserPaymentCreateInput {
+    user: ID!
+    batch: ID!
+    feePlan: ID!
+    installmentId: ID
+    image: ImageInput
+  }
+
+  input ImageInput {
+    publicId: String
+    secureUrl: String
+  }
+
+
+type UserPaymentData {
+  _id: ID
+  user: User!
+  batch: Batch!
+  feePlan: FeePlan!
+  installmentId: ID
+  isApproved: Boolean
+  isRejected: Boolean
+  isPending: UserPaymentPendingType
+  image: CoverImageType
+  createdAt: String
+  updatedAt: String
+}
+
+type UserPaymentPendingType {
+  totalAmount: String
+  totalPendingAmount: String
+}
+
+
+type UserPaymentDataOutput {
+  userPaymentData: UserPaymentData
+  response: CustomResponseType!
+}
+
+type UserAllPaymentDataOutputType  {
+  userPaymentData: [UserPaymentData]
+  response: CustomResponseType
+}
+type UserAllFeePlanDataOutputType {
+  feePlanData: [FeePlan]
+  response: CustomResponseType
+}
+
+  input MeetingDataInputType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  type MeetingDataType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  type MeetingDataOutputType {
+    meetingData: MeetingDataType
+    response: CustomResponseType
+  }
+  type CitiesOutputType {
+    cityData: [String]
+    response: CustomResponseType!
+  }
+
+  input MeetingListFilterInputType {
+    isActive: Boolean
+    isPaid: Boolean
+    scheduledAt: DateTime
+  }
+
+  type MeetingListOutputType {
+    meetingList: [MeetingDataType]
+    response: CustomResponseType
+  }
+
+
+  input MeetingListFilterInputType {
+    isActive: Boolean
+    isPaid: Boolean
+    scheduledAt: DateTime
+  }
+
+  type MeetingListOutputType {
+    meetingList: [MeetingDataType]
+    response: CustomResponseType
+  }
+
+  type UserDataOutputType {
+    userData: UserSchemaType
+    response: CustomResponseType
+  }
+  input PartialUserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+
+  type UserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+  
 
   scalar DateTime
   scalar JSON

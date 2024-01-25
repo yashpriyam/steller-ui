@@ -12,7 +12,7 @@ declare global {
   type MailResponseType = {
     html: string;
     subject: string;
-    to: string;
+    to: string | string[];
   };
 
   type MailDataType = {
@@ -49,6 +49,11 @@ declare global {
     collegeName?: string;
     profileImage?: CloudinaryImageType;
     coverImage?: CloudinaryImageType;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    batchCode?: string;
   };
 
   type CloudinaryImageType = {
@@ -713,6 +718,12 @@ declare global {
     profileImage?: UserProfile;
     coverImage?: UserProfile;
     userProfile?: Types.ObjectId;
+    batchCode?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    feePlan?: string;
   }
   interface UserProfileDataType {
     personalDetails?: PersonalDetailType;
@@ -739,4 +750,111 @@ declare global {
   type QuestionAttemptIdMapType = {
     [key: string]: QuestionAttemptSchemaType;
   };
+
+  type BatchSchemaType = {
+    batchCode: string;
+    paymentType?: FeePlanSchemaType; 
+    paidStudents?: UserSchemaType[];
+    registeredStudents?: UserSchemaType[];
+    demoStudents?: UserSchemaType[];
+    startDate?: Date
+  };
+
+  type FeePlanSchemaType = {
+    batchCode?: string;
+    name?: string;
+    description?: string;
+    installments?: Installment[],
+    miscellaneous?: JSON
+  };
+
+  type Installment = {
+    id? :string;
+    amount?: string;
+    sequence?: string;
+    dueDate?: Date; 
+    accessWeeks?: WeekDataType[]; // we'll store week data here
+    miscellaneous?: JSON
+  }
+
+  type UserPaymentSchemaType = {
+    _id?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+
+  };  
+   
+  type BatchDataOutputType = {
+    batchData?: BatchSchemaType;
+    response: CustomResponseType;
+  };
+  type FeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType;
+    response: CustomResponseType;
+  };
+
+  type UserPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType;
+    response: CustomResponseType;
+  }
+
+  type UserAllPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+  type UserAllFeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType[];
+    response: CustomResponseType;
+  }
+  
+  type CitiesOutputType = { 
+    cityData?: string[];
+    response: CustomResponseType;
+  };
+  type MeetingSchemaType = {
+    meetingNumber: string;
+    password: string;
+    link?: string;
+    scheduledAt?: Date;
+    isActive: boolean;
+    isPaid: boolean;
+  }
+  
+  type MeetingReturnType = {
+    meetingData?: MeetingSchemaType;
+    response: CustomResponseType;
+  }
+
+  type MeetingListDataType = {
+    meetingList?: MeetingSchemaType[];
+    response: CustomResponseType;
+  }
+
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
+  }
+  
+  type UserDataOutputType = {
+    userData?: UserSchemaType;
+    response: CustomResponseType;
+  }
+
+  type GetMeetingOutputType = {
+    meetingData?: MeetingSchemaType | null;
+    response: CustomResponseType
+  }
+
 }

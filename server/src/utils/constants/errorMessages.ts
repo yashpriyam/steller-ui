@@ -7,7 +7,9 @@ export const errorMessages = Object.freeze({
     USER_PASSWPRD_UPDATION_FAILED: "password updation failed",
     USER_LOGIN_FAILED: "invalid email and password",
     UPLOAD_IMAGE_FAILED: "failed to upload image",
-
+    USER_UPDATE_FAILED: "User update failed.",
+    USER_NOT_FOUND: "User not found.",
+    USER_FETCH_FAILED: "Failed to fetch user information.",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
@@ -70,5 +72,33 @@ export const errorMessages = Object.freeze({
   },
   SLACK: {
     INVALID_CONTENT: "This content can't be displayed",
+  },
+  BATCH_MODEL: {
+    BATCH_CREATION_FAILED: "Batch creation failed.",
+    BATCH_UPDATE_FAILED: "Batch update failed.",
+    BATCH_DOES_NOT_EXIST: "Batch does not exist.",
+    BATCH_EXIST: "Batch with the same code already exists.",
+  },
+  FEE_PLAN_MODEL: {
+    FEE_PLAN_CREATION_FAILED: "Failed to create fee plan.",
+    FEE_PLAN_EXIST: "Fee plan with the same batch code already exists.",
+    FEE_PLAN_UPDATE_FAILED: "Fee plan update failed.",
+    FEE_PLAN_DOES_NOT_EXIST: "Fee plan does not exist.",
+    FEE_PLAN_FETCH_FAILED: "Failed to fetch fee plan details.",
+  },
+  USER_PAYMENT_MODEL: {
+    USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
+    USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
+  },
+  CITIES: {
+    DATA_NOT_FOUND: "No data found for cities",
+    INSERTION_FAILED: "Unable to insert cities data",
+  },
+  MEETING_MODEL: {
+    MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED:
+      "Meeting number and password is required",
+    DUBLICATE_MEETING_NUMBER: "Dublicate meeting number",
+    UNABLE_TO_CREATE_MEETING: "Unable to create meeting",
+    UNABLE_TO_FIND_MEETING: "Unable to find meetings",
   },
 });

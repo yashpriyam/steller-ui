@@ -14,6 +14,7 @@ import UploadIcon from '../../icons/fileUploadIcon';
 import CrossIcon from '../../icons/CrossIcon';
 import Accordion from '../../components/accordion/accordion';
 
+
 const dataProfile = {
     personalDetail: {
         fullName: `John Doe`,
@@ -169,13 +170,16 @@ const ProfilePage = () => {
         };
 
     }, [isMobileView]);
-
+     
+    
+     
     return (
         isMobileView ? (
-            <div className={`main-container`}>
+            <div className={`profile-main-container`}>
                 <div className="button-container">
                     <button onClick={handleEditToggle}>{isEdit ? <SaveIcon /> : <EditIcon />}</button>
                 </div>
+                
                 <div className="header-container">
                     <div className="background-img-container">
                         <div className="background-upload-container">
@@ -292,7 +296,7 @@ const ProfilePage = () => {
 
                 </div>
             </div>) : (
-            <div className="main-container">
+            <div className="profile-main-container">
                 <div className="button-container">
                     <button onClick={handleEditToggle}>{isEdit ? <SaveIcon /> : <EditIcon />}</button>
                 </div>

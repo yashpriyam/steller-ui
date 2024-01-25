@@ -29,6 +29,11 @@ export const registerUser = async (
       sessionPreference,
       expectedSalary,
       collegeName,
+      location,
+      courseYear,
+      branch,
+      course,
+      batchCode,
     } = data;
     const lowerCaseEmail = email.toLowerCase();
     if (!isValidEmail(lowerCaseEmail)) {
@@ -57,6 +62,11 @@ export const registerUser = async (
       sessionPreference,
       expectedSalary,
       collegeName,
+      location,
+      courseYear,
+      branch,
+      course,
+      batchCode,
     });
 
     const { IST: time } = savedUser;
@@ -76,6 +86,11 @@ export const registerUser = async (
       isJobSeeker: savedUser.isJobSeeker,
       occupation: savedUser.occupation,
       sessionPreference:savedUser.sessionPreference,
+      location: savedUser.location,
+      courseYear: savedUser.courseYear,
+      course: savedUser.course,
+      branch: savedUser.branch,
+      batchCode: savedUser.batchCode,
     }
     await Promise.allSettled([
       sendEmail({
@@ -84,7 +99,7 @@ export const registerUser = async (
       }),
       sendEmail({
         ...getRegistrationEmailForAdmin(emailDetails),
-        to: process.env.SENDER_EMAIL || "",
+        to: [process.env.SENDER_EMAIL || "", "akadme767@gmail.com"],
       }),
     ]);
 

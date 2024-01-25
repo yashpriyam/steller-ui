@@ -8,7 +8,10 @@ import Toast from "../../helpers/utils/toast";
 function createFormFieldValueMap(formStep) {
   return {
     ...parentFormsByName[parentFormStepMap[formStep]].reduce(
-      (a, b) => ({ ...a, [b["labelId"]]: "" }),
+      (a, b) => ({
+        ...a,
+        [b["labelId"]]: b.defaultValue ? b.defaultValue : "",
+      }),
       {}
     ),
   };
