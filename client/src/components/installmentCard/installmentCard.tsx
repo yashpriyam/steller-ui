@@ -1,5 +1,5 @@
 import React from 'react';
-import './InstallmentCard.scss'; // Import the SCSS file
+import './InstallmentCard.scss'; 
 
 
 const InstallmentCard: React.FC<InstallmentCardProps> = ({ installment, index=0 }) => {
