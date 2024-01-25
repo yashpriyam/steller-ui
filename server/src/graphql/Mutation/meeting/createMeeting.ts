@@ -6,7 +6,7 @@ export const createMeeting = async (
   args: { data: MeetingSchemaType }
 ): Promise<MeetingReturnType> => {
   const { data } = args;
-  const { meetingNumber, password, link, isActive, scheduledAt } = data;
+  const { meetingNumber, password, link, isActive, scheduledAt, isPaid } = data;
   const { BAD_REQUEST, OK } = statusCodes;
   const { MEETING_MODEL } = errorMessages;
   try {
@@ -35,6 +35,7 @@ export const createMeeting = async (
           link,
           isActive,
           scheduledAt,
+          isPaid
         });
         return {
           meetingData,
