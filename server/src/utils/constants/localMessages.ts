@@ -51,6 +51,7 @@ export const localMessages = Object.freeze({
     USER_LOGIN_SUCCESS: "login successfully",
     PROFILE_IMAGE_UPLOADED: "profile image uploaded successfully",
     IMAGE_UPLOADED_SUCCESSFULLY: "image uploaded successfully",
+    USER_UPDATE_SUCCESS: "User updated successfully.",
   },
   WEEK_MODEL: {
     WEEK_CREATION_SUCCESS: "Week data inserted successfully",

@@ -75,6 +75,7 @@ const typeDefs = gql`
     getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
     createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
+    updateUser(input: PartialUserSchemaType): UserDataOutputType
   }
 
   type ProfileImageType {
@@ -93,8 +94,8 @@ const typeDefs = gql`
   }
 
   type CustomResponseType {
-    status: Int!
-    message: String!
+    status: Int
+    message: String
   }
 
   type AllVideoOutputDataType {
@@ -971,6 +972,48 @@ type UserAllFeePlanDataOutputType {
     response: CustomResponseType
   }
 
+  type UserDataOutputType {
+    userData: UserSchemaType
+    response: CustomResponseType
+  }
+  input PartialUserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+
+  type UserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+  
 
   scalar DateTime
   scalar JSON

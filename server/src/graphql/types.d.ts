@@ -846,4 +846,10 @@ declare global {
     isActive?: boolean;
     scheduledAt?: Date;
   }
+  
+  type UserDataOutputType = {
+    user?: UserSchemaType;
+    response: CustomResponseType;
+  }
+
 }
