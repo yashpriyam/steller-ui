@@ -1,0 +1,72 @@
+@import "../../components/variables.scss";
+
+@mixin installmentItem {
+    width: 50%;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid $primaryBgColor;
+    border-radius: 5px;
+
+  }
+  
+  // Styling for paid installments
+  .paid-installments {
+    color: $primaryBgColor;
+    margin-bottom: 30px;
+    .installment-heading {
+      color: $primaryBgColor;
+      margin-bottom: 30px;
+    }
+  
+    .installment-item-constainer {
+      list-style-type: none;
+      padding: 0;
+  
+      .installment-item {
+        @include installmentItem;
+        background-color: $primaryBgColor;
+        margin-bottom: 30px;
+      }
+    }
+  }
+  
+  // Styling for unpaid installments
+  .unpaid-installments {
+
+    .installment-cards{
+        display: flex;
+        flex-direction: column;
+    }
+    .installment-heading {
+      color: $primaryBgColor;
+      margin-bottom: 30px;
+    }
+  
+    .installment-item-constainer {
+      list-style-type: none;
+      padding: 0;
+    
+      .installment-item {
+        @include installmentItem;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-bottom: 30px;
+        background-color: $primaryBgColor;
+        .pay-now-button {
+            background-color: $primaryBgColor;
+            color: $primaryBgColor;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left: 10px;
+          
+            &:hover {
+              background-color: $primaryBgColor;
+            }
+          }
+      }
+    }
+  }
+  
