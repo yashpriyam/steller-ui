@@ -72,6 +72,7 @@ const typeDefs = gql`
     createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
     getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
+    createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
   }
 
@@ -918,6 +919,29 @@ type UserAllFeePlanDataOutputType {
   feePlanData: [FeePlan]
   response: CustomResponseType
 }
+
+  input MeetingDataInputType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  type MeetingDataType {
+    meetingNumber: String!
+    password: String!
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  type MeetingDataOutputType {
+    meetingData: MeetingDataType
+    response: CustomResponseType
+  }
   type CitiesOutputType {
     cityData: [String]
     response: CustomResponseType!

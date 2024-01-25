@@ -15,3 +15,4 @@ export { feePlanModel } from "./feePlanSchema";
 export { batchModel } from "./batchSchema";
 export { userPaymentModel } from "./userPaymentSchema";
 export { cityModel } from "./citySchema";
+export { meetingModel } from "./meetingSchema";

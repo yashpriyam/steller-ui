@@ -92,4 +92,9 @@ export const errorMessages = Object.freeze({
     DATA_NOT_FOUND: "No data found for cities",
     INSERTION_FAILED: "Unable to insert cities data",
   },
+  MEETING_MODEL: {
+    MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED: "Meeting number and password is required",
+    DUBLICATE_MEETING_NUMBER: "Dublicate meeting number",
+    UNABLE_TO_CREATE_MEETING: "Unable to create meeting"
+  }
 });

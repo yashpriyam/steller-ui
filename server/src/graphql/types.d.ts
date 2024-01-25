@@ -822,4 +822,17 @@ declare global {
     cityData?: string[];
     response: CustomResponseType;
   };
+  type MeetingSchemaType = {
+    meetingNumber: string;
+    password: string;
+    link?: string;
+    scheduledAt?: Date;
+    isActive: boolean;
+    isPaid: boolean;
+  }
+  
+  type MeetingReturnType = {
+    meetingData?: MeetingSchemaType,
+    response: CustomResponseType
+  }
 }
