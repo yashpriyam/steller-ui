@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { 
-  AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon, SearchIcon, VideoIcon
+  AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon, SearchIcon, VideoIcon,NameIcon
 } from "./icons/index";
 import { useTranslation } from 'react-i18next';
 import { useUser } from './redux/actions/userAction';
@@ -11,8 +11,10 @@ import { deleteCookie } from './utils';
 
 export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
-  const { user } = useUser();
-  const { isLoggedIn } = user;
+  const { user, getUserData } = useUser();
+  getUserData();
+  const { isLoggedIn, userData } = user || {};
+  const { name } = userData || {};
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,8 +35,8 @@ export const useAppData = (): UseAppDataReturnType => {
   const sidebarData: SidebarProps = {
     optionsAtFirst: [
       {
-        text: "Sujal Gotharwal",
-        image: <AvatarIcon width='40px' height='40px'/>,
+        text: name || t("profile"),
+        image: <NameIcon width='40px' height='40px' name={name} />,
         url: "/profile",
         isProfile: true,
       },
