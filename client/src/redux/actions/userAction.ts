@@ -137,8 +137,7 @@ export const useUser = () => {
         }
       },
     });  
-    dispatch(actions.setUser(response.data.updateUser));      
-    return {
+    dispatch(actions.setUser(response.data.updateUser));return {
       response,
     };
   }

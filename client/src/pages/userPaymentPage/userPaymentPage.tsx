@@ -8,6 +8,7 @@ import InstallmentList from "../../components/installmentList/installmentList";
 
 const UserPaymentPage: React.FC = () => {
   const [selectedFeePlan, setSelectedFeePlan] = useState<string | null>(null);
+  const [isLoading , setIsLoading] = useState(false)
 
   const { userPayments, getUserPayments } = useUserPayments();
   const { feePlans, getFeePlans } = useFeePlans();
@@ -21,7 +22,7 @@ const UserPaymentPage: React.FC = () => {
 
   useEffect(() => {
     getData();
-  }, [user]);
+  }, [user, isLoading]);
 
   const userFeePlan = feePlans?.filter(
     (fee) => fee._id === user?.userData?.feePlan
@@ -44,7 +45,7 @@ const UserPaymentPage: React.FC = () => {
                   onChange={() => setSelectedFeePlan(feePlan._id ?? "")}
                 />
                 <label htmlFor={feePlan.name}>
-                  <PaymentCard feePlan={feePlan} />
+                  <PaymentCard feePlan={feePlan}/>
                 </label>
               </div>
             ))}
@@ -55,6 +56,7 @@ const UserPaymentPage: React.FC = () => {
                 onClick={async () => {
                   selectedFeePlan &&
                     updateUserInfo({ feePlan: selectedFeePlan });
+                    setIsLoading(!isLoading)
                 }}
                 disabled={!Boolean(selectedFeePlan) ?? true}
               >
@@ -69,6 +71,8 @@ const UserPaymentPage: React.FC = () => {
             allInstallment={userFeePlan?.installments ?? []}
             userIntsallment={userPayments?.userPayments ?? []}
             userFeePlan={userFeePlan}
+            setIsLoading={setIsLoading}
+            isLoading={isLoading}
           />
         </div>
       )}
