@@ -3,6 +3,7 @@ import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAc
 declare global {
 
   type RegisterUserData = {
+    _id?: string;
     name: string;
     email: string;
     phoneNumber: string;
@@ -17,6 +18,7 @@ declare global {
     branch: string;
     location: string;
     batchCode: string;
+    feePlan?: string
   }
 
   interface Experience {
@@ -582,6 +584,7 @@ declare global {
   };
 
   type Installment = {
+    _id: string | undefined;
     id? :string;
     amount?: string;
     sequence?: string;
@@ -708,6 +711,25 @@ declare global {
   type UpdateUserInput = {
     feePlan?: string
   };
+  type InstallmentListProps ={
+      allInstallment?: Installment[];
+      userIntsallment?: UserPaymentSchemaType[];
+      userFeePlan?: FeePlanSchemaType;
+      setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+      isLoading?: boolean
+  }
+ 
+  type UserPaymentInputType = {
+    batch?: string; 
+    feePlan?: string;
+    installmentId: string
+    imageUrl?: string
+  }
+  interface InstallmentItemProps {
+    installment: Installment;
+    handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
+  }
+  
 
 }
 export { };

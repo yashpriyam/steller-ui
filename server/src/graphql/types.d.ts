@@ -792,7 +792,7 @@ declare global {
     image?: ImageInputType;
     createdAt?: Date;
     updatedAt?: Date
-
+    imageUrl?: string
   };  
    
   type BatchDataOutputType = {
@@ -871,4 +871,9 @@ declare global {
     meetingCode?: string;
     title?: string;
   }
+  interface VariableSchemaType extends Document {
+    key: string;
+    value: string;
+  }
+
 }

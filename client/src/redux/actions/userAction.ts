@@ -9,6 +9,7 @@ import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/s
 import { setCookie } from "../../utils/index";
 import { UPDATE_USER_INFO } from "../../graphql/mutation/user/updateUserInfo";
 import { GET_USER } from "../../graphql/mutation/user/getUser";
+import { CREATE_USER_PAYMENTS } from "../../graphql/mutation/userPayments/createUserPayment";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -136,8 +137,7 @@ export const useUser = () => {
         }
       },
     });  
-    dispatch(actions.setUser(response.data.updateUser));      
-    return {
+    dispatch(actions.setUser(response.data.updateUser));return {
       response,
     };
   }
@@ -149,6 +149,23 @@ export const useUser = () => {
         query: GET_USER
       });
       dispatch(actions.setUser(response.data.getUser));
+      return response;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const createUserPayment = async (input: UserPaymentInputType) => {
+    try {
+      const response = await apolloClient.mutate({
+        mutation: CREATE_USER_PAYMENTS,
+        variables: 
+         {
+            input: {
+              ...input
+            }
+         }
+      });
       return response;
     } catch (err) {
       console.error(err);
@@ -167,6 +184,7 @@ export const useUser = () => {
     loginUserApi,
     setIsLoggedIn,
     updateUserInfo,
-    getUserData
+    getUserData,
+    createUserPayment
   };
 };
