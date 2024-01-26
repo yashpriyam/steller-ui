@@ -40,7 +40,8 @@ const PORT = process.env.PORT || 8080;
       "https://webmaster-portal.vercel.app",
       "https://www.bewebmasters.com",
       "www.bewebmasters.com",
-      "bewebmasters.com"
+      "bewebmasters.com",
+      "https://webmaster-portal-git-fix-body-scroll-yashpriyam.vercel.app"
     ],
     credentials: true,
   };
