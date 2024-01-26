@@ -88,7 +88,8 @@ export const localMessages = Object.freeze({
     MEETING_CREATED_SUCCESSFULLY: "Meeting created successfully",
     NO_MEETING_FOUND: "No meeting data exists for given filter",
     SUCCESSFULLY_FOUND_MEETING_DETAILS: "Successfully found meeting details",
-  },  
+    SUCCESSFULLY_UPDATED_MEETING: "Successfully updated meeting details",
+  },
   CITIES: {
     DATA_FOUND: "Successfully found cities data",
     INSERTION_SUCCESS: "Successfully inserted cities data",

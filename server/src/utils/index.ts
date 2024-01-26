@@ -19,3 +19,5 @@ export { isLoggedIn } from "./isLoggedIn";
 export { updateImage } from "./updateImage";
 export { isCorrectAnswer } from "./isCorrectAnswer";
 export { getCheckedOptions } from "./getCheckedOptions";
+export { isNonNullishValueExists } from "./isNonNullishValueExists";
+export { isNonUndefinedAndNullishValueExists } from "./isNonUndefinedAndNullishValueExists";

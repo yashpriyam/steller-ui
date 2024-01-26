@@ -15,7 +15,7 @@ const typeDefs = gql`
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
-    getMeetingByMeetingNumber(meetingNumber: String!): MeetingDataOutputType
+    getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
   }
 
   type Mutation {
@@ -76,6 +76,7 @@ const typeDefs = gql`
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
     getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
     createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
+    updateMeeting(filter: UpdateMeetingInputFilter, data: UpdateMeetingInputDataType): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
   }
@@ -927,6 +928,8 @@ type UserAllFeePlanDataOutputType {
 
   input MeetingDataInputType {
     meetingNumber: String!
+    meetingCode: String!
+    title: String!
     password: String!
     link: String
     isActive: Boolean
@@ -935,8 +938,10 @@ type UserAllFeePlanDataOutputType {
   }
 
   type MeetingDataType {
-    meetingNumber: String!
-    password: String!
+    meetingNumber: String
+    password: String
+    meetingCode: String
+    title: String
     link: String
     isActive: Boolean
     scheduledAt: String
@@ -956,18 +961,7 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     isPaid: Boolean
     scheduledAt: DateTime
-  }
-
-  type MeetingListOutputType {
-    meetingList: [MeetingDataType]
-    response: CustomResponseType
-  }
-
-
-  input MeetingListFilterInputType {
-    isActive: Boolean
-    isPaid: Boolean
-    scheduledAt: DateTime
+    title: String
   }
 
   type MeetingListOutputType {
@@ -1017,6 +1011,28 @@ type UserAllFeePlanDataOutputType {
     feePlan: String 
   }
   
+  input UpdateMeetingInputFilter {
+    meetingNumber: String
+    title: String
+    meetingCode: String
+  }
+
+  input UpdateMeetingInputDataType {
+    meetingNumber: String
+    meetingCode: String
+    password: String
+    title: String
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  input GetMeetingFilterInputType {
+    meetingNumber: String
+    meetingCode: String
+    title: String
+  }
 
   scalar DateTime
   scalar JSON
