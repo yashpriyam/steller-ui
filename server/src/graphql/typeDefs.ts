@@ -72,7 +72,7 @@ const typeDefs = gql`
     createBatch(input: BatchInput!): BatchDataOutputType!
     updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
     updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
-    createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
+    createUserPayment(input: UserPaymentCreateInput): UserPaymentDataOutput!
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
     getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
     createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
@@ -877,11 +877,12 @@ const typeDefs = gql`
   }
 
   input UserPaymentCreateInput {
-    user: ID!
+    user: ID
     batch: ID!
     feePlan: ID!
     installmentId: ID
     image: ImageInput
+    imageUrl: String
   }
 
   input ImageInput {

@@ -713,8 +713,15 @@ declare global {
   };
   type InstallmentListProps ={
       allInstallment?: Installment[];
-      userIntsallment?: UserPaymentSchemaType[]
-
+      userIntsallment?: UserPaymentSchemaType[];
+      userFeePlan?: FeePlanSchemaType
+  }
+ 
+  type UserPaymentInputType = {
+    batch?: string; 
+    feePlan?: string;
+    installmentId: string
+    imageUrl?: string
   }
 
 }
