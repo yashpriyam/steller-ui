@@ -23,6 +23,10 @@ const UserPaymentPage: React.FC = () => {
     getData();
   }, [user]);
 
+  const userFeePlan = feePlans?.filter(
+    (fee) => fee._id === user?.userData?.feePlan
+  )[0];
+
   return (
     <div className="user-payment-page">
       <h1>User Payment Page</h1>
@@ -61,8 +65,11 @@ const UserPaymentPage: React.FC = () => {
         </div>
       ) : (
         <div>
-
-            <InstallmentList allInstallment={feePlans?.[0]?.installments ?? []} userIntsallment={userPayments?.userPayments ?? []}/>
+          <InstallmentList
+            allInstallment={userFeePlan?.installments ?? []}
+            userIntsallment={userPayments?.userPayments ?? []}
+            userFeePlan={userFeePlan}
+          />
         </div>
       )}
     </div>

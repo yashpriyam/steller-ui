@@ -11,10 +11,10 @@
   
   // Styling for paid installments
   .paid-installments {
-    color: $primaryBgColor;
+    color: $primaryColor;
     margin-bottom: 30px;
     .installment-heading {
-      color: $primaryBgColor;
+      color: $primaryColor;
       margin-bottom: 30px;
     }
   
@@ -24,8 +24,18 @@
   
       .installment-item {
         @include installmentItem;
-        background-color: $primaryBgColor;
+        background-color: $lightBlue;
         margin-bottom: 30px;
+        .installment-info {
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+          .installment-elem{
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 900;
+          }
+        }
       }
     }
   }
@@ -38,33 +48,89 @@
         flex-direction: column;
     }
     .installment-heading {
-      color: $primaryBgColor;
+      color: $primaryColor;
       margin-bottom: 30px;
     }
   
     .installment-item-constainer {
       list-style-type: none;
       padding: 0;
-    
+
       .installment-item {
         @include installmentItem;
         display: flex;
         justify-content: space-around;
         align-items: center;
         margin-bottom: 30px;
-        background-color: $primaryBgColor;
-        .pay-now-button {
-            background-color: $primaryBgColor;
-            color: $primaryBgColor;
-            padding: 5px 10px;
+        background-color: $red;
+
+        .file-input-wrapper {
+          position: relative;
+          margin-top: 10px;
+      
+          .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 1;
+      
+            // Add any additional styles as needed
+      
+            &:hover {
+              // Add hover styles if desired
+            }
+          }
+      
+          .file-input-label {
+            display: block;
+            padding: 10px;
+            background-color: $blue;
+            color: $primaryColor;
+            font-size: 15px;
+            font-weight: 600;
             border: none;
-            border-radius: 3px;
+            border-radius: 5px;
+            cursor: pointer;
+      
+            &:hover {
+              background-color: #2980b9;
+            }
+          }
+        }
+
+        .installment-info {
+          display: flex;
+          flex-direction: column;
+          padding: 20px;
+          .installment-elem{
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-weight: 900;
+          }
+        }
+        .disabled {
+          background-color: $gray;
+        }
+        .enabled {
+          background-color: $primaryBorderColor;
+          color: $primaryColor;
+          &:hover {
+            background-color: $darkGrey;
+          }
+        }
+        .pay-now-button {
+           border-radius: 5px;
+           width: 10vmax;
+            padding: 15px 10px;
+            border: none;
             cursor: pointer;
             margin-left: 10px;
-          
-            &:hover {
-              background-color: $primaryBgColor;
-            }
+            font-size: 15px;
+            font-weight: 600;
           }
       }
     }
