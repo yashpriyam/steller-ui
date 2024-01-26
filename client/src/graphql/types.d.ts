@@ -590,7 +590,10 @@ declare global {
     sequence?: string;
     dueDate?: Date; 
     accessWeeks?: WeekDataType[]; // we'll store week data here
-    miscellaneous?: JSON
+    miscellaneous?: JSON;
+    isApproved?: boolean;
+    isRejected?:boolean;
+    isPending?: boolean;
   }
 
   type UserPaymentSchemaType = {
