@@ -121,6 +121,8 @@ const typeDefs = gql`
     duration: String
     createdAt: String
     updatedAt: String
+    batchCode: String
+    weekNumber: String
   }
 
   type Links {
@@ -137,6 +139,8 @@ const typeDefs = gql`
     links: LinksInput!
     isActive: Boolean
     duration: String
+    weekNumber: Int!
+    batchCode: String
   }
 
   input LinksInput {

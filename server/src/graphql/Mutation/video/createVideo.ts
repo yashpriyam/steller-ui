@@ -16,6 +16,8 @@ export const createVideo = async (
       links,
       isActive,
       duration,
+      batchCode,
+      weekNumber
     } = videoData;
     const { youtube, webmasters } = links;
     const createdVideoData: VideoDataType = await videoModel.create({
@@ -30,6 +32,8 @@ export const createVideo = async (
       },
       isActive,
       duration,
+      batchCode,
+      weekNumber
     });
 
     return {

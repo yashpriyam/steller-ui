@@ -11,6 +11,14 @@ const videoSchema = new mongoose.Schema(
             type: Number,
             required: true,
         },
+        weekNumber: {
+            type: Number,
+            required: true,
+        },
+        batchCode: {
+            type: String,
+            required: true
+        },
         videoNumber: {
             type: Number,
             required: true,

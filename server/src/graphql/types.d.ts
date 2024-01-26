@@ -153,6 +153,8 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
+    weekNumber: string;
+    batchCode: string;
   };
 
   type FilteredLinksType = {
@@ -170,6 +172,8 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
+    weekNumber: number;
+    
   };
 
   type FilteredLinksType = {
