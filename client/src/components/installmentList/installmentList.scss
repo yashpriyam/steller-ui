@@ -35,6 +35,21 @@
             font-size: 20px;
             font-weight: 900;
           }
+          .installment-status {
+            font-weight: bold;
+          
+            &.approved {
+              color: $green;
+            }
+        
+            &.rejected {
+              color: $red;
+            }
+        
+            &.pending {
+              color: $lightOrangeColor;
+            }
+          }
         }
       }
     }
