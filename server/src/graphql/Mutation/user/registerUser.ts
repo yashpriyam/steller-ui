@@ -6,9 +6,11 @@ import {
   sendEmail,
   isValidEmail,
   isValidPhoneNumber,
+  uploadImage,
 } from "@utils";
 import { UserInputError } from "apollo-server-express";
 import { errorMessages, localMessages, statusCodes } from "@constants";
+const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
 
 export const registerUser = async (
   _parent: undefined,
@@ -34,6 +36,7 @@ export const registerUser = async (
       branch,
       course,
       batchCode,
+      profileImage,
     } = data;
     const lowerCaseEmail = email.toLowerCase();
     if (!isValidEmail(lowerCaseEmail)) {
@@ -51,7 +54,14 @@ export const registerUser = async (
         }
       }
     }
-
+    let cloudinaryImageData = {};
+    if (profileImage && typeof profileImage === "string") {
+      const {publicId,secureUrl} = await uploadImage(profileImage, USER_PROFILE_PICTURES_FOLDER);
+      cloudinaryImageData = {
+        publicId,
+        secureUrl,
+      }
+    }
     const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
     const savedUser = await User.create({
       name: capitalizedName,
@@ -67,6 +77,7 @@ export const registerUser = async (
       branch,
       course,
       batchCode,
+      profileImage: {...cloudinaryImageData},
     });
 
     const { IST: time } = savedUser;
@@ -77,7 +88,7 @@ export const registerUser = async (
       email:lowerCaseEmail,
       time,
     };
-    const userData:RegisterType = {
+    const userData = {
       email: savedUser.email,
       name: savedUser.name,
       phoneNumber: savedUser.phoneNumber,
@@ -91,6 +102,7 @@ export const registerUser = async (
       course: savedUser.course,
       branch: savedUser.branch,
       batchCode: savedUser.batchCode,
+      profileImage: savedUser.profileImage,
     }
     await Promise.allSettled([
       sendEmail({
