@@ -95,10 +95,17 @@ export const errorMessages = Object.freeze({
     INSERTION_FAILED: "Unable to insert cities data",
   },
   MEETING_MODEL: {
-    MEETING_NUMBER_PASSWORD_AND_TITLE_IS_REQUIRED:
-      "Meeting number and password is required",
-    DUBLICATE_MEETING_NUMBER: "Dublicate meeting number",
+    MEETING_REQUIRED_FIELDS:
+      "Meeting number, password, title and meetingCode is required",
+    DUBLICATE_MEETING_FIELDS: "Dublicate meeting number, meeting code or title",
     UNABLE_TO_CREATE_MEETING: "Unable to create meeting",
     UNABLE_TO_FIND_MEETING: "Unable to find meetings",
+    MEETING_NUMBER_OR_MEETING_CODE_IS_REQUIRED_TO_UPDATE_MEETING:
+      "Meeting number or meeting code is required to update meeting",
+    MEETING_NUMBER_MEETING_CODE_OR_TITLE_REQUIRED:
+      "meeting number, meeting code or title is required",
+    CANNOT_FIND_MEETING_DETAILS:
+      "Cannot find meeting details with given filter",
+    UNABLE_TO_UPDATE_MEETINGS: "Unable to update meeting details",
   },
 });

@@ -822,8 +822,10 @@ declare global {
     cityData?: string[];
     response: CustomResponseType;
   };
+
   type MeetingSchemaType = {
     meetingNumber: string;
+    meetingCode: string;
     title: string;
     password: string;
     link?: string;
@@ -853,9 +855,20 @@ declare global {
     response: CustomResponseType;
   }
 
+  type GetMeetingArgsType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
+
   type GetMeetingOutputType = {
     meetingData?: MeetingSchemaType | null;
     response: CustomResponseType
   }
 
+  type UpdateMeetingFilterType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
 }

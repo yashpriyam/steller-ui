@@ -1,2 +1,2 @@
 export { getMeetingList } from "./getMeetingList";
-export { getMeetingByMeetingNumber } from "./getMeetingByMeetingNumber";
+export { getMeeting } from "./getMeeting";
