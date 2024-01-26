@@ -4,8 +4,13 @@ export const createVideo = async (
   parent: undefined,
   args: { videoData: CreateVideoType }
 ): Promise<VideoOutputDataType> => {
+  const { VIDEO_CREATION_FAILED } = errorMessages.VIDEO_MODEL;
+  const { VIDEO_CREATION_SUCCESS } = localMessages.VIDEO_MODEL;
+  const errorData: CustomResponseType = {
+    status: statusCodes.BAD_REQUEST,
+    message: VIDEO_CREATION_FAILED,
+  };
   try {
-    const { VIDEO_CREATION_SUCCESS } = localMessages.VIDEO_MODEL;
     const { videoData } = args;
     const {
       title,
@@ -17,7 +22,7 @@ export const createVideo = async (
       isActive,
       duration,
       batchCode,
-      weekNumber
+      weekNumber,
     } = videoData;
     const { youtube, webmasters } = links;
     const createdVideoData: VideoDataType = await videoModel.create({
@@ -33,23 +38,20 @@ export const createVideo = async (
       isActive,
       duration,
       batchCode,
-      weekNumber
+      weekNumber,
     });
-
-    return {
-      videoData: createdVideoData,
-      response: {
-        status: statusCodes.OK,
-        message: VIDEO_CREATION_SUCCESS,
-      },
-    };
+    return createdVideoData
+      ? {
+          videoData: createdVideoData,
+          response: {
+            status: statusCodes.CREATED,
+            message: VIDEO_CREATION_SUCCESS,
+          },
+        }
+      : { response: errorData };
   } catch (err) {
-    const { VIDEO_CREATION_FAILED } = errorMessages.VIDEO_MODEL;
     return {
-      response: {
-        status: statusCodes.BAD_REQUEST,
-        message: VIDEO_CREATION_FAILED,
-      },
+      response: errorData,
     };
   }
 };

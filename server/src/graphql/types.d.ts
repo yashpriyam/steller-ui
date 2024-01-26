@@ -137,7 +137,7 @@ declare global {
   };
 
   type AllVideoOutputDataType = {
-    videoData?: [VideoDataType];
+    videoData?: VideoDataType[];
     response: CustomResponseType;
   };
 
@@ -153,7 +153,7 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-    weekNumber: string;
+    weekNumber: number;
     batchCode: string;
   };
 
@@ -172,8 +172,8 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-    weekNumber: number;
-    
+    weekNumber?: number;
+    batchCode?: string;
   };
 
   type FilteredLinksType = {

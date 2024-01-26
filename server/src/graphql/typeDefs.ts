@@ -140,7 +140,7 @@ const typeDefs = gql`
     isActive: Boolean
     duration: String
     weekNumber: Int!
-    batchCode: String
+    batchCode: String!
   }
 
   input LinksInput {

@@ -60,16 +60,15 @@ export const getVideo = async (
                 modifiedVideoDataFilter[key] = { $in: value };
             }
         });
-        const filteredVideoData = await videoModel.findOne(modifiedVideoDataFilter);
-        return {
+        const filteredVideoData= await videoModel.findOne(modifiedVideoDataFilter);
+
+        return filteredVideoData? {
             videoData: filteredVideoData,
-            response: filteredVideoData
-                ? {
+            response:{
                     status: statusCodes.OK,
                     message: VIDEO_FOUND,
                 }
-                : errorData,
-        };
+            }:{response:errorData}
     } catch (err) {
         return {
             response: errorData,

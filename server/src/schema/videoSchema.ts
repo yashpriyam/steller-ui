@@ -1,6 +1,7 @@
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const videoSchema = new mongoose.Schema(
+
+const videoSchema = new Schema<CreateVideoType>(
     {
         title: {
             type: String,
@@ -43,6 +44,6 @@ const videoSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const videoModel = mongoose.model("video", videoSchema);
+const videoModel = model<CreateVideoType>("video", videoSchema);
 
 export { videoModel };
