@@ -714,7 +714,9 @@ declare global {
   type InstallmentListProps ={
       allInstallment?: Installment[];
       userIntsallment?: UserPaymentSchemaType[];
-      userFeePlan?: FeePlanSchemaType
+      userFeePlan?: FeePlanSchemaType;
+      setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+      isLoading?: boolean
   }
  
   type UserPaymentInputType = {
@@ -723,6 +725,11 @@ declare global {
     installmentId: string
     imageUrl?: string
   }
+  interface InstallmentItemProps {
+    installment: Installment;
+    handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
+  }
+  
 
 }
 export { };

@@ -48,6 +48,7 @@ export const createUserPayment = async (
     });
 
     return {
+      userPaymentData: newUserPaymentData,
       response: newUserPaymentData
         ? {
             message: USER_PAYMENT_CREATION_SUCCESS,
