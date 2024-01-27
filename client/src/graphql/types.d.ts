@@ -325,7 +325,7 @@ declare global {
       questionData: QuestionDataType,
       selectedValues: QuestionSelectedValueType[]
     ) => {};
-    isLoading: boolean;
+    isLoading?: boolean;
     errorMsg?: string;
     successMsg?: string;
     isAnswered?: boolean;
@@ -606,7 +606,10 @@ declare global {
     sequence?: string;
     dueDate?: Date; 
     accessWeeks?: WeekDataType[]; // we'll store week data here
-    miscellaneous?: JSON
+    miscellaneous?: JSON;
+    isApproved?: boolean;
+    isRejected?:boolean;
+    isPending?: boolean;
   }
 
   type UserPaymentSchemaType = {
@@ -729,8 +732,46 @@ declare global {
   };
   type InstallmentListProps ={
       allInstallment?: Installment[];
-      userIntsallment?: UserPaymentSchemaType[]
+      userIntsallment?: UserPaymentSchemaType[];
+      userFeePlan?: FeePlanSchemaType;
+      setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+      isLoading?: boolean
+  }
+ 
+  type UserPaymentInputType = {
+    batch?: string; 
+    feePlan?: string;
+    installmentId: string
+    imageUrl?: string
+  }
+  interface InstallmentItemProps {
+    installment: Installment;
+    handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
+  }
+  
+  type GenerateZoomSignForUserArgsType = {
+    meetingNumber: string;
+    sdkKey: string;
+    sdkSecret: string;  
+  }
 
+  interface ZoomConfigType {
+    sdkKey: string;
+    sdkSecret: string;
+    meetingNumber: string;
+    password: string;
+    userName: string;
+    leaveUrl: string;
+    onSuccess?: (res: ZoomResponseType | unknown) => void;
+    onError?: (res: ZoomResponseType | unknown) => void;
+  }
+
+  type ZoomResponseType = {
+    errorCode : number;
+    errorMessage : string | null;
+    method : string; 
+    result : string | null; 
+    status : boolean; 
   }
 
 }

@@ -8,7 +8,6 @@ import { InputComponent } from "../../components/input/inputComponent";
 const QuestionAccordion = ({
   questionData,
   onSubmit,
-  isLoading,
   errorMsg,
   successMsg,
   isAnswered,
@@ -18,11 +17,14 @@ const QuestionAccordion = ({
   const { title, options, questionType } = questionData;
   const [fillupValue, setFillupValue] = useState<string>("");
   const isFillupType = questionType === "fillup";
+  const [isLoading,setIsLoading]=useState<boolean>(false)
   const isSubmitBtnDisabled: boolean = isFillupType
     ? !fillupValue
     : !selectedValues.length || isLoading;
   const handleOnSubmitQuestion = async () => {
+    setIsLoading(true);
     await onSubmit(questionData, selectedValues);
+    setIsLoading(false);
    };
   return (
     <Accordion

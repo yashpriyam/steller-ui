@@ -792,7 +792,7 @@ declare global {
     image?: ImageInputType;
     createdAt?: Date;
     updatedAt?: Date
-
+    imageUrl?: string
   };  
    
   type BatchDataOutputType = {
@@ -822,8 +822,11 @@ declare global {
     cityData?: string[];
     response: CustomResponseType;
   };
+
   type MeetingSchemaType = {
     meetingNumber: string;
+    meetingCode: string;
+    title: string;
     password: string;
     link?: string;
     scheduledAt?: Date;
@@ -852,9 +855,25 @@ declare global {
     response: CustomResponseType;
   }
 
+  type GetMeetingArgsType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
+
   type GetMeetingOutputType = {
     meetingData?: MeetingSchemaType | null;
     response: CustomResponseType
+  }
+
+  type UpdateMeetingFilterType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
+  interface VariableSchemaType extends Document {
+    key: string;
+    value: string;
   }
 
 }

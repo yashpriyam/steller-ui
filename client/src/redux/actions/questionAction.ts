@@ -17,7 +17,7 @@ export const useQuestions = () => {
     topic,
     skip,
     limit,
-  }: GetAllQuestionProps) => {
+  }: GetAllQuestionProps) => {    
     try {
       const response = await apolloClient.query({
         query: GET_ALL_QUESTIONS,
