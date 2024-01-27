@@ -325,7 +325,7 @@ declare global {
       questionData: QuestionDataType,
       selectedValues: QuestionSelectedValueType[]
     ) => {};
-    isLoading: boolean;
+    isLoading?: boolean;
     errorMsg?: string;
     successMsg?: string;
     isAnswered?: boolean;
