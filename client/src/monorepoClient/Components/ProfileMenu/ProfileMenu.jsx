@@ -12,15 +12,27 @@ const ProfileMenu = ({ options = [], image = defaultAvatar}) => {
     const ref = useRef();
     useClickOutside(ref, ()=> setIsDropdownHidden(true));
   return (
-    <div className={`profileMenuContainer ${darkMode && 'profileMenuBgDark'}`}>
-        <ImageComponent src={image} alt="" className='containerImage' onClick={()=> setIsDropdownHidden(!isDropdownHidden)} />
-       {
-        !isDropdownHidden && (<div className='optionsContainer'>
-        {
-            options.map(({ value, onClick = ()=>{}})=> <div onClick={onClick} className={`dropdownOptions ${darkMode && 'dropdownOptionsDark'}`} >{value}</div>)
-        }
-    </div>)
-       }
+    <div className={`profileMenuContainer ${darkMode && "profileMenuBgDark"}`}>
+      <ImageComponent
+        src={image}
+        alt=""
+        className="containerImage"
+        onClick={() => setIsDropdownHidden(!isDropdownHidden)}
+      />
+      {!isDropdownHidden && (
+        <div
+          className={`optionsContainer ${darkMode && "optionsContainer-dark"}`}
+        >
+          {options.map(({ value, onClick = () => {} }) => (
+            <div
+              onClick={onClick}
+              className={`dropdownOptions ${darkMode && "dropdownOptionsDark"}`}
+            >
+              {value}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

@@ -19,7 +19,6 @@ const feePlanSchema = new mongoose.Schema<FeePlanSchemaType>({
   installments: {
     type: [
       {
-        id: ObjectId,
         amount: String,
         sequence: String,
         dueDate: Date,

@@ -4,7 +4,8 @@ export {
   sendOtpToRegisteredUser,
   verifyUserOtp,
   updateUserPassword,
-  updateCoverImage
+  updateCoverImage,
+  updateUser
 } from "./user/index";
 export { createTransaction } from "./transaction/createTransaction";
 export { createNotes, deleteNotesById, updateNotesById } from "./notes/index";
@@ -27,4 +28,4 @@ export { createFeePlan, updateFeePlan, getFeePlanDetailsByBatchCode } from "./fe
 export { createBatch, updateBatch } from "./batch/index";
 export { createUserPayment, getUserPaymentsByUserId } from  "./userPaymentsHistory/index"
 export { insertCities } from "./cities/index";
-export { createMeeting } from "./meeting";
+export { createMeeting, updateMeeting } from "./meeting";

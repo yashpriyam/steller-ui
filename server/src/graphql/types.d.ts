@@ -810,7 +810,7 @@ declare global {
     image?: ImageInputType;
     createdAt?: Date;
     updatedAt?: Date
-
+    imageUrl?: string
   };  
    
   type BatchDataOutputType = {
@@ -840,8 +840,11 @@ declare global {
     cityData?: string[];
     response: CustomResponseType;
   };
+
   type MeetingSchemaType = {
     meetingNumber: string;
+    meetingCode: string;
+    title: string;
     password: string;
     link?: string;
     scheduledAt?: Date;
@@ -850,7 +853,45 @@ declare global {
   }
   
   type MeetingReturnType = {
-    meetingData?: MeetingSchemaType,
+    meetingData?: MeetingSchemaType;
+    response: CustomResponseType;
+  }
+
+  type MeetingListDataType = {
+    meetingList?: MeetingSchemaType[];
+    response: CustomResponseType;
+  }
+
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
+  }
+  
+  type UserDataOutputType = {
+    userData?: UserSchemaType;
+    response: CustomResponseType;
+  }
+
+  type GetMeetingArgsType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
+
+  type GetMeetingOutputType = {
+    meetingData?: MeetingSchemaType | null;
     response: CustomResponseType
   }
+
+  type UpdateMeetingFilterType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
+  interface VariableSchemaType extends Document {
+    key: string;
+    value: string;
+  }
+
 }

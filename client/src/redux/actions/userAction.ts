@@ -7,6 +7,9 @@ import { UPDATE_USER_PASSWORD } from "../../graphql/mutation/updateUserPassword/
 import { LOGIN } from "../../graphql/mutation/login/login";
 import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/sendUserOtp/sendUserOtp";
 import { setCookie } from "../../utils/index";
+import { UPDATE_USER_INFO } from "../../graphql/mutation/user/updateUserInfo";
+import { GET_USER } from "../../graphql/mutation/user/getUser";
+import { CREATE_USER_PAYMENTS } from "../../graphql/mutation/userPayments/createUserPayment";
 import { UPLOAD_PROFILE_IMAGE } from "../../graphql/mutation/user/uploadProfileImage";
 
 export const useUser = () => {
@@ -127,6 +130,50 @@ export const useUser = () => {
     dispatch(actions.setIsLoggedIn(isLoggedIn));
   };
 
+
+  const updateUserInfo = async (input: UpdateUserInput )=> {
+    const response = await apolloClient.mutate({
+      mutation: UPDATE_USER_INFO,
+      variables: {
+        input: {
+          ...input
+        }
+      },
+    });  
+    dispatch(actions.setUser(response.data.updateUser));return {
+      response,
+    };
+  }
+
+
+  const getUserData = async () => {
+    try {
+      const response = await apolloClient.query({
+        query: GET_USER
+      });
+      dispatch(actions.setUser(response.data.getUser));
+      return response;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const createUserPayment = async (input: UserPaymentInputType) => {
+    try {
+      const response = await apolloClient.mutate({
+        mutation: CREATE_USER_PAYMENTS,
+        variables: 
+         {
+            input: {
+              ...input
+            }
+         }
+      });
+      return response;
+    } catch (err) {
+      console.error(err);
+    }
+  };
   // const setProfileImage = async ( image: string) => {
   //   try{
   //     const response = await apolloClient.mutate({
@@ -140,6 +187,8 @@ export const useUser = () => {
   //     console.log(err)
   //   }
   // }
+  
+  
 
   return {
     user,
@@ -149,6 +198,9 @@ export const useUser = () => {
     updateUserPasswordApi,
     loginUserApi,
     setIsLoggedIn,
+    updateUserInfo,
+    getUserData,
+    createUserPayment
     // setProfileImage,
   };
 };

@@ -75,7 +75,7 @@ const Navbar = ({
       isLoginModalOpen && (<Modal> <Login closeModal={()=> setIsLoginModalOpen(false)}  /> </Modal>)
      }
       <div
-        className={`nav ${
+        className={`nav-mono ${
           location.pathname !== "/register" && darkMode ? "nav__black" : ""
         } ${show && (darkMode ? "nav__black" : "nav__white")} ${
           darkMode ? "nav__text__white" : "nav__text__black"

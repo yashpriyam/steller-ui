@@ -21,27 +21,65 @@
         cursor: pointer;
         text-align: center;
         right: 0%;
-        top: 50px;
+        top: 65px;
         transform: rotate(180deg) translate(-50%, 0%);
         z-index: 6;
-        background-color: $primaryTextColor;
+        background-color: $secondaryBgColor;
         box-shadow: 0px 0px 1px 1px $boxShadowGrey;
+        opacity: 0.8;
+        &:hover{
+            opacity: 1;
+        }
     }
     .left-side-arrow{
         transform: translate(50%, 0%);
     }
     .sidebar-main-sub-container{
         width: 100%;
+        .sidebar-first-options-container{
+            @media (max-width:$screenXs){
+                display: flex;
+            }
+        }
+        .sidebar-middle-options-container{
+            max-height: 78vh;
+            overflow-y: auto;
+            &::-webkit-scrollbar{
+                display: none;
+            }
+            @media (max-height:800px){
+                max-height: 75vh;
+            }
+            @media (max-height:680px){
+                max-height: 70vh;
+            }
+            @media (max-height:$screenXs){
+                max-height: 65vh;
+            }
+        }
+        .sidebar-options-container-flex{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            @media (max-width: $screenXs) {
+            flex-direction: row;
+            }
+        }
     }
     .sidebar-last-option-btn{
         display: flex;
     }
+    .sidebar-options-container-flex{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     .sidebar-btn-mobile-view{
         display: none;
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: $screenXs) {
     .sidebar-main-container{
         display: flex;
         position: absolute;
@@ -64,6 +102,18 @@
         }
         .sidebar-btn-mobile-view{
             display: block;
+        }
+        .sidebar-main-sub-container{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            padding: 0;
+            align-items: center;
+            .sidebar-middle-options-container{
+                display: flex;
+                height: 100%;
+                gap: 5px;
+            }
         }
     }
 }

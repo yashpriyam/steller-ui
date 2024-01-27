@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.scss";
 import ThoughtIcon from "../../icons/thoughtIcon";
 import { PageTitle } from "../../components/pageTitle/pageTitle";
@@ -9,6 +9,8 @@ import { ServiceCompomponent } from "../../components/serviceComponent/serviceCo
 import { StackComponent } from "../../components/stackComponent/stackComponent";
 import { CourseImageComponent } from "../../components/courseImageComponent/courseImages";
 import { OverviewComponent } from "../../components/overviewComponent/overviewComponent";
+import { useMeeting } from "../../redux/actions/meetingAction";
+import { startZoomMeet } from "../../utils/startZoomMeet";
 
 export const Dashboard: React.FC<DashboardProps> = ({
   className,
@@ -184,10 +186,40 @@ export const Dashboard: React.FC<DashboardProps> = ({
   overviewButtonOne = "Access now instantly",
   overviewButtonTwo = "View FAQs",
 }: DashboardProps) => {
+
+  const { getMasterMeeting, meetingDetails } = useMeeting();
+  const { masterMeeting, classMeeting } = meetingDetails || {};
+  const [meetingList, setMeetingList] = useState<ServiceBoxType[]>([]);
+  useEffect(() => {
+    masterMeeting && setMeetingList([
+      ...meetingList,
+      {
+        title: masterMeeting?.title || '',
+        subtitle: 'This is demo meeting',
+        icon: <ThoughtIcon width="20" />,
+        buttonText: 'Join',
+        isBtnEnabled: !!masterMeeting?.isActive,
+        onClick: () => {
+          startZoomMeet({
+            leaveUrl: window.location.hostname,
+            meetingNumber: masterMeeting.meetingNumber,
+            password: masterMeeting.password,
+            userName: 'test-user',
+            sdkKey: process.env.REACT_APP_ZOOM_SDK_KEY || "",
+            sdkSecret: process.env.REACT_APP_ZOOM_SDK_SECRET || ""
+          })
+        }
+      }])
+  }, [masterMeeting])
+
+  useEffect(() => {
+    getMasterMeeting()
+  }, [])
   return (
     <div className={`dashboard`}>
       <div className={`dashboard-container`}>
-        <PageTitle title={pageTitle} subtitle={pageSubtitle} />
+        <ServiceCompomponent serviceElements={meetingList} />
+        {/* <PageTitle title={pageTitle} subtitle={pageSubtitle} />
         <TopButtons
           topButtonTagOne={topButtonTagOne}
           topButtonTagTwo={topButtonTagTwo}
@@ -216,7 +248,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           courseDetails={courseDetails}
           overviewButtonOne={overviewButtonOne}
           overviewButtonTwo={overviewButtonTwo}
-        />
+        /> */}
       </div>
     </div>
   );

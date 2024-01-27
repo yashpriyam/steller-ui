@@ -2,7 +2,7 @@ $color-black: #000000;
 $color-white: #ffffff;
 $red-color: rgb(255, 8, 0);
 
-.nav {
+.nav-mono {
   position: fixed;
   top: 0;
   width: 100%;
@@ -114,7 +114,7 @@ $red-color: rgb(255, 8, 0);
     box-shadow: 4px 4px 15px 2px rgba(black, 0.75);
     transition: translateY(1rem);
   }
-  .nav {
+  .nav-mono {
     display: flex;
     flex-direction: column;
     padding: 15px;

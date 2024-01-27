@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./questionPage.scss";
 import QuestionAccordion from "../../components/questionAccordion/questionAccordion";
 import { useQuestions } from "../../redux/actions/questionAction";
 import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
-
+import { useLocation } from 'react-router-dom';
 const QuestionPage = () => {
   const { questions, getAllQuestions } = useQuestions();
-  const { questionAttempt, createQuestionAttemptByUser } = useQuestionAttempt();
+  const { createQuestionAttemptByUser } = useQuestionAttempt();
   const { questions: questionList } = questions;
-  const { isLoading } = questionAttempt;
   const { t } = useTranslation();
   const [searchParams, setSearchParams] = useSearchParams();
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const dayNumber = queryParams.get('dayNumber');
+  const weekNumber = queryParams.get('weekNumber');
   const onSubmit = async (
     question: QuestionDataType,
     selectedValues: QuestionSelectedValueType[]
@@ -29,10 +32,21 @@ const QuestionPage = () => {
   };
   const searchParam = searchParams.get("day");
   useEffect(() => {
-      getAllQuestions({})
+      getAllQuestions({week:Number(weekNumber),day:Number(dayNumber)})
   }, [])
   return (
     <div className="question-page-container">
+       <h1>{t('question')}</h1>
+        <div className="question-time">
+          <span>
+            {t('title', { title: t('week') })}
+            {weekNumber}
+          </span>
+          <span className="question-day">
+            {t('title', { title: t('day') })}
+            {dayNumber}
+          </span>
+        </div>
           <div className="question-page-sub-container">
               {
           questionList?.map((question, index) => {
@@ -40,7 +54,6 @@ const QuestionPage = () => {
                          key={index}
                          questionData={question}
                          onSubmit={onSubmit}
-                         isLoading={isLoading}
                          isCorrect={question.isCorrect}
                          isAnswered={question.isAnswered}
                          errorMsg={t("incorrect_answer")}

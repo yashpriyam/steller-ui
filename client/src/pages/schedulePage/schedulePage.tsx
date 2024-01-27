@@ -138,7 +138,6 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             <div className="buttons-wrapper">
                               <Button
                                 text={t("questions")}
-                                isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
                                   handleNavigation(
@@ -149,7 +148,6 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                               />
                               <Button
                                 text={t("notes")}
-                                isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
                                   handleNavigation(

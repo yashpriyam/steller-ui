@@ -20,6 +20,8 @@ const typeDefs = gql`
     createQuestionAttemptByUser(
       questionAttemptData: QuestionAttemptType!
     ): QuestionAttemptOutputType
+
+    updateUser(input: PartialUserSchemaType!): UserDataOutputType
   }
 
   type CustomResponseType {
@@ -159,6 +161,52 @@ const typeDefs = gql`
     iframe: String
     isChecked: Boolean
   }
+
+  input PartialUserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+
+  type UserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+  
+ 
+  type UserDataOutputType {
+    userData: UserSchemaType
+    response: CustomResponseType
+  }
+
+
   scalar DateTime
   scalar JSON
 `;

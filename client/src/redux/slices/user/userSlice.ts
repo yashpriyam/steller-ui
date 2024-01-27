@@ -4,6 +4,7 @@ import { getCookie } from "../../../utils/index";
 const initialState = {
   userData: null,
   isLoggedIn: !!getCookie(process.env.REACT_APP_JWT_SECRET_KEY || ""),
+  response: null
 };
 
 export const userSlice = createSlice({
@@ -15,6 +16,11 @@ export const userSlice = createSlice({
     },
     setIsLoggedIn: (state, action) => {
       state.isLoggedIn = action?.payload;
+    },
+    setUser: (state, action) => {
+      const { userData, response } = action.payload;
+      state.userData = userData;
+      state.response = response;
     },
   },
 });

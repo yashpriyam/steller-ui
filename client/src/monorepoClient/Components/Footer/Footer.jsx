@@ -17,7 +17,7 @@ const Footer = () => {
   const { darkMode } = useContext(ThemeContext);
 
   return (
-    <div className={darkMode ? "footer footerBlack" : "footer footerWhite"}>
+    <div className={darkMode ? "footer-mono footerBlack" : "footer-mono footerWhite"}>
       <div className="column one">
         <Logo width="150px" />
         <TextComponent className="description">

@@ -1,41 +1,60 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import { meetingModel } from "@models";
+import { isNonUndefinedAndNullishValueExists } from "@utils";
 
 export const createMeeting = async (
   _parent: undefined,
   args: { data: MeetingSchemaType }
 ): Promise<MeetingReturnType> => {
   const { data } = args;
-  const { meetingNumber, password, link, isActive, scheduledAt, isPaid } = data;
+  const {
+    meetingNumber,
+    meetingCode,
+    title,
+    password,
+    link,
+    isActive,
+    scheduledAt,
+    isPaid,
+  } = data;
   const { BAD_REQUEST, OK } = statusCodes;
   const { MEETING_MODEL } = errorMessages;
   try {
-    if (!meetingNumber || !password) {
+    if (
+      isNonUndefinedAndNullishValueExists({
+        meetingNumber,
+        meetingCode,
+        title,
+        password,
+      })
+    ) {
       return {
         response: {
           status: BAD_REQUEST,
-          message: MEETING_MODEL.MEETING_NUMBER_AND_PASSWORD_IS_REQUIRED,
+          message: MEETING_MODEL.MEETING_REQUIRED_FIELDS,
         },
       };
     } else {
-      const existingMeetingData = await meetingModel.findOne({
-        meetingNumber,
+      const meetingList = await meetingModel.find({
+        $or: [{ meetingNumber }, { meetingCode }, { title }],
       });
-      if (existingMeetingData) {
+      if (meetingList?.length) {
         return {
           response: {
             status: BAD_REQUEST,
-            message: MEETING_MODEL.DUBLICATE_MEETING_NUMBER,
+            message: MEETING_MODEL.DUBLICATE_MEETING_FIELDS,
           },
         };
       } else {
         const meetingData = await meetingModel.create({
           meetingNumber,
+          meetingCode,
+          title,
           password,
           link,
           isActive,
           scheduledAt,
-          isPaid
+          isPaid,
         });
         return {
           meetingData,

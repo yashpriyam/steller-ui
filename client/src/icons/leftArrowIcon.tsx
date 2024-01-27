@@ -8,7 +8,7 @@ export const LeftArrowIcon: React.FC<SvgIconProps> = ({
   <svg
     width={width}
     height={height}
-    fill={fillColor ? fillColor : (isDarkMode ? "#fff" : "#000")}
+    fill={fillColor ? fillColor : (isDarkMode ? "#000" : "#fff")}
     viewBox="0 0 15 15"
     xmlns="http://www.w3.org/2000/svg"
     id="arrow"

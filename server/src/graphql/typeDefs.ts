@@ -13,6 +13,9 @@ const typeDefs = gql`
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
     getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
     getAllCities: CitiesOutputType
+    getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
+    getUser: UserDataOutputType!
+    getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
   }
 
   type Mutation {
@@ -69,11 +72,13 @@ const typeDefs = gql`
     createBatch(input: BatchInput!): BatchDataOutputType!
     updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
     updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
-    createUserPayment(input: UserPaymentCreateInput!): UserPaymentDataOutput!
+    createUserPayment(input: UserPaymentCreateInput): UserPaymentDataOutput!
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
     getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
     createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
+    updateMeeting(filter: UpdateMeetingInputFilter, data: UpdateMeetingInputDataType): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
+    updateUser(input: PartialUserSchemaType): UserDataOutputType
   }
 
   type ProfileImageType {
@@ -92,8 +97,8 @@ const typeDefs = gql`
   }
 
   type CustomResponseType {
-    status: Int!
-    message: String!
+    status: Int
+    message: String
   }
 
   type AllVideoOutputDataType {
@@ -875,11 +880,12 @@ const typeDefs = gql`
   }
 
   input UserPaymentCreateInput {
-    user: ID!
+    user: ID
     batch: ID!
     feePlan: ID!
     installmentId: ID
     image: ImageInput
+    imageUrl: String
   }
 
   input ImageInput {
@@ -924,6 +930,8 @@ type UserAllFeePlanDataOutputType {
 
   input MeetingDataInputType {
     meetingNumber: String!
+    meetingCode: String!
+    title: String!
     password: String!
     link: String
     isActive: Boolean
@@ -932,8 +940,10 @@ type UserAllFeePlanDataOutputType {
   }
 
   type MeetingDataType {
-    meetingNumber: String!
-    password: String!
+    meetingNumber: String
+    password: String
+    meetingCode: String
+    title: String
     link: String
     isActive: Boolean
     scheduledAt: String
@@ -947,6 +957,83 @@ type UserAllFeePlanDataOutputType {
   type CitiesOutputType {
     cityData: [String]
     response: CustomResponseType!
+  }
+
+  input MeetingListFilterInputType {
+    isActive: Boolean
+    isPaid: Boolean
+    scheduledAt: DateTime
+    title: String
+  }
+
+  type MeetingListOutputType {
+    meetingList: [MeetingDataType]
+    response: CustomResponseType
+  }
+
+  type UserDataOutputType {
+    userData: UserSchemaType
+    response: CustomResponseType
+  }
+  input PartialUserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+
+  type UserSchemaType {
+    email: String
+    name: String
+    phoneNumber: String
+    password: String
+    isJobSeeker: Boolean
+    occupation: String
+    sessionPreference: String
+    expectedSalary: String
+    IST: String
+    collegeName: String
+    location: String
+    courseYear: String
+    course: String
+    branch: String
+    batchCode: String
+    feePlan: String 
+  }
+  
+  input UpdateMeetingInputFilter {
+    meetingNumber: String
+    title: String
+    meetingCode: String
+  }
+
+  input UpdateMeetingInputDataType {
+    meetingNumber: String
+    meetingCode: String
+    password: String
+    title: String
+    link: String
+    isActive: Boolean
+    scheduledAt: String
+    isPaid: Boolean
+  }
+
+  input GetMeetingFilterInputType {
+    meetingNumber: String
+    meetingCode: String
+    title: String
   }
 
   scalar DateTime

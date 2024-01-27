@@ -4,6 +4,7 @@ import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAc
 declare global {
 
   type RegisterUserData = {
+    _id?: string;
     name: string;
     email: string;
     phoneNumber: string;
@@ -18,6 +19,7 @@ declare global {
     branch: string;
     location: string;
     batchCode: string;
+    feePlan?: string
     profileImage: string;
   }
 
@@ -152,6 +154,8 @@ declare global {
     title: string;
     subtitle: string;
     buttonText: string;
+    onClick?: ()=> void;
+    isBtnEnabled?: boolean;
   };
 
   interface ServiceComponentProps {
@@ -325,7 +329,7 @@ declare global {
       questionData: QuestionDataType,
       selectedValues: QuestionSelectedValueType[]
     ) => {};
-    isLoading: boolean;
+    isLoading?: boolean;
     errorMsg?: string;
     successMsg?: string;
     isAnswered?: boolean;
@@ -472,11 +476,13 @@ declare global {
   }
 
   interface SidebarOptionInterface {
+    isProfile?: boolean;
     text: string | number;
     image: string | React.ReactNode;
     count?: string | number;
     showText?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
+    url?:string;
   }
 
   interface SidebarContainerProps {
@@ -485,6 +491,12 @@ declare global {
   }
 
   interface SidebarProps {
+    profile?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+    },
     options?: {
       image: string | React.ReactNode;
       url: string;
@@ -494,7 +506,15 @@ declare global {
     optionAtLast?: {
       text: string;
       onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-    }
+    },
+    optionsAtFirst?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+      onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+      isProfile?: boolean;
+    }[],
   }
 
   type UseAppDataReturnType = {
@@ -575,6 +595,7 @@ declare global {
   };
 
   type FeePlanSchemaType = {
+    _id?: string
     batchCode?: string;
     name?: string;
     description?: string;
@@ -583,12 +604,16 @@ declare global {
   };
 
   type Installment = {
+    _id: string | undefined;
     id? :string;
     amount?: string;
     sequence?: string;
     dueDate?: Date; 
     accessWeeks?: WeekDataType[]; // we'll store week data here
-    miscellaneous?: JSON
+    miscellaneous?: JSON;
+    isApproved?: boolean;
+    isRejected?:boolean;
+    isPending?: boolean;
   }
 
   type UserPaymentSchemaType = {
@@ -645,6 +670,129 @@ declare global {
     meetingData?: MeetingSchemaType,
     response: CustomResponseType
   }
+  interface InstallmentCardProps {
+    installment: Installment;
+    index?: number
+  }
+
+  type User = {
+    username?: string;
+    contact?: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    password?: string;
+  };
+
+
+  interface UserSchemaType {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    password?: string;
+    isJobSeeker: boolean;
+    occupation?: string;
+    sessionPreference: "online" | "offline";
+    expectedSalary?: string;
+    IST: string;
+    collegeName?: string;
+    profileImage?: UserProfile;
+    coverImage?: UserProfile;
+    userProfile?: Types.ObjectId;
+    batchCode?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    feePlan?: string;
+  }
+
+  type PartialUserSchemaType = {
+    email?: string;
+    name?: string;
+    phoneNumber?: string;
+    password?: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: string;
+    expectedSalary?: string;
+    IST?: string;
+    collegeName?: string;
+    location?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    batchCode?: string;
+    feePlan?: string;
+  };
+
+  type UpdateUserInput = {
+    feePlan?: string
+  };
+  type InstallmentListProps ={
+      allInstallment?: Installment[];
+      userIntsallment?: UserPaymentSchemaType[];
+      userFeePlan?: FeePlanSchemaType;
+      setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+      isLoading?: boolean
+  }
+ 
+  type UserPaymentInputType = {
+    batch?: string; 
+    feePlan?: string;
+    installmentId: string
+    imageUrl?: string
+  }
+  interface InstallmentItemProps {
+    installment: Installment;
+    handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
+  }
+  
+  type GenerateZoomSignForUserArgsType = {
+    meetingNumber: string;
+    sdkKey: string;
+    sdkSecret: string;  
+  }
+
+  interface ZoomConfigType {
+    sdkKey: string;
+    sdkSecret: string;
+    meetingNumber: string;
+    password: string;
+    userName: string;
+    leaveUrl: string;
+    onSuccess?: (res: ZoomResponseType | unknown) => void;
+    onError?: (res: ZoomResponseType | unknown) => void;
+  }
+
+  type ZoomResponseType = {
+    errorCode : number;
+    errorMessage : string | null;
+    method : string; 
+    result : string | null; 
+    status : boolean; 
+  }
+
+  type MeetingDataType = {
+    meetingNumber: string;
+    password: string;
+    meetingCode: string;
+    title: string;
+    link?: string;
+    isActive: string | null;
+    isPaid: string | null;
+    scheduledAt: Date | null
+  }
+
+  type MeetingStateType = {
+    masterMeeting: MeetingDataType | null;
+    classMeeting: MeetingDataType | null;
+  } 
   type ProfileImageType = {
     publicId?: string
     secureUrl?: string
