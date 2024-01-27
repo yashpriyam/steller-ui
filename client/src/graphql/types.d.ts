@@ -1,4 +1,5 @@
-import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction, ReactNode } from "react";
+import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction, ReactNode,ChangeEventHandler,
+} from "react";
 
 declare global {
 
@@ -647,6 +648,15 @@ declare global {
   type ProfileImageType = {
     publicId?: string
     secureUrl?: string
+  }
+  interface UploadImagePropsInterface {
+    className?: string;
+    disable?: boolean;
+    multiple?: boolean;
+    text?: string | ReactNode;
+    style?: CSSProperties;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    url?: string;
   }
 
 }
