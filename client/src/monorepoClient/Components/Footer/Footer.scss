@@ -6,7 +6,7 @@
     background: var(--light-red);
     color: black;
 }
-.footer{
+.footer-mono{
     display: flex;
     padding:80px 110px 80px 110px ;
     .column.one {
@@ -102,7 +102,7 @@
 }
 
 @media only screen and (max-width: 800px) {
-    .footer {
+    .footer-mono {
         flex-direction: column;
             padding: 80px 60px 80px 60px;
         .column.one{
