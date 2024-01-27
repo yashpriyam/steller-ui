@@ -37,7 +37,7 @@
     .sidebar-main-sub-container{
         width: 100%;
         .sidebar-first-options-container{
-            @media (max-width:480px){
+            @media (max-width:$screenXs){
                 display: flex;
             }
         }
@@ -53,7 +53,7 @@
             @media (max-height:680px){
                 max-height: 70vh;
             }
-            @media (max-height:480px){
+            @media (max-height:$screenXs){
                 max-height: 65vh;
             }
         }
@@ -61,6 +61,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            @media (max-width: $screenXs) {
+            flex-direction: row;
+            }
         }
     }
     .sidebar-last-option-btn{
@@ -76,7 +79,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: $screenXs) {
     .sidebar-main-container{
         display: flex;
         position: absolute;

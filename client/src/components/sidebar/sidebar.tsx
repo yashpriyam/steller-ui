@@ -8,7 +8,8 @@ import { LogOutIcon, LeftArrowIcon } from '../../icons/index';
 export const Sidebar = ({
     options = [],
     optionAtLast,
-    optionsAtFirst
+    optionsAtFirst,
+    profile,   
 }: SidebarProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -30,8 +31,7 @@ export const Sidebar = ({
           className={`sidebar-arrow-icon ${!isOpen && "left-side-arrow"}`}
           onClick={() => setIsOpen(!isOpen)}
         >
-          {" "}
-          <LeftArrowIcon />{" "}
+          <LeftArrowIcon />
         </div>
         <div className="sidebar-main-sub-container">
           <div
@@ -39,15 +39,21 @@ export const Sidebar = ({
               !isOpen && "sidebar-options-container-flex"
             }`}
           >
+            {profile && (
+              <SidebarOption
+                image={profile.image}
+                text={profile.text}
+                isProfile={true}
+                showText={isOpen}
+                url={profile.url}
+                onClick={() =>
+                  onOptionClick(profile.url, Boolean(profile.openNewPage))
+                }
+              />
+            )}
             {optionsAtFirst?.map((data, idx) => {
-              const {
-                image,
-                text,
-                onClick,
-                openNewPage,
-                url,
-                isProfile,
-              } = data;
+              const { image, text, onClick, openNewPage, url, isProfile } =
+                data;
               return (
                 <SidebarOption
                   key={idx}

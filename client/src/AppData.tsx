@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon, SearchIcon, VideoIcon,NameIcon
 } from "./icons/index";
@@ -12,13 +12,11 @@ import { deleteCookie } from './utils';
 export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const { user, getUserData } = useUser();
-  getUserData();
   const { isLoggedIn, userData } = user || {};
   const { name } = userData || {};
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const monorepoPaths = {
     "/": true,
     "/register": true,
@@ -33,17 +31,18 @@ export const useAppData = (): UseAppDataReturnType => {
   }
 
   const sidebarData: SidebarProps = {
+    profile : {
+      text: name || t("profile"),
+      image: name ? 
+            <NameIcon width='40px' height='40px' name={name} /> : 
+            <AvatarIcon isDarkMode={true}/>,
+      url: "/profile",
+    },
     optionsAtFirst: [
       {
-        text: name || t("profile"),
-        image: <NameIcon width='40px' height='40px' name={name} />,
-        url: "/profile",
-        isProfile: true,
+        text: t("search"),
+        image: <SearchIcon isDarkMode={true} />,
       },
-      // {
-      //   text: t("search"),
-      //   image: <SearchIcon isDarkMode={true} />,
-      // },
     ],
     options: [
       {
@@ -51,11 +50,11 @@ export const useAppData = (): UseAppDataReturnType => {
         image: <HomeIcon isDarkMode={true} />,
         url: "/",
       },
-      // {
-      //   text: t("dashboard"),
-      //   image: <DashboardIcon isDarkMode={true} />,
-      //   url: "/dashboard",
-      // },
+      {
+        text: t("dashboard"),
+        image: <DashboardIcon isDarkMode={true} />,
+        url: "/dashboard",
+      },
       {
         text: t("schedule"),
         image: <ScheduleIcon isDarkMode={true} />,
@@ -67,21 +66,25 @@ export const useAppData = (): UseAppDataReturnType => {
         url: process.env.REACT_APP_CLASS_MEET_URL || "",
         openNewPage: true,
       },
-      // {
-      //   text: t("questions"),
-      //   image: <QuestionIcon isDarkMode={true} />,
-      //   url: "/questions",
-      // },
-      // {
-      //   text: t("videos"),
-      //   image: <VideoIcon isDarkMode={true} />,
-      //   url: "/videos",
-      // },
+      {
+        text: t("questions"),
+        image: <QuestionIcon isDarkMode={true} />,
+        url: "/questions",
+      },
+      {
+        text: t("videos"),
+        image: <VideoIcon isDarkMode={true} />,
+        url: "/videos",
+      },
+      
     ],
     optionAtLast: {
       text: t(isLoggedIn ? "logout" : "login"),
       onClick: () => (isLoggedIn ? logOut() : setIsLoginModalOpen(true)),
     },
   };
+  useEffect(()=>{
+    getUserData();
+  },[])
   return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
 }

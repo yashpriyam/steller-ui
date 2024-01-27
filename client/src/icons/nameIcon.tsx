@@ -1,4 +1,4 @@
-import { getRandomColor } from "../utils/index";
+import { getFirstLettersOfName, getRandomColor } from "../utils/index";
 interface NameIconProps {
   height?: string;
   width?: string;
@@ -11,9 +11,8 @@ export const NameIcon: React.FC<NameIconProps> = ({
   fillColor,
   name = "",
 }: NameIconProps) => {
-  const acronymName = name.split(" ").map((word) => word.charAt(0));
+  const acronymName = getFirstLettersOfName(name);
   const randomColor = getRandomColor();
-  console.log({ acronymName, randomColor });
   return (
     <span
       style={{

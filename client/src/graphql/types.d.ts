@@ -487,6 +487,12 @@ declare global {
   }
 
   interface SidebarProps {
+    profile?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+    },
     options?: {
       image: string | React.ReactNode;
       url: string;
