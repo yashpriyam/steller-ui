@@ -12,6 +12,8 @@ export const startZoomMeet = async ({
     onError = () => {}
 }: ZoomConfigType) => {
     try {
+    const zoomDiv = document.getElementById('zmmtg-root');
+    zoomDiv && (zoomDiv.style.display = 'block');
     ZoomMtg.setZoomJSLib("https://source.zoom.us/3.1.0/lib", "/av");
         ZoomMtg.preLoadWasm()
         ZoomMtg.prepareWebSDK()

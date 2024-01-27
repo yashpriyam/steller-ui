@@ -152,6 +152,8 @@ declare global {
     title: string;
     subtitle: string;
     buttonText: string;
+    onClick?: ()=> void;
+    isBtnEnabled?: boolean;
   };
 
   interface ServiceComponentProps {
@@ -772,6 +774,22 @@ declare global {
     method : string; 
     result : string | null; 
     status : boolean; 
+  }
+
+  type MeetingDataType = {
+    meetingNumber: string;
+    password: string;
+    meetingCode: string;
+    title: string;
+    link?: string;
+    isActive: string | null;
+    isPaid: string | null;
+    scheduledAt: Date | null
+  }
+
+  type MeetingStateType = {
+    masterMeeting: MeetingDataType | null;
+    classMeeting: MeetingDataType | null;
   }
 
 }
