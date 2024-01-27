@@ -17,9 +17,7 @@ export const useQuestions = () => {
     topic,
     skip,
     limit,
-  }: GetAllQuestionProps) => {
-    console.log({week,day});
-    
+  }: GetAllQuestionProps) => {    
     try {
       const response = await apolloClient.query({
         query: GET_ALL_QUESTIONS,
