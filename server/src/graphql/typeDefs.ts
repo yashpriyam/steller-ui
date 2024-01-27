@@ -343,6 +343,27 @@ const typeDefs = gql`
     text: String!
     imageUrl: String
     iframe: String
+    codeBlock: CodeBlockInputType
+  }
+  input CodeBlockInputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationType
+  }
+  input ConfigurationType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowType]
+  }
+  input CodeEditorWindowType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+  enum CodeEditorWindowTypeEnum {
+    HTML
+    CSS
+    JS
   }
   enum QuestionType {
     multi
