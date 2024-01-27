@@ -12,7 +12,7 @@ export const ServiceCompomponent: React.FC<ServiceComponentProps> = ({
           <p className="service-title">{items.title}</p>
           <p className="service-subtitle">{items.subtitle}</p>
         </div>
-        <button className="service-button">{items.buttonText}</button>
+        <button disabled={!items?.isBtnEnabled} onClick={()=> items.onClick && items.onClick()} className="service-button">{items.buttonText}</button>
       </div>
     );
   });
