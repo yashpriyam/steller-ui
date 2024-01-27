@@ -3,6 +3,7 @@ import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAc
 declare global {
 
   type RegisterUserData = {
+    _id?: string;
     name: string;
     email: string;
     phoneNumber: string;
@@ -12,6 +13,12 @@ declare global {
     expectedSalary: string;
     emailOtp: string;
     collegeName: string;
+    courseYear: string;
+    course: string;
+    branch: string;
+    location: string;
+    batchCode: string;
+    feePlan?: string
   }
 
   interface Experience {
@@ -553,30 +560,179 @@ declare global {
     skip?:number;
     limit?:number;
   }
-
-  type GenerateZoomSignForUserArgsType = {
-    meetingNumber: string;
-    sdkKey: string;
-    sdkSecret: string;  
+  type CityDataStateType = {
+    cityList?: string[];
   }
 
-  interface ZoomConfigType {
-    sdkKey: string;
-    sdkSecret: string;
+  
+  type BatchSchemaType = {
+    batchCode: string;
+    paymentType?: FeePlanSchemaType; 
+    paidStudents?: UserSchemaType[];
+    registeredStudents?: UserSchemaType[];
+    demoStudents?: UserSchemaType[];
+    startDate?: Date
+  };
+
+  type FeePlanSchemaType = {
+    _id?: string
+    batchCode?: string;
+    name?: string;
+    description?: string;
+    installments?: Installment[],
+    miscellaneous?: JSON
+  };
+
+  type Installment = {
+    _id: string | undefined;
+    id? :string;
+    amount?: string;
+    sequence?: string;
+    dueDate?: Date; 
+    accessWeeks?: WeekDataType[]; // we'll store week data here
+    miscellaneous?: JSON;
+    isApproved?: boolean;
+    isRejected?:boolean;
+    isPending?: boolean;
+  }
+
+  type UserPaymentSchemaType = {
+    _id?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+
+  };  
+   
+  type BatchDataOutputType = {
+    batchData?: BatchSchemaType;
+    response: CustomResponseType;
+  };
+  type FeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType;
+    response: CustomResponseType;
+  };
+
+  type UserPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType;
+    response: CustomResponseType;
+  }
+
+  type UserAllPaymentDataOutputType = {
+    userPayments?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+  type UserAllFeePlanDataOutputType = {
+    feePlans?: FeePlanSchemaType[];
+    response: CustomResponseType;
+  }
+  
+  type MeetingSchemaType = {
     meetingNumber: string;
     password: string;
-    userName: string;
-    leaveUrl: string;
-    onSuccess?: (res: ZoomResponseType | unknown) => void;
-    onError?: (res: ZoomResponseType | unknown) => void;
+    link?: string;
+    scheduledAt?: Date;
+    isActive: boolean;
+    isPaid: boolean;
+  }
+  
+  type MeetingReturnType = {
+    meetingData?: MeetingSchemaType,
+    response: CustomResponseType
+  }
+  interface InstallmentCardProps {
+    installment: Installment;
+    index?: number
   }
 
-  type ZoomResponseType = {
-    errorCode : number;
-    errorMessage : string | null;
-    method : string; 
-    result : string | null; 
-    status : boolean; 
+  type User = {
+    username?: string;
+    contact?: string;
+    profileImg?: PaidProfileImageInput;
+    batchCode?: string;
+    sessionPreference?: SessionPreferenceEnum;
+    professionalStatus?: string;
+    college?: string;
+    expectedSalary?: string;
+    socialHandles?: SocialMediaHandles;
+    address?: string;
+    password?: string;
+  };
+
+
+  interface UserSchemaType {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    password?: string;
+    isJobSeeker: boolean;
+    occupation?: string;
+    sessionPreference: "online" | "offline";
+    expectedSalary?: string;
+    IST: string;
+    collegeName?: string;
+    profileImage?: UserProfile;
+    coverImage?: UserProfile;
+    userProfile?: Types.ObjectId;
+    batchCode?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    feePlan?: string;
   }
+
+  type PartialUserSchemaType = {
+    email?: string;
+    name?: string;
+    phoneNumber?: string;
+    password?: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: string;
+    expectedSalary?: string;
+    IST?: string;
+    collegeName?: string;
+    location?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    batchCode?: string;
+    feePlan?: string;
+  };
+
+  type UpdateUserInput = {
+    feePlan?: string
+  };
+  type InstallmentListProps ={
+      allInstallment?: Installment[];
+      userIntsallment?: UserPaymentSchemaType[];
+      userFeePlan?: FeePlanSchemaType;
+      setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+      isLoading?: boolean
+  }
+ 
+  type UserPaymentInputType = {
+    batch?: string; 
+    feePlan?: string;
+    installmentId: string
+    imageUrl?: string
+  }
+  interface InstallmentItemProps {
+    installment: Installment;
+    handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
+  }
+  
+
 }
 export { };

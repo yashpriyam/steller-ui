@@ -151,7 +151,6 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                               />
                               <Button
                                 text={t("notes")}
-                                isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
                                   handleNavigation(

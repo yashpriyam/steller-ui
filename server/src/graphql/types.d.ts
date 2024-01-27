@@ -49,6 +49,11 @@ declare global {
     collegeName?: string;
     profileImage?: CloudinaryImageType;
     coverImage?: CloudinaryImageType;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    batchCode?: string;
   };
 
   type CloudinaryImageType = {
@@ -713,6 +718,12 @@ declare global {
     profileImage?: UserProfile;
     coverImage?: UserProfile;
     userProfile?: Types.ObjectId;
+    batchCode?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    feePlan?: string;
   }
   interface UserProfileDataType {
     personalDetails?: PersonalDetailType;
@@ -753,7 +764,7 @@ declare global {
     batchCode?: string;
     name?: string;
     description?: string;
-    installments: Installment[],
+    installments?: Installment[],
     miscellaneous?: JSON
   };
 
@@ -778,7 +789,10 @@ declare global {
       totalAmount?: string;
       totalPendingAmount?: string;
     },
-    image?: ImageInputType
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+    imageUrl?: string
   };  
    
   type BatchDataOutputType = {
@@ -789,5 +803,77 @@ declare global {
     feePlanData?: FeePlanSchemaType;
     response: CustomResponseType;
   };
+
+  type UserPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType;
+    response: CustomResponseType;
+  }
+
+  type UserAllPaymentDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+  type UserAllFeePlanDataOutputType = {
+    feePlanData?: FeePlanSchemaType[];
+    response: CustomResponseType;
+  }
   
+  type CitiesOutputType = { 
+    cityData?: string[];
+    response: CustomResponseType;
+  };
+
+  type MeetingSchemaType = {
+    meetingNumber: string;
+    meetingCode: string;
+    title: string;
+    password: string;
+    link?: string;
+    scheduledAt?: Date;
+    isActive: boolean;
+    isPaid: boolean;
+  }
+  
+  type MeetingReturnType = {
+    meetingData?: MeetingSchemaType;
+    response: CustomResponseType;
+  }
+
+  type MeetingListDataType = {
+    meetingList?: MeetingSchemaType[];
+    response: CustomResponseType;
+  }
+
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
+  }
+  
+  type UserDataOutputType = {
+    userData?: UserSchemaType;
+    response: CustomResponseType;
+  }
+
+  type GetMeetingArgsType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
+
+  type GetMeetingOutputType = {
+    meetingData?: MeetingSchemaType | null;
+    response: CustomResponseType
+  }
+
+  type UpdateMeetingFilterType = {
+    meetingNumber?: string;
+    meetingCode?: string;
+    title?: string;
+  }
+  interface VariableSchemaType extends Document {
+    key: string;
+    value: string;
+  }
+
 }
