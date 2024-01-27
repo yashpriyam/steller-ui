@@ -472,11 +472,13 @@ declare global {
   }
 
   interface SidebarOptionInterface {
+    isProfile?: boolean;
     text: string | number;
     image: string | React.ReactNode;
     count?: string | number;
     showText?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
+    url?:string;
   }
 
   interface SidebarContainerProps {
@@ -485,6 +487,12 @@ declare global {
   }
 
   interface SidebarProps {
+    profile?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+    },
     options?: {
       image: string | React.ReactNode;
       url: string;
@@ -494,7 +502,15 @@ declare global {
     optionAtLast?: {
       text: string;
       onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-    }
+    },
+    optionsAtFirst?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+      onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+      isProfile?: boolean;
+    }[],
   }
 
   type UseAppDataReturnType = {

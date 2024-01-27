@@ -3,18 +3,12 @@
     .sidebar-container-heading{
          color: $primaryTextColor;
     }
-    .sidebar-container-children{
-        padding: 5px;
-        padding-top: 10px;
-    }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: $screenXs) {
     .sidebar-container-children{
         display: flex;
         justify-content: space-between;
-        padding: 0;
-        padding-top: 0;
-        gap: 14px;
+        gap: 5px;
     }
 }

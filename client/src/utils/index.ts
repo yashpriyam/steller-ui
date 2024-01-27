@@ -6,3 +6,5 @@ export { getUserFromCookies } from "./getUserFromCookie"
 export { readFileAsDataURL } from "./readFileAsDataURL";
 export { generateZoomSignatureForUser } from "./generateZoomSignatureForUser";
 export { startZoomMeet } from "./startZoomMeet";
+export { getRandomColor } from "./getRandomColor";
+export { getFirstLettersOfName } from "./getFirstLetterOfName";

@@ -2,55 +2,117 @@
 
 .sidebar-option-container{
     padding: 10px;
-    min-width: 100%;
-    width: fit-content;
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     cursor: pointer;
     gap: 10px;
     border: 1px solid transparent;
     color: $primaryTextColor;
+    border-radius: 10px;
     position: relative;
-    &:hover > .hovered-option-text{
+    opacity: 0.5;
+    transition: opacity 0.2s;
+    &:hover{
         opacity: 1;
-        z-index: 100;
     }
-    &:focus{
-        background-color: $fadedBlackColor;
-        border-radius: 10px;
+    &:hover > .sidebar-option-img-text-wrapper > .hovered-option-text{
+        opacity: 1;
+        z-index: 1;
     }
-    .sidebar-option-img{
-        height: 25px;
+    .sidebar-option-img-text-wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: fit-content;
+        gap: 10px;
+        @media (max-width:$screenXs){
+            flex-direction: column;
+            justify-content: center;
+        }
+        .sidebar-option-img{
+            height: 25px;
+        }
+        .sidebar-profile-image{
+            border-radius: 50%;
+            height: 40px;
+            width: 40px;
+            border: 2px solid $borderGrey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            @media (max-width: $screenXs){
+                height: 25px;
+                width: 25px;
+            }
+        }
+        .option-text{
+            font-size: $mediumFontSize;
+        }
+        .profile-option-text{
+            font-size: $titleFontSize;
+        }
+        .hovered-option-text{
+            position: absolute;
+            font-size: $mediumFontSize;
+            top: 8px;
+            left: 60px;
+            opacity: 0;
+            background-color: $secondaryBgColor;
+            border-radius: 15px;
+            padding: 7px 15px;
+            z-index: -1;
+            transition: opacity 0.5s;
+        }
+        .option-text-mobile-view{
+            display: none;
+            @media (max-width:$screenXs){
+                display: inline;
+                font-size: $smallFontSize;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                width: 70px;
+                text-align: center;
+            }
+        }
     }
-    .option-text{
-        font-size: $mediumFontSize;
+    .item-count-wrapper{
+        .item-count{
+            border: 1px solid $borderGrey;
+            padding: 5px;
+            margin-left: 20px;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+        @media (max-width: $screenXs){
+            display: none;
+        }
     }
-    .hovered-option-text{
-        position: absolute;
-        font-size: $mediumFontSize;
-        top: 8px;
-        left: 45px;
-        opacity: 0;
-        background-color: $secondaryBgColor;
-        border-radius: 15px;
-        padding: 7px 15px;
-        z-index: -100;
-        transition: opacity 0.5s;
-    }
-    .item-count{
-        border: 1px solid $borderGrey;
-        padding: 5px;
-        margin-left: 10px;
+    .item-count-wrapper-none{
+        display: none;
     }
 }
+.sidebar-option-container-focus{
+    background-color: $fadedBlackColor;
+    opacity: 1;
+}
+.sidebar-option-container-profile{
+    opacity: 1;
+}
+.sidebar-option-container-closed{
+    width: fit-content;
+}
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: $screenXs) {
     .sidebar-option-container{
         min-width: fit-content;
+        height: fit-content;
         flex-direction: column;
         gap: 5px;
-        
-        .hovered-option-text{
+        padding: 5px;
+        .hovered-option-text, .option-text{
             display: none;
         }
     }

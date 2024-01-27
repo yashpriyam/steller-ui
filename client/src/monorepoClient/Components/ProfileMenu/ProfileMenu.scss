@@ -14,27 +14,40 @@
       flex-direction: column;
       width: max-content;
       position: absolute;
+      padding: 5px;
+      box-shadow: 0 0 10px 1px rgba(128, 128, 128, 0.5);
+      background-color: white;
+      color: black;
+      font-size: 18px;
+      @media (max-width: 800px){
+        font-size: 14px;
+        top: -18px;
+        left: 100px;
+      }
+      @media (max-width: 578px){
+        top: 40px;
+        left: -25px;
+      }
       .dropdownOptions {
-        font-size: 18px;
-        background-color: white;
-        color: black;
         z-index: 10;
         width: 100%;
         border-radius: 5px;
         padding: 5px 10px;
         cursor: pointer;
-        box-shadow: 0 0 2px 2px grey;
         &:hover {
-          background-color: rgb(0, 0, 0);
-          color: white;
+          background-color: rgba(210, 208, 208, 0.482);
         }
      }
      .dropdownOptionsDark{
         &:hover{
-            color: black;
-            background: aliceblue;
+            background: #3e3e3e62;
         }
      }
+    }
+    .optionsContainer-dark{
+      background-color: #161616;
+      color: white;
+      box-shadow: none;
     }
   }
   
