@@ -809,5 +809,17 @@ declare global {
     url?: string;
   }
 
+  interface DataContextProps {
+    html: string;
+    setHtml: React.Dispatch<React.SetStateAction<string>>;
+    css: string;
+    setCss: React.Dispatch<React.SetStateAction<string>>;
+    js: string;
+    setJs: React.Dispatch<React.SetStateAction<string>>;
+  }
+
+  interface CodeDataProviderProps {
+    children: ReactNode;
+  }
 }
 export { };
