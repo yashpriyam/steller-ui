@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./LeftRegisterPageComponent.scss";
-const LeftRegisterPageComponent = () => {
+import { UploadImage } from "../../../components/uploadImage/uploadImage";
+const LeftRegisterPageComponent = ({ onImageClick, userPictureUrl }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  
   const updateWidthAndHeight = () => {
     console.info(screenWidth);
     setScreenWidth(window.innerWidth);
@@ -14,12 +16,13 @@ const LeftRegisterPageComponent = () => {
     <div className="leftRegisterPage">
       <div className="container">
         <div className="heading">
-          <h1>
+          {/* <h1>
             <span style={{ color: "black" }}>Hi!</span> We're glad you decided
             to join WebMasters.
           </h1>
           <br />
-          <h2>Tell us a bit about yourself.</h2>
+          <h2>Tell us a bit about yourself.</h2> */}
+          <UploadImage onChange={onImageClick} url={userPictureUrl} />
         </div>
       </div>
     </div>

@@ -37,6 +37,24 @@ declare global {
     response: CustomResponseType;
     credentials?: string;
   };
+  type RegisterInputType = {
+    _id?: string;
+    name: string;
+    email: string;
+    phoneNumber: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: "online" | "offline";
+    expectedSalary?: string;
+    collegeName?: string;
+    profileImage?: string;
+    coverImage?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    location?: string;
+    batchCode?: string;
+  };
   type RegisterType = {
     _id?: string;
     name: string;

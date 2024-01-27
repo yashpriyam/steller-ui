@@ -13,10 +13,12 @@ import {
 import { objectToBase64 } from "../../helpers/utils/base64Utils";
 import { setCookie } from "../../helpers/utils/cookieUtils";
 import { useUser } from "../../../redux/actions/userAction";
+import { readFileAsDataURL } from "../../../utils/index";
 
 const Registerpage = () => {
   const [formData, setFormData] = useState("");
   const [formStep, setFormStep] = useState(1);
+  const [userPictureUrl, setUserPictureUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [finishedPage, setFinishedPage] = useState(0);
@@ -81,6 +83,7 @@ const Registerpage = () => {
           course: selectyourcourse,
           courseYear:selectyourcourseyear,
           batchCode,
+          profileImage: userPictureUrl,
         })
         if (response?.response.data?.registerUser?.response?.status === 400) {
           Toast.warning("Email is already registered. You can login");
@@ -98,7 +101,11 @@ const Registerpage = () => {
       setIsLoading(false);
     }
   };
-
+  const handleOnImageClick = async (e) => {
+    const files = e.target.files;
+    const response = await readFileAsDataURL(files[0]);
+    setUserPictureUrl(response);
+  }
   const handleClick = (currentForm) => {
     setFormStep(currentForm);
   };
@@ -117,6 +124,8 @@ const Registerpage = () => {
           formStep={formStep}
           finishedPage={finishedPage}
           handleSubmitForm={handleSubmitForm}
+          onImageClick={handleOnImageClick}
+          userPictureUrl={userPictureUrl}
         />
         <RightRegisterPageComponent
           setFormData={setFormData}

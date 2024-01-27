@@ -17,6 +17,7 @@ declare global {
     branch: string;
     location: string;
     batchCode: string;
+    profileImage: string;
   }
 
   interface Experience {

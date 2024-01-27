@@ -14,7 +14,7 @@ const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
 
 export const registerUser = async (
   _parent: undefined,
-  args: { data: RegisterType },
+  args: { data: RegisterInputType },
   { res, req }: ContextType,
 ): Promise<RegisterOutputType | UserInputError | unknown> => {
   const { USER_EXIST } = errorMessages.USER;

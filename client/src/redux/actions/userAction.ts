@@ -7,6 +7,7 @@ import { UPDATE_USER_PASSWORD } from "../../graphql/mutation/updateUserPassword/
 import { LOGIN } from "../../graphql/mutation/login/login";
 import { SEND_OTP_REGISTER_USER } from "../../graphql/mutation/questionAttempt/sendUserOtp/sendUserOtp";
 import { setCookie } from "../../utils/index";
+import { UPLOAD_PROFILE_IMAGE } from "../../graphql/mutation/user/uploadProfileImage";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export const useUser = () => {
     branch,
     location,
     batchCode,
+    profileImage,
   }: RegisterUserData) => {
     const response = await apolloClient.mutate({
       mutation: REGISTER_USER,
@@ -44,6 +46,7 @@ export const useUser = () => {
           branch,
           location,
           batchCode,
+          profileImage,
         },
       },
     });
@@ -124,13 +127,19 @@ export const useUser = () => {
     dispatch(actions.setIsLoggedIn(isLoggedIn));
   };
 
-  const setProfileImage = async ( image: string) => {
-    // const response = await apolloClient.mutate({
-    //   // mutation: ,
-    //   // variables
-    // })
- 
-  }
+  // const setProfileImage = async ( image: string) => {
+  //   try{
+  //     const response = await apolloClient.mutate({
+  //       mutation: UPLOAD_PROFILE_IMAGE,
+  //       variables: {
+  //         image,
+  //       }
+  //     })
+  //     dispatch(actions.setProfileImage(response.data.updateProfilePicture))
+  //   }catch(err){
+  //     console.log(err)
+  //   }
+  // }
 
   return {
     user,
@@ -140,5 +149,6 @@ export const useUser = () => {
     updateUserPasswordApi,
     loginUserApi,
     setIsLoggedIn,
+    // setProfileImage,
   };
 };
