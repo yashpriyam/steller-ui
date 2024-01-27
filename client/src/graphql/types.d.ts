@@ -733,6 +733,30 @@ declare global {
     handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
   }
   
+  type GenerateZoomSignForUserArgsType = {
+    meetingNumber: string;
+    sdkKey: string;
+    sdkSecret: string;  
+  }
+
+  interface ZoomConfigType {
+    sdkKey: string;
+    sdkSecret: string;
+    meetingNumber: string;
+    password: string;
+    userName: string;
+    leaveUrl: string;
+    onSuccess?: (res: ZoomResponseType | unknown) => void;
+    onError?: (res: ZoomResponseType | unknown) => void;
+  }
+
+  type ZoomResponseType = {
+    errorCode : number;
+    errorMessage : string | null;
+    method : string; 
+    result : string | null; 
+    status : boolean; 
+  }
 
 }
 export { };
