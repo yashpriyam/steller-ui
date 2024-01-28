@@ -1011,6 +1011,7 @@ type UserAllFeePlanDataOutputType {
     branch: String
     batchCode: String
     feePlan: String 
+    profileImage: ProfileImageType
   }
   
   input UpdateMeetingInputFilter {

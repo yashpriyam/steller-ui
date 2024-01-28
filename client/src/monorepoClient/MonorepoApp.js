@@ -12,6 +12,7 @@ import PrivacyPolicy from "./Pages/PrivacyPolicy/PrivacyPolicy";
 import DummyComponentForWhatsapp from "./helpers/utils/dummyComp";
 import { useUserActivity } from "../redux/actions/userActivityAction";
 import { deleteCookie } from "../utils/index";
+import { useUser } from "../redux/actions/userAction";
 
 function MonorepoApp() {
   // Google Analytics Id
@@ -23,6 +24,7 @@ function MonorepoApp() {
   const { upsertUserActivity } = useUserActivity();
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const { getUserData } = useUser();
 
   const userActivityRequest = async () => {
     try {
@@ -34,9 +36,16 @@ function MonorepoApp() {
       console.log({ err });
     }
   };
-
+  const getUserDataRequest = async ()=>{
+    try {
+      await getUserData();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   useEffect(() => {
     userActivityRequest();
+    getUserDataRequest();
     ReactGA._gaCommandSendPageview(document.location.pathname);
     // eslint-disable-next-line
   }, []);

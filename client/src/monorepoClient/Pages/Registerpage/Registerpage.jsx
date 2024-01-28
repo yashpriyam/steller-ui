@@ -103,8 +103,14 @@ const Registerpage = () => {
   };
   const handleOnImageClick = async (e) => {
     const files = e.target.files;
-    const response = await readFileAsDataURL(files[0]);
-    setUserPictureUrl(response);
+    if (Boolean(files.length)) {
+      try {
+        const response = await readFileAsDataURL(files[0]);
+        setUserPictureUrl(response);
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
   const handleClick = (currentForm) => {
     setFormStep(currentForm);
@@ -126,6 +132,7 @@ const Registerpage = () => {
           handleSubmitForm={handleSubmitForm}
           onImageClick={handleOnImageClick}
           userPictureUrl={userPictureUrl}
+          setUserPictureUrl={setUserPictureUrl}
         />
         <RightRegisterPageComponent
           setFormData={setFormData}

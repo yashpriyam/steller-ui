@@ -733,8 +733,8 @@ declare global {
     expectedSalary?: string;
     IST: string;
     collegeName?: string;
-    profileImage?: UserProfile;
-    coverImage?: UserProfile;
+    profileImage?: CloudinaryImageType;
+    coverImage?: CloudinaryImageType;
     userProfile?: Types.ObjectId;
     batchCode?: string;
     courseYear?: string;

@@ -701,8 +701,8 @@ declare global {
     expectedSalary?: string;
     IST: string;
     collegeName?: string;
-    profileImage?: UserProfile;
-    coverImage?: UserProfile;
+    profileImage?: ProfileImageType;
+    coverImage?: ProfileImageType;
     userProfile?: Types.ObjectId;
     batchCode?: string;
     courseYear?: string;

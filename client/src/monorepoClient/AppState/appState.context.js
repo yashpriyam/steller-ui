@@ -1,4 +1,4 @@
-import { createContext, useReducer, useState, useLayoutEffect } from "react";
+import { createContext, useReducer } from "react";
 
 import { globalObject, globalReducer } from "./reducers/gloabal.reducer";
 import {
@@ -11,7 +11,7 @@ export const AppStateContext = createContext();
 export const AppStateContextProvider = ({ children }) => {
 
   const { user, setIsLoggedIn } = useUser();
-  const { isLoggedIn } = user;
+  const { isLoggedIn, userData } = user;
 
   const globalStateAndDispatch = useReducer(globalReducer, globalObject);
 
@@ -27,6 +27,7 @@ export const AppStateContextProvider = ({ children }) => {
         authenticateStateAndDispatch,
         isLoggedIn,
         setIsLoggedIn,
+        userData,
       }}
     >
       {children}
