@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./uploadImage.scss";
 import { CameraIcon } from "../../icons/index";
 export const UploadImage: React.FC<UploadImagePropsInterface> = ({
@@ -10,14 +10,7 @@ export const UploadImage: React.FC<UploadImagePropsInterface> = ({
   onChange,
   url,
 }: UploadImagePropsInterface) => {
-  const [showPreview, setShowPreview] = useState<boolean>(false);
-  const handleClick = () => {
-    if (url) setShowPreview(true);
-    else setShowPreview(false);
-  };
-  useEffect(() => {
-    handleClick();
-  }, [url]);
+
   return (
     <div
       className={`upload-image-container 
@@ -29,21 +22,21 @@ export const UploadImage: React.FC<UploadImagePropsInterface> = ({
       <input
         type="file"
         multiple={multiple}
-        id="file-type"
+        id="file-type-img"
         style={{ display: "none" }}
         onChange={onChange}
         accept="image/*"
       />
       <label
         className={`upload-image-label ${
-          showPreview && "upload-image-label-hide"
+          Boolean(url) && "upload-image-label-hide"
         }`}
-        htmlFor="file-type"
+        htmlFor="file-type-img"
       >
         <CameraIcon width="50px" height="50px" />
         <span className="label-text">{text}</span>
       </label>
-      {url && (
+      {Boolean(url) && (
         <img
           className="upload-image-preview-show"
           src={url}

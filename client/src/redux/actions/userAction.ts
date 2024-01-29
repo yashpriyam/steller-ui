@@ -10,7 +10,6 @@ import { setCookie } from "../../utils/index";
 import { UPDATE_USER_INFO } from "../../graphql/mutation/user/updateUserInfo";
 import { GET_USER } from "../../graphql/mutation/user/getUser";
 import { CREATE_USER_PAYMENTS } from "../../graphql/mutation/userPayments/createUserPayment";
-import { UPLOAD_PROFILE_IMAGE } from "../../graphql/mutation/user/uploadProfileImage";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -174,20 +173,6 @@ export const useUser = () => {
       console.error(err);
     }
   };
-  // const setProfileImage = async ( image: string) => {
-  //   try{
-  //     const response = await apolloClient.mutate({
-  //       mutation: UPLOAD_PROFILE_IMAGE,
-  //       variables: {
-  //         image,
-  //       }
-  //     })
-  //     dispatch(actions.setProfileImage(response.data.updateProfilePicture))
-  //   }catch(err){
-  //     console.log(err)
-  //   }
-  // }
-  
   
 
   return {
@@ -201,6 +186,5 @@ export const useUser = () => {
     updateUserInfo,
     getUserData,
     createUserPayment
-    // setProfileImage,
   };
 };

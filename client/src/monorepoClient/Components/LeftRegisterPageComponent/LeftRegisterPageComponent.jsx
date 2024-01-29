@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import "./LeftRegisterPageComponent.scss";
 import { UploadImage } from "../../../components/uploadImage/uploadImage";
 import { ButtonComponent } from "../Button/Button";
-const LeftRegisterPageComponent = ({ onImageClick, userPictureUrl,setUserPictureUrl }) => {
+const LeftRegisterPageComponent = ({
+  onImageClick,
+  userPictureUrl,
+  deleteImage,
+}) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   
   const updateWidthAndHeight = () => {
@@ -24,7 +28,12 @@ const LeftRegisterPageComponent = ({ onImageClick, userPictureUrl,setUserPicture
           <br />
           <h2>Tell us a bit about yourself.</h2> */}
           <UploadImage onChange={onImageClick} url={userPictureUrl} />
-          <ButtonComponent onClick={()=>setUserPictureUrl("")} className="image-delete-button" >Delete</ButtonComponent>
+          <ButtonComponent
+            onClick={deleteImage}
+            className="image-delete-button"
+          >
+            Delete
+          </ButtonComponent>
         </div>
       </div>
     </div>

@@ -26,7 +26,7 @@ const Registerpage = () => {
   const { darkMode } = useContext(ThemeContext);
   const { authenticateStateAndDispatch, setIsLoggedIn } = useContext(AppStateContext);
   const userDataCookieName = "userData";
-  const { registerUser } = useUser();
+  const { registerUser, getUserData } = useUser();
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
@@ -47,6 +47,13 @@ const Registerpage = () => {
       }
     }
     return false;
+  };
+  const getUserDataRequest = async () => {
+    try {
+      await getUserData();
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleSubmitForm = async (isNext = false, setResetForm) => {
     if (validateFormFields()) {
@@ -93,7 +100,8 @@ const Registerpage = () => {
           setFormData("");
           setResetForm((prev) => !prev);
           setIsLoggedIn(true);
-          navigate("/#Home");
+          navigate("/schedule");
+          getUserDataRequest();
         }
       } catch (e) {
         Toast.error("Something went wrong");
@@ -112,6 +120,13 @@ const Registerpage = () => {
       }
     }
   }
+  const handleOnClickDeleteImage = () => {
+    setUserPictureUrl("");
+    const fileInput = document.getElementById("file-type-img");
+    if (fileInput) {
+      fileInput.value = "";
+    }
+  };
   const handleClick = (currentForm) => {
     setFormStep(currentForm);
   };
@@ -132,7 +147,7 @@ const Registerpage = () => {
           handleSubmitForm={handleSubmitForm}
           onImageClick={handleOnImageClick}
           userPictureUrl={userPictureUrl}
-          setUserPictureUrl={setUserPictureUrl}
+          deleteImage={handleOnClickDeleteImage}
         />
         <RightRegisterPageComponent
           setFormData={setFormData}
