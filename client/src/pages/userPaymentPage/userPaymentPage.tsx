@@ -20,19 +20,11 @@ const UserPaymentPage: React.FC = () => {
     await getFeePlans(user?.userData?.batchCode ?? "");
   };
 
-  const fetchUserData = async () => {
-    await getUserData();
-  }
 
   useEffect(() => {
     getData();
     setIsLoading(false)
   }, [user, userPayments]);
-
-  useEffect(()=> {
-    fetchUserData()
-  },[])
-  
 
   const userFeePlan = feePlans?.filter(
     (fee) => fee._id === user?.userData?.feePlan

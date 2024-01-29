@@ -84,7 +84,7 @@ export const useAppData = (): UseAppDataReturnType => {
     },
   };
   useEffect(()=>{
-    getUserData();
-  },[])
+    isLoggedIn && getUserData();
+  },[isLoggedIn])
   return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
 }
