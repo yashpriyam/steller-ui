@@ -46,7 +46,7 @@ export const createBatch = async (
     // Create the batch in the database
     const newBatchData = await batchModel.create({
       batchCode,
-      paymentType,
+      paymentType: existingPaymentType._id,
       demoStudents: demoStudentIds,
       paidStudents: paidStudentIds,
       registeredStudents: registeredStudentIds,
