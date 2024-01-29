@@ -5,6 +5,7 @@ import { useFeePlans } from "../../redux/actions/feePlanActions";
 import "./UserPaymentPage.scss";
 import { useUser } from "../../redux/actions/userAction";
 import InstallmentList from "../../components/installmentList/installmentList";
+import { Button } from "../../components/button/button";
 
 const UserPaymentPage: React.FC = () => {
   const [selectedFeePlan, setSelectedFeePlan] = useState<string | null>(null);
@@ -15,14 +16,23 @@ const UserPaymentPage: React.FC = () => {
   const { updateUserInfo, getUserData, user } = useUser();
 
   const getData = async () => {
-    await getUserData();
     await getUserPayments("");
     await getFeePlans(user?.userData?.batchCode ?? "");
   };
 
+  const fetchUserData = async () => {
+    await getUserData();
+  }
+
   useEffect(() => {
     getData();
-  }, [user, isLoading]);
+    setIsLoading(false)
+  }, [user, userPayments]);
+
+  useEffect(()=> {
+    fetchUserData()
+  },[])
+  
 
   const userFeePlan = feePlans?.filter(
     (fee) => fee._id === user?.userData?.feePlan
@@ -31,7 +41,7 @@ const UserPaymentPage: React.FC = () => {
   return (
     <div className="user-payment-page">
       <h1>User Payment Page</h1>
-      {!Boolean(user?.userData?.feePlan) ? (
+      {!Boolean(user?.userData?.feePlan)  ? (
         <div>
           {Boolean(feePlans?.length) &&
             feePlans?.map((feePlan) => (
@@ -51,17 +61,17 @@ const UserPaymentPage: React.FC = () => {
             ))}
           {Boolean(feePlans?.length) && (
             <div className="button-wrapper">
-              <button
-                className="button"
-                onClick={async () => {
-                  selectedFeePlan &&
-                    updateUserInfo({ feePlan: selectedFeePlan });
-                    setIsLoading(!isLoading)
-                }}
-                disabled={!Boolean(selectedFeePlan) ?? true}
-              >
-                Add Payment Plan
-              </button>
+                <Button
+          className="button"
+           text={"Add Payment Plan"}
+            isDisabled={!Boolean(selectedFeePlan) ?? true}
+            onClick={async () => {
+              selectedFeePlan &&
+                updateUserInfo({ feePlan: selectedFeePlan });
+                setIsLoading(true)
+            }}
+           isLoading={isLoading}
+      />
             </div>
           )}
         </div>
