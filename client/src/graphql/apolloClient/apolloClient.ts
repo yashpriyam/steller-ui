@@ -7,15 +7,11 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = document.cookie
-    .split('; ')
-    .find(row => row.startsWith(`${process.env.REACT_APP_JWT_SECRET_KEY}=`))
-    ?.split('=')[1];
-
+  
   return {
     headers: {
       ...headers,
-      authorization: token ? `${token}` : '',
+      'Set-Cookie': document.cookie
     },
   };
 });
