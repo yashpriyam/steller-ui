@@ -57,7 +57,7 @@ const UserPaymentPage: React.FC = () => {
             <div className="button-wrapper">
                 <Button
           className="button"
-           text={t("Add Payment Plan")}
+           text={t("add_payment_plan")}
             isDisabled={!Boolean(selectedFeePlan) ?? true}
             onClick={async () => {
               selectedFeePlan &&

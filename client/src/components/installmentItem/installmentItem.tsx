@@ -33,7 +33,7 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
       </div>
       <Button
           className={`pay-now-button ${!paymentReceipt ? "disabled" : "enabled"}`}
-           text={t("Pay Now")}
+           text={t("pay_now")}
             isDisabled={!paymentReceipt}
             onClick={() => {
             handlePayNow(installment, paymentReceipt)
