@@ -7,7 +7,7 @@ const CodeResult: FC = () => {
     CodeDataContext
   ) as DataContextProps;
 
-  console.log({ html, css, js });
+  // console.log({ html, css, js });
 
   const srcCode: string = `
         <html>
@@ -26,7 +26,7 @@ const CodeResult: FC = () => {
   }, [html, css, js, srcCode]);
 
   return (
-    <div style={{backgroundColor: 'white'}}>
+    <div className='code-block-result-container' style={{backgroundColor: 'white'}}>
       <iframe
         srcDoc={src}
         title="output"

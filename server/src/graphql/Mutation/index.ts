@@ -29,3 +29,4 @@ export { createBatch, updateBatch } from "./batch/index";
 export { createUserPayment, getUserPaymentsByUserId } from  "./userPaymentsHistory/index"
 export { insertCities } from "./cities/index";
 export { createMeeting, updateMeeting } from "./meeting";
+export { saveUserCode } from './code/saveUserCode';

@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, useState, Dispatch, SetStateAction } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useState,
+  Dispatch,
+  SetStateAction
+} from 'react';
 
 interface DataContextProps {
   html: string;
@@ -17,8 +23,8 @@ interface CodeDataProviderProps {
 
 const CodeDataProvider: React.FC<CodeDataProviderProps> = ({ children }) => {
   const [html, setHtml] = useState<string>('');
-  const [js, setJs] = useState<string>('');
   const [css, setCss] = useState<string>('');
+  const [js, setJs] = useState<string>('');
 
   return (
     <CodeDataContext.Provider

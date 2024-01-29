@@ -20,8 +20,81 @@ const typeDefs = gql`
     createQuestionAttemptByUser(
       questionAttemptData: QuestionAttemptType!
     ): QuestionAttemptOutputType
-
+    saveUserCode(input: SaveUserCodeInput): UserCodeType
     updateUser(input: PartialUserSchemaType!): UserDataOutputType
+  }
+
+  type UserCodeType {
+    userId: ID!
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeType
+    response: CustomResponseType!
+  }
+
+  type CodeType {
+    html: String
+    css: String
+    js: String
+  }
+
+  input SaveUserCodeInput {
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeTypeInput
+  }
+
+  input CodeTypeInput {
+    html: String
+    css: String
+    js: String
+  }
+
+  type CodeBlockOutputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationOutputType
+  }
+  type ConfigurationOutputType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowOutputType]
+  }
+  type CodeEditorWindowOutputType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+
+  type AttemptQuestionOptionOutputType {
+    text: String
+    imageUrl: String
+    iframe: String
+    codeBlock: CodeBlockOutputType
+    isChecked: Boolean
+  }
+
+  type AttemptedQuestionDataType {
+    _id: String
+    isAnswered: Boolean
+    isCorrect:Boolean
+    title: [QuestionOptionOutputType]
+    questionType: QuestionType
+    options: [AttemptQuestionOptionOutputType]
+    answer: [AttemptQuestionOptionOutputType]
+    marks: Int
+    meta: QuestionMetaOutput
+  }
+
+  type GetAllQuestionsOutputType {
+    questions: [AttemptedQuestionDataType]
+    totalCorrectQuestions: Int
+    totalUnAttemptedQuestions: Int
+    totalInCorrectQuestions: Int
+    totalQuestions: Int
+    response: CustomResponseType
   }
 
   type CustomResponseType {

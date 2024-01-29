@@ -1,9 +1,35 @@
 .code-block-container {
-  border: 2px solid red;
   width: 100%;
+  display: flex;
+  border-radius: 10px;
+  margin: 10px 0;
 
   .code-editor-blocks-container {
-    display: flex;
+    flex: 1;
+
+    .code-blocks-tabs {
+      button {
+        padding: 4px 8px;
+        border-radius: 4px 4px 0 0;
+        font-size: 14px;
+
+        &.selected {
+          background-color: white;
+          color: black;
+        }
+
+        &.selected.html {
+          background-color: #ff3c41;
+        }
+
+        &.selected.css {
+          background-color: #0ebeff;
+        }
+        &.selected.js {
+          background-color: #fcd000;
+        }
+      }
+    }
 
     .code-editor-container {
       flex: 1;
@@ -16,19 +42,58 @@
         padding: 5px 10px;
         border-radius: 4px;
         border: 2px solid rgb(36, 36, 36);
+      }
 
-        &.javascript {
-          color: yellow;
-        }
+      .CodeMirror {
+        height: 300px !important;
+        color: #fff;
+        font-size: 14px !important;
+      }
 
-        &.css {
-          color: blue;
-        }
+      .CodeMirror-gutters {
+        background: #1d1e22 !important;
+        font-size: 14px !important;
+      }
 
-        &.xml {
-          color: red;
-        }
+      .CodeMirror-scroll {
+        background: #1d1e22;
+        font-size: 14px !important;
       }
     }
+  }
+
+  .code-block-result-container {
+    flex: 1;
+  }
+}
+
+.code-block-buttons {
+  width: 100%;
+  margin-bottom: 10px;
+
+  button {
+    background-color: rgb(37, 140, 224);
+    padding: 7px 22px;
+    margin: 5px 5px 5px 0;
+    border-radius: 4px;
+    font-size: 14px;
+
+    &:hover {
+      background-color: rgb(0, 109, 199);
+    }
+
+    &.reset-btn {
+      background-color: #ff3c41;
+    }
+
+    &.reset-btn:hover {
+      background-color: #e70f16;
+    }
+  }
+}
+
+@media (max-width: 824px) {
+  .code-block-container {
+    flex-direction: column;
   }
 }

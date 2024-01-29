@@ -6,7 +6,6 @@ import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-import CodeBlock from "../../components/codeBlock/codeBlock";
 
 const QuestionPage = () => {
   const { questions, getAllQuestions } = useQuestions();
@@ -38,7 +37,8 @@ const QuestionPage = () => {
   }, [])
   return (
     <div className="question-page-container">
-      <CodeBlock />
+      {/* <CodeBlock />
+      <CodeBlock /> */}
        <h1>{t('question')}</h1>
         <div className="question-time">
           <span>

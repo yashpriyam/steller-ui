@@ -212,6 +212,7 @@ declare global {
     multi = "multi",
     single = "single",
     fillup = "fillup",
+    codeblock = "codeblock"
   }
 
   enum QuestionMetaType {
@@ -894,5 +895,38 @@ declare global {
     key: string;
     value: string;
   }
+  
+  type Code = {
+    html?: string;
+    css?: string;
+    js?: string;
+  };
+  
+  type UserCode = {
+    questionId: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: Code;
+  };
+  
+  type CodeInput = {
+    html?: string;
+    css?: string;
+    js?: string;
+  };
+  
+  type SaveUserCodeInput = {
+    questionId: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: CodeInput;
+  };
 
+  type GetUserCodeInput = {
+    userId?: string;
+    questionId?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: CodeInput;
+  };
 }

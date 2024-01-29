@@ -315,7 +315,8 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
-    fillup = "fillup"
+    fillup = "fillup",
+    codeblock = "codeblock"
   }
 
   interface QuestionResponseType {
@@ -354,11 +355,30 @@ declare global {
     isLoading: boolean;
   }
 
+  type CodeBlockOpenWindowsType = {
+    enableUserSelection: boolean;
+    isEditable: boolean;
+    predefinedCode: string;
+    title: string;
+  }
+
+  type CodeBlockConfigurationType = {
+    showOutputWindow: boolean;
+    showSplitWindow: boolean;
+    openWindows: [CodeBlockOpenWindowsType];
+  }
+
+  type CodeBlockType = {
+    enableCodeBlock: boolean;
+    configuration: CodeBlockConfigurationType
+  }
+
   type QuestionOptionType = {
     imageUrl?: string;
     text?: string;
     iframe?: string;
     isChecked?: boolean;
+    codeBlock: CodeBlockType
   };
 
   type VideoDataType = {
@@ -820,6 +840,24 @@ declare global {
 
   interface CodeDataProviderProps {
     children: ReactNode;
+  }
+
+  interface UserCodeStateType {
+    userCode: [userCodeType]
+    isLoading: boolean
+  }
+
+  interface userCodeType {
+    questionId?: string
+    weekNumber?: number
+    dayNumber?: number
+    code?: CodeType
+  }
+
+  interface CodeType {
+    html: string;
+    css: string;
+    js: string;
   }
 }
 export { };
