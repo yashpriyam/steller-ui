@@ -54,5 +54,8 @@
     "estimated_reading_time": "Estimated Reading Time",
     "week": "Week",
     "day": "Day",
-    "notes_error": "No notes found for selected date"
+    "notes_error": "No notes found for selected date",
+    "payments": "Payments",
+    "Add Payment Plan": "Add Payment Plan",
+    "Pay Now": "Pay Now"
 }

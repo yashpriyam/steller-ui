@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { 
-  AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon, SearchIcon, VideoIcon,NameIcon
+  AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon, SearchIcon, VideoIcon,NameIcon, PaymentIcon
 } from "./icons/index";
 import { useTranslation } from 'react-i18next';
 import { useUser } from './redux/actions/userAction';
@@ -49,6 +49,11 @@ export const useAppData = (): UseAppDataReturnType => {
         text: t("home"),
         image: <HomeIcon isDarkMode={true} />,
         url: "/",
+      },
+      {
+        text: t("payments"),
+        image: <PaymentIcon isDarkMode={true} />,
+        url: "/userPayment",
       },
       {
         text: t("dashboard"),

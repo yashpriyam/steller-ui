@@ -6,6 +6,7 @@ import "./UserPaymentPage.scss";
 import { useUser } from "../../redux/actions/userAction";
 import InstallmentList from "../../components/installmentList/installmentList";
 import { Button } from "../../components/button/button";
+import { useTranslation } from "react-i18next";
 
 const UserPaymentPage: React.FC = () => {
   const [selectedFeePlan, setSelectedFeePlan] = useState<string | null>(null);
@@ -14,6 +15,7 @@ const UserPaymentPage: React.FC = () => {
   const { userPayments, getUserPayments } = useUserPayments();
   const { feePlans, getFeePlans } = useFeePlans();
   const { updateUserInfo, getUserData, user } = useUser();
+  const { t } = useTranslation();
 
   const getData = async () => {
     await getUserPayments("");
@@ -55,7 +57,7 @@ const UserPaymentPage: React.FC = () => {
             <div className="button-wrapper">
                 <Button
           className="button"
-           text={"Add Payment Plan"}
+           text={t("Add Payment Plan")}
             isDisabled={!Boolean(selectedFeePlan) ?? true}
             onClick={async () => {
               selectedFeePlan &&

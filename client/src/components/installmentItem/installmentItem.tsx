@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../../components/button/button";
 import React, { useState } from "react";
 
@@ -7,6 +8,7 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
   isLoading
 }) => {
   const [paymentReceipt, setPaymentReceipt] = useState<File | null>(null);
+  const { t } = useTranslation();
   return (
     <li className="installment-item">
       <p className="installment-info">
@@ -31,7 +33,7 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
       </div>
       <Button
           className={`pay-now-button ${!paymentReceipt ? "disabled" : "enabled"}`}
-           text={"Pay Now"}
+           text={t("Pay Now")}
             isDisabled={!paymentReceipt}
             onClick={() => {
             handlePayNow(installment, paymentReceipt)
