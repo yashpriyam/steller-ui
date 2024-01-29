@@ -1,0 +1,89 @@
+@mixin common-main-sub-container{
+    width: 80%;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 20px;
+    color: rgb(55, 54, 54);
+    @media (max-width: 750px){
+        width: 100%;
+    }
+}
+.user-account-main-container{
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    @media (max-width: 750px){
+        padding: 20px 10px;
+    }
+    .user-account-image-container{
+        display: flex;
+        @include common-main-sub-container;
+        justify-content: space-between;
+        align-items: flex-end;
+        .user-profile-image{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .user-profile-edit-button{
+            padding: 12px 20px;
+            border-radius: 5px;
+            background-color: rgb(206, 52, 52);
+            width: fit-content;
+            color: white;
+            font-size: 18px;
+            height: fit-content;
+        }
+    }
+    .user-account-container{
+        @include common-main-sub-container;
+        .field-value-wrapper{
+            width: 100%;
+            border-bottom: 1px solid lightgray;
+            padding: 20px;
+            font-size: 18px;
+            display: flex;
+            span{
+                display: flex;
+                font-size: 20px;
+            }
+            .user-data-value{
+                flex-basis: 350px;
+            }
+            .user-data-field{
+                flex-basis: 150px;
+            }
+            .user-data-input-value{
+                margin: 0;
+                padding: 0;
+                border: none;
+                outline: none;
+                background: none;
+                font-family: inherit;
+                font-size: inherit;
+                color: inherit;
+                font-size: 20px;
+                &:focus{
+                    border: none !important;
+                    outline: none !important;
+                    background: none !important; 
+                }
+            }
+            @media (max-width: 660px){
+                display: block;
+            }
+        }
+    }
+    .user-account-more-info-container{
+        @include common-main-sub-container;
+        min-height: 60px;
+        span{
+            padding: 5px;
+            font-size: 20px;
+        }
+    }
+}
