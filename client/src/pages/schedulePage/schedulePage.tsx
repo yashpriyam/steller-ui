@@ -25,7 +25,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
     if(path) navigate(path);
   };
   const onJoinMeetClick = () => {
-    window.open(process.env.REACT_APP_CLASS_MEET_URL, "_blank");
+    navigate("/dashboard")
   };
   
   useEffect(() => {

@@ -67,12 +67,6 @@ export const useAppData = (): UseAppDataReturnType => {
         url: "/schedule",
       },
       {
-        text: "Meet",
-        image: <MeetIcon isDarkMode={true} />,
-        url: process.env.REACT_APP_CLASS_MEET_URL || "",
-        openNewPage: true,
-      },
-      {
         text: t("questions"),
         image: <QuestionIcon isDarkMode={true} />,
         url: "/questions",
