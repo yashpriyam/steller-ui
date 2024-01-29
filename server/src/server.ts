@@ -53,7 +53,7 @@ const PORT = process.env.PORT || 8080;
     typeDefs,
     resolvers,
     context: ({ req, res }) => {
-      const token = req.cookies[process.env.JWT_SECRET_KEY || ""];
+      const token = req.headers.authorization;
       let contextData;
       try {
         if (token) {
