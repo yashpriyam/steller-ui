@@ -10,11 +10,11 @@
     border-top: 5px solid #fff;
     border-bottom: 5px solid #ff4646;
     border-radius: 50%;
-    animation: spin 1.5s infinite linear;
+    animation: spin-monorepo-loader 1.5s infinite linear;
   }
 }
 
-@keyframes spin {
+@keyframes spin-monorepo-loader {
   100% {
     transform: rotateZ(360deg);
   }
