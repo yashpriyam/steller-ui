@@ -1,22 +1,23 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client"
 import { setContext } from '@apollo/client/link/context';
 
-const httpLink = createHttpLink({
-  uri: process.env.REACT_APP_SERVER_BASE_URL,
-  credentials: 'include',
-});
+const httpLink = new HttpLink({
+    uri: process.env.REACT_APP_SERVER_BASE_URL,
+    credentials: 'include',
+})
+
+const cookie = localStorage.getItem(process.env.REACT_APP_JWT_SECRET_KEY || "")
 
 const authLink = setContext((_, { headers }) => {
-  
-  return {
-    headers: {
-      ...headers,
-      'Set-Cookie': document.cookie
-    },
-  };
-});
+    return {
+      headers: {
+        ...headers,
+        cookie,
+      },
+    };
+  });
 
 export const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache(),
-});
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
+})
