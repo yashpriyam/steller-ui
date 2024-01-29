@@ -29,6 +29,7 @@ export const useUser = () => {
     branch,
     location,
     batchCode,
+    profileImage,
   }: RegisterUserData) => {
     const response = await apolloClient.mutate({
       mutation: REGISTER_USER,
@@ -47,6 +48,7 @@ export const useUser = () => {
           branch,
           location,
           batchCode,
+          profileImage,
         },
       },
     });
@@ -171,8 +173,6 @@ export const useUser = () => {
       console.error(err);
     }
   };
-
-  
   
 
   return {

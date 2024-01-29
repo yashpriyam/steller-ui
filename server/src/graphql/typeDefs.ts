@@ -200,6 +200,7 @@ const typeDefs = gql`
     course: String
     branch: String
     location: String
+    profileImage: String
   }
 
   enum SessionPreferenceEnum {
@@ -226,6 +227,7 @@ const typeDefs = gql`
     course: String
     branch: String
     location: String
+    profileImage: ProfileImageType
   }
   input CreateNotesInputType {
     link: String!
@@ -1009,6 +1011,7 @@ type UserAllFeePlanDataOutputType {
     branch: String
     batchCode: String
     feePlan: String 
+    profileImage: ProfileImageType
   }
   
   input UpdateMeetingInputFilter {

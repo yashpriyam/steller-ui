@@ -21,6 +21,10 @@ export const REGISTER_USER = gql`
         branch
         location
         batchCode
+        profileImage {
+          publicId
+          secureUrl
+        }
       }
       credentials
     }

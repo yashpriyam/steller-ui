@@ -9,6 +9,10 @@ query {
         phoneNumber
         batchCode
         feePlan
+        profileImage {
+          publicId
+          secureUrl
+        }
       }
       response {
         message

@@ -19,15 +19,15 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
   const { weekList, isScheduleDataLoading } = weekData;
- 
+  
   const handleNavigation = (e:React.MouseEvent<HTMLElement>,path?: string) => {
     e.stopPropagation();
     if(path) navigate(path);
   };
-  
   const onJoinMeetClick = () => {
     window.open(process.env.REACT_APP_CLASS_MEET_URL, "_blank");
   };
+  
   useEffect(() => {
     getScheduleData({});
   }, []);
@@ -81,12 +81,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                           <div
                             key={index}
                             className="day-container"
-                            onClick={(
-                              e: React.MouseEvent<HTMLElement>
-                            ) => {
+                            onClick={(e: React.MouseEvent<HTMLElement>) => {
                               handleNavigation(
-                                e,
-                                // `/day/${dayNumber}?weekNumber=${weekNumber}` 
+                                e
+                                // `/day/${dayNumber}?weekNumber=${weekNumber}`
                                 // commented navigation to dayPage until data is inserted to it.
                               );
                             }}
