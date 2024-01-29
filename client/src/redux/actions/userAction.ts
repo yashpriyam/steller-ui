@@ -52,12 +52,15 @@ export const useUser = () => {
         },
       },
     });
-    setCookie({
-      key: process.env.REACT_APP_JWT_SECRET_KEY || "",
-      value: response?.data?.registerUser?.credentials,
-    });
-    dispatch(actions.setRegisterUser(response.data));
-    return { response };
+    const status = response?.data?.registerUser?.response?.status;
+    if (status === 200) {
+      setCookie({
+        key: process.env.REACT_APP_JWT_SECRET_KEY || "",
+        value: response?.data?.registerUser?.credentials,
+      });
+      dispatch(actions.setRegisterUser(response.data));
+    }
+    return { response, status };
   };
 
   const sendOtpApi = async (email: string) => {
@@ -83,10 +86,13 @@ export const useUser = () => {
         },
       },
     });
-    setCookie({
-      key: process.env.REACT_APP_JWT_SECRET_KEY || "",
-      value: response?.data?.login?.credentials,
-    });
+    const status = response?.data?.login?.response?.status;
+    if (status === 200) {
+      setCookie({
+        key: process.env.REACT_APP_JWT_SECRET_KEY || "",
+        value: response?.data?.login?.credentials,
+      });
+    }
     return response;
   };
 
@@ -100,13 +106,16 @@ export const useUser = () => {
         },
       },
     });
-    setCookie({
-      key: process.env.REACT_APP_JWT_SECRET_KEY || "",
-      value: response?.data?.verifyUserOtp?.credentials,
-    });
+    const status = response?.data?.verifyUserOtp?.response?.status;
+    if (status === 200) {
+      setCookie({
+        key: process.env.REACT_APP_JWT_SECRET_KEY || "",
+        value: response?.data?.verifyUserOtp?.credentials,
+      });
+    }
     return {
       response,
-      status: response?.data?.verifyUserOtp?.response?.status
+      status: response?.data?.verifyUserOtp?.response?.status,
     };
   };
 
@@ -129,26 +138,25 @@ export const useUser = () => {
     dispatch(actions.setIsLoggedIn(isLoggedIn));
   };
 
-
-  const updateUserInfo = async (input: UpdateUserInput )=> {
+  const updateUserInfo = async (input: UpdateUserInput) => {
     const response = await apolloClient.mutate({
       mutation: UPDATE_USER_INFO,
       variables: {
         input: {
-          ...input
-        }
+          ...input,
+        },
       },
-    });  
-    dispatch(actions.setUser(response.data.updateUser));return {
+    });
+    dispatch(actions.setUser(response.data.updateUser));
+    return {
       response,
     };
-  }
-
+  };
 
   const getUserData = async () => {
     try {
       const response = await apolloClient.query({
-        query: GET_USER
+        query: GET_USER,
       });
       dispatch(actions.setUser(response.data.getUser));
       return response;
@@ -161,19 +169,17 @@ export const useUser = () => {
     try {
       const response = await apolloClient.mutate({
         mutation: CREATE_USER_PAYMENTS,
-        variables: 
-         {
-            input: {
-              ...input
-            }
-         }
+        variables: {
+          input: {
+            ...input,
+          },
+        },
       });
       return response;
     } catch (err) {
       console.error(err);
     }
   };
-  
 
   return {
     user,
@@ -185,6 +191,6 @@ export const useUser = () => {
     setIsLoggedIn,
     updateUserInfo,
     getUserData,
-    createUserPayment
+    createUserPayment,
   };
 };
