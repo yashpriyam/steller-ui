@@ -13,10 +13,12 @@ import {
 import { objectToBase64 } from "../../helpers/utils/base64Utils";
 import { setCookie } from "../../helpers/utils/cookieUtils";
 import { useUser } from "../../../redux/actions/userAction";
+import { readFileAsDataURL } from "../../../utils/index";
 
 const Registerpage = () => {
   const [formData, setFormData] = useState("");
   const [formStep, setFormStep] = useState(1);
+  const [userPictureUrl, setUserPictureUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [finishedPage, setFinishedPage] = useState(0);
@@ -24,7 +26,7 @@ const Registerpage = () => {
   const { darkMode } = useContext(ThemeContext);
   const { authenticateStateAndDispatch, setIsLoggedIn } = useContext(AppStateContext);
   const userDataCookieName = "userData";
-  const { registerUser } = useUser();
+  const { registerUser, getUserData } = useUser();
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
@@ -45,6 +47,13 @@ const Registerpage = () => {
       }
     }
     return false;
+  };
+  const getUserDataRequest = async () => {
+    try {
+      await getUserData();
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleSubmitForm = async (isNext = false, setResetForm) => {
     if (validateFormFields()) {
@@ -81,6 +90,7 @@ const Registerpage = () => {
           course: selectyourcourse,
           courseYear:selectyourcourseyear,
           batchCode,
+          profileImage: userPictureUrl,
         })
         if (response?.response.data?.registerUser?.response?.status === 400) {
           Toast.warning("Email is already registered. You can login");
@@ -90,7 +100,8 @@ const Registerpage = () => {
           setFormData("");
           setResetForm((prev) => !prev);
           setIsLoggedIn(true);
-          navigate("/#Home");
+          navigate("/schedule");
+          getUserDataRequest();
         }
       } catch (e) {
         Toast.error("Something went wrong");
@@ -98,7 +109,24 @@ const Registerpage = () => {
       setIsLoading(false);
     }
   };
-
+  const handleOnImageClick = async (e) => {
+    const files = e.target.files;
+    if (Boolean(files.length)) {
+      try {
+        const response = await readFileAsDataURL(files[0]);
+        setUserPictureUrl(response);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
+  const handleOnClickDeleteImage = () => {
+    setUserPictureUrl("");
+    const fileInput = document.getElementById("file-type-img");
+    if (fileInput) {
+      fileInput.value = "";
+    }
+  };
   const handleClick = (currentForm) => {
     setFormStep(currentForm);
   };
@@ -117,6 +145,9 @@ const Registerpage = () => {
           formStep={formStep}
           finishedPage={finishedPage}
           handleSubmitForm={handleSubmitForm}
+          onImageClick={handleOnImageClick}
+          userPictureUrl={userPictureUrl}
+          deleteImage={handleOnClickDeleteImage}
         />
         <RightRegisterPageComponent
           setFormData={setFormData}

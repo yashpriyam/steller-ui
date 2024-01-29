@@ -1,9 +1,9 @@
-export const readFileAsDataURL = (file: File) => new Promise((resolve, reject) => {
+export const readFileAsDataURL = (file: File) : Promise<string| ArrayBuffer> => new Promise((resolve, reject) => {
     try {
         const fileReader = new FileReader();
-        fileReader.readAsDataURL(file);
+        fileReader?.readAsDataURL(file);
         fileReader.onloadend = () => {
-            resolve(fileReader.result)
+            resolve(fileReader.result || "")
         }
     } catch (err) {
         reject(err)

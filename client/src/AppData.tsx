@@ -13,7 +13,8 @@ export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const { user, getUserData } = useUser();
   const { isLoggedIn, userData } = user || {};
-  const { name } = userData || {};
+  const { name, profileImage } = userData || {};
+  const { secureUrl } = profileImage || {};
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export const useAppData = (): UseAppDataReturnType => {
   const sidebarData: SidebarProps = {
     profile : {
       text: name || t("profile"),
-      image: name ? 
+      image: secureUrl ? secureUrl : name ? 
             <NameIcon width='40px' height='40px' name={name} /> : 
             <AvatarIcon isDarkMode={true}/>,
       url: "/profile",
@@ -84,7 +85,7 @@ export const useAppData = (): UseAppDataReturnType => {
     },
   };
   useEffect(()=>{
-    getUserData();
-  },[])
+    isLoggedIn && getUserData();
+  },[isLoggedIn])
   return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
 }

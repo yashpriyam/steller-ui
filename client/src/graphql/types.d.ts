@@ -1,4 +1,5 @@
-import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction, ReactNode } from "react";
+import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction, ReactNode,ChangeEventHandler,
+} from "react";
 
 declare global {
 
@@ -19,6 +20,7 @@ declare global {
     location: string;
     batchCode: string;
     feePlan?: string
+    profileImage: string;
   }
 
   interface Experience {
@@ -699,8 +701,8 @@ declare global {
     expectedSalary?: string;
     IST: string;
     collegeName?: string;
-    profileImage?: UserProfile;
-    coverImage?: UserProfile;
+    profileImage?: ProfileImageType;
+    coverImage?: ProfileImageType;
     userProfile?: Types.ObjectId;
     batchCode?: string;
     courseYear?: string;
@@ -790,6 +792,19 @@ declare global {
   type MeetingStateType = {
     masterMeeting: MeetingDataType | null;
     classMeeting: MeetingDataType | null;
+  } 
+  type ProfileImageType = {
+    publicId?: string
+    secureUrl?: string
+  }
+  interface UploadImagePropsInterface {
+    className?: string;
+    disable?: boolean;
+    multiple?: boolean;
+    text?: string | ReactNode;
+    style?: CSSProperties;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    url?: string;
   }
 
 }

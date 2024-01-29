@@ -1,5 +1,5 @@
 .leftRegisterPage {
-  width: 45%;
+  width: 25%;
   background: var(--red);
   height: 98vh;
   margin: 1vh;
@@ -7,9 +7,12 @@
   display: flex;
   z-index: 2;
   align-items: center;
-
+  justify-content: center;
   .container {
-    margin-left: 90px;
+    // margin-left: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .saveFormButton {
         margin-top: 10vh;
       .saveButton {
@@ -24,11 +27,19 @@
     .heading {
       color: white;
       // font-size: 14px;
-      margin-bottom: 50px;
+      // margin-bottom: 50px;
       display: flex;
       flex-direction: column;
+      align-items: center;
       width: auto;
       justify-content: space-around;
+      gap: 10px;
+      .image-delete-button{
+        font-size: 14px;
+        color: black;
+        border: 1px solid black;
+        padding: 2px 5px;
+      }
       .mobileScreen.saveFormButton{
            margin-top: 0;
       }
@@ -53,9 +64,12 @@
       margin-top: 8vh;
 
       .heading {
-        margin-top: 7vh;
-        margin-left: 20px;
-        margin-bottom: 4vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // margin-top: 7vh;
+        // margin-left: 20px;
+        // margin-bottom: 4vh;
       }
       .steps {
         display: flex;
