@@ -16,6 +16,7 @@ export const createMeeting = async (
     isActive,
     scheduledAt,
     isPaid,
+    description,
   } = data;
   const { BAD_REQUEST, OK } = statusCodes;
   const { MEETING_MODEL } = errorMessages;
@@ -55,6 +56,7 @@ export const createMeeting = async (
           isActive,
           scheduledAt,
           isPaid,
+          description,
         });
         return {
           meetingData,

@@ -67,16 +67,26 @@ const typeDefs = gql`
     createDay(dayData: DayDataInputType!): DayDataOutputType
     updateDay(dayData: DayDataInputType!): DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
-    upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
+    upsertUserProfile(
+      data: UpsertUserProfileInputType!
+    ): UpsertUserProfileOutputType
     createFeePlan(feePlanData: FeePlanInput!): FeePlanDataOutputType!
     createBatch(input: BatchInput!): BatchDataOutputType!
     updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
-    updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
+    updateFeePlan(
+      feePlanId: String!
+      input: FeePlanInput!
+    ): FeePlanDataOutputType!
     createUserPayment(input: UserPaymentCreateInput): UserPaymentDataOutput!
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
-    getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
+    getFeePlanDetailsByBatchCode(
+      batchCode: String!
+    ): UserAllFeePlanDataOutputType
     createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
-    updateMeeting(filter: UpdateMeetingInputFilter, data: UpdateMeetingInputDataType): MeetingDataOutputType
+    updateMeeting(
+      filter: UpdateMeetingInputFilter
+      data: UpdateMeetingInputDataType
+    ): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
   }
@@ -472,7 +482,7 @@ const typeDefs = gql`
   type AttemptedQuestionDataType {
     _id: String
     isAnswered: Boolean
-    isCorrect:Boolean
+    isCorrect: Boolean
     title: [QuestionOptionOutputType]
     questionType: QuestionType
     options: [AttemptQuestionOptionOutputType]
@@ -799,7 +809,7 @@ const typeDefs = gql`
     installments: [InstallmentInput]
     miscellaneous: JSON
   }
-  
+
   input InstallmentInput {
     id: ID
     amount: String
@@ -824,7 +834,7 @@ const typeDefs = gql`
     _id: ID!
     batchCode: String
     name: String!
-    installments: [InstallmentInputType],
+    installments: [InstallmentInputType]
     description: String!
     miscellaneous: JSON
   }
@@ -837,12 +847,12 @@ const typeDefs = gql`
     demoStudents: [ID]
     startDate: String
   }
-  
+
   type BatchDataOutputType {
     batchData: Batch
     response: CustomResponseType!
   }
-  
+
   type Batch {
     _id: ID!
     batchCode: String!
@@ -868,12 +878,12 @@ const typeDefs = gql`
     coverImage: UserProfile
     userProfile: ID
   }
-  
+
   type UserProfile {
     url: String!
     altText: String
   }
-  
+
   enum SessionPreference {
     ONLINE
     OFFLINE
@@ -893,40 +903,38 @@ const typeDefs = gql`
     secureUrl: String
   }
 
+  type UserPaymentData {
+    _id: ID
+    user: User!
+    batch: Batch!
+    feePlan: FeePlan!
+    installmentId: ID
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: UserPaymentPendingType
+    image: CoverImageType
+    createdAt: String
+    updatedAt: String
+  }
 
-type UserPaymentData {
-  _id: ID
-  user: User!
-  batch: Batch!
-  feePlan: FeePlan!
-  installmentId: ID
-  isApproved: Boolean
-  isRejected: Boolean
-  isPending: UserPaymentPendingType
-  image: CoverImageType
-  createdAt: String
-  updatedAt: String
-}
+  type UserPaymentPendingType {
+    totalAmount: String
+    totalPendingAmount: String
+  }
 
-type UserPaymentPendingType {
-  totalAmount: String
-  totalPendingAmount: String
-}
+  type UserPaymentDataOutput {
+    userPaymentData: UserPaymentData
+    response: CustomResponseType!
+  }
 
-
-type UserPaymentDataOutput {
-  userPaymentData: UserPaymentData
-  response: CustomResponseType!
-}
-
-type UserAllPaymentDataOutputType  {
-  userPaymentData: [UserPaymentData]
-  response: CustomResponseType
-}
-type UserAllFeePlanDataOutputType {
-  feePlanData: [FeePlan]
-  response: CustomResponseType
-}
+  type UserAllPaymentDataOutputType {
+    userPaymentData: [UserPaymentData]
+    response: CustomResponseType
+  }
+  type UserAllFeePlanDataOutputType {
+    feePlanData: [FeePlan]
+    response: CustomResponseType
+  }
 
   input MeetingDataInputType {
     meetingNumber: String!
@@ -937,6 +945,7 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     scheduledAt: String
     isPaid: Boolean
+    description: String
   }
 
   type MeetingDataType {
@@ -948,6 +957,7 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     scheduledAt: String
     isPaid: Boolean
+    description: String
   }
 
   type MeetingDataOutputType {
@@ -991,7 +1001,7 @@ type UserAllFeePlanDataOutputType {
     course: String
     branch: String
     batchCode: String
-    feePlan: String 
+    feePlan: String
   }
 
   type UserSchemaType {
@@ -1010,10 +1020,10 @@ type UserAllFeePlanDataOutputType {
     course: String
     branch: String
     batchCode: String
-    feePlan: String 
+    feePlan: String
     profileImage: ProfileImageType
   }
-  
+
   input UpdateMeetingInputFilter {
     meetingNumber: String
     title: String
@@ -1029,6 +1039,7 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     scheduledAt: String
     isPaid: Boolean
+    description: String
   }
 
   input GetMeetingFilterInputType {

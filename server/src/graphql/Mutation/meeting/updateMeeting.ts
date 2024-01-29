@@ -23,6 +23,7 @@ export const updateMeeting = async (
       isPaid,
       password,
       link,
+      description,
     } = data;
     if (
       isNonNullishValueExists({
@@ -69,6 +70,7 @@ export const updateMeeting = async (
             scheduledAt,
             link,
             password,
+            description,
           },
         },
         { new: true }

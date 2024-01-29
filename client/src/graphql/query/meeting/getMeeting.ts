@@ -12,6 +12,7 @@ export const GET_MEETING = gql`
         isActive
         scheduledAt
         isPaid
+        description
       }
       response {
         status
