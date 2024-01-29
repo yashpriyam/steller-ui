@@ -24,7 +24,6 @@ export const useUserCode = () => {
     dayNumber,
     code,
   }: userCodeType) => {
-    console.log(code, weekNumber, dayNumber, questionId);
     try {
       const response = await apolloClient.mutate({
         mutation: SAVE_USER_CODE,
@@ -37,8 +36,6 @@ export const useUserCode = () => {
           },
         },
       });
-      console.log({response});
-      // dispatch(actions.setUserCode(response.data.getUserCode));
       return response;
     } catch (error) {
       console.log(error);

@@ -7,9 +7,7 @@ export const saveUserCode = async (
   { contextData }: ContextType
 ) => {
   try {
-    console.log({args});
     const userData = contextData.user;
-
     const { questionId, weekNumber, dayNumber, code } = args.input;
 
     // Find the document with the specified criteria

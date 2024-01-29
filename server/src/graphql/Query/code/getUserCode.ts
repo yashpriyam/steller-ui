@@ -12,10 +12,7 @@ export const getUserCode = async (
     if (questionId) query.questionId = questionId;
     if (weekNumber !== undefined) query.weekNumber = weekNumber;
     if (dayNumber !== undefined) query.dayNumber = dayNumber;
-console.log(query);
-const savedCode = await userCodeModel.find(query);
-console.log(savedCode);
-
+    const savedCode = await userCodeModel.find(query);
     return {
       data: savedCode,
       response: { status: 200, message: 'User code(s) retrieved successfully' },

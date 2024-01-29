@@ -12,7 +12,7 @@ interface DataContextProps {
   css: string;
   setCss: Dispatch<SetStateAction<string>>;
   js: string;
-  setJs: Dispatch<SetStateAction<string>>;
+setJs: Dispatch<SetStateAction<string>>;
 }
 
 export const CodeDataContext = createContext<null | DataContextProps>(null);

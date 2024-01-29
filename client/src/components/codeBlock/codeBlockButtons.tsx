@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CodeDataContext } from './CodeDataProvider';
 import { useUserCode } from '../../redux/actions/userCodeActions';
 import { useLocation } from 'react-router-dom';

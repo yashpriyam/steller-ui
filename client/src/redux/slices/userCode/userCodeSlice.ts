@@ -10,7 +10,6 @@ export const userCodeSlice = createSlice({
     initialState: initialState,
     reducers: {
         setUserCode: (state, action) => {
-            console.log(action.payload.data);
             state.userCode = action.payload?.data;
             state.isLoading = false;
         },

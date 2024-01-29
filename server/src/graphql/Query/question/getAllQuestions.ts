@@ -11,11 +11,9 @@ export const getAllQuestions = async (
   args: { filterData: filterDataType; pagination: pagination },
   { contextData }: ContextType
 ): Promise<QuestionsReturnType | unknown> => {
-  console.log('search for questions', args);
   if (!isLoggedIn(contextData)) {
     return getUnauthorizedResponse();
   }
-  console.log('reaches here');
   const userData = contextData.user;
   const errorData: CustomResponseType = {
     message: QUESTION_NOT_FOUND,
@@ -50,9 +48,7 @@ export const getAllQuestions = async (
         questionAttemptData;
     });
     let totalCorrectQuestions = 0;
-    console.log({ questionList });
     const updatedQuestionList = questionList.map((questionData) => {
-      console.log({ questionData });
       if (questionData.questionType === 'codeblock') {
         return questionData;
       }

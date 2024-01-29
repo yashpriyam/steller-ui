@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Accordion from '../accordion/accordion';
 import './questionAccordion.scss';
 import { Checkbox } from '../checkbox/checkbox';
@@ -14,7 +14,6 @@ const QuestionAccordion = ({
   isAnswered,
   isCorrect,
 }: QuestionAccordionProps) => {
-  console.log(questionData);
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
   const [fillupValue, setFillupValue] = useState<string>('');

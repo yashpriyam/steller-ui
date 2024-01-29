@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { CodeDataContext } from './CodeDataProvider';
 
 const CodeResult: FC = () => {
@@ -6,8 +6,6 @@ const CodeResult: FC = () => {
   const { html = "", css = "", js = "" } = useContext(
     CodeDataContext
   ) as DataContextProps;
-
-  // console.log({ html, css, js });
 
   const srcCode: string = `
         <html>

@@ -23,7 +23,6 @@ const CodeEditorBlocks: React.FC<{
   const htmlCode = openWindows.find((element) => element.title === 'HTML');
   const cssCode = openWindows.find((element) => element.title === 'CSS');
   const jsCode = openWindows.find((element) => element.title === 'JS');
-  console.log(htmlCode);
   const {
     html = '',
     css = '',
