@@ -53,10 +53,10 @@ const PORT = process.env.PORT || 8080;
     typeDefs,
     resolvers,
     context: ({ req, res }) => {
-      const token = req.headers.authorization;
+      const token = req.headers.authorization || '';
       let contextData;
       try {
-        if (token) {
+        if (!!token || token !== 'null') {
           contextData = jwt.verify(token, process.env.JWT_SECRET_VALUE || "");
         }
       } catch (err) {

@@ -11,6 +11,7 @@ import { CourseImageComponent } from "../../components/courseImageComponent/cour
 import { OverviewComponent } from "../../components/overviewComponent/overviewComponent";
 import { useMeeting } from "../../redux/actions/meetingAction";
 import { startZoomMeet } from "../../utils/startZoomMeet";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard: React.FC<DashboardProps> = ({
   className,
@@ -187,34 +188,26 @@ export const Dashboard: React.FC<DashboardProps> = ({
   overviewButtonTwo = "View FAQs",
 }: DashboardProps) => {
 
-  const { getMasterMeeting, meetingDetails } = useMeeting();
-  const { masterMeeting, classMeeting } = meetingDetails || {};
+  const { meetingDetails, getMasterMeeting } = useMeeting();
+  const { masterMeeting } = meetingDetails || {};
   const [meetingList, setMeetingList] = useState<ServiceBoxType[]>([]);
+  const navigate = useNavigate();
   useEffect(() => {
-    masterMeeting && setMeetingList([
-      ...meetingList,
-      {
+    masterMeeting && setMeetingList(
+      [{
         title: masterMeeting?.title || '',
-        subtitle: 'This is demo meeting',
+        subtitle: masterMeeting?.description || '',
         icon: <ThoughtIcon width="20" />,
         buttonText: 'Join',
         isBtnEnabled: !!masterMeeting?.isActive,
-        onClick: () => {
-          startZoomMeet({
-            leaveUrl: window.location.hostname,
-            meetingNumber: masterMeeting.meetingNumber,
-            password: masterMeeting.password,
-            userName: 'test-user',
-            sdkKey: process.env.REACT_APP_ZOOM_SDK_KEY || "",
-            sdkSecret: process.env.REACT_APP_ZOOM_SDK_SECRET || ""
-          })
-        }
+        onClick: () => navigate('/meet')
       }])
   }, [masterMeeting])
 
-  useEffect(() => {
-    getMasterMeeting()
-  }, [])
+  useEffect(()=> {
+    getMasterMeeting();
+  },[])
+
   return (
     <div className={`dashboard`}>
       <div className={`dashboard-container`}>

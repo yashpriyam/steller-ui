@@ -787,7 +787,8 @@ declare global {
     link?: string;
     isActive: string | null;
     isPaid: string | null;
-    scheduledAt: Date | null
+    scheduledAt: Date | null;
+    description: string | null;
   }
 
   type MeetingStateType = {

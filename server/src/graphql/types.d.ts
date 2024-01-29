@@ -846,10 +846,11 @@ declare global {
     meetingCode: string;
     title: string;
     password: string;
-    link?: string;
-    scheduledAt?: Date;
     isActive: boolean;
     isPaid: boolean;
+    link?: string;
+    scheduledAt?: Date;
+    description?: string;
   }
   
   type MeetingReturnType = {

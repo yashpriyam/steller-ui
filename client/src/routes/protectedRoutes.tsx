@@ -11,6 +11,7 @@ import DayContentPage from "../pages/dayContextPage/dayContextPage";
 import VideosPage from "../pages/videosPage/videosPage";
 import UserPaymentPage from '../pages/userPaymentPage/userPaymentPage';
 import Notes from '../pages/notes/notesPage';
+import { MeetingPage } from '../pages/meetingPage/meetingPage';
 
 const protectedRoutesMap: RoutesMapInterface = Object.freeze({
     "/questions": <QuestionPage />,
@@ -22,7 +23,8 @@ const protectedRoutesMap: RoutesMapInterface = Object.freeze({
     "/question": <QuestionPage />,
     "/videos": <VideosPage />,
     "/userPayment": <UserPaymentPage/>,
-    "/notes": <Notes />
+    "/notes": <Notes />,
+    "/meet": <MeetingPage />
 });
 
 export const ProtectedRoutes = () => {
