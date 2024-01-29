@@ -9,6 +9,13 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
 }) => {
   const [paymentReceipt, setPaymentReceipt] = useState<File | null>(null);
   const { t } = useTranslation();
+
+
+    const date = new Date(parseInt(installment?.dueDate?.toString() ?? '', 10));
+
+    // Format the date as a string
+    const formattedDate = date.toLocaleDateString();
+  
   return (
     <li className="installment-item">
       <p className="installment-info">
@@ -17,7 +24,7 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
           Sequence: {installment.sequence}
         </span>
         <span className="installment-elem">
-          Due Date: {installment.dueDate?.toString()}
+          Due Date: {formattedDate}
         </span>
       </p>
       <div className="file-input-wrapper">
