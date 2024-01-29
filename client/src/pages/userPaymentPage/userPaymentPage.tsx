@@ -26,7 +26,7 @@ const UserPaymentPage: React.FC = () => {
   useEffect(() => {
     getData();
     setIsLoading(false)
-  }, [user, userPayments]);
+  }, [user]);
 
   const userFeePlan = feePlans?.filter(
     (fee) => fee._id === user?.userData?.feePlan
@@ -36,7 +36,7 @@ const UserPaymentPage: React.FC = () => {
     <div className="user-payment-page">
       <h1>User Payment Page</h1>
       {!Boolean(user?.userData?.feePlan)  ? (
-        <div>
+        <div className="fee-plan-card">
           {Boolean(feePlans?.length) &&
             feePlans?.map((feePlan) => (
               <div key={feePlan.name}>
