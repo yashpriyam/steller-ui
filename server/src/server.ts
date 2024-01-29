@@ -54,7 +54,6 @@ const PORT = process.env.PORT || 8080;
     resolvers,
     context: ({ req, res }) => {
       const token = req.cookies[process.env.JWT_SECRET_KEY || ""];
-      
       let contextData;
       try {
         if (token) {
