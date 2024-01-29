@@ -11,3 +11,4 @@ export { CameraIcon } from "./cameraIcon";
 export { SearchIcon } from "./searchIcon";
 export { VideoIcon } from "./videoIcon";
 export { NameIcon } from "./nameIcon";
+export { PaymentIcon } from "./paymentIcon"

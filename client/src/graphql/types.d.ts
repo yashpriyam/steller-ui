@@ -751,6 +751,7 @@ declare global {
   interface InstallmentItemProps {
     installment: Installment;
     handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
+    isLoading?: boolean
   }
   
   type GenerateZoomSignForUserArgsType = {

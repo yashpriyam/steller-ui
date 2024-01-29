@@ -44,6 +44,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
   ) => {
     if (paymentReceipt !== null) {
       try {
+        setIsLoading &&  setIsLoading(true);
         const paymentReceiptUrl = await readFileAsDataURL(paymentReceipt);
         const input: UserPaymentInputType = {
           batch: userFeePlan?.batchCode,
@@ -53,7 +54,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
         };
         const response = await createUserPayment(input);
         if (response?.data && setIsLoading) {
-          setIsLoading(!isLoading);
+          setIsLoading(false);
         }
       } catch (error) {
         console.error("Error submitting payment receipt", error);
@@ -118,6 +119,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
                   key={installment.id}
                   installment={installment}
                   handlePayNow={handlePayNow}
+                  isLoading={isLoading}
                 />
               ))}
             </ul>
