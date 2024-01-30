@@ -297,6 +297,7 @@ const typeDefs = gql`
     link: String!
     title: String!
     dayNumber: Int!
+    weekNumber: Int!
     topics: [String]!
     noOfPages: Int
     description: String
@@ -328,6 +329,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -341,6 +343,7 @@ const typeDefs = gql`
     link: String!
     title: String!
     dayNumber: Int!
+    weekNumber: Int!
     topics: [String]!
     noOfPages: Int
     description: String
@@ -363,6 +366,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -380,6 +384,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String

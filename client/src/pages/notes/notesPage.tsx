@@ -13,8 +13,12 @@ const Notes = () => {
   const { noteData, getAllNotes } = useNotes();
   const noteSlideLink = noteData.noteList[0]?.link ?? "";
 
+  const createNoteUrl = (code: string) => {
+    return `https://slides.com/yashpriyam/${code}/embed?style=dark&share=hidden`
+  }
+
   useEffect(() => {
-    getAllNotes({ dayNumber: Number(dayNumber) });
+    getAllNotes({ dayNumber: Number(dayNumber), weekNumber: Number(weekNumber) });
   }, []);
   return (
     <>
@@ -33,9 +37,9 @@ const Notes = () => {
         {noteSlideLink ? (
           <div className="iframe-container">
             <iframe
-              title="classes-notes"
+              title={noteSlideLink}
               loading="lazy"
-              src={`${process.env.REACT_APP_NOTES_URL}/${noteSlideLink}`}
+              src={createNoteUrl(noteSlideLink)}
             ></iframe>
             <p>{noteData.noteList[0]?.title}</p>
             <p>

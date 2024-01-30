@@ -104,10 +104,10 @@ declare global {
   };
   type CreateNotesInputType = {
     link: string;
-    link: string;
     title: string;
     topics: [string];
     dayNumber: number;
+    weekNumber: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
@@ -122,6 +122,7 @@ declare global {
     link?: string;
     topics?: [string];
     dayNumber?: number;
+    weekNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
@@ -144,6 +145,7 @@ declare global {
     link: String;
     topics: [String];
     dayNumber: Number;
+    weekNumber: number;
     noOfPages?: Number;
     description?: String;
     estimatedReadingTime?: String;
@@ -292,6 +294,7 @@ declare global {
     link?: string;
     title?: string;
     dayNumber?: number;
+    weekNumber?: number;
     topics?: [string];
     noOfPages?: number;
     description?: string;
