@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 export const GET_ALL_QUESTIONS = gql`
   query GetAllQuestions($pagination: Pagination, $filterData: FilterData) {
@@ -35,6 +35,19 @@ export const GET_ALL_QUESTIONS = gql`
         options {
           iframe
           imageUrl
+          codeBlock {
+            enableCodeBlock
+            configuration {
+              showOutputWindow
+              showSplitWindow
+              openWindows {
+                title
+                isEditable
+                enableUserSelection
+                predefinedCode
+              }
+            }
+          }
           isChecked
           text
         }

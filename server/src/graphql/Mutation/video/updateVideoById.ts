@@ -32,7 +32,7 @@ export const updateVideoById = async (
       }, {});
     }
 
-    const updatedVideoData: VideoDataType = await videoModel.findByIdAndUpdate(
+    const updatedVideoData = await videoModel.findByIdAndUpdate(
       videoId,
       {
         $set: updatedLinks,
@@ -46,9 +46,9 @@ export const updateVideoById = async (
       },
       { new: true }
     );
-
+    const videoDataTyped: VideoDataType = updatedVideoData as VideoDataType;
     return {
-      videoData: updatedVideoData,
+      videoData:videoDataTyped,
       response: {
         status: statusCodes.OK,
         message: updatedVideoData

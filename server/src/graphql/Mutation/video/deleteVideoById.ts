@@ -15,15 +15,16 @@ export const deleteVideoById = async (
     const { VIDEO_DELETION_SUCCESS } = localMessages.VIDEO_MODEL;
     const { videoId } = args;
     const deletedVideoData = await videoModel.findByIdAndDelete(videoId);
-    return {
-      videoData: deletedVideoData,
-      response: deletedVideoData
-        ? {
+    const videoData: VideoDataType = deletedVideoData as VideoDataType;
+    return deletedVideoData ? {
+      videoData,
+      response:{
           status: statusCodes.OK,
-          message: VIDEO_DELETION_SUCCESS,
+          message: VIDEO_DELETION_SUCCESS
         }
-        : errorData,
-    };
+      }:{
+        response:errorData
+      }
   } catch (err) {
     return {
       response: errorData,

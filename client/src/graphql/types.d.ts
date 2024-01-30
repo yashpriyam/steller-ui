@@ -315,7 +315,8 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
-    fillup = "fillup"
+    fillup = "fillup",
+    codeblock = "codeblock"
   }
 
   interface QuestionResponseType {
@@ -354,11 +355,30 @@ declare global {
     isLoading: boolean;
   }
 
+  type CodeBlockOpenWindowsType = {
+    enableUserSelection: boolean;
+    isEditable: boolean;
+    predefinedCode: string;
+    title: string;
+  }
+
+  type CodeBlockConfigurationType = {
+    showOutputWindow: boolean;
+    showSplitWindow: boolean;
+    openWindows: [CodeBlockOpenWindowsType];
+  }
+
+  type CodeBlockType = {
+    enableCodeBlock: boolean;
+    configuration: CodeBlockConfigurationType
+  }
+
   type QuestionOptionType = {
     imageUrl?: string;
     text?: string;
     iframe?: string;
     isChecked?: boolean;
+    codeBlock: CodeBlockType
   };
 
   type VideoDataType = {
@@ -809,5 +829,67 @@ declare global {
     url?: string;
   }
 
+  interface DataContextProps {
+    html: string;
+    setHtml: React.Dispatch<React.SetStateAction<string>>;
+    css: string;
+    setCss: React.Dispatch<React.SetStateAction<string>>;
+    js: string;
+    setJs: React.Dispatch<React.SetStateAction<string>>;
+  }
+
+  interface CodeDataProviderProps {
+    children: ReactNode;
+  }
+
+  interface UserCodeStateType {
+    userCode: [UserCodeType]
+    isLoading: boolean
+  }
+
+  interface UserCodeType {
+    questionId?: string
+    weekNumber?: number
+    dayNumber?: number
+    code?: CodeType
+  }
+
+  interface CodeType {
+    html: string;
+    css: string;
+    js: string;
+  }
+
+  interface DataContextProps {
+    html: string;
+    setHtml: Dispatch<SetStateAction<string>>;
+    css: string;
+    setCss: Dispatch<SetStateAction<string>>;
+    js: string;
+    setJs: Dispatch<SetStateAction<string>>;
+  }
+
+  interface CodeDataProviderProps {
+    children: ReactNode;
+  }
+
+  interface EditorProps {
+    heading: string;
+    language: string;
+    value: string;
+    onChange: Dispatch<SetStateAction<string>>;
+    icon: string;
+    color: string;
+    questionId: string;
+  }
+
+  interface LanguageConfig {
+    language: string;
+    heading: string;
+    value: string;
+    onChange: React.Dispatch<React.SetStateAction<string>>;
+    icon: string;
+    color: string;
+  }
 }
 export { };
