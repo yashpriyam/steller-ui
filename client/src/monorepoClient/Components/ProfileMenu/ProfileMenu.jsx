@@ -16,7 +16,7 @@ const ProfileMenu = ({ options = [], image = defaultAvatar}) => {
     const { name, profileImage } = userData || {};
     const { secureUrl } = profileImage || {};
   return (
-    <div className={`profileMenuContainer ${darkMode && "profileMenuBgDark"}`}>
+    <div onClick={() => setIsDropdownHidden(!isDropdownHidden)} className={`profileMenuContainer ${darkMode && "profileMenuBgDark"}`}>
       {
         Boolean(userData) ? 
           secureUrl ?
@@ -26,7 +26,7 @@ const ProfileMenu = ({ options = [], image = defaultAvatar}) => {
               className="containerImage"
               onClick={() => setIsDropdownHidden(!isDropdownHidden)}
             />
-            : <NameIcon name={name}/> 
+            : <NameIcon height='fit-content' width='fit-content' name={name}/> 
         : (
           <ImageComponent
             src={image}

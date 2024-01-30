@@ -1,25 +1,6 @@
-import React, {
-  createContext,
-  ReactNode,
-  useState,
-  Dispatch,
-  SetStateAction
-} from 'react';
-
-interface DataContextProps {
-  html: string;
-  setHtml: Dispatch<SetStateAction<string>>;
-  css: string;
-  setCss: Dispatch<SetStateAction<string>>;
-  js: string;
-setJs: Dispatch<SetStateAction<string>>;
-}
+import React, { createContext, useState } from 'react';
 
 export const CodeDataContext = createContext<null | DataContextProps>(null);
-
-interface CodeDataProviderProps {
-  children: ReactNode;
-}
 
 const CodeDataProvider: React.FC<CodeDataProviderProps> = ({ children }) => {
   const [html, setHtml] = useState<string>('');

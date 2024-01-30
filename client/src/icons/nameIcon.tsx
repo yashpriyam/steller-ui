@@ -23,6 +23,7 @@ export const NameIcon: React.FC<NameIconProps> = ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        padding: '10px'
       }}
     >
       <span>{acronymName}</span>

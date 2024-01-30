@@ -23,7 +23,7 @@ export const useUserCode = () => {
     weekNumber,
     dayNumber,
     code,
-  }: userCodeType) => {
+  }: UserCodeType) => {
     try {
       const response = await apolloClient.mutate({
         mutation: SAVE_USER_CODE,

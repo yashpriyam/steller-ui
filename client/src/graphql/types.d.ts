@@ -843,11 +843,11 @@ declare global {
   }
 
   interface UserCodeStateType {
-    userCode: [userCodeType]
+    userCode: [UserCodeType]
     isLoading: boolean
   }
 
-  interface userCodeType {
+  interface UserCodeType {
     questionId?: string
     weekNumber?: number
     dayNumber?: number
@@ -858,6 +858,38 @@ declare global {
     html: string;
     css: string;
     js: string;
+  }
+
+  interface DataContextProps {
+    html: string;
+    setHtml: Dispatch<SetStateAction<string>>;
+    css: string;
+    setCss: Dispatch<SetStateAction<string>>;
+    js: string;
+    setJs: Dispatch<SetStateAction<string>>;
+  }
+
+  interface CodeDataProviderProps {
+    children: ReactNode;
+  }
+
+  interface EditorProps {
+    heading: string;
+    language: string;
+    value: string;
+    onChange: Dispatch<SetStateAction<string>>;
+    icon: string;
+    color: string;
+    questionId: string;
+  }
+
+  interface LanguageConfig {
+    language: string;
+    heading: string;
+    value: string;
+    onChange: React.Dispatch<React.SetStateAction<string>>;
+    icon: string;
+    color: string;
   }
 }
 export { };

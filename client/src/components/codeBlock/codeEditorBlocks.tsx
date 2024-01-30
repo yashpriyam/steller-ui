@@ -3,15 +3,6 @@ import Editor from './Editor';
 import { CodeDataContext } from './CodeDataProvider';
 import { useLocation } from 'react-router-dom';
 
-interface LanguageConfig {
-  language: string;
-  heading: string;
-  value: string;
-  onChange: React.Dispatch<React.SetStateAction<string>>;
-  icon: string;
-  color: string;
-}
-
 const CodeEditorBlocks: React.FC<{
   openWindows: [CodeBlockOpenWindowsType];
   questionId: string;

@@ -1,4 +1,4 @@
-import { FC, Dispatch, SetStateAction, useContext } from 'react';
+import { FC } from 'react';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
 import 'codemirror/mode/xml/xml';
@@ -7,22 +7,12 @@ import 'codemirror/mode/css/css';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
 import { useLocation } from 'react-router-dom';
 
-interface EditorProps {
-  heading: string;
-  language: string;
-  value: string;
-  onChange: Dispatch<SetStateAction<string>>;
-  icon: string;
-  color: string;
-  questionId: string;
-}
-
 const Editor: FC<EditorProps> = ({ language, value, onChange, questionId }) => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const dayNumber = queryParams.get('dayNumber');
   const weekNumber = queryParams.get('weekNumber');
-  const handleChange = (editor: any, data: any, value: string) => {
+  const handleChange = (editor: undefined, data: undefined, value: string) => {
     onChange(value)
     const localStorageSavedUserQuestionCode = JSON.parse(localStorage.getItem('userSavedCode') ?? '{}');
 

@@ -1,8 +1,11 @@
+@import "../variables.scss";
+
 .code-block-container {
   width: 100%;
   display: flex;
   border-radius: 10px;
   margin: 10px 0;
+  border: 1px solid black;
 
   .code-editor-blocks-container {
     flex: 1;
@@ -14,19 +17,19 @@
         font-size: 14px;
 
         &.selected {
-          background-color: white;
-          color: black;
+          background-color: $primary-color;
+          color: $bacgroundBlackColor;
         }
 
         &.selected.html {
-          background-color: #ff3c41;
+          background-color: $accent-color-2;
         }
 
         &.selected.css {
-          background-color: #0ebeff;
+          background-color: $accent-color-1;
         }
         &.selected.js {
-          background-color: #fcd000;
+          background-color: $accent-color-4;
         }
       }
     }
@@ -34,29 +37,19 @@
     .code-editor-container {
       flex: 1;
 
-      .editor-heading {
-        font-size: 15px;
-        font-weight: 500;
-        background-color: rgba(37, 37, 37, 0.75);
-        display: inline-block;
-        padding: 5px 10px;
-        border-radius: 4px;
-        border: 2px solid rgb(36, 36, 36);
-      }
-
       .CodeMirror {
         height: 300px !important;
-        color: #fff;
+        color: $primary-color;
         font-size: 14px !important;
       }
 
       .CodeMirror-gutters {
-        background: #1d1e22 !important;
+        background: $code-editory-bg !important;
         font-size: 14px !important;
       }
 
       .CodeMirror-scroll {
-        background: #1d1e22;
+        background: $code-editory-bg;
         font-size: 14px !important;
       }
     }
@@ -72,22 +65,22 @@
   margin-bottom: 10px;
 
   button {
-    background-color: rgb(37, 140, 224);
+    background-color: $accent-color-1;
     padding: 7px 22px;
     margin: 5px 5px 5px 0;
     border-radius: 4px;
     font-size: 14px;
 
     &:hover {
-      background-color: rgb(0, 109, 199);
+      background-color: $button-hover-bg;
     }
 
     &.reset-btn {
-      background-color: #ff3c41;
+      background-color: $accent-color-2;
     }
 
     &.reset-btn:hover {
-      background-color: #e70f16;
+      background-color: $red;
     }
   }
 }
