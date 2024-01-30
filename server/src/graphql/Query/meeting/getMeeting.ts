@@ -40,12 +40,15 @@ export const getMeeting = async (
       );
       return {
         meetingData,
-        response: {
+        response: meetingData ?   
+        {
           status: statusCodes.OK,
-          message: meetingData
-            ? SUCCESSFULLY_FOUND_MEETING_DETAILS
-            : NO_MEETING_FOUND,
-        },
+          message: SUCCESSFULLY_FOUND_MEETING_DETAILS
+        }
+        : {
+          status: statusCodes.BAD_REQUEST,
+          message: NO_MEETING_FOUND
+        }
       };
     }
   } catch (err) {

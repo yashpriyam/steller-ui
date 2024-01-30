@@ -166,7 +166,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 onClick={(e) => {
                                   handleNavigation(
                                     e,
-                                    `/meet`
+                                    `/meet:/meetCode`
                                   );
                                 }}
                               />)

@@ -813,8 +813,7 @@ declare global {
   }
 
   type MeetingStateType = {
-    masterMeeting: MeetingDataType | null;
-    classMeeting: MeetingDataType | null;
+    meetingList: MeetingDataType[];
   } 
   type ProfileImageType = {
     publicId?: string
@@ -891,6 +890,13 @@ declare global {
     onChange: React.Dispatch<React.SetStateAction<string>>;
     icon: string;
     color: string;
+  }
+
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
+    meetingCodeList?: string[];
   }
 }
 export { };

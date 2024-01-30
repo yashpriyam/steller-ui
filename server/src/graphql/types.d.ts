@@ -873,6 +873,7 @@ declare global {
     isPaid?: boolean;
     isActive?: boolean;
     scheduledAt?: Date;
+    meetingCodeList?: string[];
   }
   
   type UserDataOutputType = {

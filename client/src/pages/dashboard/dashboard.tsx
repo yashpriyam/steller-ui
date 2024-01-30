@@ -188,30 +188,37 @@ export const Dashboard: React.FC<DashboardProps> = ({
   overviewButtonTwo = "View FAQs",
 }: DashboardProps) => {
 
-  const { meetingDetails, getMasterMeeting } = useMeeting();
-  const { masterMeeting } = meetingDetails || {};
-  const [meetingList, setMeetingList] = useState<ServiceBoxType[]>([]);
+  const { getMeetingList, meetingDetails } = useMeeting();
+  const { meetingList } = meetingDetails;
+  const [meetingCardList, setMeetingCardList] = useState<ServiceBoxType[]>([]);
   const navigate = useNavigate();
-  useEffect(() => {
-    masterMeeting && setMeetingList(
-      [{
-        title: masterMeeting?.title || '',
-        subtitle: masterMeeting?.description || '',
-        icon: <ThoughtIcon width="20" />,
-        buttonText: 'Join',
-        isBtnEnabled: !!masterMeeting?.isActive,
-        onClick: () => navigate('/meet')
-      }])
-  }, [masterMeeting])
+
+  const addMeetingDataToMeetingCard = (meetingList: MeetingDataType[]) => {
+    setMeetingCardList(meetingList.map(meetingData => ({
+      title: meetingData?.title || '',
+      subtitle: meetingData?.description || '',
+      icon: <ThoughtIcon width="20" />,
+      buttonText: 'Join',
+      isBtnEnabled: !!meetingData?.isActive,
+      onClick: () => navigate(`meet/${meetingData.meetingCode}`)
+    })))
+  }
 
   useEffect(()=> {
-    getMasterMeeting();
+     addMeetingDataToMeetingCard(meetingList);
+  }, [meetingList])
+
+  useEffect(()=> {
+    getMeetingList({
+      meetingCodeList: ['master', 'class'],
+      isActive: true
+    });
   },[])
 
   return (
     <div className={`dashboard`}>
       <div className={`dashboard-container`}>
-        <ServiceCompomponent serviceElements={meetingList} />
+        <ServiceCompomponent serviceElements={meetingCardList} />
         {/* <PageTitle title={pageTitle} subtitle={pageSubtitle} />
         <TopButtons
           topButtonTagOne={topButtonTagOne}

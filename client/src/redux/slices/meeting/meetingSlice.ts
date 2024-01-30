@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: MeetingStateType = {
-  masterMeeting: null,
-  classMeeting: null
+  meetingList: []
 };
 
 export const meetingSlice = createSlice({
   name: "meeting",
   initialState: initialState,
   reducers: {
-    setMasterMeet: (state, action) => {
-      state.masterMeeting = action?.payload?.data?.getMeeting?.meetingData;
+    setMeetingList: (state, action) => {
+      state.meetingList = action?.payload?.data?.getMeetingList?.meetingList;
     }
   },
 });
