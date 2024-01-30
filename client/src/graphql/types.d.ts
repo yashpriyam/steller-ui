@@ -626,7 +626,7 @@ declare global {
   };
 
   type Installment = {
-    _id: string | undefined;
+    _id?: string | undefined;
     id? :string;
     amount?: string;
     sequence?: string;
@@ -891,6 +891,22 @@ declare global {
     onChange: React.Dispatch<React.SetStateAction<string>>;
     icon: string;
     color: string;
+  }
+
+  type GetAllUserPaymentsInput = {
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: Boolean
+  }
+  type AllUsersPaymentDataOutputType = {
+    allUsersPayments?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+
+  interface UserPaymentCardProps {
+    payment: UserPaymentSchemaType;
+    onApprove: (paymentId: string) => void;
+    onReject: (paymentId: string) => void;
   }
 
   type GetMeetingListArgsType = {
