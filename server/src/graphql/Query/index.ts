@@ -7,3 +7,4 @@ export { getScheduleData } from "./week/getScheduleData";
 export { getMeetingList, getMeeting } from "./meeting";
 export { getAllCities } from "./cities/index";
 export { getUser } from "./user/index";
+export { getUserCode } from "./code/getUserCode";

@@ -1,18 +1,19 @@
-import { localMessages, errorMessages, statusCodes } from "@constants";
-import { questionAttempt, questionModel } from "@models";
-import { isLoggedIn, getUnauthorizedResponse } from "@utils";
-import mongoose from "mongoose";
+import { localMessages, errorMessages, statusCodes } from '@constants';
+import { questionAttempt, questionModel } from '@models';
+import { isLoggedIn, getUnauthorizedResponse } from '@utils';
+import mongoose from 'mongoose';
+
+const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
+const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
 
 export const getAllQuestions = async (
   _parent: undefined,
   args: { filterData: filterDataType; pagination: pagination },
   { contextData }: ContextType
-): Promise<QuestionsReturnType | unknown> => {  
-  const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
-  const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
+): Promise<QuestionsReturnType | unknown> => {
   if (!isLoggedIn(contextData)) {
     return getUnauthorizedResponse();
-  }  
+  }
   const userData = contextData.user;
   const errorData: CustomResponseType = {
     message: QUESTION_NOT_FOUND,
@@ -33,7 +34,7 @@ export const getAllQuestions = async (
       .find(updatedFields)
       .skip(skip)
       .limit(limit)
-      .lean();    
+      .lean();
     const questionIdList = questionList.map((question) => question._id);
     const questionAttemptList: AllAttemptedQuestionDataType[] =
       await questionAttempt.find({
@@ -48,6 +49,9 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
+      if (questionData.questionType === 'codeblock') {
+        return questionData;
+      }
       const updatedQuestionData = {
         ...questionData,
         isAnswered: false,
@@ -69,7 +73,7 @@ export const getAllQuestions = async (
           message: QUESTION_FOUND_SUCCESS,
           status: statusCodes.OK,
         }
-      : errorData;    
+      : errorData;
     const totalUnAttemptedQuestions =
       questionList.length - questionAttemptList.length;
     const totalInCorrectQuestions = questionList.length - totalCorrectQuestions;

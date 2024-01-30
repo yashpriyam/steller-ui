@@ -1,9 +1,10 @@
-import { Card } from "../../components/card/card";
-import React, { useEffect, useState } from "react";
-import { filterDataList } from "./dataList";
-import { FilterTags } from "../../components/filterTags/filterTags";
-import { useVideos } from "../../redux/actions/videosAction";
-import "./videosPage.scss";
+import { Card } from '../../components/card/card';
+import React, { useEffect, useState, useTransition } from 'react';
+import { filterDataList } from './dataList';
+import { FilterTags } from '../../components/filterTags/filterTags';
+import { useVideos } from '../../redux/actions/videosAction';
+import './videosPage.scss';
+import { useTranslation } from 'react-i18next';
 interface VideosPageProps {
   className?: string;
   filterData?: { tag: string }[];
@@ -13,8 +14,9 @@ const VideosPage: React.FC<VideosPageProps> = ({
   className,
   filterData = filterDataList,
 }: VideosPageProps) => {
-  const [filterTag, setFilterTag] = useState<string>("");
+  const [filterTag, setFilterTag] = useState<string>('');
   const { videoData, getAllVideos } = useVideos();
+  const { t } = useTranslation();
 
   const getAllVideosRequest = async () => {
     await getAllVideos({});
@@ -34,15 +36,15 @@ const VideosPage: React.FC<VideosPageProps> = ({
       <div className="videos-container">
         <div className="content-title">VIDEOS</div>
         <div className="videos-wrapper">
-          {videoList.map(
+          {!videoList?.length && <p>{t('no_videos_found')}</p>}
+          {videoList?.map(
             (video) =>
-              (video.topics?.includes(filterTag) || filterTag === "") && (
+              (video.topics?.includes(filterTag) || filterTag === '') && (
                 <Card
                   className={className}
                   tagPosition="left"
                   data={video}
-                >
-                </Card>
+                ></Card>
               )
           )}
         </div>

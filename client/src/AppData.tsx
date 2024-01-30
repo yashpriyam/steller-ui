@@ -46,11 +46,6 @@ export const useAppData = (): UseAppDataReturnType => {
       },
     ],
     options: [
-      // {
-      //   text: t("home"),
-      //   image: <HomeIcon isDarkMode={true} />,
-      //   url: "/",
-      // },
       {
         text: t("payments"),
         image: <PaymentIcon isDarkMode={true} />,

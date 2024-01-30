@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import Accordion from "../accordion/accordion";
-import "./questionAccordion.scss";
-import { Checkbox } from "../checkbox/checkbox";
-import { Button } from "../button/button";
-import { InputComponent } from "../../components/input/inputComponent";
+import { useState } from 'react';
+import Accordion from '../accordion/accordion';
+import './questionAccordion.scss';
+import { Checkbox } from '../checkbox/checkbox';
+import { Button } from '../button/button';
+import { InputComponent } from '../../components/input/inputComponent';
+import CodeBlock from '../../components/codeBlock/codeBlock';
 
 const QuestionAccordion = ({
   questionData,
@@ -12,12 +13,12 @@ const QuestionAccordion = ({
   successMsg,
   isAnswered,
   isCorrect,
-}: QuestionAccordionProps) => {  
+}: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
-  const [fillupValue, setFillupValue] = useState<string>("");
-  const isFillupType = questionType === "fillup";
-  const [isLoading,setIsLoading]=useState<boolean>(false)
+  const [fillupValue, setFillupValue] = useState<string>('');
+  const isFillupType = questionType === 'fillup';
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const isSubmitBtnDisabled: boolean = isFillupType
     ? !fillupValue
     : !selectedValues.length || isLoading;
@@ -25,7 +26,8 @@ const QuestionAccordion = ({
     setIsLoading(true);
     await onSubmit(questionData, selectedValues);
     setIsLoading(false);
-   };
+  };
+
   return (
     <Accordion
       className={`question-title`}
@@ -54,6 +56,9 @@ const QuestionAccordion = ({
               )}
             </div>
           ))}
+          {questionData.questionType === 'codeblock' && (
+            <CodeBlock questionData={questionData} />
+          )}
           <div className="question-option-container">
             {isFillupType ? (
               <InputComponent
@@ -63,15 +68,17 @@ const QuestionAccordion = ({
                 value={fillupValue}
               />
             ) : (
-              <Checkbox
-                onSelect={(index, selectedValues) =>
-                  setSelectedValues(Object.values(selectedValues))
-                }
-                isIncorrect={isAnswered && !isCorrect}
-                options={options}
-                className="question-checkbox"
-                type={isFillupType ? "multi" : "single"}
-              />
+              questionData.questionType !== 'codeblock' && (
+                <Checkbox
+                  onSelect={(index, selectedValues) =>
+                    setSelectedValues(Object.values(selectedValues))
+                  }
+                  isIncorrect={isAnswered && !isCorrect}
+                  options={options}
+                  className="question-checkbox"
+                  type={isFillupType ? 'multi' : 'single'}
+                />
+              )
             )}
           </div>
           {isAnswered &&
@@ -82,15 +89,17 @@ const QuestionAccordion = ({
               <div className="question-incorrect-ans">{errorMsg}</div>
             ))}
           {isAnswered && isFillupType && <iframe src={fillupValue}></iframe>}
-          <div className="question-submit-btn-wrapper">
-            <Button
-              isLoading={isLoading}
-              isDisabled={isSubmitBtnDisabled}
-              onClick={handleOnSubmitQuestion}
-              iconPosition="center"
-              className="question-submit-btn"
-            />
-          </div>
+          {questionData.questionType !== 'codeblock' && (
+            <div className="question-submit-btn-wrapper">
+              <Button
+                isLoading={isLoading}
+                isDisabled={isSubmitBtnDisabled}
+                onClick={handleOnSubmitQuestion}
+                iconPosition="center"
+                className="question-submit-btn"
+              />
+            </div>
+          )}
         </div>
       </div>
     </Accordion>
