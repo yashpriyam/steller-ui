@@ -26,7 +26,8 @@ export const getAllUserPayments = async (
       const query: Record<string, boolean | undefined> = {};
       if (isApproved !== undefined) query.isApproved = isApproved;
       if (isRejected !== undefined) query.isRejected = isRejected;
-      // if (isPending !== undefined) query.isPending = isPending; // for now we are not covering this
+      // if (isPending !== undefined) query.isPending = isPending; 
+      // TODO: @ritikshilpkar,  for now we are not covering this
   
       // Fetch user payments based on the constructed query
       const userPayments = await userPaymentModel.find(query).populate('user batch feePlan');
