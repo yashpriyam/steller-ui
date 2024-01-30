@@ -34,7 +34,8 @@ const VideosPage: React.FC<VideosPageProps> = ({
       <div className="videos-container">
         <div className="content-title">VIDEOS</div>
         <div className="videos-wrapper">
-          {videoList.map(
+          {!videoList?.length && <p>No videos to show for this day</p>}
+          {videoList?.map(
             (video) =>
               (video.topics?.includes(filterTag) || filterTag === "") && (
                 <Card
