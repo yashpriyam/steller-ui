@@ -1,76 +1,172 @@
-import { useState } from "react";
-import { useUser } from "../../redux/actions/userAction";
 import "./userPage.scss";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useUser } from "../../redux/actions/userAction";
+import { UserInfoSubCard } from "../../components/userInfoSubCard/userInfoSubCard";
+import { newFormTextValues } from "./userPageData";
 interface UserPagePropsInterFace {
   className?: string;
 }
 export const UserPage: React.FC<UserPagePropsInterFace> = ({
   className,
 }: UserPagePropsInterFace) => {
-  const { user } = useUser();
+  const [editingUserData, setEditingUserData] =
+    useState<SecondaryUserSchemaType>();
+  const [isFormEditing, setIsFormEditing] = useState<boolean>(false);
+  const [showMore, setShowMore] = useState<boolean>(false);
+  const [formTextValues, setFormTextValues] =
+    useState<SecondaryUserSchemaType>();
+  const { user, updateUserInfo } = useUser();
   const { userData } = user || {};
-  const { email, name,phoneNumber,batchCode,location,occupation,profileImage } = userData || {};
+  const {
+    email,
+    name,
+    phoneNumber,
+    batchCode,
+    location,
+    occupation,
+    profileImage,
+    course,
+    courseYear,
+    branch,
+    collegeName,
+  } = userData || {};
   const { secureUrl } = profileImage || {};
-  // const userDataArr = Object.entries(userData || {});
-  // console.log({userDataArr})
-  const [ isEditForm, setIsEditForm] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState<string>(email|| "");
+
+  const handleFunction = (e: ChangeEvent<HTMLInputElement>, field: string) => {
+    setEditingUserData({ ...editingUserData, [field]: e.target.value });
+  };
+  const isFieldEditedable = (field: string): boolean => {
+    const nonEditedableFields = ["email", "batchCode"];
+    return !nonEditedableFields.includes(field);
+  };
+  const updateUserInfoRequest = async () => {
+    await updateUserInfo({ ...editingUserData });
+  };
+  const setInitialDataInState = () => {
+    userData &&
+      setEditingUserData({
+        batchCode,
+        email,
+        name,
+        phoneNumber,
+        location,
+        collegeName,
+        occupation,
+        course,
+        courseYear,
+        branch,
+      });
+    setIsFormEditing(false);
+  };
+  const handleFormEditing = () => {
+    setIsFormEditing(!isFormEditing);
+    setEditingUserData({ ...editingUserData });
+  };
+  useEffect(() => {
+    setInitialDataInState();
+    setFormTextValues(newFormTextValues);
+  }, [userData]);
   return (
-    <div className="user-account-main-container">
-      <div className="user-account-image-container">
+    <div className={`user-account-main-container ${className}`}>
+      <div className="user-account-header-container">
         <img src={secureUrl} alt="profile" className="user-profile-image" />
-        <button
-          className="user-profile-edit-button"
-          onClick={() => {
-            setIsEditForm(!isEditForm);
-            setUserEmail(email)
-          }}
-        >
-          {!isEditForm ? "Edit Profile" : "Save"}
-        </button>
+        <div className="user-account-header-container-right-side">
+          <div className="user-account-holder-name">{name}</div>
+          <div className="user-account-image-container-button-wrapper">
+            {isFormEditing && (
+              <button
+                className="user-profile-edit-button"
+                onClick={setInitialDataInState}
+              >
+                Cancel
+              </button>
+            )}
+            <button
+              className="user-profile-edit-button"
+              onClick={
+                !isFormEditing ? handleFormEditing : updateUserInfoRequest
+              }
+            >
+              {!isFormEditing ? "Edit Profile" : "Save"}
+            </button>
+          </div>
+        </div>
       </div>
       <div className="user-account-container">
-        <div className="field-value-wrapper">
-          <label htmlFor="user-data-email" className="user-data-field">
-            Email :{" "}
-          </label>
-          {isEditForm ? (
-            <input
-              onChange={(e) => {
-                setUserEmail(e.target.value);
-              }}
-              type="text"
-              id="user-data-email"
-              value={userEmail}
-              className="user-data-input-value"
-            />
-          ) : (
-            <span className="user-data-value">{email}</span>
-          )}
-        </div>
-        <div className="field-value-wrapper">
-          <span className="user-data-field">Name : </span>
-          <span className="user-data-value">{name}</span>
-        </div>
-        <div className="field-value-wrapper">
-          <span className="user-data-field">Phone : </span>
-          <span className="user-data-value">{phoneNumber}</span>
-        </div>
-        <div className="field-value-wrapper">
-          <span className="user-data-field">Batch Code : </span>
-          <span className="user-data-value">{batchCode}</span>
-        </div>
-        <div className="field-value-wrapper">
-          <span className="user-data-field">Location : </span>
-          <span className="user-data-value">{location || "____"}</span>
-        </div>
-        <div className="field-value-wrapper">
-          <span className="user-data-field">Occupation : </span>
-          <span className="user-data-value">{occupation || "____"}</span>
-        </div>
+        {editingUserData &&
+          Object.entries(editingUserData)
+            ?.slice(0, 4)
+            .map(([key, value], idx) => {
+              if (isFieldEditedable(key)) {
+                return (
+                  <UserInfoSubCard
+                    text={formTextValues ? `${formTextValues[key]}` : key}
+                    value={value}
+                    editing={isFormEditing}
+                    userInputValue={editingUserData}
+                    field={key}
+                    onChange={handleFunction}
+                    key={idx}
+                  />
+                );
+              } else {
+                return (
+                  <UserInfoSubCard
+                    text={formTextValues ? `${formTextValues[key]}` : key}
+                    value={value}
+                    key={idx}
+                  />
+                );
+              }
+            })}
       </div>
       <div className="user-account-more-info-container">
-        <span>+</span>
+        <div
+          className="user-account-more-info-container-header"
+          onClick={() => setShowMore(!showMore)}
+        >
+          <span>Complete Your Profile</span>
+          <span
+            className={`show-more-user-info-button ${
+              showMore && "show-more-user-info-button-rotate"
+            }`}
+          >
+            +
+          </span>
+        </div>
+        <div
+          className={`user-account-more-info-wrapper ${
+            showMore && "user-account-more-info-wrapper-display"
+          }`}
+        >
+          {editingUserData &&
+            Object.entries(editingUserData)
+              ?.slice(4)
+              .map(([key, value], idx) => {
+                if (isFieldEditedable(key)) {
+                  return (
+                    <UserInfoSubCard
+                      text={formTextValues ? `${formTextValues[key]}` : key}
+                      value={value}
+                      editing={isFormEditing}
+                      userInputValue={editingUserData}
+                      field={key}
+                      onChange={handleFunction}
+                      autoFocus={idx === 0}
+                      key={idx}
+                    />
+                  );
+                } else {
+                  return (
+                    <UserInfoSubCard
+                      text={formTextValues ? `${formTextValues[key]}` : key}
+                      value={value}
+                      key={idx}
+                    />
+                  );
+                }
+              })}
+        </div>
       </div>
     </div>
   );

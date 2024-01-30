@@ -712,6 +712,21 @@ declare global {
     feePlan?: string;
   }
 
+  type SecondaryUserSchemaType = {
+    [key: string]: string | undefined;
+    name?: string;
+    phoneNumber?: string;
+    password?: string;
+    occupation?: string;
+    sessionPreference?: string;
+    collegeName?: string;
+    location?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+  };
+
+
   type PartialUserSchemaType = {
     email?: string;
     name?: string;
@@ -733,6 +748,20 @@ declare global {
 
   type UpdateUserInput = {
     feePlan?: string
+    name?: string;
+    phoneNumber?: string;
+    password?: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: string;
+    expectedSalary?: string;
+    IST?: string;
+    collegeName?: string;
+    location?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    feePlan?: string;
   };
   type InstallmentListProps ={
       allInstallment?: Installment[];
@@ -806,6 +835,16 @@ declare global {
     style?: CSSProperties;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     url?: string;
+  }
+  interface UserInfoSubCardPropsInterface {
+    editing?: boolean;
+    userInputValue?: SecondaryUserSchemaType;
+    value?: string;
+    field?: string;
+    text: string;
+    autoFocus?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
+    errorMessage?: string;
   }
 
 }
