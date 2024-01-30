@@ -719,6 +719,7 @@ const typeDefs = gql`
     title: String
     description: String
     topics: [String]
+    date: DateTime
   }
   type DaySchemaType {
     batchCode: String
@@ -730,6 +731,7 @@ const typeDefs = gql`
     notes: [NotesDataType]
     videos: [videoDataType]
     questions: [QuestionDataType]
+    date: DateTime
   }
   type DayDataOutputType {
     dayData: DaySchemaType
