@@ -192,8 +192,8 @@ $red-color: rgb(255, 8, 0);
       padding: 10px 0px;
       gap: 10px;
       background: var(--light-red);
-      color: white;
-      background: black;
+      color: black;
+      background: white;
       .navbar-mono-option{
         width: 100%;
         text-align: center;
@@ -201,9 +201,9 @@ $red-color: rgb(255, 8, 0);
         font-size: 18px;
       }
       &.darkMode {
-        background-color: white;
-        color: black !important;
-        box-shadow: 0 0 5px 5px white;
+        background-color: black;
+        color: white !important;
+        box-shadow: 0 0 15px 5px grey;
       }
     }
     .centerPartRegister {
