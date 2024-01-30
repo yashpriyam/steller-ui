@@ -58,5 +58,7 @@
     "payments": "Payments",
     "add_payment_plan": "Add Payment Plan",
     "pay_now": "Pay Now",
-    "no_videos_found": "No videos to show for this day"
+    "no_videos_found": "No videos to show for this day",
+    "solution_submitted_success_message": "Solution submitted successfully",
+    "solution_submit_error_message": "Failed to submit code, Try again"
 }

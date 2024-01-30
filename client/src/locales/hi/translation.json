@@ -31,5 +31,7 @@
     "payments": "भुगतान",
     "add_payment_plann": "भुगतान योजना जोड़ें",
     "pay_now": "अब भुगतान करें",
-    "no_videos_found": "इस दिन दिखाने के लिए कोई वीडियो नहीं है"
+    "no_videos_found": "इस दिन दिखाने के लिए कोई वीडियो नहीं है",
+    "solution_submitted_success_message": "समाधान सफलतापूर्वक प्रस्तुत किया गया",
+    "solution_submit_error_message": "कोड सबमिट करने में विफल, पुनः प्रयास करें"
 } 
