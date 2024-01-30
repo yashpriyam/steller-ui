@@ -1,6 +1,9 @@
 import { userPaymentModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { getUnauthorizedResponse, isLoggedIn } from "@utils";
+import {
+  getUnauthorizedResponse,
+  isLoggedIn
+} from "@utils";
 
 export const updateUserPayments = async (
   parent: undefined,
@@ -26,10 +29,34 @@ export const updateUserPayments = async (
     // Validate required input fields
     if (!userId || !input.installmentId) return { response: errorData };
 
+    const {
+      batch,
+      createdAt,
+      feePlan,
+      image,
+      imageUrl,
+      installmentId,
+      isApproved,
+      isPending,
+      isRejected,
+    } = input;
+
+
     // Update the user payment information
     const updatedUserPaymentData = await userPaymentModel.findOneAndUpdate(
       { installmentId: input.installmentId, user: userId },
-      { $set: input },
+      {
+        $set: {
+          batch,
+          createdAt,
+          feePlan,
+          imageUrl,
+          installmentId,
+          isApproved,
+          isPending,
+          isRejected,
+        },
+      },
       { new: true }
     );
 
@@ -37,7 +64,8 @@ export const updateUserPayments = async (
       userPaymentData: updatedUserPaymentData,
       response: updatedUserPaymentData
         ? {
-            message: localMessages.USER_PAYMENT_MODEL.USER_PAYMENT_UPDATE_SUCCESS,
+            message:
+              localMessages.USER_PAYMENT_MODEL.USER_PAYMENT_UPDATE_SUCCESS,
             status: statusCodes.OK,
           }
         : errorData,
