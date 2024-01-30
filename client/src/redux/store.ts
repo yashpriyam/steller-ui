@@ -11,6 +11,7 @@ import citySlice from "./slices/city/citySlice";
 import feePlanSlice from "./slices/feePlans/feePlanSlice";
 import meetingReducer from "./slices/meeting/meetingSlice";
 import userCodeSlice from "./slices/userCode/userCodeSlice";
+import allUsersPaymentsSlice from "./slices/allusersPayments/allUsersPaymentsSlice";
 
 export default configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export default configureStore({
     city: citySlice,
     feePlans: feePlanSlice,
     meeting: meetingReducer,
-    userCode: userCodeSlice
+    userCode: userCodeSlice,
+    allUsersPayments: allUsersPaymentsSlice
   },
 });
