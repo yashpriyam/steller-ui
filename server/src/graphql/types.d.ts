@@ -955,4 +955,10 @@ declare global {
     dayNumber?: number;
     code?: CodeInput;
   };
+
+  type UserPaymentsDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+
 }

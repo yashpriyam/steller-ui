@@ -92,6 +92,7 @@ const typeDefs = gql`
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
     saveUserCode(input: SaveUserCodeInput): UserCodeType
+    getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
   }
 
   input SaveUserCodeInput {
@@ -1162,6 +1163,15 @@ const typeDefs = gql`
   input UserPaymentPendingInputType {
     totalAmount: String
     totalPendingAmount: String
+  }
+  input GetAllUserPaymentsInput {
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: Boolean
+  }
+  type UserPaymentsDataOutputType {
+    userPaymentData: [UserPaymentData]
+    response: CustomResponseType
   }
 
   scalar DateTime
