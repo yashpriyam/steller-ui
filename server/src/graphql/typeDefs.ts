@@ -16,6 +16,7 @@ const typeDefs = gql`
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
+    getUserCode(input: getUserCodeInputType): GetUserCodeOutput
   }
 
   type Mutation {
@@ -89,6 +90,54 @@ const typeDefs = gql`
     ): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
+    saveUserCode(input: SaveUserCodeInput): UserCodeType
+  }
+
+  input SaveUserCodeInput {
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeTypeInput
+  }
+
+  type GetUserCodeOutputDataType {
+    userId: ID!
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeType
+  }
+
+  type GetUserCodeOutput {
+    data: [GetUserCodeOutputDataType]
+    response: CustomResponseType!
+  }
+
+  input CodeTypeInput {
+    html: String
+    css: String
+    js: String
+  }
+
+  type CodeType {
+    html: String
+    css: String
+    js: String
+  }
+
+  input getUserCodeInputType {
+    userId: ID!
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+  }
+
+  type UserCodeType {
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeType
+    response: CustomResponseType!
   }
 
   type ProfileImageType {
@@ -343,11 +392,48 @@ const typeDefs = gql`
     text: String!
     imageUrl: String
     iframe: String
+    codeBlock: CodeBlockInputType
+  }
+  input CodeBlockInputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationType
+  }
+  type CodeBlockOutputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationOutputType
+  }
+  input ConfigurationType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowType]
+  }
+  type ConfigurationOutputType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowOutputType]
+  }
+  type CodeEditorWindowOutputType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+  input CodeEditorWindowType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+  enum CodeEditorWindowTypeEnum {
+    HTML
+    CSS
+    JS
   }
   enum QuestionType {
     multi
     single
     fillup
+    codeblock
   }
   input QuestionMeta {
     topic: String!
@@ -427,6 +513,7 @@ const typeDefs = gql`
     text: String!
     imageUrl: String
     iframe: String
+    codeBlock: CodeBlockOutputType
   }
 
   type QuestionDataOutput {
@@ -465,6 +552,7 @@ const typeDefs = gql`
     text: String
     imageUrl: String
     iframe: String
+    codeBlock: CodeBlockOutputType
     isChecked: Boolean
   }
 
