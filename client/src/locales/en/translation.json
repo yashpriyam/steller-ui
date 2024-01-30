@@ -57,5 +57,6 @@
     "notes_error": "No notes found for selected date",
     "payments": "Payments",
     "add_payment_plan": "Add Payment Plan",
-    "pay_now": "Pay Now"
+    "pay_now": "Pay Now",
+    "no_videos_found": "No videos to show for this day"
 }
