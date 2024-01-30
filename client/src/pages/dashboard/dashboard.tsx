@@ -200,7 +200,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
       icon: <ThoughtIcon width="20" />,
       buttonText: 'Join',
       isBtnEnabled: !!meetingData?.isActive,
-      onClick: () => navigate(`meet/${meetingData.meetingCode}`)
+      onClick: () => navigate(`/meet/${meetingData.meetingCode}`)
     })))
   }
 
