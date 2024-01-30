@@ -9,7 +9,7 @@ export const meetingSlice = createSlice({
   initialState: initialState,
   reducers: {
     setMeetingList: (state, action) => {
-      state.meetingList = action?.payload?.data?.getMeetingList?.meetingList;
+      state.meetingList = action?.payload?.data?.getMeetingList?.meetingList || [];
     }
   },
 });
