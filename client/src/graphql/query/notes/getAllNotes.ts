@@ -7,6 +7,7 @@ export const GET_NOTES = gql`
                 link
                 title
                 dayNumber
+                weekNumber
                 topics
                 noOfPages
                 description
