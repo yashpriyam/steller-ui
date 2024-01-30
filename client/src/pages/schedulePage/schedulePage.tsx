@@ -161,7 +161,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                              {
                             date && isCurrentDate(date) 
                               ? (<Button
-                                text={t("join today's class")}
+                                text={t("join_todays_class")}
                                 className="button join-meet-btn"
                                 onClick={(e) => {
                                   handleNavigation(
