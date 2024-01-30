@@ -72,6 +72,7 @@ $red-color: rgb(255, 8, 0);
     }
     .option {
       cursor: pointer;
+      padding: 5px 0px;
     }
 
     .option.selected {
@@ -182,12 +183,27 @@ $red-color: rgb(255, 8, 0);
       flex-direction: column;
       align-items: center;
       justify-content: space-evenly;
-      height: 300px;
-      top: 110px;
+      height: fit-content;
+      top: 0px;
+      width: 100%;
+      border-radius: 0;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding: 10px 0px;
+      gap: 10px;
       background: var(--light-red);
+      color: white;
+      background: black;
+      .navbar-mono-option{
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid rgb(0,0,0,0.1);
+        font-size: 18px;
+      }
       &.darkMode {
-        background-color: black;
-        color: white;
+        background-color: white;
+        color: black !important;
+        box-shadow: 0 0 5px 5px white;
       }
     }
     .centerPartRegister {
