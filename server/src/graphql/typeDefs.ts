@@ -90,6 +90,7 @@ const typeDefs = gql`
     ): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
+    updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
     saveUserCode(input: SaveUserCodeInput): UserCodeType
   }
 
@@ -296,6 +297,7 @@ const typeDefs = gql`
     link: String!
     title: String!
     dayNumber: Int!
+    weekNumber: Int!
     topics: [String]!
     noOfPages: Int
     description: String
@@ -327,6 +329,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -340,6 +343,7 @@ const typeDefs = gql`
     link: String!
     title: String!
     dayNumber: Int!
+    weekNumber: Int!
     topics: [String]!
     noOfPages: Int
     description: String
@@ -362,6 +366,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -379,6 +384,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -719,6 +725,7 @@ const typeDefs = gql`
     title: String
     description: String
     topics: [String]
+    date: DateTime
   }
   type DaySchemaType {
     batchCode: String
@@ -730,6 +737,7 @@ const typeDefs = gql`
     notes: [NotesDataType]
     videos: [videoDataType]
     questions: [QuestionDataType]
+    date: DateTime
   }
   type DayDataOutputType {
     dayData: DaySchemaType
@@ -906,7 +914,7 @@ const typeDefs = gql`
     id: ID
     amount: String
     sequence: String!
-    dueDate: String!
+    dueDate: DateTime!
     accessWeeks: ID
     miscellaneous: JSON
   }
@@ -918,7 +926,7 @@ const typeDefs = gql`
     _id: ID
     amount: String
     sequence: String!
-    dueDate: String!
+    dueDate: DateTime
     accessWeeks: ID
     miscellaneous: JSON
   }
@@ -1138,6 +1146,22 @@ const typeDefs = gql`
     meetingNumber: String
     meetingCode: String
     title: String
+  }
+  type UserPaymentDataOutputType {
+    userPaymentData: UserPaymentData
+    response: CustomResponseType
+  }
+  
+  input UserPaymentInput {
+    installmentId: ID!
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: UserPaymentPendingInputType
+    imageUrl: ImageInput
+  }
+  input UserPaymentPendingInputType {
+    totalAmount: String
+    totalPendingAmount: String
   }
 
   scalar DateTime

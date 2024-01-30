@@ -92,7 +92,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
                       Sequence: {installment.sequence}
                     </span>
                     <span className="installment-elem">
-                      Due Date: {installment.dueDate?.toString()}
+                      Due Date: {installment?.dueDate?.toString()}
                     </span>
                     <span
                       className={`installment-status installment-elem ${getStatusClassName(

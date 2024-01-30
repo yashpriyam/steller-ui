@@ -212,7 +212,7 @@ const Navbar = ({
                   isMenuOpen ? "isNavOpen" : ""
                 }`}
               >
-                <a href="/#Home">
+                <a className="navbar-mono-option" href="/#Home">
                   <div
                     onClick={() => handleOnClickMenu(0)}
                     className={`option ${id === 0 && "selected"}`}
@@ -220,7 +220,7 @@ const Navbar = ({
                     Home
                   </div>
                 </a>
-                <a href="/#demo-week">
+                <a className="navbar-mono-option" href="/#demo-week">
                   <div
                     onClick={() => handleOnClickMenu(1)}
                     className={`option ${id === 1 && "selected"}`}
@@ -228,7 +228,7 @@ const Navbar = ({
                     Demo
                   </div>
                 </a>
-                <a href="/#programs">
+                <a className="navbar-mono-option" href="/#programs">
                   <div
                     onClick={() => handleOnClickMenu(2)}
                     className={`option ${id === 2 && "selected"}`}
@@ -236,7 +236,7 @@ const Navbar = ({
                     Courses
                   </div>
                 </a>
-                <a href="/#pricing">
+                <a className="navbar-mono-option" href="/#pricing">
                   <div
                     onClick={() => handleOnClickMenu(3)}
                     className={`option ${id === 3 && "selected"}`}
@@ -244,14 +244,15 @@ const Navbar = ({
                     Pricing
                   </div>
                 </a>
-                <a href="/#faq">
+                <a className="navbar-mono-option" href="/#faq">
                   <div
                     onClick={() => handleOnClickMenu(4)}
                     className={`option ${id === 4 && "selected"}`}
                   >
                     FAQ'S
                   </div>
-                  <a href="/#jobs">
+                </a>
+                  <a className="navbar-mono-option" href="/#jobs">
                 <div
                   onClick={() => handleOnClickMenu(5)}
                   className={`option ${id === 5 && "selected"}`}
@@ -259,7 +260,14 @@ const Navbar = ({
                   Jobs
                 </div>
               </a>
-                </a>
+              {
+                  !isLoggedIn && (<div
+                    onClick={handleLogin}
+                    className="option navbar-mono-option"
+                  >
+                    Login
+               </div>)
+                }
                 <div className="toggler">
                   <p
                     className={`nav-button ${
@@ -277,14 +285,6 @@ const Navbar = ({
                     <span className="slider round"></span>
                   </label>
                 </div>
-                {
-                  !isLoggedIn && (<div
-                    onClick={handleLogin}
-                    className="option"
-                  >
-                    Login
-               </div>)
-                }
                 {isLoggedIn ? (
                   <ProfileMenu options={profileMenuOptions} />
                 ) : (

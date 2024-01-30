@@ -33,20 +33,10 @@ export const createBatch = async (
         },
       };
 
-    // Check if the payment type exists
-    const existingPaymentType = await feePlanModel.findOne({ name: paymentType });
-    if (!existingPaymentType)
-      return {
-        response: {
-          message: "Invalid payment type",
-          status: statusCodes.BAD_REQUEST,
-        },
-      };
-
     // Create the batch in the database
     const newBatchData = await batchModel.create({
       batchCode,
-      paymentType: existingPaymentType._id,
+      paymentType: paymentType,
       demoStudents: demoStudentIds,
       paidStudents: paidStudentIds,
       registeredStudents: registeredStudentIds,

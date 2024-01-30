@@ -16,6 +16,7 @@ export const updateNotesById = async (
     const { notesId, notesData } = args;
     const {
       dayNumber,
+      weekNumber,
       description,
       estimatedReadingTime,
       link,
@@ -32,6 +33,7 @@ export const updateNotesById = async (
         noOfPages,
         estimatedReadingTime,
         dayNumber,
+        weekNumber,
         description,
       },
       { new: true }

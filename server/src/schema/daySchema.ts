@@ -40,6 +40,9 @@ const daySchema = new Schema<DaySchemaType>({
       ref: questionModel,
     },
   ],
+  date: {
+    type: Date
+  }
 });
 
 export const dayModel = model<DaySchemaType>("day", daySchema);

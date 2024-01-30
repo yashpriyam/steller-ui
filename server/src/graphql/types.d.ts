@@ -104,10 +104,10 @@ declare global {
   };
   type CreateNotesInputType = {
     link: string;
-    link: string;
     title: string;
     topics: [string];
     dayNumber: number;
+    weekNumber: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
@@ -122,6 +122,7 @@ declare global {
     link?: string;
     topics?: [string];
     dayNumber?: number;
+    weekNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
@@ -144,6 +145,7 @@ declare global {
     link: String;
     topics: [String];
     dayNumber: Number;
+    weekNumber: number;
     noOfPages?: Number;
     description?: String;
     estimatedReadingTime?: String;
@@ -292,6 +294,7 @@ declare global {
     link?: string;
     title?: string;
     dayNumber?: number;
+    weekNumber?: number;
     topics?: [string];
     noOfPages?: number;
     description?: string;
@@ -490,6 +493,7 @@ declare global {
     notes?: string[];
     videos?: string[];
     questions?: string[];
+    date?: Date;
   };
   type loginUserInputType = {
     email: string;
@@ -925,6 +929,24 @@ declare global {
     dayNumber?: number;
     code?: CodeInput;
   };
+
+  type UpdateUserPaymentSchemaType = {
+    installmentId?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+    imageUrl?: string
+  };  
 
   type GetUserCodeInput = {
     userId?: string;

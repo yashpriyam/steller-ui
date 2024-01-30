@@ -404,6 +404,7 @@ declare global {
     link?: string;
     topics?: [string];
     dayNumber?: number;
+    weekNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;

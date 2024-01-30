@@ -20,6 +20,10 @@ const notesSchema = new Schema(
         type: Number,
         required: true,
     },
+    weekNumber: {
+        type: Number,
+        required: true,
+    },
     description: {
       type: String,
     },
