@@ -574,6 +574,7 @@ declare global {
     notes?: ObjectId[];
     videos?: ObjectId[];
     questions?: ObjectId[];
+    date?: Date;
   };
   interface AccordionPropsInterface {
     className?: string;
@@ -813,8 +814,7 @@ declare global {
   }
 
   type MeetingStateType = {
-    masterMeeting: MeetingDataType | null;
-    classMeeting: MeetingDataType | null;
+    meetingList: MeetingDataType[];
   } 
   type ProfileImageType = {
     publicId?: string
@@ -909,5 +909,11 @@ declare global {
     onReject: (paymentId: string) => void;
   }
 
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
+    meetingCodeList?: string[];
+  }
 }
 export { };

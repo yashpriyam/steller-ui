@@ -26,7 +26,8 @@ const protectedRoutesMap: RoutesMapInterface = Object.freeze({
     "/userPayment": <UserPaymentPage/>,
     "/notes": <Notes />,
     "/meet": <MeetingPage />,
-    "/admin/usersPayments": <AllUserPaymentsList/>
+    "/admin/usersPayments": <AllUserPaymentsList/>,
+    "/meet/:meetingCode": <MeetingPage />
 });
 
 export const ProtectedRoutes = () => {
