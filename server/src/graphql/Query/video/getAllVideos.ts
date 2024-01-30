@@ -5,7 +5,7 @@ import { removeNullAndUndefinedKeys } from "@utils";
 export const getAllVideos = async (
     parent: undefined,
     args: { videoDataFilter: VideoDataType }
-): Promise<AllVideoOutputDataType | void> => {
+): Promise<AllVideoOutputDataType | unknown> => {
     const { VIDEO_NOT_FOUND } = errorMessages.VIDEO_MODEL;
     const errorData: CustomResponseType = {
         status: statusCodes.BAD_REQUEST,
@@ -53,15 +53,18 @@ export const getAllVideos = async (
                 modifiedVideoDataFilter[key] = { $in: value };
             }
         });
-        const filteredVideoData: [VideoDataType] = await videoModel.find(modifiedVideoDataFilter);
+        const filteredVideoData:VideoDataType[] = await videoModel.find(modifiedVideoDataFilter);
+        
 
-        return {
+        return filteredVideoData.length ? {
             videoData: filteredVideoData,
-            response: filteredVideoData.length ? {
+            response:{
                 status: statusCodes.OK,
                 message: VIDEO_FOUND,
-            } : errorData,
-        };
+            }
+          }:{
+            response:errorData
+          }        
     } catch (err) {
         return {
             response: errorData,

@@ -46,7 +46,6 @@ export const Card: React.FC<CardProps> = ({
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
-        <div className="overlay-div"></div>
         <span className={`card-tags-wrapper ${tagPosition}`}>
           {topics?.map((tag, i) => {
             return i <= 1 ? (
