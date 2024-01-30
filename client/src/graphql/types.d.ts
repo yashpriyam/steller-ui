@@ -573,6 +573,7 @@ declare global {
     notes?: ObjectId[];
     videos?: ObjectId[];
     questions?: ObjectId[];
+    date?: Date;
   };
   interface AccordionPropsInterface {
     className?: string;
