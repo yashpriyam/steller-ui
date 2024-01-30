@@ -907,7 +907,7 @@ const typeDefs = gql`
     id: ID
     amount: String
     sequence: String!
-    dueDate: String!
+    dueDate: DateTime!
     accessWeeks: ID
     miscellaneous: JSON
   }
@@ -919,7 +919,7 @@ const typeDefs = gql`
     _id: ID
     amount: String
     sequence: String!
-    dueDate: String!
+    dueDate: DateTime
     accessWeeks: ID
     miscellaneous: JSON
   }

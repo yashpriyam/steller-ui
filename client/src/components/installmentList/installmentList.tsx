@@ -3,7 +3,6 @@ import "./installmentList.scss";
 import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
 import { useUser } from "../../redux/actions/userAction";
 import InstallmentItem from "../../components/installmentItem/installmentItem";
-import { getDateFromIntValue } from "../../utils/getDateFromIntValue";
 
 const InstallmentList: React.FC<InstallmentListProps> = ({
   allInstallment,
@@ -93,7 +92,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
                       Sequence: {installment.sequence}
                     </span>
                     <span className="installment-elem">
-                      Due Date: {getDateFromIntValue(installment.dueDate)}
+                      Due Date: {installment?.dueDate?.toString()}
                     </span>
                     <span
                       className={`installment-status installment-elem ${getStatusClassName(
