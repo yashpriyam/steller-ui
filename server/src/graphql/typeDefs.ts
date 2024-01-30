@@ -89,6 +89,7 @@ const typeDefs = gql`
     ): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
+    updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
   }
 
   type ProfileImageType {
@@ -1046,6 +1047,22 @@ const typeDefs = gql`
     meetingNumber: String
     meetingCode: String
     title: String
+  }
+  type UserPaymentDataOutputType {
+    userPaymentData: UserPaymentData
+    response: CustomResponseType
+  }
+  
+  input UserPaymentInput {
+    installmentId: ID!
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: UserPaymentPendingInputType
+    imageUrl: ImageInput
+  }
+  input UserPaymentPendingInputType {
+    totalAmount: String
+    totalPendingAmount: String
   }
 
   scalar DateTime

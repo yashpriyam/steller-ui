@@ -895,4 +895,22 @@ declare global {
     value: string;
   }
 
+  type UpdateUserPaymentSchemaType = {
+    installmentId?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+    imageUrl?: string
+  };  
+
 }
