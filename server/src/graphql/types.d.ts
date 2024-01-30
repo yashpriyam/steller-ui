@@ -490,6 +490,7 @@ declare global {
     notes?: string[];
     videos?: string[];
     questions?: string[];
+    date?: Date;
   };
   type loginUserInputType = {
     email: string;
