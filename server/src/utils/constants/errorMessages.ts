@@ -89,6 +89,8 @@ export const errorMessages = Object.freeze({
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
     USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
+    USER_PAYMENT_UPDATE_FAILED: "Failed to update user payments"
+
   },
   CITIES: {
     DATA_NOT_FOUND: "No data found for cities",

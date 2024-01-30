@@ -926,6 +926,24 @@ declare global {
     code?: CodeInput;
   };
 
+  type UpdateUserPaymentSchemaType = {
+    installmentId?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+    imageUrl?: string
+  };  
+
   type GetUserCodeInput = {
     userId?: string;
     questionId?: string;
