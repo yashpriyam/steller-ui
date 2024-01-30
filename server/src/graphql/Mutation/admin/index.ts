@@ -1,0 +1,1 @@
+export { getAllUserPayments } from "./getAllUsersPayments";
