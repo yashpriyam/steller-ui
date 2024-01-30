@@ -8,14 +8,22 @@ export const getMeetingList = async (
 ): Promise<MeetingListDataType> => {
   try {
     const { data } = args;
-    const { isActive, isPaid, scheduledAt } = data;
+    const { isActive, isPaid, scheduledAt, meetingCodeList = [] } = data;
     const { MEETING_MODEL } = localMessages;
     const meetingFilter: GetMeetingListArgsType = removeNullAndUndefinedKeys({
       isActive,
       isPaid,
       scheduledAt,
     });
-    const meetingList = await meetingModel.find(meetingFilter);
+    const meetingList = await meetingModel.find(
+      meetingCodeList.length 
+      ? {
+          meetingCode: {
+            $in: meetingCodeList
+          },
+          ...meetingFilter,
+        } 
+      : meetingFilter);
     if (meetingList.length) {
       return {
         meetingList,

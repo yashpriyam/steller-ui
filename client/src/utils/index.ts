@@ -8,3 +8,4 @@ export { generateZoomSignatureForUser } from "./generateZoomSignatureForUser";
 export { startZoomMeet } from "./startZoomMeet";
 export { getRandomColor } from "./getRandomColor";
 export { getFirstLettersOfName } from "./getFirstLetterOfName";
+export { isCurrentDate } from "./isCurrentDate";

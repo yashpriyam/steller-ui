@@ -1075,6 +1075,7 @@ const typeDefs = gql`
     isPaid: Boolean
     scheduledAt: DateTime
     title: String
+    meetingCodeList: [String]
   }
 
   type MeetingListOutputType {

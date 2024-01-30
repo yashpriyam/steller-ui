@@ -17,6 +17,7 @@ export const GET_SCHEDULE_DATA = gql`
           title
           description
           topics
+          date
         }
       }
       response {

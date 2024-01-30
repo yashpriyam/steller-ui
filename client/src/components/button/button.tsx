@@ -51,7 +51,7 @@ export const Button: React.FC<ButtonProps> = ({
     <>
       {!isHidden && (
         <button
-          className={`button-component ${className} ${variantMap[variant]} ${sizeMap[size]}`}
+          className={`button-component ${variantMap[variant]} ${sizeMap[size]} ${className}`}
           disabled={isDisabled}
           onClick={onClick}
           onMouseEnter={onHover}
