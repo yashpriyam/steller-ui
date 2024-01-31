@@ -966,8 +966,8 @@ declare global {
 
   interface UserPaymentCardProps {
     payment: UserPaymentSchemaType;
-    onApprove: (paymentId: string) => void;
-    onReject: (paymentId: string) => void;
+    onApprove: (paymentId: string) => Promise<boolean | string | undefined>;
+    onReject: (paymentId: string) =>  Promise<boolean | string | undefined>;
     setPaymentReceipt: React.Dispatch<React.SetStateAction<File | null>>;
     paymentReceipt: File | null
     isLoading?: boolean;

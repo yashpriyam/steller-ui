@@ -9,11 +9,12 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
   onReject,
   paymentReceipt,
   setPaymentReceipt,
-  isLoading
 }) => {
   const { _id = "", isApproved, isRejected, isPending, image, user } = payment;
   const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
 
@@ -37,6 +38,11 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
     }
   };
 
+  const handleOnClick = async (action: (paymentId: string) => Promise<string | boolean | undefined>) => {
+    setIsLoading(true);
+    await action(_id);
+    setIsLoading(false);
+  }
   return (
     <div className={`user-payment-card ${getStatusClassName(payment)}`}>
       {getStatusClassName(payment) && (
@@ -76,20 +82,26 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
           <div className="action-buttons">
             <Button
               className="approve-button"
-              onClick={() => onApprove(_id)}
+              onClick={() => {
+                 handleOnClick(onApprove)
+              }}
               text={t("Approve")}
               isDisabled={!paymentReceipt}
-              isLoading={isLoading}
+              isLoading={Boolean(paymentReceipt) && isLoading}
               key={payment._id}
             />
 
-            <Button
-              className="reject-button"
-              onClick={() => onReject(_id)}
-              text={t("Reject")}
-              isLoading={isLoading}
-              key={payment._id}
-            />
+            {!paymentReceipt && (
+              <Button
+                className="reject-button"
+                onClick={() => {
+                  handleOnClick(onReject)
+                }}
+                text={t("Reject")}
+                isLoading={isLoading}
+                key={payment._id}
+              />
+            )}
           </div>
         </>
       )}
