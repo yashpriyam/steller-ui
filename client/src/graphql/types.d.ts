@@ -920,6 +920,9 @@ declare global {
     payment: UserPaymentSchemaType;
     onApprove: (paymentId: string) => void;
     onReject: (paymentId: string) => void;
+    setPaymentReceipt: React.Dispatch<React.SetStateAction<File | null>>;
+    paymentReceipt: File | null
+    isLoading?: boolean
   }
 
   type GetMeetingListArgsType = {
@@ -927,6 +930,18 @@ declare global {
     isActive?: boolean;
     scheduledAt?: Date;
     meetingCodeList?: string[];
+  }
+
+  type UpdateUserPaymentInput = {
+    paymentId: string
+    isApproved? :boolean
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: string | ArrayBuffer;
   }
 }
 export { };

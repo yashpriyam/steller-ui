@@ -7,6 +7,9 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
   payment,
   onApprove,
   onReject,
+  paymentReceipt,
+  setPaymentReceipt,
+  isLoading
 }) => {
   const { _id = "", isApproved, isRejected, isPending, image, user } = payment;
   const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
@@ -58,19 +61,35 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
         onClick={() => openImagePreview(image.secureUrl)}
       />
       {!isApproved && (
-        <div className="action-buttons">
-          <Button
-            className="approve-button"
-            onClick={() => onApprove(_id)}
-            text="Approve"
-          />
+        <>
+          <div className="file-input-wrapper">
+            <input
+              type="file"
+              accept="image/*"
+              className="file-input"
+              onChange={(e) => setPaymentReceipt(e.target.files?.[0] ?? null)}
+            />
+            <label className="file-input-label">
+              {paymentReceipt ? paymentReceipt.name : "Select Receipt"}
+            </label>
+          </div>
+          <div className="action-buttons">
+            <Button
+              className="approve-button"
+              onClick={() => onApprove(_id)}
+              text="Approve"
+              isDisabled={!paymentReceipt}
+              isLoading={isLoading}
+              key={payment._id}
+            />
 
-          <Button
-            className="reject-button"
-            onClick={() => onReject(_id)}
-            text="Reject"
-          />
-        </div>
+            <Button
+              className="reject-button"
+              onClick={() => onReject(_id)}
+              text="Reject"
+            />
+          </div>
+        </>
       )}
       {isImagePreviewOpen && (
         <div className="image-preview-modal" onClick={closeImagePreview}>
