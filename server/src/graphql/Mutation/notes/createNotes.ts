@@ -19,6 +19,7 @@ export const createNotes = async (
       link,
       topics,
       dayNumber,
+      weekNumber,
       noOfPages,
       estimatedReadingTime,
     } = notesData;
@@ -29,6 +30,7 @@ export const createNotes = async (
       link,
       topics,
       dayNumber,
+      weekNumber,
       noOfPages,
       estimatedReadingTime,
     });

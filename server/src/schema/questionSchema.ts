@@ -4,18 +4,54 @@ const questionTypes = {
   multi: "multi",
   single: "single",
   fillup: "fillup",
+  codeblock: "codeblock"
 };
 const questionDurationTypes = {
   timed: "timed",
   recorded: "recorded",
 };
+const codeEditorWindowTypes = {
+  HTML: "HTML",
+  CSS: "CSS",
+  JS: "JS",
+};
 const questionSchema = new Schema<QuestionSchemaType>({
   title: {
-    type: [{ imageUrl: String, text: String, iframe: String }],
+    type: [{ imageUrl: String, text: String, iframe: String, codeBlock: {
+      enableCodeBlock: Boolean,
+      configuration: {
+        showOutputWindow: Boolean,
+        showSplitWindow: Boolean,
+        openWindows: [{
+          title: {
+            type: String,
+            enum: codeEditorWindowTypes
+          },
+          isEditable: Boolean,
+          enableUserSelection: Boolean,
+          predefinedCode: String
+        }]
+      }
+    } }],
     required: true,
   },
   options: {
-    type: [{ imageUrl: String, text: String, iframe: String }],
+    type: [{ imageUrl: String, text: String, iframe: String, codeBlock: {
+      enableCodeBlock: Boolean,
+      configuration: {
+        showOutputWindow: Boolean,
+        showSplitWindow: Boolean,
+        openWindows: [{
+          title: {
+            type: String,
+            enum: codeEditorWindowTypes
+          },
+          isEditable: Boolean,
+          enableUserSelection: Boolean,
+          predefinedCode: String
+        }]
+      }
+    } }],
     required: true,
   },
   questionType: {

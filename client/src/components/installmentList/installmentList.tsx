@@ -28,6 +28,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
         isApproved: matchingUserInstallment?.isApproved,
         isRejected: matchingUserInstallment?.isRejected,
         isPending: matchingUserInstallment?.isPending,
+        image: matchingUserInstallment?.image,
       };
     });
 
@@ -44,7 +45,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
   ) => {
     if (paymentReceipt !== null) {
       try {
-        setIsLoading &&  setIsLoading(true);
+        setIsLoading && setIsLoading(true);
         const paymentReceiptUrl = await readFileAsDataURL(paymentReceipt);
         const input: UserPaymentInputType = {
           batch: userFeePlan?.batchCode,
@@ -81,29 +82,35 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
           <h2 className="installment-heading">Paid Installments</h2>
           <div className="installment-cards">
             <ul className="installment-item-constainer">
-              {paidInstallments?.map(
-                (installment) => (
-                  (
-                    <li key={installment.id} className={`installment-item`}>
-                      <p className="installment-info">
-                        <span className="installment-elem">
-                          Amount: {installment.amount}
-                        </span>
-                        <span className="installment-elem">
-                          Sequence: {installment.sequence}
-                        </span>
-                        <span className="installment-elem">
-                          Due Date: {installment.dueDate?.toString()}
-                        </span>
-                        <span className={`installment-status ${getStatusClassName(installment)}`}>
-                          Status:{" "}
-                          {getStatusClassName(installment).toUpperCase()}
-                        </span>
-                      </p>
-                    </li>
-                  )
-                )
-              )}
+              {paidInstallments?.map((installment) => (
+                <li key={installment.id} className={`installment-item`}>
+                  <p className="installment-info">
+                    <span className="installment-elem">
+                      Amount: {installment.amount}
+                    </span>
+                    <span className="installment-elem">
+                      Sequence: {installment.sequence}
+                    </span>
+                    <span className="installment-elem">
+                      Due Date: {installment?.dueDate?.toString()}
+                    </span>
+                    <span
+                      className={`installment-status installment-elem ${getStatusClassName(
+                        installment
+                      )}`}
+                    >
+                      Status: {getStatusClassName(installment).toUpperCase()}
+                    </span>
+                  </p>
+                  <img
+                    src={installment?.image?.secureUrl}
+                    alt="image"
+                    className={`installment-image ${getStatusClassName(
+                      installment
+                    )}`}
+                  />
+                </li>
+              ))}
             </ul>
           </div>
         </div>

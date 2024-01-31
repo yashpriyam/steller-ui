@@ -16,6 +16,7 @@ const typeDefs = gql`
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
+    getUserCode(input: getUserCodeInputType): GetUserCodeOutput
   }
 
   type Mutation {
@@ -67,18 +68,79 @@ const typeDefs = gql`
     createDay(dayData: DayDataInputType!): DayDataOutputType
     updateDay(dayData: DayDataInputType!): DayDataOutputType
     updateCoverImage(data: CoverImageInputType): UpdateImageOutputType
-    upsertUserProfile(data:UpsertUserProfileInputType!): UpsertUserProfileOutputType
+    upsertUserProfile(
+      data: UpsertUserProfileInputType!
+    ): UpsertUserProfileOutputType
     createFeePlan(feePlanData: FeePlanInput!): FeePlanDataOutputType!
     createBatch(input: BatchInput!): BatchDataOutputType!
     updateBatch(batchCode: String!, input: BatchInput!): BatchDataOutputType!
-    updateFeePlan(feePlanId: String!, input: FeePlanInput!): FeePlanDataOutputType!
+    updateFeePlan(
+      feePlanId: String!
+      input: FeePlanInput!
+    ): FeePlanDataOutputType!
     createUserPayment(input: UserPaymentCreateInput): UserPaymentDataOutput!
     getUserPaymentsByUserId(userId: ID!): UserAllPaymentDataOutputType
-    getFeePlanDetailsByBatchCode(batchCode: String!): UserAllFeePlanDataOutputType
+    getFeePlanDetailsByBatchCode(
+      batchCode: String!
+    ): UserAllFeePlanDataOutputType
     createMeeting(data: MeetingDataInputType!): MeetingDataOutputType
-    updateMeeting(filter: UpdateMeetingInputFilter, data: UpdateMeetingInputDataType): MeetingDataOutputType
+    updateMeeting(
+      filter: UpdateMeetingInputFilter
+      data: UpdateMeetingInputDataType
+    ): MeetingDataOutputType
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
+    updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
+    saveUserCode(input: SaveUserCodeInput): UserCodeType
+    getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
+    approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+  }
+
+  input SaveUserCodeInput {
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeTypeInput
+  }
+
+  type GetUserCodeOutputDataType {
+    userId: ID!
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeType
+  }
+
+  type GetUserCodeOutput {
+    data: [GetUserCodeOutputDataType]
+    response: CustomResponseType!
+  }
+
+  input CodeTypeInput {
+    html: String
+    css: String
+    js: String
+  }
+
+  type CodeType {
+    html: String
+    css: String
+    js: String
+  }
+
+  input getUserCodeInputType {
+    userId: ID!
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+  }
+
+  type UserCodeType {
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeType
+    response: CustomResponseType!
   }
 
   type ProfileImageType {
@@ -122,6 +184,8 @@ const typeDefs = gql`
     duration: String
     createdAt: String
     updatedAt: String
+    batchCode: String
+    weekNumber: String
   }
 
   type Links {
@@ -138,6 +202,8 @@ const typeDefs = gql`
     links: LinksInput!
     isActive: Boolean
     duration: String
+    weekNumber: Int!
+    batchCode: String!
   }
 
   input LinksInput {
@@ -233,6 +299,7 @@ const typeDefs = gql`
     link: String!
     title: String!
     dayNumber: Int!
+    weekNumber: Int!
     topics: [String]!
     noOfPages: Int
     description: String
@@ -264,6 +331,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -277,6 +345,7 @@ const typeDefs = gql`
     link: String!
     title: String!
     dayNumber: Int!
+    weekNumber: Int!
     topics: [String]!
     noOfPages: Int
     description: String
@@ -299,6 +368,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -316,6 +386,7 @@ const typeDefs = gql`
     link: String
     title: String
     dayNumber: Int
+    weekNumber: Int
     topics: [String]
     noOfPages: Int
     description: String
@@ -333,11 +404,48 @@ const typeDefs = gql`
     text: String!
     imageUrl: String
     iframe: String
+    codeBlock: CodeBlockInputType
+  }
+  input CodeBlockInputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationType
+  }
+  type CodeBlockOutputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationOutputType
+  }
+  input ConfigurationType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowType]
+  }
+  type ConfigurationOutputType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowOutputType]
+  }
+  type CodeEditorWindowOutputType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+  input CodeEditorWindowType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+  enum CodeEditorWindowTypeEnum {
+    HTML
+    CSS
+    JS
   }
   enum QuestionType {
     multi
     single
     fillup
+    codeblock
   }
   input QuestionMeta {
     topic: String!
@@ -417,6 +525,7 @@ const typeDefs = gql`
     text: String!
     imageUrl: String
     iframe: String
+    codeBlock: CodeBlockOutputType
   }
 
   type QuestionDataOutput {
@@ -455,6 +564,7 @@ const typeDefs = gql`
     text: String
     imageUrl: String
     iframe: String
+    codeBlock: CodeBlockOutputType
     isChecked: Boolean
   }
 
@@ -472,7 +582,7 @@ const typeDefs = gql`
   type AttemptedQuestionDataType {
     _id: String
     isAnswered: Boolean
-    isCorrect:Boolean
+    isCorrect: Boolean
     title: [QuestionOptionOutputType]
     questionType: QuestionType
     options: [AttemptQuestionOptionOutputType]
@@ -617,6 +727,7 @@ const typeDefs = gql`
     title: String
     description: String
     topics: [String]
+    date: DateTime
   }
   type DaySchemaType {
     batchCode: String
@@ -628,6 +739,7 @@ const typeDefs = gql`
     notes: [NotesDataType]
     videos: [videoDataType]
     questions: [QuestionDataType]
+    date: DateTime
   }
   type DayDataOutputType {
     dayData: DaySchemaType
@@ -799,12 +911,12 @@ const typeDefs = gql`
     installments: [InstallmentInput]
     miscellaneous: JSON
   }
-  
+
   input InstallmentInput {
     id: ID
     amount: String
     sequence: String!
-    dueDate: String!
+    dueDate: DateTime!
     accessWeeks: ID
     miscellaneous: JSON
   }
@@ -816,7 +928,7 @@ const typeDefs = gql`
     _id: ID
     amount: String
     sequence: String!
-    dueDate: String!
+    dueDate: DateTime
     accessWeeks: ID
     miscellaneous: JSON
   }
@@ -824,7 +936,7 @@ const typeDefs = gql`
     _id: ID!
     batchCode: String
     name: String!
-    installments: [InstallmentInputType],
+    installments: [InstallmentInputType]
     description: String!
     miscellaneous: JSON
   }
@@ -837,12 +949,12 @@ const typeDefs = gql`
     demoStudents: [ID]
     startDate: String
   }
-  
+
   type BatchDataOutputType {
     batchData: Batch
     response: CustomResponseType!
   }
-  
+
   type Batch {
     _id: ID!
     batchCode: String!
@@ -868,12 +980,12 @@ const typeDefs = gql`
     coverImage: UserProfile
     userProfile: ID
   }
-  
+
   type UserProfile {
     url: String!
     altText: String
   }
-  
+
   enum SessionPreference {
     ONLINE
     OFFLINE
@@ -893,40 +1005,38 @@ const typeDefs = gql`
     secureUrl: String
   }
 
+  type UserPaymentData {
+    _id: ID
+    user: User!
+    batch: Batch!
+    feePlan: FeePlan!
+    installmentId: ID
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: UserPaymentPendingType
+    image: CoverImageType
+    createdAt: String
+    updatedAt: String
+  }
 
-type UserPaymentData {
-  _id: ID
-  user: User!
-  batch: Batch!
-  feePlan: FeePlan!
-  installmentId: ID
-  isApproved: Boolean
-  isRejected: Boolean
-  isPending: UserPaymentPendingType
-  image: CoverImageType
-  createdAt: String
-  updatedAt: String
-}
+  type UserPaymentPendingType {
+    totalAmount: String
+    totalPendingAmount: String
+  }
 
-type UserPaymentPendingType {
-  totalAmount: String
-  totalPendingAmount: String
-}
+  type UserPaymentDataOutput {
+    userPaymentData: UserPaymentData
+    response: CustomResponseType!
+  }
 
-
-type UserPaymentDataOutput {
-  userPaymentData: UserPaymentData
-  response: CustomResponseType!
-}
-
-type UserAllPaymentDataOutputType  {
-  userPaymentData: [UserPaymentData]
-  response: CustomResponseType
-}
-type UserAllFeePlanDataOutputType {
-  feePlanData: [FeePlan]
-  response: CustomResponseType
-}
+  type UserAllPaymentDataOutputType {
+    userPaymentData: [UserPaymentData]
+    response: CustomResponseType
+  }
+  type UserAllFeePlanDataOutputType {
+    feePlanData: [FeePlan]
+    response: CustomResponseType
+  }
 
   input MeetingDataInputType {
     meetingNumber: String!
@@ -937,6 +1047,7 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     scheduledAt: String
     isPaid: Boolean
+    description: String
   }
 
   type MeetingDataType {
@@ -948,6 +1059,7 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     scheduledAt: String
     isPaid: Boolean
+    description: String
   }
 
   type MeetingDataOutputType {
@@ -964,6 +1076,7 @@ type UserAllFeePlanDataOutputType {
     isPaid: Boolean
     scheduledAt: DateTime
     title: String
+    meetingCodeList: [String]
   }
 
   type MeetingListOutputType {
@@ -974,6 +1087,7 @@ type UserAllFeePlanDataOutputType {
   type UserDataOutputType {
     userData: UserSchemaType
     response: CustomResponseType
+    isAdmin: Boolean
   }
   input PartialUserSchemaType {
     email: String
@@ -991,7 +1105,7 @@ type UserAllFeePlanDataOutputType {
     course: String
     branch: String
     batchCode: String
-    feePlan: String 
+    feePlan: String
   }
 
   type UserSchemaType {
@@ -1010,10 +1124,10 @@ type UserAllFeePlanDataOutputType {
     course: String
     branch: String
     batchCode: String
-    feePlan: String 
+    feePlan: String
     profileImage: ProfileImageType
   }
-  
+
   input UpdateMeetingInputFilter {
     meetingNumber: String
     title: String
@@ -1029,12 +1143,46 @@ type UserAllFeePlanDataOutputType {
     isActive: Boolean
     scheduledAt: String
     isPaid: Boolean
+    description: String
   }
 
   input GetMeetingFilterInputType {
     meetingNumber: String
     meetingCode: String
     title: String
+  }
+  type UserPaymentDataOutputType {
+    userPaymentData: UserPaymentData
+    response: CustomResponseType
+  }
+  
+  input UserPaymentInput {
+    installmentId: ID!
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: UserPaymentPendingInputType
+    imageUrl: ImageInput
+  }
+  input UserPaymentPendingInputType {
+    totalAmount: String
+    totalPendingAmount: String
+  }
+  input GetAllUserPaymentsInput {
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: Boolean
+  }
+  type UserPaymentsDataOutputType {
+    userPaymentData: [UserPaymentData]
+    response: CustomResponseType
+  }
+
+  input UpdateUserPaymentInput {
+    paymentId: String
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: UserPaymentPendingInputType
+    image: String
   }
 
   scalar DateTime

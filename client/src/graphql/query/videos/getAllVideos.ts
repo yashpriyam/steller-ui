@@ -4,20 +4,22 @@ export const GET_VIDEOS = gql`
     query GetAllVideos($videoDataFilter: VideoInputFilterType) {
         getAllVideos(videoDataFilter: $videoDataFilter) {
             videoData {
-                title
-                description
+                batchCode
+                createdAt
                 dayNumber
+                description
                 videoNumber
+                updatedAt
+                weekNumber
                 topics
-                links {
-                    webmasters
-                    youtube
-                }
+                title
                 isActive
                 duration
-                createdAt
-                updatedAt
-            }
+                links {
+                  youtube
+                  webmasters
+                }
+              }
             response {
                 status
                 message

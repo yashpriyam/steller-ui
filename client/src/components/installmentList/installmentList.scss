@@ -51,6 +51,21 @@
             }
           }
         }
+        .installment-image {
+          max-width: 100%; 
+          border-radius: 8px;
+          &.approved {
+            outline: 5px solid $green;
+          }
+      
+          &.rejected {
+            outline: 5px solid $red;
+          }
+      
+          &.pending {
+            outline: 5px solid $lightOrangeColor;
+          }
+        }
       }
     }
   }

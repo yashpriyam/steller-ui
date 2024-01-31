@@ -1,6 +1,6 @@
-import { ObjectId } from "mongoose";
-import { localMessages, errorMessages, statusCodes } from "@constants";
-import { notesModel } from "@models";
+import { ObjectId } from 'mongoose';
+import { localMessages, errorMessages, statusCodes } from '@constants';
+import { notesModel } from '@models';
 
 export const updateNotesById = async (
   _parent: undefined,
@@ -8,7 +8,7 @@ export const updateNotesById = async (
 ): Promise<UpdateNotesOutputType | unknown> => {
   const { NOTES_UPDATION_SUCCESS } = localMessages.NOTES_MODEL;
   const { NOTES_UPDATION_FAILED } = errorMessages.NOTES_MODEL;
-  const errorData:CustomResponseType = {
+  const errorData: CustomResponseType = {
     status: statusCodes.BAD_REQUEST,
     message: NOTES_UPDATION_FAILED,
   };
@@ -16,6 +16,7 @@ export const updateNotesById = async (
     const { notesId, notesData } = args;
     const {
       dayNumber,
+      weekNumber,
       description,
       estimatedReadingTime,
       link,
@@ -32,6 +33,7 @@ export const updateNotesById = async (
         noOfPages,
         estimatedReadingTime,
         dayNumber,
+        weekNumber,
         description,
       },
       { new: true }

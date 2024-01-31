@@ -11,6 +11,7 @@ import { CourseImageComponent } from "../../components/courseImageComponent/cour
 import { OverviewComponent } from "../../components/overviewComponent/overviewComponent";
 import { useMeeting } from "../../redux/actions/meetingAction";
 import { startZoomMeet } from "../../utils/startZoomMeet";
+import { useNavigate } from "react-router-dom";
 
 export const Dashboard: React.FC<DashboardProps> = ({
   className,
@@ -18,19 +19,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
   pageSubtitle = "The Original family of vampires settle down in the city of New Orleans that they helped to construct several",
   topButtonTagOne = "About",
   topButtonTagTwo = "E-Mail",
-  newsDropTitile = "News Drop",
+  newsDropTitile = "Explore",
   newsDropElements = [
     {
       image:
-        "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg",
-      title: "Image Title",
-      description: "Add your thoughts about this images",
+"https://res.cloudinary.com/dzzysrpcm/image/upload/v1706679537/Web%20Masters/Dashboard/2_is5vzg.png",
+      title: "HTML",
+      description: "Topics in HTML",
     },
     {
       image:
-        "https://img.freepik.com/free-vector/gradient-ui-ux-landing-page-template_23-2149053801.jpg?size=626&ext=jpg&ga=GA1.1.507716930.1702729428&semt=ais",
-      title: "Image Title",
-      description: "Add your thoughts about this images",
+"https://res.cloudinary.com/dzzysrpcm/image/upload/v1706683058/Web%20Masters/Dashboard/2_1_cy3vdt.png",
+      title: "CSS",
+      description: "Topics in CSS",
     },
   ],
   thoughtComponentTitle = "Thoughts",
@@ -187,48 +188,47 @@ export const Dashboard: React.FC<DashboardProps> = ({
   overviewButtonTwo = "View FAQs",
 }: DashboardProps) => {
 
-  const { getMasterMeeting, meetingDetails } = useMeeting();
-  const { masterMeeting, classMeeting } = meetingDetails || {};
-  const [meetingList, setMeetingList] = useState<ServiceBoxType[]>([]);
-  useEffect(() => {
-    masterMeeting && setMeetingList([
-      ...meetingList,
-      {
-        title: masterMeeting?.title || '',
-        subtitle: 'This is demo meeting',
-        icon: <ThoughtIcon width="20" />,
-        buttonText: 'Join',
-        isBtnEnabled: !!masterMeeting?.isActive,
-        onClick: () => {
-          startZoomMeet({
-            leaveUrl: window.location.hostname,
-            meetingNumber: masterMeeting.meetingNumber,
-            password: masterMeeting.password,
-            userName: 'test-user',
-            sdkKey: process.env.REACT_APP_ZOOM_SDK_KEY || "",
-            sdkSecret: process.env.REACT_APP_ZOOM_SDK_SECRET || ""
-          })
-        }
-      }])
-  }, [masterMeeting])
+  const { getMeetingList, meetingDetails } = useMeeting();
+  const { meetingList } = meetingDetails;
+  const [meetingCardList, setMeetingCardList] = useState<ServiceBoxType[]>([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    getMasterMeeting()
-  }, [])
+  const addMeetingDataToMeetingCard = (meetingList: MeetingDataType[]) => {
+    setMeetingCardList(meetingList.map(meetingData => ({
+      title: meetingData?.title || '',
+      subtitle: meetingData?.description || '',
+      icon: <ThoughtIcon width="20" />,
+      buttonText: 'Join',
+      isBtnEnabled: !!meetingData?.isActive,
+      onClick: () => navigate(`/meet/${meetingData.meetingCode}`)
+    })))
+  }
+
+  useEffect(()=> {
+     addMeetingDataToMeetingCard(meetingList);
+  }, [meetingList])
+
+  useEffect(()=> {
+    getMeetingList({
+      meetingCodeList: ['master', 'class'],
+      isActive: true
+    });
+  },[])
+
   return (
     <div className={`dashboard`}>
       <div className={`dashboard-container`}>
-        <ServiceCompomponent serviceElements={meetingList} />
+        <ServiceCompomponent serviceElements={meetingCardList} />
         {/* <PageTitle title={pageTitle} subtitle={pageSubtitle} />
         <TopButtons
           topButtonTagOne={topButtonTagOne}
           topButtonTagTwo={topButtonTagTwo}
-        />
+        /> */}
         <NewsDrop
           newsDropTitile={newsDropTitile}
           newsDropElements={newsDropElements}
         />
-        <ThoughtComponent
+        {/* <ThoughtComponent
           thoughtComponentTitle={thoughtComponentTitle}
           thoughtComponentSubtitle={thoughtComponentSubtitle}
           thoughtElement={thoughtElement}

@@ -56,7 +56,7 @@ const PORT = process.env.PORT || 8080;
       const token = req.headers.authorization;
       let contextData;
       try {
-        if (token) {
+        if (token && token !== 'null') {
           contextData = jwt.verify(token, process.env.JWT_SECRET_VALUE || "");
         }
       } catch (err) {

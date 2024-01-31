@@ -39,6 +39,11 @@ export const useAppData = (): UseAppDataReturnType => {
             <AvatarIcon isDarkMode={true}/>,
       url: "/profile",
     },
+    admin: user.isAdmin &&  {
+      image: <PaymentIcon isDarkMode={true}/>,
+      text: t('all_users_payments'),
+      url: '/admin/usersPayments'
+    },
     optionsAtFirst: [
       {
         text: t("search"),
@@ -46,11 +51,6 @@ export const useAppData = (): UseAppDataReturnType => {
       },
     ],
     options: [
-      {
-        text: t("home"),
-        image: <HomeIcon isDarkMode={true} />,
-        url: "/",
-      },
       {
         text: t("payments"),
         image: <PaymentIcon isDarkMode={true} />,
@@ -65,12 +65,6 @@ export const useAppData = (): UseAppDataReturnType => {
         text: t("schedule"),
         image: <ScheduleIcon isDarkMode={true} />,
         url: "/schedule",
-      },
-      {
-        text: "Meet",
-        image: <MeetIcon isDarkMode={true} />,
-        url: process.env.REACT_APP_CLASS_MEET_URL || "",
-        openNewPage: true,
       },
       {
         text: t("questions"),
@@ -92,5 +86,5 @@ export const useAppData = (): UseAppDataReturnType => {
   useEffect(()=>{
     isLoggedIn && getUserData();
   },[isLoggedIn])
-  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
+  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn, user: user }
 }

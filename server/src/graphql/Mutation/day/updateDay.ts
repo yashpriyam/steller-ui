@@ -13,32 +13,41 @@ export const updateDay = async (
   try {
     const { DAY_UPDATION_SUCCESS } = localMessages.DAY_MODEL;
     const { dayData } = args;
-    const { dayNumber, description, title, topics, weekNumber, batchCode } =
+    const { dayNumber, description, title, topics, weekNumber, batchCode, date } =
       dayData;
-    if (!weekNumber || !batchCode || !dayNumber) return { response: errorData };
-    const updatedDayData = await dayModel.findOneAndUpdate(
-      { batchCode, weekNumber, dayNumber },
-      {
-        dayNumber,
-        description,
-        title,
-        topics,
-        weekNumber,
-        batchCode,
-      },
-      { new: true }
-    );
-    return updatedDayData
-      ? {
-          dayData: updatedDayData,
-          response: {
-            message: DAY_UPDATION_SUCCESS,
-            status: statusCodes.OK,
-          },
-        }
-      : {
-          response: errorData,
-        };
+    if (!weekNumber || !batchCode || !dayNumber || !date) {
+      return {
+        response: {
+          status: statusCodes.BAD_REQUEST,
+          message: errorMessages.DAY_MODEL.DAY_MODEL_REQUIRED_FIELDS,
+        },
+      };
+    } else {
+      const updatedDayData = await dayModel.findOneAndUpdate(
+        { batchCode, weekNumber, dayNumber },
+        {
+          dayNumber,
+          description,
+          title,
+          topics,
+          weekNumber,
+          batchCode,
+          date
+        },
+        { new: true }
+      );
+      return updatedDayData
+        ? {
+            dayData: updatedDayData,
+            response: {
+              message: DAY_UPDATION_SUCCESS,
+              status: statusCodes.OK,
+            },
+          }
+        : {
+            response: errorData,
+          };
+    }
   } catch (err) {
     return {
       response: errorData,

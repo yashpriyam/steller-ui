@@ -26,6 +26,8 @@ export { createDay, updateDay } from "./day/index";
 export { upsertUserProfile } from "./userProfile/index";
 export { createFeePlan, updateFeePlan, getFeePlanDetailsByBatchCode } from "./feePlan/index";
 export { createBatch, updateBatch } from "./batch/index";
-export { createUserPayment, getUserPaymentsByUserId } from  "./userPaymentsHistory/index"
+export { createUserPayment, getUserPaymentsByUserId, updateUserPayments } from  "./userPaymentsHistory/index"
 export { insertCities } from "./cities/index";
 export { createMeeting, updateMeeting } from "./meeting";
+export { saveUserCode } from './code/saveUserCode';
+export { getAllUserPayments, approveUserPaymentByAdmin } from "./admin/index"

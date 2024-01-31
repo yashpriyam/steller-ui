@@ -8,6 +8,7 @@ import { useWeek } from "../../redux/actions/scheduleAction";
 import { MeetIcon } from "../../icons/index";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
+import { isCurrentDate } from "../../utils/index";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
 
 const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
@@ -25,7 +26,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
     if(path) navigate(path);
   };
   const onJoinMeetClick = () => {
-    window.open(process.env.REACT_APP_CLASS_MEET_URL, "_blank");
+    navigate("/dashboard")
   };
   
   useEffect(() => {
@@ -74,6 +75,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                           dayNumber,
                           description,
                           title,
+                          date,
                           topics: tags,
                         } = day;
                         const tagsLength = tags?.length;
@@ -156,9 +158,20 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                   );
                                 }}
                               />
-                              <Button
+                             {
+                            date && isCurrentDate(date) 
+                              ? (<Button
+                                text={t("join_todays_class")}
+                                className="button join-meet-btn"
+                                onClick={(e) => {
+                                  handleNavigation(
+                                    e,
+                                    `/meet/class`
+                                  );
+                                }}
+                              />)
+                              : ( <Button
                                 text={t("videos")}
-                                isDisabled={true}
                                 className="button"
                                 onClick={(e) => {
                                   handleNavigation(
@@ -166,7 +179,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                     `/videos?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
                                   );
                                 }}
-                              />
+                              />)
+                             }
                             </div>
                           </div>
                         );

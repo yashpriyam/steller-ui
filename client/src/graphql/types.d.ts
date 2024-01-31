@@ -315,7 +315,8 @@ declare global {
   enum QuestionTypeEnum {
     multi = "multi",
     single = "single",
-    fillup = "fillup"
+    fillup = "fillup",
+    codeblock = "codeblock"
   }
 
   interface QuestionResponseType {
@@ -354,11 +355,30 @@ declare global {
     isLoading: boolean;
   }
 
+  type CodeBlockOpenWindowsType = {
+    enableUserSelection: boolean;
+    isEditable: boolean;
+    predefinedCode: string;
+    title: string;
+  }
+
+  type CodeBlockConfigurationType = {
+    showOutputWindow: boolean;
+    showSplitWindow: boolean;
+    openWindows: [CodeBlockOpenWindowsType];
+  }
+
+  type CodeBlockType = {
+    enableCodeBlock: boolean;
+    configuration: CodeBlockConfigurationType
+  }
+
   type QuestionOptionType = {
     imageUrl?: string;
     text?: string;
     iframe?: string;
     isChecked?: boolean;
+    codeBlock: CodeBlockType
   };
 
   type VideoDataType = {
@@ -384,6 +404,7 @@ declare global {
     link?: string;
     topics?: [string];
     dayNumber?: number;
+    weekNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
@@ -515,6 +536,14 @@ declare global {
       onClick?: (e: MouseEvent<HTMLDivElement>) => void;
       isProfile?: boolean;
     }[],
+    admin?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+      onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+      isProfile?: boolean;
+    } | false
   }
 
   type UseAppDataReturnType = {
@@ -523,6 +552,11 @@ declare global {
     isLoginModalOpen: boolean;
     setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
     isLoggedIn: boolean;
+    user: {
+      userData: UserSchemaType;
+      isLoggedIn: boolean;
+      isAdmin: boolean;
+    };
   }
 
   type SetCookieArgsType = {
@@ -553,6 +587,7 @@ declare global {
     notes?: ObjectId[];
     videos?: ObjectId[];
     questions?: ObjectId[];
+    date?: Date;
   };
   interface AccordionPropsInterface {
     className?: string;
@@ -604,7 +639,7 @@ declare global {
   };
 
   type Installment = {
-    _id: string | undefined;
+    _id?: string | undefined;
     id? :string;
     amount?: string;
     sequence?: string;
@@ -816,12 +851,12 @@ declare global {
     link?: string;
     isActive: string | null;
     isPaid: string | null;
-    scheduledAt: Date | null
+    scheduledAt: Date | null;
+    description: string | null;
   }
 
   type MeetingStateType = {
-    masterMeeting: MeetingDataType | null;
-    classMeeting: MeetingDataType | null;
+    meetingList: MeetingDataType[];
   } 
   type ProfileImageType = {
     publicId?: string
@@ -856,5 +891,105 @@ declare global {
     batchCode?: boolean;
   }
 
+  interface DataContextProps {
+    html: string;
+    setHtml: React.Dispatch<React.SetStateAction<string>>;
+    css: string;
+    setCss: React.Dispatch<React.SetStateAction<string>>;
+    js: string;
+    setJs: React.Dispatch<React.SetStateAction<string>>;
+  }
+
+  interface CodeDataProviderProps {
+    children: ReactNode;
+  }
+
+  interface UserCodeStateType {
+    userCode: [UserCodeType]
+    isLoading: boolean
+  }
+
+  interface UserCodeType {
+    questionId?: string
+    weekNumber?: number
+    dayNumber?: number
+    code?: CodeType
+  }
+
+  interface CodeType {
+    html: string;
+    css: string;
+    js: string;
+  }
+
+  interface DataContextProps {
+    html: string;
+    setHtml: Dispatch<SetStateAction<string>>;
+    css: string;
+    setCss: Dispatch<SetStateAction<string>>;
+    js: string;
+    setJs: Dispatch<SetStateAction<string>>;
+  }
+
+  interface CodeDataProviderProps {
+    children: ReactNode;
+  }
+
+  interface EditorProps {
+    heading: string;
+    language: string;
+    value: string;
+    onChange: Dispatch<SetStateAction<string>>;
+    icon: string;
+    color: string;
+    questionId: string;
+  }
+
+  interface LanguageConfig {
+    language: string;
+    heading: string;
+    value: string;
+    onChange: React.Dispatch<React.SetStateAction<string>>;
+    icon: string;
+    color: string;
+  }
+
+  type GetAllUserPaymentsInput = {
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: Boolean
+  }
+  type AllUsersPaymentDataOutputType = {
+    allUsersPayments?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+
+  interface UserPaymentCardProps {
+    payment: UserPaymentSchemaType;
+    onApprove: (paymentId: string) => void;
+    onReject: (paymentId: string) => void;
+    setPaymentReceipt: React.Dispatch<React.SetStateAction<File | null>>;
+    paymentReceipt: File | null
+    isLoading?: boolean
+  }
+
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
+    meetingCodeList?: string[];
+  }
+
+  type UpdateUserPaymentInput = {
+    paymentId: string
+    isApproved? :boolean
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: string | ArrayBuffer;
+  }
 }
 export { };

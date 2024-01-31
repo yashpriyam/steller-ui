@@ -9,6 +9,9 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
 }) => {
   const [paymentReceipt, setPaymentReceipt] = useState<File | null>(null);
   const { t } = useTranslation();
+
+
+  
   return (
     <li className="installment-item">
       <p className="installment-info">

@@ -104,10 +104,10 @@ declare global {
   };
   type CreateNotesInputType = {
     link: string;
-    link: string;
     title: string;
     topics: [string];
     dayNumber: number;
+    weekNumber: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
@@ -122,6 +122,7 @@ declare global {
     link?: string;
     topics?: [string];
     dayNumber?: number;
+    weekNumber?: number;
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
@@ -144,6 +145,7 @@ declare global {
     link: String;
     topics: [String];
     dayNumber: Number;
+    weekNumber: number;
     noOfPages?: Number;
     description?: String;
     estimatedReadingTime?: String;
@@ -155,7 +157,7 @@ declare global {
   };
 
   type AllVideoOutputDataType = {
-    videoData?: [VideoDataType];
+    videoData?: VideoDataType[];
     response: CustomResponseType;
   };
 
@@ -171,6 +173,8 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
+    weekNumber: number;
+    batchCode: string;
   };
 
   type FilteredLinksType = {
@@ -188,6 +192,8 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
+    weekNumber?: number;
+    batchCode?: string;
   };
 
   type FilteredLinksType = {
@@ -212,6 +218,7 @@ declare global {
     multi = "multi",
     single = "single",
     fillup = "fillup",
+    codeblock = "codeblock"
   }
 
   enum QuestionMetaType {
@@ -287,6 +294,7 @@ declare global {
     link?: string;
     title?: string;
     dayNumber?: number;
+    weekNumber?: number;
     topics?: [string];
     noOfPages?: number;
     description?: string;
@@ -485,6 +493,7 @@ declare global {
     notes?: string[];
     videos?: string[];
     questions?: string[];
+    date?: Date;
   };
   type loginUserInputType = {
     email: string;
@@ -846,10 +855,11 @@ declare global {
     meetingCode: string;
     title: string;
     password: string;
-    link?: string;
-    scheduledAt?: Date;
     isActive: boolean;
     isPaid: boolean;
+    link?: string;
+    scheduledAt?: Date;
+    description?: string;
   }
   
   type MeetingReturnType = {
@@ -866,11 +876,13 @@ declare global {
     isPaid?: boolean;
     isActive?: boolean;
     scheduledAt?: Date;
+    meetingCodeList?: string[];
   }
   
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
+    isAdmin?: boolean
   }
 
   type GetMeetingArgsType = {
@@ -892,6 +904,82 @@ declare global {
   interface VariableSchemaType extends Document {
     key: string;
     value: string;
+  }
+  
+  type Code = {
+    html?: string;
+    css?: string;
+    js?: string;
+  };
+  
+  type UserCode = {
+    questionId: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: Code;
+  };
+  
+  type CodeInput = {
+    html?: string;
+    css?: string;
+    js?: string;
+  };
+  
+  type SaveUserCodeInput = {
+    questionId: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: CodeInput;
+  };
+
+  type UpdateUserPaymentSchemaType = {
+    installmentId?: string;
+    user: PaidUserInputType; 
+    batch: BatchSchemaType; 
+    feePlan: FeePlanSchemaType; 
+    installmentId?: string;
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: ImageInputType;
+    createdAt?: Date;
+    updatedAt?: Date
+    imageUrl?: string
+  };  
+
+  type GetUserCodeInput = {
+    userId?: string;
+    questionId?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: CodeInput;
+  };
+
+  type UserPaymentsDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+
+  type UpdateUserPaymentInput = {
+    paymentId: string
+    isApproved? :boolean
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: string;
+  }
+
+  interface PaymentApprovalEmailData {
+    status: string;
+    date: string;
+    receiptImageUrl: string;
+    userEmail: string;
   }
 
 }

@@ -4,7 +4,8 @@ import { getCookie } from "../../../utils/index";
 const initialState = {
   userData: null,
   isLoggedIn: !!getCookie(process.env.REACT_APP_JWT_SECRET_KEY || ""),
-  response: null
+  response: null,
+  isAdmin: false
 };
 
 export const userSlice = createSlice({
@@ -18,13 +19,14 @@ export const userSlice = createSlice({
       state.isLoggedIn = action?.payload;
     },
     setUser: (state, action) => {
-      const { userData, response } = action.payload;
+      const { userData, response, isAdmin } = action.payload;
       state.userData = userData;
       state.response = response;
+      state.isAdmin = isAdmin
     },
   },
 });
 
 export const { actions } = userSlice;
-export const selectUser = (state: { user: { userData: UserSchemaType, isLoggedIn: boolean } }) => state.user;
+export const selectUser = (state: { user: { userData: UserSchemaType, isLoggedIn: boolean, isAdmin: boolean} }) => state.user;
 export default userSlice.reducer;

@@ -145,7 +145,15 @@
             gap: 5px;
             flex-wrap: wrap;
             width: 45vw;
-
+            .button.join-meet-btn{
+              border: 1px solid $success-500;
+              background-color: $success-800;
+              &:hover{
+                color: $primaryColor;
+                border: 1px solid $success-200;
+                background-color: $success-800;
+              }
+            }
             .button {
               border: 1px solid $videoHutBorderColor;
               background-color: $secondaryBorderColorHighlighted;
