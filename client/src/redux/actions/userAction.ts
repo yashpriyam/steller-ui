@@ -10,10 +10,12 @@ import { setCookie } from "../../utils/index";
 import { UPDATE_USER_INFO } from "../../graphql/mutation/user/updateUserInfo";
 import { GET_USER } from "../../graphql/mutation/user/getUser";
 import { CREATE_USER_PAYMENTS } from "../../graphql/mutation/userPayments/createUserPayment";
+import { useState } from "react";
 
 export const useUser = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
+  const [isLoading, setIsLoading] = useState(false);
 
   const registerUser = async ({
     name,
@@ -139,6 +141,7 @@ export const useUser = () => {
   };
 
   const updateUserInfo = async (input: UpdateUserInput) => {
+    setIsLoading(true)
     const response = await apolloClient.mutate({
       mutation: UPDATE_USER_INFO,
       variables: {
@@ -147,6 +150,7 @@ export const useUser = () => {
         },
       },
     });
+    setIsLoading(false)
     dispatch(actions.setUser(response.data.updateUser));
     return {
       response,
@@ -192,5 +196,6 @@ export const useUser = () => {
     updateUserInfo,
     getUserData,
     createUserPayment,
+    isLoading
   };
 };
