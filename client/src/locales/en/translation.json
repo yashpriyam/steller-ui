@@ -60,5 +60,7 @@
     "pay_now": "Pay Now",
     "no_videos_found": "No videos to show for this day",
     "join_todays_class": "Join today's class",
-    "all_users_payments": "All Users Payments"
+    "all_users_payments": "All Users Payments",
+    "Approve": "Approve",
+    "Reject": "Reject"
 }

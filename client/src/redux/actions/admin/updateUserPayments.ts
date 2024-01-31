@@ -22,13 +22,11 @@ export const useAdmin = () => {
           },
         },
       });
-      if (response.data.approveUserPaymentByAdmin) {
-        setIsLoading(false);
-      }
       return response;
     } catch (err) {
-      setIsLoading(false);
       console.error(err);
+    } finally {
+        setIsLoading(false);
     }
   };
 

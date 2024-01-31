@@ -77,7 +77,7 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
             <Button
               className="approve-button"
               onClick={() => onApprove(_id)}
-              text="Approve"
+              text={t("Approve")}
               isDisabled={!paymentReceipt}
               isLoading={isLoading}
               key={payment._id}
@@ -86,7 +86,7 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
             <Button
               className="reject-button"
               onClick={() => onReject(_id)}
-              text="Reject"
+              text={t("Reject")}
             />
           </div>
         </>
