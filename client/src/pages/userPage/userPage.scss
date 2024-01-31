@@ -1,0 +1,117 @@
+@import "../../components/variables.scss";
+@mixin common-main-sub-container{
+    width: 80%;
+    background-color: $secondaryBgColor;
+    border-radius: 10px;
+    border: 1px solid $Gray29;
+    padding: 20px;
+    color: $primaryColor;
+    @media (max-width: $screenMd){
+        width: 100%;
+    }
+}
+.user-account-main-container{
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    @media (max-width: $screenMd){
+        padding: 20px 10px;
+    }
+    @media (max-width: $screenXs) {
+      padding: 2px;
+      gap: 10px;
+    }
+    .user-account-header-container{
+        display: flex;
+        @include common-main-sub-container;
+        justify-content: space-between;
+        align-items: flex-end;
+        .user-profile-image{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .user-account-header-container-right-side{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            gap: 15px;
+            .user-account-holder-name{
+                font-size: $subHeaderFontSize;
+            }
+            .user-account-image-container-button-wrapper{
+                display: flex;
+                gap: 5px;
+                .user-profile-edit-button{
+                    background-color: $Gray35;
+                    font-size: $largerFontSize;
+                    padding: 5px 10px;
+                    border-color: $lightBlue;
+                    color: $lightBlue;
+                    transition: 0.5s;
+                    border: 1px solid $lightBlue;
+                    &:hover{
+                        background-color: $accent-color-6;
+                        color: $lightBlue;
+                    }
+                }
+                .user-profile-save-button{
+                    color: $accent-color-3;
+                    border-color: $accent-color-3;
+                    &:hover{
+                        border-color: $accent-color-3;
+                        background-color: $accent-color-3-faded;
+                        color: $accent-color-3;
+                    }
+                }
+                .user-profile-cancel-button{
+                    color: $accent-color-5;
+                    border-color: $accent-color-5;
+                    &:hover{
+                        border-color: $accent-color-2;
+                        background-color: $accent-color-5-faded;
+                        color: $accent-color-2;
+                    }
+                }
+            }
+        }
+    }
+    .user-account-container{
+        @include common-main-sub-container;
+    }
+    .user-account-more-info-container{
+        @include common-main-sub-container;
+        min-height: 60px;
+        .user-account-more-info-container-header{
+            font-size: $titleFontSize;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            &:hover{
+                cursor: pointer;
+            }
+            .show-more-user-info-button{
+                padding: 5px;
+                transition: 0.8s;
+                transform: scale(120%);
+                color: $blue;
+            }
+            .show-more-user-info-button-rotate{
+                transform: rotate(225deg) scale(150%);
+                transition: 0.8s;
+            }
+        }
+        .user-account-more-info-wrapper{
+            display: none;
+            margin-top: 30px;
+        }
+        .user-account-more-info-wrapper-display{
+            display: block;
+        }
+    }
+}

@@ -62,5 +62,9 @@
     "join_todays_class": "Join today's class",
     "all_users_payments": "All Users Payments",
     "Approve": "Approve",
-    "Reject": "Reject"
+    "Reject": "Reject",
+    "save": "Save",
+    "edit_profile": "Edit Profile",
+    "cancel": "Cancel",
+    "complete_profile": "Complete Your Profile"
 }
