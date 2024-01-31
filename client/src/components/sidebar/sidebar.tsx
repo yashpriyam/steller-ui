@@ -9,7 +9,8 @@ export const Sidebar = ({
     options = [],
     optionAtLast,
     optionsAtFirst,
-    profile,   
+    profile,
+    admin
 }: SidebarProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -22,7 +23,7 @@ export const Sidebar = ({
         } else if(url) {
             navigate(url)
         }
-    }
+    }   
     return (
       <div
         className="sidebar-main-container"
@@ -51,6 +52,21 @@ export const Sidebar = ({
                 }
               />
             )}
+            {
+              admin && (
+                <SidebarOption
+                image={admin.image}
+                text={admin.text}
+                isProfile={false}
+                showText={isOpen}
+                url={admin.url}
+                onClick={() =>
+                  onOptionClick(admin.url, Boolean(admin.openNewPage))
+                }
+              />
+              )
+            }
+             
             {optionsAtFirst?.map((data, idx) => {
               const { image, text, onClick, openNewPage, url, isProfile } =
                 data;
