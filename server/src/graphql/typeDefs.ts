@@ -94,6 +94,7 @@ const typeDefs = gql`
     saveUserCode(input: SaveUserCodeInput): UserCodeType
     getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
     approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+    rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
   }
 
   input SaveUserCodeInput {
@@ -1183,6 +1184,7 @@ const typeDefs = gql`
     isRejected: Boolean
     isPending: UserPaymentPendingInputType
     image: String
+    rejectReason: String
   }
 
   scalar DateTime

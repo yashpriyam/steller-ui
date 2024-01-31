@@ -30,4 +30,4 @@ export { createUserPayment, getUserPaymentsByUserId, updateUserPayments } from  
 export { insertCities } from "./cities/index";
 export { createMeeting, updateMeeting } from "./meeting";
 export { saveUserCode } from './code/saveUserCode';
-export { getAllUserPayments, approveUserPaymentByAdmin } from "./admin/index"
+export { getAllUserPayments, approveUserPaymentByAdmin, rejectUserPaymentByAdmin } from "./admin/index"

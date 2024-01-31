@@ -9,8 +9,8 @@ import { readFileAsDataURL } from "../../../utils/readFileAsDataURL";
 const AllUserPaymentsList: React.FC = () => {
   const { t } = useTranslation();
   const [paymentReceipt, setPaymentReceipt] = useState<File | null>(null);
-
   const { allUsersPayments, getAllUsersPayments } = useAllUsersPayments();
+  
 
   const { updateUserPayment, isLoading } = useAdmin();
   useEffect(() => {
@@ -35,8 +35,11 @@ const AllUserPaymentsList: React.FC = () => {
   };
 
   const handleReject = (paymentId: string) => {
-    // Implement logic for rejecting payment
-    console.log(`Payment ${paymentId} rejected`);
+    const inputData = {
+        paymentId,
+        isRejected: true
+      };
+      updateUserPayment("rejected", inputData);
   };
 
   return (

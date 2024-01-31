@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { apolloClient } from "../../../graphql/apolloClient/apolloClient";
 import { UPDATE_USER_PAYMENT } from "../../../graphql/mutation/admin/updateUserPayment";
 import { useState } from "react";
+import { REJECT_USER_PAYMENT } from "../../../graphql/mutation/admin/rejectUserPayments";
 
 export const useAdmin = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export const useAdmin = () => {
   ) => {
     try {
       setIsLoading(true);
+      if (status === 'approved') {
       const response = await apolloClient.mutate({
         mutation: UPDATE_USER_PAYMENT,
         variables: {
@@ -23,6 +25,17 @@ export const useAdmin = () => {
         },
       });
       return response;
+    } else if (status === 'rejected') {
+        const response = await apolloClient.mutate({
+            mutation: REJECT_USER_PAYMENT,
+            variables: {
+              input: {
+                ...input,
+              },
+            },
+          });
+          return response;
+    }
     } catch (err) {
       console.error(err);
     } finally {

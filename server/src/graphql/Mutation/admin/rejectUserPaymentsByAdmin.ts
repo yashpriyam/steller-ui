@@ -1,14 +1,13 @@
-import { userPaymentModel, variableModel } from "@models";
+import { userPaymentModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import {
   getUnauthorizedResponse,
   isLoggedIn,
   sendEmail,
-  uploadImage,
   generatePaymentApprovalEmail,
 } from "@utils";
 
-export const approveUserPaymentByAdmin = async (
+export const rejectUserPaymentByAdmin = async (
   parent: undefined,
   args: { input: UpdateUserPaymentInput },
   { contextData }: ContextType
@@ -28,17 +27,11 @@ export const approveUserPaymentByAdmin = async (
       };
     }
 
-    const { paymentId, image, isApproved, isPending, isRejected } = input;
-
-    const imageFolderName = await variableModel.findOne({
-      key: "userPaymentReceiptFolder",
-    });
+    const { paymentId, isApproved, isPending, isRejected, rejectReason } = input;
 
     // Validate required input fields
-    if (!paymentId || !image || !imageFolderName)
+    if (!paymentId)
       return { response: errorData };
-
-    const imageData = await uploadImage(image, imageFolderName?.value);
 
     // Update the user payment information
     const updatedUserPaymentData = await userPaymentModel
@@ -46,10 +39,10 @@ export const approveUserPaymentByAdmin = async (
         { _id: paymentId },
         {
           $set: {
-            image: imageData,
             isApproved,
             isPending,
             isRejected,
+            rejectReason
           },
         },
         { new: true }
@@ -58,14 +51,14 @@ export const approveUserPaymentByAdmin = async (
 
     if (updatedUserPaymentData) {
       const emailData: PaymentApprovalEmailData = {
-        status: "Approved",
+        status: "Reject",
         date: new Date().toISOString().slice(0, 10),
-        receiptImageUrl: imageData.secureUrl,
         userEmail: updatedUserPaymentData.user.email,
+        rejectReason
       };
       try {
         const approvalMail = await sendEmail({
-          subject: "Payment Approval Notification",
+          subject: "Payment Reject Notification",
           html: generatePaymentApprovalEmail(emailData),
           to: emailData.userEmail,
         });

@@ -922,7 +922,7 @@ declare global {
     onReject: (paymentId: string) => void;
     setPaymentReceipt: React.Dispatch<React.SetStateAction<File | null>>;
     paymentReceipt: File | null
-    isLoading?: boolean
+    isLoading?: boolean;
   }
 
   type GetMeetingListArgsType = {
@@ -942,6 +942,7 @@ declare global {
       totalPendingAmount?: string;
     },
     image?: string | ArrayBuffer;
+    rejectReason?: string
   }
 }
 export { };
