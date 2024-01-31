@@ -16,7 +16,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
   const paidInstallments = allInstallment
     ?.filter((installment) =>
       userIntsallment?.some(
-        ({ installmentId }) => installmentId === installment?._id
+        ({ installmentId, isRejected }) => installmentId === installment?._id && !isRejected
       )
     )
     ?.map((installment) => {

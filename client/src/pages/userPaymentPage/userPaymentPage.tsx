@@ -13,8 +13,8 @@ const UserPaymentPage: React.FC = () => {
   const [isLoading , setIsLoading] = useState(false)
 
   const { userPayments, getUserPayments } = useUserPayments();
-  const { feePlans, getFeePlans } = useFeePlans();
-  const { updateUserInfo, getUserData, user } = useUser();
+  const { feePlans, getFeePlans  } = useFeePlans();
+  const { updateUserInfo, getUserData, user, isLoading: isUserUpdating } = useUser();
   const { t } = useTranslation();
 
   const getData = async () => {
@@ -25,8 +25,7 @@ const UserPaymentPage: React.FC = () => {
 
   useEffect(() => {
     getData();
-    setIsLoading(false)
-  }, [user]);
+  }, [user, isUserUpdating, isLoading]);
 
   const userFeePlan = feePlans?.filter(
     (fee) => fee._id === user?.userData?.feePlan
@@ -62,9 +61,8 @@ const UserPaymentPage: React.FC = () => {
             onClick={async () => {
               selectedFeePlan &&
                 updateUserInfo({ feePlan: selectedFeePlan });
-                setIsLoading(true)
             }}
-           isLoading={isLoading}
+           isLoading={isUserUpdating}
       />
             </div>
           )}
