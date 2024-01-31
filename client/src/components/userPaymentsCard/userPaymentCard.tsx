@@ -8,13 +8,13 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
   onApprove,
   onReject,
   paymentReceipt,
-  setPaymentReceipt
+  setPaymentReceipt,
 }) => {
   const { _id = "", isApproved, isRejected, isPending, image, user } = payment;
   const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const { t } = useTranslation();
 
@@ -76,26 +76,27 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
           <div className="action-buttons">
             <Button
               className="approve-button"
-              onClick={ () =>{ 
-                setIsLoading(true)
-                onApprove(_id)
+              onClick={() => {
+                setIsLoading(true);
+                onApprove(_id);
               }}
               text={t("Approve")}
               isDisabled={!paymentReceipt}
               isLoading={isLoading}
               key={payment._id}
             />
-
-            <Button
-              className="reject-button"
-              onClick={() => {
-                setIsLoading(true)
-                onReject(_id)
-              }}
-              text={t("Reject")}
-              isLoading={isLoading}
-              key={payment._id}
-            />
+            {!paymentReceipt && (
+              <Button
+                className="reject-button"
+                onClick={() => {
+                  setIsLoading(true);
+                  onReject(_id);
+                }}
+                text={t("Reject")}
+                isLoading={isLoading}
+                key={payment._id}
+              />
+            )}
           </div>
         </>
       )}
