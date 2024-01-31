@@ -818,8 +818,9 @@ declare global {
     },
     image?: ImageInputType;
     createdAt?: Date;
-    updatedAt?: Date
-    imageUrl?: string
+    updatedAt?: Date;
+    imageUrl?: string;
+    rejectReason?: string
   };  
    
   type BatchDataOutputType = {
@@ -973,13 +974,15 @@ declare global {
       totalPendingAmount?: string;
     },
     image?: string;
+    rejectReason?: string
   }
 
   interface PaymentApprovalEmailData {
     status: string;
     date: string;
-    receiptImageUrl: string;
+    receiptImageUrl?: string;
     userEmail: string;
+    rejectReason?: string
   }
 
 }

@@ -42,6 +42,9 @@ const userPaymentSchema = new mongoose.Schema<UserPaymentSchemaType>({
             type: String,
             required: false,
           },
+      },
+      rejectReason: {
+        type: String
       }
 },
 { timestamps: true }

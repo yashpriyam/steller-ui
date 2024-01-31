@@ -87,6 +87,8 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
               className="reject-button"
               onClick={() => onReject(_id)}
               text={t("Reject")}
+              isLoading={isLoading}
+              key={payment._id}
             />
           </div>
         </>
