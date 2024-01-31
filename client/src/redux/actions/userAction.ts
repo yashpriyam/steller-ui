@@ -141,20 +141,26 @@ export const useUser = () => {
   };
 
   const updateUserInfo = async (input: UpdateUserInput) => {
-    setIsLoading(true)
-    const response = await apolloClient.mutate({
-      mutation: UPDATE_USER_INFO,
-      variables: {
-        input: {
-          ...input,
+    try {
+      setIsLoading(true)
+      const response = await apolloClient.mutate({
+        mutation: UPDATE_USER_INFO,
+        variables: {
+          input: {
+            ...input,
+          },
         },
-      },
-    });
-    setIsLoading(false)
-    dispatch(actions.setUser(response.data.updateUser));
-    return {
-      response,
-    };
+      });
+     
+      dispatch(actions.setUser(response.data.updateUser));
+      return {
+        response,
+      };
+    } catch (error) {
+      console.error(error)
+    } finally {
+      setIsLoading(false)
+    }
   };
 
   const getUserData = async () => {
