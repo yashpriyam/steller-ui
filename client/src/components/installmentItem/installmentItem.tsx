@@ -4,13 +4,19 @@ import React, { useState } from "react";
 
 const InstallmentItem: React.FC<InstallmentItemProps> = ({
   installment,
-  handlePayNow
+  handlePayNow,
 }) => {
   const [paymentReceipt, setPaymentReceipt] = useState<File | null>(null);
   const { t } = useTranslation();
- const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  
+  const handleOnClick = async () => {
+    setIsLoading(true);
+    await handlePayNow(installment, paymentReceipt);
+    setPaymentReceipt(null);
+    setIsLoading(false);
+  };
+
   return (
     <li className="installment-item">
       <p className="installment-info">
@@ -34,17 +40,12 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
         </label>
       </div>
       <Button
-          className={`pay-now-button ${!paymentReceipt ? "disabled" : "enabled"}`}
-           text={t("pay_now")}
-            isDisabled={!paymentReceipt}
-            onClick={async() => {
-              setIsLoading(true)
-            await handlePayNow(installment, paymentReceipt)
-            setPaymentReceipt(null)
-            setIsLoading(false)
-          }}
-            isLoading={isLoading} 
-            key={installment._id}
+        className={`pay-now-button ${!paymentReceipt ? "disabled" : "enabled"}`}
+        text={t("pay_now")}
+        isDisabled={!paymentReceipt}
+        onClick={handleOnClick}
+        isLoading={isLoading}
+        key={installment._id}
       />
     </li>
   );

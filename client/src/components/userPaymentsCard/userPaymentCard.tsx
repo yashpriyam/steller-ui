@@ -82,8 +82,8 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
           <div className="action-buttons">
             <Button
               className="approve-button"
-              onClick={async () => {
-                await handleOnClick(onApprove)
+              onClick={() => {
+                 handleOnClick(onApprove)
               }}
               text={t("Approve")}
               isDisabled={!paymentReceipt}
@@ -94,8 +94,8 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
             {!paymentReceipt && (
               <Button
                 className="reject-button"
-                onClick={async () => {
-                 await handleOnClick(onReject)
+                onClick={() => {
+                  handleOnClick(onReject)
                 }}
                 text={t("Reject")}
                 isLoading={isLoading}
