@@ -963,4 +963,16 @@ declare global {
     response: CustomResponseType;
   }
 
+  type UpdateUserPaymentInput = {
+    paymentId: string
+    isApproved? :boolean
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: string;
+  }
+
 }
