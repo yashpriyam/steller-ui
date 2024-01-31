@@ -552,7 +552,11 @@ declare global {
     isLoginModalOpen: boolean;
     setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
     isLoggedIn: boolean;
-    isAdmin: boolean;
+    user: {
+      userData: UserSchemaType;
+      isLoggedIn: boolean;
+      isAdmin: boolean;
+    };
   }
 
   type SetCookieArgsType = {
