@@ -5,8 +5,8 @@ import {
   isLoggedIn,
   sendEmail,
   uploadImage,
+  generatePaymentApprovalEmail,
 } from "@utils";
-import { generatePaymentApprovalEmail } from "utils/getPaymentApprovalHtml";
 
 export const approveUserPaymentByAdmin = async (
   parent: undefined,
@@ -63,23 +63,24 @@ export const approveUserPaymentByAdmin = async (
         receiptImageUrl: imageData.secureUrl,
         userEmail: updatedUserPaymentData.user.email,
       };
-
-      const approvalMail = await sendEmail({
-        subject: "Payment Approval Notification",
-        html: generatePaymentApprovalEmail(emailData),
-        to: emailData.userEmail,
-      });
+      try {
+        const approvalMail = await sendEmail({
+          subject: "Payment Approval Notification",
+          html: generatePaymentApprovalEmail(emailData),
+          to: emailData.userEmail,
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     return {
       userPaymentData: updatedUserPaymentData,
-      response: updatedUserPaymentData
-        ? {
+      response: {
             message:
               localMessages.USER_PAYMENT_MODEL.USER_PAYMENT_UPDATE_SUCCESS,
             status: statusCodes.OK,
           }
-        : errorData,
     };
   } catch (err) {
     console.error(err);
