@@ -6,6 +6,7 @@ import {
   sendEmail,
   uploadImage,
 } from "@utils";
+import { generatePaymentApprovalEmail } from "utils/getPaymentApprovalHtml";
 
 export const approveUserPaymentByAdmin = async (
   parent: undefined,
@@ -41,7 +42,7 @@ export const approveUserPaymentByAdmin = async (
 
     // Update the user payment information
     const updatedUserPaymentData = await userPaymentModel
-      .findOneAndUpdate(
+      .findByIdAndUpdate(
         { _id: paymentId },
         {
           $set: {
@@ -56,36 +57,17 @@ export const approveUserPaymentByAdmin = async (
       .populate("user");
 
     if (updatedUserPaymentData) {
+      const emailData: PaymentApprovalEmailData = {
+        status: "approved",
+        date: new Date().toISOString().slice(0, 10),
+        receiptImageUrl: imageData.secureUrl,
+        userEmail: updatedUserPaymentData.user.email,
+      };
+
       const approvalMail = await sendEmail({
-        subject: `Payment Approval Notification`,
-        html: `
-          <div>
-            <h2>Payment Approval Notification</h2>
-            <br />
-            <div>
-             Your Payment has been <strong>approved</strong>.
-            </div>
-            <div>
-              Date: <strong>${new Date().toISOString().slice(0, 10)}</strong>
-            </div>
-            <br />
-            <div>
-              <img src="${
-                imageData.secureUrl
-              }" alt="Receipt" style="max-width: 100%; height: auto;" />
-            </div>
-            <br />
-            <div>
-              If you have any questions or concerns, please contact our support team.
-            </div>
-            <br />
-            <br />
-            Best regards,
-            <br />
-            The Webmaster Team
-          </div>
-        `,
-        to: updatedUserPaymentData.user.email,
+        subject: "Payment Approval Notification",
+        html: generatePaymentApprovalEmail(emailData),
+        to: emailData.userEmail,
       });
     }
 

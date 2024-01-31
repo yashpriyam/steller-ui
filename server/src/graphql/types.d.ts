@@ -975,4 +975,11 @@ declare global {
     image?: string;
   }
 
+  interface PaymentApprovalEmailData {
+    status: string;
+    date: string;
+    receiptImageUrl: string;
+    userEmail: string;
+  }
+
 }
