@@ -37,6 +37,12 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
       return "pending";
     }
   };
+
+  const handleOnClick = async (action: (paymentId: string) => Promise<string | boolean | undefined>) => {
+    setIsLoading(true);
+    await action(_id);
+    setIsLoading(false);
+  }
   return (
     <div className={`user-payment-card ${getStatusClassName(payment)}`}>
       {getStatusClassName(payment) && (
@@ -76,21 +82,20 @@ const UserPaymentCard: React.FC<UserPaymentCardProps> = ({
           <div className="action-buttons">
             <Button
               className="approve-button"
-              onClick={() => {
-                setIsLoading(true);
-                onApprove(_id);
+              onClick={async () => {
+                await handleOnClick(onApprove)
               }}
               text={t("Approve")}
               isDisabled={!paymentReceipt}
-              isLoading={isLoading}
+              isLoading={Boolean(paymentReceipt) && isLoading}
               key={payment._id}
             />
+
             {!paymentReceipt && (
               <Button
                 className="reject-button"
-                onClick={() => {
-                  setIsLoading(true);
-                  onReject(_id);
+                onClick={async () => {
+                 await handleOnClick(onReject)
                 }}
                 text={t("Reject")}
                 isLoading={isLoading}

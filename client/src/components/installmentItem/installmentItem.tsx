@@ -37,10 +37,11 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
           className={`pay-now-button ${!paymentReceipt ? "disabled" : "enabled"}`}
            text={t("pay_now")}
             isDisabled={!paymentReceipt}
-            onClick={() => {
-            handlePayNow(installment, paymentReceipt)
+            onClick={async() => {
+              setIsLoading(true)
+            await handlePayNow(installment, paymentReceipt)
             setPaymentReceipt(null)
-            setIsLoading(true)
+            setIsLoading(false)
           }}
             isLoading={isLoading} 
             key={installment._id}

@@ -30,16 +30,18 @@ const AllUserPaymentsList: React.FC = () => {
         isApproved: true,
         image: paymentReceiptUrl,
       };
-      updateUserPayment("approved", inputData);
+     const response = await updateUserPayment("approved", inputData);
+      return Boolean(response) && 'Approved'
     }
   };
 
-  const handleReject = (paymentId: string) => {
+  const handleReject = async (paymentId: string) => {
     const inputData = {
         paymentId,
         isRejected: true
       };
-      updateUserPayment("rejected", inputData);
+      const response = await updateUserPayment("rejected", inputData);
+      return Boolean(response) && 'Rejected'
   };
 
   return (
