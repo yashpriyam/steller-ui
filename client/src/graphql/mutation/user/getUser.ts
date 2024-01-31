@@ -18,6 +18,7 @@ query {
         message
         status
       }
+      isAdmin
     }
   }
   

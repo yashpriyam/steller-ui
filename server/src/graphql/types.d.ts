@@ -882,6 +882,7 @@ declare global {
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
+    isAdmin?: boolean
   }
 
   type GetMeetingArgsType = {
