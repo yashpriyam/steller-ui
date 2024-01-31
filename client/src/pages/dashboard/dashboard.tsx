@@ -19,19 +19,19 @@ export const Dashboard: React.FC<DashboardProps> = ({
   pageSubtitle = "The Original family of vampires settle down in the city of New Orleans that they helped to construct several",
   topButtonTagOne = "About",
   topButtonTagTwo = "E-Mail",
-  newsDropTitile = "News Drop",
+  newsDropTitile = "Explore",
   newsDropElements = [
     {
       image:
-        "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-980x653.jpg",
-      title: "Image Title",
-      description: "Add your thoughts about this images",
+"https://res.cloudinary.com/dzzysrpcm/image/upload/v1706679537/Web%20Masters/Dashboard/2_is5vzg.png",
+      title: "HTML",
+      description: "Topics in HTML",
     },
     {
       image:
-        "https://img.freepik.com/free-vector/gradient-ui-ux-landing-page-template_23-2149053801.jpg?size=626&ext=jpg&ga=GA1.1.507716930.1702729428&semt=ais",
-      title: "Image Title",
-      description: "Add your thoughts about this images",
+"https://res.cloudinary.com/dzzysrpcm/image/upload/v1706679537/Web%20Masters/Dashboard/HTML_2_txks94.png",
+      title: "CSS",
+      description: "Topics in CSS",
     },
   ],
   thoughtComponentTitle = "Thoughts",
@@ -223,12 +223,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
         <TopButtons
           topButtonTagOne={topButtonTagOne}
           topButtonTagTwo={topButtonTagTwo}
-        />
+        /> */}
         <NewsDrop
           newsDropTitile={newsDropTitile}
           newsDropElements={newsDropElements}
         />
-        <ThoughtComponent
+        {/* <ThoughtComponent
           thoughtComponentTitle={thoughtComponentTitle}
           thoughtComponentSubtitle={thoughtComponentSubtitle}
           thoughtElement={thoughtElement}
