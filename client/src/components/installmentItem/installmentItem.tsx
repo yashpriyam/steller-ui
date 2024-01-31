@@ -4,12 +4,11 @@ import React, { useState } from "react";
 
 const InstallmentItem: React.FC<InstallmentItemProps> = ({
   installment,
-  handlePayNow,
-  isLoading
+  handlePayNow
 }) => {
   const [paymentReceipt, setPaymentReceipt] = useState<File | null>(null);
   const { t } = useTranslation();
-
+ const [isLoading, setIsLoading] = useState(false)
 
   
   return (
@@ -40,7 +39,9 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
             isDisabled={!paymentReceipt}
             onClick={() => {
             handlePayNow(installment, paymentReceipt)
-            setPaymentReceipt(null)}}
+            setPaymentReceipt(null)
+            setIsLoading(true)
+          }}
             isLoading={isLoading} 
             key={installment._id}
       />

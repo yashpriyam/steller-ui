@@ -54,7 +54,6 @@ const AllUserPaymentsList: React.FC = () => {
             onReject={handleReject}
             paymentReceipt={paymentReceipt}
             setPaymentReceipt={setPaymentReceipt}
-            isLoading={isLoading}
           />
         ))}
       </ul>

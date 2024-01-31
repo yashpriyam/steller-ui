@@ -74,7 +74,6 @@ const UserPaymentPage: React.FC = () => {
             userIntsallment={userPayments?.userPayments ?? []}
             userFeePlan={userFeePlan}
             setIsLoading={setIsLoading}
-            isLoading={isLoading}
           />
         </div>
       )}
