@@ -29,7 +29,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
     },
     {
       image:
-"https://res.cloudinary.com/dzzysrpcm/image/upload/v1706679537/Web%20Masters/Dashboard/HTML_2_txks94.png",
+"https://res.cloudinary.com/dzzysrpcm/image/upload/v1706683058/Web%20Masters/Dashboard/2_1_cy3vdt.png",
       title: "CSS",
       description: "Topics in CSS",
     },
