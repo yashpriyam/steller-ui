@@ -39,6 +39,11 @@ export const useAppData = (): UseAppDataReturnType => {
             <AvatarIcon isDarkMode={true}/>,
       url: "/profile",
     },
+    admin: user.isAdmin ?  {
+      image: <PaymentIcon isDarkMode={true}/>,
+      text: t('all_users_payments'),
+      url: '/admin/usersPayments'
+    } : false,
     optionsAtFirst: [
       {
         text: t("search"),
@@ -81,5 +86,5 @@ export const useAppData = (): UseAppDataReturnType => {
   useEffect(()=>{
     isLoggedIn && getUserData();
   },[isLoggedIn])
-  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
+  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn, isAdmin: user.isAdmin }
 }

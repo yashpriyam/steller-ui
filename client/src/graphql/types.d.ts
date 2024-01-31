@@ -536,6 +536,14 @@ declare global {
       onClick?: (e: MouseEvent<HTMLDivElement>) => void;
       isProfile?: boolean;
     }[],
+    admin?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+      onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+      isProfile?: boolean;
+    } | false
   }
 
   type UseAppDataReturnType = {
@@ -544,6 +552,7 @@ declare global {
     isLoginModalOpen: boolean;
     setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
     isLoggedIn: boolean;
+    isAdmin: boolean;
   }
 
   type SetCookieArgsType = {

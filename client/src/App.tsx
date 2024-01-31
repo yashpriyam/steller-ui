@@ -16,7 +16,7 @@ const App = () => {
   return (
     <div className="app-container">
       {
-        isLoggedIn && isNotMonorepoPath && (<Sidebar {...sidebarData} />)
+        isLoggedIn && isNotMonorepoPath && (<Sidebar {...sidebarData}/>)
       }
       {
         isLoginModalOpen && (<Modal> <Login closeModal={() => setIsLoginModalOpen(false)} /> </Modal>)
