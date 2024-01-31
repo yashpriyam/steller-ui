@@ -845,6 +845,15 @@ declare global {
     autoFocus?: boolean;
     onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
     errorMessage?: string;
+    className?: string;
+  }
+  interface UserPagePropsInterFace {
+    className?: string;
+  }
+  type nonEditableUserSchemaFieldsType = {
+    [key: string]: boolean;
+    email?: boolean;
+    batchCode?: boolean;
   }
 
 }

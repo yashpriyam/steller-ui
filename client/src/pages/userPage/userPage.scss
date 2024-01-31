@@ -47,17 +47,34 @@
                 display: flex;
                 gap: 5px;
                 .user-profile-edit-button{
-                    padding: 10px 15px;
-                    border-radius: 5px;
                     background-color: $Gray35;
-                    width: fit-content;
                     font-size: $largerFontSize;
-                    height: fit-content;
-                    border: 1px solid $Gray29;
+                    padding: 5px 10px;
+                    border-color: $lightBlue;
+                    color: $lightBlue;
                     transition: 0.5s;
+                    border: 1px solid $lightBlue;
                     &:hover{
-                        background-color: $Gray43;
-                        border-color: $lightGreyPrimary;
+                        background-color: $accent-color-6;
+                        color: $lightBlue;
+                    }
+                }
+                .user-profile-save-button{
+                    color: $accent-color-3;
+                    border-color: $accent-color-3;
+                    &:hover{
+                        border-color: $accent-color-3;
+                        background-color: $accent-color-3-faded;
+                        color: $accent-color-3;
+                    }
+                }
+                .user-profile-cancel-button{
+                    color: $accent-color-5;
+                    border-color: $accent-color-5;
+                    &:hover{
+                        border-color: $accent-color-2;
+                        background-color: $accent-color-5-faded;
+                        color: $accent-color-2;
                     }
                 }
             }
@@ -82,6 +99,7 @@
                 padding: 5px;
                 transition: 0.8s;
                 transform: scale(120%);
+                color: $blue;
             }
             .show-more-user-info-button-rotate{
                 transform: rotate(225deg) scale(150%);

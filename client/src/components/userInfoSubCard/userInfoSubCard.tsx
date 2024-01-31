@@ -1,36 +1,39 @@
-import React, { useState} from "react";
+import React, { ChangeEvent, useEffect, useState} from "react";
 import "./userInfoSubCard.scss";
+import { isValidPhoneNumber } from "../../monorepoClient/helpers/utils/validations";
 
 export const UserInfoSubCard: React.FC<UserInfoSubCardPropsInterface> = ({
   editing = false,
   userInputValue,
   value,
   text,
-  field,
+  field="",
   onChange = () => {},
-  errorMessage = "error",
+  errorMessage,
   autoFocus=false,
+  className,
 }: UserInfoSubCardPropsInterface) => {
   const [isError, setIsError] = useState<boolean>(false);
-  const validateNumberAndHandleError = (value: string = "", field: string) => {
+  const onPhoneNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (field === "phoneNumber") {
-      if (/^(\+\d{1,3}[- ]?)?\d{10}$/.test(value)) {
+      if (isValidPhoneNumber(e.target.value)) {
         setIsError(false);
       } else setIsError(true);
     } else setIsError(false);
+    onChange(e, field);
   };
+  useEffect(()=>{
+    !editing && setIsError(false);
+  },[editing])
   return (
-    <div className="field-value-wrapper">
+    <div className={`field-value-wrapper ${className}`}>
       <label htmlFor={`user-data-${field}`} className="user-data-field">
         {text} :
       </label>
       {editing && userInputValue && field ? (
         <span className="user-data-input-error-wrapper">
           <input
-            onChange={(e) => {
-              validateNumberAndHandleError(e.target.value, field);
-              onChange(e, field);
-            }}
+            onChange={onPhoneNumberChange}
             type="text"
             id={`user-data-${field}`}
             value={userInputValue[field]}
@@ -40,13 +43,13 @@ export const UserInfoSubCard: React.FC<UserInfoSubCardPropsInterface> = ({
             }`}
             autoFocus={autoFocus}
           />
-          <span
+          {errorMessage && <span
             className={`user-data-input-value-tool-tip ${
               isError && "user-data-input-value-tool-tip-show"
             }`}
           >
             {errorMessage}
-          </span>
+          </span>}
         </span>
       ) : value ? (
         <span className="user-data-value">{value}</span>

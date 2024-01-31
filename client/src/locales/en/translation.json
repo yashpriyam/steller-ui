@@ -57,5 +57,9 @@
     "notes_error": "No notes found for selected date",
     "payments": "Payments",
     "add_payment_plan": "Add Payment Plan",
-    "pay_now": "Pay Now"
+    "pay_now": "Pay Now",
+    "save": "Save",
+    "edit_profile": "Edit Profile",
+    "cancel": "Cancel",
+    "complete_profile": "Complete Your Profile"
 }
