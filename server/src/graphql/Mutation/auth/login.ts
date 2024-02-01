@@ -24,8 +24,8 @@ export const login = async (
         response: errorData,
       };
     }
+    delete user.password;
     const userInfo = user.toObject();
-    delete userInfo.password;
     const { JWT_SECRET_VALUE, JWT_SECRET_KEY } = process.env;
     let token;
     if (JWT_SECRET_VALUE && JWT_SECRET_KEY) {

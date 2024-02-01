@@ -6,6 +6,7 @@ export const LOGIN = gql`
       userData {
         email
         name
+        password
         phoneNumber
         isJobSeeker
         occupation
