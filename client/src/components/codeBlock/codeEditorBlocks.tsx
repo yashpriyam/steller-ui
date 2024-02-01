@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Editor from './Editor';
 import { CodeDataContext } from './CodeDataProvider';
 import { useLocation } from 'react-router-dom';
+import { codeBlockWindow } from './codeBlockButtons';
 
 const CODE_STORAGE_KEY = 'userSavedCode';
 
@@ -56,20 +57,24 @@ const CodeEditorBlocks: React.FC<{
   };
 
   useEffect(() => {
-    const localStorageSavedUserQuestionCode = JSON.parse(
-      localStorage.getItem(CODE_STORAGE_KEY) || '{}'
-    );
-    const savedCode =
-      localStorageSavedUserQuestionCode[`week${weekNumber}`]?.[
-        `day${dayNumber}`
-      ]?.[questionId];
+    try {
+      const localStorageSavedUserQuestionCode = JSON.parse(
+        localStorage.getItem(CODE_STORAGE_KEY) || '{}'
+      );
+      const savedCode =
+        localStorageSavedUserQuestionCode[`week${weekNumber}`]?.[
+          `day${dayNumber}`
+        ]?.[questionId];
 
-    const getCodeWindowPredefinedCode = (title: string) =>
-      String(findCodeWindowByTitle(openWindows, title)?.predefinedCode || '');
+      const getCodeWindowPredefinedCode = (title: string) =>
+        String(findCodeWindowByTitle(openWindows, title)?.predefinedCode || '');
 
-    setHtml(savedCode?.html ?? getCodeWindowPredefinedCode('HTML'));
-    setCss(savedCode?.css ?? getCodeWindowPredefinedCode('CSS'));
-    setJs(savedCode?.javascript ?? getCodeWindowPredefinedCode('JS'));
+      setHtml(savedCode?.html ?? getCodeWindowPredefinedCode(codeBlockWindow.HTML));
+      setCss(savedCode?.css ?? getCodeWindowPredefinedCode(codeBlockWindow.CSS));
+      setJs(savedCode?.javascript ?? getCodeWindowPredefinedCode(codeBlockWindow.JS));
+    } catch (error) {
+      console.log(error);
+    }
     // eslint-disable-next-line
   }, []);
 

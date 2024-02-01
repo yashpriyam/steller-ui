@@ -38,5 +38,10 @@
     "edit_profile":"प्रोफ़ाइल संपादित करें",
     "cancel": "रद्द करें",
     "complete_profile": "अपनी प्रोफ़ाइल पूरी करें",
-    "join_todays_class": "आज की कक्षा में शामिल हों"
+    "join_todays_class": "आज की कक्षा में शामिल हों",
+    "last_submitted_on": "अंतिम बार सबमिट किया गया:",
+    "confirm_code_reset": "क्या आप कोड रीसेट करना चाहते हैं?",
+    "reset": "रीसेट",
+    "submit": "जमा",
+    "submitting": "जमा..."
 } 

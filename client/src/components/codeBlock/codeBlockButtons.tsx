@@ -11,6 +11,12 @@ import {
   userCodeAction,
 } from '../../redux/slices/userCode/userCodeSlice';
 
+export const codeBlockWindow = {
+  HTML: 'HTML',
+  CSS: 'CSS',
+  JS: 'js',
+};
+
 const CodeBlockButtons = ({
   questionId,
   openWindows,
@@ -24,9 +30,6 @@ const CodeBlockButtons = ({
   const { saveUserCode } = useUserCode();
   const location = useLocation();
   const { t } = useTranslation();
-  const predefinedHtmlCode = openWindows.map(
-    (element) => element.title === 'HTML'
-  );
   const queryParams = new URLSearchParams(location.search);
   const dayNumber = queryParams.get('dayNumber');
   const weekNumber = queryParams.get('weekNumber');
@@ -40,9 +43,11 @@ const CodeBlockButtons = ({
   } = useContext(CodeDataContext) as DataContextProps;
 
   const getPredefinedCode = (title: string) => {
-    const openWindowBlock = openWindows.find((element) => element.title === title);
-    return openWindowBlock?.predefinedCode
-  }
+    const openWindowBlock = openWindows.find(
+      (element) => element.title === title
+    );
+    return openWindowBlock?.predefinedCode;
+  };
 
   const handleCodingBlockQuestionSubmit = async () => {
     dispatch(setCodeSubmittedLoading(true));
@@ -63,7 +68,7 @@ const CodeBlockButtons = ({
 
   const handleCodeBlockReset = () => {
     const resetCodeBlock = window.confirm('Do you want to reset code?');
-    if(!resetCodeBlock){
+    if (!resetCodeBlock) {
       return;
     }
     const localStorageSavedUserQuestionCode = JSON.parse(
@@ -72,10 +77,13 @@ const CodeBlockButtons = ({
     localStorageSavedUserQuestionCode[`week${weekNumber}`][`day${dayNumber}`][
       questionId
     ] = {};
-    localStorage.setItem('userSavedCode', JSON.stringify(localStorageSavedUserQuestionCode));
-    setHtml(getPredefinedCode("HTML") ?? "")
-    setCss(getPredefinedCode("CSS") ?? "")
-    setJs(getPredefinedCode("JS") ?? "")
+    localStorage.setItem(
+      'userSavedCode',
+      JSON.stringify(localStorageSavedUserQuestionCode)
+    );
+    setHtml(getPredefinedCode(codeBlockWindow.HTML) ?? '');
+    setCss(getPredefinedCode(codeBlockWindow.CSS) ?? '');
+    setJs(getPredefinedCode(codeBlockWindow.JS) ?? '');
   };
 
   return (
@@ -83,11 +91,11 @@ const CodeBlockButtons = ({
       <Button
         onClick={handleCodeBlockReset}
         className="reset-btn"
-        text="Reset"
+        text={t("reset")}
       />
       <Button
         onClick={handleCodingBlockQuestionSubmit}
-        text={userCode.isUserSubmittedCodeLoading ? 'Submitting...' : 'Submit'}
+        text={userCode.isUserSubmittedCodeLoading ? t("submitting") : t('submit')}
       />
     </div>
   );

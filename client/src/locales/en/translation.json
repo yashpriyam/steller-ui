@@ -68,5 +68,10 @@
     "save": "Save",
     "edit_profile": "Edit Profile",
     "cancel": "Cancel",
-    "complete_profile": "Complete Your Profile"
+    "complete_profile": "Complete Your Profile",
+    "last_submitted_on": "Last Submitted on:",
+    "confirm_code_reset": "Do you want to reset code?",
+    "reset": "Reset",
+    "submit": "Submit",
+    "submitting": "Submitting..."
 }

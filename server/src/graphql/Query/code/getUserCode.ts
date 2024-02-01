@@ -9,7 +9,9 @@ export const getUserCode = async (
   try {
     const userData = contextData.user;
     const { questionId, weekNumber, dayNumber } = args?.input || {};
-    const query: any = { userId: new mongoose.Types.ObjectId(userData._id) };
+    const query: GetUserCodeQueryType = {
+      userId: String(new mongoose.Types.ObjectId(userData._id)),
+    };
 
     if (questionId) query.questionId = questionId;
     if (weekNumber !== undefined) query.weekNumber = weekNumber;

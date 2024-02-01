@@ -17,10 +17,9 @@ export const saveUserCode = async (
         dayNumber,
       },
       { code },
-      { upsert: true, new: true }
+      { upsert: true }
     );
-    const query: any = { userId: new mongoose.Types.ObjectId(userData._id) };
-    const udpateUserCodeData = await userCodeModel.find(query);
+    const udpateUserCodeData = await userCodeModel.find({ userId: new mongoose.Types.ObjectId(userData._id) });
 
     return {
       data: udpateUserCodeData,

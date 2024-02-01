@@ -958,6 +958,13 @@ declare global {
     code?: CodeInput;
   };
 
+  type GetUserCodeQueryType = {
+    questionId?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    userId?: ObjectId | string
+  }
+
   type UserPaymentsDataOutputType = {
     userPaymentData?: UserPaymentSchemaType[];
     response: CustomResponseType;
