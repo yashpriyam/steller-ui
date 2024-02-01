@@ -73,7 +73,6 @@ const CodeBlockButtons = ({
       questionId
     ] = {};
     localStorage.setItem('userSavedCode', JSON.stringify(localStorageSavedUserQuestionCode));
-    console.log(getPredefinedCode("HTML") ?? "", 1)
     setHtml(getPredefinedCode("HTML") ?? "")
     setCss(getPredefinedCode("CSS") ?? "")
     setJs(getPredefinedCode("JS") ?? "")

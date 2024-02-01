@@ -9,7 +9,6 @@ import { useUserCode } from '../../redux/actions/userCodeActions';
 const CodeBlock: React.FC<{ questionData: QuestionDataType }> = ({
   questionData,
 }) => {
-  console.log({questionData});
   const { options } = questionData;
   const { userCodeData } = useUserCode();
   const openWindows = options[0]?.codeBlock?.configuration?.openWindows;
