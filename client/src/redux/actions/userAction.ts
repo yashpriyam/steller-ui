@@ -94,6 +94,7 @@ export const useUser = () => {
         key: process.env.REACT_APP_JWT_SECRET_KEY || "",
         value: response?.data?.login?.credentials,
       });
+      dispatch(actions.setUser(response.data.login));
     }
     return response;
   };

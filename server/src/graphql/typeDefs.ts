@@ -626,6 +626,7 @@ const typeDefs = gql`
     password: String!
   }
   type LoginUserDataOutputType {
+    userData: UserSchemaType
     response: CustomResponseType!
     credentials: String
   }
