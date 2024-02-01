@@ -28,19 +28,24 @@ export const getUser = async (
     // Fetch user information
     const userData = await User.findById(userId);
 
+    if(!userData){
+      return {
+        response: errorData,
+      }
+    }
+    
+    const { password, ...userInfo } = userData.toObject();
     // check user is admin or not
 
     const isAdminUser = await isAdmin(userData?.email ?? '')
 
     return {
-      userData: userData,
+      userData: userInfo,
       isAdmin: isAdminUser,
-      response: userData
-        ? {
-            message: localMessages.USER.USER_FETCH_SUCCESS,
-            status: statusCodes.OK,
-          }
-        : errorData,
+      response: {
+              message: localMessages.USER.USER_FETCH_SUCCESS,
+              status: statusCodes.OK,
+            }
     };
   } catch (err) {
     console.error(err);
