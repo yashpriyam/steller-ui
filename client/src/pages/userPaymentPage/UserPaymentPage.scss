@@ -1,19 +1,32 @@
+@import "../../components/variables.scss";
 .user-payment-page {
   padding: 20px;
-
-  h1 {
+  width: 100%;
+  min-height: 100%;
+  background-color: $primaryBgColor;
+  .user-payment-page-header {
     margin-bottom: 20px;
   }
-
-  .payment-card {
-    width: 60vw;
-    margin-bottom: 15px;
-
-    input[type="radio"] {
-      margin-right: 10px;
+  .fee-plan-card{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .fee-plan-card-input-wrapper{
+      width: 450px;
+      // width: 60vw;
+      margin-bottom: 15px;
+      input[type="radio"] {
+        margin-right: 10px;
+      }
     }
-}
-.button-wrapper {
+  }
+
+  .fee-plan-installment-list-container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .button-wrapper {
     margin-top: 20px;
   }
   

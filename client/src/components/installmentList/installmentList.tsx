@@ -76,12 +76,12 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
   };
 
   return (
-    <div>
+    <div className="installment-list-container">
       {Boolean(paidInstallments?.length) && (
         <div className="paid-installments">
           <h2 className="installment-heading">Paid Installments</h2>
           <div className="installment-cards">
-            <ul className="installment-item-constainer">
+            <ul className="installment-item-container">
               {paidInstallments?.map((installment) => (
                 <li key={installment.id} className={`installment-item`}>
                   <p className="installment-info">
@@ -104,7 +104,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
                   </p>
                   <img
                     src={installment?.image?.secureUrl}
-                    alt="image"
+                    alt="fee plan"
                     className={`installment-image ${getStatusClassName(
                       installment
                     )}`}

@@ -33,12 +33,12 @@ const UserPaymentPage: React.FC = () => {
 
   return (
     <div className="user-payment-page">
-      <h1>User Payment Page</h1>
+      <h1 className="user-payment-page-header">User Payment Page</h1>
       {!Boolean(user?.userData?.feePlan)  ? (
         <div className="fee-plan-card">
           {Boolean(feePlans?.length) &&
             feePlans?.map((feePlan) => (
-              <div key={feePlan.name}>
+              <div key={feePlan.name} className="fee-plan-card-input-wrapper">
                 <input
                   type="radio"
                   id={feePlan.name}
@@ -68,7 +68,7 @@ const UserPaymentPage: React.FC = () => {
           )}
         </div>
       ) : (
-        <div>
+        <div className="fee-plan-installment-list-container">
           <InstallmentList
             allInstallment={userFeePlan?.installments ?? []}
             userIntsallment={userPayments?.userPayments ?? []}
