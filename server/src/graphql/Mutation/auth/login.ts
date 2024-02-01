@@ -33,6 +33,7 @@ export const login = async (
       res.cookie(JWT_SECRET_KEY,token);
     }
     return {
+      userData: user,
       response: {
         message: USER_LOGIN_SUCCESS,
         status: statusCodes.OK,

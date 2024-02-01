@@ -500,6 +500,7 @@ declare global {
     password: string;
   };
   type loginOutputType = {
+    userData?: UserSchemaType
     response: CustomResponseType;
     credentials?: string;
   };
