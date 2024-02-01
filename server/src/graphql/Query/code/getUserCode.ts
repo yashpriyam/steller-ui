@@ -1,14 +1,16 @@
 import { userCodeModel } from '@models';
+import mongoose from 'mongoose';
 
 export const getUserCode = async (
   parent: undefined,
-  args: { input: GetUserCodeInput }
+  args: { input: GetUserCodeInput },
+  { contextData }: ContextType
 ) => {
   try {
-    const { userId, questionId, weekNumber, dayNumber } = args?.input || {};
-    const query: any = {};
+    const userData = contextData.user;
+    const { questionId, weekNumber, dayNumber } = args?.input || {};
+    const query: any = { userId: new mongoose.Types.ObjectId(userData._id) };
 
-    if (userId) query.userId = userId;
     if (questionId) query.questionId = questionId;
     if (weekNumber !== undefined) query.weekNumber = weekNumber;
     if (dayNumber !== undefined) query.dayNumber = dayNumber;

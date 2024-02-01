@@ -5,10 +5,12 @@ import { useQuestions } from '../../redux/actions/questionAction';
 import { useQuestionAttempt } from '../../redux/actions/questionAttemptAction';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
+import { useUserCode } from '../../redux/actions/userCodeActions';
 
 const QuestionPage = () => {
   const { questions, getAllQuestions } = useQuestions();
   const { createQuestionAttemptByUser } = useQuestionAttempt();
+  const { getUserCode } = useUserCode();
   const { questions: questionList } = questions;
   const { t } = useTranslation();
   const location = useLocation();
@@ -31,10 +33,11 @@ const QuestionPage = () => {
   };
   useEffect(() => {
     getAllQuestions({ week: Number(weekNumber), day: Number(dayNumber) });
+    getUserCode({weekNumber: Number(weekNumber), dayNumber: Number(dayNumber)});
   }, []);
   return (
     <div className="question-page-container">
-      <h1>{t('question')}</h1>
+      <h1>{t('questions')}</h1>
       <div className="question-time">
         <span>
           {t('title', { title: t('week') })}

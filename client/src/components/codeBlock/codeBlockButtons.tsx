@@ -4,11 +4,29 @@ import { useUserCode } from '../../redux/actions/userCodeActions';
 import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { Button } from '../../components/button/button';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectUserCode,
+  userCodeAction,
+} from '../../redux/slices/userCode/userCodeSlice';
 
-const CodeBlockButtons = ({ questionId }: { questionId: string }) => {
+const CodeBlockButtons = ({
+  questionId,
+  openWindows,
+}: {
+  questionId: string;
+  openWindows: [CodeBlockOpenWindowsType];
+}) => {
+  const dispatch = useDispatch();
+  const { setCodeSubmittedLoading } = userCodeAction;
+  const userCode = useSelector(selectUserCode);
   const { saveUserCode } = useUserCode();
   const location = useLocation();
   const { t } = useTranslation();
+  const predefinedHtmlCode = openWindows.map(
+    (element) => element.title === 'HTML'
+  );
   const queryParams = new URLSearchParams(location.search);
   const dayNumber = queryParams.get('dayNumber');
   const weekNumber = queryParams.get('weekNumber');
@@ -16,26 +34,62 @@ const CodeBlockButtons = ({ questionId }: { questionId: string }) => {
     html = '',
     css = '',
     js = '',
+    setHtml,
+    setCss,
+    setJs,
   } = useContext(CodeDataContext) as DataContextProps;
+
+  const getPredefinedCode = (title: string) => {
+    const openWindowBlock = openWindows.find((element) => element.title === title);
+    return openWindowBlock?.predefinedCode
+  }
+
   const handleCodingBlockQuestionSubmit = async () => {
+    dispatch(setCodeSubmittedLoading(true));
     const response = await saveUserCode({
       weekNumber: Number(weekNumber),
       dayNumber: Number(dayNumber),
       code: { html, css, js },
       questionId: questionId,
     });
+    dispatch(setCodeSubmittedLoading(false));
 
     if (response?.data.saveUserCode.response.status === 200) {
       toast.success(t('solution_submitted_success_message'));
-    }else{
+    } else {
       toast.error(t('solution_submit_error_message'));
     }
   };
 
+  const handleCodeBlockReset = () => {
+    const resetCodeBlock = window.confirm('Do you want to reset code?');
+    if(!resetCodeBlock){
+      return;
+    }
+    const localStorageSavedUserQuestionCode = JSON.parse(
+      localStorage.getItem('userSavedCode') ?? '{}'
+    );
+    localStorageSavedUserQuestionCode[`week${weekNumber}`][`day${dayNumber}`][
+      questionId
+    ] = {};
+    localStorage.setItem('userSavedCode', JSON.stringify(localStorageSavedUserQuestionCode));
+    console.log(getPredefinedCode("HTML") ?? "", 1)
+    setHtml(getPredefinedCode("HTML") ?? "")
+    setCss(getPredefinedCode("CSS") ?? "")
+    setJs(getPredefinedCode("JS") ?? "")
+  };
+
   return (
     <div className="code-block-buttons">
-      {/* <button className="reset-btn">Reset</button> */}
-      <button onClick={handleCodingBlockQuestionSubmit}>Submit</button>
+      <Button
+        onClick={handleCodeBlockReset}
+        className="reset-btn"
+        text="Reset"
+      />
+      <Button
+        onClick={handleCodingBlockQuestionSubmit}
+        text={userCode.isUserSubmittedCodeLoading ? 'Submitting...' : 'Submit'}
+      />
     </div>
   );
 };

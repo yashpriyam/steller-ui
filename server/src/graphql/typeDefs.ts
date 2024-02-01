@@ -91,7 +91,7 @@ const typeDefs = gql`
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
-    saveUserCode(input: SaveUserCodeInput): UserCodeType
+    saveUserCode(input: SaveUserCodeInput): GetUserCodeOutput
   }
 
   input SaveUserCodeInput {
@@ -107,6 +107,7 @@ const typeDefs = gql`
     weekNumber: Int
     dayNumber: Int
     code: CodeType
+    updatedAt: String
   }
 
   type GetUserCodeOutput {
@@ -127,8 +128,7 @@ const typeDefs = gql`
   }
 
   input getUserCodeInputType {
-    userId: ID!
-    questionId: ID!
+    questionId: ID
     weekNumber: Int
     dayNumber: Int
   }
@@ -138,6 +138,7 @@ const typeDefs = gql`
     weekNumber: Int
     dayNumber: Int
     code: CodeType
+    updatedAt: String
     response: CustomResponseType!
   }
 

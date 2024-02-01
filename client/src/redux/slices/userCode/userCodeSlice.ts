@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     userCode: [],
-    isLoading: true
+    isSetUserCodeLoading: true,
+    isUserSubmittedCodeLoading: false
 };
 
 export const userCodeSlice = createSlice({
@@ -11,11 +12,14 @@ export const userCodeSlice = createSlice({
     reducers: {
         setUserCode: (state, action) => {
             state.userCode = action.payload?.data;
-            state.isLoading = false;
+            state.isSetUserCodeLoading = false;
         },
+        setCodeSubmittedLoading: (state, action) => {
+            state.isUserSubmittedCodeLoading = action.payload
+        }
     },
 });
 
-export const { actions } = userCodeSlice;
+export const { actions: userCodeAction, reducer: userCodeReducer } = userCodeSlice;
 export const selectUserCode = (state: { userCode: UserCodeStateType }) => state.userCode;
 export default userCodeSlice.reducer;

@@ -7,6 +7,7 @@ const typeDefs = gql`
       filterData: FilterData
       pagination: Pagination
     ): GetAllQuestionsOutputType
+    getUserCode(input: getUserCodeInputType): GetUserCodeOutputDataType
   }
 
   type Mutation {
@@ -24,12 +25,27 @@ const typeDefs = gql`
     updateUser(input: PartialUserSchemaType!): UserDataOutputType
   }
 
+  type GetUserCodeOutputDataType {
+    userId: ID!
+    questionId: ID!
+    weekNumber: Int
+    dayNumber: Int
+    code: CodeType
+    updatedAt: String
+  }
+
+  input getUserCodeInputType{
+    dayNumber: Int
+    weekNumber: Int
+  }
+
   type UserCodeType {
     userId: ID!
     questionId: ID!
     weekNumber: Int
     dayNumber: Int
     code: CodeType
+    updatedAt: String
     response: CustomResponseType!
   }
 

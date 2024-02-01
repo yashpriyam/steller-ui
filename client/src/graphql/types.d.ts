@@ -845,7 +845,15 @@ declare global {
 
   interface UserCodeStateType {
     userCode: [UserCodeType]
-    isLoading: boolean
+    isSetUserCodeLoading: boolean
+    isUserSubmittedCodeLoading: boolean
+  }
+
+  interface UserCodeInputType {
+    questionId?: string
+    weekNumber?: number
+    dayNumber?: number
+    code?: CodeType
   }
 
   interface UserCodeType {
@@ -853,6 +861,7 @@ declare global {
     weekNumber?: number
     dayNumber?: number
     code?: CodeType
+    updatedAt: string
   }
 
   interface CodeType {

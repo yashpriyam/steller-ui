@@ -949,7 +949,6 @@ declare global {
   };  
 
   type GetUserCodeInput = {
-    userId?: string;
     questionId?: string;
     weekNumber?: number;
     dayNumber?: number;
