@@ -7,7 +7,7 @@ const typeDefs = gql`
       filterData: FilterData
       pagination: Pagination
     ): GetAllQuestionsOutputType
-    getUserCode(input: getUserCodeInputType): GetUserCodeOutputDataType
+    getUserCode(input: GetUserCodeInputType): GetUserCodeOutputDataType
   }
 
   type Mutation {
@@ -34,7 +34,7 @@ const typeDefs = gql`
     updatedAt: String
   }
 
-  input getUserCodeInputType{
+  input GetUserCodeInputType{
     dayNumber: Int
     weekNumber: Int
   }
