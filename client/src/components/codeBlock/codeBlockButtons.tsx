@@ -71,19 +71,23 @@ const CodeBlockButtons = ({
     if (!resetCodeBlock) {
       return;
     }
-    const localStorageSavedUserQuestionCode = JSON.parse(
-      localStorage.getItem('userSavedCode') ?? '{}'
-    );
-    localStorageSavedUserQuestionCode[`week${weekNumber}`][`day${dayNumber}`][
-      questionId
-    ] = {};
-    localStorage.setItem(
-      'userSavedCode',
-      JSON.stringify(localStorageSavedUserQuestionCode)
-    );
-    setHtml(getPredefinedCode(codeBlockWindow.HTML) ?? '');
-    setCss(getPredefinedCode(codeBlockWindow.CSS) ?? '');
-    setJs(getPredefinedCode(codeBlockWindow.JS) ?? '');
+    try {
+      const localStorageSavedUserQuestionCode = JSON.parse(
+        localStorage.getItem('userSavedCode') ?? '{}'
+      );
+      localStorageSavedUserQuestionCode[`week${weekNumber}`][`day${dayNumber}`][
+        questionId
+      ] = {};
+      localStorage.setItem(
+        'userSavedCode',
+        JSON.stringify(localStorageSavedUserQuestionCode)
+      );
+      setHtml(getPredefinedCode(codeBlockWindow.HTML) ?? '');
+      setCss(getPredefinedCode(codeBlockWindow.CSS) ?? '');
+      setJs(getPredefinedCode(codeBlockWindow.JS) ?? '');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -91,11 +95,13 @@ const CodeBlockButtons = ({
       <Button
         onClick={handleCodeBlockReset}
         className="reset-btn"
-        text={t("reset")}
+        text={t('reset')}
       />
       <Button
         onClick={handleCodingBlockQuestionSubmit}
-        text={userCode.isUserSubmittedCodeLoading ? t("submitting") : t('submit')}
+        text={
+          userCode.isUserSubmittedCodeLoading ? t('submitting') : t('submit')
+        }
       />
     </div>
   );
