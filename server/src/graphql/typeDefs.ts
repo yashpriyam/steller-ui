@@ -16,7 +16,7 @@ const typeDefs = gql`
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
-    getUserCode(input: getUserCodeInputType): GetUserCodeOutput
+    getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
   }
 
   type Mutation {
@@ -130,7 +130,7 @@ const typeDefs = gql`
     js: String
   }
 
-  input getUserCodeInputType {
+  input GetUserCodeInputType {
     questionId: ID
     weekNumber: Int
     dayNumber: Int
