@@ -14,7 +14,7 @@ import {
 export const codeBlockWindow = {
   HTML: 'HTML',
   CSS: 'CSS',
-  JS: 'js',
+  JS: 'JS',
 };
 
 const CodeBlockButtons = ({
