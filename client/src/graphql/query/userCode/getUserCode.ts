@@ -1,10 +1,9 @@
 import { gql } from '@apollo/client';
 
 export const GET_USER_CODE = gql`
-  query GetUserCode {
-    getUserCode {
+  query GetUserCode($input: getUserCodeInputType) {
+    getUserCode(input: $input) {
       data {
-        userId
         questionId
         weekNumber
         dayNumber
@@ -13,10 +12,11 @@ export const GET_USER_CODE = gql`
           css
           js
         }
+        updatedAt
       }
       response {
-        message
         status
+        message
       }
     }
   }

@@ -4,7 +4,7 @@
   width: 100%;
   display: flex;
   border-radius: 10px;
-  margin: 10px 0;
+  margin: 10px 0 5px;
   border: 1px solid black;
 
   .code-editor-blocks-container {
@@ -70,6 +70,7 @@
     margin: 5px 5px 5px 0;
     border-radius: 4px;
     font-size: 14px;
+    color: $primary-color;
 
     &:hover {
       background-color: $button-hover-bg;
@@ -89,4 +90,10 @@
   .code-block-container {
     flex-direction: column;
   }
+}
+
+.submitted-line{
+  color: $accent-color-3;
+  font-size: 12px;
+  margin: 10px 0 5px;
 }

@@ -16,7 +16,7 @@ const typeDefs = gql`
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
-    getUserCode(input: getUserCodeInputType): GetUserCodeOutput
+    getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
   }
 
   type Mutation {
@@ -91,7 +91,7 @@ const typeDefs = gql`
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
-    saveUserCode(input: SaveUserCodeInput): UserCodeType
+    saveUserCode(input: SaveUserCodeInput): GetUserCodeOutput
     getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
     approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
     rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
@@ -110,6 +110,7 @@ const typeDefs = gql`
     weekNumber: Int
     dayNumber: Int
     code: CodeType
+    updatedAt: String
   }
 
   type GetUserCodeOutput {
@@ -129,9 +130,8 @@ const typeDefs = gql`
     js: String
   }
 
-  input getUserCodeInputType {
-    userId: ID!
-    questionId: ID!
+  input GetUserCodeInputType {
+    questionId: ID
     weekNumber: Int
     dayNumber: Int
   }
@@ -141,6 +141,7 @@ const typeDefs = gql`
     weekNumber: Int
     dayNumber: Int
     code: CodeType
+    updatedAt: String
     response: CustomResponseType!
   }
 

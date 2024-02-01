@@ -1,17 +1,34 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { apolloClient } from '../../graphql/apolloClient/apolloClient';
 import { GET_USER_CODE } from '../../graphql/query/userCode/getUserCode';
-import { actions, selectUserCode } from '../slices/userCode/userCodeSlice';
+import {
+  userCodeAction,
+  selectUserCode,
+} from '../slices/userCode/userCodeSlice';
 import { SAVE_USER_CODE } from '../../graphql/mutation/userCode/saveUserCode';
 
 export const useUserCode = () => {
   const dispatch = useDispatch();
   const userCodeData = useSelector(selectUserCode);
 
-  const getUserCode = async () => {
+  const getUserCode = async ({
+    weekNumber,
+    dayNumber,
+  }: {
+    weekNumber: number;
+    dayNumber: number;
+  }) => {
     try {
-      const response = await apolloClient.query({ query: GET_USER_CODE });
-      dispatch(actions.setUserCode(response.data.getUserCode));
+      const response = await apolloClient.query({
+        query: GET_USER_CODE,
+        variables: {
+          input: {
+            weekNumber,
+            dayNumber,
+          },
+        },
+      });      
+      dispatch(userCodeAction.setUserCode(response.data.getUserCode));
       return response;
     } catch (error) {
       console.log(error);
@@ -23,7 +40,7 @@ export const useUserCode = () => {
     weekNumber,
     dayNumber,
     code,
-  }: UserCodeType) => {
+  }: UserCodeInputType) => {
     try {
       const response = await apolloClient.mutate({
         mutation: SAVE_USER_CODE,
@@ -36,11 +53,16 @@ export const useUserCode = () => {
           },
         },
       });
+      dispatch(userCodeAction.setUserCode(response.data.saveUserCode));
       return response;
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { userCodeData, getUserCode, saveUserCode };
+  const setCodeSubmittedLoading = (payload: boolean) => {
+    dispatch(userCodeAction.setCodeSubmittedLoading(payload));
+  };
+
+  return { userCodeData, getUserCode, saveUserCode, setCodeSubmittedLoading };
 };

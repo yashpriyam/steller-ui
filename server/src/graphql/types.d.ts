@@ -953,12 +953,18 @@ declare global {
   };  
 
   type GetUserCodeInput = {
-    userId?: string;
     questionId?: string;
     weekNumber?: number;
     dayNumber?: number;
     code?: CodeInput;
   };
+
+  type GetUserCodeQueryType = {
+    questionId?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    userId?: ObjectId | string
+  }
 
   type UserPaymentsDataOutputType = {
     userPaymentData?: UserPaymentSchemaType[];
