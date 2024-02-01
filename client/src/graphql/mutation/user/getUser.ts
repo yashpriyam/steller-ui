@@ -7,6 +7,17 @@ query {
         email
         name
         phoneNumber
+        password
+        isJobSeeker
+        occupation
+        sessionPreference
+        expectedSalary
+        IST
+        collegeName
+        location
+        courseYear
+        course
+        branch
         batchCode
         feePlan
         profileImage {
@@ -18,6 +29,7 @@ query {
         message
         status
       }
+      isAdmin
     }
   }
   

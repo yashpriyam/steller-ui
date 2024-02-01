@@ -536,6 +536,14 @@ declare global {
       onClick?: (e: MouseEvent<HTMLDivElement>) => void;
       isProfile?: boolean;
     }[],
+    admin?: {
+      image: string | ReactNode;
+      url?: string;
+      text: string;
+      openNewPage?: boolean;
+      onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+      isProfile?: boolean;
+    } | false
   }
 
   type UseAppDataReturnType = {
@@ -544,6 +552,11 @@ declare global {
     isLoginModalOpen: boolean;
     setIsLoginModalOpen: Dispatch<SetStateAction<boolean>>;
     isLoggedIn: boolean;
+    user: {
+      userData: UserSchemaType;
+      isLoggedIn: boolean;
+      isAdmin: boolean;
+    };
   }
 
   type SetCookieArgsType = {
@@ -574,6 +587,7 @@ declare global {
     notes?: ObjectId[];
     videos?: ObjectId[];
     questions?: ObjectId[];
+    date?: Date;
   };
   interface AccordionPropsInterface {
     className?: string;
@@ -625,7 +639,7 @@ declare global {
   };
 
   type Installment = {
-    _id: string | undefined;
+    _id?: string | undefined;
     id? :string;
     amount?: string;
     sequence?: string;
@@ -733,6 +747,21 @@ declare global {
     feePlan?: string;
   }
 
+  type SecondaryUserSchemaType = {
+    [key: string]: string | undefined;
+    name?: string;
+    phoneNumber?: string;
+    password?: string;
+    occupation?: string;
+    sessionPreference?: string;
+    collegeName?: string;
+    location?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+  };
+
+
   type PartialUserSchemaType = {
     email?: string;
     name?: string;
@@ -754,6 +783,20 @@ declare global {
 
   type UpdateUserInput = {
     feePlan?: string
+    name?: string;
+    phoneNumber?: string;
+    password?: string;
+    isJobSeeker?: boolean;
+    occupation?: string;
+    sessionPreference?: string;
+    expectedSalary?: string;
+    IST?: string;
+    collegeName?: string;
+    location?: string;
+    courseYear?: string;
+    course?: string;
+    branch?: string;
+    feePlan?: string;
   };
   type InstallmentListProps ={
       allInstallment?: Installment[];
@@ -813,8 +856,7 @@ declare global {
   }
 
   type MeetingStateType = {
-    masterMeeting: MeetingDataType | null;
-    classMeeting: MeetingDataType | null;
+    meetingList: MeetingDataType[];
   } 
   type ProfileImageType = {
     publicId?: string
@@ -828,6 +870,25 @@ declare global {
     style?: CSSProperties;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     url?: string;
+  }
+  interface UserInfoSubCardPropsInterface {
+    editing?: boolean;
+    userInputValue?: SecondaryUserSchemaType;
+    value?: string;
+    field?: string;
+    text: string;
+    autoFocus?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
+    errorMessage?: string;
+    className?: string;
+  }
+  interface UserPagePropsInterFace {
+    className?: string;
+  }
+  type nonEditableUserSchemaFieldsType = {
+    [key: string]: boolean;
+    email?: boolean;
+    batchCode?: boolean;
   }
 
   interface DataContextProps {
@@ -900,6 +961,45 @@ declare global {
     onChange: React.Dispatch<React.SetStateAction<string>>;
     icon: string;
     color: string;
+  }
+
+  type GetAllUserPaymentsInput = {
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: Boolean
+  }
+  type AllUsersPaymentDataOutputType = {
+    allUsersPayments?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+
+  interface UserPaymentCardProps {
+    payment: UserPaymentSchemaType;
+    onApprove: (paymentId: string) => Promise<boolean | string | undefined>;
+    onReject: (paymentId: string) =>  Promise<boolean | string | undefined>;
+    setPaymentReceipt: React.Dispatch<React.SetStateAction<File | null>>;
+    paymentReceipt: File | null
+    isLoading?: boolean;
+  }
+
+  type GetMeetingListArgsType = {
+    isPaid?: boolean;
+    isActive?: boolean;
+    scheduledAt?: Date;
+    meetingCodeList?: string[];
+  }
+
+  type UpdateUserPaymentInput = {
+    paymentId: string
+    isApproved? :boolean
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: string | ArrayBuffer;
+    rejectReason?: string
   }
 }
 export { };

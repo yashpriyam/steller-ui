@@ -92,6 +92,9 @@ const typeDefs = gql`
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
     saveUserCode(input: SaveUserCodeInput): GetUserCodeOutput
+    getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
+    approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+    rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
   }
 
   input SaveUserCodeInput {
@@ -1075,6 +1078,7 @@ const typeDefs = gql`
     isPaid: Boolean
     scheduledAt: DateTime
     title: String
+    meetingCodeList: [String]
   }
 
   type MeetingListOutputType {
@@ -1085,6 +1089,7 @@ const typeDefs = gql`
   type UserDataOutputType {
     userData: UserSchemaType
     response: CustomResponseType
+    isAdmin: Boolean
   }
   input PartialUserSchemaType {
     email: String
@@ -1163,6 +1168,24 @@ const typeDefs = gql`
   input UserPaymentPendingInputType {
     totalAmount: String
     totalPendingAmount: String
+  }
+  input GetAllUserPaymentsInput {
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: Boolean
+  }
+  type UserPaymentsDataOutputType {
+    userPaymentData: [UserPaymentData]
+    response: CustomResponseType
+  }
+
+  input UpdateUserPaymentInput {
+    paymentId: String
+    isApproved: Boolean
+    isRejected: Boolean
+    isPending: UserPaymentPendingInputType
+    image: String
+    rejectReason: String
   }
 
   scalar DateTime

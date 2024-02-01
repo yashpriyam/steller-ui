@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { actions } from './redux/slices/user/userSlice';
 import { useNavigate } from 'react-router-dom';
 import { deleteCookie } from './utils';
+import { apolloClient } from './graphql/apolloClient/apolloClient';
 
 export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
@@ -28,6 +29,7 @@ export const useAppData = (): UseAppDataReturnType => {
   const logOut = () => {
     deleteCookie(process.env.REACT_APP_JWT_SECRET_KEY || "");
     dispatch(actions.setIsLoggedIn(false));
+    apolloClient.resetStore()
     navigate("/")
   }
 
@@ -38,6 +40,11 @@ export const useAppData = (): UseAppDataReturnType => {
             <NameIcon width='40px' height='40px' name={name} /> : 
             <AvatarIcon isDarkMode={true}/>,
       url: "/profile",
+    },
+    admin: user.isAdmin &&  {
+      image: <PaymentIcon isDarkMode={true}/>,
+      text: t('all_users_payments'),
+      url: '/admin/usersPayments'
     },
     optionsAtFirst: [
       {
@@ -81,5 +88,5 @@ export const useAppData = (): UseAppDataReturnType => {
   useEffect(()=>{
     isLoggedIn && getUserData();
   },[isLoggedIn])
-  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn }
+  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn, user: user }
 }

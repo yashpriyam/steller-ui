@@ -21,3 +21,5 @@ export { isCorrectAnswer } from "./isCorrectAnswer";
 export { getCheckedOptions } from "./getCheckedOptions";
 export { isNonNullishValueExists } from "./isNonNullishValueExists";
 export { isNonUndefinedAndNullishValueExists } from "./isNonUndefinedAndNullishValueExists";
+export { isAdmin } from "./isAdmin"
+export { generatePaymentApprovalEmail } from "./getPaymentApprovalHtml"

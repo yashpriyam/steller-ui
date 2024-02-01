@@ -1,0 +1,61 @@
+@import "../variables.scss";
+.field-value-wrapper {
+  width: 100%;
+  border-bottom: 1px solid $Gray29;
+  font-size: $largerFontSize;
+  padding: 5px;
+  display: flex;
+  position: relative;
+  font-size: 20px;
+
+  .user-data-value {
+    flex-basis: 250px;
+    padding: 15px 0px;
+  }
+  .user-data-value-faded {
+    color: $placeHolderColor;
+  }
+  .user-data-field {
+    padding: 15px 0px;
+    flex-basis: 150px;
+    @media (max-width: $screenXs) {
+      flex-basis: 90px;
+    }
+  }
+  .user-data-input-error-wrapper {
+    flex-basis: 250px;
+    .user-data-input-value {
+      padding: 15px 5px;
+      border: transparent;
+      background: transparent;
+      border-radius: 5px;
+      outline: none !important;
+      &:focus {
+        background: $Gray43;
+      }
+    }
+    .user-data-input-value-error {
+      border: 2px solid $accent-color-5 !important;
+    }
+    .user-data-input-value-tool-tip {
+      color: $accent-color-5;
+      font-size: $mediumFontSize;
+      position: absolute;
+      opacity: 0;
+      transition: 0.3s;
+      bottom: -3px;
+      padding: 1px;
+      left: 160px;
+      background-color: $secondaryBgColor;
+      @media (max-width: $screenMd) {
+        left: 70px;
+      }
+      @media (max-width: $screenXs) {
+        left: 100px;
+      }
+    }
+    .user-data-input-value-tool-tip-show {
+      opacity: 1;
+    }
+  }
+}

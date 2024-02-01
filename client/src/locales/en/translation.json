@@ -60,5 +60,13 @@
     "pay_now": "Pay Now",
     "no_videos_found": "No videos to show for this day",
     "solution_submitted_success_message": "Solution submitted successfully",
-    "solution_submit_error_message": "Failed to submit code, Try again"
+    "solution_submit_error_message": "Failed to submit code, Try again",
+    "join_todays_class": "Join today's class",
+    "all_users_payments": "All Users Payments",
+    "Approve": "Approve",
+    "Reject": "Reject",
+    "save": "Save",
+    "edit_profile": "Edit Profile",
+    "cancel": "Cancel",
+    "complete_profile": "Complete Your Profile"
 }

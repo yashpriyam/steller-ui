@@ -7,8 +7,23 @@ mutation UpdateUser($input: PartialUserSchemaType) {
         email
         name
         phoneNumber
+        password
+        isJobSeeker
+        occupation
+        sessionPreference
+        expectedSalary
+        IST
+        collegeName
+        location
+        courseYear
+        course
+        branch
         batchCode
         feePlan
+        profileImage {
+          publicId
+          secureUrl
+        }
       }
       response {
         message

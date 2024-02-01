@@ -818,8 +818,9 @@ declare global {
     },
     image?: ImageInputType;
     createdAt?: Date;
-    updatedAt?: Date
-    imageUrl?: string
+    updatedAt?: Date;
+    imageUrl?: string;
+    rejectReason?: string
   };  
    
   type BatchDataOutputType = {
@@ -876,11 +877,13 @@ declare global {
     isPaid?: boolean;
     isActive?: boolean;
     scheduledAt?: Date;
+    meetingCodeList?: string[];
   }
   
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
+    isAdmin?: boolean
   }
 
   type GetMeetingArgsType = {
@@ -954,4 +957,31 @@ declare global {
     dayNumber?: number;
     code?: CodeInput;
   };
+
+  type UserPaymentsDataOutputType = {
+    userPaymentData?: UserPaymentSchemaType[];
+    response: CustomResponseType;
+  }
+
+  type UpdateUserPaymentInput = {
+    paymentId: string
+    isApproved? :boolean
+    isApproved?: boolean;
+    isRejected?: boolean;
+    isPending?: {
+      totalAmount?: string;
+      totalPendingAmount?: string;
+    },
+    image?: string;
+    rejectReason?: string
+  }
+
+  interface PaymentApprovalEmailData {
+    status: string;
+    date: string;
+    receiptImageUrl?: string;
+    userEmail: string;
+    rejectReason?: string
+  }
+
 }

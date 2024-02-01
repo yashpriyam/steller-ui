@@ -1,0 +1,50 @@
+@import "../../../components/variables.scss";
+.user-payments-list {
+  margin-top: 20px;
+
+  .list-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+
+  .payment-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+
+    .payment-item {
+      border: 1px solid $gray;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+
+      &.approved {
+        background-color: $green;
+      }
+
+      &.rejected {
+        background-color: $red;
+      }
+
+      &.pending {
+        background-color: $orange;
+      }
+
+      .payment-info {
+        font-size: 16px;
+        margin-bottom: 8px;
+
+        .amount {
+          font-weight: bold;
+          color: $gray;
+        }
+
+        .status {
+          font-style: italic;
+          color: $gray;
+        }
+      }
+    }
+  }
+}
