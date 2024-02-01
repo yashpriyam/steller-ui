@@ -32,9 +32,6 @@ export const useAppData = (): UseAppDataReturnType => {
     apolloClient.resetStore()
     navigate("/")
   }
-  const getUserDataRequest = async()=>{
-      await getUserData();
-  }
 
   const sidebarData: SidebarProps = {
     profile : {
@@ -89,7 +86,7 @@ export const useAppData = (): UseAppDataReturnType => {
     },
   };
   useEffect(()=>{
-    isLoggedIn && getUserDataRequest();
+    isLoggedIn && getUserData();
   },[isLoggedIn])
   return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn, user: user }
 }

@@ -89,12 +89,12 @@ export const useUser = () => {
       },
     });
     const status = response?.data?.login?.response?.status;
-    dispatch(actions.setUser(response.data.login));
     if (status === 200) {
       setCookie({
         key: process.env.REACT_APP_JWT_SECRET_KEY || "",
         value: response?.data?.login?.credentials,
       });
+      dispatch(actions.setUser(response.data.login));
     }
     return response;
   };

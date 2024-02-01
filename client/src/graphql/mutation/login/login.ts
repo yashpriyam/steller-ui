@@ -7,7 +7,6 @@ export const LOGIN = gql`
         email
         name
         phoneNumber
-        password
         isJobSeeker
         occupation
         sessionPreference
