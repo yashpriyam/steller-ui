@@ -33,11 +33,7 @@ export const useAppData = (): UseAppDataReturnType => {
     navigate("/")
   }
   const getUserDataRequest = async()=>{
-    try {
       await getUserData();
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   const sidebarData: SidebarProps = {
