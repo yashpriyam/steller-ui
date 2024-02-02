@@ -16,7 +16,7 @@
     .title-subtitle {
       .accordion-title {
         font-size: $mediumLargFontSize;
-        font-weight: bold;
+        font-weight: 500;
         white-space: wrap;
       }
       .accordion-sub-title {
@@ -33,7 +33,7 @@
         position: absolute;
         transform: rotate(0deg);
         transition: 0.1s;
-        top: 10%;
+        top: -10px;
       }
 
       .image {
@@ -42,7 +42,6 @@
       }
 
       .accordion-dropdown-arrow-active {
-        top: 10%;
         transform: rotate(180deg);
       }
 

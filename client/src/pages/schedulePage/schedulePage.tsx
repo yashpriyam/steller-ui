@@ -21,15 +21,18 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
   const { weekList, isScheduleDataLoading } = weekData;
-  
-  const handleNavigation = (e:React.MouseEvent<HTMLElement>,path?: string) => {
+
+  const handleNavigation = (
+    e: React.MouseEvent<HTMLElement>,
+    path?: string
+  ) => {
     e.stopPropagation();
-    if(path) navigate(path);
+    if (path) navigate(path);
   };
   const onJoinMeetClick = () => {
-    navigate("/dashboard")
+    navigate("/dashboard");
   };
-  
+
   useEffect(() => {
     getScheduleData({});
   }, []);
@@ -45,6 +48,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
           {t("join_meet")}
         </div>
       </div>
+      <div className="schedule-page-header">{t("schedule_header") }</div>
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (
           <Spinner colors={["#D5B9B2", "#A26769", "#6D2E46"]}/>
@@ -166,32 +170,29 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 positionOfCountLabel="outside"
                                 isDisabled={!notes?.length}
                               />
-                             {
-                            date && isCurrentDate(date) 
-                              ? (<Button
-                                text={t("join_todays_class")}
-                                className="button join-meet-btn"
-                                onClick={(e) => {
-                                  handleNavigation(
-                                    e,
-                                    `/meet/class`
-                                  );
-                                }}
-                              />)
-                              : ( <Button
-                                text={t("videos")}
-                                className="button"
-                                onClick={(e) => {
-                                  handleNavigation(
-                                    e,
-                                    `/videos?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
-                                  );
-                                }}
-                                countLabel={videos?.length.toString()}
-                                positionOfCountLabel="outside"
-                                isDisabled={!videos?.length}
-                              />)
-                             }
+                              {date && isCurrentDate(date) ? (
+                                <Button
+                                  text={t("join_todays_class")}
+                                  className="button join-meet-btn"
+                                  onClick={(e) => {
+                                    handleNavigation(e, `/meet/class`);
+                                  }}
+                                />
+                              ) : (
+                                <Button
+                                  text={t("videos")}
+                                  className="button"
+                                  onClick={(e) => {
+                                    handleNavigation(
+                                      e,
+                                      `/videos?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
+                                    );
+                                  }}
+                                  countLabel={videos?.length.toString()}
+                                  positionOfCountLabel="outside"
+                                  isDisabled={!videos?.length}
+                                />
+                              )}
                             </div>
                           </div>
                         );
