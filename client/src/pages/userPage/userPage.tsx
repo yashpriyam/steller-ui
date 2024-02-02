@@ -4,6 +4,7 @@ import { useUser } from "../../redux/actions/userAction";
 import { UserInfoSubCard } from "../../components/userInfoSubCard/userInfoSubCard";
 import { Button } from "../../components/button/button";
 import { useTranslation } from "react-i18next";
+import { UploadImage } from "../../components/uploadImage/uploadImage";
 
 const UserPage: React.FC<UserPagePropsInterFace> = ({
   className,
@@ -105,7 +106,8 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
   return (
     <div className={`user-account-main-container ${className}`}>
       <div className="user-account-header-container">
-        <img src={secureUrl} alt="profile" className="user-profile-image" />
+        {secureUrl ? <img src={secureUrl} alt="profile" className="user-profile-image" />: <UploadImage className=""/>}
+
         <div className="user-account-header-container-right-side">
           <div className="user-account-holder-name">{name}</div>
           <div className="user-account-image-container-button-wrapper">

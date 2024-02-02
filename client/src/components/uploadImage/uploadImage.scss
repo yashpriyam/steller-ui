@@ -1,19 +1,19 @@
 @import "../variables.scss";
 .upload-image-container {
-  max-width: 100%;
+  width: 120px;
   align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 100%;
+  height: 120px;
   background-color: transparent;
+  border: 2px dashed $primaryBgColor;
+  color: $primaryBgColor;
+  border-radius: 50%;
   .upload-image-label {
-    width: 120px;
-    height: 120px;
-    border: 2px dashed $primaryBgColor;
-    color: $primaryBgColor;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
