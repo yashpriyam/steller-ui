@@ -73,5 +73,6 @@
     "confirm_code_reset": "Do you want to reset code?",
     "reset": "Reset",
     "submit": "Submit",
-    "submitting": "Submitting..."
+    "submitting": "Submitting...",
+    "upload_image": "Upload"
 }

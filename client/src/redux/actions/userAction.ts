@@ -11,6 +11,7 @@ import { UPDATE_USER_INFO } from "../../graphql/mutation/user/updateUserInfo";
 import { GET_USER } from "../../graphql/mutation/user/getUser";
 import { CREATE_USER_PAYMENTS } from "../../graphql/mutation/userPayments/createUserPayment";
 import { useState } from "react";
+import { UPLOAD_PROFILE_IMAGE } from "../../graphql/mutation/user/uploadProfileImage";
 
 export const useUser = () => {
   const dispatch = useDispatch();
@@ -191,6 +192,19 @@ export const useUser = () => {
       console.error(err);
     }
   };
+  const updateProfilePicture = async (image : string,size : number ,name : string) =>{
+    try {
+      const response = await apolloClient.mutate({
+        mutation: UPLOAD_PROFILE_IMAGE,
+        variables: {
+          image, size, name
+        }
+      })
+      return response;
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return {
     user,
@@ -203,6 +217,7 @@ export const useUser = () => {
     updateUserInfo,
     getUserData,
     createUserPayment,
-    isLoading
+    isLoading,
+    updateProfilePicture,
   };
 };

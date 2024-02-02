@@ -870,6 +870,7 @@ declare global {
     style?: CSSProperties;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     url?: string;
+    iconFillColor?:string;
   }
   interface UserInfoSubCardPropsInterface {
     editing?: boolean;

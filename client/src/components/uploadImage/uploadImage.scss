@@ -5,12 +5,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   height: 120px;
   background-color: transparent;
   border: 2px dashed $primaryBgColor;
   color: $primaryBgColor;
   border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
   .upload-image-label {
     width: 100%;
     height: 100%;
@@ -19,28 +21,23 @@
     align-items: center;
     flex-direction: column;
     font-size: $smallFontSize;
-    .label-text {
-      width: min-content;
-      text-align: center;
+    .upload-image-text-and-icon {
+      display: flex;
+      flex-direction: column;
+      .label-text {
+        width: min-content;
+        text-align: center;
+      }
     }
-    &:hover {
-      cursor: pointer;
+    .upload-image-preview-show {
+      width: calc(100% + 10px);
+      height: calc(100% + 10px);
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px 1px $primaryBgColor;
+      transition: 0.7s;
+      &:hover {
+        transform: scale(105%);
+      }
     }
-  }
-  .upload-image-label-hide {
-    opacity: 0;
-    &:hover ~ .upload-image-preview-show {
-      transform: scale(105%);
-    }
-  }
-  .upload-image-preview-show {
-    width: calc(100% + 10px);
-    height: calc(100% + 10px);
-    position: absolute;
-    transform: translate(0%, 0%);
-    z-index: -1;
-    border-radius: 50%;
-    box-shadow: 0px 0px 10px 1px $primaryBgColor;
-    transition: 0.7s;
   }
 }

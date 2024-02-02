@@ -5,6 +5,8 @@ import { UserInfoSubCard } from "../../components/userInfoSubCard/userInfoSubCar
 import { Button } from "../../components/button/button";
 import { useTranslation } from "react-i18next";
 import { UploadImage } from "../../components/uploadImage/uploadImage";
+import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
+import { PenIcon } from "../../icons/index";
 
 const UserPage: React.FC<UserPagePropsInterFace> = ({
   className,
@@ -16,9 +18,13 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
     useState<SecondaryUserSchemaType>();
   const [isFormEditing, setIsFormEditing] = useState<boolean>(false);
   const [showMore, setShowMore] = useState<boolean>(false);
+  const [showProfileImageOption, setShowProfileImageOption] =
+    useState<boolean>(false);
   const [formTextValues, setFormTextValues] =
     useState<SecondaryUserSchemaType>();
-  const { user, updateUserInfo } = useUser();
+  const [userPictureUrl, setUserPictureUrl] = useState<string>("");
+
+  const { user, updateUserInfo, updateProfilePicture } = useUser();
   const { userData } = user || {};
   const {
     email,
@@ -93,12 +99,40 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
       });
     }
     setIsFormEditing(false);
+    setShowProfileImageOption(false);
+    handleOnClickDeleteImage();
   };
   const handleFormEditing = () => {
     setIsFormEditing(!isFormEditing);
     setMainDetailsOfUserData({ ...mainDetailsOfUserData });
     setOtherDetailsOfUserData({ ...otherDetailsOfUserData });
+    secureUrl && setUserPictureUrl(secureUrl);
+    setShowProfileImageOption(true);
   };
+  const handleOnImageClick = async (e: ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && Boolean(files.length)) {
+      try {
+        const response = await readFileAsDataURL(files[0]);
+        setUserPictureUrl(typeof response === "string" ? response : "");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+  const handleImageUpdation = async () => {
+    const res = await updateProfilePicture(userPictureUrl, 1, "name");
+  };
+  const handleOnClickDeleteImage = () => {
+    setUserPictureUrl("");
+    const fileInput = document.getElementById(
+      "file-type-img"
+    ) as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = "";
+    }
+  };
+
   useEffect(() => {
     setInitialDataInState();
     setFormTextValues(newFormTextValues);
@@ -106,11 +140,35 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
   return (
     <div className={`user-account-main-container ${className}`}>
       <div className="user-account-header-container">
-        {secureUrl ? <img src={secureUrl} alt="profile" className="user-profile-image" />: <UploadImage className=""/>}
+        <div className="profile-image-wrapper">
+          {secureUrl && !isFormEditing && (
+            <img src={secureUrl} alt="profile" className="user-profile-image" />
+          )}
+          {isFormEditing && (
+            <UploadImage
+              url={userPictureUrl}
+              className="user-profile-update-image-container"
+              iconFillColor="#3498db"
+              onChange={handleOnImageClick}
+            />
+          )}
+        {/* {showProfileImageOption && (
+          <span className="profile-image-option-tool">
+            <PenIcon />
+          </span>
+        )} */}
+        </div>
 
         <div className="user-account-header-container-right-side">
           <div className="user-account-holder-name">{name}</div>
           <div className="user-account-image-container-button-wrapper">
+            {isFormEditing && (
+              <Button
+                text={t("upload_image")}
+                className="user-profile-edit-button"
+                onClick={handleImageUpdation}
+              />
+            )}
             <Button
               className={`user-profile-edit-button ${
                 isFormEditing && "user-profile-save-button"
