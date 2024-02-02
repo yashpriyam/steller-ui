@@ -1,14 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { 
-  AvatarIcon, DashboardIcon, HomeIcon, QuestionIcon, ScheduleIcon, MeetIcon, SearchIcon, VideoIcon,NameIcon, PaymentIcon
+import React, { useEffect, useState } from "react";
+import {
+  AvatarIcon,
+  DashboardIcon,
+  HomeIcon,
+  QuestionIcon,
+  ScheduleIcon,
+  MeetIcon,
+  SearchIcon,
+  VideoIcon,
+  NameIcon,
+  PaymentIcon,
 } from "./icons/index";
-import { useTranslation } from 'react-i18next';
-import { useUser } from './redux/actions/userAction';
-import { useDispatch } from 'react-redux';
-import { actions } from './redux/slices/user/userSlice';
-import { useNavigate } from 'react-router-dom';
-import { deleteCookie } from './utils';
-import { apolloClient } from './graphql/apolloClient/apolloClient';
+import { useTranslation } from "react-i18next";
+import { useUser } from "./redux/actions/userAction";
+import { useDispatch } from "react-redux";
+import { actions } from "./redux/slices/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { deleteCookie } from "./utils";
+import { apolloClient } from "./graphql/apolloClient/apolloClient";
 
 export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
@@ -24,40 +33,39 @@ export const useAppData = (): UseAppDataReturnType => {
     "/register": true,
     "/privacy": true,
     "/privacy/concerns/whatsapp": true,
-  }
+  };
 
   const logOut = () => {
     deleteCookie(process.env.REACT_APP_JWT_SECRET_KEY || "");
     dispatch(actions.setIsLoggedIn(false));
-    apolloClient.resetStore()
-    navigate("/")
-  }
+    apolloClient.resetStore();
+    navigate("/");
+  };
 
   const sidebarData: SidebarProps = {
-    profile : {
+    profile: {
       text: name || t("profile"),
-      image: secureUrl ? secureUrl : name ? 
-            <NameIcon width='40px' height='40px' name={name} /> : 
-            <AvatarIcon isDarkMode={true}/>,
+      image: secureUrl ? (
+        secureUrl
+      ) : name ? (
+        <NameIcon width="40px" height="40px" name={name} />
+      ) : (
+        <AvatarIcon isDarkMode={true} />
+      ),
       url: "/profile",
     },
-    admin: user.isAdmin &&  {
-      image: <PaymentIcon isDarkMode={true}/>,
-      text: t('all_users_payments'),
-      url: '/admin/usersPayments'
+    admin: user.isAdmin && {
+      image: <PaymentIcon isDarkMode={true} />,
+      text: t("all_users_payments"),
+      url: "/admin/usersPayments",
     },
     optionsAtFirst: [
-      {
-        text: t("search"),
-        image: <SearchIcon isDarkMode={true} />,
-      },
+      // {
+      //   text: t("search"),
+      //   image: <SearchIcon isDarkMode={true} />,
+      // },
     ],
     options: [
-      {
-        text: t("payments"),
-        image: <PaymentIcon isDarkMode={true} />,
-        url: "/userPayment",
-      },
       {
         text: t("dashboard"),
         image: <DashboardIcon isDarkMode={true} />,
@@ -68,25 +76,36 @@ export const useAppData = (): UseAppDataReturnType => {
         image: <ScheduleIcon isDarkMode={true} />,
         url: "/schedule",
       },
-      {
-        text: t("questions"),
-        image: <QuestionIcon isDarkMode={true} />,
-        url: "/questions",
-      },
+      // {
+      //   text: t("questions"),
+      //   image: <QuestionIcon isDarkMode={true} />,
+      //   url: "/questions",
+      // },
       {
         text: t("videos"),
         image: <VideoIcon isDarkMode={true} />,
         url: "/videos",
       },
-      
+      {
+        text: t("payments"),
+        image: <PaymentIcon isDarkMode={true} />,
+        url: "/userPayment",
+      },
     ],
     optionAtLast: {
       text: t(isLoggedIn ? "logout" : "login"),
       onClick: () => (isLoggedIn ? logOut() : setIsLoginModalOpen(true)),
     },
   };
-  useEffect(()=>{
+  useEffect(() => {
     isLoggedIn && getUserData();
-  },[isLoggedIn])
-  return { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn, user: user }
-}
+  }, [isLoggedIn]);
+  return {
+    sidebarData,
+    monorepoPaths,
+    isLoginModalOpen,
+    setIsLoginModalOpen,
+    isLoggedIn,
+    user: user,
+  };
+};
