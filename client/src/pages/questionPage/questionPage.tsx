@@ -58,7 +58,9 @@ const QuestionPage = () => {
             </span>
           </div>
         )}
-        {questionList?.length&&<span>{`${t("totalQuestions")} : ${questionList?.length}`}</span>}
+        {questionList?.length && (
+          <span>{`${t("totalQuestions")} : ${questionList?.length}`}</span>
+        )}
       </div>
       <div className="question-page-sub-container">
         {questionList?.map((question, index) => {
