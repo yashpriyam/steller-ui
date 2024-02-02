@@ -14,6 +14,7 @@ const QuestionAccordion = ({
   isAnswered,
   isCorrect,
   className,
+  index
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
@@ -32,7 +33,7 @@ const QuestionAccordion = ({
   return (
     <Accordion
       className={`question-title ${className}`}
-      title={<div className="question-title">{title[0]?.text}</div>}
+      title={<div className="question-title">{`${(index||index===0)&&index+1}. ${title[0]?.text}`}</div>}
     >
       <div className="question-accordion-container">
         <div className="question-container">
