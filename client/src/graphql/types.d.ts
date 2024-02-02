@@ -335,6 +335,7 @@ declare global {
     successMsg?: string;
     isAnswered?: boolean;
     isCorrect?: boolean;
+    className?:string
   }
 
   type QuestionSelectedValueType = {
