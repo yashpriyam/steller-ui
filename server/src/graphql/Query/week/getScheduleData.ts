@@ -1,5 +1,5 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { weekModel } from "@models";
+import { notesModel, questionModel, videoModel, weekModel } from "@models";
 
 export const getScheduleData = async (
     parent: undefined,
@@ -13,7 +13,23 @@ export const getScheduleData = async (
     try {
         const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
         const { weekDataFilter } = args;
-        const weekData: WeekDataType[] = await weekModel.find(weekDataFilter).populate(DAYS);
+        const weekData: WeekDataType[] = await weekModel.find(weekDataFilter).populate({
+            path: DAYS,
+            populate: [
+            {
+              path: 'questions videos',
+              model: questionModel, 
+            },
+            {
+                path: 'videos',
+                model: videoModel, 
+              },
+              {
+                path: 'notes',
+                model: notesModel, 
+              },
+        ]
+          });
         return {
             weekData,
             response: weekData.length ? {

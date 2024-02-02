@@ -1004,9 +1004,9 @@ declare global {
 
   interface SpinnerProps {
     colors: string[]; 
-    width: string;
-    height: string;
-    theme: 'dark' | 'light';
+    width?: string;
+    height?: string;
+    theme?: 'dark' | 'light';
   }
 }
 export { };
