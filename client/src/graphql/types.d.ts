@@ -335,6 +335,8 @@ declare global {
     successMsg?: string;
     isAnswered?: boolean;
     isCorrect?: boolean;
+    className?: string;
+    index?: number;
   }
 
   type QuestionSelectedValueType = {
@@ -1001,6 +1003,13 @@ declare global {
     },
     image?: string | ArrayBuffer;
     rejectReason?: string
+  }
+
+  interface SpinnerProps {
+    colors: string[]; 
+    width: string;
+    height: string;
+    theme: 'dark' | 'light';
   }
 }
 export { };

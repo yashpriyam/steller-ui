@@ -74,5 +74,7 @@
     "reset": "Reset",
     "submit": "Submit",
     "submitting": "Submitting...",
-    "upload_image": "Upload"
+    "upload_image": "Upload",
+    "schedule_header":"Schedule Page",
+    "totalQuestions":"Total Questions"
 }

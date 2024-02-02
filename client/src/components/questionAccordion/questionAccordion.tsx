@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import Accordion from '../accordion/accordion';
-import './questionAccordion.scss';
-import { Checkbox } from '../checkbox/checkbox';
-import { Button } from '../button/button';
-import { InputComponent } from '../../components/input/inputComponent';
-import CodeBlock from '../../components/codeBlock/codeBlock';
+import { useState } from "react";
+import Accordion from "../accordion/accordion";
+import "./questionAccordion.scss";
+import { Checkbox } from "../checkbox/checkbox";
+import { Button } from "../button/button";
+import { InputComponent } from "../../components/input/inputComponent";
+import CodeBlock from "../../components/codeBlock/codeBlock";
 
 const QuestionAccordion = ({
   questionData,
@@ -13,11 +13,13 @@ const QuestionAccordion = ({
   successMsg,
   isAnswered,
   isCorrect,
+  className,
+  index
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
-  const [fillupValue, setFillupValue] = useState<string>('');
-  const isFillupType = questionType === 'fillup';
+  const [fillupValue, setFillupValue] = useState<string>("");
+  const isFillupType = questionType === "fillup";
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const isSubmitBtnDisabled: boolean = isFillupType
     ? !fillupValue
@@ -30,8 +32,8 @@ const QuestionAccordion = ({
 
   return (
     <Accordion
-      className={`question-title`}
-      title={<div className="question-title">{title[0]?.text}</div>}
+      className={`question-title ${className}`}
+      title={<div className="question-title">{`${(index||index===0)&&index+1}. ${title[0]?.text}`}</div>}
     >
       <div className="question-accordion-container">
         <div className="question-container">
@@ -56,7 +58,7 @@ const QuestionAccordion = ({
               )}
             </div>
           ))}
-          {questionData.questionType === 'codeblock' && (
+          {questionData.questionType === "codeblock" && (
             <CodeBlock questionData={questionData} />
           )}
           <div className="question-option-container">
@@ -68,7 +70,7 @@ const QuestionAccordion = ({
                 value={fillupValue}
               />
             ) : (
-              questionData.questionType !== 'codeblock' && (
+              questionData.questionType !== "codeblock" && (
                 <Checkbox
                   onSelect={(index, selectedValues) =>
                     setSelectedValues(Object.values(selectedValues))
@@ -76,7 +78,7 @@ const QuestionAccordion = ({
                   isIncorrect={isAnswered && !isCorrect}
                   options={options}
                   className="question-checkbox"
-                  type={isFillupType ? 'multi' : 'single'}
+                  type={isFillupType ? "multi" : "single"}
                 />
               )
             )}
@@ -89,7 +91,7 @@ const QuestionAccordion = ({
               <div className="question-incorrect-ans">{errorMsg}</div>
             ))}
           {isAnswered && isFillupType && <iframe src={fillupValue}></iframe>}
-          {questionData.questionType !== 'codeblock' && (
+          {questionData.questionType !== "codeblock" && (
             <div className="question-submit-btn-wrapper">
               <Button
                 isLoading={isLoading}

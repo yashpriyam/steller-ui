@@ -1,4 +1,4 @@
-import { getFirstLettersOfName, getRandomColor } from "../utils/index";
+import { getFirstLettersOfName, getProfileRandomColorFromLocalStorage } from "../utils/index";
 interface NameIconProps {
   height?: string;
   width?: string;
@@ -12,7 +12,7 @@ export const NameIcon: React.FC<NameIconProps> = ({
   name = "",
 }: NameIconProps) => {
   const acronymName = getFirstLettersOfName(name);
-  const randomColor = getRandomColor();
+  const randomColor = getProfileRandomColorFromLocalStorage();
   return (
     <span
       style={{

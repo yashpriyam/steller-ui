@@ -6,19 +6,19 @@
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
-  gap: 30px;
+  gap: 15px;
   background-color: $primaryBgColor;
   font-family: $primaryFontFamily;
   color: $primaryTextColor;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 
-  .schedule-page-meet-container{
+  .schedule-page-meet-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    .schedule-page-meet-btn{
+    .schedule-page-meet-btn {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -29,7 +29,9 @@
       cursor: pointer;
     }
   }
-
+  .schedule-page-header {
+    font-size: 30px;
+  }
   .scheduling-page-accordion {
     width: 100%;
     padding-top: 0;
@@ -60,7 +62,7 @@
         padding: 10px;
 
         .day-container {
-          display: flex;  
+          display: flex;
           color: $primaryColor;
           padding: 10px;
           border-radius: 7px;
@@ -71,7 +73,7 @@
           display: flex;
           flex-direction: column;
           gap: 12px;
-          &:hover{
+          &:hover {
             cursor: pointer;
           }
           .day-header {
@@ -79,7 +81,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            @media (max-width:$screenSm){
+            @media (max-width: $screenSm) {
               flex-direction: column;
             }
 
@@ -88,7 +90,7 @@
               gap: 10px;
               position: relative;
               font-size: $smallFontSize;
-              @media (max-width:$screenSm ){
+              @media (max-width: $screenSm) {
                 font-size: $extraSmallFontSize;
               }
               .topic-tag {
@@ -99,7 +101,7 @@
                 &:hover {
                   transform: scale(110%);
                 }
-                @media (max-width:$screenSm ){
+                @media (max-width: $screenSm) {
                   padding: 2px 3px;
                 }
               }
@@ -145,10 +147,10 @@
             gap: 5px;
             flex-wrap: wrap;
             width: 45vw;
-            .button.join-meet-btn{
+            .button.join-meet-btn {
               border: 1px solid $success-500;
               background-color: $success-800;
-              &:hover{
+              &:hover {
                 color: $primaryColor;
                 border: 1px solid $success-200;
                 background-color: $success-800;
@@ -227,7 +229,7 @@
       .accordion-content-wrapper {
         .daylist-container {
           padding: 10px 0px;
-          
+
           .day-container {
             border-radius: 10px;
             padding: 10px;
