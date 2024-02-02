@@ -7,21 +7,26 @@ import { useUser } from "../../redux/actions/userAction";
 import InstallmentList from "../../components/installmentList/installmentList";
 import { Button } from "../../components/button/button";
 import { useTranslation } from "react-i18next";
+import Spinner from "../../components/spinner/spinner";
 
 const UserPaymentPage: React.FC = () => {
   const [selectedFeePlan, setSelectedFeePlan] = useState<string | null>(null);
-  const [isLoading , setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const { userPayments, getUserPayments } = useUserPayments();
-  const { feePlans, getFeePlans  } = useFeePlans();
-  const { updateUserInfo, getUserData, user, isLoading: isUserUpdating } = useUser();
+  const { feePlans, getFeePlans } = useFeePlans();
+  const {
+    updateUserInfo,
+    getUserData,
+    user,
+    isLoading: isUserUpdating,
+  } = useUser();
   const { t } = useTranslation();
 
   const getData = async () => {
     await getUserPayments("");
     await getFeePlans(user?.userData?.batchCode ?? "");
   };
-
 
   useEffect(() => {
     getData();
@@ -32,52 +37,63 @@ const UserPaymentPage: React.FC = () => {
   )[0];
 
   return (
-    <div className="user-payment-page">
-      <h1>User Payment Page</h1>
-      {!Boolean(user?.userData?.feePlan)  ? (
-        <div className="fee-plan-card">
-          {Boolean(feePlans?.length) &&
-            feePlans?.map((feePlan) => (
-              <div key={feePlan.name}>
-                <input
-                  type="radio"
-                  id={feePlan.name}
-                  name="feePlanRadio"
-                  value={feePlan.name}
-                  checked={selectedFeePlan === feePlan._id}
-                  onChange={() => setSelectedFeePlan(feePlan._id ?? "")}
-                />
-                <label htmlFor={feePlan.name}>
-                  <PaymentCard feePlan={feePlan}/>
-                </label>
-              </div>
-            ))}
-          {Boolean(feePlans?.length) && (
-            <div className="button-wrapper">
-                <Button
-          className="button"
-           text={t("add_payment_plan")}
-            isDisabled={!Boolean(selectedFeePlan) ?? true}
-            onClick={async () => {
-              selectedFeePlan &&
-                updateUserInfo({ feePlan: selectedFeePlan });
-            }}
-           isLoading={isUserUpdating}
-      />
+    <>
+      {Boolean(feePlans?.length && userPayments?.userPayments?.length) ? (
+        <div className="user-payment-page">
+          <h1>{t('User Payment Page')}</h1>
+          {!Boolean(user?.userData?.feePlan) ? (
+            <div className="fee-plan-card">
+              {Boolean(feePlans?.length) &&
+                feePlans?.map((feePlan) => (
+                  <div key={feePlan.name}>
+                    <input
+                      type="radio"
+                      id={feePlan.name}
+                      name="feePlanRadio"
+                      value={feePlan.name}
+                      checked={selectedFeePlan === feePlan._id}
+                      onChange={() => setSelectedFeePlan(feePlan._id ?? "")}
+                    />
+                    <label htmlFor={feePlan.name}>
+                      <PaymentCard feePlan={feePlan} />
+                    </label>
+                  </div>
+                ))}
+              {Boolean(feePlans?.length) && (
+                <div className="button-wrapper">
+                  <Button
+                    className="button"
+                    text={t("add_payment_plan")}
+                    isDisabled={!Boolean(selectedFeePlan) ?? true}
+                    onClick={async () => {
+                      selectedFeePlan &&
+                        updateUserInfo({ feePlan: selectedFeePlan });
+                    }}
+                    isLoading={isUserUpdating}
+                  />
+                </div>
+              )}
+            </div>
+          ) : (
+            <div>
+              <InstallmentList
+                allInstallment={userFeePlan?.installments ?? []}
+                userIntsallment={userPayments?.userPayments ?? []}
+                userFeePlan={userFeePlan}
+                setIsLoading={setIsLoading}
+              />
             </div>
           )}
         </div>
       ) : (
-        <div>
-          <InstallmentList
-            allInstallment={userFeePlan?.installments ?? []}
-            userIntsallment={userPayments?.userPayments ?? []}
-            userFeePlan={userFeePlan}
-            setIsLoading={setIsLoading}
-          />
-        </div>
+        <Spinner
+          colors={["#D5B9B2", "#A26769", "#6D2E46"]}
+          theme="dark"
+          height="300px"
+          width="300px"
+        />
       )}
-    </div>
+    </>
   );
 };
 
