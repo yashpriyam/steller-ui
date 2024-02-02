@@ -51,7 +51,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
       <div className="schedule-page-header">{t("schedule_header") }</div>
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (
-          <Spinner colors={["#D5B9B2", "#A26769", "#6D2E46"]}/>
+          <Spinner />
         ) : (
           Boolean(weekList?.length) &&
           weekList.map((week, index) => {
