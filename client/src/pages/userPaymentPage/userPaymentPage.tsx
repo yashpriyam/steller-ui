@@ -40,7 +40,7 @@ const UserPaymentPage: React.FC = () => {
     <>
       {Boolean(feePlans?.length && userPayments?.userPayments?.length) ? (
         <div className="user-payment-page">
-          <h1>User Payment Page</h1>
+          <h1>{t('User Payment Page')}</h1>
           {!Boolean(user?.userData?.feePlan) ? (
             <div className="fee-plan-card">
               {Boolean(feePlans?.length) &&
