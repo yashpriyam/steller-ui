@@ -7,6 +7,7 @@ import { useAppData } from "./AppData";
 import { useLocation } from "react-router-dom";
 import { Modal } from "./components/Modal/modal";
 import { Login } from "./components/Login/login";
+import { BackButton } from "./components/backButton/backButton";
 
 const App = () => {
   const { sidebarData, monorepoPaths, isLoginModalOpen, setIsLoginModalOpen, isLoggedIn } = useAppData();
@@ -22,6 +23,7 @@ const App = () => {
         isLoginModalOpen && (<Modal> <Login closeModal={() => setIsLoginModalOpen(false)} /> </Modal>)
       }
       <div className={`app-section ${isLoggedIn && isNotMonorepoPath && 'portal-app-section'} ${!isLoggedIn && 'app-log-out' }`}>
+            <BackButton/>
         <RouteList />
         <MonorepoIndex />
       </div>

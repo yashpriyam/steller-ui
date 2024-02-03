@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { isCurrentDate } from "../../utils/index";
 import Spinner from "../../components/spinner/spinner";
+import { useMeeting } from "../../redux/actions/meetingAction";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
 
 const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
@@ -21,6 +22,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
   const { weekList, isScheduleDataLoading } = weekData;
+  const { getMeeting } = useMeeting();
+  const [meetingData, setMeetingData] = useState<MeetingDataType | null>(null);
 
   const handleNavigation = (
     e: React.MouseEvent<HTMLElement>,
@@ -35,8 +38,22 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
     navigate("/dashboard");
   };
 
+  const onJoinTodayClassMeetClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigate("/meet/class",  { state: { meetingData } });
+  }
+
+  const getTodayClassMeeting = async() => {
+    const { status, response } = await getMeeting('class');
+    const meetingDetails = response?.data?.getMeeting?.meetingData;
+    if(status === 200 && meetingDetails){
+      setMeetingData(meetingDetails);
+    }
+  }
+
   useEffect(() => {
     getScheduleData({});
+    getTodayClassMeeting();
   }, []);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
@@ -94,8 +111,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             className="day-container"
                             onClick={(e: React.MouseEvent<HTMLElement>) => {
                               handleNavigation(
-                                e
-                                // `/day/${dayNumber}?weekNumber=${weekNumber}`
+                                e,
+                                `/day/${dayNumber}?weekNumber=${weekNumber}`
                                 // commented navigation to dayPage until data is inserted to it.
                               );
                             }}
@@ -108,6 +125,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                     ?.slice(0, 2)
                                     .map((tag: string, idx: number) => (
                                       <span
+                                        key={idx}
                                         className={`topic-tag ${tag.toLowerCase()}`}
                                       >
                                         {tag.toUpperCase()}
@@ -176,13 +194,11 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 positionOfCountLabel="outside"
                                 isDisabled={!notes?.length}
                               />
-                              {date && isCurrentDate(date) ? (
+                              {date && meetingData && isCurrentDate(date) ? (
                                 <Button
                                   text={t("join_todays_class")}
                                   className="button join-meet-btn"
-                                  onClick={(e) => {
-                                    handleNavigation(e, `/meet/class`);
-                                  }}
+                                  onClick={onJoinTodayClassMeetClick}
                                 />
                               ) : (
                                 <Button
