@@ -5,7 +5,7 @@ import { Checkbox } from "../checkbox/checkbox";
 import { Button } from "../button/button";
 import { InputComponent } from "../../components/input/inputComponent";
 import CodeBlock from "../../components/codeBlock/codeBlock";
-import { CheckedIcon} from "../../icons/index";
+import { CheckedIcon } from "../../icons/CheckedIcon";
 import { useUserCode } from "../../redux/actions/userCodeActions";
 
 const QuestionAccordion = ({
@@ -16,7 +16,7 @@ const QuestionAccordion = ({
   isAnswered,
   isCorrect,
   className,
-  index
+  index,
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
@@ -35,19 +35,25 @@ const QuestionAccordion = ({
   const questionId = questionData?._id;
   const codeBlockSubmittedDate = userCodeData?.userCode?.find(
     (element) => element.questionId === questionId
-  );  
+  );
   return (
     <Accordion
       className={`question-title ${className}`}
       title={
         <div className="question-title-wrapper">
           <div className="question-title">
-            {`${(index || index === 0) && index + 1}. ${title[0]?.text}`} 
+            {`${(index || index === 0) && index + 1}. ${title[0]?.text}`}
           </div>
-          <div className={`checked-icon ${(isAnswered||Boolean(codeBlockSubmittedDate)) ? "checked-true": "checked-false"}`}>
+          <div
+            className={`checked-icon ${
+              isAnswered || Boolean(codeBlockSubmittedDate)
+                ? "checked-true"
+                : "checked-false"
+            }`}
+          >
             <CheckedIcon />
           </div>
-        </div> 
+        </div>
       }
     >
       <div className="question-accordion-container">
