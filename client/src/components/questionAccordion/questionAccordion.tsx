@@ -42,7 +42,7 @@ const QuestionAccordion = ({
       title={
         <div className="question-title-wrapper">
           <div className="question-title">
-            {`${(index || index === 0) && index + 1}. ${title[0]?.text}`}{" "}
+            {`${(index || index === 0) && index + 1}. ${title[0]?.text}`} 
           </div>
           <div className={`checked-icon ${(isAnswered||Boolean(codeBlockSubmittedDate)) ? "checked-true": "checked-false"}`}>
             <CheckedIcon />
