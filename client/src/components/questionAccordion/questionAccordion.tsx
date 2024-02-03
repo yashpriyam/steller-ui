@@ -37,8 +37,9 @@ const QuestionAccordion = ({
     >
       <div className="question-accordion-container">
         <div className="question-container">
+          <div key={index} className="question-title-sub-container">
           {title.map((titleData: QuestionOptionType, index: number) => (
-            <div key={index} className="question-title-sub-container">
+            <>
               {Boolean(index) && (
                 <div className="question-title-text">{titleData.text}</div>
               )}
@@ -56,8 +57,9 @@ const QuestionAccordion = ({
                   src={titleData.iframe}
                 ></iframe>
               )}
-            </div>
+              </>
           ))}
+            </div>
           {questionData.questionType === "codeblock" && (
             <CodeBlock questionData={questionData} />
           )}
