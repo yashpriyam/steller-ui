@@ -1,12 +1,11 @@
 import "./userPage.scss";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useUser } from "../../redux/actions/userAction";
-import { UserInfoSubCard } from "../../components/userInfoSubCard/userInfoSubCard";
 import { Button } from "../../components/button/button";
 import { useTranslation } from "react-i18next";
 import { UploadImage } from "../../components/uploadImage/uploadImage";
 import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
-import { PenIcon } from "../../icons/index";
+import { UserInfoCard } from "../../components/userInfoCard/userInfoCard";
 
 const UserPage: React.FC<UserPagePropsInterFace> = ({
   className,
@@ -18,13 +17,11 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
     useState<SecondaryUserSchemaType>();
   const [isFormEditing, setIsFormEditing] = useState<boolean>(false);
   const [showMore, setShowMore] = useState<boolean>(false);
-  const [showProfileImageOption, setShowProfileImageOption] =
-    useState<boolean>(false);
   const [formTextValues, setFormTextValues] =
     useState<SecondaryUserSchemaType>();
   const [userPictureUrl, setUserPictureUrl] = useState<string>("");
-
-  const { user, updateUserInfo, updateProfilePicture } = useUser();
+  const [apiLoading, setApiLoading] = useState<{uploadImage:boolean, updateUserInfo: boolean}>({uploadImage:false, updateUserInfo: false});
+  const { user, updateUserInfo, updateProfilePicture, getUserData } = useUser();
   const { userData } = user || {};
   const {
     email,
@@ -76,10 +73,12 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
     batchCode: true,
   };
   const updateUserInfoRequest = async () => {
+    setApiLoading({...apiLoading, updateUserInfo: true});
     await updateUserInfo({
       ...mainDetailsOfUserData,
       ...otherDetailsOfUserData,
     });
+    setApiLoading({...apiLoading, updateUserInfo: false});
   };
   const setInitialDataInState = () => {
     if (Boolean(userData)) {
@@ -99,7 +98,6 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
       });
     }
     setIsFormEditing(false);
-    setShowProfileImageOption(false);
     handleOnClickDeleteImage();
   };
   const handleFormEditing = () => {
@@ -107,7 +105,6 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
     setMainDetailsOfUserData({ ...mainDetailsOfUserData });
     setOtherDetailsOfUserData({ ...otherDetailsOfUserData });
     secureUrl && setUserPictureUrl(secureUrl);
-    setShowProfileImageOption(true);
   };
   const handleOnImageClick = async (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -116,15 +113,17 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
         const response = await readFileAsDataURL(files[0]);
         setUserPictureUrl(typeof response === "string" ? response : "");
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   };
   const handleImageUpdation = async () => {
-    const res = await updateProfilePicture(userPictureUrl, 1, "name");
+    setApiLoading({...apiLoading, uploadImage: true});
+    await updateProfilePicture(userPictureUrl, 1, "name");
+    setApiLoading({...apiLoading, uploadImage: false});
   };
   const handleOnClickDeleteImage = () => {
-    setUserPictureUrl("");
+    secureUrl ? setUserPictureUrl(secureUrl) : setUserPictureUrl("");
     const fileInput = document.getElementById(
       "file-type-img"
     ) as HTMLInputElement;
@@ -134,8 +133,9 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
   };
 
   useEffect(() => {
-    setInitialDataInState();
+   (!mainDetailsOfUserData || !otherDetailsOfUserData) && setInitialDataInState();
     setFormTextValues(newFormTextValues);
+    // getUserData();
   }, [userData]);
   return (
     <div className={`user-account-main-container ${className}`}>
@@ -152,11 +152,6 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
               onChange={handleOnImageClick}
             />
           )}
-        {/* {showProfileImageOption && (
-          <span className="profile-image-option-tool">
-            <PenIcon />
-          </span>
-        )} */}
         </div>
 
         <div className="user-account-header-container-right-side">
@@ -167,6 +162,7 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
                 text={t("upload_image")}
                 className="user-profile-edit-button"
                 onClick={handleImageUpdation}
+                isLoading={apiLoading.uploadImage}
               />
             )}
             <Button
@@ -177,6 +173,7 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
                 isFormEditing ? updateUserInfoRequest : handleFormEditing
               }
               text={isFormEditing ? t("save") : t("edit_profile")}
+              isLoading={apiLoading.updateUserInfo}
             />
             {isFormEditing && (
               <Button
@@ -189,35 +186,15 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
         </div>
       </div>
       <div className="user-account-container">
-        {mainDetailsOfUserData &&
-          Object.entries(mainDetailsOfUserData)?.map(([key, value], idx) => {
-            if (!nonEditedableFields[key]) {
-              return (
-                <UserInfoSubCard
-                  text={formTextValues ? `${formTextValues[key]}` : key}
-                  value={value}
-                  editing={isFormEditing}
-                  userInputValue={mainDetailsOfUserData}
-                  field={key}
-                  onChange={handleMainDetailsOfUserData}
-                  key={idx}
-                  errorMessage={
-                    key === "phoneNumber"
-                      ? "phone number must contain 10 digits only"
-                      : "error"
-                  }
-                />
-              );
-            } else {
-              return (
-                <UserInfoSubCard
-                  text={formTextValues ? `${formTextValues[key]}` : key}
-                  value={value}
-                  key={idx}
-                />
-              );
-            }
-          })}
+        {mainDetailsOfUserData && (
+          <UserInfoCard
+            datalist={mainDetailsOfUserData}
+            nonEditedableFields={nonEditedableFields}
+            formTextValues={formTextValues}
+            editing={isFormEditing}
+            onChange={handleMainDetailsOfUserData}
+          />
+        )}
       </div>
       <div className="user-account-more-info-container">
         <div
@@ -238,31 +215,15 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
             showMore && "user-account-more-info-wrapper-display"
           }`}
         >
-          {otherDetailsOfUserData &&
-            Object.entries(otherDetailsOfUserData)?.map(([key, value], idx) => {
-              if (!nonEditedableFields[key]) {
-                return (
-                  <UserInfoSubCard
-                    text={formTextValues ? `${formTextValues[key]}` : key}
-                    value={value}
-                    editing={isFormEditing}
-                    userInputValue={otherDetailsOfUserData}
-                    field={key}
-                    onChange={handleOtherDetailsOfUserData}
-                    autoFocus={idx === 0}
-                    key={idx}
-                  />
-                );
-              } else {
-                return (
-                  <UserInfoSubCard
-                    text={formTextValues ? `${formTextValues[key]}` : key}
-                    value={value}
-                    key={idx}
-                  />
-                );
-              }
-            })}
+          {otherDetailsOfUserData && (
+            <UserInfoCard
+              datalist={otherDetailsOfUserData}
+              nonEditedableFields={nonEditedableFields}
+              formTextValues={formTextValues}
+              editing={isFormEditing}
+              onChange={handleOtherDetailsOfUserData}
+            />
+          )}
         </div>
       </div>
     </div>

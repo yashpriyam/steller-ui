@@ -194,6 +194,7 @@ export const useUser = () => {
   };
   const updateProfilePicture = async (image : string,size : number ,name : string) =>{
     try {
+      setIsLoading(true);
       const response = await apolloClient.mutate({
         mutation: UPLOAD_PROFILE_IMAGE,
         variables: {
@@ -203,6 +204,8 @@ export const useUser = () => {
       return response;
     } catch (error) {
       console.log(error)
+    } finally {
+      setIsLoading(false)
     }
   }
 
