@@ -12,7 +12,17 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
   isLoading,
 }) => {
   const { createUserPayment } = useUser();
+  const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  const openImagePreview = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setIsImagePreviewOpen(true);
+  };
+  const closeImagePreview = () => {
+    setSelectedImage(null);
+    setIsImagePreviewOpen(false);
+  };
   const paidInstallments = allInstallment
     ?.filter((installment) =>
       userIntsallment?.some(
@@ -83,7 +93,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
           <div className="installment-cards">
             <ul className="installment-item-container">
               {paidInstallments?.map((installment) => (
-                <li key={installment.id} className={`installment-item`}>
+               <> <li key={installment.id} className={`installment-item`}>
                   <p className="installment-info">
                     <span className="installment-elem">
                       Amount: {installment.amount}
@@ -108,8 +118,55 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
                     className={`installment-image ${getStatusClassName(
                       installment
                     )}`}
+                    onClick={() => openImagePreview(installment?.image?.secureUrl)}
                   />
+                   {isImagePreviewOpen && (
+                      <div className="image-preview-modal" onClick={closeImagePreview}>
+                        <img
+                          className="preview-image"
+                          src={selectedImage|| ""}
+                          alt="Image Preview"
+                        />
+                      </div>
+                      )}
                 </li>
+                <li key={installment.id} className={`installment-item`}>
+                <p className="installment-info">
+                  <span className="installment-elem">
+                    Amount: {installment.amount}
+                  </span>
+                  <span className="installment-elem">
+                    Sequence: {installment.sequence}
+                  </span>
+                  <span className="installment-elem">
+                    Due Date: {installment?.dueDate?.toString()}
+                  </span>
+                  <span
+                    className={`installment-status installment-elem ${getStatusClassName(
+                      installment
+                    )}`}
+                  >
+                    Status: {getStatusClassName(installment).toUpperCase()}
+                  </span>
+                </p>
+                <img
+                  src={installment?.image?.secureUrl}
+                  alt="fee plan"
+                  className={`installment-image ${getStatusClassName(
+                    installment
+                  )}`}
+                  onClick={() => openImagePreview(installment?.image?.secureUrl)}
+                />
+                 {isImagePreviewOpen && (
+                    <div className="image-preview-modal" onClick={closeImagePreview}>
+                      <img
+                        className="preview-image"
+                        src={selectedImage|| ""}
+                        alt="Image Preview"
+                      />
+                    </div>
+                    )}
+              </li></>
               ))}
             </ul>
           </div>
@@ -120,14 +177,33 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
         <div className="unpaid-installments">
           <h2 className="installment-heading">Unpaid Installments</h2>
           <div className="installment-cards">
-            <ul className="installment-item-constainer">
+            <ul className="installment-item-container">
               {unpaidInstallments?.map((installment) => (
-                <InstallmentItem
+               <> <InstallmentItem
                   key={installment.id}
                   installment={installment}
                   handlePayNow={handlePayNow}
                   isLoading={isLoading}
                 />
+                 <InstallmentItem
+                  key={installment.id}
+                  installment={installment}
+                  handlePayNow={handlePayNow}
+                  isLoading={isLoading}
+                />
+                 <InstallmentItem
+                  key={installment.id}
+                  installment={installment}
+                  handlePayNow={handlePayNow}
+                  isLoading={isLoading}
+                />
+                 <InstallmentItem
+                  key={installment.id}
+                  installment={installment}
+                  handlePayNow={handlePayNow}
+                  isLoading={isLoading}
+                />
+                </>
               ))}
             </ul>
           </div>
