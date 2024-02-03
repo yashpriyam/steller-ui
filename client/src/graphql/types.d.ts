@@ -336,7 +336,7 @@ declare global {
     isAnswered?: boolean;
     isCorrect?: boolean;
     className?: string;
-    index?: number;
+    questionNumber?: number;
   }
 
   type QuestionSelectedValueType = {

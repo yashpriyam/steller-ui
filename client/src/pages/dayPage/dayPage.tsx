@@ -230,6 +230,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
                     >
                       <QuestionAccordion
                         key={index}
+                        questionNumber={index + 1}
                         questionData={questionData}
                         onSubmit={onSubmit}
                         isLoading={isLoading}
