@@ -336,7 +336,7 @@ declare global {
     isAnswered?: boolean;
     isCorrect?: boolean;
     className?: string;
-    index?: number;
+    questionNumber?: number;
   }
 
   type QuestionSelectedValueType = {
@@ -496,6 +496,7 @@ declare global {
     width?: string;
     isDarkMode?: boolean;
     fillColor?: string;
+    className?: string;
   }
 
   interface SidebarOptionInterface {

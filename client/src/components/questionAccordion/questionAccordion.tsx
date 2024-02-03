@@ -5,6 +5,8 @@ import { Checkbox } from "../checkbox/checkbox";
 import { Button } from "../button/button";
 import { InputComponent } from "../../components/input/inputComponent";
 import CodeBlock from "../../components/codeBlock/codeBlock";
+import { CheckedIcon } from "../../icons/CheckedIcon";
+import { useUserCode } from "../../redux/actions/userCodeActions";
 
 const QuestionAccordion = ({
   questionData,
@@ -14,7 +16,7 @@ const QuestionAccordion = ({
   isAnswered,
   isCorrect,
   className,
-  index
+  questionNumber,
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
@@ -29,35 +31,61 @@ const QuestionAccordion = ({
     await onSubmit(questionData, selectedValues);
     setIsLoading(false);
   };
-
+  const { userCodeData } = useUserCode();
+  const questionId = questionData?._id;
+  const codeBlockSubmittedDate = userCodeData?.userCode?.find(
+    (element) => element.questionId === questionId
+  );
   return (
     <Accordion
       className={`question-title ${className}`}
-      title={<div className="question-title">{`${(index||index===0)&&index+1}. ${title[0]?.text}`}</div>}
+      title={
+        <div className="question-title-wrapper">
+          <div className="question-title">
+            {questionNumber
+              ? `${
+                  questionNumber < 10 ? `0${questionNumber}` : questionNumber
+                }.`
+              : ""}{" "}
+            {`${title[0]?.text}`}
+          </div>
+          <div
+            className={`checked-icon ${
+              isAnswered || Boolean(codeBlockSubmittedDate)
+                ? "checked-true"
+                : "checked-false"
+            }`}
+          >
+            <CheckedIcon />
+          </div>
+        </div>
+      }
     >
       <div className="question-accordion-container">
         <div className="question-container">
-          {title.map((titleData: QuestionOptionType, index: number) => (
-            <div key={index} className="question-title-sub-container">
-              {Boolean(index) && (
-                <div className="question-title-text">{titleData.text}</div>
-              )}
-              {titleData?.imageUrl && (
-                <img
-                  className="question-title-img"
-                  src={titleData.imageUrl}
-                  alt=""
-                />
-              )}
-              {titleData?.iframe && (
-                <iframe
-                  className="question-accordion-head-iframe"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  src={titleData.iframe}
-                ></iframe>
-              )}
-            </div>
-          ))}
+          <div key={questionNumber} className="question-title-sub-container">
+            {title.map((titleData: QuestionOptionType, index: number) => (
+              <>
+                {Boolean(index) && (
+                  <div className="question-title-text">{titleData.text}</div>
+                )}
+                {titleData?.imageUrl && (
+                  <img
+                    className="question-title-img"
+                    src={titleData.imageUrl}
+                    alt=""
+                  />
+                )}
+                {titleData?.iframe && (
+                  <iframe
+                    className="question-accordion-head-iframe"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    src={titleData.iframe}
+                  ></iframe>
+                )}
+              </>
+            ))}
+          </div>
           {questionData.questionType === "codeblock" && (
             <CodeBlock questionData={questionData} />
           )}
