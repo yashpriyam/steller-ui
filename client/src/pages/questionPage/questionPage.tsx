@@ -22,10 +22,7 @@ const QuestionPage = () => {
     description = state?.description;
     title = state?.title
       ? state.title
-      : `${t("title", { title: t("week") })} ${Number(weekNumber) - 1}`;;
-
-  console.log({ description, title });
-
+      : `${t("title", { title: t("week") })} ${Number(weekNumber) - 1}`;
   const onSubmit = async (
     question: QuestionDataType,
     selectedValues: QuestionSelectedValueType[]
