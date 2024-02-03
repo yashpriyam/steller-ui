@@ -76,5 +76,6 @@
     "submitting": "Submitting...",
     "upload_image": "Upload",
     "schedule_header":"Schedule Page",
-    "totalQuestions":"Total Questions"
+    "totalQuestions":"Total Questions",
+    "back": "Back"
 }

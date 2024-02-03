@@ -1,0 +1,19 @@
+@import '../../components/variables.scss';
+
+.back-button {
+    padding: 10px 20px 10px 20px;
+    margin: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    background-color: $secondaryBgColor;
+    color: $sencondaryBg;
+    font-weight: bold;
+    border: 1px solid $primaryBg;
+    &:disabled {
+      cursor: default;
+      opacity: 0.6;
+    }
+  }
+  
