@@ -5,7 +5,7 @@ import { Checkbox } from "../checkbox/checkbox";
 import { Button } from "../button/button";
 import { InputComponent } from "../../components/input/inputComponent";
 import CodeBlock from "../../components/codeBlock/codeBlock";
-import CheckedIcon from "../../icons/CheckedIcon";
+import { CheckedIcon} from "../../icons/index";
 import { useUserCode } from "../../redux/actions/userCodeActions";
 
 const QuestionAccordion = ({

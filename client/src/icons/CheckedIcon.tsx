@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
-const CheckedIcon: FC<SvgIconProps> = ({
+export const CheckedIcon: FC<SvgIconProps> = ({
   height = "25px",
   width = "25px",
   className,
@@ -24,5 +24,3 @@ const CheckedIcon: FC<SvgIconProps> = ({
     </g>
   </svg>
 );
-
-export default CheckedIcon;
