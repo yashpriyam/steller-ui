@@ -203,7 +203,7 @@ export const useUser = () => {
       })
       return response;
     } catch (error) {
-      console.log(error)
+      console.error(error)
     } finally {
       setIsLoading(false)
     }
