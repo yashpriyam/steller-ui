@@ -496,6 +496,7 @@ declare global {
     width?: string;
     isDarkMode?: boolean;
     fillColor?: string;
+    className?: string;
   }
 
   interface SidebarOptionInterface {
