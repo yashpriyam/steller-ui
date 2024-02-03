@@ -1018,5 +1018,9 @@ declare global {
     onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
     formTextValues?:SecondaryUserSchemaType;
 }
+
+interface NoDataFoundProps {
+  message?: string;
+}
 }
 export { };
