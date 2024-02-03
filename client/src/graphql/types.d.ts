@@ -872,6 +872,7 @@ declare global {
     style?: CSSProperties;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     url?: string;
+    iconFillColor?:string;
   }
   interface UserInfoSubCardPropsInterface {
     editing?: boolean;
@@ -1010,5 +1011,12 @@ declare global {
     height: string;
     theme: 'dark' | 'light';
   }
+  interface UserInfoCardPropsInterface {
+    datalist: SecondaryUserSchemaType;
+    nonEditedableFields: nonEditableUserSchemaFieldsType;
+    editing?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
+    formTextValues?:SecondaryUserSchemaType;
+}
 }
 export { };
