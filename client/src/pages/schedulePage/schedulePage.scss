@@ -44,12 +44,15 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 30px;
+      gap: 15px;
 
       .week-description {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        font-size: $titleFontSize;
+        justify-content: left;
+        flex-wrap: wrap;
+        font-size: $largerFontSize;
         color: $sencondaryTextColor;
       }
 
@@ -60,14 +63,14 @@
         flex-wrap: wrap;
         gap: 10px;
         padding: 10px;
-
+        width: 100%;
         .day-container {
           display: flex;
           color: $primaryColor;
           padding: 10px;
           border-radius: 7px;
           border: 1px solid $videoHutBorderColor;
-          width: 48vw;
+          width: 100%;
           background-color: $Gray35;
           transition: all 0.3s;
           display: flex;
@@ -82,7 +85,7 @@
             justify-content: space-between;
             width: 100%;
             @media (max-width: $screenSm) {
-              flex-direction: column;
+              width: 100%;
             }
 
             .topic-tags {
@@ -133,20 +136,21 @@
             }
           }
           .day-title {
-            font-size: $textFontSize;
+            font-size: $mediumFontSize;
             font-family: $secondaryFontFamily;
           }
 
           .day-description {
             color: $sencondaryTextColor;
             font-size: $largerFontSize;
+            width: 100%;
           }
 
           .buttons-wrapper {
             display: flex;
-            gap: 5px;
             flex-wrap: wrap;
-            width: 45vw;
+            gap: 5px;
+            width: 100%;
             .button.join-meet-btn {
               border: 1px solid $success-500;
               background-color: $success-800;
@@ -185,7 +189,7 @@
 
     .accordion-content-wrapper {
       max-width: 100%;
-      padding: 0 20px;
+      padding: 0 20px;  
     }
   }
 }
@@ -201,10 +205,6 @@
       transition: 0.5s;
 
       .accordion-content-wrapper {
-        .week-description {
-          font-size: $largerFontSize;
-        }
-
         .daylist-container {
           padding: 0px 30px;
           padding-bottom: 20px;
@@ -229,21 +229,21 @@
       .accordion-content-wrapper {
         .daylist-container {
           padding: 10px 0px;
-
           .day-container {
             border-radius: 10px;
             padding: 10px;
             width: 100%;
-
             .day-header {
-              flex-direction: column;
               gap: 5px;
               transition: 0.5s;
+              .day-title {
+                width: 100%;
+                justify-content: left;
+              }
             }
             .buttons-wrapper {
               display: flex;
               align-items: center;
-              justify-content: center;
             }
             .day-description {
               font-size: $smallFontSize;

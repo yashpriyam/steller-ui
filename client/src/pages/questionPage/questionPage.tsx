@@ -17,6 +17,7 @@ const QuestionPage = () => {
   const queryParams = new URLSearchParams(location.search);
   const dayNumber = queryParams.get("dayNumber");
   const weekNumber = queryParams.get("weekNumber");
+  const { description, title } = location.state;
   const onSubmit = async (
     question: QuestionDataType,
     selectedValues: QuestionSelectedValueType[]
@@ -46,19 +47,17 @@ const QuestionPage = () => {
         <h1>{t("questions")}</h1>
       </div>
       <div className="question-time">
+        <div className="question-page-description">{`Title: ${description}`}</div>
         {weekNumber && dayNumber && (
           <div>
-            <span>
-              {t("title", { title: t("week") })}
-              {weekNumber}
-            </span>
+            <span>{title}</span>
             <span className="question-day">
               {t("title", { title: t("day") })}
               {dayNumber}
             </span>
           </div>
         )}
-        {questionList?.length && (
+        {Boolean(questionList?.length) && (
           <span>{`${t("totalQuestions")} : ${questionList?.length}`}</span>
         )}
       </div>

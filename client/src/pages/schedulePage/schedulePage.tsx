@@ -23,10 +23,12 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
 
   const handleNavigation = (
     e: React.MouseEvent<HTMLElement>,
-    path?: string
+    path?: string,
+    title?: string,
+    description?: string
   ) => {
     e.stopPropagation();
-    if (path) navigate(path);
+    if (path) navigate(path, { state: { title, description } });
   };
   const onJoinMeetClick = () => {
     navigate("/dashboard");
@@ -47,7 +49,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
           {t("join_meet")}
         </div>
       </div>
-      <div className="schedule-page-header">{t("schedule_header") }</div>
+      <div className="schedule-page-header">{t("schedule_header")}</div>
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (
           <Skeleton
@@ -66,6 +68,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
               title,
               weekNumber,
             } = week;
+
+            const weekTitle = title;
             return (
               isActive && (
                 <Accordion title={title} disabled={isDisabledForUnpaidUsers}>
@@ -148,7 +152,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                 onClick={(e) => {
                                   handleNavigation(
                                     e,
-                                    `/question?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
+                                    `/question?weekNumber=${weekNumber}&dayNumber=${dayNumber}`,
+                                    weekTitle,
+                                    description,
                                   );
                                 }}
                               />
