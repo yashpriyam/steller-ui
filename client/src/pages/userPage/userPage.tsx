@@ -21,7 +21,7 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
     useState<SecondaryUserSchemaType>();
   const [userPictureUrl, setUserPictureUrl] = useState<string>("");
   const [apiLoading, setApiLoading] = useState<{uploadImage:boolean, updateUserInfo: boolean}>({uploadImage:false, updateUserInfo: false});
-  const { user, updateUserInfo, updateProfilePicture, getUserData } = useUser();
+  const { user, updateUserInfo, updateProfilePicture } = useUser();
   const { userData } = user || {};
   const {
     email,
@@ -135,7 +135,6 @@ const UserPage: React.FC<UserPagePropsInterFace> = ({
   useEffect(() => {
    (!mainDetailsOfUserData || !otherDetailsOfUserData) && setInitialDataInState();
     setFormTextValues(newFormTextValues);
-    // getUserData();
   }, [userData]);
   return (
     <div className={`user-account-main-container ${className}`}>
