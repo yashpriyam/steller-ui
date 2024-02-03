@@ -873,6 +873,7 @@ declare global {
     style?: CSSProperties;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     url?: string;
+    iconFillColor?:string;
   }
   interface UserInfoSubCardPropsInterface {
     editing?: boolean;
@@ -1006,10 +1007,17 @@ declare global {
   }
 
   interface SpinnerProps {
-    colors: string[]; 
-    width: string;
-    height: string;
-    theme: 'dark' | 'light';
+    colors?: string[]; 
+    width?: string;
+    height?: string;
+    theme?: 'dark' | 'light';
   }
+  interface UserInfoCardPropsInterface {
+    datalist: SecondaryUserSchemaType;
+    nonEditedableFields: nonEditableUserSchemaFieldsType;
+    editing?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
+    formTextValues?:SecondaryUserSchemaType;
+}
 }
 export { };

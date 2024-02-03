@@ -1,4 +1,4 @@
-import { notesModel } from "@models";
+import { dayModel, notesModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
 
 export const createNotes = async (
@@ -21,8 +21,18 @@ export const createNotes = async (
       dayNumber,
       weekNumber,
       noOfPages,
-      estimatedReadingTime,
+      estimatedReadingTime
     } = notesData;
+
+    const dayResponse = await dayModel.findOne({weekNumber, dayNumber})
+
+    if (!dayResponse) {
+      return {response: {
+          message: localMessages.DAY_MODEL.WEEK_DOES_NOT_EXIST_TO_INSERT_DAY,
+          statusCodes: statusCodes.BAD_REQUEST
+      }}
+  }
+
 
     const createdNotesdata: NotesDataType = await notesModel.create({
       title,
@@ -35,16 +45,18 @@ export const createNotes = async (
       estimatedReadingTime,
     });
 
-    const response: CustomResponseType = createdNotesdata
-      ? {
-          message: NOTES_CREATION_SUCCESS,
-          status: statusCodes.CREATED,
-        }
-      : errorData;
+    if (!createdNotesdata) {
+      return {response: errorData}
+  }
+     dayResponse.notes?.push(createdNotesdata._id)
+     await dayResponse.save()
 
     return {
       notesData: createdNotesdata,
-      response,
+      response: {
+        message: NOTES_CREATION_SUCCESS,
+        status: statusCodes.CREATED,
+      },
     };
   } catch (err) {
     return {

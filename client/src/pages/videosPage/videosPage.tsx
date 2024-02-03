@@ -5,6 +5,7 @@ import { FilterTags } from '../../components/filterTags/filterTags';
 import { useVideos } from '../../redux/actions/videosAction';
 import './videosPage.scss';
 import { useTranslation } from 'react-i18next';
+import Spinner from '../../components/spinner/spinner';
 interface VideosPageProps {
   className?: string;
   filterData?: { tag: string }[];
@@ -36,7 +37,7 @@ const VideosPage: React.FC<VideosPageProps> = ({
       <div className="videos-container">
         <div className="content-title">VIDEOS</div>
         <div className="videos-wrapper">
-          {!videoList?.length && <p>{t('no_videos_found')}</p>}
+          {!videoList?.length && <Spinner />}
           {videoList?.map(
             (video) =>
               (video.topics?.includes(filterTag) || filterTag === '') && (

@@ -141,6 +141,7 @@ declare global {
     estimatedReadingTime?: String;
   };
   type NotesDataType = {
+    _id:string
     title: String;
     link: String;
     topics: [String];
@@ -162,6 +163,7 @@ declare global {
   };
 
   type CreateVideoType = {
+    _id: string;
     title: string;
     description?: string;
     dayNumber: number;
@@ -181,6 +183,7 @@ declare global {
     [key: string]: string;
   };
   type VideoDataType = {
+    _id?: string;
     title?: string;
     description?: string;
     dayNumber?: number;

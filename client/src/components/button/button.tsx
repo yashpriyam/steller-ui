@@ -15,6 +15,8 @@ interface ButtonProps {
   loaderIcon?: string;
   text?: string;
   style?: object;
+  countLabel?: string;
+  positionOfCountLabel?: "inside" | "outside";
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -31,6 +33,8 @@ export const Button: React.FC<ButtonProps> = ({
   isLoading,
   loaderIcon,
   style = {},
+  countLabel,
+  positionOfCountLabel = "inside",
 }: ButtonProps) => {
   const variantMap: Record<string, string> = {
     text: "text-button-style",
@@ -72,9 +76,17 @@ export const Button: React.FC<ButtonProps> = ({
                 <Loader />
               )}
               <span className="loader-right-button loader-button">{text}</span>
+              {countLabel && positionOfCountLabel === "inside" && (
+                <span className="count-label">{countLabel}</span>
+              )}
             </span>
           ) : (
+            <>
             <span>{text}</span>
+            {countLabel && positionOfCountLabel === "outside" && (
+              <span className="count-label-outside">{countLabel}</span>
+            )}
+            </>
           )}
         </button>
       )}

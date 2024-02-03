@@ -1,4 +1,4 @@
-import { videoModel } from "@models";
+import { dayModel, videoModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
 export const createVideo = async (
   parent: undefined,
@@ -25,6 +25,16 @@ export const createVideo = async (
       weekNumber,
     } = videoData;
     const { youtube, webmasters } = links;
+   
+    const dayResponse = await dayModel.findOne({weekNumber, dayNumber, batchCode})
+
+    if (!dayResponse) {
+      return {response: {
+          message: localMessages.DAY_MODEL.WEEK_DOES_NOT_EXIST_TO_INSERT_DAY,
+          status: statusCodes.BAD_REQUEST
+      }}
+  }
+
     const createdVideoData: VideoDataType = await videoModel.create({
       title,
       description,
@@ -40,15 +50,21 @@ export const createVideo = async (
       batchCode,
       weekNumber,
     });
-    return createdVideoData
-      ? {
+
+     if (!createdVideoData) {
+       return { response: errorData }
+     }
+
+     dayResponse.videos?.push(createdVideoData._id!)
+     await dayResponse.save()
+
+    return {
           videoData: createdVideoData,
           response: {
             status: statusCodes.CREATED,
             message: VIDEO_CREATION_SUCCESS,
           },
-        }
-      : { response: errorData };
+        };
   } catch (err) {
     return {
       response: errorData,
