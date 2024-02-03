@@ -16,7 +16,7 @@ const QuestionAccordion = ({
   isAnswered,
   isCorrect,
   className,
-  index
+  questionNumber
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
@@ -42,7 +42,7 @@ const QuestionAccordion = ({
       title={
         <div className="question-title-wrapper">
           <div className="question-title">
-            {`${(index || index === 0) && index + 1}. ${title[0]?.text}`} 
+            { questionNumber ? `${questionNumber < 10 ? `0${questionNumber}` : questionNumber}.` : '' } {`${title[0]?.text}`} 
           </div>
           <div className={`checked-icon ${(isAnswered||Boolean(codeBlockSubmittedDate)) ? "checked-true": "checked-false"}`}>
             <CheckedIcon />

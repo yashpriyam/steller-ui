@@ -76,7 +76,7 @@ const QuestionPage = () => {
           return (
             <QuestionAccordion
               key={index}
-              index={index}
+              questionNumber={index + 1}
               questionData={question}
               onSubmit={onSubmit}
               className="accordian-customize"
