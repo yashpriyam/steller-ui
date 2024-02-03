@@ -1,9 +1,13 @@
 import React, { FC } from "react";
 
-const CheckedIcon: FC<SvgIconProps> = ({height, width,className}:SvgIconProps) => (
+const CheckedIcon: FC<SvgIconProps> = ({
+  height = "25px",
+  width = "25px",
+  className,
+}: SvgIconProps) => (
   <svg
-    height="25px"
-    width="25px"
+    height={height}
+    width={width}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
