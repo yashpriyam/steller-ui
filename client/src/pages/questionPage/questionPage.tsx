@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import "./questionPage.scss";
-import QuestionAccordion from "../../components/questionAccordion/questionAccordion";
-import { useQuestions } from "../../redux/actions/questionAction";
-import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
-import { useUserCode } from "../../redux/actions/userCodeActions";
+import { useEffect } from 'react';
+import './questionPage.scss';
+import QuestionAccordion from '../../components/questionAccordion/questionAccordion';
+import { useQuestions } from '../../redux/actions/questionAction';
+import { useQuestionAttempt } from '../../redux/actions/questionAttemptAction';
+import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
+import { useUserCode } from '../../redux/actions/userCodeActions';
 
 const QuestionPage = () => {
   const { questions, getAllQuestions } = useQuestions();
@@ -15,14 +15,14 @@ const QuestionPage = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const dayNumber = queryParams.get("dayNumber");
-  const weekNumber = queryParams.get("weekNumber");
+  const dayNumber = queryParams.get('dayNumber');
+  const weekNumber = queryParams.get('weekNumber');
   const { state } = location;
   let description, title;
-    description = state?.description;
-    title = state?.title
-      ? state.title
-      : `${t("title", { title: t("week") })} ${Number(weekNumber) - 1}`;
+  description = state?.description;
+  title = state?.title
+    ? state.title
+    : `${t('title', { title: t('week') })} ${Number(weekNumber) - 1}`;
   const onSubmit = async (
     question: QuestionDataType,
     selectedValues: QuestionSelectedValueType[]
@@ -49,23 +49,26 @@ const QuestionPage = () => {
   return (
     <div className="question-page-container">
       <div className="questions-page-header">
-        <h1>{t("questions")}</h1>
+        <h1>{t('questions')}</h1>
       </div>
       <div className="question-time">
         {description && (
-          <div className="question-page-description">{`Title: ${description}`}</div>
+          <div className="question-page-description">
+            {t('title', { title: 'Title' })}
+            {description}
+          </div>
         )}
         {title && dayNumber && (
           <div>
             <span>{title}</span>
             <span className="question-day">
-              {t("title", { title: t("day") })}
+              {t('title', { title: t('day') })}
               {dayNumber}
             </span>
           </div>
         )}
         {Boolean(questionList?.length) && (
-          <span>{`${t("totalQuestions")} : ${questionList?.length}`}</span>
+          <span>{`${t('totalQuestions')} : ${questionList?.length}`}</span>
         )}
       </div>
       <div className="question-page-sub-container">
@@ -79,8 +82,8 @@ const QuestionPage = () => {
               className="accordian-customize"
               isCorrect={question.isCorrect}
               isAnswered={question.isAnswered}
-              errorMsg={t("incorrect_answer")}
-              successMsg={t("correct_answer")}
+              errorMsg={t('incorrect_answer')}
+              successMsg={t('correct_answer')}
             />
           );
         })}
