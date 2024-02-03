@@ -1006,10 +1006,10 @@ declare global {
   }
 
   interface SpinnerProps {
-    colors: string[]; 
-    width: string;
-    height: string;
-    theme: 'dark' | 'light';
+    colors?: string[]; 
+    width?: string;
+    height?: string;
+    theme?: 'dark' | 'light';
   }
   interface UserInfoCardPropsInterface {
     datalist: SecondaryUserSchemaType;

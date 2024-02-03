@@ -9,6 +9,7 @@ import { MeetIcon } from "../../icons/index";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { isCurrentDate } from "../../utils/index";
+import Spinner from "../../components/spinner/spinner";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
 
 const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
@@ -50,10 +51,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
       <div className="schedule-page-header">{t("schedule_header") }</div>
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (
-          <Skeleton
-            count={4}
-            style={{ display: "block", background: "lightGray" }}
-          />
+          <Spinner />
         ) : (
           Boolean(weekList?.length) &&
           weekList.map((week, index) => {
@@ -81,6 +79,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                           title,
                           date,
                           topics: tags,
+                          questions,
+                          notes,
+                          videos
                         } = day;
                         const tagsLength = tags?.length;
                         return (
@@ -151,6 +152,10 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                     `/question?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
                                   );
                                 }}
+                                countLabel={questions?.length.toString()}
+                                positionOfCountLabel="outside"
+                                isDisabled={!questions?.length}
+                                
                               />
                               <Button
                                 text={t("notes")}
@@ -161,6 +166,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                     `/notes?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
                                   );
                                 }}
+                                countLabel={notes?.length.toString()}
+                                positionOfCountLabel="outside"
+                                isDisabled={!notes?.length}
                               />
                               {date && isCurrentDate(date) ? (
                                 <Button
@@ -180,6 +188,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                       `/videos?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
                                     );
                                   }}
+                                  countLabel={videos?.length.toString()}
+                                  positionOfCountLabel="outside"
+                                  isDisabled={!videos?.length}
                                 />
                               )}
                             </div>

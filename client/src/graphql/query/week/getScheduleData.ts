@@ -18,6 +18,15 @@ export const GET_SCHEDULE_DATA = gql`
           description
           topics
           date
+          questions {
+            marks
+          }
+          videos {
+            title
+          }
+          notes {
+            title
+          }
         }
       }
       response {
