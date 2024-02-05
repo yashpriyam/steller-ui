@@ -21,12 +21,16 @@ const VideosPage: React.FC = () => {
 
   const handleFilter = (value: string) => {
     const tempFilterTagMap = { ...filterTagMap };
-    tempFilterTagMap[value] = !tempFilterTagMap[value]
+    tempFilterTagMap[value] = !tempFilterTagMap[value];
     setFilterTagMap(tempFilterTagMap);
   };
-
+  const queryParams = new URLSearchParams(location.search);
+  const dayNumber = queryParams.get("dayNumber");
+  const weekNumber = queryParams.get("weekNumber");
   const getAllVideosRequest = async () => {
-    await getAllVideos({});
+     weekNumber && dayNumber
+       ? getAllVideos({ weekNumber: Number(weekNumber), dayNumber: Number(dayNumber) })
+       : getAllVideos({});
   };
   useEffect(() => {
     getAllVideosRequest();
@@ -36,25 +40,28 @@ const VideosPage: React.FC = () => {
   const isVideoTagCheckedInFilterTag = (tagList: string[]) => {
     let isAllTagsExists = true;
     Object.entries(filterTagMap).map(([tag, isTagChecked]) => {
-      if(isTagChecked && !tagList.includes(tag)){
+      if (isTagChecked && !tagList.includes(tag)) {
         isAllTagsExists = false;
       }
-    })
+    });
     return isAllTagsExists;
   };
-  const isAnyFilterApplied =  Object.values(filterTagMap).some((tag) => tag);
+  const isAnyFilterApplied = Object.values(filterTagMap).some((tag) => tag);
 
   return (
     <div className={`video-page`}>
-      <div className="content-title">{t('videos').toUpperCase()}</div>
+      <div className="content-title">{t("videos").toUpperCase()}</div>
       <FilterTags setFilterTag={handleFilter} filterTagMap={filterTagMap} />
       <div className="videos-wrapper">
         {!videoList?.length && <Spinner />}
-        {videoList?.map((video) => 
-          /* TODO: @dhananjay - Instead of using this filter, need to do an API call  */
-          (isVideoTagCheckedInFilterTag(video?.topics || []) || !isAnyFilterApplied) && (
-          <Card tagPosition="left" data={video}></Card>
-        ))}
+        {videoList?.map(
+          (video) =>
+            /* TODO: @dhananjay - Instead of using this filter, need to do an API call  */
+            (isVideoTagCheckedInFilterTag(video?.topics || []) ||
+              !isAnyFilterApplied) && (
+              <Card tagPosition="left" data={video}></Card>
+            )
+        )}
       </div>
     </div>
   );

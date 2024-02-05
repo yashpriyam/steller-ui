@@ -222,6 +222,7 @@ const typeDefs = gql`
     links: OptionalLinksInput
     isActive: Boolean
     duration: String
+    weekNumber:Number
   }
 
   input OptionalLinksInput {

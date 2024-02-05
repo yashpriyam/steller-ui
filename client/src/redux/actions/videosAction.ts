@@ -10,6 +10,7 @@ export const useVideos = () => {
         title,
         description,
         dayNumber,
+        weekNumber,
         videoNumber,
         topics,
         links,
@@ -22,6 +23,7 @@ export const useVideos = () => {
                 videoDataFilter: {
                     title,
                     description,
+                    weekNumber,
                     dayNumber,
                     videoNumber,
                     topics,

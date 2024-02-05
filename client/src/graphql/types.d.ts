@@ -387,6 +387,7 @@ declare global {
     title?: string;
     description?: string;
     dayNumber?: number;
+    weekNumber?: number;
     videoNumber?: number;
     topics?: string[];
     links?: {
