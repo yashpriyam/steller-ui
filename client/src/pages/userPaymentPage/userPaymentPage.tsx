@@ -8,13 +8,14 @@ import InstallmentList from "../../components/installmentList/installmentList";
 import { Button } from "../../components/button/button";
 import { useTranslation } from "react-i18next";
 import Spinner from "../../components/spinner/spinner";
+import NoDataFound from "../../components/noDataFound/noDataFound";
 
 const UserPaymentPage: React.FC = () => {
   const [selectedFeePlan, setSelectedFeePlan] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { userPayments, getUserPayments } = useUserPayments();
-  const { feePlans, getFeePlans } = useFeePlans();
+  const { userPayments, getUserPayments, isLoading: isPaymentsLoading } = useUserPayments();
+  const { feePlans, getFeePlans, isLoading: isFeePlanLoading } = useFeePlans();
   const {
     updateUserInfo,
     getUserData,
@@ -35,6 +36,11 @@ const UserPaymentPage: React.FC = () => {
   const userFeePlan = feePlans?.filter(
     (fee) => fee._id === user?.userData?.feePlan
   )[0];
+
+  
+  if (isFeePlanLoading || isPaymentsLoading) {
+     return( <Spinner/>)
+  }
 
   return (
     <>
@@ -86,12 +92,8 @@ const UserPaymentPage: React.FC = () => {
           )}
         </div>
       ) : (
-        <Spinner
-          colors={["#D5B9B2", "#A26769", "#6D2E46"]}
-          theme="dark"
-          height="300px"
-          width="300px"
-        />
+      
+        <NoDataFound message="No videos found" />
       )}
     </>
   );

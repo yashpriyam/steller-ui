@@ -38,8 +38,9 @@
       flex: 1;
 
       .CodeMirror {
-        height: 300px !important;
         color: $primary-color;
+        overflow: auto;
+        resize: vertical;
         font-size: 14px !important;
       }
 

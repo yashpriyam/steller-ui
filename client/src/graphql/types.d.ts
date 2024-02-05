@@ -1018,6 +1018,17 @@ declare global {
     editing?: boolean;
     onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
     formTextValues?:SecondaryUserSchemaType;
+  }
+  
+  interface FilterTagsProps {
+    className?: string;
+    filterTagMap?: Record<string, boolean>;
+    setFilterTag: (value: string) => void;
+    onClearAll?: () => void;
+  } 
+
+interface NoDataFoundProps {
+  message?: string;
 }
 }
 export { };
