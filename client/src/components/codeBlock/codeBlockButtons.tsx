@@ -41,7 +41,7 @@ const CodeBlockButtons = ({
     setCss,
     setJs,
   } = useContext(CodeDataContext) as DataContextProps;
-
+  const isSubmitButtonDisabled = !(Boolean(html) || Boolean(css) || Boolean(js));
   const getPredefinedCode = (title: string) => {
     const openWindowBlock = openWindows.find(
       (element) => element.title === title
@@ -102,6 +102,7 @@ const CodeBlockButtons = ({
         text={
           userCode.isUserSubmittedCodeLoading ? t('submitting') : t('submit')
         }
+        isDisabled={isSubmitButtonDisabled}
       />
     </div>
   );
