@@ -77,5 +77,6 @@
     "upload_image": "Upload",
     "schedule_header":"Schedule Page",
     "totalQuestions":"Total Questions",
-    "back": "Back"
+    "back": "Back",
+    "clear": "Clear"
 }

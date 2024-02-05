@@ -1,19 +1,11 @@
-import { filterDataList } from "../../pages/videosPage/dataList";
 import React, { MouseEventHandler } from "react";
 import "./filterTags.scss";
-interface FilterTagsProps {
-  className?: string;
-  filterData?: { tag: string }[];
-  filterTag?: string;
-  setFilterTag: (value: string) => void;
-}
+import { useTranslation } from "react-i18next";
 
-export const FilterTags: React.FC<FilterTagsProps> = ({
-  className,
-  filterData = filterDataList,
-  setFilterTag,
-  filterTag,
-}: FilterTagsProps) => {
+export const FilterTags: React.FC<FilterTagsProps> = (props) => {
+  const { className, setFilterTag, filterTagMap = {}, onClearAll } = props;
+  const { t } = useTranslation();
+
   const handleClickOnApplyFilter: MouseEventHandler<HTMLSpanElement> = (
     event
   ) => {
@@ -24,27 +16,22 @@ export const FilterTags: React.FC<FilterTagsProps> = ({
     }
   };
 
-  const handleClickOnClearFilter = () => {
-    setFilterTag("");
-  };
   return (
     <div className={`filter-container ${className}`}>
       <div className="filter-wrapper">
-        {filterData?.map((data) => {
-          return (
+        {filterTagMap &&
+          Object.keys(filterTagMap).map((tag: string) => (
             <span
-              className={`filter-tag ${
-                data.tag === filterTag ? "active-tag" : ""
-              }`}
+              key={tag}
+              className={`filter-tag ${filterTagMap[tag] && "active-tag"}`}
               onClick={handleClickOnApplyFilter}
             >
-              {data.tag}
+              {tag}
             </span>
-          );
-        })}
-        {filterData.length && (
-          <span className="clear-filter" onClick={handleClickOnClearFilter}>
-            Clear
+          ))}
+        {onClearAll && (
+          <span className="clear-filter" onClick={onClearAll}>
+            {t("clear")}
           </span>
         )}
       </div>

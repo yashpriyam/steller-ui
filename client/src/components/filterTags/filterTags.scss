@@ -15,7 +15,11 @@
     .filter-wrapper{
         display: flex;
         flex-wrap: wrap;
-        width: 40vw;
+        border: 1px solid $primaryTextColor;
+        padding: 10px 20px;
+        border-radius: 20px;
+        max-width: 100%;
+        gap: 10px;
         justify-content:center;
         gap: 5px;
 
@@ -30,29 +34,33 @@
         }
 
         .filter-tag{
-            border: 1px solid $boxShadowColor;
             @include common-tags;
-            
+            transition: all 0.5s ease;
             &:hover{
-                background-color: $fadedOrangeColor;
-                transition:  0.3s;
+                transition: all 0.5s ease;
                 color: $lightOrangeColor;
                 border-color: $lightOrangeColor;
+                color: $primaryBgColor;
+                background-color: $primaryTextColor;
+                opacity: 0.8;
+            }
+            &:hover.active-tag{
+                background-color: $primaryTextColor;
+                opacity: 1;
             }
             @media (max-width:$screenMd){
                 font-size: $mediumFontSize;
             }
         }
         .active-tag{
-            background-color: $darkOrangeColor;
-            font-weight: 700;
-            color: $lightOrangeColor;
-            border-color:  $lightOrangeColor;
+            font-weight: 500;
+            color: $primaryBgColor;
+            background-color: $primaryTextColor;
         }
         .clear-filter{
             @include common-tags;
-            border: 2px solid $redBorderColor;
-            color: $red;
+            color: $primaryBgColor;
+            background: $primaryTextColor;
             transition: 0.2s;
             &:hover{
                 transform: scale(105%);
