@@ -10,9 +10,11 @@ export const SidebarOption = ({
   onClick = () => {},
   url,
   isProfile=false,
+  moreInfo,
 }: SidebarOptionInterface) => {
   const [focusOnOption, setFocusOnOption] = useState<boolean>(false);
   const {pathname} = useLocation();
+  const { batchCode } = moreInfo || {};
   useEffect(()=>{
     setFocusOnOption(pathname===url)
   },[pathname])
@@ -51,8 +53,15 @@ export const SidebarOption = ({
               : "hovered-option-text"
           }`}
         >
-          {text}
+          <span>
+            {text}
+          </span>
+       {moreInfo && showText && <span className='profile-more-info-wrapper'>
+        {batchCode && <span className='profile-more-info-option'>{batchCode}</span>}
         </span>
+        }
+        </span>
+        
         <span className={`option-text-mobile-view`}>{text}</span>
       </div>
       <div

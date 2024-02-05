@@ -23,7 +23,7 @@ export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
   const { user, getUserData } = useUser();
   const { isLoggedIn, userData } = user || {};
-  const { name, profileImage } = userData || {};
+  const { name, profileImage, batchCode } = userData || {};
   const { secureUrl } = profileImage || {};
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ export const useAppData = (): UseAppDataReturnType => {
         <AvatarIcon isDarkMode={true} />
       ),
       url: "/profile",
-      moreOption: [],
+      moreInfo:{ batchCode },
     },
     admin: user.isAdmin && {
       image: <PaymentIcon isDarkMode={true} />,

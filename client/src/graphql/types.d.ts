@@ -507,6 +507,7 @@ declare global {
     showText?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
     url?:string;
+    moreInfo?: PartialUserSchemaType; 
   }
 
   interface SidebarContainerProps {
@@ -518,9 +519,9 @@ declare global {
     profile?: {
       image: string | ReactNode;
       url?: string;
+      moreInfo?: PartialUserSchemaType;
       text: string;
       openNewPage?: boolean;
-      moreOption?: [];
     },
     options?: {
       image: string | React.ReactNode;
