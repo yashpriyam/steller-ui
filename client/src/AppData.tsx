@@ -53,6 +53,7 @@ export const useAppData = (): UseAppDataReturnType => {
         <AvatarIcon isDarkMode={true} />
       ),
       url: "/profile",
+      moreOption: [],
     },
     admin: user.isAdmin && {
       image: <PaymentIcon isDarkMode={true} />,

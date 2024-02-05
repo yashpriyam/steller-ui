@@ -520,6 +520,7 @@ declare global {
       url?: string;
       text: string;
       openNewPage?: boolean;
+      moreOption?: [];
     },
     options?: {
       image: string | React.ReactNode;
