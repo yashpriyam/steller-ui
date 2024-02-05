@@ -16,7 +16,7 @@ const QuestionAccordion = ({
   isAnswered,
   isCorrect,
   className,
-  questionNumber
+  questionNumber,
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
@@ -42,7 +42,12 @@ const QuestionAccordion = ({
       title={
         <div className="question-title-wrapper">
           <div className="question-title">
-            { questionNumber ? `${questionNumber < 10 ? `0${questionNumber}` : questionNumber}.` : '' } {`${title[0]?.text}`} 
+            {questionNumber
+              ? `${
+                  questionNumber < 10 ? `0${questionNumber}` : questionNumber
+                }.`
+              : ""}{" "}
+            {`${title[0]?.text}`}
           </div>
           <div
             className={`checked-icon ${
@@ -58,27 +63,29 @@ const QuestionAccordion = ({
     >
       <div className="question-accordion-container">
         <div className="question-container">
-          {title.map((titleData: QuestionOptionType, index: number) => (
-            <div key={index} className="question-title-sub-container">
-              {Boolean(index) && (
-                <div className="question-title-text">{titleData.text}</div>
-              )}
-              {titleData?.imageUrl && (
-                <img
-                  className="question-title-img"
-                  src={titleData.imageUrl}
-                  alt=""
-                />
-              )}
-              {titleData?.iframe && (
-                <iframe
-                  className="question-accordion-head-iframe"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  src={titleData.iframe}
-                ></iframe>
-              )}
-            </div>
-          ))}
+          <div key={questionNumber} className="question-title-sub-container">
+            {title.map((titleData: QuestionOptionType, index: number) => (
+              <>
+                {Boolean(index) && (
+                  <div className="question-title-text">{titleData.text}</div>
+                )}
+                {titleData?.imageUrl && (
+                  <img
+                    className="question-title-img"
+                    src={titleData.imageUrl}
+                    alt=""
+                  />
+                )}
+                {titleData?.iframe && (
+                  <iframe
+                    className="question-accordion-head-iframe"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    src={titleData.iframe}
+                  ></iframe>
+                )}
+              </>
+            ))}
+          </div>
           {questionData.questionType === "codeblock" && (
             <CodeBlock questionData={questionData} />
           )}

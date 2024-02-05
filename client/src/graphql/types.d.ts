@@ -1026,5 +1026,9 @@ declare global {
     setFilterTag: (value: string) => void;
     onClearAll?: () => void;
   } 
+
+interface NoDataFoundProps {
+  message?: string;
+}
 }
 export { };
