@@ -1,0 +1,1 @@
+export const convertDateToString = (inputDate: Date): string => new Date(inputDate).toDateString();
