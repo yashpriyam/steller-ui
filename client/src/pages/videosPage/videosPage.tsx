@@ -29,10 +29,14 @@ const VideosPage: React.FC = () => {
   const dayNumber = queryParams.get("dayNumber");
   const weekNumber = queryParams.get("weekNumber");
   const getAllVideosRequest = async () => {
-       await getAllVideos( (weekNumber && dayNumber)?{
-          weekNumber: Number(weekNumber),
-          dayNumber: Number(dayNumber),
-        }:{})
+    await getAllVideos(
+      weekNumber && dayNumber
+        ? {
+            weekNumber: Number(weekNumber),
+            dayNumber: Number(dayNumber),
+          }
+        : {}
+    );
   };
   useEffect(() => {
     getAllVideosRequest();
