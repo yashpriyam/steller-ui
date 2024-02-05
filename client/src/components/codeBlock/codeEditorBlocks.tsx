@@ -53,7 +53,7 @@ const CodeEditorBlocks: React.FC<{
     },
     js: {
       language: "javascript",
-      heading: titleTopicMap.JS,
+      heading: titleTopicMap.JS ,
       value: js,
       onChange: setJs,
       icon: "( )",
