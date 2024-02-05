@@ -46,7 +46,7 @@ const VideosPage: React.FC = () => {
 
   return (
     <div className={`video-page`}>
-      <div className="content-title">VIDEOS</div>
+      <div className="content-title">{t('videos').toUpperCase()}</div>
       <FilterTags setFilterTag={handleFilter} filterTagMap={filterTagMap} />
       <div className="videos-wrapper">
         {!videoList?.length && <Spinner />}
