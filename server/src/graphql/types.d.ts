@@ -111,6 +111,7 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+    batchCode?: string
   };
   type CreateNotesOutputType = {
     notesData: NotesDataType;
@@ -126,6 +127,7 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+    batchCode?: string
   };
   type UpdateNotesOutputType = {
     notesData?: UpdateNotesDataType;
@@ -150,6 +152,7 @@ declare global {
     noOfPages?: Number;
     description?: String;
     estimatedReadingTime?: String;
+    batchCode?: String
   };
 
   type VideoOutputDataType = {

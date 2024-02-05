@@ -26,6 +26,7 @@ export const GET_SCHEDULE_DATA = gql`
           }
           notes {
             title
+            dayNumber
           }
         }
       }
