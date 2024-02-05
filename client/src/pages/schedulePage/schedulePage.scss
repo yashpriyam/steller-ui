@@ -65,7 +65,6 @@
         padding: 10px;
         width: 100%;
         .day-container {
-          display: flex;
           color: $primaryColor;
           padding: 10px;
           border-radius: 7px;
@@ -84,10 +83,19 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            @media (max-width: $screenSm) {
-              width: 100%;
+            .day-title-and-date-wrapper {
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+              .day-title {
+                font-size: $mediumFontSize;
+                font-family: $secondaryFontFamily;
+              }
+              .day-date-info{
+                font-size: $smallFontSize;
+                color: $gray;
+              }
             }
-
             .topic-tags {
               display: flex;
               gap: 10px;
@@ -134,10 +142,6 @@
                 color: $accent-color-1;
               }
             }
-          }
-          .day-title {
-            font-size: $mediumFontSize;
-            font-family: $secondaryFontFamily;
           }
 
           .day-description {
@@ -236,10 +240,6 @@
             .day-header {
               gap: 5px;
               transition: 0.5s;
-              .day-title {
-                width: 100%;
-                justify-content: left;
-              }
             }
             .buttons-wrapper {
               display: flex;

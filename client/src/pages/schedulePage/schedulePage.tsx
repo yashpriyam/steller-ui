@@ -8,7 +8,7 @@ import { useWeek } from "../../redux/actions/scheduleAction";
 import { MeetIcon } from "../../icons/index";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
-import { isCurrentDate } from "../../utils/index";
+import { convertDateToString, isCurrentDate } from "../../utils/index";
 import Spinner from "../../components/spinner/spinner";
 import { useMeeting } from "../../redux/actions/meetingAction";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
@@ -118,7 +118,13 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             }}
                           >
                             <div className="day-header">
-                              <strong className="day-title">{title}</strong>
+                              <div className="day-title-and-date-wrapper">
+                                <strong className="day-title">{title}</strong>
+                               {date && 
+                               <span className="day-date-info">{
+                               convertDateToString(date)
+                               }</span>}
+                               </div>
                               {Boolean(tagsLength) && tagsLength && (
                                 <div className="topic-tags">
                                   {tags
