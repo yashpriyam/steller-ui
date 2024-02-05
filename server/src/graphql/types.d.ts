@@ -134,25 +134,25 @@ declare global {
     response: CustomResponseType;
   };
   type UpdateNotesDataType = {
-    title: String;
-    link: String;
-    topics: [String];
+    title: string;
+    link: string;
+    topics: [string];
     dayNumber: Number;
     noOfPages?: Number;
-    description?: String;
-    estimatedReadingTime?: String;
+    description?: string;
+    estimatedReadingTime?: string;
   };
   type NotesDataType = {
     _id:string
-    title: String;
-    link: String;
-    topics: [String];
+    title: string;
+    link: string;
+    topics: [string];
     dayNumber: Number;
     weekNumber: number;
     noOfPages?: Number;
-    description?: String;
-    estimatedReadingTime?: String;
-    batchCode?: String
+    description?: string;
+    estimatedReadingTime?: string;
+    batchCode?: string
   };
 
   type VideoOutputDataType = {
@@ -556,7 +556,7 @@ declare global {
     sessionPreference?: SessionPreferenceEnum;
   };
   type updatePaidUserPasswordInput = {
-    email: String;
+    email: string;
     password?: string;
   };
   type DayDataOutputType = {
