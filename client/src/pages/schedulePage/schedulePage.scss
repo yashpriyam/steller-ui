@@ -45,6 +45,7 @@
       align-items: center;
       justify-content: center;
       gap: 15px;
+      padding: 20px;
 
       .week-description {
         width: 100%;
@@ -52,8 +53,9 @@
         flex-direction: column;
         justify-content: left;
         flex-wrap: wrap;
-        font-size: $largerFontSize;
+        font-size: $drawerFontSize;
         color: $sencondaryTextColor;
+        font-weight: 600;
       }
 
       .daylist-container {
