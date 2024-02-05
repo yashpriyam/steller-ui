@@ -47,6 +47,7 @@ export const Sidebar = ({
                 isProfile={true}
                 showText={isOpen}
                 url={profile.url}
+                moreInfo={profile.moreInfo}
                 onClick={() =>
                   onOptionClick(profile.url, Boolean(profile.openNewPage))
                 }

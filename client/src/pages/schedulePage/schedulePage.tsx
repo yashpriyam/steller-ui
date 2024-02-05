@@ -111,8 +111,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             className="day-container"
                             onClick={(e: React.MouseEvent<HTMLElement>) => {
                               handleNavigation(
-                                e,
-                                `/day/${dayNumber}?weekNumber=${weekNumber}`
+                                e
+                                // `/day/${dayNumber}?weekNumber=${weekNumber}`
                                 // commented navigation to dayPage until data is inserted to it.
                               );
                             }}
