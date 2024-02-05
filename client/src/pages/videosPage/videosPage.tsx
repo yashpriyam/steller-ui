@@ -6,7 +6,7 @@ import { useVideos } from "../../redux/actions/videosAction";
 import "./videosPage.scss";
 import { useTranslation } from "react-i18next";
 import Spinner from "../../components/spinner/spinner";
-
+import { useLocation } from "react-router-dom";
 const VideosPage: React.FC = () => {
   const [filterTagMap, setFilterTagMap] = useState<Record<string, boolean>>({
     HTML: false,
@@ -24,17 +24,21 @@ const VideosPage: React.FC = () => {
     tempFilterTagMap[value] = !tempFilterTagMap[value];
     setFilterTagMap(tempFilterTagMap);
   };
+  const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const dayNumber = queryParams.get("dayNumber");
   const weekNumber = queryParams.get("weekNumber");
   const getAllVideosRequest = async () => {
-     weekNumber && dayNumber
-       ? await getAllVideos({ weekNumber: Number(weekNumber), dayNumber: Number(dayNumber) })
-       : await getAllVideos({});
+    weekNumber && dayNumber
+      ? await getAllVideos({
+          weekNumber: Number(weekNumber),
+          dayNumber: Number(dayNumber),
+        })
+      : await getAllVideos({});
   };
   useEffect(() => {
     getAllVideosRequest();
-  }, []);
+  }, [weekNumber, dayNumber]);
   const { videoList } = videoData;
 
   const isVideoTagCheckedInFilterTag = (tagList: string[]) => {
