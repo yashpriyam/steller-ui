@@ -223,6 +223,7 @@ const typeDefs = gql`
     isActive: Boolean
     duration: String
     batchCode: String
+    weekNumber:Int
   }
 
   input OptionalLinksInput {
