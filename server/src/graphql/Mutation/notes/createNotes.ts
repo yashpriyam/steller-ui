@@ -21,10 +21,11 @@ export const createNotes = async (
       dayNumber,
       weekNumber,
       noOfPages,
-      estimatedReadingTime
+      estimatedReadingTime,
+      batchCode
     } = notesData;
 
-    const dayResponse = await dayModel.findOne({weekNumber, dayNumber})
+    const dayResponse = await dayModel.findOne({weekNumber, dayNumber, batchCode})
 
     if (!dayResponse) {
       return {response: {
@@ -43,6 +44,7 @@ export const createNotes = async (
       weekNumber,
       noOfPages,
       estimatedReadingTime,
+      batchCode
     });
 
     if (!createdNotesdata) {
