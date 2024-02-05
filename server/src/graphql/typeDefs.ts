@@ -222,6 +222,7 @@ const typeDefs = gql`
     links: OptionalLinksInput
     isActive: Boolean
     duration: String
+    batchCode: String
     weekNumber:Int
   }
 
@@ -307,6 +308,7 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+    batchCode: String
   }
 
   input OtpUserInputType {
@@ -339,6 +341,7 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+    batchCode: String
   }
   type UpdateNotesOutputType {
     notesData: UpdateNotesDataType
@@ -353,6 +356,7 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+    batchCode: String
   }
   type DeletedNotesOutputType {
     notesData: DeletedNotesDataType
