@@ -29,10 +29,15 @@ const CodeEditorBlocks: React.FC<{
   } = useContext(CodeDataContext) as DataContextProps;
   const [selectedTab, setSelectedTab] = useState(0);
 
+  const titleTopicMap: Record<string, string> = Object.freeze({
+    HTML: 'HTML',
+    CSS: 'CSS',
+    JS: 'JS',
+  });
   const editorConfigs: { [key: string]: LanguageConfig } = {
     html: {
       language: 'xml',
-      heading: 'HTML',
+      heading: titleTopicMap.HTML,
       value: html,
       onChange: setHtml,
       icon: '/',
@@ -40,7 +45,7 @@ const CodeEditorBlocks: React.FC<{
     },
     css: {
       language: 'css',
-      heading: 'CSS',
+      heading: titleTopicMap.CSS,
       value: css,
       onChange: setCss,
       icon: '*',
@@ -48,7 +53,7 @@ const CodeEditorBlocks: React.FC<{
     },
     js: {
       language: 'javascript',
-      heading: 'JS',
+      heading: titleTopicMap.JS ,
       value: js,
       onChange: setJs,
       icon: '( )',
@@ -69,9 +74,15 @@ const CodeEditorBlocks: React.FC<{
       const getCodeWindowPredefinedCode = (title: string) =>
         String(findCodeWindowByTitle(openWindows, title)?.predefinedCode || '');
 
-      setHtml(savedCode?.html ?? getCodeWindowPredefinedCode(codeBlockWindow.HTML));
-      setCss(savedCode?.css ?? getCodeWindowPredefinedCode(codeBlockWindow.CSS));
-      setJs(savedCode?.javascript ?? getCodeWindowPredefinedCode(codeBlockWindow.JS));
+      setHtml(
+        savedCode?.html ?? getCodeWindowPredefinedCode(codeBlockWindow.HTML)
+      );
+      setCss(
+        savedCode?.css ?? getCodeWindowPredefinedCode(codeBlockWindow.CSS)
+      );
+      setJs(
+        savedCode?.javascript ?? getCodeWindowPredefinedCode(codeBlockWindow.JS)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -90,13 +101,19 @@ const CodeEditorBlocks: React.FC<{
       {language}
     </button>
   );
+const renderTabButtonMap: Record<string, JSX.Element> = {
+  HTML: renderTabButton(0,titleTopicMap.HTML),
+  CSS: renderTabButton(1, titleTopicMap.CSS),
+  JS: renderTabButton(2, titleTopicMap.JS),
+};
 
   return (
-    <div className="code-editor-blocks-container">
-      <div className="code-blocks-tabs">
-        {renderTabButton(0, 'HTML')}
-        {renderTabButton(1, 'CSS')}
-        {renderTabButton(2, 'JS')}
+    <div className='code-editor-blocks-container'>
+      <div className='code-blocks-tabs'>
+        {openWindows.map((tabMeta) => {
+          const title = tabMeta.title;
+          return renderTabButtonMap[title]
+        })}
       </div>
       <Editor
         questionId={questionId}

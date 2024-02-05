@@ -23,6 +23,7 @@ export const updateNotesById = async (
       noOfPages,
       title,
       topics,
+      batchCode
     } = notesData;
     const notesUpdatedData: NotesDataType = await notesModel.findByIdAndUpdate(
       notesId,
@@ -35,6 +36,7 @@ export const updateNotesById = async (
         dayNumber,
         weekNumber,
         description,
+        batchCode
       },
       { new: true }
     );
