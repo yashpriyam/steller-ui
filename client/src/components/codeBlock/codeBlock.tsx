@@ -11,6 +11,8 @@ const CodeBlock: React.FC<{ questionData: QuestionDataType }> = ({
   questionData,
 }) => {
   const { t } = useTranslation();
+  const weekNumber = questionData?.meta?.week;
+  const dayNumber = questionData?.meta?.day;
   const { options } = questionData;
   const { userCodeData } = useUserCode();
   const openWindows = options[0]?.codeBlock?.configuration?.openWindows;
@@ -23,7 +25,12 @@ const CodeBlock: React.FC<{ questionData: QuestionDataType }> = ({
   return (
     <CodeDataProvider>
       <div className="code-block-container">
-        <CodeEditorBlocks openWindows={openWindows} questionId={questionId} />
+        <CodeEditorBlocks
+          openWindows={openWindows}
+          questionId={questionId}
+          weekNumber={weekNumber}
+          dayNumber={dayNumber}
+        />
         {showOutputWindow && <CodeResult />}
       </div>
       {codeBlockSubmittedDate && (
@@ -32,7 +39,12 @@ const CodeBlock: React.FC<{ questionData: QuestionDataType }> = ({
           {new Date(Number(codeBlockSubmittedDate?.updatedAt)).toLocaleString()}
         </p>
       )}
-      <CodeBlockButtons openWindows={openWindows} questionId={questionId} />
+      <CodeBlockButtons
+        openWindows={openWindows}
+        questionId={questionId}
+        weekNumber={weekNumber}
+        dayNumber={dayNumber}
+      />
     </CodeDataProvider>
   );
 };

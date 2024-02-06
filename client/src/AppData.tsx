@@ -77,11 +77,11 @@ export const useAppData = (): UseAppDataReturnType => {
         image: <ScheduleIcon isDarkMode={true} />,
         url: "/schedule",
       },
-      // {
-      //   text: t("questions"),
-      //   image: <QuestionIcon isDarkMode={true} />,
-      //   url: "/questions",
-      // },
+      {
+        text: t("questions"),
+        image: <QuestionIcon isDarkMode={true} />,
+        url: "/questions",
+      },
       {
         text: t("videos"),
         image: <VideoIcon isDarkMode={true} />,
