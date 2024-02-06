@@ -961,6 +961,8 @@ declare global {
     icon: string;
     color: string;
     questionId: string;
+    weekNumber: number;
+    dayNumber: number;
   }
 
   interface LanguageConfig {

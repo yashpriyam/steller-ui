@@ -14,8 +14,8 @@ export const getUserCode = async (
     };
 
     if (questionId) query.questionId = questionId;
-    if (weekNumber !== undefined) query.weekNumber = weekNumber;
-    if (dayNumber !== undefined) query.dayNumber = dayNumber;
+    if (weekNumber) query.weekNumber = weekNumber;
+    if (dayNumber) query.dayNumber = dayNumber;
     const savedCode = await userCodeModel.find(query);
     return {
       data: savedCode,

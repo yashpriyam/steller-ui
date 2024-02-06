@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import { CodeDataContext } from './CodeDataProvider';
 import { useUserCode } from '../../redux/actions/userCodeActions';
-import { useLocation } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/button/button';
@@ -20,19 +19,19 @@ export const codeBlockWindow = {
 const CodeBlockButtons = ({
   questionId,
   openWindows,
+  weekNumber,
+  dayNumber
 }: {
   questionId: string;
   openWindows: [CodeBlockOpenWindowsType];
+  weekNumber: number;
+  dayNumber: number;
 }) => {
   const dispatch = useDispatch();
   const { setCodeSubmittedLoading } = userCodeAction;
   const userCode = useSelector(selectUserCode);
   const { saveUserCode } = useUserCode();
-  const location = useLocation();
   const { t } = useTranslation();
-  const queryParams = new URLSearchParams(location.search);
-  const dayNumber = queryParams.get('dayNumber');
-  const weekNumber = queryParams.get('weekNumber');
   const {
     html = '',
     css = '',
