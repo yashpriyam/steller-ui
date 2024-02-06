@@ -281,6 +281,7 @@ declare global {
     totalInCorrectQuestions?: number;
     totalUnAttemptedQuestions?: number;
     response?: CustomResponseType;
+    isQuestionLoading?: boolean;
   }
 
   type QuestionDataType = {
@@ -400,6 +401,7 @@ declare global {
 
   type VideoDataStateType = {
     videoList: VideoDataType[];
+    isVideosLoading: boolean;
   }
 
   type NotesFilterDataType = {

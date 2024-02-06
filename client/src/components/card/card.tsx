@@ -32,7 +32,7 @@ export const Card: React.FC<CardProps> = ({
   } = data || {};
   return (
     <div
-      className={`main-container ${className}`}
+      className={`card-main-container ${className}`}
       style={{ ...style, height: height, width: width }}
     >
       <div className="card-image-container">

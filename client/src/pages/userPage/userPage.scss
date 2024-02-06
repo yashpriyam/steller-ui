@@ -16,12 +16,8 @@
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  @media (max-width: $screenMd) {
-    padding: 20px 10px;
-  }
+  padding: 20px 10px;
   @media (max-width: $screenXs) {
-    padding: 2px;
     gap: 10px;
   }
   .user-account-header-container {

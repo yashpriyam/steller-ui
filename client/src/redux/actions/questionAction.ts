@@ -19,6 +19,7 @@ export const useQuestions = () => {
     limit,
   }: GetAllQuestionProps) => {    
     try {
+      dispatch(actions.setIsQuestionLoading(true));
       const response = await apolloClient.query({
         query: GET_ALL_QUESTIONS,
         variables: {
@@ -40,6 +41,8 @@ export const useQuestions = () => {
       return response;
     } catch (err) {
       console.log(err);
+    } finally {
+      dispatch(actions.setIsQuestionLoading(false));
     }
   };
 

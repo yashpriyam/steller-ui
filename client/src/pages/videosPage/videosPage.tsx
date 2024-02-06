@@ -41,7 +41,7 @@ const VideosPage: React.FC = () => {
   useEffect(() => {
     getAllVideosRequest();
   }, [weekNumber, dayNumber]);
-  const { videoList } = videoData;
+  const { videoList,isVideosLoading } = videoData;
 
   const isVideoTagCheckedInFilterTag = (tagList: string[]) => {
     let isAllTagsExists = true;
@@ -57,9 +57,9 @@ const VideosPage: React.FC = () => {
   return (
     <div className={`video-page`}>
       <div className="content-title">{t("videos").toUpperCase()}</div>
-      <FilterTags setFilterTag={handleFilter} filterTagMap={filterTagMap} />
+        {isVideosLoading ? <Spinner /> :
+      <><FilterTags setFilterTag={handleFilter} filterTagMap={filterTagMap} />
       <div className="videos-wrapper">
-        {!videoList?.length && <Spinner />}
         {videoList?.map(
           (video) =>
             /* TODO: @dhananjay - Instead of using this filter, need to do an API call  */
@@ -68,7 +68,8 @@ const VideosPage: React.FC = () => {
               <Card tagPosition="left" data={video}></Card>
             )
         )}
-      </div>
+      </div></>
+      }
     </div>
   );
 };

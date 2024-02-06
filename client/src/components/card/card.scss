@@ -1,6 +1,6 @@
 @import "../variables.scss";
 
-.main-container {
+.card-main-container {
   width: 450px;
   color: $primaryBg;
   display: flex;
@@ -129,7 +129,7 @@
 }
 
 @media (max-width: $screenSm) {
-  .main-container {
+  .card-main-container {
     width: 340px;
     height: 225px;
     .card-text-wrapper {  
@@ -144,7 +144,7 @@
 }
 
 @media (max-width: 350px) and (max-width: 0px) {
-  .main-container {
+  .card-main-container {
     width: 225px;
   }
 }

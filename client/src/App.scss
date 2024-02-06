@@ -41,7 +41,7 @@ html, body{
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: $screenXs) {
     .app-container{
         .portal-app-section{
             height: calc(100vh - 90px);

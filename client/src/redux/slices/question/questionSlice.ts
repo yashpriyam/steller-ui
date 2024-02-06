@@ -34,6 +34,9 @@ export const questionSlice = createSlice({
       });
       state.questions = questions;
     },
+    setIsQuestionLoading : (state, action) => {
+      state.isQuestionLoading = action.payload;
+    }
   },
 });
 
