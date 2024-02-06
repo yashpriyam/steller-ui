@@ -57,17 +57,16 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   }, []);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
-      {/* <Filter
-        checkboxData={checkboxDataList}
-        filter={filter}
-      /> */}
       <div className="schedule-page-meet-container">
         <div onClick={onJoinMeetClick} className="schedule-page-meet-btn">
           <MeetIcon isDarkMode={true} />
           {t("join_meet")}
         </div>
       </div>
-      <div className="schedule-page-header">{t("schedule_header")}</div>
+      <div className="schedule-page-header-filter-wrapper">
+        <div className="schedule-page-header">{t("schedule_header")}</div>
+        <Filter/>
+      </div>
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (
           <Spinner />

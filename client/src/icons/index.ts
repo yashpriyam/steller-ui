@@ -15,3 +15,4 @@ export { PaymentIcon } from "./paymentIcon"
 export { PenIcon } from "./penIcon";
 export { NoDataFound } from "./noDataFound"
 export { CheckedIcon } from "./CheckedIcon";
+export { SortIcon } from "./sortIcon";
