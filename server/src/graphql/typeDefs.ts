@@ -17,6 +17,7 @@ const typeDefs = gql`
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
+    getBatchCode: BatchDataOutputType!
   }
 
   type Mutation {
