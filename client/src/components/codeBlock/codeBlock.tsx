@@ -11,8 +11,8 @@ const CodeBlock: React.FC<{ questionData: QuestionDataType }> = ({
   questionData,
 }) => {
   const { t } = useTranslation();
-  const weekNumber = questionData.meta.week;
-  const dayNumber = questionData.meta.day;
+  const weekNumber = questionData?.meta?.week;
+  const dayNumber = questionData?.meta?.day;
   const { options } = questionData;
   const { userCodeData } = useUserCode();
   const openWindows = options[0]?.codeBlock?.configuration?.openWindows;
