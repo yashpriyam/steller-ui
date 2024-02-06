@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: VideoDataStateType = {
     videoList: [],
+    isVideosLoading: true,
 };
 
 export const videosSlice = createSlice({
@@ -11,6 +12,9 @@ export const videosSlice = createSlice({
         setVideos: (state, action) => {
             state.videoList = action.payload?.videoData;
         },
+        setIsLoading: (state, action) => {
+            state.isVideosLoading = action.payload;
+        }
     },
 });
 
