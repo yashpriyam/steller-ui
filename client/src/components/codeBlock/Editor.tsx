@@ -5,13 +5,15 @@ import 'codemirror/mode/xml/xml';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/mode/css/css';
 import { Controlled as ControlledEditor } from 'react-codemirror2';
-import { useLocation } from 'react-router-dom';
 
-const Editor: FC<EditorProps> = ({ language, value, onChange, questionId }) => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const dayNumber = queryParams.get('dayNumber');
-  const weekNumber = queryParams.get('weekNumber');
+const Editor: FC<EditorProps> = ({
+  language,
+  value,
+  onChange,
+  questionId,
+  weekNumber,
+  dayNumber,
+}) => {
   const handleChange = (editor: undefined, data: undefined, value: string) => {
     onChange(value)
     const localStorageSavedUserQuestionCode = JSON.parse(localStorage.getItem('userSavedCode') ?? '{}');
