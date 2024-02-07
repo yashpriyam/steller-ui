@@ -195,10 +195,10 @@ const PersonalInfoFormData = [
     "Batch-code",
     false,
     true,
-    ["WMB2 - Starting - 29 jan 2024"],
+    ["WMB2 - Started - 29 jan 2024"],
     0,
     false,
-    "WMB2 - Starting - 29 jan 2024"
+    "WMB2 - Started - 29 jan 2024"
   ),
   // new FormInputTypeShape(
   //   formInputType.TEXT_INPUT_FIELD,

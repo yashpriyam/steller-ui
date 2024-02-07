@@ -29,13 +29,10 @@ const Registerpage = () => {
   const userDataCookieName = "userData";
   const { registerUser, getUserData } = useUser();
   const {batchData, getBatchCode} = useBatch();
-  const batchResponse = async()=> {
-    const res = await getBatchCode();
-    console.log({batchData})
-  }
+  const { batchCode } = batchData || {};
   useEffect(()=>{
-    batchResponse();
-  },[])
+    getBatchCode();
+  },[batchData])
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
@@ -84,9 +81,6 @@ const Registerpage = () => {
           selectyourrelevantbranch,
           selectyourpreferredbatch,
         } = formData;
-        const batchCode = selectyourpreferredbatch.split("-")[0].trim();
-        // const batchResponse = await getBatchCode();
-        // console.log({batchResponse});
         const response = await registerUser({
           name,
           email,

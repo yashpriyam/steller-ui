@@ -13,10 +13,10 @@ import { localMessages } from "../../helpers/constants/localMessages";
 const Homepage = () => {
   return (
     <>
-      <Banner
+      {/* <Banner
         className={`bannerWrapperContainer`}
         text={localMessages.BANNER_NEXT_BATCH_TEXT}
-      />
+      /> */}
       <PreviewImages />
       <TopBanner />
       <CoursePage />

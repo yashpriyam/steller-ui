@@ -24,9 +24,9 @@ const RightRegisterPageComponent = ({
         <div className="topText">
           <h3 className="heading">Takes only 1 minute.</h3>
         </div>
-        <div className="bannerWrapperContainerRegisterPage">
+        {/* <div className="bannerWrapperContainerRegisterPage">
           <Banner text={localMessages.BANNER_NEXT_BATCH_TEXT} />
-        </div>
+        </div> */}
         <FormComponent
           className="inputContainer"
           setFormData={setFormData}

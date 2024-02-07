@@ -29,6 +29,6 @@ export default configureStore({
     meeting: meetingReducer,
     userCode: userCodeSlice,
     allUsersPayments: allUsersPaymentsSlice,
-    batchData: batchSlice
+    batch: batchSlice
   },
 });
