@@ -1,0 +1,10 @@
+.open-window-container{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 10px;
+  .question-input-container{
+    width: 100%;
+  }
+}

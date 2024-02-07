@@ -1,0 +1,86 @@
+@import "../../styles/variables.scss" ;
+
+.select-container{
+    width: 200px;
+
+    .select{
+        position: relative;
+        
+        .select-box{
+            position: relative;
+            max-width: 100%;
+            border-radius: 5px;
+            padding: 5px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            cursor: pointer;
+            
+
+            .selected-value{
+                padding: 5px 15px;
+                width: 100%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .select-required-tag{
+                color: red;
+                position: absolute;
+                top: 0%;
+                right: 10px;
+                transform: translate(-50%, -50%);
+                padding: 0px 2px;
+            }
+        }
+
+        .options-container{
+            position: absolute;
+            left: 0px;
+            bottom: 0%;
+            transform: translate(0%, calc(100% + 5px));
+            width: 100%;
+            max-height: 170px;
+            list-style: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 16px;
+            overflow-x: scroll;
+            white-space: wrap;
+            
+            .list-child{
+                padding: 8px 10px;
+                border-bottom: 1px solid rgba(22, 22, 174, 0.89);
+                transition: all 0.3s;
+            }
+    
+            .list-child:hover {
+                cursor: pointer;
+            }
+        }
+
+        .options-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .label{
+            font-size: 14px;
+            padding: 5px 10px;
+            color: rgb(146, 144, 144);
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .label-position-top{
+            top: 48px;
+        }
+
+        .select-disabled{
+            opacity: 0.6;
+            cursor:default;
+        }
+    }
+
+}

@@ -1,8 +1,14 @@
-import { CSSProperties, ChangeEvent, ReactElement, MouseEventHandler, SetStateAction, ReactNode,ChangeEventHandler,
+import {
+  CSSProperties,
+  ChangeEvent,
+  ReactElement,
+  MouseEventHandler,
+  SetStateAction,
+  ReactNode,
+  ChangeEventHandler,
 } from "react";
 
 declare global {
-
   type RegisterUserData = {
     _id?: string;
     name: string;
@@ -19,9 +25,9 @@ declare global {
     branch: string;
     location: string;
     batchCode: string;
-    feePlan?: string
+    feePlan?: string;
     profileImage: string;
-  }
+  };
 
   interface Experience {
     companyName: string;
@@ -109,7 +115,7 @@ declare global {
   type CustomResponseType = {
     status: number;
     message: string;
-  }
+  };
 
   interface RoutesMapInterface {
     [path: string]: ReactElement;
@@ -154,7 +160,7 @@ declare global {
     title: string;
     subtitle: string;
     buttonText: string;
-    onClick?: ()=> void;
+    onClick?: () => void;
     isBtnEnabled?: boolean;
   };
 
@@ -259,9 +265,8 @@ declare global {
     direction?: "row" | "column";
     title?: string;
     isIncorrect?: boolean;
-    type: "single" | "multi"
+    type: "single" | "multi";
   }
-
 
   type AttemptedQuestionDataType = {
     _id: string;
@@ -316,7 +321,7 @@ declare global {
     multi = "multi",
     single = "single",
     fillup = "fillup",
-    codeblock = "codeblock"
+    codeblock = "codeblock",
   }
 
   interface QuestionResponseType {
@@ -362,25 +367,25 @@ declare global {
     isEditable: boolean;
     predefinedCode: string;
     title: string;
-  }
+  };
 
   type CodeBlockConfigurationType = {
     showOutputWindow: boolean;
     showSplitWindow: boolean;
     openWindows: [CodeBlockOpenWindowsType];
-  }
+  };
 
   type CodeBlockType = {
     enableCodeBlock: boolean;
-    configuration: CodeBlockConfigurationType
-  }
+    configuration: CodeBlockConfigurationType;
+  };
 
   type QuestionOptionType = {
     imageUrl?: string;
     text?: string;
     iframe?: string;
     isChecked?: boolean;
-    codeBlock: CodeBlockType
+    codeBlock: CodeBlockType;
   };
 
   type VideoDataType = {
@@ -396,11 +401,11 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  }
+  };
 
   type VideoDataStateType = {
     videoList: VideoDataType[];
-  }
+  };
 
   type NotesFilterDataType = {
     title?: string;
@@ -411,7 +416,7 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
-  }
+  };
 
   type NotesDataType = {
     title: string;
@@ -421,11 +426,11 @@ declare global {
     noOfPages: number;
     description: string;
     estimatedReadingTime: string;
-  }
+  };
 
   type NotesDataStateType = {
     noteList: NotesDataType[];
-  }
+  };
 
   interface DayPagePropsInterface {
     className?: string;
@@ -507,8 +512,8 @@ declare global {
     count?: string | number;
     showText?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
-    url?:string;
-    moreInfo?: PartialUserSchemaType; 
+    url?: string;
+    moreInfo?: PartialUserSchemaType;
   }
 
   interface SidebarContainerProps {
@@ -523,17 +528,17 @@ declare global {
       moreInfo?: PartialUserSchemaType;
       text: string;
       openNewPage?: boolean;
-    },
+    };
     options?: {
       image: string | React.ReactNode;
       url: string;
       text: string;
       openNewPage?: boolean;
-    }[],
+    }[];
     optionAtLast?: {
       text: string;
       onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
-    },
+    };
     optionsAtFirst?: {
       image: string | ReactNode;
       url?: string;
@@ -541,15 +546,17 @@ declare global {
       openNewPage?: boolean;
       onClick?: (e: MouseEvent<HTMLDivElement>) => void;
       isProfile?: boolean;
-    }[],
-    admin?: {
-      image: string | ReactNode;
-      url?: string;
-      text: string;
-      openNewPage?: boolean;
-      onClick?: (e: MouseEvent<HTMLDivElement>) => void;
-      isProfile?: boolean;
-    } | false
+    }[];
+    admin?:
+      | {
+          image: string | ReactNode;
+          url?: string;
+          text: string;
+          openNewPage?: boolean;
+          onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+          isProfile?: boolean;
+        }
+      | false;
   }
 
   type UseAppDataReturnType = {
@@ -563,12 +570,12 @@ declare global {
       isLoggedIn: boolean;
       isAdmin: boolean;
     };
-  }
+  };
 
   type SetCookieArgsType = {
     key: string;
     value: string;
-  }
+  };
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
@@ -577,11 +584,11 @@ declare global {
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: ObjectId[];
-  }
+  };
   type ScheduleDataStateType = {
     weekList: WeekDataType[];
     isScheduleDataLoading: boolean;
-  }
+  };
   type DayDataType = {
     _id?: ObjectId;
     batchCode?: string;
@@ -612,69 +619,67 @@ declare global {
     style?: CSSProperties;
   }
   interface GetAllQuestionProps {
-    day?:number;
-    week?:number;
-    batchCode?:string;
-    isActive?:boolean;
-    isArchived?:boolean;
-    topic?:string;
-    skip?:number;
-    limit?:number;
+    day?: number;
+    week?: number;
+    batchCode?: string;
+    isActive?: boolean;
+    isArchived?: boolean;
+    topic?: string;
+    skip?: number;
+    limit?: number;
   }
   type CityDataStateType = {
     cityList?: string[];
-  }
+  };
 
-  
   type BatchSchemaType = {
     batchCode: string;
-    paymentType?: FeePlanSchemaType; 
+    paymentType?: FeePlanSchemaType;
     paidStudents?: UserSchemaType[];
     registeredStudents?: UserSchemaType[];
     demoStudents?: UserSchemaType[];
-    startDate?: Date
+    startDate?: Date;
   };
 
   type FeePlanSchemaType = {
-    _id?: string
+    _id?: string;
     batchCode?: string;
     name?: string;
     description?: string;
-    installments?: Installment[],
-    miscellaneous?: JSON
+    installments?: Installment[];
+    miscellaneous?: JSON;
   };
 
   type Installment = {
     _id?: string | undefined;
-    id? :string;
+    id?: string;
     amount?: string;
     sequence?: string;
-    dueDate?: Date; 
+    dueDate?: Date;
     accessWeeks?: WeekDataType[]; // we'll store week data here
     miscellaneous?: JSON;
     isApproved?: boolean;
-    isRejected?:boolean;
+    isRejected?: boolean;
     isPending?: boolean;
-  }
+  };
 
   type UserPaymentSchemaType = {
     _id?: string;
-    user: PaidUserInputType; 
-    batch: BatchSchemaType; 
-    feePlan: FeePlanSchemaType; 
+    user: PaidUserInputType;
+    batch: BatchSchemaType;
+    feePlan: FeePlanSchemaType;
     installmentId?: string;
     isApproved?: boolean;
     isRejected?: boolean;
     isPending?: {
       totalAmount?: string;
       totalPendingAmount?: string;
-    },
+    };
     image?: ImageInputType;
     createdAt?: Date;
-    updatedAt?: Date
+    updatedAt?: Date;
+  };
 
-  };  
-   
   type BatchDataOutputType = {
     batchData?: BatchSchemaType;
     response: CustomResponseType;
@@ -687,17 +692,17 @@ declare global {
   type UserPaymentDataOutputType = {
     userPaymentData?: UserPaymentSchemaType;
     response: CustomResponseType;
-  }
+  };
 
   type UserAllPaymentDataOutputType = {
     userPayments?: UserPaymentSchemaType[];
     response: CustomResponseType;
-  }
+  };
   type UserAllFeePlanDataOutputType = {
     feePlans?: FeePlanSchemaType[];
     response: CustomResponseType;
-  }
-  
+  };
+
   type MeetingSchemaType = {
     meetingNumber: string;
     password: string;
@@ -705,15 +710,15 @@ declare global {
     scheduledAt?: Date;
     isActive: boolean;
     isPaid: boolean;
-  }
-  
+  };
+
   type MeetingReturnType = {
-    meetingData?: MeetingSchemaType,
-    response: CustomResponseType
-  }
+    meetingData?: MeetingSchemaType;
+    response: CustomResponseType;
+  };
   interface InstallmentCardProps {
     installment: Installment;
-    index?: number
+    index?: number;
   }
 
   type User = {
@@ -729,7 +734,6 @@ declare global {
     address?: string;
     password?: string;
   };
-
 
   interface UserSchemaType {
     email: string;
@@ -767,7 +771,6 @@ declare global {
     branch?: string;
   };
 
-
   type PartialUserSchemaType = {
     email?: string;
     name?: string;
@@ -788,7 +791,7 @@ declare global {
   };
 
   type UpdateUserInput = {
-    feePlan?: string
+    feePlan?: string;
     name?: string;
     phoneNumber?: string;
     password?: string;
@@ -804,31 +807,34 @@ declare global {
     branch?: string;
     feePlan?: string;
   };
-  type InstallmentListProps ={
-      allInstallment?: Installment[];
-      userIntsallment?: UserPaymentSchemaType[];
-      userFeePlan?: FeePlanSchemaType;
-      setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
-      isLoading?: boolean
-  }
- 
+  type InstallmentListProps = {
+    allInstallment?: Installment[];
+    userIntsallment?: UserPaymentSchemaType[];
+    userFeePlan?: FeePlanSchemaType;
+    setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+    isLoading?: boolean;
+  };
+
   type UserPaymentInputType = {
-    batch?: string; 
+    batch?: string;
     feePlan?: string;
-    installmentId: string
-    imageUrl?: string
-  }
+    installmentId: string;
+    imageUrl?: string;
+  };
   interface InstallmentItemProps {
     installment: Installment;
-    handlePayNow: (installment: Installment, paymentReceipt: File | null) => Promise<void>;
-    isLoading?: boolean
+    handlePayNow: (
+      installment: Installment,
+      paymentReceipt: File | null
+    ) => Promise<void>;
+    isLoading?: boolean;
   }
-  
+
   type GenerateZoomSignForUserArgsType = {
     meetingNumber: string;
     sdkKey: string;
-    sdkSecret: string;  
-  }
+    sdkSecret: string;
+  };
 
   interface ZoomConfigType {
     sdkKey: string;
@@ -842,12 +848,12 @@ declare global {
   }
 
   type ZoomResponseType = {
-    errorCode : number;
-    errorMessage : string | null;
-    method : string; 
-    result : string | null; 
-    status : boolean; 
-  }
+    errorCode: number;
+    errorMessage: string | null;
+    method: string;
+    result: string | null;
+    status: boolean;
+  };
 
   type MeetingDataType = {
     meetingNumber: string;
@@ -859,15 +865,15 @@ declare global {
     isPaid: string | null;
     scheduledAt: Date | null;
     description: string | null;
-  }
+  };
 
   type MeetingStateType = {
     meetingList: MeetingDataType[];
-  } 
+  };
   type ProfileImageType = {
-    publicId?: string
-    secureUrl?: string
-  }
+    publicId?: string;
+    secureUrl?: string;
+  };
   interface UploadImagePropsInterface {
     className?: string;
     disable?: boolean;
@@ -876,7 +882,7 @@ declare global {
     style?: CSSProperties;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     url?: string;
-    iconFillColor?:string;
+    iconFillColor?: string;
   }
   interface UserInfoSubCardPropsInterface {
     editing?: boolean;
@@ -896,7 +902,7 @@ declare global {
     [key: string]: boolean;
     email?: boolean;
     batchCode?: boolean;
-  }
+  };
 
   interface DataContextProps {
     html: string;
@@ -912,24 +918,24 @@ declare global {
   }
 
   interface UserCodeStateType {
-    userCode: [UserCodeType]
-    isSetUserCodeLoading: boolean
-    isUserSubmittedCodeLoading: boolean
+    userCode: [UserCodeType];
+    isSetUserCodeLoading: boolean;
+    isUserSubmittedCodeLoading: boolean;
   }
 
   interface UserCodeInputType {
-    questionId?: string
-    weekNumber?: number
-    dayNumber?: number
-    code?: CodeType
+    questionId?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: CodeType;
   }
 
   interface UserCodeType {
-    questionId?: string
-    weekNumber?: number
-    dayNumber?: number
-    code?: CodeType
-    updatedAt: string
+    questionId?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    code?: CodeType;
+    updatedAt: string;
   }
 
   interface CodeType {
@@ -971,21 +977,21 @@ declare global {
   }
 
   type GetAllUserPaymentsInput = {
-    isApproved: Boolean
-    isRejected: Boolean
-    isPending: Boolean
-  }
+    isApproved: Boolean;
+    isRejected: Boolean;
+    isPending: Boolean;
+  };
   type AllUsersPaymentDataOutputType = {
     allUsersPayments?: UserPaymentSchemaType[];
     response: CustomResponseType;
-  }
+  };
 
   interface UserPaymentCardProps {
     payment: UserPaymentSchemaType;
     onApprove: (paymentId: string) => Promise<boolean | string | undefined>;
-    onReject: (paymentId: string) =>  Promise<boolean | string | undefined>;
+    onReject: (paymentId: string) => Promise<boolean | string | undefined>;
     setPaymentReceipt: React.Dispatch<React.SetStateAction<File | null>>;
-    paymentReceipt: File | null
+    paymentReceipt: File | null;
     isLoading?: boolean;
   }
 
@@ -994,44 +1000,128 @@ declare global {
     isActive?: boolean;
     scheduledAt?: Date;
     meetingCodeList?: string[];
-  }
+  };
 
   type UpdateUserPaymentInput = {
-    paymentId: string
-    isApproved? :boolean
+    paymentId: string;
+    isApproved?: boolean;
     isApproved?: boolean;
     isRejected?: boolean;
     isPending?: {
       totalAmount?: string;
       totalPendingAmount?: string;
-    },
+    };
     image?: string | ArrayBuffer;
-    rejectReason?: string
-  }
+    rejectReason?: string;
+  };
 
   interface SpinnerProps {
-    colors?: string[]; 
+    colors?: string[];
     width?: string;
     height?: string;
-    theme?: 'dark' | 'light';
+    theme?: "dark" | "light";
   }
   interface UserInfoCardPropsInterface {
     datalist: SecondaryUserSchemaType;
     nonEditedableFields: nonEditableUserSchemaFieldsType;
     editing?: boolean;
     onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
-    formTextValues?:SecondaryUserSchemaType;
+    formTextValues?: SecondaryUserSchemaType;
   }
-  
+
   interface FilterTagsProps {
     className?: string;
     filterTagMap?: Record<string, boolean>;
     setFilterTag: (value: string) => void;
     onClearAll?: () => void;
-  } 
+  }
 
-interface NoDataFoundProps {
-  message?: string;
+  interface NoDataFoundProps {
+    message?: string;
+  }
+  interface SelectProps {
+    isDisabled?: boolean;
+    className?: string;
+    data?: { text: string; value: string }[];
+    defaultSelected?: string;
+    onSelect?: (option: SelectOptionType) => void;
+    label?: string;
+    labelPosition?: "top" | "bottom";
+    isRequired?: boolean;
+    isError?: boolean;
+    placeHolder?: string;
+    style?: React.CSSProperties;
+    backgroundColor?: string;
+    theme?: ThemeValueType;
+  }
+
+  type SelectOptionType = {
+    text: string;
+    value: string;
+  };
+  type ThemeType = {
+    colors: ThemeColorType;
+    typography: TypographyType;
+  };
+
+  type ThemeMapType = {
+    light: ThemeType;
+    dark: ThemeType;
+  };
+  type ThemeColorType = {
+    primaryTextColor: string;
+    secondaryTextColor: string;
+    primaryBorder: string;
+    secondaryBorder: string;
+    primaryBgColor: string;
+    secondaryBgColor: string;
+    primaryBgOnHover: string;
+    secondaryBgOnHover: string;
+    primaryTextOnHover: string;
+    secondaryTextOnHover: string;
+    primaryBorderOnHover: string;
+    secondaryBorderOnHover: string;
+    primaryBoxShadow: string;
+    secondaryBoxShadow: string;
+    primaryBoxShadowOnHover: string;
+    secondaryBoxShadowOnHover: string;
+    errorColor: string;
+    [key: string]: string;
+  };
+
+  type ThemeType = {
+    colors: ThemeColorType;
+    typography: TypographyType;
+  };
+
+  type ThemeMapType = {
+    light: ThemeType;
+    dark: ThemeType;
+  };
+
+  interface UseUpdateThemeColorProp {
+    useStyle: function;
+    colors?: {
+      primaryTextColor?: string;
+      secondaryTextColor?: string;
+      primaryBorder?: string;
+      secondaryBorder?: string;
+      primaryBgColor?: string;
+      secondaryBgColor?: string;
+      primaryBgOnHover?: string;
+      secondaryBgOnHover?: string;
+      primaryTextOnHover?: string;
+      secondaryTextOnHover?: string;
+      primaryBorderOnHover?: string;
+      secondaryBorderOnHover?: string;
+      primaryBoxShadow?: string;
+      secondaryBoxShadow?: string;
+      primaryBoxShadowOnHover?: string;
+      secondaryBoxShadowOnHover?: string;
+      errorColor?: string;
+    };
+  }
+
+  type ThemeValueType = "light" | "dark";
 }
-}
-export { };
+export {};

@@ -3,9 +3,11 @@ import { Route, Routes } from 'react-router-dom';
 import { useUser } from '../redux/actions/userAction';
 import UnauthorizedPage from '../pages/unauthorizedPage/unauthorizedPage';
 import AllUserPaymentsList from '../pages/[admin]/allUsersPaymentsList/AllUsersPaymentsList';
+import { CreateQuestion } from '../pages/[admin]/createQuestion/createQuestion';
 
 const AdminRoutesMap: RoutesMapInterface = Object.freeze({
-    "/admin/usersPayments": <AllUserPaymentsList/>
+    "/admin/usersPayments": <AllUserPaymentsList />,
+    "/admin/createQuestions":<CreateQuestion/>
 });
 
 export const AdminRoutes = () => {
