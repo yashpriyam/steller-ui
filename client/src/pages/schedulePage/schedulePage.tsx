@@ -8,7 +8,7 @@ import { useWeek } from "../../redux/actions/scheduleAction";
 import { MeetIcon } from "../../icons/index";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
-import { convertDateToString, isCurrentDate } from "../../utils/index";
+import { sortDirection, convertDateToString, isCurrentDate, weekSortBy } from "../../utils/index";
 import Spinner from "../../components/spinner/spinner";
 import { useMeeting } from "../../redux/actions/meetingAction";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
@@ -17,13 +17,14 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   className,
   style,
 }: SchedulePagePropsInterface) => {
-  const [filter, setFilter] = useState<GetScheduleDataType>({weekFilterData: {}, sortdata: {sortOrder: "desc", sortBy: "date"}});
+  const { desc } = sortDirection;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
   const { weekList, isScheduleDataLoading } = weekData;
   const { getMeeting } = useMeeting();
   const [meetingData, setMeetingData] = useState<MeetingDataType | null>(null);
+  const [filter, setFilter] = useState<GetScheduleDataType>({weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}});
 
   const handleNavigation = (
     e: React.MouseEvent<HTMLElement>,

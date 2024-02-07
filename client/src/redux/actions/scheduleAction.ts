@@ -7,7 +7,7 @@ export const useWeek = () => {
     const weekData = useSelector(selectWeek);
 
     const getScheduleData = async ({
-        weekFilterData, sortdata
+        weekFilterData, sortData
     }: GetScheduleDataType) => {
         const {
             weekNumber,
@@ -19,7 +19,7 @@ export const useWeek = () => {
         } : WeekDataType = weekFilterData || {};
         const {
             sortBy, sortOrder
-        } : SortDataType = sortdata || {};
+        } : SortDataType = sortData || {};
         try {
             dispatch(actions.setIsScheduleDataLoading(true));
             const response = await apolloClient.query({

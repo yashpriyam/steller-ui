@@ -1,5 +1,6 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import { notesModel, questionModel, videoModel, weekModel } from "@models";
+import { sortDirection } from "@utils";
 
 export const getScheduleData = async (
     parent: undefined,
@@ -13,10 +14,11 @@ export const getScheduleData = async (
     try {
         const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
         const { weekDataFilter, sortData } = args;
-        const {sortBy, sortOrder="desc"} = sortData;
-        const sortOptions: { [key: string]: "asc" | "desc"} = {};
+        const { asc, desc } = sortDirection;
+        const {sortBy, sortOrder = desc} = sortData;
+        const sortOptions: { [key: string]: SortDirectionType } = {};
         if (sortBy && sortOrder) {
-                sortOptions[sortBy] = sortOrder;
+           sortOptions[sortBy] = sortOrder;
         }
         const weekData: WeekDataType[] = await weekModel.find(weekDataFilter).populate({
             path: DAYS,

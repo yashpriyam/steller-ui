@@ -1,4 +1,5 @@
 import { UserProfileSchemaType } from '@models';
+import { sortDirection } from '@utils';
 import { Request, Response } from "express";
 import { ObjectId } from "mongoose";
 
@@ -997,12 +998,9 @@ declare global {
     userEmail: string;
     rejectReason?: string
   }
-  enum SortDirection {
-    asc = "asc",
-    desc = "desc",
-  }
+  type SortDirectionType = keyof typeof sortDirection;
   type SortDataType = {
-    sortOrder?: SortDirection;
+    sortOrder?: SortDirectionType;
     sortBy?: string;
   }
 

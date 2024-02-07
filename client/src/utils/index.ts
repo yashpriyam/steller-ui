@@ -11,4 +11,4 @@ export { getFirstLettersOfName } from "./getFirstLetterOfName";
 export { isCurrentDate } from "./isCurrentDate";
 export { getProfileRandomColorFromLocalStorage } from "./getProfileRandomColorFromLocalStorage"
 export { convertDateToString} from "./dateUtils";
-export { SortDirection } from "./sortEnum";
+export { sortDirection, weekSortBy } from "./sortUtil";

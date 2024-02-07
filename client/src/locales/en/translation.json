@@ -78,5 +78,6 @@
     "schedule_header":"Schedule Page",
     "totalQuestions":"Total Questions",
     "back": "Back",
-    "clear": "Clear"
+    "clear": "Clear",
+    "date": "Date"
 }

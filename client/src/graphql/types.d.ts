@@ -1040,7 +1040,7 @@ declare global {
   }
   type GetScheduleDataType = {
     weekFilterData ?: WeekDataType;
-    sortdata ?: SortDataType; 
+    sortData ?: SortDataType; 
   }
 
 interface NoDataFoundProps {
