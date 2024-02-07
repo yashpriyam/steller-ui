@@ -5,7 +5,7 @@ import Footer from "../../Components/Footer/Footer";
 import PreviewImages from "../../Components/PreviewImages/PreviewImages";
 import TopBanner from "../../Components/TopBanner/TopBanner";
 import Testimonials from "../../Components/Testimonials/Testimonials";
-import Banner from "../../Components/Banner/Banner";
+// import Banner from "../../Components/Banner/Banner";
 import "./Homepage.scss";
 import { localMessages } from "../../helpers/constants/localMessages";
 // import JobBoard from "../../Components/JobBoard/JobBoard";

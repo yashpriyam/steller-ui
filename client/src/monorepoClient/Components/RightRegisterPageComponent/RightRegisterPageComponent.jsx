@@ -3,7 +3,7 @@ import { ButtonComponent } from "../Button/Button";
 import "./RightRegisterPageComponent.scss";
 import FormComponent from "../FormComponent/FormComponent";
 import LoadingComponent from "../loading/Loading.Component";
-import Banner from "../Banner/Banner";
+// import Banner from "../Banner/Banner";
 import { localMessages } from "../../helpers/constants/localMessages";
 // import { formNamesArray } from "../../Components/FormComponent/FormData.js";
 
