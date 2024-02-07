@@ -566,7 +566,7 @@ declare global {
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
-    batchCode?: string;
+    date?: Date;
     description?: string;
     title?: string;
     isActive?: boolean;
@@ -996,6 +996,14 @@ declare global {
     receiptImageUrl?: string;
     userEmail: string;
     rejectReason?: string
+  }
+  enum SortDirection {
+    asc = "asc",
+    desc = "desc",
+  }
+  type SortDataType = {
+    sortOrder?: SortDirection;
+    sortBy?: string;
   }
 
 }

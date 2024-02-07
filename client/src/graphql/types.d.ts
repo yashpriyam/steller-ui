@@ -579,6 +579,7 @@ declare global {
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: ObjectId[];
+    date?: Date;
   }
   type ScheduleDataStateType = {
     weekList: WeekDataType[];
@@ -1033,6 +1034,14 @@ declare global {
     setFilterTag: (value: string) => void;
     onClearAll?: () => void;
   } 
+  type SortDataType = {
+    sortOrder?: string;
+    sortBy?: string;
+  }
+  type GetScheduleDataType = {
+    weekFilterData ?: WeekDataType;
+    sortdata ?: SortDataType; 
+  }
 
 interface NoDataFoundProps {
   message?: string;

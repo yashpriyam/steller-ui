@@ -1,34 +1,47 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import "./filter.scss";
 import { SortIcon } from "../../icons/index";
 import { Checkbox } from "../../components/checkbox/checkbox";
+import { SortDirection } from "../../utils/index";
 interface FilterProps {
   className?: string;
   style?: object;
-  filter?: string[];
-  setFilter?: (value: string[]) => {};
+  filter?: GetScheduleDataType;
+  setFilter?: Dispatch<SetStateAction<GetScheduleDataType>>;
 }
 export const Filter: React.FC<FilterProps> = ({
   className,
   style,
   filter,
-  setFilter
+  setFilter = () => { }
 }: FilterProps) => {
-  
-  const checkboxData : CheckboxValueType[] =[{text: "some text", value: "1"}];
-  const [isSortActive, setIsSortActive] = useState<boolean>(false);
+  const { asc, desc } = SortDirection();
+  const [sortOrder, setSortOrder] = useState("desc")
+  const checkboxData: CheckboxValueType[] = [{ text: "some text", value: "1" }];
+  const [isSortActive, setIsSortActive] = useState<boolean>(true);
+
+  const handleSortButon = async () => {
+    const newSortOrder = sortOrder === desc ? asc : desc;
+    setSortOrder(newSortOrder);
+    setFilter({ ...filter, sortdata: { sortBy: "date", sortOrder: newSortOrder } });
+    setIsSortActive(!isSortActive);
+  }
+
   return (
     <div
       className={`scheduling-page-filter-container ${className}`}
       style={style}
     >
-        <div className="checkbox-content filter-right-border-style">
+      {/* <div className="checkbox-content filter-right-border-style">
           {checkboxData && <Checkbox type="multi" options={checkboxData}/>}
-        </div>
-       <div className={`sort-by-date-wrapper ${isSortActive && "sort-by-date-wrapper-active"}`} onClick={()=>setIsSortActive(!isSortActive)}>
-         <SortIcon isDarkMode={true} width="20px" height="20px" fillColor="rgb(14,114,177)"/>
-        <span>Date</span>
-        </div>
+        </div> */}
+      {
+        //TO-DO @sujal
+      }
+      <div className={`sort-by-date-wrapper ${isSortActive && "sort-by-date-wrapper-active"}`} onClick={handleSortButon}>
+        <SortIcon isDarkMode={true} width="20px" height="20px" />
+        <span className="sort-by-date-text">Date</span>
       </div>
+    </div>
   );
 };

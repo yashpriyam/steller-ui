@@ -17,7 +17,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   className,
   style,
 }: SchedulePagePropsInterface) => {
-  const [filter, setFilter] = useState<string[]>([]);
+  const [filter, setFilter] = useState<GetScheduleDataType>({weekFilterData: {}, sortdata: {sortOrder: "desc", sortBy: "date"}});
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
@@ -52,9 +52,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   }
 
   useEffect(() => {
-    getScheduleData({});
+    getScheduleData(filter);
     getTodayClassMeeting();
-  }, []);
+  }, [filter]);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
       <div className="schedule-page-meet-container">
@@ -65,7 +65,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
       </div>
       <div className="schedule-page-header-filter-wrapper">
         <div className="schedule-page-header">{t("schedule_header")}</div>
-        <Filter/>
+        <Filter filter={filter} setFilter={setFilter}/>
       </div>
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (

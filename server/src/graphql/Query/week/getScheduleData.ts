@@ -3,7 +3,7 @@ import { notesModel, questionModel, videoModel, weekModel } from "@models";
 
 export const getScheduleData = async (
     parent: undefined,
-    args: { weekDataFilter: WeekDataType }
+    args: { weekDataFilter: WeekDataType, sortData: SortDataType}
 ): Promise<AllWeekDataOutputType> => {
     const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
     const errorData: CustomResponseType = {
@@ -12,7 +12,12 @@ export const getScheduleData = async (
     }
     try {
         const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
-        const { weekDataFilter } = args;
+        const { weekDataFilter, sortData } = args;
+        const {sortBy, sortOrder="desc"} = sortData;
+        const sortOptions: { [key: string]: "asc" | "desc"} = {};
+        if (sortBy && sortOrder) {
+                sortOptions[sortBy] = sortOrder;
+        }
         const weekData: WeekDataType[] = await weekModel.find(weekDataFilter).populate({
             path: DAYS,
             populate: [
@@ -29,7 +34,7 @@ export const getScheduleData = async (
                 model: notesModel, 
               },
         ]
-          });
+          }).sort(sortOptions);
         return {
             weekData,
             response: weekData.length ? {
