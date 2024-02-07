@@ -4,9 +4,7 @@ import { useUserCode } from '../../redux/actions/userCodeActions';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../../components/button/button';
-import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectUserCode,
   userCodeAction,
 } from '../../redux/slices/userCode/userCodeSlice';
 
@@ -27,9 +25,6 @@ const CodeBlockButtons = ({
   weekNumber: number;
   dayNumber: number;
 }) => {
-  const dispatch = useDispatch();
-  const { setCodeSubmittedLoading } = userCodeAction;
-  const userCode = useSelector(selectUserCode);
   const { saveUserCode } = useUserCode();
   const { t } = useTranslation();
   const {
@@ -47,16 +42,16 @@ const CodeBlockButtons = ({
     );
     return openWindowBlock?.predefinedCode;
   };
-  const [isCodeSubmittedCodeLoading,setIsCodeSubmittedLoading]=useState<boolean>(false);
+  const [isCodeSubmitting, setisCodeSubmitting] = useState<boolean>(false);
   const handleCodingBlockQuestionSubmit = async () => {
-    setCodeSubmittedLoading(true);
+    setisCodeSubmitting(true);
     const response = await saveUserCode({
       weekNumber: Number(weekNumber),
       dayNumber: Number(dayNumber),
       code: { html, css, js },
       questionId: questionId,
     });
-    setCodeSubmittedLoading(false);
+    setisCodeSubmitting(false);
 
     if (response?.data.saveUserCode.response.status === 200) {
       toast.success(t('solution_submitted_success_message'));
@@ -99,7 +94,7 @@ const CodeBlockButtons = ({
       <Button
         onClick={handleCodingBlockQuestionSubmit}
         text={
-          isCodeSubmittedCodeLoading ? t('submitting') : t('submit')
+          isCodeSubmitting ? t('submitting') : t('submit')
         }
         isDisabled={isSubmitButtonDisabled}
       />
