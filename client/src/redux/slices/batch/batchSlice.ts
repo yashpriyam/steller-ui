@@ -9,7 +9,6 @@ export const batchSlice = createSlice({
     initialState: initialState,
     reducers: {
         setBatchCode: (state, action) => {
-            console.log({data : action.payload.batchData})
             state.batchData = action.payload?.batchData;
         },
     },
