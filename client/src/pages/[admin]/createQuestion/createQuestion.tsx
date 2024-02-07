@@ -6,14 +6,24 @@ import { CreateQuestionComponent } from "../../../components/createQuestionCompo
 
 export const CreateQuestion: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const handleOnAddQuestionClick = () => {
+    setIsModalOpen(true);
+  };
+  const handleOnCloseModal = () => {
+    setIsModalOpen(false)
+  }
   return (
     <div className="create-question-wrapper-container">
       <h1 className="create-question-header">Create Question</h1>
       <div className="add-question-button-wrapper">
-        <Button text="Add Question" className="add-question-button" />
+        <Button
+          text="Add Question"
+          className="add-question-button"
+          onClick={handleOnAddQuestionClick}
+        />
       </div>
-      <Modal className="question-modal-wrapper" isOpen={true}>
-        <CreateQuestionComponent />
+      <Modal className="question-modal-wrapper" isOpen={isModalOpen}>
+        <CreateQuestionComponent onClose={handleOnCloseModal} />
       </Modal>
     </div>
   );

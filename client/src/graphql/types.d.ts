@@ -1121,6 +1121,9 @@ declare global {
       errorColor?: string;
     };
   }
+  interface CreateQuestionComponentProps{
+    onClose?:()=>void
+  }
 
   type ThemeValueType = "light" | "dark";
 }
