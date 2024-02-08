@@ -803,6 +803,7 @@ declare global {
   };
 
   type Installment = {
+    _id?: string
     id? :string;
     amount?: string;
     sequence?: string;
