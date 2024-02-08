@@ -6,7 +6,9 @@
   border-radius: 10px;
   margin: 10px 0 5px;
   border: 1px solid black;
-
+  .code-block-container-fix-width{
+    max-width: 50%;
+  }
   .code-editor-blocks-container {
     flex: 1;
 
@@ -57,7 +59,7 @@
   }
 
   .code-block-result-container {
-    flex: 1;
+     flex-basis: 50%;
   }
 }
 
