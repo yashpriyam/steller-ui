@@ -1,7 +1,7 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import { batchModel } from "@models";
 
-export const getBatchCode = async (): Promise<BatchDataOutputType> => {
+export const getBatchCode = async (): Promise<AllBatchDataOutputType> => {
   const { BATCH_DOES_NOT_EXIST } = errorMessages.BATCH_MODEL;
   const errorData: CustomResponseType = {
     message: BATCH_DOES_NOT_EXIST,
@@ -9,7 +9,7 @@ export const getBatchCode = async (): Promise<BatchDataOutputType> => {
   };
   try {
     const { BATCH_FOUND_SUCCESS } = localMessages.BATCH_MODEL;
-    const batchCodeData = await batchModel.findOne(
+    const batchCodeData = await batchModel.find(
       {},
       { batchCode: 1, _id: 0, startDate: 1 }
     );

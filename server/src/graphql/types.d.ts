@@ -997,5 +997,9 @@ declare global {
     userEmail: string;
     rejectReason?: string
   }
+  type AllBatchDataOutputType = {
+    batchData?: BatchSchemaType[];
+    response: CustomResponseType;
+  };
 
 }

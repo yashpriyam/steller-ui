@@ -161,6 +161,7 @@ const Registerpage = () => {
           setFormStep={setFormStep}
           setFinishedPage={setFinishedPage}
           isLoading={isLoading}
+          batchData={batchData}
         />
       </div>
     </div>

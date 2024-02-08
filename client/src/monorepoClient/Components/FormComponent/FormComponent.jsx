@@ -30,6 +30,7 @@ const FormComponent = ({
   setFormData,
   setFinishedPage,
   resetForm,
+  batchData,
   // paymentStatus,
   // setPaymentStatus,
 }) => {
@@ -43,7 +44,7 @@ const FormComponent = ({
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? JSON.parse(authenticateStateAndDispatch[0])
       : {};
-
+  const { batchCode } = batchData || {};
   useLayoutEffect(() => {
     if (userInfo.haveForm && userInfo.id) {
       sendRequest(`/api/register/getUserForm`, "get")
@@ -111,8 +112,9 @@ const FormComponent = ({
           <InputComponent
             key={formInputs.labelId}
             inputProps={formInputs}
-            value={formFieldValueMap[formInputs.labelId] || ""}
+            value={formInputs.labelId==="Select your preferred batch" ?batchCode :formFieldValueMap[formInputs.labelId] || ""}
             onChange={formInputHandlerHOC(formInputs)}
+            batchData={batchData}
           />
         );
       })}

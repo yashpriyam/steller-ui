@@ -17,7 +17,7 @@ const typeDefs = gql`
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
-    getBatchCode: BatchDataOutputType!
+    getBatchCode: AllBatchDataOutputType!
   }
 
   type Mutation {
@@ -1193,6 +1193,10 @@ const typeDefs = gql`
     isPending: UserPaymentPendingInputType
     image: String
     rejectReason: String
+  }
+  type AllBatchDataOutputType {
+    batchData: [Batch]
+    response: CustomResponseType!
   }
 
   scalar DateTime

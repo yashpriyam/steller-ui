@@ -13,6 +13,7 @@ const RightRegisterPageComponent = ({
   handleSubmitForm = () => {},
   setFinishedPage,
   isLoading,
+  batchData,
   // sendOtp,
   // showSendOtpButton,
 }) => {
@@ -33,6 +34,7 @@ const RightRegisterPageComponent = ({
           formStep={formStep}
           setFinishedPage={setFinishedPage}
           resetForm={resetForm}
+          batchData={batchData}
         />
         {/* {showSendOtpButton && (
           <>
