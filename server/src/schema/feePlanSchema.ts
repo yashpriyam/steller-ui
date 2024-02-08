@@ -22,10 +22,10 @@ const feePlanSchema = new mongoose.Schema<FeePlanSchemaType>({
         amount: String,
         sequence: String,
         dueDate: Date,
-        accessWeeks: {
+        accessWeeks: [{
           type: ObjectId,
           ref: weekModel,
-        },
+        }],
         miscellaneous: {
           type: Object,
           required: false,
