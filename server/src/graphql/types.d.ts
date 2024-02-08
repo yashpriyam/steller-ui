@@ -803,6 +803,7 @@ declare global {
   };
 
   type Installment = {
+    _id?: string
     id? :string;
     amount?: string;
     sequence?: string;
@@ -890,9 +891,9 @@ declare global {
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
-    isAdmin?: boolean
+    isAdmin?: boolean;
+    isPaidUser?: JSON;
   }
-
   type GetMeetingArgsType = {
     meetingNumber?: string;
     meetingCode?: string;
