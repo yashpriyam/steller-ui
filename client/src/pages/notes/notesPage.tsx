@@ -3,6 +3,7 @@ import { useNotes } from '../../redux/actions/notesAction';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import './notesPage.scss';
+import Spinner from '../../components/spinner/spinner';
 
 const Notes = () => {
   const location = useLocation();
@@ -10,9 +11,9 @@ const Notes = () => {
   const queryParams = new URLSearchParams(location.search);
   const dayNumber = queryParams.get('dayNumber');
   const weekNumber = queryParams.get('weekNumber');
-  const { noteData, getAllNotes } = useNotes();
+  const { noteData, getAllNotes, } = useNotes();
   const noteSlideLink = noteData.noteList[0]?.link ?? "";
-
+  const { isNotesLoading } = noteData || {};
   const createNoteUrl = (code: string) => {
     return `https://slides.com/yashpriyam/${code}/embed?style=dark&share=hidden`
   }
@@ -34,7 +35,7 @@ const Notes = () => {
             {dayNumber}
           </span>
         </div>
-        {noteSlideLink ? (
+        { isNotesLoading ? <Spinner /> : noteSlideLink ? (
           <div className="iframe-container">
             <iframe
               title={noteSlideLink}
