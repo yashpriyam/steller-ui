@@ -1,4 +1,5 @@
 import { UserProfileSchemaType } from '@models';
+import { sortDirection } from '@utils';
 import { Request, Response } from "express";
 import { ObjectId } from "mongoose";
 
@@ -566,7 +567,7 @@ declare global {
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
-    batchCode?: string;
+    date?: Date;
     description?: string;
     title?: string;
     isActive?: boolean;
@@ -997,6 +998,11 @@ declare global {
     receiptImageUrl?: string;
     userEmail: string;
     rejectReason?: string
+  }
+  type SortDirectionType = keyof typeof sortDirection;
+  type SortDataType = {
+    sortOrder?: SortDirectionType;
+    sortBy?: string;
   }
 
 }

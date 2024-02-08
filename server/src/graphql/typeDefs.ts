@@ -11,7 +11,9 @@ const typeDefs = gql`
       pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
-    getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
+    getScheduleData(
+      weekDataFilter: WeekDataInputType sortData: SortDataInputType
+      ): WeekDataOutputType
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
@@ -708,6 +710,7 @@ const typeDefs = gql`
     description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
+    date: DateTime
   }
   type WeekDataType {
     batchCode: String
@@ -717,6 +720,7 @@ const typeDefs = gql`
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
     days: [DaySchemaType]
+    date: DateTime
   }
   type WeekDataOutputType {
     weekData: [WeekDataType]
@@ -1200,7 +1204,14 @@ const typeDefs = gql`
     image: String
     rejectReason: String
   }
-
+  enum SortDirection {
+    asc 
+    desc
+  }
+  input SortDataInputType {
+    sortOrder: SortDirection
+    sortBy: String
+  }
   scalar DateTime
   scalar JSON
 `;

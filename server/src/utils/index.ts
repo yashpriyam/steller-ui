@@ -24,3 +24,4 @@ export { isNonUndefinedAndNullishValueExists } from "./isNonUndefinedAndNullishV
 export { isAdmin } from "./isAdmin"
 export { checkPaidUser } from "./checkPaidUser"
 export { generatePaymentApprovalEmail } from "./getPaymentApprovalHtml"
+export { sortDirection } from "./sortUtils";
