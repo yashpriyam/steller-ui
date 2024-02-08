@@ -427,6 +427,7 @@ declare global {
 
   type NotesDataStateType = {
     noteList: NotesDataType[];
+    isNotesLoading: boolean;
   }
 
   interface DayPagePropsInterface {

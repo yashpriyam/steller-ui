@@ -23,6 +23,8 @@ const QuestionAccordion = ({
   const [fillupValue, setFillupValue] = useState<string>("");
   const isFillupType = questionType === "fillup";
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const isSubmitBtnDisabled: boolean = isFillupType
     ? !fillupValue
     : !selectedValues.length || isLoading;
@@ -36,6 +38,14 @@ const QuestionAccordion = ({
   const codeBlockSubmittedDate = userCodeData?.userCode?.find(
     (element) => element.questionId === questionId
   );
+  const openImagePreview = (imageUrl: string) => {
+    setSelectedImage(imageUrl);
+    setIsImagePreviewOpen(true);
+  };
+  const closeImagePreview = () => {
+    setSelectedImage(null);
+    setIsImagePreviewOpen(false);
+  };
   return (
     <Accordion
       className={`question-title ${className}`}
@@ -74,6 +84,7 @@ const QuestionAccordion = ({
                     className="question-title-img"
                     src={titleData.imageUrl}
                     alt=""
+                    onClick={() => openImagePreview(titleData.imageUrl ? titleData.imageUrl : "")}
                   />
                 )}
                 {titleData?.iframe && (
@@ -83,6 +94,15 @@ const QuestionAccordion = ({
                     src={titleData.iframe}
                   ></iframe>
                 )}
+                {isImagePreviewOpen && (
+        <div className="question-image-preview-modal" onClick={closeImagePreview}>
+          <img
+            className="question-preview-image"
+            src={selectedImage || ""}
+            alt="Image Preview"
+          />
+        </div>
+      )}
               </>
             ))}
           </div>
