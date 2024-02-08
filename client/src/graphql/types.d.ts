@@ -1121,10 +1121,30 @@ declare global {
       errorColor?: string;
     };
   }
-  interface CreateQuestionComponentProps{
-    onClose?:()=>void
+  interface CreateQuestionComponentProps {
+    onClose?: () => void;
   }
-
+  type CraeteQuestionDataType = {
+    title: CreateQuestionOptionType[];
+    questionType: QuestionTypeEnum;
+    options: CreateQuestionOptionType[];
+    answer: CreateQuestionOptionType[];
+    marks: number;
+    meta: QuestionMetaDataType;
+    isCorrect?: boolean;
+    isAnswered?: boolean;
+  };
+  type CreateQuestionOptionType = {
+    imageUrl?: string | undefined;
+    text?: string | undefined;
+    iframe?: string | undefined;
+    isChecked?: boolean | undefined;
+    codeBlock?: CodeBlockType;
+  };
+  interface OptionsProps {
+    isCodeBlockOpen?: boolean;
+    onChange?: React.Dispatch<React.SetStateAction>;
+  }
   type ThemeValueType = "light" | "dark";
 }
 export {};

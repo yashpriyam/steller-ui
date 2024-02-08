@@ -15,3 +15,7 @@ export { PaymentIcon } from "./paymentIcon"
 export { PenIcon } from "./penIcon";
 export { NoDataFound } from "./noDataFound"
 export { CheckedIcon } from "./CheckedIcon";
+export { EditzIcon } from "./editzIcon";
+export { DeleteIcon } from "./deleteIcon";
+export { AddIcon } from "./addIcon"
+export { CloseCrossIcon } from "./closeCrossIcon"
