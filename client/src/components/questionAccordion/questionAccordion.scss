@@ -26,12 +26,11 @@
           justify-content: center;
           align-items: center;
           z-index: 1;
-          .question-preview-image {
-            width: 80%;
-            max-height: 80%;
-            border: 1px solid $primaryColor;
-            border-radius: 4px;
-          }
+        }
+        .question-preview-image {
+          max-width: 80%;
+          max-height: 80%;
+          border-radius: 5px;
         }
       .question-title-img {
         max-height: 300px;
