@@ -38,6 +38,8 @@ export async function checkPaidUser(
     }
   }
 
-
-  return false;
+  return {
+    isPaidUser: false,
+    accessWeeks:[]
+  }
 }

@@ -92,9 +92,15 @@ const typeDefs = gql`
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
     saveUserCode(input: SaveUserCodeInput): GetUserCodeOutput
-    getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
-    approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
-    rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+    getAllUserPayments(
+      input: GetAllUserPaymentsInput
+    ): UserPaymentsDataOutputType
+    approveUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
+    rejectUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
   }
 
   input SaveUserCodeInput {
@@ -223,7 +229,7 @@ const typeDefs = gql`
     isActive: Boolean
     duration: String
     batchCode: String
-    weekNumber:Int
+    weekNumber: Int
   }
 
   input OptionalLinksInput {
@@ -1096,7 +1102,7 @@ const typeDefs = gql`
     userData: UserSchemaType
     response: CustomResponseType
     isAdmin: Boolean
-    isPaidUser: Boolean
+    isPaidUser: JSON
   }
   input PartialUserSchemaType {
     email: String

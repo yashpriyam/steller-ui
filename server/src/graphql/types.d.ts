@@ -892,9 +892,8 @@ declare global {
     userData?: UserSchemaType;
     response: CustomResponseType;
     isAdmin?: boolean;
-    isPaidUser?: boolean;
+    isPaidUser?: JSON;
   }
-
   type GetMeetingArgsType = {
     meetingNumber?: string;
     meetingCode?: string;
