@@ -34,12 +34,12 @@ export async function checkPaidUser(
       isPaidUser: true,
       accessWeeks: userInstallments?.map((userInstallment)=> {
           return userInstallment.accessWeeks?.map((week)=> week.weekNumber)
-      })
+      }).flat(1)
     }
   }
 
   return {
     isPaidUser: false,
-    accessWeeks:[]
+    accessWeeks:[1,2]
   }
 }

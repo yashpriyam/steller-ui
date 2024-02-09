@@ -1,7 +1,7 @@
-import { localMessages, errorMessages, statusCodes } from '@constants';
-import { questionAttempt, questionModel } from '@models';
-import { isLoggedIn, getUnauthorizedResponse } from '@utils';
-import mongoose from 'mongoose';
+import { localMessages, errorMessages, statusCodes } from "@constants";
+import { User, questionAttempt, questionModel } from "@models";
+import { isLoggedIn, getUnauthorizedResponse, checkPaidUser } from "@utils";
+import mongoose from "mongoose";
 
 const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
 const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
@@ -30,8 +30,20 @@ export const getAllQuestions = async (
         updatedFields[fullPath] = filteredData[key];
       }
     }
+    const userId = contextData.user._id;
+    const userInfo = await User.findById(userId);
+    const userSelectedFeePlan = userInfo?.feePlan;
+    const isPaidUser = await checkPaidUser(
+      userId ?? "",
+      userSelectedFeePlan ?? ""
+    );
+    const { accessWeeks } = isPaidUser;
+
     const questionList: [QuestionSchemaType] = await questionModel
-      .find(updatedFields)
+      .find({
+        ...updatedFields,
+        'meta.week': { $in: accessWeeks }, 
+      })
       .skip(skip)
       .limit(limit)
       .lean();
@@ -49,7 +61,7 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
-      if (questionData.questionType === 'codeblock') {
+      if (questionData.questionType === "codeblock") {
         return questionData;
       }
       const updatedQuestionData = {
