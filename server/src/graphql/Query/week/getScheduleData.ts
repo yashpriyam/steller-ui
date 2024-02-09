@@ -4,7 +4,7 @@ import { sortDirection } from "@utils";
 
 export const getScheduleData = async (
     parent: undefined,
-    args: { weekDataFilter: WeekDataType, sortData: SortDataType}
+    args: { weekNumbers ?: number[], weekDataFilter: WeekDataType, sortData: SortDataType}
 ): Promise<AllWeekDataOutputType> => {
     const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
     const errorData: CustomResponseType = {
@@ -13,14 +13,16 @@ export const getScheduleData = async (
     }
     try {
         const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
-        const { weekDataFilter, sortData } = args;
+        const { weekDataFilter, sortData, weekNumbers } = args;
+
         const { asc, desc } = sortDirection;
-        const {sortBy, sortOrder = desc} = sortData;
+        const {sortBy, sortOrder = desc} = sortData || {};
         const sortOptions: { [key: string]: SortDirectionType } = {};
         if (sortBy && sortOrder) {
            sortOptions[sortBy] = sortOrder;
         }
-        const weekData: WeekDataType[] = await weekModel.find(weekDataFilter).populate({
+        const queryConditions = { weekNumber: { $in: weekNumbers ?? [] } };
+        const weekData: WeekDataType[] = await weekModel.find({...queryConditions, ...weekDataFilter}).populate({
             path: DAYS,
             populate: [
             {

@@ -654,7 +654,7 @@ declare global {
     amount?: string;
     sequence?: string;
     dueDate?: Date; 
-    accessWeeks?: WeekDataType[]; // we'll store week data here
+    accessWeeks?: number[]; // we'll store week data here
     miscellaneous?: JSON;
     isApproved?: boolean;
     isRejected?:boolean;
@@ -1042,6 +1042,11 @@ declare global {
   type GetScheduleDataType = {
     weekFilterData ?: WeekDataType;
     sortData ?: SortDataType; 
+    weekNumbers ?: number[];
+  }
+  type IsPaidUserType = {
+    isPaidUser: boolean;
+    accessWeeks: number[];
   }
 
 interface NoDataFoundProps {

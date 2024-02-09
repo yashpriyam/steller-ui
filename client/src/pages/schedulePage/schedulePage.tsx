@@ -11,6 +11,7 @@ import Skeleton from "react-loading-skeleton";
 import { sortDirection, convertDateToString, isCurrentDate, weekSortBy } from "../../utils/index";
 import Spinner from "../../components/spinner/spinner";
 import { useMeeting } from "../../redux/actions/meetingAction";
+import { useUser } from "../../redux/actions/userAction";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
 
 const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
@@ -24,7 +25,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const { weekList, isScheduleDataLoading } = weekData;
   const { getMeeting } = useMeeting();
   const [meetingData, setMeetingData] = useState<MeetingDataType | null>(null);
-  const [filter, setFilter] = useState<GetScheduleDataType>({weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}});
+  const [filter, setFilter] = useState<GetScheduleDataType>({});
 
   const handleNavigation = (
     e: React.MouseEvent<HTMLElement>,
@@ -51,11 +52,17 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
       setMeetingData(meetingDetails);
     }
   }
-
+  const { user } = useUser();
+  const { isPaidUser } = user || {};
+  const { accessWeeks } = isPaidUser || {};
   useEffect(() => {
     getScheduleData(filter);
     getTodayClassMeeting();
   }, [filter]);
+  useEffect(()=>{
+    const newFilter = { weekNumbers : accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}}
+    setFilter(newFilter);
+  },[accessWeeks])
   return (
     <div className={`scheduling-page ${className}`} style={style}>
       <div className="schedule-page-meet-container">
