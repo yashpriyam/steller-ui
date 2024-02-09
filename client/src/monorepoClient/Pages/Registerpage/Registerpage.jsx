@@ -28,11 +28,6 @@ const Registerpage = () => {
   const { authenticateStateAndDispatch, setIsLoggedIn } = useContext(AppStateContext);
   const userDataCookieName = "userData";
   const { registerUser, getUserData } = useUser();
-  const {batchData, getBatchCode} = useBatch();
-  const { batchCode } = batchData || {};
-  useEffect(()=>{
-    getBatchCode();
-  },[batchData])
   const dispatcher =
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? authenticateStateAndDispatch[1]
@@ -94,7 +89,7 @@ const Registerpage = () => {
           location,
           course: selectyourcourse,
           courseYear:selectyourcourseyear,
-          batchCode,
+          batchCode: selectyourpreferredbatch,
           profileImage: userPictureUrl,
         })
         if (response?.response.data?.registerUser?.response?.status === 400) {
@@ -160,9 +155,7 @@ const Registerpage = () => {
           handleSubmitForm={handleSubmitForm}
           setFormStep={setFormStep}
           setFinishedPage={setFinishedPage}
-          isLoading={isLoading}
-          batchData={batchData}
-        />
+          isLoading={isLoading}        />
       </div>
     </div>
   );

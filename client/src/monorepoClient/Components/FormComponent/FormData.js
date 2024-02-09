@@ -1,4 +1,18 @@
-const parentFormStepMap = {
+export const useFormData = ( batchData ) => {
+  const findBatchByDate = (batchData, targetDate) => {
+    const batch = batchData?.find(batch => {
+      const formatDate = new Date(Number(batch.startDate)).toISOString() 
+      console.log(formatDate, targetDate, formatDate === targetDate)
+      // return new Date(batch.startDate).toLocaleString() === targetDate
+    });
+    return batch ? {
+      batchCode : batch.batchCode, startDate : batch.startDate
+    } : {};
+  }
+  const { batchCode, startDate } = findBatchByDate(batchData, "2024-01-29T00:00:00.000+00:00") || {};
+ console.log({ batchCode, startDate })
+
+  const parentFormStepMap = {
   1: "USER_EMAIL",
   2: "PROFESSIONAL_INFO_FORM",
   3: "SKILLS_INFO_FORM",
@@ -382,9 +396,12 @@ const parentFormsByName = {
 //   Theprogramrequiresyoutoattendliveclassesofaround10hrsweekDoyouhavethetimeresourcestodothat,
 // };
 
-export {
+
+
+return {
   parentFormsByName,
   parentFormStepMap,
   formNameStepMap,
   formNamesArray,
-};
+}
+}
