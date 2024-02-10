@@ -12,8 +12,7 @@ export const getBatchCode = async (): Promise<AllBatchDataOutputType> => {
     const batchCodeData = await batchModel.find(
       {},
       { batchCode: 1, _id: 0, startDate: 1 }
-    );
-
+    ).sort({_id: -1}).limit(1);
     return batchCodeData
       ? {
           batchData: batchCodeData,

@@ -53,7 +53,7 @@ const Registerpage = () => {
     try {
       await getUserData();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const handleSubmitForm = async (isNext = false, setResetForm) => {
@@ -76,20 +76,21 @@ const Registerpage = () => {
           selectyourrelevantbranch,
           selectyourpreferredbatch,
         } = formData;
+        const batchCode = selectyourpreferredbatch.split(" ")[0].trim()
         const response = await registerUser({
           name,
           email,
           phoneNumber: phonenumber,
           occupation: currentprofessionalstatus,
           expectedSalary: whatsagoodsalarythatcanmotivateyoutoacceptajoboffer,
-          sessionPreference: youwouldattendtheclassesonlineoroffline.toLowerCase() === 'online' ? 'online' : "offline",
+          sessionPreference: youwouldattendtheclassesonlineoroffline?.toLowerCase() === 'online' ? 'online' : "offline",
           isJobSeeker: true,
           collegeName: whichcollegeyouarefrom,
           branch: selectyourrelevantbranch,
           location,
           course: selectyourcourse,
           courseYear:selectyourcourseyear,
-          batchCode: selectyourpreferredbatch,
+          batchCode,
           profileImage: userPictureUrl,
         })
         if (response?.response.data?.registerUser?.response?.status === 400) {
@@ -104,6 +105,7 @@ const Registerpage = () => {
           getUserDataRequest();
         }
       } catch (e) {
+        console.log({e})
         Toast.error("Something went wrong");
       }
       setIsLoading(false);
@@ -116,7 +118,7 @@ const Registerpage = () => {
         const response = await readFileAsDataURL(files[0]);
         setUserPictureUrl(response);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   }

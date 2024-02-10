@@ -1,17 +1,5 @@
-export const useFormData = ( batchData ) => {
-  const findBatchByDate = (batchData, targetDate) => {
-    const batch = batchData?.find(batch => {
-      const formatDate = new Date(Number(batch.startDate)).toISOString() 
-      console.log(formatDate, targetDate, formatDate === targetDate)
-      // return new Date(batch.startDate).toLocaleString() === targetDate
-    });
-    return batch ? {
-      batchCode : batch.batchCode, startDate : batch.startDate
-    } : {};
-  }
-  const { batchCode, startDate } = findBatchByDate(batchData, "2024-01-29T00:00:00.000+00:00") || {};
- console.log({ batchCode, startDate })
-
+export const useFormData = ( { batchCode, startDate } ) => {
+  const batchDate = new Date(Number(startDate)).toDateString();
   const parentFormStepMap = {
   1: "USER_EMAIL",
   2: "PROFESSIONAL_INFO_FORM",
@@ -52,7 +40,7 @@ class FormInputTypeShape {
     this.isDropdown = isDropdown;
     this.optionList = optionList;
     this.parentFormStep = parentFormStep;
-    this.labelId = labelName.replaceAll(/\W/g, "").toLowerCase();
+    this.labelId = labelName.replaceAll(/\W/g, "")?.toLowerCase();
     this.isDataList = isDataList;
     this.defaultValue = defaultValue;
   }
@@ -209,10 +197,10 @@ const PersonalInfoFormData = [
     "Batch-code",
     false,
     true,
-    ["WMB2 - Started - 29 jan 2024"],
+    [`${batchCode} - Started - ${batchDate}`],
     0,
     false,
-    "WMB2 - Started - 29 jan 2024"
+    `${batchCode} - Started - ${batchDate}`
   ),
   // new FormInputTypeShape(
   //   formInputType.TEXT_INPUT_FIELD,

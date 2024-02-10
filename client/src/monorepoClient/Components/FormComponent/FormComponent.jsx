@@ -37,11 +37,12 @@ const FormComponent = ({
       ),
     };
   }
- const { batchData, getBatchCode } = useBatch();
- useEffect(()=> {
-   getBatchCode();
- },[batchData])
-  const {formNameStepMap, formNamesArray, parentFormStepMap, parentFormsByName} = useFormData(batchData)
+  const { batchData, getBatchCode } = useBatch();
+  const { batchCode, startDate } = batchData ? batchData[0] : {};
+  useEffect(()=> {
+    getBatchCode();
+  },[ batchCode, startDate ])
+  const {formNameStepMap, formNamesArray, parentFormStepMap, parentFormsByName} = useFormData({ batchCode, startDate })
   const [formFieldValueMap, setFormFieldValueMap] = useState(
     createFormFieldValueMap(formStep, parentFormsByName)
   );
@@ -96,14 +97,15 @@ const FormComponent = ({
     setFormFieldValueMap({
       ...createFormFieldValueMap(formStep, parentFormStepMap),
       ...storedFormData,
+      selectyourpreferredbatch: batchCode,
     });
     // eslint-disable-next-line
-  }, [formStep, storedFormData]);
+  }, [formStep, storedFormData, batchData]);
 
   useEffect(() => {
     setFormData(formFieldValueMap);
     // eslint-disable-next-line
-  }, [formFieldValueMap]);
+  }, [formFieldValueMap, batchData]);
 
   function formInputHandlerHOC(formInputs) {
     return function (value) {

@@ -24,7 +24,7 @@ export const getScheduleData = async (
             path: DAYS,
             populate: [
             {
-              path: 'questions videos',
+              path: 'questions',
               model: questionModel, 
             },
             {
