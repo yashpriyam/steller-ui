@@ -1,7 +1,7 @@
-import { localMessages, errorMessages, statusCodes } from '@constants';
-import { questionAttempt, questionModel } from '@models';
-import { isLoggedIn, getUnauthorizedResponse } from '@utils';
-import mongoose from 'mongoose';
+import { localMessages, errorMessages, statusCodes } from "@constants";
+import { User, questionAttempt, questionModel } from "@models";
+import { isLoggedIn, getUnauthorizedResponse, checkPaidUser } from "@utils";
+import mongoose from "mongoose";
 
 const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
 const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
@@ -14,8 +14,8 @@ export const getAllQuestions = async (
   if (!isLoggedIn(contextData)) {
     return getUnauthorizedResponse();
   }
-  const userData = contextData.user;
-  const errorData: CustomResponseType = {
+    const userId = contextData.user._id;
+    const errorData: CustomResponseType = {
     message: QUESTION_NOT_FOUND,
     status: statusCodes.BAD_REQUEST,
   };
@@ -30,15 +30,26 @@ export const getAllQuestions = async (
         updatedFields[fullPath] = filteredData[key];
       }
     }
+    const userInfo = await User.findById(userId);
+    const userSelectedFeePlan = userInfo?.feePlan;
+    const isPaidUser = await checkPaidUser(
+      userId ?? "",
+      userSelectedFeePlan ?? ""
+    );
+    const { accessWeeks } = isPaidUser;
+
     const questionList: [QuestionSchemaType] = await questionModel
-      .find(updatedFields)
+      .find({
+        ...updatedFields,
+        'meta.week': { $in: accessWeeks }, 
+      })
       .skip(skip)
       .limit(limit)
       .lean();
     const questionIdList = questionList.map((question) => question._id);
     const questionAttemptList: AllAttemptedQuestionDataType[] =
       await questionAttempt.find({
-        userId: new mongoose.Types.ObjectId(userData._id),
+        userId: new mongoose.Types.ObjectId(userId),
         questionId: { $in: questionIdList },
         isLatest: true,
       });
@@ -49,7 +60,7 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
-      if (questionData.questionType === 'codeblock') {
+      if (questionData.questionType === "codeblock") {
         return questionData;
       }
       const updatedQuestionData = {
