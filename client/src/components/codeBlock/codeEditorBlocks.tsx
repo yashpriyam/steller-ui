@@ -15,7 +15,8 @@ const CodeEditorBlocks: React.FC<{
   questionId: string;
   weekNumber: number;
   dayNumber: number;
-}> = ({ openWindows, questionId, weekNumber, dayNumber }) => {
+  className?: string;
+}> = ({ openWindows, questionId, weekNumber, dayNumber,className }) => {
   const {
     html = '',
     css = '',
@@ -105,7 +106,7 @@ const renderTabButtonMap: Record<string, JSX.Element> = {
 };
 
   return (
-    <div className='code-editor-blocks-container'>
+    <div className={`code-editor-blocks-container ${className}`}>
       <div className='code-blocks-tabs'>
         {openWindows.map((tabMeta) => {
           const title = tabMeta.title;
