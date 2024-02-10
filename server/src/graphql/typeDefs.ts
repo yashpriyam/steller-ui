@@ -11,7 +11,9 @@ const typeDefs = gql`
       pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
-    getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
+    getScheduleData(
+      weekDataFilter: WeekDataInputType sortData: SortDataInputType
+      ): WeekDataOutputType
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
@@ -93,9 +95,15 @@ const typeDefs = gql`
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
     saveUserCode(input: SaveUserCodeInput): GetUserCodeOutput
-    getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
-    approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
-    rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+    getAllUserPayments(
+      input: GetAllUserPaymentsInput
+    ): UserPaymentsDataOutputType
+    approveUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
+    rejectUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
   }
 
   input SaveUserCodeInput {
@@ -224,7 +232,7 @@ const typeDefs = gql`
     isActive: Boolean
     duration: String
     batchCode: String
-    weekNumber:Int
+    weekNumber: Int
   }
 
   input OptionalLinksInput {
@@ -703,6 +711,7 @@ const typeDefs = gql`
     description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
+    date: DateTime
   }
   type WeekDataType {
     batchCode: String
@@ -712,6 +721,7 @@ const typeDefs = gql`
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
     days: [DaySchemaType]
+    date: DateTime
   }
   type WeekDataOutputType {
     weekData: [WeekDataType]
@@ -1097,6 +1107,7 @@ const typeDefs = gql`
     userData: UserSchemaType
     response: CustomResponseType
     isAdmin: Boolean
+    isPaidUser: JSON
   }
   input PartialUserSchemaType {
     email: String
@@ -1199,6 +1210,14 @@ const typeDefs = gql`
     response: CustomResponseType!
   }
 
+  enum SortDirection {
+    asc 
+    desc
+  }
+  input SortDataInputType {
+    sortOrder: SortDirection
+    sortBy: String
+  }
   scalar DateTime
   scalar JSON
 `;

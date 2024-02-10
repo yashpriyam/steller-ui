@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     userCode: [],
     isSetUserCodeLoading: true,
-    isUserSubmittedCodeLoading: false
 };
 
 export const userCodeSlice = createSlice({
@@ -14,9 +13,6 @@ export const userCodeSlice = createSlice({
             state.userCode = action.payload?.data;
             state.isSetUserCodeLoading = false;
         },
-        setCodeSubmittedLoading: (state, action) => {
-            state.isUserSubmittedCodeLoading = action.payload
-        }
     },
 });
 

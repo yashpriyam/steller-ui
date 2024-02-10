@@ -8,7 +8,7 @@ import { useWeek } from "../../redux/actions/scheduleAction";
 import { MeetIcon } from "../../icons/index";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
-import { convertDateToString, isCurrentDate } from "../../utils/index";
+import { sortDirection, convertDateToString, isCurrentDate, weekSortBy } from "../../utils/index";
 import Spinner from "../../components/spinner/spinner";
 import { useMeeting } from "../../redux/actions/meetingAction";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
@@ -17,13 +17,14 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   className,
   style,
 }: SchedulePagePropsInterface) => {
-  const [filter, setFilter] = useState<string[]>([]);
+  const { desc } = sortDirection;
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { weekData, getScheduleData } = useWeek();
   const { weekList, isScheduleDataLoading } = weekData;
   const { getMeeting } = useMeeting();
   const [meetingData, setMeetingData] = useState<MeetingDataType | null>(null);
+  const [filter, setFilter] = useState<GetScheduleDataType>({weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}});
 
   const handleNavigation = (
     e: React.MouseEvent<HTMLElement>,
@@ -52,22 +53,21 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   }
 
   useEffect(() => {
-    getScheduleData({});
+    getScheduleData(filter);
     getTodayClassMeeting();
-  }, []);
+  }, [filter]);
   return (
     <div className={`scheduling-page ${className}`} style={style}>
-      {/* <Filter
-        checkboxData={checkboxDataList}
-        filter={filter}
-      /> */}
       <div className="schedule-page-meet-container">
         <div onClick={onJoinMeetClick} className="schedule-page-meet-btn">
           <MeetIcon isDarkMode={true} />
           {t("join_meet")}
         </div>
       </div>
-      <div className="schedule-page-header">{t("schedule_header")}</div>
+      <div className="schedule-page-header-filter-wrapper">
+        <div className="schedule-page-header">{t("schedule_header")}</div>
+        <Filter filter={filter} setFilter={setFilter}/>
+      </div>
       <div className="scheduling-page-accordion">
         {isScheduleDataLoading ? (
           <Spinner />

@@ -21,6 +21,7 @@ export const upsertWeek = async (
             isDisabledForUnpaidUsers,
             title,
             batchCode,
+            date,
         } = weekData;
         const updatedWeekData: WeekDataType = await weekModel.findOneAndUpdate(
             { batchCode, weekNumber },
@@ -31,6 +32,7 @@ export const upsertWeek = async (
                 isActive,
                 isDisabledForUnpaidUsers,
                 title,
+                date,
             },
             { new: true, upsert: true }
         );

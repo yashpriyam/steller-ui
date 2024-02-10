@@ -34,7 +34,7 @@ export const UploadImage: React.FC<UploadImagePropsInterface> = ({
         ) : (
           <span className="upload-image-text-and-icon">
             <CameraIcon width="50px" height="50px" fillColor={iconFillColor} />
-            <span className="label-text">{text}</span>
+            <span className="upload-image-label-text">{text}</span>
           </span>
         )}
       </label>

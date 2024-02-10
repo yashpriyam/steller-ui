@@ -97,7 +97,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
               )}
             </div>
             <div className="checkbox-option-container">
-              <label className="label-text" style={{ color: textColor }}>
+              <label className="checkbox-label-text" style={{ color: textColor }}>
                 {option?.text}
               </label>
               {

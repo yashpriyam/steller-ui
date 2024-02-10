@@ -1,55 +1,34 @@
 @import "../variables.scss";
 .scheduling-page-filter-container {
-  width: 20%;
+  width: fit-content;
   height: fit-content;
   background-color: $Gray35;
   border-radius: 7px;
-  padding: 20px;
   border: 1px solid $Gray29;
-
-  .filter-sub-container {
-    .filter-heading {
-      border-bottom: 1px solid $lightGreyPrimary;
-      font-size: $titleFontSize;
+  display: flex;
+  align-items: center;
+  .sort-by-date-wrapper{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    transition: 0.5s;
+    .sort-by-date-text{
+      font-size: $largerFontSize;
+      user-select: none;
     }
-
-    .checkbox-content {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-
-      .checkbox-wrapper {
-        display: flex;
-        gap: 5px;
-        align-items: center;
-
-        .checkbox-input {
-          width: 15px;
-          height: 15px;
-          cursor: pointer;
-        }
-
-        .checkbox-label {
-          font-size: $mediumFontSize;
-          color: $sencondaryTextColor;
-          cursor: pointer;
-        }
-      }
-    }
+  }
+  .sort-by-date-wrapper-active{
+    background-color: $accent-color-6;
+    border-color: $lightBlue;
+  }
+  .checkbox-content{
+    padding: 4px 8px;
   }
 }
-
-@media (max-width: $screenMd) {
-  .scheduling-page-filter-container {
-    width: 100%;
-
-    .checkbox-content {
-      flex-direction: row;
-      width: 100%;
-    }
-    .filter-sub-container {
-      margin: 0;
-    }
-  }
+.filter-right-border-style{
+  border-right: 1px solid $Gray29;
 }

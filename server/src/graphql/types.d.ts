@@ -1,4 +1,5 @@
 import { UserProfileSchemaType } from '@models';
+import { sortDirection } from '@utils';
 import { Request, Response } from "express";
 import { ObjectId } from "mongoose";
 
@@ -566,7 +567,7 @@ declare global {
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
-    batchCode?: string;
+    date?: Date;
     description?: string;
     title?: string;
     isActive?: boolean;
@@ -803,6 +804,7 @@ declare global {
   };
 
   type Installment = {
+    _id?: string
     id? :string;
     amount?: string;
     sequence?: string;
@@ -890,9 +892,9 @@ declare global {
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
-    isAdmin?: boolean
+    isAdmin?: boolean;
+    isPaidUser?: JSON;
   }
-
   type GetMeetingArgsType = {
     meetingNumber?: string;
     meetingCode?: string;
@@ -1001,5 +1003,10 @@ declare global {
     batchData?: BatchSchemaType[];
     response: CustomResponseType;
   };
+  type SortDirectionType = keyof typeof sortDirection;
+  type SortDataType = {
+    sortOrder?: SortDirectionType;
+    sortBy?: string;
+  }
 
 }
