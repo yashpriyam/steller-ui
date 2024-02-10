@@ -30,12 +30,13 @@ const CodeBlock: React.FC<{ questionData: QuestionDataType }> = ({
           questionId={questionId}
           weekNumber={weekNumber}
           dayNumber={dayNumber}
+          className={showOutputWindow?"code-block-container-fix-width":""}
         />
         {showOutputWindow && <CodeResult />}
       </div>
       {codeBlockSubmittedDate && (
         <p className="submitted-line">
-          {t('last_submitted_on')}
+          {t("last_submitted_on")}
           {new Date(Number(codeBlockSubmittedDate?.updatedAt)).toLocaleString()}
         </p>
       )}

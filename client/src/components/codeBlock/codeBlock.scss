@@ -6,7 +6,9 @@
   border-radius: 10px;
   margin: 10px 0 5px;
   border: 1px solid black;
-
+  .code-block-container-fix-width{
+    max-width: 50%;
+  }
   .code-editor-blocks-container {
     flex: 1;
 
@@ -36,11 +38,11 @@
 
     .code-editor-container {
       flex: 1;
-
       .CodeMirror {
         color: $primary-color;
         overflow: auto;
-        resize: vertical;
+        resize:vertical;
+        min-height: 300px;
         font-size: 14px !important;
       }
 
@@ -57,7 +59,8 @@
   }
 
   .code-block-result-container {
-    flex: 1;
+     flex-basis: 50%;
+     min-height: 300px;
   }
 }
 
@@ -90,6 +93,9 @@
 @media (max-width: 824px) {
   .code-block-container {
     flex-direction: column;
+    .code-block-container-fix-width{
+      max-width: 100%;
+  }
   }
 }
 
