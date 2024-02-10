@@ -22,9 +22,7 @@ const FormComponent = ({
   setFormData,
   setFinishedPage,
   resetForm,
-  // paymentStatus,
-  // setPaymentStatus,
-}) => {
+}) => {s
 
   function createFormFieldValueMap(formStep, parentFormsByName) {
     return {

@@ -202,15 +202,6 @@ const PersonalInfoFormData = [
     false,
     `${batchCode} - Started - ${batchDate}`
   ),
-  // new FormInputTypeShape(
-  //   formInputType.TEXT_INPUT_FIELD,
-  //   "Otp",
-  //   "Enter otp sent on your email address",
-  //   true,
-  //   false,
-  //   [],
-  //   1
-  // ),
 ];
 
 const ProfessionalInfoFormData = [
