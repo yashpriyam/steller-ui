@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Filter } from "../../components/filter/filter";
 import { useNavigate } from "react-router-dom";
 import { useWeek } from "../../redux/actions/scheduleAction";
-import { MeetIcon } from "../../icons/index";
+import { MeetIcon, PremiumMemberIcon } from "../../icons/index";
 import { useTranslation } from "react-i18next";
 import Skeleton from "react-loading-skeleton";
 import { sortDirection, convertDateToString, isCurrentDate, weekSortBy } from "../../utils/index";
@@ -60,7 +60,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
     getTodayClassMeeting();
   }, [filter]);
   useEffect(()=>{
-    const newFilter = { weekNumbers : accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}}
+    const newFilter = { accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}}
     setFilter(newFilter);
   },[accessWeeks])
   return (
@@ -94,13 +94,13 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             const weekTitle = title;
             return (
               isActive && (
-                <Accordion title={title} disabled={isDisabledForUnpaidUsers}>
+                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${ weekNumber && !accessWeeks.includes(weekNumber) && "pro-membership-weeks"}`}>
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
                       <div className="week-description">{description}</div>
                     )}
                     <div key={index} className="daylist-container">
-                      {days?.map((day: DayDataType, index) => {
+                      { days ? days.map((day: DayDataType, index) => {
                         const {
                           dayNumber,
                           description,
@@ -231,7 +231,14 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             </div>
                           </div>
                         );
-                      })}
+                      })
+                    : <span className="pro-membership-info-container">
+                        <span className="pro-membership-info-text">
+                          Get Pro membership to access all week
+                        </span>
+                        <PremiumMemberIcon/>
+                      </span>
+                    }
                     </div>
                   </div>
                 </Accordion>

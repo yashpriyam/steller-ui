@@ -1042,7 +1042,7 @@ declare global {
   type GetScheduleDataType = {
     weekFilterData ?: WeekDataType;
     sortData ?: SortDataType; 
-    weekNumbers ?: number[];
+    accessWeeks ?: number[];
   }
   type IsPaidUserType = {
     isPaidUser: boolean;

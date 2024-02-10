@@ -43,6 +43,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    .pro-membership-weeks{
+      border-color: $premiumColor;
     .accordion-content-wrapper {
       position: relative;
       display: flex;
@@ -62,7 +64,16 @@
         color: $sencondaryTextColor;
         font-weight: 600;
       }
-
+      .pro-membership-info-container{
+        color: $premiumColor;
+        border-bottom: 1px solid;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .pro-membership-info-text{
+          font-size: $textFontSize;
+        }
+      }
       .daylist-container {
         display: flex;
         align-items: center;
@@ -191,6 +202,7 @@
         }
       }
     }
+  }
   }
 }
 @media (max-width: $screenLg) {
