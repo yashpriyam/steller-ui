@@ -38,7 +38,7 @@
 
     .code-editor-container {
       flex: 1;
-
+      min-height: 300px;
       .CodeMirror {
         color: $primary-color;
         overflow: auto;
@@ -60,6 +60,7 @@
 
   .code-block-result-container {
      flex-basis: 50%;
+     min-height: 300px;
   }
 }
 
@@ -92,6 +93,9 @@
 @media (max-width: 824px) {
   .code-block-container {
     flex-direction: column;
+    .code-block-container-fix-width{
+      max-width: 100%;
+  }
   }
 }
 
