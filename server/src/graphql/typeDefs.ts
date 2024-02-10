@@ -1106,7 +1106,11 @@ const typeDefs = gql`
     userData: UserSchemaType
     response: CustomResponseType
     isAdmin: Boolean
-    isPaidUser: JSON
+    isPaidUser: IsPaidUsertype
+  }
+   type IsPaidUsertype  {
+    isPaidUser: Boolean
+    accessWeeks:[Int]
   }
   input PartialUserSchemaType {
     email: String

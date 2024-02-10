@@ -14,8 +14,8 @@ export const getAllQuestions = async (
   if (!isLoggedIn(contextData)) {
     return getUnauthorizedResponse();
   }
-  const userData = contextData.user;
-  const errorData: CustomResponseType = {
+    const userId = contextData.user._id;
+    const errorData: CustomResponseType = {
     message: QUESTION_NOT_FOUND,
     status: statusCodes.BAD_REQUEST,
   };
@@ -30,7 +30,6 @@ export const getAllQuestions = async (
         updatedFields[fullPath] = filteredData[key];
       }
     }
-    const userId = contextData.user._id;
     const userInfo = await User.findById(userId);
     const userSelectedFeePlan = userInfo?.feePlan;
     const isPaidUser = await checkPaidUser(
@@ -50,7 +49,7 @@ export const getAllQuestions = async (
     const questionIdList = questionList.map((question) => question._id);
     const questionAttemptList: AllAttemptedQuestionDataType[] =
       await questionAttempt.find({
-        userId: new mongoose.Types.ObjectId(userData._id),
+        userId: new mongoose.Types.ObjectId(userId),
         questionId: { $in: questionIdList },
         isLatest: true,
       });
