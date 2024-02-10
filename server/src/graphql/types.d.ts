@@ -917,7 +917,7 @@ declare global {
   }
   interface VariableSchemaType extends Document {
     key: string;
-    value: string;
+    value: string[];
   }
   
   type Code = {
