@@ -38,11 +38,11 @@
 
     .code-editor-container {
       flex: 1;
-      min-height: 300px;
       .CodeMirror {
         color: $primary-color;
         overflow: auto;
-        resize: vertical;
+        resize:vertical;
+        min-height: 300px;
         font-size: 14px !important;
       }
 
