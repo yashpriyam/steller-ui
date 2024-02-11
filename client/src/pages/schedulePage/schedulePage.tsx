@@ -94,7 +94,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             const weekTitle = title;
             return (
               isActive && (
-                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${ weekNumber && !accessWeeks.includes(weekNumber) && "pro-membership-weeks"}`}>
+                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${ weekNumber && !accessWeeks?.includes(weekNumber) && "pro-membership-weeks-wrapper"}`}>
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
                       <div className="week-description">{description}</div>
@@ -234,7 +234,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                       })
                     : <span className="pro-membership-info-container">
                         <span className="pro-membership-info-text">
-                          Get Pro membership to access all week
+                          {t("pro_membership_access_message")}
                         </span>
                         <PremiumMemberIcon/>
                       </span>

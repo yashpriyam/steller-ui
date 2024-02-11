@@ -43,8 +43,8 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    .pro-membership-weeks{
-      border-color: $premiumColor;
+    .pro-membership-weeks-wrapper{
+      border-color: $fadedPremiumColor;
     .accordion-content-wrapper {
       position: relative;
       display: flex;
