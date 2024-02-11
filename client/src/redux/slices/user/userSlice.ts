@@ -30,5 +30,5 @@ export const userSlice = createSlice({
 });
 
 export const { actions } = userSlice;
-export const selectUser = (state: { user: { userData: UserSchemaType, isLoggedIn: boolean, isAdmin: boolean, isPaidUser:JSON} }) => state.user;
+export const selectUser = (state: { user: { userData: UserSchemaType, isLoggedIn: boolean, isAdmin: boolean, isPaidUser:IsPaidUserType} }) => state.user;
 export default userSlice.reducer;

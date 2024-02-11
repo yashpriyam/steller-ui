@@ -4,7 +4,7 @@ import { sortDirection } from "@utils";
 
 export const getScheduleData = async (
     parent: undefined,
-    args: { weekDataFilter: WeekDataType, sortData: SortDataType}
+    args: { accessWeeks : number[], weekDataFilter: WeekDataType, sortData: SortDataType}
 ): Promise<AllWeekDataOutputType> => {
     const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
     const errorData: CustomResponseType = {
@@ -13,18 +13,18 @@ export const getScheduleData = async (
     }
     try {
         const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
-        const { weekDataFilter, sortData } = args;
+        const { weekDataFilter, sortData, accessWeeks } = args;
+
         const { asc, desc } = sortDirection;
-        const {sortBy, sortOrder = desc} = sortData;
-        const sortOptions: { [key: string]: SortDirectionType } = {};
-        if (sortBy && sortOrder) {
-           sortOptions[sortBy] = sortOrder;
-        }
-        const weekData: WeekDataType[] = await weekModel.find(weekDataFilter).populate({
+        const {sortBy, sortOrder = desc} = sortData || {};
+
+        const accessibleWeeks = { weekNumber: { $in: accessWeeks ?? [] } };
+        const nonAccessibleWeeks = { weekNumber: { $nin: accessWeeks ??[] } };
+        const accessibleWeeksData : GetWeekDataType[] = await weekModel.find({...accessibleWeeks, ...weekDataFilter}).populate({
             path: DAYS,
             populate: [
             {
-              path: 'questions videos',
+              path: 'questions',
               model: questionModel, 
             },
             {
@@ -36,14 +36,30 @@ export const getScheduleData = async (
                 model: notesModel, 
               },
         ]
-          }).sort(sortOptions);
-        return {
+          })
+          const nonAccessibleWeeksData : GetWeekDataType[] = await weekModel.find({...nonAccessibleWeeks, ...weekDataFilter}, {days: 0}) 
+          const weekData = [...accessibleWeeksData, ...nonAccessibleWeeksData]
+
+          if (sortBy && sortOrder) {
+            weekData.sort((a, b) => {
+                const aValue  = a[sortBy];
+                const bValue = b[sortBy];
+                if (aValue < bValue) {
+                    return sortOrder === asc ? -1 : 1;
+                }
+                if (aValue > bValue) {
+                    return sortOrder === asc ? 1 : -1;
+                }
+                return 0;
+            });
+        }
+        return weekData.length ? {
             weekData,
-            response: weekData.length ? {
+            response:  {
                 status: statusCodes.OK,
                 message: WEEK_FOUND,
-            } : errorData,
-        };
+            }
+        } : {response : errorData};
     } catch (err) {
         return {
             response: errorData,

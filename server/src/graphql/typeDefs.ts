@@ -11,7 +11,7 @@ const typeDefs = gql`
       pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
-    getScheduleData(
+    getScheduleData( accessWeeks: [Int]
       weekDataFilter: WeekDataInputType sortData: SortDataInputType
       ): WeekDataOutputType
     getAllCities: CitiesOutputType

@@ -574,7 +574,17 @@ declare global {
     isDisabledForUnpaidUsers?: boolean;
     days?: string[];
   };
-
+  type GetWeekDataType = {
+    [key: string]: string
+    batchCode?: string;
+    weekNumber?: number;
+    date?: Date;
+    description?: string;
+    title?: string;
+    isActive?: boolean;
+    isDisabledForUnpaidUsers?: boolean;
+    days?: string[];
+  }
   interface paidUserSchemaType {
     username: string;
     email: string;
