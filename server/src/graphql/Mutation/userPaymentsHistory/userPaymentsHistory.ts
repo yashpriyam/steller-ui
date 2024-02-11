@@ -33,7 +33,7 @@ export const createUserPayment = async (
     // Validate required input fields
     if (!input.imageUrl || !imageFolderName?.value || !installmentId) return { response: errorData };
 
-    const imageData = await uploadImage(input.imageUrl, imageFolderName?.value)
+    const imageData = await uploadImage(input.imageUrl, imageFolderName?.value[0])
 
     // Create the user payment in the database
     const newUserPaymentData = await userPaymentModel.create({

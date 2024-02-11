@@ -7,7 +7,7 @@ const variableSchema = new Schema<VariableSchemaType>({
     unique: true,
   },
   value: {
-    type: String,
+    type: [String],
     required: true,
   },
 });

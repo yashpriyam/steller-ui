@@ -38,7 +38,7 @@ export const approveUserPaymentByAdmin = async (
     if (!paymentId || !image || !imageFolderName)
       return { response: errorData };
 
-    const imageData = await uploadImage(image, imageFolderName?.value);
+    const imageData = await uploadImage(image, imageFolderName?.value[0]);
 
     // Update the user payment information
     const updatedUserPaymentData = await userPaymentModel
