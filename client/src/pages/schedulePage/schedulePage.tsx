@@ -90,11 +90,11 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
               title,
               weekNumber,
             } = week;
-
+            const isWeekIncluded = weekNumber && !accessWeeks?.includes(weekNumber);
             const weekTitle = title;
             return (
               isActive && (
-                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${ weekNumber && !accessWeeks?.includes(weekNumber) && "pro-membership-weeks-wrapper"}`}>
+                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${isWeekIncluded && "pro-membership-weeks-wrapper"}`}>
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
                       <div className="week-description">{description}</div>

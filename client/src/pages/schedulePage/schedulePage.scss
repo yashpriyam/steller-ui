@@ -43,8 +43,6 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    .pro-membership-weeks-wrapper{
-      border-color: $fadedPremiumColor;
     .accordion-content-wrapper {
       position: relative;
       display: flex;
@@ -63,16 +61,6 @@
         font-size: $drawerFontSize;
         color: $sencondaryTextColor;
         font-weight: 600;
-      }
-      .pro-membership-info-container{
-        color: $premiumColor;
-        border-bottom: 1px solid;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        .pro-membership-info-text{
-          font-size: $textFontSize;
-        }
       }
       .daylist-container {
         display: flex;
@@ -204,7 +192,19 @@
     }
   }
   }
-}
+  .pro-membership-weeks-wrapper{
+    border-color: $fadedPremiumColor;
+  }
+  .pro-membership-info-container{
+    color: $premiumColor;
+    border-bottom: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .pro-membership-info-text{
+      font-size: $textFontSize;
+    }
+  }
 @media (max-width: $screenLg) {
   .scheduling-page-accordion {
     .accordion-content-wrapper {
