@@ -24,8 +24,11 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const { weekData, getScheduleData } = useWeek();
   const { weekList, isScheduleDataLoading } = weekData;
   const { getMeeting } = useMeeting();
+  const { user } = useUser();
+  const { isPaidUser } = user || {};
+  const { accessWeeks } = isPaidUser || {};
   const [meetingData, setMeetingData] = useState<MeetingDataType | null>(null);
-  const [filter, setFilter] = useState<GetScheduleDataType>({});
+  const [filter, setFilter] = useState<GetScheduleDataType>({accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}});
 
   const handleNavigation = (
     e: React.MouseEvent<HTMLElement>,
@@ -52,17 +55,12 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
       setMeetingData(meetingDetails);
     }
   }
-  const { user } = useUser();
-  const { isPaidUser } = user || {};
-  const { accessWeeks } = isPaidUser || {};
+
   useEffect(() => {
     getScheduleData(filter);
     getTodayClassMeeting();
   }, [filter]);
-  useEffect(()=>{
-    const newFilter = { accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}}
-    setFilter(newFilter);
-  },[accessWeeks])
+
   return (
     <div className={`scheduling-page ${className}`} style={style}>
       <div className="schedule-page-meet-container">
