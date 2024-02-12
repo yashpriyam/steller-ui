@@ -19,13 +19,13 @@ export async function checkPaidUser(
       model: weekModel,
     });
 
-    const allUserPayments = await userPaymentModel.find({ user: userId }).sort({ date: -1 });
-  
+    const allUserPayments : UserPaymentSchemaType[] = await userPaymentModel.find({ user: userId }).sort({ date: -1 });
+
     
     const feePlansInstallment = getFeePlans?.installments;
 
   const userInstallments = feePlansInstallment?.filter((installment)=> {
-   return allUserPayments.some(({installmentId})=> {
+   return allUserPayments.filter((payment)=> payment.isApproved).some(({installmentId})=> {
        const feePlanInstallmentId= new mongoose.Types.ObjectId(installment._id);
        const userInstallmentId = new mongoose.Types.ObjectId(installmentId);
          return feePlanInstallmentId.equals(userInstallmentId)

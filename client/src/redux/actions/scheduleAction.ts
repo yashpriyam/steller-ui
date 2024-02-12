@@ -7,7 +7,7 @@ export const useWeek = () => {
     const weekData = useSelector(selectWeek);
 
     const getScheduleData = async ({
-        weekFilterData, sortData, accessWeeks
+        weekFilterData, sortData, accessWeeks, isAdmin
     }: GetScheduleDataType) => {
         const {
             weekNumber,
@@ -38,6 +38,7 @@ export const useWeek = () => {
                         sortBy, sortOrder
                     },
                     accessWeeks,
+                    isAdmin,
                 },
             });
             dispatch(actions.setSchedule(response.data.getScheduleData));
