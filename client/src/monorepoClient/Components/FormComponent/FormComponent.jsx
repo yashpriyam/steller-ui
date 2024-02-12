@@ -1,21 +1,13 @@
 import React, { useState, useContext, useEffect, useLayoutEffect } from "react";
-import { parentFormStepMap, parentFormsByName } from "./FormData";
+
 import InputComponent from "../InputComponent/InputComponent";
 import { AppStateContext } from "../../AppState/appState.context";
 import useHttp from "../../CustomHooks/useHttp";
 // import PaymentButtonComponent from "../PaymentButtonComponent/PaymentButtonComponent";
 import Toast from "../../helpers/utils/toast";
-function createFormFieldValueMap(formStep) {
-  return {
-    ...parentFormsByName[parentFormStepMap[formStep]].reduce(
-      (a, b) => ({
-        ...a,
-        [b["labelId"]]: b.defaultValue ? b.defaultValue : "",
-      }),
-      {}
-    ),
-  };
-}
+import { useFormData } from "./FormData";
+import { useBatch } from "../../../redux/actions/batchAction";
+
 
 const formStepForBackend = {
   1: "personalForm",
@@ -30,11 +22,27 @@ const FormComponent = ({
   setFormData,
   setFinishedPage,
   resetForm,
-  // paymentStatus,
-  // setPaymentStatus,
 }) => {
+
+  function createFormFieldValueMap(formStep, parentFormsByName) {
+    return {
+      ...parentFormsByName[parentFormStepMap[formStep]]?.reduce(
+        (a, b) => ({
+          ...a,
+          [b["labelId"]]: b.defaultValue ? b.defaultValue : "",
+        }),
+        {}
+      ),
+    };
+  }
+  const { batchData, getBatchCode } = useBatch();
+  const { batchCode, startDate } = batchData ? batchData[0] : {};
+  useEffect(()=> {
+    getBatchCode();
+  },[ batchCode, startDate ])
+  const {formNameStepMap, formNamesArray, parentFormStepMap, parentFormsByName} = useFormData({ batchCode, startDate })
   const [formFieldValueMap, setFormFieldValueMap] = useState(
-    createFormFieldValueMap(formStep)
+    createFormFieldValueMap(formStep, parentFormsByName)
   );
   const [storedFormData, setStoredFormData] = useState("");
   const { sendRequest } = useHttp();
@@ -43,6 +51,14 @@ const FormComponent = ({
     Object.keys(authenticateStateAndDispatch[0]).length !== 0
       ? JSON.parse(authenticateStateAndDispatch[0])
       : {};
+
+
+
+     
+
+      //
+
+      //
 
   useLayoutEffect(() => {
     if (userInfo.haveForm && userInfo.id) {
@@ -71,22 +87,23 @@ const FormComponent = ({
   }, [formStep]);
 
   useEffect(() => {
-    setFormFieldValueMap({ ...createFormFieldValueMap(formStep) });
+    setFormFieldValueMap({ ...createFormFieldValueMap(formStep, parentFormStepMap) });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetForm]);
 
   useEffect(() => {
     setFormFieldValueMap({
-      ...createFormFieldValueMap(formStep),
+      ...createFormFieldValueMap(formStep, parentFormStepMap),
       ...storedFormData,
+      selectyourpreferredbatch: batchCode,
     });
     // eslint-disable-next-line
-  }, [formStep, storedFormData]);
+  }, [formStep, storedFormData, batchData]);
 
   useEffect(() => {
     setFormData(formFieldValueMap);
     // eslint-disable-next-line
-  }, [formFieldValueMap]);
+  }, [formFieldValueMap, batchData]);
 
   function formInputHandlerHOC(formInputs) {
     return function (value) {

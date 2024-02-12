@@ -19,6 +19,7 @@ const typeDefs = gql`
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
+    getBatchCode: AllBatchDataOutputType!
   }
 
   type Mutation {
@@ -1208,6 +1209,11 @@ const typeDefs = gql`
     image: String
     rejectReason: String
   }
+  type AllBatchDataOutputType {
+    batchData: [Batch]
+    response: CustomResponseType!
+  }
+
   enum SortDirection {
     asc 
     desc
