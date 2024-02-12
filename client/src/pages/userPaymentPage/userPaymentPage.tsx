@@ -93,7 +93,7 @@ const UserPaymentPage: React.FC = () => {
         </div>
       ) : (
       
-        <NoDataFound message="No videos found" />
+        <NoDataFound message="No payment found" />
       )}
     </>
   );
