@@ -1043,6 +1043,7 @@ declare global {
     weekFilterData ?: WeekDataType;
     sortData ?: SortDataType; 
     accessWeeks ?: number[];
+    isAdmin ?: boolean;
   }
   type IsPaidUserType = {
     isPaidUser: boolean;

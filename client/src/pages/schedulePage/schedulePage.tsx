@@ -25,7 +25,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const { weekList, isScheduleDataLoading } = weekData;
   const { getMeeting } = useMeeting();
   const { user } = useUser();
-  const { isPaidUser } = user || {};
+  const { isPaidUser,isAdmin } = user || {};
   const { accessWeeks } = isPaidUser || {};
   const [meetingData, setMeetingData] = useState<MeetingDataType | null>(null);
   const [filter, setFilter] = useState<GetScheduleDataType>({});
@@ -58,9 +58,9 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
 
   useEffect(() => {
     getScheduleData(filter);
-    setFilter({accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}})
+    setFilter({isAdmin,accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}})
     getTodayClassMeeting();
-  }, [accessWeeks]);
+  }, [accessWeeks, isAdmin]);
 
   useEffect(()=>{
    getScheduleData(filter)

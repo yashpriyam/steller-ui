@@ -38,7 +38,7 @@ export const getUser = async (
     // check user is admin or not
 
     const isAdminUser = await isAdmin(userData?.email ?? '')
-    const userSelectedFeePlan = userData.feePlan;
+    const userSelectedFeePlan = userData?.feePlan;
     const isPaidUser = await checkPaidUser(userId ?? '', userSelectedFeePlan ?? '');
 
     return {

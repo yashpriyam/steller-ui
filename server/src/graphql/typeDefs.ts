@@ -12,7 +12,7 @@ const typeDefs = gql`
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
     getScheduleData( accessWeeks: [Int]
-      weekDataFilter: WeekDataInputType sortData: SortDataInputType
+      weekDataFilter: WeekDataInputType sortData: SortDataInputType isAdmin: Boolean
       ): WeekDataOutputType
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType

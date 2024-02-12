@@ -4,7 +4,7 @@ import { sortDirection } from "@utils";
 
 export const getScheduleData = async (
     parent: undefined,
-    args: { accessWeeks : number[], weekDataFilter: WeekDataType, sortData: SortDataType}
+    args: { accessWeeks : number[], weekDataFilter: WeekDataType, sortData: SortDataType, isAdmin: boolean},
 ): Promise<AllWeekDataOutputType> => {
     const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
     const errorData: CustomResponseType = {
@@ -13,12 +13,12 @@ export const getScheduleData = async (
     }
     try {
         const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
-        const { weekDataFilter, sortData, accessWeeks } = args;
+        const { weekDataFilter, sortData, accessWeeks, isAdmin } = args;
 
         const { asc, desc } = sortDirection;
         const {sortBy, sortOrder = desc} = sortData || {};
 
-        const accessibleWeeks = { weekNumber: { $in: accessWeeks ?? [] } };
+        const accessibleWeeks = isAdmin ? {} : { weekNumber: { $in: accessWeeks ?? [] } };
         const nonAccessibleWeeks = { weekNumber: { $nin: accessWeeks ??[] } };
         const accessibleWeeksData : GetWeekDataType[] = await weekModel.find({...accessibleWeeks, ...weekDataFilter}).populate({
             path: DAYS,
@@ -30,14 +30,16 @@ export const getScheduleData = async (
             {
                 path: 'videos',
                 model: videoModel, 
-              },
-              {
+            },
+            {
                 path: 'notes',
                 model: notesModel, 
-              },
+            },
         ]
           })
-          const nonAccessibleWeeksData : GetWeekDataType[] = await weekModel.find({...nonAccessibleWeeks, ...weekDataFilter}, {days: 0}) 
+          let nonAccessibleWeeksData : GetWeekDataType[] = [];
+       if(!isAdmin) {
+        nonAccessibleWeeksData = await weekModel.find({...nonAccessibleWeeks, ...weekDataFilter}, {days: 0}) }
           const weekData = [...accessibleWeeksData, ...nonAccessibleWeeksData]
 
           if (sortBy && sortOrder) {
