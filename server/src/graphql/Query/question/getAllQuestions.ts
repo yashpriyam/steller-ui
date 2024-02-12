@@ -14,22 +14,14 @@ export const getAllQuestions = async (
   if (!isLoggedIn(contextData)) {
     return getUnauthorizedResponse();
   }
-    const userId = contextData.user._id;
-    const errorData: CustomResponseType = {
+  const userId = contextData.user._id;
+  const errorData: CustomResponseType = {
     message: QUESTION_NOT_FOUND,
     status: statusCodes.BAD_REQUEST,
   };
   try {
     const { filterData, pagination } = args;
     const { limit, skip } = pagination;
-    const filteredData: Record<string, string | number | boolean> = filterData;
-    const updatedFields: Record<string, string | number | boolean> = {};
-    for (const key in filteredData) {
-      if (filteredData.hasOwnProperty(key)) {
-        const fullPath = `meta.${key}`;
-        updatedFields[fullPath] = filteredData[key];
-      }
-    }
     const userInfo = await User.findById(userId);
     const userSelectedFeePlan = userInfo?.feePlan;
     const isPaidUser = await checkPaidUser(
@@ -37,12 +29,22 @@ export const getAllQuestions = async (
       userSelectedFeePlan ?? ""
     );
     const { accessWeeks } = isPaidUser;
-
+    if (!accessWeeks?.includes(filterData?.week)) {
+      delete filterData.week;
+    }
+    const filteredData: Record<string, string | number | boolean> = filterData;
+    const updatedFields: Record<string, string | number | boolean | object> = {};
+    for (const key in filteredData) {
+      if (filteredData.hasOwnProperty(key)) {
+        const fullPath = `meta.${key}`;
+        updatedFields[fullPath] = filteredData[key];
+      }
+    }
+    if (!Boolean(filterData.week)) {
+      updatedFields[`meta.week`] = { $in: accessWeeks };
+    }
     const questionList: [QuestionSchemaType] = await questionModel
-      .find({
-        ...updatedFields,
-        'meta.week': { $in: accessWeeks }, 
-      })
+      .find(updatedFields)
       .skip(skip)
       .limit(limit)
       .lean();
