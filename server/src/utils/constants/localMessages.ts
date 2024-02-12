@@ -74,6 +74,7 @@ export const localMessages = Object.freeze({
     WEEK_DOES_NOT_EXIST_TO_INSERT_BATCH: "Week does not exist to insert batch.",
     BATCH_EXIST: "Batch with the same code already exists.",
     BATCH_UPDATE_SUCCESS: "Batch updated successfully.",
+    BATCH_FOUND_SUCCESS: "Batch found successfully",
   },
   FEE_PLAN_MODEL: {
     FEE_PLAN_CREATION_SUCCESS: "Fee plan created successfully.",

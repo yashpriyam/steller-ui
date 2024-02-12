@@ -1013,6 +1013,10 @@ declare global {
     userEmail: string;
     rejectReason?: string
   }
+  type AllBatchDataOutputType = {
+    batchData?: BatchSchemaType[];
+    response: CustomResponseType;
+  };
   type SortDirectionType = keyof typeof sortDirection;
   type SortDataType = {
     sortOrder?: SortDirectionType;
