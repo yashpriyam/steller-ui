@@ -9,6 +9,9 @@ export async function checkPaidUser(
   userId: string,
   userSelectedFeePlan: string
 ) {
+  try {
+    
+  
   const getFeePlans = await feePlanModel
     .findById(userSelectedFeePlan)
     .populate({
@@ -42,4 +45,10 @@ export async function checkPaidUser(
     isPaidUser: false,
     accessWeeks:[1,2]
   }
+} catch (error) {
+  return {
+    isPaidUser: false,
+    accessWeeks:[1,2]
+  }
+}
 }
