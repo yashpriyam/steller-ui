@@ -32,6 +32,9 @@
       -webkit-appearance: none;
       margin: 0;
     }
+    .input-container::placeholder {
+      padding: 0px 10px;
+    }
     .password-visible {
       font-size: 12px;
       font-weight: 600;

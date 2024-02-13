@@ -4,7 +4,7 @@
   width: 480px;
   padding: 10px;
   margin: 5px;
-  border: 1px solid $primaryBgColor;
+  border: 1px solid $videoHutBorderColor;
   border-radius: 5px;
   @media (max-width: $screenXs){
     width: fit-content;

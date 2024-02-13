@@ -1,19 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Editor from './Editor';
 import { CodeDataContext } from './CodeDataProvider';
-import { useLocation } from 'react-router-dom';
+import { codeBlockWindow } from './codeBlockButtons';
+
+const CODE_STORAGE_KEY = 'userSavedCode';
+
+const findCodeWindowByTitle = (
+  openWindows: [CodeBlockOpenWindowsType],
+  title: string
+) => openWindows.find((element) => element.title === title);
 
 const CodeEditorBlocks: React.FC<{
   openWindows: [CodeBlockOpenWindowsType];
   questionId: string;
-}> = ({ openWindows, questionId }) => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const dayNumber = queryParams.get('dayNumber');
-  const weekNumber = queryParams.get('weekNumber');
-  const htmlCode = openWindows.find((element) => element.title === 'HTML');
-  const cssCode = openWindows.find((element) => element.title === 'CSS');
-  const jsCode = openWindows.find((element) => element.title === 'JS');
+  weekNumber: number;
+  dayNumber: number;
+  className?: string;
+}> = ({ openWindows, questionId, weekNumber, dayNumber,className }) => {
   const {
     html = '',
     css = '',
@@ -24,69 +27,97 @@ const CodeEditorBlocks: React.FC<{
   } = useContext(CodeDataContext) as DataContextProps;
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const editorConfigs: LanguageConfig[] = [
-    {
+  const titleTopicMap: Record<string, string> = Object.freeze({
+    HTML: 'HTML',
+    CSS: 'CSS',
+    JS: 'JS',
+  });
+  const editorConfigs: { [key: string]: LanguageConfig } = {
+    html: {
       language: 'xml',
-      heading: 'HTML',
+      heading: titleTopicMap.HTML,
       value: html,
       onChange: setHtml,
       icon: '/',
       color: '#FF3C41',
     },
-    {
+    css: {
       language: 'css',
-      heading: 'CSS',
+      heading: titleTopicMap.CSS,
       value: css,
       onChange: setCss,
       icon: '*',
       color: '#0EBEFF',
     },
-    {
+    js: {
       language: 'javascript',
-      heading: 'JS',
+      heading: titleTopicMap.JS ,
       value: js,
       onChange: setJs,
       icon: '( )',
       color: '#FCD000',
     },
-  ];
+  };
 
   useEffect(() => {
-    const localStorageSavedUserQuestionCode = JSON.parse(
-      localStorage.getItem('userSavedCode') ?? '{}'
-    );
-    const savedCode =
-      localStorageSavedUserQuestionCode[`week${weekNumber}`]?.[
-        `day${dayNumber}`
-      ]?.[questionId];
-    setHtml(savedCode?.html ?? String(htmlCode?.predefinedCode ?? ''));
-    setCss(savedCode?.css ?? String(cssCode?.predefinedCode ?? ''));
-    setJs(savedCode?.js ?? String(jsCode?.predefinedCode ?? ''));
+    try {
+      const localStorageSavedUserQuestionCode = JSON.parse(
+        localStorage.getItem(CODE_STORAGE_KEY) || '{}'
+      );
+      const savedCode =
+        localStorageSavedUserQuestionCode[`week${weekNumber}`]?.[
+          `day${dayNumber}`
+        ]?.[questionId];
+
+      const getCodeWindowPredefinedCode = (title: string) =>
+        String(findCodeWindowByTitle(openWindows, title)?.predefinedCode || '');
+
+      setHtml(
+        savedCode?.html ?? getCodeWindowPredefinedCode(codeBlockWindow.HTML)
+      );
+      setCss(
+        savedCode?.css ?? getCodeWindowPredefinedCode(codeBlockWindow.CSS)
+      );
+      setJs(
+        savedCode?.javascript ?? getCodeWindowPredefinedCode(codeBlockWindow.JS)
+      );
+    } catch (error) {
+      console.log(error);
+    }
+    // eslint-disable-next-line
   }, []);
 
+  const renderTabButton = (tabIndex: number, language: string) => (
+    <button
+      className={`${
+        selectedTab === tabIndex
+          ? 'selected ' + language.toLowerCase()
+          : language.toLowerCase()
+      }`}
+      onClick={() => setSelectedTab(tabIndex)}
+    >
+      {language}
+    </button>
+  );
+const renderTabButtonMap: Record<string, JSX.Element> = {
+  HTML: renderTabButton(0,titleTopicMap.HTML),
+  CSS: renderTabButton(1, titleTopicMap.CSS),
+  JS: renderTabButton(2, titleTopicMap.JS),
+};
+
   return (
-    <div className="code-editor-blocks-container">
-      <div className="code-blocks-tabs">
-        <button
-          className={`${selectedTab === 0 ? 'selected html' : 'html'}`}
-          onClick={() => setSelectedTab(0)}
-        >
-          HTML
-        </button>
-        <button
-          className={`${selectedTab === 1 ? 'selected css' : 'css'}`}
-          onClick={() => setSelectedTab(1)}
-        >
-          CSS
-        </button>
-        <button
-          className={`${selectedTab === 2 ? 'selected js' : 'js'}`}
-          onClick={() => setSelectedTab(2)}
-        >
-          JS
-        </button>
+    <div className={`code-editor-blocks-container ${className}`}>
+      <div className='code-blocks-tabs'>
+        {openWindows.map((tabMeta) => {
+          const title = tabMeta.title;
+          return renderTabButtonMap[title]
+        })}
       </div>
-      <Editor questionId={questionId} {...editorConfigs[selectedTab]} />
+      <Editor
+        questionId={questionId}
+        {...editorConfigs[Object.keys(editorConfigs)[selectedTab]]}
+        weekNumber={weekNumber} dayNumber={dayNumber}
+      />
     </div>
   );
 };

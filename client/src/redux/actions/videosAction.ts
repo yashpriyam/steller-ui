@@ -10,18 +10,22 @@ export const useVideos = () => {
         title,
         description,
         dayNumber,
+        weekNumber,
         videoNumber,
         topics,
         links,
         isActive,
         duration,
     }: VideoDataType) => {
+        try {
+        dispatch(actions.setIsLoading(true))
         const response = await apolloClient.query({
             query: GET_VIDEOS,
             variables: {
                 videoDataFilter: {
                     title,
                     description,
+                    weekNumber,
                     dayNumber,
                     videoNumber,
                     topics,
@@ -33,6 +37,11 @@ export const useVideos = () => {
         });
         dispatch(actions.setVideos(response.data.getAllVideos));
         return response;
+    } catch (error) {
+       console.error(error);
+    } finally {
+        dispatch(actions.setIsLoading(false));
+    }
     };
 
 

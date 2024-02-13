@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_SCHEDULE_DATA = gql`
-  query GetScheduleData($weekDataFilter: WeekDataInputType) {
-    getScheduleData(weekDataFilter: $weekDataFilter) {
+  query GetScheduleData($accessWeeks: [Int], $weekDataFilter: WeekDataInputType, $sortData: SortDataInputType, $isAdmin: Boolean) {
+  getScheduleData(accessWeeks: $accessWeeks, weekDataFilter: $weekDataFilter, sortData: $sortData,  isAdmin: $isAdmin){
       weekData {
         batchCode
         weekNumber
@@ -10,6 +10,7 @@ export const GET_SCHEDULE_DATA = gql`
         description
         isActive
         isDisabledForUnpaidUsers
+        date
         days {
           batchCode
           dayNumber
@@ -18,6 +19,16 @@ export const GET_SCHEDULE_DATA = gql`
           description
           topics
           date
+          questions {
+            marks
+          }
+          videos {
+            title
+          }
+          notes {
+            title
+            dayNumber
+          }
         }
       }
       response {

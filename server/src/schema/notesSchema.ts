@@ -33,6 +33,10 @@ const notesSchema = new Schema(
     estimatedReadingTime: {
       type: String,
     },
+    batchCode: {
+      type: String,
+      required: true
+    },
   },
   { timestamps: true }
 );

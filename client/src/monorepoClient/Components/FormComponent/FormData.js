@@ -1,4 +1,6 @@
-const parentFormStepMap = {
+export const useFormData = ( { batchCode, startDate } ) => {
+  const batchDate = new Date(Number(startDate)).toDateString();
+  const parentFormStepMap = {
   1: "USER_EMAIL",
   2: "PROFESSIONAL_INFO_FORM",
   3: "SKILLS_INFO_FORM",
@@ -38,7 +40,7 @@ class FormInputTypeShape {
     this.isDropdown = isDropdown;
     this.optionList = optionList;
     this.parentFormStep = parentFormStep;
-    this.labelId = labelName.replaceAll(/\W/g, "").toLowerCase();
+    this.labelId = labelName.replaceAll(/\W/g, "")?.toLowerCase();
     this.isDataList = isDataList;
     this.defaultValue = defaultValue;
   }
@@ -195,20 +197,11 @@ const PersonalInfoFormData = [
     "Batch-code",
     false,
     true,
-    ["WMB2 - Starting - 29 jan 2024"],
+    [`${batchCode} - Started - ${batchDate}`],
     0,
     false,
-    "WMB2 - Starting - 29 jan 2024"
+    `${batchCode} - Started - ${batchDate}`
   ),
-  // new FormInputTypeShape(
-  //   formInputType.TEXT_INPUT_FIELD,
-  //   "Otp",
-  //   "Enter otp sent on your email address",
-  //   true,
-  //   false,
-  //   [],
-  //   1
-  // ),
 ];
 
 const ProfessionalInfoFormData = [
@@ -382,9 +375,12 @@ const parentFormsByName = {
 //   Theprogramrequiresyoutoattendliveclassesofaround10hrsweekDoyouhavethetimeresourcestodothat,
 // };
 
-export {
+
+
+return {
   parentFormsByName,
   parentFormStepMap,
   formNameStepMap,
   formNamesArray,
-};
+}
+}

@@ -9,6 +9,7 @@ const InputComponent = ({
   labelClass,
   className = "",
   autoComplete,
+  batchData,
   ...props
 }) => {
   const {

@@ -20,10 +20,11 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            .label-text {
+            .checkbox-label-text {
                 cursor: pointer;
-                font-size: $smallFontSize;
-                font-weight: 600;
+                font-size: $mediumFontSize;
+                font-weight: 500;
+                margin: 0px;
             }
             .checkbox-comp-option-img{
                 max-height: 1000px;

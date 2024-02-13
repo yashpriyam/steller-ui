@@ -1,7 +1,7 @@
-import { localMessages, errorMessages, statusCodes } from '@constants';
-import { questionAttempt, questionModel } from '@models';
-import { isLoggedIn, getUnauthorizedResponse } from '@utils';
-import mongoose from 'mongoose';
+import { localMessages, errorMessages, statusCodes } from "@constants";
+import { User, questionAttempt, questionModel } from "@models";
+import { isLoggedIn, getUnauthorizedResponse, checkPaidUser } from "@utils";
+import mongoose from "mongoose";
 
 const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
 const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
@@ -14,7 +14,7 @@ export const getAllQuestions = async (
   if (!isLoggedIn(contextData)) {
     return getUnauthorizedResponse();
   }
-  const userData = contextData.user;
+  const userId = contextData.user._id;
   const errorData: CustomResponseType = {
     message: QUESTION_NOT_FOUND,
     status: statusCodes.BAD_REQUEST,
@@ -22,13 +22,26 @@ export const getAllQuestions = async (
   try {
     const { filterData, pagination } = args;
     const { limit, skip } = pagination;
+    const userInfo = await User.findById(userId);
+    const userSelectedFeePlan = userInfo?.feePlan;
+    const isPaidUser = await checkPaidUser(
+      userId ?? "",
+      userSelectedFeePlan ?? ""
+    );
+    const { accessWeeks } = isPaidUser;
+    if (!accessWeeks?.includes(filterData?.week)) {
+      delete filterData.week;
+    }
     const filteredData: Record<string, string | number | boolean> = filterData;
-    const updatedFields: Record<string, string | number | boolean> = {};
+    const updatedFields: Record<string, string | number | boolean | object> = {};
     for (const key in filteredData) {
       if (filteredData.hasOwnProperty(key)) {
         const fullPath = `meta.${key}`;
         updatedFields[fullPath] = filteredData[key];
       }
+    }
+    if (!Boolean(filterData.week)) {
+      updatedFields[`meta.week`] = { $in: accessWeeks };
     }
     const questionList: [QuestionSchemaType] = await questionModel
       .find(updatedFields)
@@ -38,7 +51,7 @@ export const getAllQuestions = async (
     const questionIdList = questionList.map((question) => question._id);
     const questionAttemptList: AllAttemptedQuestionDataType[] =
       await questionAttempt.find({
-        userId: new mongoose.Types.ObjectId(userData._id),
+        userId: new mongoose.Types.ObjectId(userId),
         questionId: { $in: questionIdList },
         isLatest: true,
       });
@@ -49,7 +62,7 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
-      if (questionData.questionType === 'codeblock') {
+      if (questionData.questionType === "codeblock") {
         return questionData;
       }
       const updatedQuestionData = {

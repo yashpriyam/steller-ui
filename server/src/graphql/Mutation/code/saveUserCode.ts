@@ -9,42 +9,20 @@ export const saveUserCode = async (
   try {
     const userData = contextData.user;
     const { questionId, weekNumber, dayNumber, code } = args.input;
-
-    // Find the document with the specified criteria
-    const existingCode = await userCodeModel.findOne({
-      userId: new mongoose.Types.ObjectId(userData._id),
-      questionId,
-      weekNumber,
-      dayNumber,
-    });
-
-    if (existingCode) {
-      // If the document exists, update it
-      await userCodeModel.findOneAndUpdate(
-        {
-          userId: new mongoose.Types.ObjectId(userData._id),
-          questionId,
-          weekNumber,
-          dayNumber,
-        },
-        { code }
-      );
-    } else {
-      // If the document doesn't exist, create a new one
-      await userCodeModel.create({
+    await userCodeModel.findOneAndUpdate(
+      {
         userId: new mongoose.Types.ObjectId(userData._id),
         questionId,
         weekNumber,
         dayNumber,
-        code,
-      });
-    }
+      },
+      { code },
+      { upsert: true }
+    );
+    const udpateUserCodeData = await userCodeModel.find({ userId: new mongoose.Types.ObjectId(userData._id) });
 
     return {
-      questionId,
-      weekNumber,
-      dayNumber,
-      code,
+      data: udpateUserCodeData,
       response: { status: 200, message: 'user code saved successfully' },
     };
   } catch (error) {

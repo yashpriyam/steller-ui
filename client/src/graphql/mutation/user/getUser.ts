@@ -30,7 +30,10 @@ query {
         status
       }
       isAdmin
+      isPaidUser {
+        isPaidUser
+        accessWeeks
+      }
     }
   }
-  
 `;

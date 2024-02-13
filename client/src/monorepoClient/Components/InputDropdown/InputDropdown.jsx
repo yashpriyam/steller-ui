@@ -11,6 +11,7 @@ const InputDropdown = ({
   isOpen = false,
   setOpen,
   children,
+  defaultValue,
 }) => {
   return (
     <div
@@ -23,14 +24,14 @@ const InputDropdown = ({
         {isOpen ? (
           <>
             <p className={`${value === "" && "placeholderDropDown"}`}>
-              {value === "" ? "Choose the options" : value}
+              {defaultValue ? defaultValue : value === "" ? "Choose the options" : value}
             </p>
             <ImageComponent src={Dropup} alt="dropup" />
           </>
         ) : (
           <>
             <p className={`${value === "" && "placeholderDropDown"}`}>
-              {value === "" ? "Choose the options" : value}
+              {defaultValue ? defaultValue : value === "" ? "Choose the options" : value}
             </p>
             <ImageComponent src={Dropdown} alt="dropdown" />
           </>

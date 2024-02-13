@@ -2,8 +2,7 @@
 
 
 .video-page{
-    max-width: 100vw;
-    min-height: 100vh;
+    width: 100%;
     display: flex;
     flex-direction: column;
     background-color: $primaryBgColor;
@@ -12,26 +11,22 @@
     gap: 20px;
     align-items: center;
     overflow-x: hidden;
+    padding: 20px 10px;
     @media (max-width: 300px){
         overflow-x:visible;
     }
-
-    .videos-container{
+    .content-title{
+        width: 100%;
+        font-size: $headerFontSize;
+        text-align: center;
+        letter-spacing: 5px;
+        font-weight: 700;
+    }
+    .videos-wrapper{
+        width: 100%;
         display: flex;
-        flex-direction: column;
-        gap: 30px;
-        .content-title{
-            max-width: 100%;
-            font-size: $headerFontSize;
-            text-align: center;
-            letter-spacing: 5px;
-        }
-        .videos-wrapper{
-            max-width: 100%;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
     }
 }

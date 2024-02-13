@@ -14,6 +14,7 @@ import { objectToBase64 } from "../../helpers/utils/base64Utils";
 import { setCookie } from "../../helpers/utils/cookieUtils";
 import { useUser } from "../../../redux/actions/userAction";
 import { readFileAsDataURL } from "../../../utils/index";
+import { useBatch } from "../../../redux/actions/batchAction";
 
 const Registerpage = () => {
   const [formData, setFormData] = useState("");
@@ -52,7 +53,7 @@ const Registerpage = () => {
     try {
       await getUserData();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   const handleSubmitForm = async (isNext = false, setResetForm) => {
@@ -75,14 +76,14 @@ const Registerpage = () => {
           selectyourrelevantbranch,
           selectyourpreferredbatch,
         } = formData;
-        const batchCode = selectyourpreferredbatch.split("-")[0].trim();
+        const batchCode = selectyourpreferredbatch.split(" ")[0].trim()
         const response = await registerUser({
           name,
           email,
           phoneNumber: phonenumber,
           occupation: currentprofessionalstatus,
           expectedSalary: whatsagoodsalarythatcanmotivateyoutoacceptajoboffer,
-          sessionPreference: youwouldattendtheclassesonlineoroffline.toLowerCase() === 'online' ? 'online' : "offline",
+          sessionPreference: youwouldattendtheclassesonlineoroffline?.toLowerCase() === 'online' ? 'online' : "offline",
           isJobSeeker: true,
           collegeName: whichcollegeyouarefrom,
           branch: selectyourrelevantbranch,
@@ -104,6 +105,7 @@ const Registerpage = () => {
           getUserDataRequest();
         }
       } catch (e) {
+        console.log({e})
         Toast.error("Something went wrong");
       }
       setIsLoading(false);
@@ -116,7 +118,7 @@ const Registerpage = () => {
         const response = await readFileAsDataURL(files[0]);
         setUserPictureUrl(response);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     }
   }
@@ -155,8 +157,7 @@ const Registerpage = () => {
           handleSubmitForm={handleSubmitForm}
           setFormStep={setFormStep}
           setFinishedPage={setFinishedPage}
-          isLoading={isLoading}
-        />
+          isLoading={isLoading}        />
       </div>
     </div>
   );

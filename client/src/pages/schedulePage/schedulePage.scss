@@ -6,19 +6,19 @@
   display: flex;
   flex-direction: column;
   padding: 20px 10px;
-  gap: 30px;
+  gap: 15px;
   background-color: $primaryBgColor;
   font-family: $primaryFontFamily;
   color: $primaryTextColor;
-  &::-webkit-scrollbar{
+  &::-webkit-scrollbar {
     display: none;
   }
 
-  .schedule-page-meet-container{
+  .schedule-page-meet-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
-    .schedule-page-meet-btn{
+    .schedule-page-meet-btn {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -29,10 +29,17 @@
       cursor: pointer;
     }
   }
-
+  .schedule-page-header-filter-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .schedule-page-header {
+      font-size: 30px;
+    }
+  }
   .scheduling-page-accordion {
     width: 100%;
-    padding-top: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -42,15 +49,19 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 30px;
+      gap: 15px;
+      padding: 20px;
 
       .week-description {
+        width: 100%;
         display: flex;
         flex-direction: column;
-        font-size: $titleFontSize;
+        justify-content: left;
+        flex-wrap: wrap;
+        font-size: $drawerFontSize;
         color: $sencondaryTextColor;
+        font-weight: 600;
       }
-
       .daylist-container {
         display: flex;
         align-items: center;
@@ -58,20 +69,19 @@
         flex-wrap: wrap;
         gap: 10px;
         padding: 10px;
-
+        width: 100%;
         .day-container {
-          display: flex;  
           color: $primaryColor;
           padding: 10px;
           border-radius: 7px;
           border: 1px solid $videoHutBorderColor;
-          width: 48vw;
+          width: 100%;
           background-color: $Gray35;
           transition: all 0.3s;
           display: flex;
           flex-direction: column;
           gap: 12px;
-          &:hover{
+          &:hover {
             cursor: pointer;
           }
           .day-header {
@@ -79,16 +89,25 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            @media (max-width:$screenSm){
+            .day-title-and-date-wrapper {
+              display: flex;
               flex-direction: column;
+              gap: 5px;
+              .day-title {
+                font-size: $mediumFontSize;
+                font-family: $secondaryFontFamily;
+              }
+              .day-date-info{
+                font-size: $smallFontSize;
+                color: $gray;
+              }
             }
-
             .topic-tags {
               display: flex;
               gap: 10px;
               position: relative;
               font-size: $smallFontSize;
-              @media (max-width:$screenSm ){
+              @media (max-width: $screenSm) {
                 font-size: $extraSmallFontSize;
               }
               .topic-tag {
@@ -99,7 +118,7 @@
                 &:hover {
                   transform: scale(110%);
                 }
-                @media (max-width:$screenSm ){
+                @media (max-width: $screenSm) {
                   padding: 2px 3px;
                 }
               }
@@ -130,25 +149,22 @@
               }
             }
           }
-          .day-title {
-            font-size: $textFontSize;
-            font-family: $secondaryFontFamily;
-          }
 
           .day-description {
             color: $sencondaryTextColor;
             font-size: $largerFontSize;
+            width: 100%;
           }
 
           .buttons-wrapper {
             display: flex;
-            gap: 5px;
             flex-wrap: wrap;
-            width: 45vw;
-            .button.join-meet-btn{
+            gap: 5px;
+            width: 100%;
+            .button.join-meet-btn {
               border: 1px solid $success-500;
               background-color: $success-800;
-              &:hover{
+              &:hover {
                 color: $primaryColor;
                 border: 1px solid $success-200;
                 background-color: $success-800;
@@ -175,34 +191,41 @@
       }
     }
   }
-}
+  }
+  .pro-membership-weeks-wrapper{
+    border-color: $fadedPremiumColor;
+  }
+  .pro-membership-info-container{
+    color: $premiumColor;
+    border-bottom: 1px solid;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 5px;
+    justify-content: center;
+    cursor: pointer;
+    transition: box-shadow 0.6s, border-radius 0.3s;
+    &:hover {
+      border-radius: 5px;
+      box-shadow: 0px 5px 10px -7px;
+    }
+    .pro-membership-info-text{
+      font-size: $textFontSize;
+    }
+  }
 @media (max-width: $screenLg) {
   .scheduling-page-accordion {
-    padding: 10px;
-    padding-top: 30px;
-
     .accordion-content-wrapper {
       max-width: 100%;
-      padding: 0 20px;
+      padding: 0 20px;  
     }
   }
 }
 
 @media (max-width: $screenMd) {
   .scheduling-page {
-    gap: 0;
-    flex-direction: column;
-
     .scheduling-page-accordion {
-      width: 100%;
-      padding: 10px;
-      transition: 0.5s;
-
       .accordion-content-wrapper {
-        .week-description {
-          font-size: $largerFontSize;
-        }
-
         .daylist-container {
           padding: 0px 30px;
           padding-bottom: 20px;
@@ -227,21 +250,17 @@
       .accordion-content-wrapper {
         .daylist-container {
           padding: 10px 0px;
-          
           .day-container {
             border-radius: 10px;
             padding: 10px;
             width: 100%;
-
             .day-header {
-              flex-direction: column;
               gap: 5px;
               transition: 0.5s;
             }
             .buttons-wrapper {
               display: flex;
               align-items: center;
-              justify-content: center;
             }
             .day-description {
               font-size: $smallFontSize;

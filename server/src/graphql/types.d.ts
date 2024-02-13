@@ -1,4 +1,5 @@
 import { UserProfileSchemaType } from '@models';
+import { sortDirection } from '@utils';
 import { Request, Response } from "express";
 import { ObjectId } from "mongoose";
 
@@ -111,6 +112,7 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+    batchCode?: string
   };
   type CreateNotesOutputType = {
     notesData: NotesDataType;
@@ -126,29 +128,32 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
+    batchCode?: string
   };
   type UpdateNotesOutputType = {
     notesData?: UpdateNotesDataType;
     response: CustomResponseType;
   };
   type UpdateNotesDataType = {
-    title: String;
-    link: String;
-    topics: [String];
+    title: string;
+    link: string;
+    topics: [string];
     dayNumber: Number;
     noOfPages?: Number;
-    description?: String;
-    estimatedReadingTime?: String;
+    description?: string;
+    estimatedReadingTime?: string;
   };
   type NotesDataType = {
-    title: String;
-    link: String;
-    topics: [String];
+    _id:string
+    title: string;
+    link: string;
+    topics: [string];
     dayNumber: Number;
     weekNumber: number;
     noOfPages?: Number;
-    description?: String;
-    estimatedReadingTime?: String;
+    description?: string;
+    estimatedReadingTime?: string;
+    batchCode?: string
   };
 
   type VideoOutputDataType = {
@@ -162,6 +167,7 @@ declare global {
   };
 
   type CreateVideoType = {
+    _id: string;
     title: string;
     description?: string;
     dayNumber: number;
@@ -181,6 +187,7 @@ declare global {
     [key: string]: string;
   };
   type VideoDataType = {
+    _id?: string;
     title?: string;
     description?: string;
     dayNumber?: number;
@@ -550,7 +557,7 @@ declare global {
     sessionPreference?: SessionPreferenceEnum;
   };
   type updatePaidUserPasswordInput = {
-    email: String;
+    email: string;
     password?: string;
   };
   type DayDataOutputType = {
@@ -560,14 +567,24 @@ declare global {
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
-    batchCode?: string;
+    date?: Date;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: string[];
   };
-
+  type GetWeekDataType = {
+    [key: string]: string
+    batchCode?: string;
+    weekNumber?: number;
+    date?: Date;
+    description?: string;
+    title?: string;
+    isActive?: boolean;
+    isDisabledForUnpaidUsers?: boolean;
+    days?: string[];
+  }
   interface paidUserSchemaType {
     username: string;
     email: string;
@@ -797,6 +814,7 @@ declare global {
   };
 
   type Installment = {
+    _id?: string
     id? :string;
     amount?: string;
     sequence?: string;
@@ -884,9 +902,13 @@ declare global {
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
-    isAdmin?: boolean
+    isAdmin?: boolean;
+    isPaidUser?: IsPaidUsertype;
   }
-
+  type IsPaidUsertype = {
+    isPaidUser: boolean;
+    accessWeeks: number[];
+  }
   type GetMeetingArgsType = {
     meetingNumber?: string;
     meetingCode?: string;
@@ -905,7 +927,7 @@ declare global {
   }
   interface VariableSchemaType extends Document {
     key: string;
-    value: string;
+    value: string[];
   }
   
   type Code = {
@@ -953,12 +975,18 @@ declare global {
   };  
 
   type GetUserCodeInput = {
-    userId?: string;
     questionId?: string;
     weekNumber?: number;
     dayNumber?: number;
     code?: CodeInput;
   };
+
+  type GetUserCodeQueryType = {
+    questionId?: string;
+    weekNumber?: number;
+    dayNumber?: number;
+    userId?: ObjectId | string
+  }
 
   type UserPaymentsDataOutputType = {
     userPaymentData?: UserPaymentSchemaType[];
@@ -984,6 +1012,15 @@ declare global {
     receiptImageUrl?: string;
     userEmail: string;
     rejectReason?: string
+  }
+  type AllBatchDataOutputType = {
+    batchData?: BatchSchemaType[];
+    response: CustomResponseType;
+  };
+  type SortDirectionType = keyof typeof sortDirection;
+  type SortDataType = {
+    sortOrder?: SortDirectionType;
+    sortBy?: string;
   }
 
 }

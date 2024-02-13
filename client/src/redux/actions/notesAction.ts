@@ -16,6 +16,8 @@ export const useNotes = () => {
         description,
         estimatedReadingTime,
     }: NotesFilterDataType) => {
+        try {
+        dispatch(actions.setIsNotesLoading(true));
         const response = await apolloClient.query({
             query: GET_NOTES,
             variables: {
@@ -31,8 +33,13 @@ export const useNotes = () => {
                 },
             },
         });  
-        dispatch(actions.setVideos(response.data.getAllNotes));
+        dispatch(actions.setNotes(response.data.getAllNotes));
         return response;
+    } catch (err){
+        console.error(err);
+    } finally {
+        dispatch(actions.setIsNotesLoading(false));
+    }
     };
 
 

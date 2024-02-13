@@ -281,6 +281,7 @@ declare global {
     totalInCorrectQuestions?: number;
     totalUnAttemptedQuestions?: number;
     response?: CustomResponseType;
+    isQuestionLoading?: boolean;
   }
 
   type QuestionDataType = {
@@ -335,6 +336,8 @@ declare global {
     successMsg?: string;
     isAnswered?: boolean;
     isCorrect?: boolean;
+    className?: string;
+    questionNumber?: number;
   }
 
   type QuestionSelectedValueType = {
@@ -385,6 +388,7 @@ declare global {
     title?: string;
     description?: string;
     dayNumber?: number;
+    weekNumber?: number;
     videoNumber?: number;
     topics?: string[];
     links?: {
@@ -397,6 +401,7 @@ declare global {
 
   type VideoDataStateType = {
     videoList: VideoDataType[];
+    isVideosLoading: boolean;
   }
 
   type NotesFilterDataType = {
@@ -422,6 +427,7 @@ declare global {
 
   type NotesDataStateType = {
     noteList: NotesDataType[];
+    isNotesLoading: boolean;
   }
 
   interface DayPagePropsInterface {
@@ -494,6 +500,7 @@ declare global {
     width?: string;
     isDarkMode?: boolean;
     fillColor?: string;
+    className?: string;
   }
 
   interface SidebarOptionInterface {
@@ -504,6 +511,7 @@ declare global {
     showText?: boolean;
     onClick?: MouseEventHandler<HTMLDivElement>;
     url?:string;
+    moreInfo?: PartialUserSchemaType; 
   }
 
   interface SidebarContainerProps {
@@ -515,6 +523,7 @@ declare global {
     profile?: {
       image: string | ReactNode;
       url?: string;
+      moreInfo?: PartialUserSchemaType;
       text: string;
       openNewPage?: boolean;
     },
@@ -571,6 +580,7 @@ declare global {
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: ObjectId[];
+    date?: Date;
   }
   type ScheduleDataStateType = {
     weekList: WeekDataType[];
@@ -644,7 +654,7 @@ declare global {
     amount?: string;
     sequence?: string;
     dueDate?: Date; 
-    accessWeeks?: WeekDataType[]; // we'll store week data here
+    accessWeeks?: number[]; // we'll store week data here
     miscellaneous?: JSON;
     isApproved?: boolean;
     isRejected?:boolean;
@@ -870,6 +880,7 @@ declare global {
     style?: CSSProperties;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     url?: string;
+    iconFillColor?:string;
   }
   interface UserInfoSubCardPropsInterface {
     editing?: boolean;
@@ -906,7 +917,15 @@ declare global {
 
   interface UserCodeStateType {
     userCode: [UserCodeType]
-    isLoading: boolean
+    isSetUserCodeLoading: boolean
+    isUserSubmittedCodeLoading: boolean
+  }
+
+  interface UserCodeInputType {
+    questionId?: string
+    weekNumber?: number
+    dayNumber?: number
+    code?: CodeType
   }
 
   interface UserCodeType {
@@ -914,6 +933,7 @@ declare global {
     weekNumber?: number
     dayNumber?: number
     code?: CodeType
+    updatedAt: string
   }
 
   interface CodeType {
@@ -943,6 +963,8 @@ declare global {
     icon: string;
     color: string;
     questionId: string;
+    weekNumber: number;
+    dayNumber: number;
   }
 
   interface LanguageConfig {
@@ -992,5 +1014,44 @@ declare global {
     image?: string | ArrayBuffer;
     rejectReason?: string
   }
+
+  interface SpinnerProps {
+    colors?: string[]; 
+    width?: string;
+    height?: string;
+    theme?: 'dark' | 'light';
+  }
+  interface UserInfoCardPropsInterface {
+    datalist: SecondaryUserSchemaType;
+    nonEditedableFields: nonEditableUserSchemaFieldsType;
+    editing?: boolean;
+    onChange?: (e: ChangeEvent<HTMLInputElement>, field: string) => void;
+    formTextValues?:SecondaryUserSchemaType;
+  }
+  
+  interface FilterTagsProps {
+    className?: string;
+    filterTagMap?: Record<string, boolean>;
+    setFilterTag: (value: string) => void;
+    onClearAll?: () => void;
+  } 
+  type SortDataType = {
+    sortOrder?: string;
+    sortBy?: string;
+  }
+  type GetScheduleDataType = {
+    weekFilterData ?: WeekDataType;
+    sortData ?: SortDataType; 
+    accessWeeks ?: number[];
+    isAdmin ?: boolean;
+  }
+  type IsPaidUserType = {
+    isPaidUser: boolean;
+    accessWeeks: number[];
+  }
+
+interface NoDataFoundProps {
+  message?: string;
+}
 }
 export { };

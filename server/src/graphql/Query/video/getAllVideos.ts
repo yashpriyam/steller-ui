@@ -23,6 +23,7 @@ export const getAllVideos = async (
             duration,
             description,
             dayNumber,
+            weekNumber
         }: VideoDataType = videoDataFilter;
         let modifiedVideoDataFilter = removeNullAndUndefinedKeys({
             links,

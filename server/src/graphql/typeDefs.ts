@@ -11,12 +11,15 @@ const typeDefs = gql`
       pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
-    getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
+    getScheduleData( accessWeeks: [Int]
+      weekDataFilter: WeekDataInputType sortData: SortDataInputType isAdmin: Boolean
+      ): WeekDataOutputType
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
-    getUserCode(input: getUserCodeInputType): GetUserCodeOutput
+    getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
+    getBatchCode: AllBatchDataOutputType!
   }
 
   type Mutation {
@@ -91,10 +94,16 @@ const typeDefs = gql`
     insertCities(citiesData: [String]!): CitiesOutputType
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
-    saveUserCode(input: SaveUserCodeInput): UserCodeType
-    getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
-    approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
-    rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+    saveUserCode(input: SaveUserCodeInput): GetUserCodeOutput
+    getAllUserPayments(
+      input: GetAllUserPaymentsInput
+    ): UserPaymentsDataOutputType
+    approveUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
+    rejectUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
   }
 
   input SaveUserCodeInput {
@@ -110,6 +119,7 @@ const typeDefs = gql`
     weekNumber: Int
     dayNumber: Int
     code: CodeType
+    updatedAt: String
   }
 
   type GetUserCodeOutput {
@@ -129,9 +139,8 @@ const typeDefs = gql`
     js: String
   }
 
-  input getUserCodeInputType {
-    userId: ID!
-    questionId: ID!
+  input GetUserCodeInputType {
+    questionId: ID
     weekNumber: Int
     dayNumber: Int
   }
@@ -141,6 +150,7 @@ const typeDefs = gql`
     weekNumber: Int
     dayNumber: Int
     code: CodeType
+    updatedAt: String
     response: CustomResponseType!
   }
 
@@ -221,6 +231,8 @@ const typeDefs = gql`
     links: OptionalLinksInput
     isActive: Boolean
     duration: String
+    batchCode: String
+    weekNumber: Int
   }
 
   input OptionalLinksInput {
@@ -305,6 +317,7 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+    batchCode: String
   }
 
   input OtpUserInputType {
@@ -337,6 +350,7 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+    batchCode: String
   }
   type UpdateNotesOutputType {
     notesData: UpdateNotesDataType
@@ -351,6 +365,7 @@ const typeDefs = gql`
     noOfPages: Int
     description: String
     estimatedReadingTime: String
+    batchCode: String
   }
   type DeletedNotesOutputType {
     notesData: DeletedNotesDataType
@@ -696,6 +711,7 @@ const typeDefs = gql`
     description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
+    date: DateTime
   }
   type WeekDataType {
     batchCode: String
@@ -705,6 +721,7 @@ const typeDefs = gql`
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
     days: [DaySchemaType]
+    date: DateTime
   }
   type WeekDataOutputType {
     weekData: [WeekDataType]
@@ -717,6 +734,7 @@ const typeDefs = gql`
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
     weekNumber: Int!
+    date: DateTime
   }
   type UpsertWeekDataOutputType {
     weekData: WeekDataType
@@ -1090,6 +1108,11 @@ const typeDefs = gql`
     userData: UserSchemaType
     response: CustomResponseType
     isAdmin: Boolean
+    isPaidUser: IsPaidUsertype
+  }
+   type IsPaidUsertype  {
+    isPaidUser: Boolean
+    accessWeeks:[Int]
   }
   input PartialUserSchemaType {
     email: String
@@ -1187,7 +1210,19 @@ const typeDefs = gql`
     image: String
     rejectReason: String
   }
+  type AllBatchDataOutputType {
+    batchData: [Batch]
+    response: CustomResponseType!
+  }
 
+  enum SortDirection {
+    asc 
+    desc
+  }
+  input SortDataInputType {
+    sortOrder: SortDirection
+    sortBy: String
+  }
   scalar DateTime
   scalar JSON
 `;

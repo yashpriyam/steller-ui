@@ -58,7 +58,9 @@ $fadedOrangeColor: rgba(136, 83, 60, 0.4);
 $darkOrangeColor: rgb(61, 34, 22);
 $green: green;
 $orange: #ff9800;
-
+$loaderColors: #fff, #fff, #fff, #fff, #fff;
+$premiumColor: rgb(255, 215, 0);
+$fadedPremiumColor: rgba(255, 215, 0,0.5);
 
 $screenXs: 480px;
 $screenSm: 576px;
@@ -99,7 +101,7 @@ $input-bg: #ffffff;
 $input-text: #333333;
 $input-border: #555555;
 
-$videoHutBorderColor:var(--videohut-framer-website-nero-30, rgba(255, 255, 255, 0.3));
+$videoHutBorderColor:rgba(255, 255, 255, 0.3);
 $radialGradient: var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63,
  rgba(255, 255, 255, 0.15))2.210024196147939%,
  hsla(0, 0%, 100%, 0);
@@ -122,3 +124,6 @@ $success-200: #a5d6a7;
 $success-500: #4caf50;
 $success-800: #2e7d32;
 $placeHolderColor: rgb(117, 117, 117);
+
+$primaryTextColor: #fff;
+$fadedGrayWhite: rgba(255, 255, 255, 0.1);
