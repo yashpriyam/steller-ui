@@ -38,7 +38,7 @@ const UserPaymentPage: React.FC = () => {
   )[0];
 
   
-  if (isFeePlanLoading || isPaymentsLoading) {
+  if (isFeePlanLoading && isPaymentsLoading) {
      return( <Spinner/>)
   }
 

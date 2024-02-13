@@ -734,6 +734,7 @@ const typeDefs = gql`
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
     weekNumber: Int!
+    date: DateTime
   }
   type UpsertWeekDataOutputType {
     weekData: WeekDataType
