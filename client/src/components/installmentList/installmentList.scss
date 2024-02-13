@@ -1,168 +1,210 @@
 @import "../../components/variables.scss";
 
 @mixin installmentItem {
-    width: 50%;
-    padding: 10px;
-    margin: 5px;
-    border: 1px solid $videoHutBorderColor;
-    border-radius: 5px;
-
+  width: 480px;
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid $videoHutBorderColor;
+  border-radius: 5px;
+  @media (max-width: $screenXs){
+    width: fit-content;
   }
-  
-  // Styling for paid installments
-  .paid-installments {
+}
+
+.installment-list-container{
+
+.paid-installments {
+  color: $primaryColor;
+  margin-bottom: 30px;
+  .installment-heading {
     color: $primaryColor;
     margin-bottom: 30px;
-    .installment-heading {
-      color: $primaryColor;
-      margin-bottom: 30px;
-    }
-  
-    .installment-item-constainer {
-      list-style-type: none;
-      padding: 0;
-  
-      .installment-item {
-        @include installmentItem;
-        background-color: $lightBlue;
-        margin-bottom: 30px;
-        .installment-info {
-          display: flex;
-          flex-direction: column;
-          padding: 20px;
-          .installment-elem{
-            margin-bottom: 10px;
-            font-size: 20px;
-            font-weight: 900;
-          }
-          .installment-status {
-            font-weight: bold;
-          
-            &.approved {
-              color: $green;
-            }
-        
-            &.rejected {
-              color: $red;
-            }
-        
-            &.pending {
-              color: $lightOrangeColor;
-            }
-          }
-        }
-        .installment-image {
-          max-width: 100%; 
-          border-radius: 8px;
-          &.approved {
-            outline: 5px solid $green;
-          }
-      
-          &.rejected {
-            outline: 5px solid $red;
-          }
-      
-          &.pending {
-            outline: 5px solid $lightOrangeColor;
-          }
-        }
-      }
-    }
   }
-  
-  // Styling for unpaid installments
-  .unpaid-installments {
 
-    .installment-cards{
+  .installment-item-container {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    .installment-item {
+      @include installmentItem;
+      background-color: $lightBlue;
+      display: flex;
+      flex-wrap: wrap;
+      background-color: $secondaryBgColor;
+      color: $primaryTextColor;
+      border: 3px solid $videoHutBorderColor;
+      padding: 20px;
+
+
+      .installment-info {
         display: flex;
         flex-direction: column;
-    }
-    .installment-heading {
-      color: $primaryColor;
-      margin-bottom: 30px;
-    }
-  
-    .installment-item-constainer {
-      list-style-type: none;
-      padding: 0;
+        width:100%;
+        .installment-elem {
+          margin-bottom: 10px;
+          font-size: 20px;
+          font-weight: 900;
+        }
+        .installment-status {
+          font-weight: bold;
 
-      .installment-item {
-        @include installmentItem;
+          &.approved {
+            color: $green;
+          }
+
+          &.rejected {
+            color: $red;
+          }
+
+          &.pending {
+            color: $lightOrangeColor;
+          }
+        }
+      }
+      .installment-image {
+        max-width: 100%;
+        border-radius: 8px;
+        &.approved {
+          outline: none; 
+        }
+
+        &.rejected {
+          outline: 5px solid $red;
+        }
+
+        &.pending {
+          outline: 5px solid $lightOrangeColor;
+        }
+      }
+      .image-preview-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $sencondaryBorderColor;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        margin-bottom: 30px;
-        background-color: $red;
-
-        .file-input-wrapper {
-          position: relative;
-          margin-top: 10px;
-      
-          .file-input {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-            z-index: 1;
-      
-            // Add any additional styles as needed
-      
-            &:hover {
-              // Add hover styles if desired
-            }
-          }
-      
-          .file-input-label {
-            display: block;
-            padding: 10px;
-            background-color: $blue;
-            color: $primaryColor;
-            font-size: 15px;
-            font-weight: 600;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-      
-            &:hover {
-              background-color: #2980b9;
-            }
-          }
+        @media (max-width: $screenXs){
+          width: 95vw;
         }
-
-        .installment-info {
-          display: flex;
-          flex-direction: column;
-          padding: 20px;
-          .installment-elem{
-            margin-bottom: 10px;
-            font-size: 20px;
-            font-weight: 900;
-          }
+        .preview-image {
+          max-width: 85%;
+          max-height: 85%;
+          border: 1px solid $primaryColor;
+          border-radius: 4px;
         }
-        .disabled {
-          background-color: $gray;
-        }
-        .enabled {
-          background-color: $primaryBorderColor;
-          color: $primaryColor;
-          &:hover {
-            background-color: $darkGrey;
-          }
-        }
-        .pay-now-button {
-           border-radius: 5px;
-           width: 10vmax;
-            padding: 15px 10px;
-            border: none;
-            cursor: pointer;
-            margin-left: 10px;
-            font-size: 15px;
-            font-weight: 600;
-          }
       }
     }
   }
-  
+}
+
+.unpaid-installments {
+  .installment-cards {
+    display: flex;
+    flex-direction: column;
+  }
+  .installment-heading {
+    color: $primaryColor;
+    margin-bottom: 30px;
+  }
+
+  .installment-item-container {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    width:100%;
+
+    .installment-item {
+      @include installmentItem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-bottom: 30px;
+      background-color: $accent-color-5;
+      transition: 0.6s;
+      &:hover{
+        transform: scale(104%);
+      }
+
+      .file-input-button-wrapper{
+        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-end;
+      .file-input-wrapper {
+        position: relative;
+        margin-top: 10px;
+
+        .file-input {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          cursor: pointer;
+          z-index: 1;
+        }
+
+        .file-input-label {
+          display: block;
+          padding: 10px;
+          background-color: $blue;
+          color: $primaryColor;
+          font-size: 15px;
+          font-weight: 600;
+          text-align: center;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #2980b9;
+          }
+        }
+      }
+      }
+      .installment-info {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        gap:10px;
+        .installment-elem {
+          font-size: 20px;
+          font-weight: 900;
+          @media (max-width: $screenMd){
+            font-weight: 600;
+            font-size: 18px;
+          }
+        }
+      }
+      .disabled {
+        background-color: $gray;
+      }
+      .enabled {
+        background-color: $primaryBorderColor;
+        color: $primaryColor;
+        &:hover {
+          background-color: $darkGrey;
+        }
+      }
+      .pay-now-button {
+        border-radius: 5px;
+        width: 100%;
+        padding: 15px 10px;
+        border: none;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+}
