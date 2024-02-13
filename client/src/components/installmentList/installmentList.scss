@@ -33,15 +33,15 @@
       background-color: $lightBlue;
       display: flex;
       flex-wrap: wrap;
-      background-color: $primaryTextColor;
-      color: $primaryBgColor;
-      border: 3px solid $green;
+      background-color: $secondaryBgColor;
+      color: $primaryTextColor;
+      border: 3px solid $videoHutBorderColor;
+      padding: 20px;
 
 
       .installment-info {
         display: flex;
         flex-direction: column;
-        padding: 20px;
         width:100%;
         .installment-elem {
           margin-bottom: 10px;
