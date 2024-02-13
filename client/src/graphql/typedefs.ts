@@ -287,9 +287,14 @@ const typeDefs = gql`
     branch: String
     batchCode: String
     feePlan: String 
+    # temporaryAccess: UserTemporaryAccessType;
   }
   
- 
+  # type UserTemporaryAccessType {
+  #   allowTemporaryAccess: Boolean,
+  #   allowedAccessDate: DateTime
+  # }
+
   type UserDataOutputType {
     userData: UserSchemaType
     response: CustomResponseType

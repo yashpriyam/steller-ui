@@ -1109,7 +1109,11 @@ const typeDefs = gql`
     isAdmin: Boolean
     isPaidUser: IsPaidUsertype
   }
-   type IsPaidUsertype  {
+  type UserTemporaryAccessType {
+    allowTemporaryAccess: Boolean,
+    allowedAccessDate: DateTime
+  }
+  type IsPaidUsertype  {
     isPaidUser: Boolean
     accessWeeks:[Int]
   }
@@ -1150,6 +1154,7 @@ const typeDefs = gql`
     batchCode: String
     feePlan: String
     profileImage: ProfileImageType
+    temporaryAccess: UserTemporaryAccessType
   }
 
   input UpdateMeetingInputFilter {

@@ -39,8 +39,8 @@ export const getUser = async (
 
     const isAdminUser = await isAdmin(userData?.email ?? '')
     const userSelectedFeePlan = userData.feePlan;
+    console.log('checking paid user')
     const isPaidUser = await checkPaidUser(userId ?? '', userSelectedFeePlan ?? '');
-
     return {
       userData: userInfo,
       isAdmin: isAdminUser,
