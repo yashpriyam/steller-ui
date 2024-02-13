@@ -25,7 +25,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
   const { weekList, isScheduleDataLoading } = weekData;
   const { getMeeting } = useMeeting();
   const { user } = useUser();
-  const { isPaidUser } = user || {};
+  const { isPaidUser,isAdmin } = user || {};
   const { accessWeeks } = isPaidUser || {};
   const [meetingData, setMeetingData] = useState<MeetingDataType | null>(null);
   const [filter, setFilter] = useState<GetScheduleDataType>({});
@@ -55,12 +55,13 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
       setMeetingData(meetingDetails);
     }
   }
+  const navigateToPayment = ()=>navigate("/userPayment");
 
   useEffect(() => {
     getScheduleData(filter);
-    setFilter({accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}})
+    setFilter({isAdmin,accessWeeks,weekFilterData: {}, sortData: {sortOrder: desc, sortBy: weekSortBy.date}})
     getTodayClassMeeting();
-  }, [accessWeeks]);
+  }, [accessWeeks, isAdmin]);
 
   useEffect(()=>{
    getScheduleData(filter)
@@ -96,7 +97,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             const weekTitle = title;
             return (
               isActive && (
-                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${isWeekIncluded && "pro-membership-weeks-wrapper"}`}>
+                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${isWeekIncluded && !isAdmin && "pro-membership-weeks-wrapper"}`}>
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
                       <div className="week-description">{description}</div>
@@ -234,7 +235,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                           </div>
                         );
                       })
-                    : <span className="pro-membership-info-container">
+                    : <span className="pro-membership-info-container" onClick={navigateToPayment}>
                         <span className="pro-membership-info-text">
                           {t("pro_membership_access_message")}
                         </span>

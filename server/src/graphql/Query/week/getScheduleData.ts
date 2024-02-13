@@ -8,8 +8,18 @@ import {
 } from '@models';
 import { sortDirection } from '@utils';
 
-const populateWeekData = async (filterWeek: any) => {
-  const { DAYS } = localMessages.WEEK_MODEL;
+export const getScheduleData = async (
+    parent: undefined,
+    args: { accessWeeks : number[], weekDataFilter: WeekDataType, sortData: SortDataType, isAdmin: boolean},
+): Promise<AllWeekDataOutputType> => {
+    const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
+    const errorData: CustomResponseType = {
+        status: statusCodes.BAD_REQUEST,
+        message: WEEK_NOT_FOUND,
+    }
+    try {
+        const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
+        const { weekDataFilter, sortData, accessWeeks } = args;
 
   const getWeekData : GetWeekDataType[] = await weekModel.find(filterWeek).populate({
     path: DAYS,
