@@ -6,13 +6,18 @@
   h1 {
     margin-bottom: 20px;
   }
+  .fee-plan-card{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .payment-card-label-focus{
+      border-radius: 8px;
+      box-shadow: 1px 1px 15px -5px rgb(10 225 46);
+      transform: scale(102%);
 
-  .payment-card {
-    width: 60vw;
-    margin-bottom: 15px;
-
-    input[type="radio"] {
-      margin-right: 10px;
+    }
+    .payment-card {
+      width: 60vw;
     }
 }
 .button-wrapper {

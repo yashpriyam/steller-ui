@@ -13,6 +13,7 @@ import NoDataFound from "../../components/noDataFound/noDataFound";
 const UserPaymentPage: React.FC = () => {
   const [selectedFeePlan, setSelectedFeePlan] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [focusPaymentCard, setFocusPaymentCard] = useState<string>();
 
   const { userPayments, getUserPayments, isLoading: isPaymentsLoading } = useUserPayments();
   const { feePlans, getFeePlans, isLoading: isFeePlanLoading } = useFeePlans();
@@ -50,17 +51,22 @@ const UserPaymentPage: React.FC = () => {
           {!Boolean(user?.userData?.feePlan) ? (
             <div className="fee-plan-card">
               {Boolean(feePlans?.length) &&
-                feePlans?.map((feePlan) => (
-                  <div key={feePlan.name}>
+                feePlans?.map((feePlan, idx) => (
+                  <div key={`${feePlan.name}-${idx}}`}>
                     <input
                       type="radio"
-                      id={feePlan.name}
+                      id={`${feePlan.name}-${idx}}`}
                       name="feePlanRadio"
                       value={feePlan.name}
+                      style={{display:"none"}}
                       checked={selectedFeePlan === feePlan._id}
-                      onChange={() => setSelectedFeePlan(feePlan._id ?? "")}
+                      onChange={() => {
+                          setSelectedFeePlan(feePlan._id ?? "")
+                          setFocusPaymentCard(`${feePlan.name}-${idx}}`);
+                        }
+                      }
                     />
-                    <label htmlFor={feePlan.name}>
+                    <label htmlFor={`${feePlan.name}-${idx}}`} className={`${focusPaymentCard=== `${feePlan.name}-${idx}}` && "payment-card-label-focus"}`}>
                       <PaymentCard feePlan={feePlan} />
                     </label>
                   </div>
