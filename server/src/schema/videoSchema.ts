@@ -39,6 +39,10 @@ const videoSchema = new Schema<CreateVideoType>(
             type: Boolean,
             default: true,
         },
+        thumbnailImage: {
+            type: String,
+            required: false
+        },
         duration: String,
     },
     { timestamps: true }

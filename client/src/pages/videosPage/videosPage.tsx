@@ -65,7 +65,7 @@ const VideosPage: React.FC = () => {
             /* TODO: @dhananjay - Instead of using this filter, need to do an API call  */
             (isVideoTagCheckedInFilterTag(video?.topics || []) ||
               !isAnyFilterApplied) && (
-              <Card tagPosition="left" data={video}></Card>
+              <Card tagPosition="left" data={video} className="videos-card"></Card>
             )
         )}
       </div></>
