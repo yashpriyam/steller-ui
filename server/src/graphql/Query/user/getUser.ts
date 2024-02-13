@@ -40,7 +40,6 @@ export const getUser = async (
     const isAdminUser = await isAdmin(userData?.email ?? '')
     const userSelectedFeePlan = userData?.feePlan;
     const isPaidUser = await checkPaidUser(userId ?? '', userSelectedFeePlan ?? '');
-
     return {
       userData: userInfo,
       isAdmin: isAdminUser,

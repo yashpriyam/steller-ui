@@ -1,8 +1,4 @@
-import {
-  feePlanModel,
-  userPaymentModel,
-  weekModel,
-} from '@models';
+import { feePlanModel, userPaymentModel, weekModel } from '@models';
 import mongoose from 'mongoose';
 
 export async function checkPaidUser(
@@ -40,15 +36,15 @@ export async function checkPaidUser(
       })
     }
   }
-
-  return {
-    isPaidUser: false,
-    accessWeeks:[1,2]
+    return {
+      isPaidUser: false,
+      accessWeeks: [1, 2],
+    };
+  } 
+  catch (error) {
+    return {
+      isPaidUser: false,
+      accessWeeks: [1, 2],
+    };
   }
-} catch (error) {
-  return {
-    isPaidUser: false,
-    accessWeeks:[1,2]
-  }
-}
 }

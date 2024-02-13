@@ -24,6 +24,10 @@ query {
           publicId
           secureUrl
         }
+        temporaryAccess {
+          allowTemporaryAccess
+          allowedAccessDate
+        }
       }
       response {
         message

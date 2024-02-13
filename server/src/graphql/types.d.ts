@@ -769,6 +769,11 @@ declare global {
     branch?: string;
     location?: string;
     feePlan?: string;
+    temporaryAccess?: UserTemporaryAccessType;
+  }
+  interface UserTemporaryAccessType {
+    allowTemporaryAccess: boolean;
+    allowedAccessDate: Date;
   }
   interface UserProfileDataType {
     personalDetails?: PersonalDetailType;

@@ -288,8 +288,7 @@ const typeDefs = gql`
     batchCode: String
     feePlan: String 
   }
-  
- 
+
   type UserDataOutputType {
     userData: UserSchemaType
     response: CustomResponseType

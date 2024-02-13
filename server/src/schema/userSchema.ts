@@ -54,6 +54,16 @@ const userSchema = new mongoose.Schema<UserSchemaType>(
       type: ObjectId,
       ref: feePlanModel,
     },
+    temporaryAccess: {
+      allowTemporaryAccess: {
+        type: Boolean,
+        required: false
+      },
+      allowedAccessDate: {
+        type: Date,
+        required: false
+      }
+    },
   },
   { timestamps: true }
 );
