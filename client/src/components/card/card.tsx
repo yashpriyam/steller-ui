@@ -32,38 +32,38 @@ export const Card: React.FC<CardProps> = ({
     thumbnailImage
   } = data || {};
   return (
-    <div
-      className={`card-main-container ${className}`}
-      style={{ ...style, height: height, width: width }}
-    >
-      <div className="card-image-container">
-        <a target="blank" href={links?.youtube}>
-          <img className="card-image" src={thumbnailImage} alt="video_thumbnail" />
-        </a>
-        <span className={`card-tags-wrapper ${tagPosition}`}>
-          {topics?.map((tag, i) => {
-            return i <= 1 ? (
-              <span className={`card-tag ${tag}`}>{tag}</span>
-            ) : (
-              <span className={`card-tag hidden-tags ${tag}`}>{tag}</span>
-            );
-          })}
-        </span>
-      </div>
-      <div className="card-text-wrapper">
-        {title && (
-          <p className="card-title">
-            <strong>{title}</strong>
-          </p>
-        )}
-        {description && <p className="video-description-data">{description}</p>}
-        <div className="videodata-wrapper">
-          {dayNumber && <span>Day Number : {dayNumber}</span>}
-          {duration && <span>duration : {duration}</span>}
-          {videoNumber && <span>Video Number : {videoNumber}</span>}
-          {children}
+    <a target="blank" href={links?.youtube} style={{textDecoration: 'none'}}>
+      <div
+        className={`card-main-container ${className}`}
+        style={{ ...style, height: height, width: width }}
+      >
+        <div className="card-image-container">
+            <img className="card-image" src={thumbnailImage} alt="video_thumbnail" />
+          <span className={`card-tags-wrapper ${tagPosition}`}>
+            {topics?.map((tag, i) => {
+              return i <= 1 ? (
+                <span className={`card-tag ${tag}`}>{tag}</span>
+                ) : (
+                  <span className={`card-tag hidden-tags ${tag}`}>{tag}</span>
+                  );
+                })}
+          </span>
+        </div>
+        <div className="card-text-wrapper">
+          {title && (
+            <p className="card-title">
+              <strong>{title}</strong>
+            </p>
+          )}
+          {description && <p className="video-description-data">{description}</p>}
+          <div className="videodata-wrapper">
+            {dayNumber && <span>Day Number : {dayNumber}</span>}
+            {duration && <span>duration : {duration}</span>}
+            {videoNumber && <span>Video Number : {videoNumber}</span>}
+            {children}
+          </div>
         </div>
       </div>
-    </div>
+    </a>
   );
 };
