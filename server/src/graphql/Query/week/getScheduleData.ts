@@ -1,47 +1,58 @@
 import { errorMessages, localMessages, statusCodes } from '@constants';
-import {
-  User,
-  notesModel,
-  questionModel,
-  videoModel,
-  weekModel,
-} from '@models';
-import { sortDirection } from '@utils';
-
-export const getScheduleData = async (
-    parent: undefined,
-    args: { accessWeeks : number[], weekDataFilter: WeekDataType, sortData: SortDataType, isAdmin: boolean},
-): Promise<AllWeekDataOutputType> => {
-    const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
-    const errorData: CustomResponseType = {
-        status: statusCodes.BAD_REQUEST,
-        message: WEEK_NOT_FOUND,
-    }
-    try {
-        const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
-        const { weekDataFilter, sortData, accessWeeks } = args;
-
-  const getWeekData : GetWeekDataType[] = await weekModel.find(filterWeek).populate({
-    path: DAYS,
-    populate: [
-      {
-        path: 'questions',
-        model: questionModel,
-      },
-      {
-        path: 'videos',
-        model: videoModel,
-      },
-      {
-        path: 'notes',
-        model: notesModel,
-      },
-    ],
-  });
-
-  return getWeekData;
+import { User, notesModel, questionModel, videoModel, weekModel } from '@models';
+import { isAdmin, sortDirection } from '@utils';
+const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
+const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
+const errorData: CustomResponseType = {
+  status: statusCodes.BAD_REQUEST,
+  message: WEEK_NOT_FOUND,
 };
+const { asc, desc } = sortDirection;
+const populateWeekData = async ( {allowAccess=false, isAdminUser, DAYS : path, accessWeeks, weekDataFilter={}, sortData }: { 
+  DAYS: string; 
+  accessWeeks?: number[]; 
+  weekDataFilter: WeekDataType; 
+  sortData?: SortDataType; 
+  isAdminUser?: boolean;
+  allowAccess?: boolean;
+} ) : Promise<GetWeekDataType[]> => {
+  const { sortBy, sortOrder } : SortDataType = sortData || {};
 
+  const accessibleWeeks = isAdminUser || allowAccess ? {} : { weekNumber: { $in: accessWeeks ?? [] } };
+  const allWeeksData : GetWeekDataType[] = await weekModel
+  .find({...accessibleWeeks, ...weekDataFilter})
+  .populate({
+        path,
+        populate: [
+          {
+            path: 'questions',
+            model: questionModel,
+          },
+          {
+            path: 'videos',
+            model: videoModel,
+          },
+          {
+            path: 'notes',
+            model: notesModel,
+          },
+        ]
+      })
+      if (sortBy && sortOrder) {
+        allWeeksData.sort((a, b) => {
+          const aValue = a[sortBy];
+          const bValue = b[sortBy];
+          if (aValue < bValue) {
+            return sortOrder === asc ? -1 : 1;
+          }
+          if (aValue > bValue) {
+            return sortOrder === asc ? 1 : -1;
+          }
+          return 0;
+        });
+      }
+      return allWeeksData;
+}
 export const getScheduleData = async (
   parent: undefined,
   args: {
@@ -51,55 +62,27 @@ export const getScheduleData = async (
   },
   { contextData }: ContextType
 ): Promise<AllWeekDataOutputType> => {
-  const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
-  const { WEEK_FOUND, DAYS } = localMessages.WEEK_MODEL;
-  const userId = contextData.user._id;
-  console.log({ userId });
+  try {
+  const {_id : userId, email} = contextData.user || {} ;
+  const { weekDataFilter, sortData, accessWeeks } = args;
+  const { asc, desc } = sortDirection;
+  const { sortBy, sortOrder = desc } = sortData || {};
   const getUserData = await User.findOne({ _id: userId });
-  if (getUserData?.temporaryAccess?.allowTemporaryAccess) {
-    const getWeekData = await populateWeekData({});
-    return  {
+  const isAdminUser = await isAdmin(email)
+  const allowAccess = getUserData?.temporaryAccess?.allowTemporaryAccess;
+  if (allowAccess || isAdminUser) {
+    const getWeekData = await populateWeekData({allowAccess,isAdminUser, DAYS, weekDataFilter , sortData});
+    return getWeekData ? {
         weekData: getWeekData,
         response: {
           status: statusCodes.OK,
           message: WEEK_FOUND,
         },
-      }
+      } : { response : errorData}
   }
-  console.log({ getUserData });
-  const errorData: CustomResponseType = {
-    status: statusCodes.BAD_REQUEST,
-    message: WEEK_NOT_FOUND,
-  };
-  try {
-    const { weekDataFilter, sortData, accessWeeks } = args;
 
-    const { asc, desc } = sortDirection;
-    const { sortBy, sortOrder = desc } = sortData || {};
-
-    const accessibleWeeks = { weekNumber: { $in: accessWeeks ?? [] } };
     const nonAccessibleWeeks = { weekNumber: { $nin: accessWeeks ?? [] } };
-    const accessibleWeeksData = await populateWeekData({
-      ...accessibleWeeks,
-      ...weekDataFilter,
-    });
-    // const accessibleWeeksData : GetWeekDataType[] = await weekModel.find({...accessibleWeeks, ...weekDataFilter}).populate({
-    //     path: DAYS,
-    //     populate: [
-    //     {
-    //       path: 'questions',
-    //       model: questionModel,
-    //     },
-    //     {
-    //         path: 'videos',
-    //         model: videoModel,
-    //       },
-    //       {
-    //         path: 'notes',
-    //         model: notesModel,
-    //       },
-    // ]
-    //   })
+    const accessibleWeeksData  = await populateWeekData({isAdminUser, accessWeeks,weekDataFilter, DAYS, sortData});
     const nonAccessibleWeeksData: GetWeekDataType[] = await weekModel.find(
       { ...nonAccessibleWeeks, ...weekDataFilter },
       { days: 0 }

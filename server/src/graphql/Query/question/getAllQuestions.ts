@@ -28,7 +28,7 @@ export const getAllQuestions = async (
       userId ?? "",
       userSelectedFeePlan ?? ""
     );
-    const { accessWeeks } = isPaidUser;
+    const { accessWeeks } = isPaidUser || {};
     if (!accessWeeks?.includes(filterData?.week)) {
       delete filterData.week;
     }

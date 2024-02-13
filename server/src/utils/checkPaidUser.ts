@@ -19,7 +19,6 @@ export async function checkPaidUser(
 
     
     const feePlansInstallment = getFeePlans?.installments;
-    console.log(23245, {userId})
 
   const userInstallments = feePlansInstallment?.filter((installment)=> {
    return allUserPayments.filter((payment)=> payment.isApproved).some(({installmentId})=> {
@@ -36,12 +35,13 @@ export async function checkPaidUser(
           return userInstallment.accessWeeks?.map((week)=> week.weekNumber) // mapping  weeks of each installment to only keep the week number
       })
     }
-
+  }
     return {
       isPaidUser: false,
       accessWeeks: [1, 2],
     };
-  } catch (error) {
+  } 
+  catch (error) {
     return {
       isPaidUser: false,
       accessWeeks: [1, 2],
