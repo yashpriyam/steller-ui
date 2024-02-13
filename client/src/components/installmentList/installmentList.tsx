@@ -35,7 +35,7 @@ const InstallmentList: React.FC<InstallmentListProps> = ({
   const unpaidInstallments = allInstallment?.filter(
     (installment) =>
       !paidInstallments?.some(
-        (paidInstallment) => paidInstallment?._id === installment?._id
+        (paidInstallment) => paidInstallment?._id === installment?._id && !paidInstallment.isRejected
       )
   );
 
