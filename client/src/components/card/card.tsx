@@ -29,6 +29,7 @@ export const Card: React.FC<CardProps> = ({
     title,
     videoNumber,
     topics,
+    thumbnailImage
   } = data || {};
   return (
     <div
@@ -36,16 +37,9 @@ export const Card: React.FC<CardProps> = ({
       style={{ ...style, height: height, width: width }}
     >
       <div className="card-image-container">
-        <iframe
-          width="560"
-          height="315"
-          className="card-image"
-          src={links?.youtube}
-          title="YouTube video player"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+        <a target="blank" href={links?.youtube}>
+          <img className="card-image" src={thumbnailImage} alt="video_thumbnail" />
+        </a>
         <span className={`card-tags-wrapper ${tagPosition}`}>
           {topics?.map((tag, i) => {
             return i <= 1 ? (
@@ -62,7 +56,7 @@ export const Card: React.FC<CardProps> = ({
             <strong>{title}</strong>
           </p>
         )}
-        {description && <p>{description}</p>}
+        {description && <p className="video-description-data">{description}</p>}
         <div className="videodata-wrapper">
           {dayNumber && <span>Day Number : {dayNumber}</span>}
           {duration && <span>duration : {duration}</span>}

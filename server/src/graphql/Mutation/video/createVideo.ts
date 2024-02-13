@@ -23,6 +23,7 @@ export const createVideo = async (
       duration,
       batchCode,
       weekNumber,
+      thumbnailImage
     } = videoData;
     const { youtube, webmasters } = links;
    
@@ -49,6 +50,7 @@ export const createVideo = async (
       duration,
       batchCode,
       weekNumber,
+      thumbnailImage
     });
 
      if (!createdVideoData) {

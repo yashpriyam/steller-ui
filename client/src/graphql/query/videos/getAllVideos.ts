@@ -19,6 +19,7 @@ export const GET_VIDEOS = gql`
                   youtube
                   webmasters
                 }
+                thumbnailImage
               }
             response {
                 status

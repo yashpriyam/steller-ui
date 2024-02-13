@@ -181,6 +181,7 @@ declare global {
     duration?: string;
     weekNumber: number;
     batchCode: string;
+    thumbnailImage: string;
   };
 
   type FilteredLinksType = {

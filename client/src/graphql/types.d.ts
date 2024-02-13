@@ -397,6 +397,7 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
+    thumbnailImage?: string;
   }
 
   type VideoDataStateType = {

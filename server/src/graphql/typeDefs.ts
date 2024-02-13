@@ -197,6 +197,7 @@ const typeDefs = gql`
     updatedAt: String
     batchCode: String
     weekNumber: String
+    thumbnailImage: String
   }
 
   type Links {
@@ -215,6 +216,7 @@ const typeDefs = gql`
     duration: String
     weekNumber: Int!
     batchCode: String!
+    thumbnailImage: String
   }
 
   input LinksInput {
