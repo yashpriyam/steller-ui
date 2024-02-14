@@ -3,8 +3,8 @@ import Accordion from "../accordion/accordion";
 import { Select } from "../select/select";
 import "./configurationType.scss";
 import { AddIcon } from "../../icons/addIcon";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
 
 export const ConfigurationType: React.FC<{ prevPath: string }> = ({
@@ -21,8 +21,6 @@ export const ConfigurationType: React.FC<{ prevPath: string }> = ({
     },
   ];
   const dispatch = useDispatch();
-  // const { createQuestion } = useSelector((state): any => state);
-  // console.log({ ...createQuestion });
   const { updateState } = createQuestionActions;
   const [openWindowCount, setOpenWindowCount] = useState<number>(1);
   const handleOnAddOpenWindow = () => {

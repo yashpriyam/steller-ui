@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
 export const Options: React.FC<OptionsProps> = ({prevPath}) => {
   const { createQuestion } = useSelector((state): any => state);
-    console.log({ createQuestion });
   const { questionType } = createQuestion as CreateQuestionInterface;
   const  dispatch = useDispatch();
   const { updateState } = createQuestionActions;

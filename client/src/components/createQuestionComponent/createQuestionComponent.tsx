@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
 import { Button } from "../../components/button/button";
 import { createQuestionApi } from "../../redux/actions/admin/createQuestion";
+import Toast from "../../utils/toast";
 export const CreateQuestionComponent: React.FC<
   CreateQuestionComponentProps
 > = ({ onClose }) => {
@@ -44,10 +45,9 @@ export const CreateQuestionComponent: React.FC<
   const { createQuestion: createdQuestionData } = useSelector(
     (state): any => state
   );
-  console.log({ ...createdQuestionData });
-
   const { updateState } = createQuestionActions;
   const dispatch = useDispatch();
+  const [isQuestionAdding,setIsQuestionAdding]=useState<boolean>(false)
   const [count, setCount] = useState({
     titleCount: 1,
     answerCount: 1,
@@ -131,18 +131,30 @@ export const CreateQuestionComponent: React.FC<
     setCount({ ...count, optionsCount: count.optionsCount + 1 });
   };
   const handleOnAddQuestion = async () => {
-    const { answer, options, meta, questionType, title, marks } =
-      createdQuestionData;
-    const { createQuestion } = createQuestionApi();
-    const response = await createQuestion({
-      answer: answer,
-      marks: marks,
-      meta: meta,
-      options: options,
-      questionType: questionType,
-      title: title,
-    });
-    console.log({ response });
+    try {
+      const { answer, options, meta, questionType, title, marks } =
+        createdQuestionData;
+      const { createQuestion } = createQuestionApi();
+      setIsQuestionAdding(true)
+      const response = await createQuestion({
+        answer: answer,
+        marks: marks,
+        meta: meta,
+        options: options,
+        questionType: questionType,
+        title: title,
+      });      
+      setIsQuestionAdding(false);
+      const message = response.response.message;
+      const status = response.response.status;
+      if (status === 200) {
+        Toast.success(message)
+      } else {
+        Toast.error(message);        
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <div className="create-question-component-wrapper">
@@ -153,6 +165,7 @@ export const CreateQuestionComponent: React.FC<
       <h3>Meta</h3>
       <div className="question-meta-container">
         <InputComponent
+          key={"batchCode"}
           className="create-question-input"
           type="text"
           onChange={handleOnSetBatchCode}
@@ -160,6 +173,7 @@ export const CreateQuestionComponent: React.FC<
         />
         <InputComponent
           className="create-question-input"
+          key={"dayNumber"}
           type="number"
           onChange={handleOnSetDayNumber}
           placeholder="Day Number"
@@ -167,29 +181,34 @@ export const CreateQuestionComponent: React.FC<
         <InputComponent
           className="create-question-input"
           type="number"
+          key={"weekNumber"}
           onChange={handleOnSetWeekNumber}
           placeholder="Week Number"
         />
         <InputComponent
           className="create-question-input"
           type="text"
+          key={"Topic"}
           onChange={handleOnSetTopic}
           placeholder="Topic"
         />
         <InputComponent
           className="create-question-input"
           type="number"
+          key={"expiresTime"}
           onChange={handleOnSetExpiresTime}
           placeholder="Expires Time"
         />
         <Select
           className="create-question-select"
           defaultSelected="Select Active"
+          key={"isActive"}
           data={bool}
           isRequired
           onSelect={handleOnSetIsActive}
         ></Select>
         <Select
+          key={"isArchived"}
           className="create-question-select"
           defaultSelected="Select Archived"
           data={bool}
@@ -199,6 +218,7 @@ export const CreateQuestionComponent: React.FC<
         <Select
           className="create-question-select"
           defaultSelected="Select Openable"
+          key={"isOpenable"}
           data={bool}
           isRequired
           onSelect={handleOnSetIsOpenable}
@@ -206,6 +226,7 @@ export const CreateQuestionComponent: React.FC<
         <Select
           className="create-question-select"
           defaultSelected="Select type"
+          key={"selcect-type"}
           data={type}
           isRequired
           onSelect={handleOnSetType}
@@ -214,18 +235,20 @@ export const CreateQuestionComponent: React.FC<
       <InputComponent
         className="create-question-input"
         type="number"
+        key={"marks"}
         onChange={handleOnSetMarks}
         placeholder="Marks"
         disabled={false}
       />
       <Select
         className="create-question-select"
+        key={"question-type"}
         defaultSelected="Question type"
         data={questionType}
         isRequired
         onSelect={handleOnSetQuestionType}
       ></Select>
-      <Accordion title={"Title"} className="accordian-container">
+      <Accordion title={"Title"} key={"title"} className="accordian-container">
         {titleList.map((title) => {
           return title;
         })}
@@ -235,7 +258,7 @@ export const CreateQuestionComponent: React.FC<
           </span>
         </div>
       </Accordion>
-      <Accordion title={"Options"} className="accordian-container">
+      <Accordion title={"Options"} key={"options"} className="accordian-container">
         {optionsList.map((option) => {
           return option;
         })}
@@ -245,7 +268,7 @@ export const CreateQuestionComponent: React.FC<
           </span>
         </div>
       </Accordion>
-      <Accordion title={"Answer"} className="accordian-container">
+      <Accordion title={"Answer"} key={"answer"} className="accordian-container">
         {answerList.map((answer) => {
           return answer;
         })}
@@ -256,7 +279,10 @@ export const CreateQuestionComponent: React.FC<
         </div>
       </Accordion>
       <div className="add-question-button-container">
-        <Button text="Add Question" onClick={handleOnAddQuestion} />
+        <Button key={"addButton"}
+          text={isQuestionAdding ? "Question Adding" : "Add Question"}
+          onClick={handleOnAddQuestion}
+        />
       </div>
     </div>
   );

@@ -1,9 +1,8 @@
-import CodeBlock from "../codeBlock/codeBlock";
 import { Select } from "../../components/select/select";
 import "./openWindow.scss";
 import Editor from "../Editor/editor";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
 export const OpenWindow: React.FC<{ prevPath?: string }> = ({ prevPath }) => {
   const bool = [
@@ -25,10 +24,7 @@ export const OpenWindow: React.FC<{ prevPath?: string }> = ({ prevPath }) => {
     { text: "JS", value: "JS" },
   ];
   const dispatch = useDispatch();
-  // const { createQuestion } = useSelector((state): any => state);
-  // console.log({ ...createQuestion });
   const { updateState } = createQuestionActions;
-  // const [selectedTab, setSelectedTab] = useState<number>(0);
   const [selectedTitle, SetSelectedTitle] = useState<string>("");
   const [html, setHtml] = useState<string>("");
   const [css, setCss] = useState<string>("");

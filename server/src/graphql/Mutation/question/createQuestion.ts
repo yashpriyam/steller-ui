@@ -4,7 +4,6 @@ export const createQuestion = async (
   _parent: undefined,
   args: { questionData: QuestionSchemaType }
 ): Promise<CreateQuestionOutputType | unknown> => {
-  console.log("hello bro, chal ja please");
   const { QUESTION_CREATION_SUCCESS } = localMessages.QUESTION_MODEL;
   const { QUESTION_CREATION_FAILED } = errorMessages.QUESTION_MODEL;
   const errorData: CustomResponseType = {
@@ -13,8 +12,6 @@ export const createQuestion = async (
   };
 
   try {
-    console.log("create question called  server");
-
     const { questionData } = args;
     const { title, questionType, answer, marks, options, meta } = questionData;
 
@@ -30,7 +27,7 @@ export const createQuestion = async (
       return {
         response: {
           message: localMessages.DAY_MODEL.WEEK_DOES_NOT_EXIST_TO_INSERT_DAY,
-          statusCodes: statusCodes.BAD_REQUEST,
+          status: statusCodes.BAD_REQUEST,
         },
       };
     }
@@ -55,7 +52,7 @@ export const createQuestion = async (
       questionData: createdQuestionData,
       response: {
         message: localMessages.QUESTION_MODEL.QUESTION_CREATION_SUCCESS,
-        staus: statusCodes.OK,
+        status: statusCodes.OK,
       },
     };
   } catch (error) {

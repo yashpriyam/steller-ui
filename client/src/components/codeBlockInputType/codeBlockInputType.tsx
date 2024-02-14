@@ -2,7 +2,7 @@ import "./codeBlockInput.scss";
 import { ConfigurationType } from "../configuration/configurationType";
 import Accordion from "../accordion/accordion";
 import { Select } from "../select/select";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
 export const CodeBlockInputType: React.FC<{ prevPath: string }> = ({
   prevPath,
@@ -17,8 +17,6 @@ export const CodeBlockInputType: React.FC<{ prevPath: string }> = ({
       value: "false",
     },
   ];
-  const { createQuestion } = useSelector((state): any => state);
-  console.log({ ...createQuestion });
   const dispatch = useDispatch();
   const { updateState } = createQuestionActions;
   const handleOnSetEnableCodeBlock = (option: SelectOptionType) => {

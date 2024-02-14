@@ -10,7 +10,6 @@ export const createQuestionApi = () => {
     options,
     questionType,
   }: CreateQuestionInterface) => {
-    console.log({ title, answer, meta, marks, questionType, options });
     const {
       batchCode,
       day,
@@ -22,20 +21,9 @@ export const createQuestionApi = () => {
       type,
       week,
     } = meta as QuestionMetaDataType;
-    console.log({
-      batchCode,
-      day,
-      expiresInMins,
-      isActive,
-      isArchived,
-      isOpenable,
-      topic,
-      type,
-      week,
-    });
     try {
-      const response = await apolloClient.query({
-        query: CREATE_QUESTION,
+      const response = await apolloClient.mutate({
+        mutation: CREATE_QUESTION,
         variables: {
           questionData: {
             meta: {
@@ -57,9 +45,7 @@ export const createQuestionApi = () => {
           },
         },
       });
-      console.log({ response });
-
-      return response.data;
+      return response.data.createQuestion;
     } catch (err) {
       console.log(err);
     }

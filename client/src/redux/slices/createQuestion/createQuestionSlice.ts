@@ -1,25 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-const openWindowType = {
-  enableUserSelection: false,
-  isEditable: false,
-  predefinedCode: "",
-  title: "",
-};
-const option = {
-  text: "",
-  imageUrl: "",
-  iframe: "",
-  codeBlock: {
-    enableCodeBlock: false,
-    configuration: {
-      showOutputWindow: false,
-      showSplitWindow: false,
-      openWindows: [openWindowType,openWindowType,openWindowType
-      ],
-    },
-  },
-};
-
 const initialState = {
   title: [],
   answer: [],
@@ -43,13 +22,9 @@ export const createQuestionSlice = createSlice({
   initialState: initialState,
   reducers: {
     updateState: (state, action) => {
-          const { path, value } = action.payload;
-          console.log({path},{state});
-          
+      const { path, value } = action.payload;
       const keys = path.split(".");
       let currentState: any = state;
-      //   console.log(path, value);
-
       for (let i = 0; i < keys.length - 1; i++) {
         const key = keys[i];
         if (!(key in currentState)) {
@@ -57,12 +32,8 @@ export const createQuestionSlice = createSlice({
         }
         currentState = currentState[key];
       }
-
-      // Set the value at the specified path
       currentState[keys[keys.length - 1]] = value;
-          console.log({ currentState });
     },
-
   },
 });
 
