@@ -3,7 +3,7 @@ export const CloseCrossIcon: React.FC = () => {
   return (
     <>
       <svg
-        enable-background="new 0 0 23.332 23.333"
+        // enable-background="new 0 0 23.332 23.333"
         height="20px"
         id="Capa_1"
         version="1.1"

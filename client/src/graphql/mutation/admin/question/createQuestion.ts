@@ -4,7 +4,6 @@ export const CREATE_QUESTION = gql`
   mutation CreateQuestion($questionData: CreateQuestionInputType!) {
     createQuestion(questionData: $questionData) {
       questionData {
-        id
         marks
         answer {
           text

@@ -299,17 +299,25 @@ declare global {
     isCorrect?: boolean;
     isAnswered?: boolean;
   };
+  interface CreateQuestionInterface {
+    title?: QuestionOptionType[];
+    questionType?: "";
+    options?: QuestionOptionType[];
+    answer?: QuestionOptionType[];
+    marks?: number;
+    meta?: QuestionMetaDataType;
+  };
 
   type QuestionMetaDataType = {
-    topic: string;
-    day: number;
-    week: number;
-    batchCode: string;
-    isActive: boolean;
-    isArchived: boolean;
-    type: QuestionMetaType;
-    expiresInMins: number;
-    isOpenable: boolean;
+    topic?: string;
+    day?: number;
+    week?: number;
+    batchCode?: string;
+    isActive?: boolean;
+    isArchived ?: boolean;
+    type ?: "";
+    expiresInMins?: number;
+    isOpenable?: boolean;
   };
 
   enum QuestionMetaType {
@@ -971,7 +979,15 @@ declare global {
     language: string;
     heading: string;
     value: string;
-    onChange: React.Dispatch<React.SetStateAction<string>>;
+    onChange: React.Dispatch<React.SetStateAction<string>>|( (value:string)=>void);
+    icon: string;
+    color: string;
+  }
+  interface LanguageConfigure {
+    language: string;
+    heading: string;
+    value: string;
+    onChange: (e:string)=>void;
     icon: string;
     color: string;
   }
@@ -1142,8 +1158,15 @@ declare global {
     codeBlock?: CodeBlockType;
   };
   interface OptionsProps {
-    isCodeBlockOpen?: boolean;
-    onChange?: React.Dispatch<React.SetStateAction>;
+    prevPath: string;
+  }
+  interface AdminEditorProps {
+    heading: string;
+    language: string;
+    value: string;
+    onChange: Dispatch<SetStateAction<string>>|((value:string)=>void);
+    icon: string;
+    color: string;
   }
   type ThemeValueType = "light" | "dark";
 }

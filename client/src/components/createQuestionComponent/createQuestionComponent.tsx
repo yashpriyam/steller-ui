@@ -5,7 +5,10 @@ import React, { useState } from "react";
 import Accordion from "../accordion/accordion";
 import { Options } from "../options/options";
 import { CloseCrossIcon, AddIcon } from "../../icons/index";
-
+import { useDispatch, useSelector } from "react-redux";
+import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
+import { Button } from "../../components/button/button";
+import { createQuestionApi } from "../../redux/actions/admin/createQuestion";
 export const CreateQuestionComponent: React.FC<
   CreateQuestionComponentProps
 > = ({ onClose }) => {
@@ -38,68 +41,108 @@ export const CreateQuestionComponent: React.FC<
     { text: "fillup", value: "fillup" },
     { text: "codeblock", value: "codeblock" },
   ];
+  const { createQuestion: createdQuestionData } = useSelector(
+    (state): any => state
+  );
+  console.log({ ...createdQuestionData });
+
+  const { updateState } = createQuestionActions;
+  const dispatch = useDispatch();
   const [count, setCount] = useState({
     titleCount: 1,
     answerCount: 1,
-    optionsCount:1
+    optionsCount: 1,
   });
-  const [questionData, setQuestionData] = useState({
-    meta: {},
-    answer: [{}],
-    options: [{}],
-    title: [{}],
-    marks: 1,
-    questionType:""
-  })
-  const setBatchCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const batchCode = e.target.value;
+  const handleOnSetBatchCode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const path = `meta.batchCode`;
+    dispatch(updateState({ path, value }));
   };
-  const setDayNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const day = e.target.value;
+  const handleOnSetDayNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    const path = `meta.day`;
+    dispatch(updateState({ path, value }));
   };
-  const setWeekNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const week = e.target.value;
+  const handleOnSetWeekNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    const path = `meta.week`;
+    dispatch(updateState({ path, value }));
   };
-  const setTopic = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const topic = e.target.value;
+  const handleOnSetTopic = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const path = `meta.topic`;
+    dispatch(updateState({ path, value }));
   };
-  const setExpiresTime = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const expiresTime = e.target.value;
+  const handleOnSetExpiresTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    const path = `meta.expiresInMins`;
+    dispatch(updateState({ path, value }));
   };
-  const setType = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const type = e.target.value;
+  const handleOnSetType = (option: SelectOptionType) => {
+    const value = option.value;
+    const path = `meta.type`;
+    dispatch(updateState({ path, value }));
   };
-  const setIsActive = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const isActive = Number(e.target.value) ;
+  const handleOnSetIsActive = (option: SelectOptionType) => {
+    const value = option.value === "true";
+    const path = `meta.isActive`;
+    dispatch(updateState({ path, value }));
   };
-  const setIsArchived = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const isArchive = Boolean(Number(e.target.value));
+  const handleOnSetIsArchived = (option: SelectOptionType) => {
+    const value = option.value === "true";
+    const path = `meta.isArchived`;
+    dispatch(updateState({ path, value }));
   };
-  const setIsOpenable = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const openStatus=Boolean(Number(e.target.value))
+  const handleOnSetIsOpenable = (option: SelectOptionType) => {
+    const value = option.value === "true";
+    const path = `meta.isOpenable`;
+    dispatch(updateState({ path, value }));
   };
-  
-  
+  const handleOnSetMarks = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = Number(e.target.value);
+    const path = `marks`;
+    dispatch(updateState({ path, value }));
+  };
+  const handleOnSetQuestionType = (option: SelectOptionType) => {
+    const value = option.value;
+    const path = `questionType`;
+    dispatch(updateState({ path, value }));
+  };
   const optionsList: JSX.Element[] = [];
   const titleList: JSX.Element[] = [];
   const answerList: JSX.Element[] = [];
-  
-    for (let index = 0; index < count.optionsCount; index++) {
-      optionsList.push(<Options onChange={setQuestionData } />);
+
+  for (let index = 0; index < count.optionsCount; index++) {
+    optionsList.push(<Options prevPath={`options.${index}`} />);
   }
-   for (let index = 0; index < count.titleCount; index++) {
-     titleList.push(<Options />);
-   } for (let index = 0; index < count.answerCount; index++) {
-     answerList.push(<Options />);
-   }
+  for (let index = 0; index < count.titleCount; index++) {
+    titleList.push(<Options prevPath={`title.${index}`} />);
+  }
+  for (let index = 0; index < count.answerCount; index++) {
+    answerList.push(<Options prevPath={`answer.${index}`} />);
+  }
   const handleOnAddTitleClick = () => {
-    setCount({ ...count,titleCount:count.titleCount+1 });
-  }
+    setCount({ ...count, titleCount: count.titleCount + 1 });
+  };
   const handleOnAddAnswerClick = () => {
     setCount({ ...count, answerCount: count.answerCount + 1 });
   };
   const handleOnAddOptionsClick = () => {
     setCount({ ...count, optionsCount: count.optionsCount + 1 });
+  };
+  const handleOnAddQuestion = async () => {
+    const { answer, options, meta, questionType, title, marks } =
+      createdQuestionData;
+    const { createQuestion } = createQuestionApi();
+    const response = await createQuestion({
+      answer: answer,
+      marks: marks,
+      meta: meta,
+      options: options,
+      questionType: questionType,
+      title: title,
+    });
+    console.log({ response });
   };
   return (
     <div className="create-question-component-wrapper">
@@ -112,31 +155,31 @@ export const CreateQuestionComponent: React.FC<
         <InputComponent
           className="create-question-input"
           type="text"
-          onChange={() => {}}
+          onChange={handleOnSetBatchCode}
           placeholder="Batch Code"
         />
         <InputComponent
           className="create-question-input"
           type="number"
-          onChange={() => {}}
+          onChange={handleOnSetDayNumber}
           placeholder="Day Number"
         />
         <InputComponent
           className="create-question-input"
           type="number"
-          onChange={() => {}}
+          onChange={handleOnSetWeekNumber}
           placeholder="Week Number"
         />
         <InputComponent
           className="create-question-input"
           type="text"
-          onChange={() => {}}
+          onChange={handleOnSetTopic}
           placeholder="Topic"
         />
         <InputComponent
           className="create-question-input"
           type="number"
-          onChange={() => {}}
+          onChange={handleOnSetExpiresTime}
           placeholder="Expires Time"
         />
         <Select
@@ -144,34 +187,34 @@ export const CreateQuestionComponent: React.FC<
           defaultSelected="Select Active"
           data={bool}
           isRequired
-          onSelect={() => {}}
+          onSelect={handleOnSetIsActive}
         ></Select>
         <Select
           className="create-question-select"
           defaultSelected="Select Archived"
           data={bool}
           isRequired
-          onSelect={() => {}}
+          onSelect={handleOnSetIsArchived}
         ></Select>
         <Select
           className="create-question-select"
           defaultSelected="Select Openable"
           data={bool}
           isRequired
-          onSelect={() => {}}
+          onSelect={handleOnSetIsOpenable}
         ></Select>
         <Select
           className="create-question-select"
           defaultSelected="Select type"
           data={type}
           isRequired
-          onSelect={() => {}}
+          onSelect={handleOnSetType}
         ></Select>
       </div>
       <InputComponent
         className="create-question-input"
         type="number"
-        onChange={() => {}}
+        onChange={handleOnSetMarks}
         placeholder="Marks"
         disabled={false}
       />
@@ -180,7 +223,7 @@ export const CreateQuestionComponent: React.FC<
         defaultSelected="Question type"
         data={questionType}
         isRequired
-        onSelect={() => {}}
+        onSelect={handleOnSetQuestionType}
       ></Select>
       <Accordion title={"Title"} className="accordian-container">
         {titleList.map((title) => {
@@ -212,6 +255,9 @@ export const CreateQuestionComponent: React.FC<
           </span>
         </div>
       </Accordion>
+      <div className="add-question-button-container">
+        <Button text="Add Question" onClick={handleOnAddQuestion} />
+      </div>
     </div>
   );
 };

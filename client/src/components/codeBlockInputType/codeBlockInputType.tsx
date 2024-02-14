@@ -2,7 +2,11 @@ import "./codeBlockInput.scss";
 import { ConfigurationType } from "../configuration/configurationType";
 import Accordion from "../accordion/accordion";
 import { Select } from "../select/select";
-export const CodeBlockInputType: React.FC = () => {
+import { useDispatch, useSelector } from "react-redux";
+import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
+export const CodeBlockInputType: React.FC<{ prevPath: string }> = ({
+  prevPath,
+}) => {
   const bool = [
     {
       text: "true",
@@ -13,6 +17,15 @@ export const CodeBlockInputType: React.FC = () => {
       value: "false",
     },
   ];
+  const { createQuestion } = useSelector((state): any => state);
+  console.log({ ...createQuestion });
+  const dispatch = useDispatch();
+  const { updateState } = createQuestionActions;
+  const handleOnSetEnableCodeBlock = (option: SelectOptionType) => {
+    const value = option.value === "true";
+    const path = `${prevPath}.enableCodeBlock`;
+    dispatch(updateState({ path, value }));
+  };
   return (
     <div className="code-block-input-container">
       <Select
@@ -20,10 +33,10 @@ export const CodeBlockInputType: React.FC = () => {
         defaultSelected="Enable Code Block"
         data={bool}
         isRequired
-        onSelect={() => {}}
+        onSelect={handleOnSetEnableCodeBlock}
       ></Select>
       <Accordion title={"Configuration"}>
-        <ConfigurationType />
+        <ConfigurationType prevPath={`${prevPath}.configuration`} />
       </Accordion>
     </div>
   );

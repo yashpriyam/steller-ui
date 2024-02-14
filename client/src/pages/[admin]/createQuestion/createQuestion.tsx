@@ -49,7 +49,7 @@ export const CreateQuestion: React.FC = () => {
         <CreateQuestionComponent onClose={handleOnCloseModal} />
       </Modal>
       <div className="created-question-container">
-        {questionList?.map((question, index) => {
+        {/* {questionList?.map((question, index) => {
           return (
             <QuestionAccordion
               key={index}
@@ -63,7 +63,7 @@ export const CreateQuestion: React.FC = () => {
               successMsg={t("correct_answer")}
             />
           );
-        })}
+        })} */}
       </div>
     </div>
   );
