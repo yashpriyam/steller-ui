@@ -1029,4 +1029,20 @@ declare global {
     sortBy?: string;
   }
 
+  interface LeaderBoardData {
+    _id: mongoose.Types.ObjectId;
+    user: UserSchemaType;
+    submissions: Submission[];
+    rank?: number;
+    totalSubmissions?: number 
+  }
+  interface Submission {
+    _id: mongoose.Types.ObjectId;
+    code: Code; 
+    dayNumber: number;
+    questionId: mongoose.Types.ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
+  }
+
 }

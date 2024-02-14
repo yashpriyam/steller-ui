@@ -20,6 +20,7 @@ const typeDefs = gql`
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
     getBatchCode: AllBatchDataOutputType!
+    getLeaderBoardData: [LeaderBoardData]
   }
 
   type Mutation {
@@ -1230,6 +1231,25 @@ const typeDefs = gql`
     sortOrder: SortDirection
     sortBy: String
   }
+ 
+
+  type LeaderBoardData {
+    _id: String
+    user: UserSchemaType
+    submissions: [Submission]
+    rank: Int
+    totalSubmissions: Int 
+  }
+  type Submission {
+    _id: String
+    code: CodeType
+    dayNumber: Int
+    questionId: String
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+
+
   scalar DateTime
   scalar JSON
 `;

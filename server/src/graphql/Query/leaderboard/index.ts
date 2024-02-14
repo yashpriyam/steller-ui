@@ -1,0 +1,1 @@
+export { getLeaderBoardData } from "./getLeaderboardData"

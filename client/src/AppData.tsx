@@ -10,6 +10,7 @@ import {
   VideoIcon,
   NameIcon,
   PaymentIcon,
+  LeaderBoard
 } from "./icons/index";
 import { useTranslation } from "react-i18next";
 import { useUser } from "./redux/actions/userAction";
@@ -91,6 +92,11 @@ export const useAppData = (): UseAppDataReturnType => {
         text: t("payments"),
         image: <PaymentIcon isDarkMode={true} />,
         url: "/userPayment",
+      },
+      {
+        text: t("Leaderboard"),
+        image: <LeaderBoard/>,
+        url: "/leaderboard"
       },
     ],
     optionAtLast: {
