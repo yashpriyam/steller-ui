@@ -143,9 +143,13 @@
     }
     .videodata-wrapper{
       display: flex;
+      justify-content: space-between;
       flex-wrap: wrap;
       font-size: $mediumFontSize;
       gap:5px;
+      font-size: $smallFontSize;
+      font-weight: 700;
+      margin-top: 5px;
     }
   }
 }
@@ -156,14 +160,12 @@
     height: 225px;
     &.videos-card{
       height: 394px;
+      width: auto;
     }
     .card-text-wrapper {
       .card-title{
         font-size: $largerFontSize;
         height: 50px;
-      }
-      .videodata-wrapper{
-        font-size: $smallFontSize;
       }
     }
   }

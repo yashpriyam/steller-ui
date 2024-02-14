@@ -34,6 +34,7 @@ export const getAllVideos = async (
             duration,
             description,
             dayNumber,
+            weekNumber
         });
         if (links) {
             const filteredLinks = removeNullAndUndefinedKeys(links);
