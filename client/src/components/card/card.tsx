@@ -57,9 +57,8 @@ export const Card: React.FC<CardProps> = ({
           )}
           {description && <p className="video-description-data">{description}</p>}
           <div className="videodata-wrapper">
+            {duration && <span>Duration : {duration}</span>}
             {dayNumber && <span>Day Number : {dayNumber}</span>}
-            {duration && <span>duration : {duration}</span>}
-            {videoNumber && <span>Video Number : {videoNumber}</span>}
             {children}
           </div>
         </div>
