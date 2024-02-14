@@ -997,5 +997,9 @@ declare global {
     userEmail: string;
     rejectReason?: string
   }
+  type CreateImagePublicUrlOutputType = {
+    publicUrl?: string;
+    response: CustomResponseType;
+  };
 
 }

@@ -37,19 +37,16 @@ export const OpenWindow: React.FC<{ prevPath?: string }> = ({ prevPath }) => {
     JS: "JS",
   });
   const handleOnSetHtml = (value: string) => {
-     console.log("html");
     const path = `${prevPath}.predefinedCode`;
     dispatch(updateState({ path, value }))
     setHtml(value);
   };
   const handleOnSetCss = (value: string) => {
-     console.log("css");
      const path = `${prevPath}.predefinedCode`;
     dispatch(updateState({ path, value }));
     setCss(value);
   };
   const handleOnSetJs = (value: string) => {
-     console.log("js");
      const path = `${prevPath}.predefinedCode`;
     dispatch(updateState({ path, value }));
     setJs(value);

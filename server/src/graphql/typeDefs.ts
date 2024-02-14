@@ -95,6 +95,7 @@ const typeDefs = gql`
     getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
     approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
     rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+    createImagePublicUrl(url: String!): CreateImagePublicUrlOutputType
   }
 
   input SaveUserCodeInput {
@@ -1163,7 +1164,7 @@ const typeDefs = gql`
     userPaymentData: UserPaymentData
     response: CustomResponseType
   }
-  
+
   input UserPaymentInput {
     installmentId: ID!
     isApproved: Boolean
@@ -1192,6 +1193,10 @@ const typeDefs = gql`
     isPending: UserPaymentPendingInputType
     image: String
     rejectReason: String
+  }
+  type CreateImagePublicUrlOutputType {
+    publicUrl: String
+    response: CustomResponseType!
   }
 
   scalar DateTime

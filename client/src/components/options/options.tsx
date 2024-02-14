@@ -4,8 +4,11 @@ import Accordion from "../accordion/accordion";
 import "./options.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
+import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
+import { UploadImage } from "../uploadImage/uploadImage";
+import { createImageePublicUrl } from "../../redux/actions/imageAction";
 export const Options: React.FC<OptionsProps> = ({prevPath}) => {
-  const { createQuestion } = useSelector((state): any => state);
+  const { createQuestion } = useSelector((state): any => state);  
   const { questionType } = createQuestion as CreateQuestionInterface;
   const  dispatch = useDispatch();
   const { updateState } = createQuestionActions;
@@ -14,11 +17,23 @@ export const Options: React.FC<OptionsProps> = ({prevPath}) => {
     const path = `${prevPath}.text`;
     dispatch(updateState({path,value}))
   }
-  const handleOnSetImageUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const path = `${prevPath}.imageUrl`;
-    dispatch(updateState({ path, value }));
-  };
+   const handleOnImageClick = async (e: React.ChangeEvent<HTMLInputElement>) => {
+     const files = e.target.files;
+     if (files && Boolean(files.length)) {
+       try {
+         const image = await readFileAsDataURL(files[0]);
+         if (typeof image === "string") {
+           const { publicUrl, response } = await createImageePublicUrl(image);
+           if (response.status === 200 && publicUrl) {
+             const path = `${prevPath}.imageUrl`;
+             dispatch(updateState({ path, value:publicUrl }));
+           }
+         }
+       } catch (err) {
+         console.error(err);
+       }
+     }
+   };
   const handleOnSetIframe = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const path = `${prevPath}.iframe`;
@@ -33,13 +48,14 @@ export const Options: React.FC<OptionsProps> = ({prevPath}) => {
         backgroundColor="black"
         className="question-input-container"
       />
-      <InputComponent
+      {/* <InputComponent
         type="text"
         onChange={handleOnSetImageUrl}
         placeholder="image URL"
         backgroundColor="black"
         className="question-input-container"
-      />
+      /> */}
+      <UploadImage onChange={handleOnImageClick} text="upload image" className="upload-image-wrapper"/>
       <InputComponent
         type="text"
         onChange={handleOnSetIframe}

@@ -51,7 +51,7 @@ export const createQuestion = async (
     return {
       questionData: createdQuestionData,
       response: {
-        message: localMessages.QUESTION_MODEL.QUESTION_CREATION_SUCCESS,
+        message: QUESTION_CREATION_SUCCESS,
         status: statusCodes.OK,
       },
     };

@@ -14,7 +14,27 @@
       padding-bottom: 10px 0px;
     }
     .accordion-content {
-        width: 100%;
+      width: 100%;
+    }
+  }
+}
+.upload-image-wrapper {
+  background-color: #fff;
+  width: 100%;
+  height: fit-content;
+  border-radius: 0;
+  .upload-image-label {
+    width: 100%;
+    .upload-image-text-and-icon {
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      width: 100%;
+      gap: 10px;
+      .label-text {
+        width: fit-content;
+        font-size: 22px;
+      }
     }
   }
 }

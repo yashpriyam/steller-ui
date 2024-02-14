@@ -95,4 +95,7 @@ export const localMessages = Object.freeze({
     DATA_FOUND: "Successfully found cities data",
     INSERTION_SUCCESS: "Successfully inserted cities data",
   },
+  IMAGE: {
+    PUBLIC_URL_SUCCESS:"successfully generated public url"
+  }
 });
