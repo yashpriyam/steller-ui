@@ -15,13 +15,13 @@
   .leaderboard{
    display: flex;
    align-items: center;
-   justify-content: space-between;
+   justify-content: center;
   }
  
   .leaderboardTable {
     width: 60%;
     border-collapse: collapse;
-    box-shadow: 0 4px 6px $sencondaryBorderColor;
+    box-shadow: 0 4px 6px $sencondaryBorderColor;  
   }
   
   .leaderboardTable th,
@@ -29,6 +29,14 @@
     padding: 15px;
     border: 1px solid $sencondaryTextColor;
     text-align: left;
+    position: relative;
+  }
+  .star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
   }
   
   .leaderboardTable th {
@@ -37,6 +45,7 @@
     text-transform: uppercase;
     color: $textColorBlack;
     text-align: center;
+    
   }
   
   .leaderboardTable td {

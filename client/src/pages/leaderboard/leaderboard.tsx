@@ -3,6 +3,7 @@ import React from "react";
 import Spinner from "../../components/spinner/spinner";
 import "./leaderboard.scss";
 import { GET_LEADERBOARD_DATA } from "../../graphql/query/leaderboard/getLeaderboardData";
+import { Star } from "../../icons/star";
 
 const LeaderBoard = () => {
   const { data: leaderboardData, loading } = useQuery(GET_LEADERBOARD_DATA);
@@ -19,7 +20,8 @@ const LeaderBoard = () => {
         <Spinner />
       ) : (
         <div className="leaderboard">
-        <div className="firstPlaceUser">
+            {/* will use this section later */}
+        {/* <div className="firstPlaceUser">
             <h2 className="firstPlaceTitle">First Place</h2>
             <div className="userProfile">
               {firstPlaceUser?.user?.profileImage ? (
@@ -34,7 +36,7 @@ const LeaderBoard = () => {
               <span className="userName">{firstPlaceUser?.user.name}</span>
             </div>
             <p className="total-submissions">Total Submissions: {firstPlaceUser?.totalSubmissions}</p>
-          </div>
+          </div> */}
       
         <table className="leaderboardTable">
           <thead>
@@ -48,7 +50,17 @@ const LeaderBoard = () => {
             {leaderboardData?.getLeaderBoardData?.map(
               (data: any, idx: number) => (
                 <tr key={data._id}>
-                  <td>{idx + 1}</td>
+                  <td>
+                    {idx + 1}
+                    {
+                    idx === 0 && (
+                        <div className="star">
+                            <Star/>
+                        </div>
+                    )
+                  }
+                  </td>
+                 
                   <div className="userProfile">
                     {data?.user?.profileImage ? (
                       <img
