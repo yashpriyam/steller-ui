@@ -14,8 +14,9 @@ const Accordion: React.FC<AccordionPropsInterface> = ({
   titlePosition = "left",
   disabled = false,
   subTitle,
+  defaultOpen=false,
 }: AccordionPropsInterface) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(defaultOpen);
   const accordionRef = useRef<HTMLDivElement | null>(null);
   const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     if (!disabled) setIsOpen(!isOpen);

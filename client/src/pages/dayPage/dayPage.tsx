@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./dayPage.scss";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useVideos } from "../../redux/actions/videosAction";
 import { useNotes } from "../../redux/actions/notesAction";
 import DropDownIcon from "../../icons/dropDownIcon";
@@ -8,6 +8,7 @@ import { useQuestions } from "../../redux/actions/questionAction";
 import QuestionAccordion from "../../components/questionAccordion/questionAccordion";
 import { useTranslation } from "react-i18next";
 import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
+import Spinner from "../../components/spinner/spinner";
 
 const DayPage: React.FC<DayPagePropsInterface> = ({
   className,
@@ -15,14 +16,15 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
 }: DayPagePropsInterface) => {
   const [activeScrollbar, setActiveScrollbar] = useState<boolean>(false);
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
-  const { dayNumber } = useParams();
-  const contentDayNumber: number = Number(dayNumber);
+  const [ searchParams ] = useSearchParams();
+  const dayNumber = Number(searchParams.get('dayNumber'))
+  const weekNumber = Number(searchParams.get('weekNumber'))
   const { videoData, getAllVideos } = useVideos();
   const { noteData, getAllNotes } = useNotes();
   const { questions, getAllQuestions } = useQuestions();
-  const { questions:questionList } = questions||[];
-  const { videoList } = videoData;
-  const { noteList } = noteData;
+  const { questions:questionList, isQuestionLoading } = questions||[];
+  const { videoList, isVideosLoading } = videoData;
+  const { noteList, isNotesLoading } = noteData;
   const { questionAttempt, createQuestionAttemptByUser } = useQuestionAttempt();
   const { isLoading } = questionAttempt;
   const { t } = useTranslation();
@@ -48,29 +50,29 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
   };
   const handleNavigation = (dayContent: string) => {
     if (dayContent === "questions") {
-      navigate(`/question?day=${contentDayNumber}`);
+      navigate(`/question?day=${dayNumber}`);
     } else {
       navigate(`${pathname}/${dayContent}`);
     }
   };
 
-  const getAllDataRequest = async (dayNumber: number) => {
-    await getAllVideos({ dayNumber });
-    await getAllNotes({ dayNumber });
-    await getAllQuestions({}); 
+  const getAllDataRequest = async (dayNumber: number, weekNumber: number) => {
+    await getAllVideos({ dayNumber, weekNumber });
+    await getAllNotes({ dayNumber, weekNumber });
+    await getAllQuestions({day: dayNumber, week: weekNumber}); 
   };
   useEffect(() => {
-    getAllDataRequest(contentDayNumber);
+    getAllDataRequest(dayNumber, weekNumber);
   }, [dayNumber]);
   return (
     <div className={`main-daypage-container ${className}`}>
-      <div className="main-title-div">{`Day ${contentDayNumber}`}</div>
+      <div className="main-title-div">{`Day ${dayNumber}`}</div>
       <div className="content-navigation">
         {navigationLinksData.map((nav) => (
           <span
             className="navigator"
             onClick={() => {
-              handleNavigation(nav);
+              // handleNavigation(nav); disabled navigation TO-DO @sujal
             }}
           >
             {t(nav)}
@@ -87,7 +89,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
             <div
               className="content-header"
               onClick={() => {
-                handleNavigation("videos");
+                // handleNavigation("videos"); disabled navigation TO-DO @sujal
               }}
             >
               {t("videos")}
@@ -98,7 +100,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
               }`}
               onScroll={() => setActiveScrollbar(true)}
             >
-              {videoList?.map((video, index) => {
+              {isVideosLoading ? <Spinner/> : videoList?.length ? videoList.map((video, index) => {
                 const {
                   dayNumber,
                   description,
@@ -115,7 +117,6 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
                       <iframe
                         src={links?.youtube}
                         title={title}
-                        frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
                         className="video-iframe"
@@ -135,7 +136,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
                     </div>
                   </div>
                 );
-              })}
+              }) : <div>{t("no_video_found")}</div>}
             </div>
           </div>
 
@@ -143,13 +144,13 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
             <div
               className="content-header"
               onClick={() => {
-                handleNavigation("notes");
+                // handleNavigation("notes"); disabled navigation TO-DO @sujal
               }}
             >
               {t("notes")}
             </div>
             <div className="note-content-wrapper">
-              {noteList?.map((note, index) => {
+              {isNotesLoading ? <Spinner/> : noteList?.length ? noteList.map((note, index) => {
                 const {
                   dayNumber,
                   description,
@@ -165,10 +166,6 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
                       <iframe
                         src={link}
                         title={title}
-                        scrolling="no"
-                        frameBorder="0"
-                        // webkitAllowFullScreen
-                        // mozallowfullscreen
                         allowFullScreen
                         className="note-iframe"
                         key={index}
@@ -188,7 +185,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
                     </div>
                   </div>
                 );
-              })}
+              }) : <div>{t("no_note_found")}</div> }
             </div>
           </div>
         </div>
@@ -219,7 +216,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
             }`}
             onScroll={() => setActiveScrollbar(true)}
           >
-            { 
+            { isQuestionLoading ? <Spinner/> : questionList?.length ?
               questionList?.map((questionData,index) => {
                 return (
                   <div className="question-content-wrapper">
@@ -243,6 +240,7 @@ const DayPage: React.FC<DayPagePropsInterface> = ({
                   </div>
                 );
               })
+              : <div>{t("no_question_found")}</div>
             }
           </div>
         </div>

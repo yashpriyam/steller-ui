@@ -21,7 +21,7 @@ const protectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/profile": <UserPage />,
   "/schedule": <SchedulePage />,
   "/dashboard": <Dashboard />,
-  "/day/:dayNumber": <DayPage />,
+  "/day": <DayPage />,
   "/day/:dayNumber/:dayContent": <DayContentPage />,
   "/question": <QuestionPage />,
   "/videos": <VideosPage />,
