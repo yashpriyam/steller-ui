@@ -148,9 +148,9 @@ export const CreateQuestionComponent: React.FC<
       const message = response.response.message;
       const status = response.response.status;
       if (status === 200) {
-        Toast.success(message)
+        window.alert(message)
       } else {
-        Toast.error(message);        
+       window.alert(message);        
       }
     } catch (err) {
       console.log(err);
