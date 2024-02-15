@@ -7,9 +7,13 @@ import { createQuestionActions } from "../../redux/slices/createQuestion/createQ
 import { readFileAsDataURL } from "../../utils/readFileAsDataURL";
 import { UploadImage } from "../uploadImage/uploadImage";
 import { createImageePublicUrl } from "../../redux/actions/imageAction";
+import { useState } from "react";
+import { Button } from "../button/button";
 export const Options: React.FC<OptionsProps> = ({prevPath}) => {
   const { createQuestion } = useSelector((state): any => state);  
   const { questionType } = createQuestion as CreateQuestionInterface;
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string>("")
+  const [isImageUploading, setIsImageUploading] = useState<boolean>(false)
   const  dispatch = useDispatch();
   const { updateState } = createQuestionActions;
   const handleOnSetTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,23 +21,35 @@ export const Options: React.FC<OptionsProps> = ({prevPath}) => {
     const path = `${prevPath}.text`;
     dispatch(updateState({path,value}))
   }
-   const handleOnImageClick = async (e: React.ChangeEvent<HTMLInputElement>) => {
+   const handleOnSelectImageClick = async (
+     e: React.ChangeEvent<HTMLInputElement>
+   ) => {
      const files = e.target.files;
      if (files && Boolean(files.length)) {
        try {
          const image = await readFileAsDataURL(files[0]);
          if (typeof image === "string") {
-           const { publicUrl, response } = await createImageePublicUrl(image);
-           if (response.status === 200 && publicUrl) {
-             const path = `${prevPath}.imageUrl`;
-             dispatch(updateState({ path, value:publicUrl }));
-           }
+           setUploadedImageUrl(image);
          }
        } catch (err) {
          console.error(err);
        }
      }
-   };
+  };
+  const handleOnUploadImage = async() => {
+    try {
+      setIsImageUploading(true);
+      const { publicUrl, response } = await createImageePublicUrl(uploadedImageUrl);
+      setIsImageUploading(false);
+      if (response.status === 200 && publicUrl) {
+        alert("image uploaded successfully");
+         const path = `${prevPath}.imageUrl`;
+         dispatch(updateState({ path, value: publicUrl }));
+       }
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const handleOnSetIframe = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const path = `${prevPath}.iframe`;
@@ -48,14 +64,18 @@ export const Options: React.FC<OptionsProps> = ({prevPath}) => {
         backgroundColor="black"
         className="question-input-container"
       />
-      {/* <InputComponent
-        type="text"
-        onChange={handleOnSetImageUrl}
-        placeholder="image URL"
-        backgroundColor="black"
-        className="question-input-container"
-      /> */}
-      <UploadImage onChange={handleOnImageClick} text="upload image" className="upload-image-wrapper"/>
+      <div className="upload-image-conatiner-wrapper">
+        <UploadImage
+          onChange={handleOnSelectImageClick}
+          text="Select image"
+          className="upload-image-wrapper"
+        />
+        {uploadedImageUrl && <div className="uploaded-mage-conatiner">
+          <img className="image-container" src={uploadedImageUrl} alt="uploading" />
+          <Button className="upload-image-button" onClick={handleOnUploadImage} text={isImageUploading?"uploading":"upload image"}/>
+        </div>}
+      </div>
+
       <InputComponent
         type="text"
         onChange={handleOnSetIframe}
