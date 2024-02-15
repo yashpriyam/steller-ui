@@ -97,7 +97,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             const weekTitle = title;
             return (
               isActive && (
-                <Accordion title={title} disabled={isDisabledForUnpaidUsers} className={`${isWeekIncluded && !isAdmin && "pro-membership-weeks-wrapper"}`}>
+                <Accordion defaultOpen={true} title={title} disabled={isDisabledForUnpaidUsers} className={`${isWeekIncluded && !isAdmin && "pro-membership-weeks-wrapper"}`}>
                   <div key={index} className="accordion-content-wrapper">
                     {description && (
                       <div className="week-description">{description}</div>
@@ -121,9 +121,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             className="day-container"
                             onClick={(e: React.MouseEvent<HTMLElement>) => {
                               handleNavigation(
-                                e
-                                // `/day/${dayNumber}?weekNumber=${weekNumber}`
-                                // commented navigation to dayPage until data is inserted to it.
+                                e,
+                                `/day?dayNumber=${dayNumber}&weekNumber=${weekNumber}`
                               );
                             }}
                           >

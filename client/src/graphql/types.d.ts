@@ -611,6 +611,7 @@ declare global {
     titlePosition?: "left" | "center" | "right";
     disabled?: boolean;
     subTitle?: string;
+    defaultOpen?: boolean;
   }
   interface SchedulePagePropsInterface {
     className?: string;
