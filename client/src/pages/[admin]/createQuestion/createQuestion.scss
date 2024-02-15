@@ -1,0 +1,24 @@
+.create-question-wrapper-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  gap: 10px;
+  ::-webkit-scrollbar {
+    display: none;
+}
+  overflow: auto;
+  .add-question-button-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    .add-question-button {
+      padding: 8px 12px;
+      border: none;
+    }
+  }
+}
+.question-modal-wrapper {
+  background-color: rgb(117, 114, 114);
+  padding: 10px 10px;
+}

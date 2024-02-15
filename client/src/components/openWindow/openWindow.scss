@@ -1,0 +1,19 @@
+.open-window-container{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 10px;
+    overflow: auto;
+  .question-input-container{
+    width: 100%;
+  }
+  .accordian-container {
+    .accordion-header {
+      padding-bottom: 10px 0px;
+    }
+    .accordion-content {
+        padding-bottom: 50px;
+    }
+  }
+}

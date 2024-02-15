@@ -105,6 +105,7 @@ const typeDefs = gql`
     rejectUserPaymentByAdmin(
       input: UpdateUserPaymentInput
     ): UserPaymentsDataOutputType
+    createImagePublicUrl(url: String!): CreateImagePublicUrlOutputType
   }
 
   input SaveUserCodeInput {
@@ -1188,7 +1189,7 @@ const typeDefs = gql`
     userPaymentData: UserPaymentData
     response: CustomResponseType
   }
-  
+
   input UserPaymentInput {
     installmentId: ID!
     isApproved: Boolean
@@ -1249,6 +1250,10 @@ const typeDefs = gql`
     updatedAt: DateTime
   }
 
+  type CreateImagePublicUrlOutputType {
+    publicUrl: String
+    response: CustomResponseType!
+  }
 
   scalar DateTime
   scalar JSON

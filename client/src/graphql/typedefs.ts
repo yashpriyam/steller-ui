@@ -23,6 +23,7 @@ const typeDefs = gql`
     ): QuestionAttemptOutputType
     saveUserCode(input: SaveUserCodeInput): UserCodeType
     updateUser(input: PartialUserSchemaType!): UserDataOutputType
+    createQuestion(questionData: CreateQuestionInputType!): QuestionOutputType
   }
 
   type GetUserCodeOutputDataType {
@@ -34,7 +35,7 @@ const typeDefs = gql`
     updatedAt: String
   }
 
-  input GetUserCodeInputType{
+  input GetUserCodeInputType {
     dayNumber: Int
     weekNumber: Int
   }
@@ -95,7 +96,7 @@ const typeDefs = gql`
   type AttemptedQuestionDataType {
     _id: String
     isAnswered: Boolean
-    isCorrect:Boolean
+    isCorrect: Boolean
     title: [QuestionOptionOutputType]
     questionType: QuestionType
     options: [AttemptQuestionOptionOutputType]
@@ -267,7 +268,7 @@ const typeDefs = gql`
     course: String
     branch: String
     batchCode: String
-    feePlan: String 
+    feePlan: String
   }
 
   type UserSchemaType {
@@ -286,7 +287,7 @@ const typeDefs = gql`
     course: String
     branch: String
     batchCode: String
-    feePlan: String 
+    feePlan: String
   }
 
   type UserDataOutputType {
@@ -294,6 +295,108 @@ const typeDefs = gql`
     response: CustomResponseType
   }
 
+  input CreateQuestionInputType {
+    title: [QuestionOptionInputType!]!
+    options: [QuestionOptionInputType!]!
+    questionType: QuestionType!
+    answer: [QuestionOptionInputType!]!
+    marks: Int!
+    meta: QuestionMeta!
+  }
+  input QuestionOptionInputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+    codeBlock: CodeBlockInputType
+  }
+  input CodeBlockInputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationType
+  }
+  input ConfigurationType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowType]
+  }
+  input CodeEditorWindowType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+
+  enum CodeEditorWindowTypeEnum {
+    HTML
+    CSS
+    JS
+  }
+
+  enum QuestionType {
+    multi
+    single
+    fillup
+    codeblock
+  }
+  input QuestionMeta {
+    topic: String!
+    batchCode: String!
+    week: Int!
+    day: Int!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type QuestionOutputType {
+    questionData: QuestionDataType
+    response: CustomResponseType
+  }
+  type QuestionDataType {
+    id: String
+    title: [QuestionOptionOutputType!]!
+    options: [QuestionOptionOutputType!]!
+    questionType: QuestionType!
+    answer: [QuestionOptionOutputType!]!
+    marks: Int!
+    meta: QuestionMetaOutput!
+  }
+  type QuestionMetaOutput {
+    topic: String!
+    day: Int!
+    week: Int!
+    batchCode: String!
+    isActive: Boolean!
+    isArchived: Boolean!
+    type: QuestionMetaType!
+    expiresInMins: Int!
+    isOpenable: Boolean!
+  }
+  type QuestionOptionOutputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+    codeBlock: CodeBlockOutputType
+  }
+  type CodeBlockOutputType {
+    enableCodeBlock: Boolean
+    configuration: ConfigurationOutputType
+  }
+  type ConfigurationOutputType {
+    showOutputWindow: Boolean
+    showSplitWindow: Boolean
+    openWindows: [CodeEditorWindowOutputType]
+  }
+  type CodeEditorWindowOutputType {
+    title: String
+    isEditable: Boolean
+    enableUserSelection: Boolean
+    predefinedCode: String
+  }
+  enum QuestionMetaType {
+    timed
+    recorded
+  }
 
   scalar DateTime
   scalar JSON

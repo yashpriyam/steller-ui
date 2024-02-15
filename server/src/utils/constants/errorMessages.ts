@@ -49,6 +49,7 @@ export const errorMessages = Object.freeze({
     FAILED_TO_DELETE_IMAGE: "Failed to delete image with public ID",
     FAILED_TO_UPLOAD_IMAGE: "Failed to upload image",
     NO_PUBLIC_ID_PROVIDED: "No public ID found",
+    PUBLIC_URL_FAILED: "failed generate public url",
   },
   PAID_USER_MODEL: {
     PAID_USER_CREATION_FAILED: "unable to insert paid user data",
@@ -91,7 +92,6 @@ export const errorMessages = Object.freeze({
     USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
     USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
     USER_PAYMENT_UPDATE_FAILED: "Failed to update user payments"
-
   },
   CITIES: {
     DATA_NOT_FOUND: "No data found for cities",

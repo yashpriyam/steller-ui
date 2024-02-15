@@ -1044,5 +1044,9 @@ declare global {
     createdAt: Date;
     updatedAt: Date;
   }
+  type CreateImagePublicUrlOutputType = {
+    publicUrl?: string;
+    response: CustomResponseType;
+  };
 
 }

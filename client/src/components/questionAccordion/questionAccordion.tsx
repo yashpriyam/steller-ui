@@ -7,7 +7,8 @@ import { InputComponent } from "../../components/input/inputComponent";
 import CodeBlock from "../../components/codeBlock/codeBlock";
 import { CheckedIcon } from "../../icons/CheckedIcon";
 import { useUserCode } from "../../redux/actions/userCodeActions";
-
+import { useUser } from "../../redux/actions/userAction";
+import { EditzIcon, DeleteIcon } from "../../icons/index";
 const QuestionAccordion = ({
   questionData,
   onSubmit,
@@ -46,6 +47,14 @@ const QuestionAccordion = ({
     setSelectedImage(null);
     setIsImagePreviewOpen(false);
   };
+  const { user } = useUser();
+  const { isAdmin } = user;
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+  };
+  const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+  }
   return (
     <Accordion
       className={`question-title ${className}`}
@@ -61,12 +70,23 @@ const QuestionAccordion = ({
           </div>
           <div
             className={`checked-icon ${
-              isAnswered || Boolean(codeBlockSubmittedDate)
+              isAdmin || isAnswered || Boolean(codeBlockSubmittedDate)
                 ? "checked-true"
                 : "checked-false"
             }`}
           >
-            <CheckedIcon />
+            {isAdmin ? (
+              <div className="edit-delete-wrapper">
+                <span onClick={handleEdit}>
+                  <EditzIcon width="25px" height="25px" />
+                </span>
+                <span onClick={handleDelete}>
+                  <DeleteIcon height="25px" width="25px" />
+                </span>
+              </div>
+            ) : (
+              <CheckedIcon />
+            )}
           </div>
         </div>
       }

@@ -72,11 +72,19 @@
   }
   .checked-icon {
     align-items: center;
+    .edit-delete-wrapper {
+      display: flex;
+      gap: 10px;
+      .button-component {
+        border: none;
+        padding: 2px 4px;
+      }
+    }
   }
-  .checked-false{
+  .checked-false {
     display: none;
   }
-  .checked-true{
+  .checked-true {
     display: flex;
   }
 }
