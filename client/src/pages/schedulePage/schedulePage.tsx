@@ -67,7 +67,8 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
    getScheduleData(filter)
  },[filter])
   return (
-    <div className={`scheduling-page ${className}`} style={style}>
+    <div className={`schedule-page-container ${className}`} style={style}>
+      <div className="schedule-page-sub-container">
       <div className="schedule-page-meet-container">
         <div onClick={onJoinMeetClick} className="schedule-page-meet-btn">
           <MeetIcon isDarkMode={true} />
@@ -248,6 +249,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
             );
           })
         )}
+      </div>
       </div>
     </div>
   );
