@@ -310,15 +310,15 @@ declare global {
   };
 
   type QuestionMetaDataType = {
-    topic?: string;
-    day?: number;
-    week?: number;
-    batchCode?: string;
-    isActive?: boolean;
-    isArchived ?: boolean;
-    type ?: "";
-    expiresInMins?: number;
-    isOpenable?: boolean;
+    topic: string;
+    day: number;
+    week: number;
+    batchCode: string;
+    isActive: boolean;
+    isArchived : boolean;
+    type :QuestionMetaType;
+    expiresInMins: number;
+    isOpenable: boolean;
   };
 
   enum QuestionMetaType {

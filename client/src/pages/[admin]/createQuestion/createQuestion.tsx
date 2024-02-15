@@ -10,7 +10,7 @@ import { useQuestionAttempt } from "../../../redux/actions/questionAttemptAction
 
 export const CreateQuestion: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const handleOnAddQuestionClick = () => {
+  const handleOnAddQuestionClick = () => {    
     setIsModalOpen(true);
   };
   const { t } = useTranslation();
@@ -23,18 +23,18 @@ export const CreateQuestion: React.FC = () => {
     question: QuestionDataType,
     selectedValues: QuestionSelectedValueType[]
   ) => {
-    const filteredData = selectedValues.map((selectedValue) => ({
-      imageUrl: selectedValue.imageUrl,
-      text: selectedValue.text,
-    }));
+    // const filteredData = selectedValues.map((selectedValue) => ({
+    //   imageUrl: selectedValue.imageUrl,
+    //   text: selectedValue.text,
+    // }));
     try {
     } catch (err) {
       console.log(err);
     }
   };
-  useEffect(() => {
-    getAllQuestions({});
-  });
+  // useEffect(() => {
+  //   getAllQuestions({});
+  // },[]);
   return (
     <div className="create-question-wrapper-container">
       <h1 className="create-question-header">Create Question</h1>
