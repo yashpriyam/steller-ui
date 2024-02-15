@@ -59,7 +59,7 @@ const VideosPage: React.FC = () => {
     <div className="video-page-container">
     <div className="video-page-sub-container">
       <Text headerType="h1">{t("videos")}</Text>
-        {!isVideosLoading ? <Spinner /> :
+        {isVideosLoading ? <Spinner /> :
       <><FilterTags setFilterTag={handleFilter} filterTagMap={filterTagMap} />
       <div className="videos-wrapper">
         {videoList?.map(
