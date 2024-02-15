@@ -5,7 +5,8 @@ const initialState = {
   userData: null,
   isLoggedIn: !!getCookie(process.env.REACT_APP_JWT_SECRET_KEY || ""),
   response: null,
-  isAdmin: false
+  isAdmin: false,
+  isPaidUser:null
 };
 
 export const userSlice = createSlice({
@@ -19,14 +20,15 @@ export const userSlice = createSlice({
       state.isLoggedIn = action?.payload;
     },
     setUser: (state, action) => {
-      const { userData, response, isAdmin } = action.payload;
+      const { userData, response, isAdmin ,isPaidUser } = action.payload;
       state.userData = userData;
       state.response = response;
       state.isAdmin = isAdmin
+      state.isPaidUser = isPaidUser;
     },
   },
 });
 
 export const { actions } = userSlice;
-export const selectUser = (state: { user: { userData: UserSchemaType, isLoggedIn: boolean, isAdmin: boolean} }) => state.user;
+export const selectUser = (state: { user: { userData: UserSchemaType, isLoggedIn: boolean, isAdmin: boolean, isPaidUser:IsPaidUserType} }) => state.user;
 export default userSlice.reducer;

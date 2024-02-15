@@ -11,12 +11,16 @@ const typeDefs = gql`
       pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
-    getScheduleData(weekDataFilter: WeekDataInputType): WeekDataOutputType
+    getScheduleData( accessWeeks: [Int]
+      weekDataFilter: WeekDataInputType sortData: SortDataInputType
+      ): WeekDataOutputType
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
     getMeeting(meetingFilter: GetMeetingFilterInputType!): MeetingDataOutputType
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
+    getBatchCode: AllBatchDataOutputType!
+    getLeaderBoardData: [LeaderBoardData]
   }
 
   type Mutation {
@@ -92,9 +96,15 @@ const typeDefs = gql`
     updateUser(input: PartialUserSchemaType): UserDataOutputType
     updateUserPayments(input: UserPaymentInput!): UserPaymentDataOutputType
     saveUserCode(input: SaveUserCodeInput): GetUserCodeOutput
-    getAllUserPayments(input: GetAllUserPaymentsInput): UserPaymentsDataOutputType
-    approveUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
-    rejectUserPaymentByAdmin(input: UpdateUserPaymentInput): UserPaymentsDataOutputType
+    getAllUserPayments(
+      input: GetAllUserPaymentsInput
+    ): UserPaymentsDataOutputType
+    approveUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
+    rejectUserPaymentByAdmin(
+      input: UpdateUserPaymentInput
+    ): UserPaymentsDataOutputType
     createImagePublicUrl(url: String!): CreateImagePublicUrlOutputType
   }
 
@@ -189,6 +199,7 @@ const typeDefs = gql`
     updatedAt: String
     batchCode: String
     weekNumber: String
+    thumbnailImage: String
   }
 
   type Links {
@@ -207,6 +218,7 @@ const typeDefs = gql`
     duration: String
     weekNumber: Int!
     batchCode: String!
+    thumbnailImage: String
   }
 
   input LinksInput {
@@ -224,7 +236,7 @@ const typeDefs = gql`
     isActive: Boolean
     duration: String
     batchCode: String
-    weekNumber:Int
+    weekNumber: Int
   }
 
   input OptionalLinksInput {
@@ -703,6 +715,7 @@ const typeDefs = gql`
     description: String
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
+    date: DateTime
   }
   type WeekDataType {
     batchCode: String
@@ -712,6 +725,7 @@ const typeDefs = gql`
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
     days: [DaySchemaType]
+    date: DateTime
   }
   type WeekDataOutputType {
     weekData: [WeekDataType]
@@ -724,6 +738,7 @@ const typeDefs = gql`
     isActive: Boolean
     isDisabledForUnpaidUsers: Boolean
     weekNumber: Int!
+    date: DateTime
   }
   type UpsertWeekDataOutputType {
     weekData: WeekDataType
@@ -1097,6 +1112,15 @@ const typeDefs = gql`
     userData: UserSchemaType
     response: CustomResponseType
     isAdmin: Boolean
+    isPaidUser: IsPaidUsertype
+  }
+  type UserTemporaryAccessType {
+    allowTemporaryAccess: Boolean,
+    allowedAccessDate: DateTime
+  }
+  type IsPaidUsertype  {
+    isPaidUser: Boolean
+    accessWeeks:[Int]
   }
   input PartialUserSchemaType {
     email: String
@@ -1135,6 +1159,7 @@ const typeDefs = gql`
     batchCode: String
     feePlan: String
     profileImage: ProfileImageType
+    temporaryAccess: UserTemporaryAccessType
   }
 
   input UpdateMeetingInputFilter {
@@ -1194,6 +1219,37 @@ const typeDefs = gql`
     image: String
     rejectReason: String
   }
+  type AllBatchDataOutputType {
+    batchData: [Batch]
+    response: CustomResponseType!
+  }
+
+  enum SortDirection {
+    asc 
+    desc
+  }
+  input SortDataInputType {
+    sortOrder: SortDirection
+    sortBy: String
+  }
+ 
+
+  type LeaderBoardData {
+    _id: String
+    user: UserSchemaType
+    submissions: [Submission]
+    rank: Int
+    totalSubmissions: Int 
+  }
+  type Submission {
+    _id: String
+    code: CodeType
+    dayNumber: Int
+    questionId: String
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+
   type CreateImagePublicUrlOutputType {
     publicUrl: String
     response: CustomResponseType!

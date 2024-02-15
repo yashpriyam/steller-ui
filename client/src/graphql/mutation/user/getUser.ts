@@ -24,13 +24,20 @@ query {
           publicId
           secureUrl
         }
+        temporaryAccess {
+          allowTemporaryAccess
+          allowedAccessDate
+        }
       }
       response {
         message
         status
       }
       isAdmin
+      isPaidUser {
+        isPaidUser
+        accessWeeks
+      }
     }
   }
-  
 `;

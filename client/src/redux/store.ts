@@ -12,6 +12,7 @@ import feePlanSlice from "./slices/feePlans/feePlanSlice";
 import meetingReducer from "./slices/meeting/meetingSlice";
 import userCodeSlice from "./slices/userCode/userCodeSlice";
 import allUsersPaymentsSlice from "./slices/allusersPayments/allUsersPaymentsSlice";
+import batchSlice from "./slices/batch/batchSlice";
 import createQuestionSlice from "./slices/createQuestion/createQuestionSlice"
 export default configureStore({
   reducer: {
@@ -28,6 +29,7 @@ export default configureStore({
     meeting: meetingReducer,
     userCode: userCodeSlice,
     allUsersPayments: allUsersPaymentsSlice,
+    batch: batchSlice,
     createQuestion:createQuestionSlice
   },
 });

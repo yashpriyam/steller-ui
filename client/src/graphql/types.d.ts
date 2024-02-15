@@ -286,6 +286,7 @@ declare global {
     totalInCorrectQuestions?: number;
     totalUnAttemptedQuestions?: number;
     response?: CustomResponseType;
+    isQuestionLoading?: boolean;
   }
 
   type QuestionDataType = {
@@ -409,11 +410,13 @@ declare global {
     };
     isActive?: boolean;
     duration?: string;
-  };
+    thumbnailImage?: string;
+  }
 
   type VideoDataStateType = {
     videoList: VideoDataType[];
-  };
+    isVideosLoading: boolean;
+  }
 
   type NotesFilterDataType = {
     title?: string;
@@ -438,7 +441,8 @@ declare global {
 
   type NotesDataStateType = {
     noteList: NotesDataType[];
-  };
+    isNotesLoading: boolean;
+  }
 
   interface DayPagePropsInterface {
     className?: string;
@@ -592,7 +596,8 @@ declare global {
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: ObjectId[];
-  };
+    date?: Date;
+  }
   type ScheduleDataStateType = {
     weekList: WeekDataType[];
     isScheduleDataLoading: boolean;
@@ -663,8 +668,8 @@ declare global {
     id?: string;
     amount?: string;
     sequence?: string;
-    dueDate?: Date;
-    accessWeeks?: WeekDataType[]; // we'll store week data here
+    dueDate?: Date; 
+    accessWeeks?: number[]; // we'll store week data here
     miscellaneous?: JSON;
     isApproved?: boolean;
     isRejected?: boolean;
@@ -973,6 +978,8 @@ declare global {
     icon: string;
     color: string;
     questionId: string;
+    weekNumber: number;
+    dayNumber: number;
   }
 
   interface LanguageConfig {
@@ -1050,6 +1057,19 @@ declare global {
     filterTagMap?: Record<string, boolean>;
     setFilterTag: (value: string) => void;
     onClearAll?: () => void;
+  } 
+  type SortDataType = {
+    sortOrder?: string;
+    sortBy?: string;
+  }
+  type GetScheduleDataType = {
+    weekFilterData ?: WeekDataType;
+    sortData ?: SortDataType; 
+    accessWeeks ?: number[];
+  }
+  type IsPaidUserType = {
+    isPaidUser: boolean;
+    accessWeeks: number[];
   }
 
   interface NoDataFoundProps {

@@ -1,6 +1,6 @@
 @import "../variables.scss";
 
-.main-container {
+.card-main-container {
   width: 450px;
   color: $primaryBg;
   display: flex;
@@ -28,6 +28,13 @@
   }
   &:hover > .image-div > .img {
     transform: scale(120%);
+  }
+
+  &.videos-card{
+    width: 420px;
+    .card-image-container{
+      height: 220px;
+    }
   }
 
   .card-image-container {
@@ -65,7 +72,7 @@
       .card-tag {
         border: 1px solid $primaryBg;
         border-radius: 25px;
-        background-color: transparent;
+        background-color: $lightBlack;
         backdrop-filter: blur(5px);
         font-size: $smallFontSize;
         text-align: center;
@@ -117,34 +124,55 @@
     flex-direction: column;
     width: 100%;
     .card-title{
-      font-size: $subHeaderFontSize;
+      font-size: $titleFontSize;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      height: 60px;
+      -webkit-box-orient: vertical;
+      margin-bottom: 5px;
+    }
+    .video-description-data{
+      font-size: $mediumFontSize;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      height: 70px;
+      -webkit-box-orient: vertical;
+      margin-bottom: 5px;
     }
     .videodata-wrapper{
       display: flex;
+      justify-content: space-between;
       flex-wrap: wrap;
       font-size: $mediumFontSize;
       gap:5px;
+      font-size: $smallFontSize;
+      font-weight: 700;
+      margin-top: 5px;
     }
   }
 }
 
 @media (max-width: $screenSm) {
-  .main-container {
+  .card-main-container {
     width: 340px;
     height: 225px;
-    .card-text-wrapper {  
+    &.videos-card{
+      height: 394px;
+      width: auto;
+    }
+    .card-text-wrapper {
       .card-title{
         font-size: $largerFontSize;
-      }
-      .videodata-wrapper{
-        font-size: $smallFontSize;
+        height: 50px;
       }
     }
   }
 }
 
 @media (max-width: 350px) and (max-width: 0px) {
-  .main-container {
+  .card-main-container {
     width: 225px;
   }
 }

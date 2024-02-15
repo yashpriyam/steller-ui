@@ -24,6 +24,9 @@ const weekSchema = new Schema<WeekDataType>({
         default: true,
     },
     days: [{ type: ObjectId, ref: dayModel }],
+    date: {
+        type : Date,
+    },
 });
 
 export const weekModel = model<WeekDataType>('week', weekSchema);

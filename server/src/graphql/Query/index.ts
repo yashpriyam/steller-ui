@@ -8,3 +8,5 @@ export { getMeetingList, getMeeting } from "./meeting";
 export { getAllCities } from "./cities/index";
 export { getUser } from "./user/index";
 export { getUserCode } from "./code/getUserCode";
+export { getBatchCode } from "./batch/getBatchCode";
+export { getLeaderBoardData } from "./leaderboard"

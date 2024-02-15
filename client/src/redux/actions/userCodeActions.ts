@@ -60,9 +60,5 @@ export const useUserCode = () => {
     }
   };
 
-  const setCodeSubmittedLoading = (payload: boolean) => {
-    dispatch(userCodeAction.setCodeSubmittedLoading(payload));
-  };
-
-  return { userCodeData, getUserCode, saveUserCode, setCodeSubmittedLoading };
+  return { userCodeData, getUserCode, saveUserCode };
 };

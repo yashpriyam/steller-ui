@@ -1,4 +1,5 @@
 import { UserProfileSchemaType } from '@models';
+import { sortDirection } from '@utils';
 import { Request, Response } from "express";
 import { ObjectId } from "mongoose";
 
@@ -180,6 +181,7 @@ declare global {
     duration?: string;
     weekNumber: number;
     batchCode: string;
+    thumbnailImage: string;
   };
 
   type FilteredLinksType = {
@@ -566,14 +568,24 @@ declare global {
   type WeekDataType = {
     batchCode?: string;
     weekNumber?: number;
-    batchCode?: string;
+    date?: Date;
     description?: string;
     title?: string;
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: string[];
   };
-
+  type GetWeekDataType = {
+    [key: string]: string
+    batchCode?: string;
+    weekNumber?: number;
+    date?: Date;
+    description?: string;
+    title?: string;
+    isActive?: boolean;
+    isDisabledForUnpaidUsers?: boolean;
+    days?: string[];
+  }
   interface paidUserSchemaType {
     username: string;
     email: string;
@@ -758,6 +770,11 @@ declare global {
     branch?: string;
     location?: string;
     feePlan?: string;
+    temporaryAccess?: UserTemporaryAccessType;
+  }
+  interface UserTemporaryAccessType {
+    allowTemporaryAccess: boolean;
+    allowedAccessDate: Date;
   }
   interface UserProfileDataType {
     personalDetails?: PersonalDetailType;
@@ -803,6 +820,7 @@ declare global {
   };
 
   type Installment = {
+    _id?: string
     id? :string;
     amount?: string;
     sequence?: string;
@@ -890,9 +908,13 @@ declare global {
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
-    isAdmin?: boolean
+    isAdmin?: boolean;
+    isPaidUser?: IsPaidUsertype;
   }
-
+  type IsPaidUsertype = {
+    isPaidUser: boolean;
+    accessWeeks: number[];
+  }
   type GetMeetingArgsType = {
     meetingNumber?: string;
     meetingCode?: string;
@@ -911,7 +933,7 @@ declare global {
   }
   interface VariableSchemaType extends Document {
     key: string;
-    value: string;
+    value: string[];
   }
   
   type Code = {
@@ -996,6 +1018,31 @@ declare global {
     receiptImageUrl?: string;
     userEmail: string;
     rejectReason?: string
+  }
+  type AllBatchDataOutputType = {
+    batchData?: BatchSchemaType[];
+    response: CustomResponseType;
+  };
+  type SortDirectionType = keyof typeof sortDirection;
+  type SortDataType = {
+    sortOrder?: SortDirectionType;
+    sortBy?: string;
+  }
+
+  interface LeaderBoardData {
+    _id: mongoose.Types.ObjectId;
+    user: UserSchemaType;
+    submissions: Submission[];
+    rank?: number;
+    totalSubmissions?: number 
+  }
+  interface Submission {
+    _id: mongoose.Types.ObjectId;
+    code: Code; 
+    dayNumber: number;
+    questionId: mongoose.Types.ObjectId;
+    createdAt: Date;
+    updatedAt: Date;
   }
   type CreateImagePublicUrlOutputType = {
     publicUrl?: string;

@@ -28,25 +28,29 @@ const InstallmentItem: React.FC<InstallmentItemProps> = ({
           Due Date: {installment.dueDate?.toString()}
         </span>
       </p>
-      <div className="file-input-wrapper">
-        <input
-          type="file"
-          accept="image/*"
-          className="file-input"
-          onChange={(e) => setPaymentReceipt(e.target.files?.[0] ?? null)}
+      <div className="file-input-button-wrapper">
+        <div className="file-input-wrapper">
+          <input
+            type="file"
+            accept="image/*"
+            className="file-input"
+            onChange={(e) => setPaymentReceipt(e.target.files?.[0] ?? null)}
+          />
+          <label className="file-input-label">
+            {paymentReceipt ? paymentReceipt.name : "Select Receipt"}
+          </label>
+        </div>
+        <Button
+          className={`pay-now-button ${
+            !paymentReceipt ? "disabled" : "enabled"
+          }`}
+          text={t("pay_now")}
+          isDisabled={!paymentReceipt}
+          onClick={handleOnClick}
+          isLoading={isLoading}
+          key={installment._id}
         />
-        <label className="file-input-label">
-          {paymentReceipt ? paymentReceipt.name : "Select Receipt"}
-        </label>
       </div>
-      <Button
-        className={`pay-now-button ${!paymentReceipt ? "disabled" : "enabled"}`}
-        text={t("pay_now")}
-        isDisabled={!paymentReceipt}
-        onClick={handleOnClick}
-        isLoading={isLoading}
-        key={installment._id}
-      />
     </li>
   );
 };

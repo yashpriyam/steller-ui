@@ -17,6 +17,8 @@ export const useVideos = () => {
         isActive,
         duration,
     }: VideoDataType) => {
+        try {
+        dispatch(actions.setIsLoading(true))
         const response = await apolloClient.query({
             query: GET_VIDEOS,
             variables: {
@@ -35,6 +37,11 @@ export const useVideos = () => {
         });
         dispatch(actions.setVideos(response.data.getAllVideos));
         return response;
+    } catch (error) {
+       console.error(error);
+    } finally {
+        dispatch(actions.setIsLoading(false));
+    }
     };
 
 

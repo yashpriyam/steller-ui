@@ -1,6 +1,6 @@
 import { User } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { getUnauthorizedResponse, isAdmin, isLoggedIn } from "@utils";
+import { getUnauthorizedResponse, isAdmin, isLoggedIn, checkPaidUser } from "@utils";
 
 export const getUser = async (
   parent: undefined,
@@ -38,10 +38,12 @@ export const getUser = async (
     // check user is admin or not
 
     const isAdminUser = await isAdmin(userData?.email ?? '')
-
+    const userSelectedFeePlan = userData?.feePlan;
+    const isPaidUser = await checkPaidUser(userId ?? '', userSelectedFeePlan ?? '');
     return {
       userData: userInfo,
       isAdmin: isAdminUser,
+      isPaidUser: isPaidUser,
       response: {
               message: localMessages.USER.USER_FETCH_SUCCESS,
               status: statusCodes.OK,

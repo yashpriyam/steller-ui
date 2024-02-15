@@ -29,12 +29,17 @@
       cursor: pointer;
     }
   }
-  .schedule-page-header {
-    font-size: 30px;
+  .schedule-page-header-filter-wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .schedule-page-header {
+      font-size: 30px;
+    }
   }
   .scheduling-page-accordion {
     width: 100%;
-    padding-top: 0;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -57,7 +62,6 @@
         color: $sencondaryTextColor;
         font-weight: 600;
       }
-
       .daylist-container {
         display: flex;
         align-items: center;
@@ -187,12 +191,30 @@
       }
     }
   }
-}
+  }
+  .pro-membership-weeks-wrapper{
+    border-color: $fadedPremiumColor;
+  }
+  .pro-membership-info-container{
+    color: $premiumColor;
+    border-bottom: 1px solid;
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 5px;
+    justify-content: center;
+    cursor: pointer;
+    transition: box-shadow 0.6s, border-radius 0.3s;
+    &:hover {
+      border-radius: 5px;
+      box-shadow: 0px 5px 10px -7px;
+    }
+    .pro-membership-info-text{
+      font-size: $textFontSize;
+    }
+  }
 @media (max-width: $screenLg) {
   .scheduling-page-accordion {
-    padding: 10px;
-    padding-top: 30px;
-
     .accordion-content-wrapper {
       max-width: 100%;
       padding: 0 20px;  
@@ -202,14 +224,7 @@
 
 @media (max-width: $screenMd) {
   .scheduling-page {
-    gap: 0;
-    flex-direction: column;
-
     .scheduling-page-accordion {
-      width: 100%;
-      padding: 10px;
-      transition: 0.5s;
-
       .accordion-content-wrapper {
         .daylist-container {
           padding: 0px 30px;

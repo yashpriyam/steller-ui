@@ -6,12 +6,13 @@ import { useQuestionAttempt } from '../../redux/actions/questionAttemptAction';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useUserCode } from '../../redux/actions/userCodeActions';
+import Spinner from '../../components/spinner/spinner';
 
 const QuestionPage = () => {
   const { questions, getAllQuestions } = useQuestions();
   const { createQuestionAttemptByUser } = useQuestionAttempt();
   const { getUserCode } = useUserCode();
-  const { questions: questionList } = questions;
+  const { questions: questionList, isQuestionLoading } = questions;
   const { t } = useTranslation();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -72,7 +73,7 @@ const QuestionPage = () => {
         )}
       </div>
       <div className="question-page-sub-container">
-        {questionList?.map((question, index) => {
+        {isQuestionLoading? <Spinner/> : questionList?.map((question, index) => {
           return (
             <QuestionAccordion
               key={index}

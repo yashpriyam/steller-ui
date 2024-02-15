@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Editor from './Editor';
 import { CodeDataContext } from './CodeDataProvider';
-import { useLocation } from 'react-router-dom';
 import { codeBlockWindow } from './codeBlockButtons';
 
 const CODE_STORAGE_KEY = 'userSavedCode';
@@ -14,11 +13,10 @@ const findCodeWindowByTitle = (
 const CodeEditorBlocks: React.FC<{
   openWindows: [CodeBlockOpenWindowsType];
   questionId: string;
-}> = ({ openWindows, questionId }) => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const dayNumber = queryParams.get('dayNumber');
-  const weekNumber = queryParams.get('weekNumber');
+  weekNumber: number;
+  dayNumber: number;
+  className?: string;
+}> = ({ openWindows, questionId, weekNumber, dayNumber,className }) => {
   const {
     html = '',
     css = '',
@@ -108,7 +106,7 @@ const renderTabButtonMap: Record<string, JSX.Element> = {
 };
 
   return (
-    <div className='code-editor-blocks-container'>
+    <div className={`code-editor-blocks-container ${className}`}>
       <div className='code-blocks-tabs'>
         {openWindows.map((tabMeta) => {
           const title = tabMeta.title;
@@ -118,6 +116,7 @@ const renderTabButtonMap: Record<string, JSX.Element> = {
       <Editor
         questionId={questionId}
         {...editorConfigs[Object.keys(editorConfigs)[selectedTab]]}
+        weekNumber={weekNumber} dayNumber={dayNumber}
       />
     </div>
   );

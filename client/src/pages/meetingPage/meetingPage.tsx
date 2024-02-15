@@ -3,12 +3,13 @@ import { useMeeting } from "../../redux/actions/meetingAction";
 import { useUser } from "../../redux/actions/userAction";
 import { startZoomMeet } from "../../utils";
 import React, { useEffect } from "react";
+import Spinner from "../../components/spinner/spinner"
 
 export const MeetingPage = () => {
   const navigate = useNavigate();
   const { meetingCode } = useParams();
   const { state } = useLocation();
-  const { meetingData } = state;
+  const { meetingData } = state || {};
   const { getMeeting } = useMeeting();
   const { user } = useUser();
   const { userData } = user;
@@ -33,7 +34,6 @@ export const MeetingPage = () => {
       startZoomMeet(getMeetingConfig(meetingDetails));
     }
   };
-
   useEffect(() => {
     if (meetingData) {
       startZoomMeet(getMeetingConfig(meetingData));
@@ -41,5 +41,5 @@ export const MeetingPage = () => {
       getMeetingDetails(meetingCode);
     }
   }, [userData]);
-  return <></>;
+  return <Spinner />
 };
