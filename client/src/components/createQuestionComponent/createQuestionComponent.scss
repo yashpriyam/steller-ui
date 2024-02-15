@@ -1,3 +1,18 @@
+@mixin create-question-select {
+  border: 1px solid #fff;
+  border-radius: 10px;
+  .select {
+    .select-box {
+      .options-container {
+        z-index: 15;
+        .list-child {
+          background-color: black;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
 .create-question-component-wrapper {
   background-color: #000;
   border-radius: 20px;
@@ -33,35 +48,11 @@
       }
     }
     .create-question-select {
-      border: 1px solid #fff;
-      border-radius: 10px;
-      .select {
-        .select-box {
-          .options-container {
-            z-index: 15;
-            .list-child {
-              background-color: black;
-              color: #fff;
-            }
-          }
-        }
-      }
+      @include create-question-select
     }
   }
   .create-question-select {
-    border: 1px solid white;
-    border-radius: 10px;
-    .select {
-      .select-box {
-        .options-container {
-          z-index: 15;
-          .list-child {
-            background-color: black;
-            color: white;
-          }
-        }
-      }
-    }
+      @include create-question-select
   }
   .accordian-container {
     padding: 10px 20px;
@@ -77,7 +68,7 @@
       flex-direction: column;
       width: 100%;
       gap: 10px;
-      .add-option-container{
+      .add-option-container {
         width: 100%;
         display: flex;
         justify-content: right;
