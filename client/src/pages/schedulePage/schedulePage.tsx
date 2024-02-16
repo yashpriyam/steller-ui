@@ -12,7 +12,7 @@ import { sortDirection, convertDateToString, isCurrentDate, weekSortBy } from ".
 import Spinner from "../../components/spinner/spinner";
 import { useMeeting } from "../../redux/actions/meetingAction";
 import { useUser } from "../../redux/actions/userAction";
-import { Text } from "../../components/header/header";
+import { Text } from "../../components/text/text";
 const checkboxDataList = ["HTML", "CSS", "JavaScript"];
 
 const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
@@ -77,7 +77,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
         </div>
       </div>
       <div className="schedule-page-header-filter-wrapper">
-        <Text headerType="h1">
+        <Text textType="h1">
         {t("schedule_header")}
           </Text>
         <Filter filter={filter} setFilter={setFilter}/>
@@ -103,7 +103,7 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
               isActive && (
                 <Accordion defaultOpen={true} title={
                     <div className="schedule-week-title">
-                      <Text headerType="h2">{title}</Text>
+                      <Text textType="h2">{title}</Text>
                      </div>
                 } disabled={isDisabledForUnpaidUsers} className={`${isWeekIncluded && !isAdmin && "pro-membership-weeks-wrapper"}`}>
                   <div key={index} className="accordion-content-wrapper">

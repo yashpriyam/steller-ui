@@ -2,18 +2,9 @@
 
 .dashboard {
   width: 100%;
-  display: flex;
-  justify-content: center;
   .dashboard-container {
-    width: 80%;
-    max-width: $screenLg;
-    display: flex;
-    justify-content: center;
     padding: 20px;
     color: $primaryTextColor;
-    @media (max-width: $screenMd){
-      width: 90%;
-    }
   }
 }
 

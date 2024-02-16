@@ -1,10 +1,16 @@
 @import "../variables.scss";
+$headerFontSize1: 40px;
+$headerFontSize2: 28px;
+$headerFontSize3: 24px;
+$headerFontSize4: 20px;
+$headerFontSize5: 18px;
+$headerFontSize6: 16px;
 @mixin common-header {
     font-weight: 600;
     font-style: normal;
 }
 .h1-header-style{
-    font-size: $headerFontSize;
+    font-size: $headerFontSize1;
     letter-spacing: -0.04em;
     line-height: 48px;
     @include common-header;

@@ -1,7 +1,7 @@
-import "./header.scss";
-interface HeaderProps {
+import "./text.scss";
+interface TextProps {
   children: React.ReactNode;
-  headerType: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "lg" | "md" | "sm";
+  textType: "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "lg" | "md" | "sm";
   className?: string;
 }
 const textElementClassType = {
@@ -15,6 +15,6 @@ const textElementClassType = {
     md : "md-para-style",
     sm : "sm-para-style",
 }
-export const Text: React.FC<HeaderProps> = ({ children, headerType, className }) => {
-  return <div className={`${textElementClassType[headerType]} ${className}`}>{children}</div>;
+export const Text: React.FC<TextProps> = ({ children, textType, className }) => {
+  return <div className={`${textElementClassType[textType]} ${className}`}>{children}</div>;
 };
