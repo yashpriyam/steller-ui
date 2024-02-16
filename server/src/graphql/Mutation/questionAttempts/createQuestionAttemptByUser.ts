@@ -22,9 +22,11 @@ export const createQuestionAttemptByUser = async (
   try {
     const { questionAttemptData } = args;
     const { questionId, response } = questionAttemptData;
-    const question = await questionModel.findById(questionId);
+    // console.log({questionId, response })
+    const question = await questionModel.findById(questionId).lean();
     const isCorrect = isCorrectAnswer(response, question!.answer);
     const updatedResponse = getCheckedOptions(response, question?.options);
+    // console.log({updatedResponse})
     const existingQuestionAttempt = await questionAttempt.findOne({
       questionId,
       userId,
@@ -53,6 +55,7 @@ export const createQuestionAttemptByUser = async (
       response: responseData,
     };
   } catch (error) {
+    console.log(error)
     return { response: errorData };
   }
 };

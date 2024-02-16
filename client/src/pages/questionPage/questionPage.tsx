@@ -28,10 +28,12 @@ const QuestionPage = () => {
     question: QuestionDataType,
     selectedValues: QuestionSelectedValueType[]
   ) => {
+    console.log({selectedValues})
     const filteredData = selectedValues.map((selectedValue) => ({
       imageUrl: selectedValue.imageUrl,
       text: selectedValue.text,
     }));
+    console.log({filteredData})
     try {
       await createQuestionAttemptByUser(filteredData, question._id);
     } catch (err) {
