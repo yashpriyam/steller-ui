@@ -1,6 +1,11 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { User, questionAttempt, questionModel } from "@models";
-import { isLoggedIn, getUnauthorizedResponse, checkPaidUser } from "@utils";
+import {
+  isLoggedIn,
+  getUnauthorizedResponse,
+  checkPaidUser,
+  isAdmin,
+} from "@utils";
 import mongoose from "mongoose";
 
 const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
@@ -21,7 +26,7 @@ export const getAllQuestions = async (
     status: statusCodes.BAD_REQUEST,
   };
   try {
-    const { filterData, pagination } = args;
+    let { filterData, pagination } = args;
     const { limit, skip } = pagination;
     const userInfo = await User.findById(userId);
     const userSelectedFeePlan = userInfo?.feePlan;
@@ -29,29 +34,37 @@ export const getAllQuestions = async (
       userId ?? "",
       userSelectedFeePlan ?? ""
     );
+    const email = userInfo?.email;
+    const isAdminUser = await isAdmin(email ?? "");
     const { accessWeeks } = isPaidUser || {};
-    if (filterData.week && !accessWeeks?.includes(filterData?.week)) {      
+    if (
+      !isAdminUser &&
+      filterData.week &&
+      !accessWeeks?.includes(filterData?.week)
+    ) {
       return {
         response: {
           message: WEEK_NOT_FOUND,
           status: statusCodes.OK,
         },
       };
-    }
-    if (!accessWeeks?.includes(filterData?.week)) {
-      delete filterData.week;
-    }
+    }    
+    if (!isAdminUser && !accessWeeks?.includes(filterData?.week)) {
+      const { week, ...filteredFilterData } = filterData;
+      filterData = filteredFilterData;
+    }    
     const filteredData: Record<string, string | number | boolean> = filterData;
-    const updatedFields: Record<string, string | number | boolean | object> = {};
+    const updatedFields: Record<string, string | number | boolean | object> =
+      {};
     for (const key in filteredData) {
       if (filteredData.hasOwnProperty(key)) {
         const fullPath = `meta.${key}`;
         updatedFields[fullPath] = filteredData[key];
       }
     }
-    if (!Boolean(filterData.week)) {
+    if (!isAdminUser && !Boolean(filterData.week)) {
       updatedFields[`meta.week`] = { $in: accessWeeks };
-    }
+    }    
     const questionList: [QuestionSchemaType] = await questionModel
       .find(updatedFields)
       .skip(skip)
