@@ -1,6 +1,6 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { User, questionAttempt, questionModel } from "@models";
-import { isLoggedIn, getUnauthorizedResponse, checkPaidUser } from "@utils";
+import { isLoggedIn, getUnauthorizedResponse, checkPaidUser, QuestionTypeObject } from "@utils";
 import mongoose from "mongoose";
 
 const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
@@ -62,7 +62,14 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
-      if (questionData.questionType === "codeblock") {
+      const { questionType } = questionData || {};
+      const questionTypes = {
+        Single: questionType===QuestionTypeObject.single,
+        Multi: questionType===QuestionTypeObject.multi,
+        Fillup: questionType===QuestionTypeObject.fillup,
+        Codeblock: questionType===QuestionTypeObject.codeblock,
+      }
+      if (questionTypes.Codeblock) {
         return questionData;
       }
       const updatedQuestionData = {
@@ -72,9 +79,7 @@ export const getAllQuestions = async (
       };
       const attemptData = questionAttemptIdMap[questionData._id.toString()];
       if (attemptData) {
-        const questionTypeSingle : boolean = questionData.questionType === "single";
-        const questionTypeMulti : boolean = questionData.questionType === "single";
-        if (attemptData.isCorrect && (questionTypeSingle || questionTypeMulti)) {
+        if (attemptData.isCorrect && (questionTypes.Single || questionTypes.Multi)) {
           totalCorrectQuestions += 1;
           updatedQuestionData.isCorrect = true;
         }

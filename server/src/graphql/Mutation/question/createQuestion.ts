@@ -1,5 +1,6 @@
 import { dayModel, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
+import { QuestionTypeObject } from "@utils";
 export const createQuestion = async (
   _parent: undefined,
   args: { questionData: QuestionSchemaType }
@@ -31,7 +32,13 @@ export const createQuestion = async (
         },
       };
     }
-    if((questionType==="single" || questionType==="multi") && !Boolean(options.length)){
+    const questionTypes = {
+      Single: questionType===QuestionTypeObject.single,
+      Multi: questionType===QuestionTypeObject.multi,
+      Fillup: questionType===QuestionTypeObject.fillup,
+      Codeblock: questionType===QuestionTypeObject.codeblock,
+    }
+    if((questionTypes.Single || questionTypes.Multi) && !Boolean(options?.length)){
       return {
         response : {
           message: QUESTION_OPTIONS_NOT_FOUND,
