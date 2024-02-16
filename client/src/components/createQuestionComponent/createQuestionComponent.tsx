@@ -10,10 +10,11 @@ import { createQuestionActions } from "../../redux/slices/createQuestion/createQ
 import { Button } from "../../components/button/button";
 import { createQuestionApi } from "../../redux/actions/admin/createQuestion";
 import Toast from "../../utils/toast";
+import { validateQuestionInput } from "./validatequestionInput";
 export const CreateQuestionComponent: React.FC<
   CreateQuestionComponentProps
 > = ({ onClose }) => {
-  const bool = [
+  const selectedBoolean = [
     {
       text: "true",
       value: "true",
@@ -47,12 +48,14 @@ export const CreateQuestionComponent: React.FC<
   );
   const { updateState } = createQuestionActions;
   const dispatch = useDispatch();
-  const [isQuestionAdding,setIsQuestionAdding]=useState<boolean>(false)
+  const [isQuestionAdding, setIsQuestionAdding] = useState<boolean>(false);
   const [count, setCount] = useState({
     titleCount: 1,
     answerCount: 1,
     optionsCount: 1,
   });
+  const [isRequiredFiledError, setIsRequiredFiledError] =
+    useState<boolean>(false);
   const handleOnSetBatchCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     const path = `meta.batchCode`;
@@ -134,8 +137,23 @@ export const CreateQuestionComponent: React.FC<
     try {
       const { answer, options, meta, questionType, title, marks } =
         createdQuestionData;
+      const isValidInput = validateQuestionInput({
+        meta,
+        answer,
+        options,
+        title,
+        questionType,
+        marks,
+      });
+      if (!isValidInput) {
+        setIsRequiredFiledError(true);
+        window.setTimeout(() => {
+          setIsRequiredFiledError(false);
+        }, 5000);
+        return;
+      }
       const { createQuestion } = createQuestionApi();
-      setIsQuestionAdding(true)
+      setIsQuestionAdding(true);
       const response = await createQuestion({
         answer: answer,
         marks: marks,
@@ -143,14 +161,14 @@ export const CreateQuestionComponent: React.FC<
         options: options,
         questionType: questionType,
         title: title,
-      });      
+      });
       setIsQuestionAdding(false);
-      const message = response.response.message;
-      const status = response.response.status;
+      const message = response?.response?.message;
+      const status = response?.response?.status;
       if (status === 200) {
-        Toast.success(message)
+        window.alert(message);
       } else {
-        Toast.error(message);        
+        window.alert(message);
       }
     } catch (err) {
       console.log(err);
@@ -164,90 +182,144 @@ export const CreateQuestionComponent: React.FC<
       <h1 className="create-question-component-header">Add Question</h1>
       <h3>Meta</h3>
       <div className="question-meta-container">
-        <InputComponent
-          key={"batchCode"}
-          className="create-question-input"
-          type="text"
-          onChange={handleOnSetBatchCode}
-          placeholder="Batch Code"
-        />
-        <InputComponent
-          className="create-question-input"
-          key={"dayNumber"}
-          type="number"
-          onChange={handleOnSetDayNumber}
-          placeholder="Day Number"
-        />
-        <InputComponent
-          className="create-question-input"
-          type="number"
-          key={"weekNumber"}
-          onChange={handleOnSetWeekNumber}
-          placeholder="Week Number"
-        />
-        <InputComponent
-          className="create-question-input"
-          type="text"
-          key={"Topic"}
-          onChange={handleOnSetTopic}
-          placeholder="Topic"
-        />
-        <InputComponent
-          className="create-question-input"
-          type="number"
-          key={"expiresTime"}
-          onChange={handleOnSetExpiresTime}
-          placeholder="Expires Time"
-        />
-        <Select
-          className="create-question-select"
-          defaultSelected="Select Active"
-          key={"isActive"}
-          data={bool}
-          isRequired
-          onSelect={handleOnSetIsActive}
-        ></Select>
-        <Select
-          key={"isArchived"}
-          className="create-question-select"
-          defaultSelected="Select Archived"
-          data={bool}
-          isRequired
-          onSelect={handleOnSetIsArchived}
-        ></Select>
-        <Select
-          className="create-question-select"
-          defaultSelected="Select Openable"
-          key={"isOpenable"}
-          data={bool}
-          isRequired
-          onSelect={handleOnSetIsOpenable}
-        ></Select>
-        <Select
-          className="create-question-select"
-          defaultSelected="Select type"
-          key={"selcect-type"}
-          data={type}
-          isRequired
-          onSelect={handleOnSetType}
-        ></Select>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Batch Code:
+          </label>
+          <InputComponent
+            key={"batchCode"}
+            className="create-question-input"
+            type="text"
+            onChange={handleOnSetBatchCode}
+            placeholder="Batch Code"
+          />
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Day :
+          </label>
+          <InputComponent
+            className="create-question-input"
+            key={"dayNumber"}
+            type="number"
+            onChange={handleOnSetDayNumber}
+            placeholder="Day Number"
+          />
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Week :
+          </label>
+          <InputComponent
+            className="create-question-input"
+            type="number"
+            key={"weekNumber"}
+            onChange={handleOnSetWeekNumber}
+            placeholder="Week Number"
+          />
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Topic :
+          </label>
+          <InputComponent
+            className="create-question-input"
+            type="text"
+            key={"Topic"}
+            onChange={handleOnSetTopic}
+            placeholder="Topic"
+          />
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Expires in min:
+          </label>
+          <InputComponent
+            className="create-question-input"
+            type="number"
+            key={"expiresTime"}
+            onChange={handleOnSetExpiresTime}
+            placeholder="Expires Time"
+          />
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Active status :
+          </label>
+          <Select
+            className="create-question-select"
+            key={"isActive"}
+            data={selectedBoolean}
+            isRequired
+            onSelect={handleOnSetIsActive}
+          ></Select>
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Archived status :
+          </label>
+          <Select
+            key={"isArchived"}
+            className="create-question-select"
+            data={selectedBoolean}
+            isRequired
+            onSelect={handleOnSetIsArchived}
+          ></Select>
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Openable status :
+          </label>
+          <Select
+            className="create-question-select"
+            key={"isOpenable"}
+            data={selectedBoolean}
+            isRequired
+            onSelect={handleOnSetIsOpenable}
+          ></Select>
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Type :
+          </label>
+          <Select
+            className="create-question-select"
+            key={"selcect-type"}
+            data={type}
+            isRequired
+            onSelect={handleOnSetType}
+          ></Select>
+        </div>
       </div>
-      <InputComponent
-        className="create-question-input"
-        type="number"
-        key={"marks"}
-        onChange={handleOnSetMarks}
-        placeholder="Marks"
-        disabled={false}
-      />
-      <Select
-        className="create-question-select"
-        key={"question-type"}
-        defaultSelected="Question type"
-        data={questionType}
-        isRequired
-        onSelect={handleOnSetQuestionType}
-      ></Select>
+      <div className="break-line"></div>
+      <div className="marks-questionType-wrapper">
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Marks :
+          </label>
+          <InputComponent
+            className="create-question-input"
+            type="number"
+            key={"marks"}
+            onChange={handleOnSetMarks}
+            placeholder="Marks"
+            disabled={false}
+          />
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Type :
+          </label>
+          <Select
+            className="create-question-select"
+            key={"question-type"}
+            defaultSelected="Question type"
+            data={questionType}
+            isRequired
+            onSelect={handleOnSetQuestionType}
+          ></Select>
+        </div>
+      </div>
       <Accordion title={"Title"} key={"title"} className="accordian-container">
         {titleList.map((title) => {
           return title;
@@ -258,7 +330,11 @@ export const CreateQuestionComponent: React.FC<
           </span>
         </div>
       </Accordion>
-      <Accordion title={"Options"} key={"options"} className="accordian-container">
+      <Accordion
+        title={"Options"}
+        key={"options"}
+        className="accordian-container"
+      >
         {optionsList.map((option) => {
           return option;
         })}
@@ -268,7 +344,11 @@ export const CreateQuestionComponent: React.FC<
           </span>
         </div>
       </Accordion>
-      <Accordion title={"Answer"} key={"answer"} className="accordian-container">
+      <Accordion
+        title={"Answer"}
+        key={"answer"}
+        className="accordian-container"
+      >
         {answerList.map((answer) => {
           return answer;
         })}
@@ -278,8 +358,12 @@ export const CreateQuestionComponent: React.FC<
           </span>
         </div>
       </Accordion>
+      <div className={`error-message-container ${isRequiredFiledError && "error-message-show"}`}>
+          please enter all required filed
+        </div>
       <div className="add-question-button-container">
-        <Button key={"addButton"}
+        <Button
+          key={"addButton"}
           text={isQuestionAdding ? "Question Adding" : "Add Question"}
           onClick={handleOnAddQuestion}
         />
