@@ -61,7 +61,6 @@ export const createQuestionAttemptByUser = async (
       response: responseData,
     };
   } catch (error) {
-    console.log(error)
     return { response: errorData };
   }
 };
