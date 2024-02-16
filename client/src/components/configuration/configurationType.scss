@@ -1,7 +1,23 @@
-.code-block-option-container{
+.code-block-option-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    overflow: hidden;
+    background-color: #a39c9c;
+  }
+  .accordian-container {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px;
+    .accordion-header {
+      padding-bottom:0px 10px;
+    }
+    .accordion-content {
+      width: 100%;
+    }
+  }
 }

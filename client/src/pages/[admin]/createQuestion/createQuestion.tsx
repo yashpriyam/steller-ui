@@ -45,7 +45,7 @@ export const CreateQuestion: React.FC = () => {
           onClick={handleOnAddQuestionClick}
         />
       </div>
-      <Modal className="question-modal-wrapper" isOpen={isModalOpen}>
+      <Modal className="question-modal-wrapper" isOpen={true}>
         <CreateQuestionComponent onClose={handleOnCloseModal} />
       </Modal>
       <div className="created-question-container">

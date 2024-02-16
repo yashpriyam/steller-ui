@@ -26,14 +26,19 @@ export const CodeBlockInputType: React.FC<{ prevPath: string }> = ({
   };
   return (
     <div className="code-block-input-container">
-      <Select
-        className="create-question-select"
-        defaultSelected="Enable Code Block"
-        data={bool}
-        isRequired
-        onSelect={handleOnSetEnableCodeBlock}
-      ></Select>
-      <Accordion title={"Configuration"}>
+      <div className="create-question-input-wrapper">
+        <label htmlFor="batch-code" className="create-question-label">
+          Code block enable status :
+        </label>
+        <Select
+          className="create-question-select"
+          defaultSelected="Enable Code Block"
+          data={bool}
+          isRequired
+          onSelect={handleOnSetEnableCodeBlock}
+        ></Select>
+      </div>
+      <Accordion title={"Configuration"} className="accordian-container">
         <ConfigurationType prevPath={`${prevPath}.configuration`} />
       </Accordion>
     </div>

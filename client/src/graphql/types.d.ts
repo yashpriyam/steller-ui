@@ -301,12 +301,12 @@ declare global {
     isAnswered?: boolean;
   };
   interface CreateQuestionInterface {
-    title?: QuestionOptionType[];
-    questionType?: "";
-    options?: QuestionOptionType[];
-    answer?: QuestionOptionType[];
-    marks?: number;
-    meta?: QuestionMetaDataType;
+    title: QuestionOptionType[];
+    questionType: "";
+    options: QuestionOptionType[];
+    answer: QuestionOptionType[];
+    marks: number;
+    meta: QuestionMetaDataType;
   };
 
   type QuestionMetaDataType = {
