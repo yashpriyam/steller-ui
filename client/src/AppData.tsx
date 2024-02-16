@@ -20,7 +20,6 @@ import { actions } from "./redux/slices/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { deleteCookie } from "./utils";
 import { apolloClient } from "./graphql/apolloClient/apolloClient";
-import { CreateQuestion } from "./pages/[admin]/createQuestion/createQuestion";
 
 export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
