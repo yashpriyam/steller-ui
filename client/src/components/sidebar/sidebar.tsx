@@ -68,23 +68,6 @@ export const Sidebar = ({
               />
                 </>
               })
-              
-              
-              // admin?.map(() => {
-              //   return "sd"
-              // })
-              // admin && (
-              //   <SidebarOption
-              //   image={admin.image}
-              //   text={admin.text}
-              //   isProfile={false}
-              //   showText={isOpen}
-              //   url={admin.url}
-              //   onClick={() =>
-              //     onOptionClick(admin.url, Boolean(admin.openNewPage))
-              //   }
-              // />
-              // )
             }
              
             {optionsAtFirst?.map((data, idx) => {
