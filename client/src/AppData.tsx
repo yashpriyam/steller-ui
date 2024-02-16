@@ -10,7 +10,8 @@ import {
   VideoIcon,
   NameIcon,
   PaymentIcon,
-  LeaderBoard
+  LeaderBoard,
+  EditzIcon,
 } from "./icons/index";
 import { useTranslation } from "react-i18next";
 import { useUser } from "./redux/actions/userAction";
@@ -19,6 +20,7 @@ import { actions } from "./redux/slices/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { deleteCookie } from "./utils";
 import { apolloClient } from "./graphql/apolloClient/apolloClient";
+import { CreateQuestion } from "./pages/[admin]/createQuestion/createQuestion";
 
 export const useAppData = (): UseAppDataReturnType => {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState<boolean>(false);
@@ -54,13 +56,20 @@ export const useAppData = (): UseAppDataReturnType => {
         <AvatarIcon isDarkMode={true} />
       ),
       url: "/profile",
-      moreInfo:{ batchCode },
+      moreInfo: { batchCode },
     },
-    admin: user.isAdmin && {
-      image: <PaymentIcon isDarkMode={true} />,
-      text: t("all_users_payments"),
-      url: "/admin/usersPayments",
-    },
+    admin: user.isAdmin && [
+      {
+        image: <PaymentIcon isDarkMode={true} />,
+        text: t("all_users_payments"),
+        url: "/admin/usersPayments",
+      },
+      {
+        text: t("create_question"),
+        image: <EditzIcon height="25" width="25"/>,
+        url: "/admin/createQuestions",
+      },
+    ],
     optionsAtFirst: [
       // {
       //   text: t("search"),
@@ -95,8 +104,8 @@ export const useAppData = (): UseAppDataReturnType => {
       },
       {
         text: t("Leaderboard"),
-        image: <LeaderBoard/>,
-        url: "/leaderboard"
+        image: <LeaderBoard />,
+        url: "/leaderboard",
       },
     ],
     optionAtLast: {

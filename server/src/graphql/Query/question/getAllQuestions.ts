@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 const { QUESTION_FOUND_SUCCESS } = localMessages.QUESTION_MODEL;
 const { QUESTION_NOT_FOUND } = errorMessages.QUESTION_MODEL;
+const { WEEK_NOT_FOUND } = errorMessages.WEEK_MODEL;
 
 export const getAllQuestions = async (
   _parent: undefined,
@@ -29,6 +30,14 @@ export const getAllQuestions = async (
       userSelectedFeePlan ?? ""
     );
     const { accessWeeks } = isPaidUser || {};
+    if (filterData.week && !accessWeeks?.includes(filterData?.week)) {      
+      return {
+        response: {
+          message: WEEK_NOT_FOUND,
+          status: statusCodes.OK,
+        },
+      };
+    }
     if (!accessWeeks?.includes(filterData?.week)) {
       delete filterData.week;
     }

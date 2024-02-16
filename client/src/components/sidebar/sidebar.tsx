@@ -54,18 +54,37 @@ export const Sidebar = ({
               />
             )}
             {
-              admin && (
-                <SidebarOption
-                image={admin.image}
-                text={admin.text}
-                isProfile={false}
-                showText={isOpen}
-                url={admin.url}
-                onClick={() =>
-                  onOptionClick(admin.url, Boolean(admin.openNewPage))
+              Array.isArray(admin) && admin.map(admindata => {
+                return <>
+                  <SidebarOption
+                    image={admindata.image}
+                    text={admindata.text}
+                    isProfile={false}
+                    showText={isOpen}
+                    url={admindata.url}
+                     onClick={() =>
+                     onOptionClick(admindata.url, Boolean(admindata.openNewPage))
                 }
               />
-              )
+                </>
+              })
+              
+              
+              // admin?.map(() => {
+              //   return "sd"
+              // })
+              // admin && (
+              //   <SidebarOption
+              //   image={admin.image}
+              //   text={admin.text}
+              //   isProfile={false}
+              //   showText={isOpen}
+              //   url={admin.url}
+              //   onClick={() =>
+              //     onOptionClick(admin.url, Boolean(admin.openNewPage))
+              //   }
+              // />
+              // )
             }
              
             {optionsAtFirst?.map((data, idx) => {

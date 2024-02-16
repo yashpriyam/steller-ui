@@ -567,7 +567,7 @@ declare global {
           openNewPage?: boolean;
           onClick?: (e: MouseEvent<HTMLDivElement>) => void;
           isProfile?: boolean;
-        }
+        }[]
       | false;
   }
 
