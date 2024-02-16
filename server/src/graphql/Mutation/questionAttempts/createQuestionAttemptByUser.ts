@@ -22,11 +22,17 @@ export const createQuestionAttemptByUser = async (
   try {
     const { questionAttemptData } = args;
     const { questionId, response } = questionAttemptData;
-    // console.log({questionId, response })
-    const question = await questionModel.findById(questionId).lean();
-    const isCorrect = isCorrectAnswer(response, question!.answer);
-    const updatedResponse = getCheckedOptions(response, question?.options);
-    // console.log({updatedResponse})
+    const question : QuestionSchemaType | null = await questionModel.findById(questionId);
+    const { questionType } = question || {};
+    let isCorrect;
+    let updatedResponse;
+    if(questionType && questionType === "fillup") {
+      updatedResponse = response;
+    }
+    else {
+      isCorrect = isCorrectAnswer(response, question!.answer);
+     updatedResponse = getCheckedOptions(response, question?.options);
+      }
     const existingQuestionAttempt = await questionAttempt.findOne({
       questionId,
       userId,

@@ -72,7 +72,9 @@ export const getAllQuestions = async (
       };
       const attemptData = questionAttemptIdMap[questionData._id.toString()];
       if (attemptData) {
-        if (attemptData.isCorrect) {
+        const questionTypeSingle : boolean = questionData.questionType === "single";
+        const questionTypeMulti : boolean = questionData.questionType === "single";
+        if (attemptData.isCorrect && (questionTypeSingle || questionTypeMulti)) {
           totalCorrectQuestions += 1;
           updatedQuestionData.isCorrect = true;
         }

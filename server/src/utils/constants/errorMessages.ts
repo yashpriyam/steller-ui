@@ -33,6 +33,7 @@ export const errorMessages = Object.freeze({
     QUESTION_CREATION_FAILED: "unable to add question data",
     QUESTION_UPDATION_FAILED: "unable to update question data",
     QUESTION_NOT_FOUND: "questions not found",
+    QUESTION_OPTIONS_NOT_FOUND: "unable to create a multiple choice question without options",
   },
   OTP_MODEL: {
     OTP_SENT_FAILED: "Failed to send OTP",

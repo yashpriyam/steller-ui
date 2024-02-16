@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Accordion from "../accordion/accordion";
 import "./questionAccordion.scss";
 import { Checkbox } from "../checkbox/checkbox";
@@ -29,7 +29,6 @@ const QuestionAccordion = ({
   const isSubmitBtnDisabled: boolean = isFillupType
     ? !fillupValue
     : !selectedValues.length || isLoading;
-    // console.log({questionData})
   const handleOnSubmitQuestion = async () => {
     setIsLoading(true);
     await onSubmit(questionData, isFillupType ? fillupValue : selectedValues);
@@ -56,6 +55,9 @@ const QuestionAccordion = ({
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
   }
+  useEffect(()=>{
+    setFillupValue(options)
+  },[options])
   return (
     <Accordion
       className={`question-title ${className}`}
