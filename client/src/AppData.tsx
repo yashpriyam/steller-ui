@@ -11,7 +11,7 @@ import {
   NameIcon,
   PaymentIcon,
   LeaderBoard,
-  EditzIcon,
+  EditIcon,
 } from "./icons/index";
 import { useTranslation } from "react-i18next";
 import { useUser } from "./redux/actions/userAction";
@@ -65,7 +65,7 @@ export const useAppData = (): UseAppDataReturnType => {
       },
       {
         text: t("create_question"),
-        image: <EditzIcon height="25" width="25"/>,
+        image: <EditIcon height="25" width="25"/>,
         url: "/admin/createQuestions",
       },
     ],

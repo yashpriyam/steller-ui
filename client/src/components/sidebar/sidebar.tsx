@@ -57,13 +57,13 @@ export const Sidebar = ({
               Array.isArray(admin) && admin.map(admindata => {
                 return <>
                   <SidebarOption
-                    image={admindata.image}
-                    text={admindata.text}
+                    image={admindata?.image}
+                    text={admindata?.text}
                     isProfile={false}
                     showText={isOpen}
-                    url={admindata.url}
+                    url={admindata?.url}
                      onClick={() =>
-                     onOptionClick(admindata.url, Boolean(admindata.openNewPage))
+                     onOptionClick(admindata?.url, Boolean(admindata?.openNewPage))
                 }
               />
                 </>
