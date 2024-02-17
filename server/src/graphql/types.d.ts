@@ -249,7 +249,7 @@ declare global {
     answer: QuestionInfoType[];
     marks: number;
     meta: QuestionMetaData;
-    questionTypeTags?: string;
+    questionTypeTags?: string[];
   };
 
   type QuestionOptionType = {
@@ -381,7 +381,7 @@ declare global {
     marks?: number;
     batchCode?: string;
     meta: QuestioinMetaDataUpdate;
-    questionTypeTags?: string;
+    questionTypeTags?: string[];
   };
   type QuestioinMetaDataUpdate = {
     topic?: string;
@@ -404,7 +404,7 @@ declare global {
     marks: number;
     batchCode: string;
     meta: QuestionUpdateOutputMetaData;
-    questionTypeTags?: string;
+    questionTypeTags?: string[];
   };
   type QuestionUpdateOutputMetaData = {
     topic: string;
@@ -447,7 +447,7 @@ declare global {
     answer: QuestionInfoType[];
     marks: number;
     meta: QuestionMetaData;
-    questionTypeTags?: string;
+    questionTypeTags?: string[];
   };
   type QuestionsReturnType = {
     questions: [AllQuestionDataType];

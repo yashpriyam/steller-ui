@@ -420,7 +420,7 @@ const typeDefs = gql`
     answer: [QuestionOptionInputType!]!
     marks: Int!
     meta: QuestionMeta!
-    questionTypeTags:String
+    questionTypeTags:[String]
   }
   input QuestionOptionInputType {
     text: String!
@@ -492,7 +492,7 @@ const typeDefs = gql`
     answer: [QuestionOptionOutputType!]!
     marks: Int!
     meta: QuestionMetaOutput!
-    questionTypeTags:String
+    questionTypeTags:[String]
   }
   type QuestionMetaOutput {
     topic: String!
@@ -522,7 +522,7 @@ const typeDefs = gql`
     answer: [UpdateOptionInput]
     marks: Int
     meta: QuestionMetaInput
-    questionTypeTags:String
+    questionTypeTags:[String]
   }
   input UpdateOptionInput {
     imageUrl: String
@@ -559,7 +559,7 @@ const typeDefs = gql`
     answer: [QuestionOptionOutputType]
     marks: Int
     meta: QuestionMetaOutput
-    questionTypeTags:String
+    questionTypeTags:[String]
   }
   type QuestionMetaOutput {
     topic: String
@@ -614,7 +614,7 @@ const typeDefs = gql`
     answer: [AttemptQuestionOptionOutputType]
     marks: Int
     meta: QuestionMetaOutput
-    questionTypeTags:String
+    questionTypeTags:[String]
   }
 
   type GetAllQuestionsOutputType {
