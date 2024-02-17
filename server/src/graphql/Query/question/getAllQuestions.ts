@@ -28,15 +28,19 @@ export const getAllQuestions = async (
   try {
     let { filterData, pagination } = args;
     const { limit, skip } = pagination;
-    const userInfo = await User.findById(userId);
+    const userInfo = await User.findById(userId); //Fetch user info
     const userSelectedFeePlan = userInfo?.feePlan;
+    // Check if user is paid
     const isPaidUser = await checkPaidUser(
       userId ?? "",
       userSelectedFeePlan ?? ""
     );
     const email = userInfo?.email;
+    // Check if user is admin
     const isAdminUser = await isAdmin(email ?? "");
+    // Fetch access weeks for paid users
     const { accessWeeks } = isPaidUser || {};
+    // Check if user is not admin and week is specified but not accessible
     if (
       !isAdminUser &&
       filterData.week &&
@@ -48,28 +52,32 @@ export const getAllQuestions = async (
           status: statusCodes.OK,
         },
       };
-    }    
+    }
+    // Check if user is not admin and week is specified but not accessible, remove week from filterData
     if (!isAdminUser && !accessWeeks?.includes(filterData?.week)) {
       const { week, ...filteredFilterData } = filterData;
       filterData = filteredFilterData;
-    }    
+    }
     const filteredData: Record<string, string | number | boolean> = filterData;
     const updatedFields: Record<string, string | number | boolean | object> =
       {};
+    // Prepare updatedFields for querying
     for (const key in filteredData) {
       if (filteredData.hasOwnProperty(key)) {
         const fullPath = `meta.${key}`;
         updatedFields[fullPath] = filteredData[key];
       }
     }
+    // If user is not admin and week is not specified, include accessWeeks in meta.week to handle user can get all there accessible question list
     if (!isAdminUser && !Boolean(filterData.week)) {
       updatedFields[`meta.week`] = { $in: accessWeeks };
-    }    
+    }
     const questionList: [QuestionSchemaType] = await questionModel
       .find(updatedFields)
       .skip(skip)
       .limit(limit)
       .lean();
+    // Fetch question attempts for the user
     const questionIdList = questionList.map((question) => question._id);
     const questionAttemptList: AllAttemptedQuestionDataType[] =
       await questionAttempt.find({
