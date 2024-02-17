@@ -1,19 +1,22 @@
-.open-window-container{
-    width: 100%;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    padding: 10px;
-    overflow: auto;
-  .question-input-container{
+.open-window-container {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  padding: 0px 10px 40px 10px;
+  flex-wrap: wrap;
+  overflow: scroll;
+  flex: 1;
+  .code-editor-container{
     width: 100%;
   }
-  .accordian-container {
-    .accordion-header {
-      padding-bottom: 10px 0px;
-    }
-    .accordion-content {
-        padding-bottom: 50px;
-    }
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  &::-webkit-scrollbar-thumb {
+    overflow: hidden;
+    background-color: #a39c9c;
+  }
+  .question-input-container {
+    width: 100%;
   }
 }

@@ -1,0 +1,66 @@
+@import "../variables.scss";
+$headerFontSize1: 40px;
+$headerFontSize2: 28px;
+$headerFontSize3: 24px;
+$headerFontSize4: 20px;
+$headerFontSize5: 18px;
+$headerFontSize6: 16px;
+@mixin common-header {
+    font-weight: 600;
+    font-style: normal;
+}
+.h1-header-style{
+    font-size: $headerFontSize1;
+    letter-spacing: -0.04em;
+    line-height: 48px;
+    @include common-header;
+}
+.h2-header-style{
+    font-size: $headerFontSize2;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    @include common-header;
+}
+.h3-header-style{
+    font-size: $headerFontSize3;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    @include common-header;
+}
+.h4-header-style{
+    font-size: $headerFontSize4;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    @include common-header;
+}
+.h5-header-style{
+    font-size: $headerFontSize3;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    @include common-header;
+}
+.h6-header-style{
+    font-size: $headerFontSize3;
+    line-height: 20px;
+    letter-spacing: -0.03em;
+    @include common-header;
+}
+
+.lg-para-style{
+    font-size: $largerFontSize;
+    line-height: 24px;
+    letter-spacing: -0.03em;
+    font-weight: 500;
+}
+.md-para-style{
+    font-size: $mediumFontSize;
+    line-height: 24px;
+    letter-spacing: -0.02em;
+    font-weight: 500;
+}
+.md-para-style{
+    font-size: $smallFontSize;
+    line-height: 24px;
+    letter-spacing: 0em;
+    font-weight: 400;
+}

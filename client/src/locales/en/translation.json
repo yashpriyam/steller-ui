@@ -83,5 +83,6 @@
     "pro_membership_access_message": "Get Pro membership to access all weeks",
     "no_video_found": "No Video Available",
     "no_note_found": "No Notes Available",
-    "no_question_found": "No Question Available"
+    "no_question_found": "No Question Available",
+    "create_question":"Create Questions"
 }

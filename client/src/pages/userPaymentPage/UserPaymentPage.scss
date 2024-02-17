@@ -1,4 +1,12 @@
 @import "../../components/variables.scss";
+.user-payment-feeplan-and-installment-wrapper{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  .user-payment-feeplan-and-installment-sub-wrapper{
+    max-width: $screenLg;
+    width: 80%;
 .user-payment-page {
   padding: 20px;
   width: 100%;
@@ -51,4 +59,6 @@
       cursor: not-allowed;
     }
   }
+}
+}
 }

@@ -44,7 +44,8 @@ const UserPaymentPage: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="user-payment-feeplan-and-installment-wrapper">
+    <div className="user-payment-feeplan-and-installment-sub-wrapper">
       {Boolean(feePlans?.length || userPayments?.userPayments?.length) ? (
         <div className="user-payment-page">
           <h1 className="user-payment-page-header">{t('User Payment Page')}</h1>
@@ -101,7 +102,8 @@ const UserPaymentPage: React.FC = () => {
       
         <NoDataFound message="No payment found" />
       )}
-    </>
+    </div>
+    </div>
   );
 };
 

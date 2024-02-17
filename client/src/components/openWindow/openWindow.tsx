@@ -30,7 +30,6 @@ export const OpenWindow: React.FC<{ prevPath?: string }> = ({ prevPath }) => {
   const [css, setCss] = useState<string>("");
   const [js, setJs] = useState<string>("");
 
-
   const titleTopicMap: Record<string, string> = Object.freeze({
     HTML: "HTML",
     CSS: "CSS",
@@ -38,19 +37,19 @@ export const OpenWindow: React.FC<{ prevPath?: string }> = ({ prevPath }) => {
   });
   const handleOnSetHtml = (value: string) => {
     const path = `${prevPath}.predefinedCode`;
-    dispatch(updateState({ path, value }))
+    dispatch(updateState({ path, value }));
     setHtml(value);
   };
   const handleOnSetCss = (value: string) => {
-     const path = `${prevPath}.predefinedCode`;
+    const path = `${prevPath}.predefinedCode`;
     dispatch(updateState({ path, value }));
     setCss(value);
   };
   const handleOnSetJs = (value: string) => {
-     const path = `${prevPath}.predefinedCode`;
+    const path = `${prevPath}.predefinedCode`;
     dispatch(updateState({ path, value }));
     setJs(value);
-   };
+  };
   const editorConfigs: { [key: string]: LanguageConfig } = {
     html: {
       language: "xml",
@@ -78,8 +77,8 @@ export const OpenWindow: React.FC<{ prevPath?: string }> = ({ prevPath }) => {
     },
   };
   const renderTabButtonMap: Record<string, any> = {
-    HTML:0,
-    CSS:1,
+    HTML: 0,
+    CSS: 1,
     JS: 2,
   };
   const handleOnSelectTopic = (option: SelectOptionType) => {
@@ -100,29 +99,48 @@ export const OpenWindow: React.FC<{ prevPath?: string }> = ({ prevPath }) => {
   };
   return (
     <div className="open-window-container">
-      <Select
-        className="create-question-select"
-        defaultSelected="Title"
-        data={title}
-        isRequired
-        onSelect={handleOnSelectTopic}
-      ></Select>
-      <Select
-        className="create-question-select"
-        defaultSelected="Editable status"
-        data={bool}
-        isRequired
-        onSelect={handleEditableStatus}
-      ></Select>
-      <Select
-        className="create-question-select"
-        defaultSelected="Enable User Selection"
-        data={bool}
-        isRequired
-        onSelect={handleUserSelection}
-      ></Select>
+      <div className="create-question-input-wrapper">
+        <label htmlFor="batch-code" className="create-question-label">
+          Title :
+        </label>
+        <Select
+          className="create-question-select"
+          defaultSelected="Title"
+          data={title}
+          isRequired
+          onSelect={handleOnSelectTopic}
+        ></Select>
+      </div>
+      <div className="create-question-input-wrapper">
+        <label htmlFor="batch-code" className="create-question-label">
+          Editable status :
+        </label>
+        <Select
+          className="create-question-select"
+          defaultSelected="Editable status"
+          data={bool}
+          isRequired
+          onSelect={handleEditableStatus}
+        ></Select>
+      </div>
+      <div className="create-question-input-wrapper">
+        <label htmlFor="batch-code" className="create-question-label">
+          User Selection status :
+        </label>
+        <Select
+          className="create-question-select"
+          defaultSelected="Enable User Selection"
+          data={bool}
+          isRequired
+          onSelect={handleUserSelection}
+        ></Select>
+      </div>
       {selectedTitle && (
-        <Editor {...editorConfigs[Object.keys(editorConfigs)[renderTabButtonMap[selectedTitle]]]} />
+        <Editor
+          {...editorConfigs[
+            Object.keys(editorConfigs)[renderTabButtonMap[selectedTitle]]
+          ]}
+        />
       )}
     </div>
   );

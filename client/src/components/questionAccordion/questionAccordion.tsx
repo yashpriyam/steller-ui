@@ -8,7 +8,7 @@ import CodeBlock from "../../components/codeBlock/codeBlock";
 import { CheckedIcon } from "../../icons/CheckedIcon";
 import { useUserCode } from "../../redux/actions/userCodeActions";
 import { useUser } from "../../redux/actions/userAction";
-import { EditzIcon, DeleteIcon } from "../../icons/index";
+import { EditIcon, DeleteIcon } from "../../icons/index";
 const QuestionAccordion = ({
   questionData,
   onSubmit,
@@ -81,7 +81,7 @@ const QuestionAccordion = ({
             {isAdmin ? (
               <div className="edit-delete-wrapper">
                 <span onClick={handleEdit}>
-                  <EditzIcon width="25px" height="25px" />
+                  <EditIcon width="25px" height="25px"/>
                 </span>
                 <span onClick={handleDelete}>
                   <DeleteIcon height="25px" width="25px" />

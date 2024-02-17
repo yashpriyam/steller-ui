@@ -7,6 +7,7 @@ import "./videosPage.scss";
 import { useTranslation } from "react-i18next";
 import Spinner from "../../components/spinner/spinner";
 import { useLocation } from "react-router-dom";
+import { Text } from "../../components/text/text";
 const VideosPage: React.FC = () => {
   const [filterTagMap, setFilterTagMap] = useState<Record<string, boolean>>({
     HTML: false,
@@ -55,8 +56,9 @@ const VideosPage: React.FC = () => {
   const isAnyFilterApplied = Object.values(filterTagMap).some((tag) => tag);
 
   return (
-    <div className={`video-page`}>
-      <div className="content-title">{t("videos").toUpperCase()}</div>
+    <div className="video-page-container">
+    <div className="video-page-sub-container">
+      <Text textType="h1">{t("videos")}</Text>
         {isVideosLoading ? <Spinner /> :
       <><FilterTags setFilterTag={handleFilter} filterTagMap={filterTagMap} />
       <div className="videos-wrapper">
@@ -70,6 +72,7 @@ const VideosPage: React.FC = () => {
         )}
       </div></>
       }
+    </div>
     </div>
   );
 };

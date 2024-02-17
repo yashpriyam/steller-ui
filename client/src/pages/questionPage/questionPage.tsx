@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { useUserCode } from '../../redux/actions/userCodeActions';
 import Spinner from '../../components/spinner/spinner';
+import { Text } from '../../components/text/text';
 
 const QuestionPage = () => {
   const { questions, getAllQuestions } = useQuestions();
@@ -49,8 +50,9 @@ const QuestionPage = () => {
   }, [weekNumber, dayNumber]);
   return (
     <div className="question-page-container">
+    <div className="question-page-sub-wrapper">
       <div className="questions-page-header">
-        <h1>{t('questions')}</h1>
+        <Text textType='h1'>{t('questions')}</Text>
       </div>
       <div className="question-time">
         {description && (
@@ -60,16 +62,16 @@ const QuestionPage = () => {
           </div>
         )}
         {title && dayNumber && (
-          <div>
+          <Text textType='h3'>
             <span>{title}</span>
             <span className="question-day">
               {t('title', { title: t('day') })}
               {dayNumber}
             </span>
-          </div>
+          </Text>
         )}
         {Boolean(questionList?.length) && (
-          <span>{`${t('totalQuestions')} : ${questionList?.length}`}</span>
+          <Text textType='h3'>{`${t('totalQuestions')} : ${questionList?.length}`}</Text>
         )}
       </div>
       <div className="question-page-sub-container">
@@ -89,6 +91,7 @@ const QuestionPage = () => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };
