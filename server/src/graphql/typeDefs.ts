@@ -21,6 +21,7 @@ const typeDefs = gql`
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
     getBatchCode: AllBatchDataOutputType!
     getLeaderBoardData: [LeaderBoardData]
+    getVariableValue(key:String!):getVariableOutputType
   }
 
   type Mutation {
@@ -1254,7 +1255,10 @@ const typeDefs = gql`
     publicUrl: String
     response: CustomResponseType!
   }
-
+  type getVariableOutputType{
+    value:[String]
+    response:CustomResponseType!
+  }
   scalar DateTime
   scalar JSON
 `;

@@ -98,5 +98,8 @@ export const localMessages = Object.freeze({
   },
   IMAGE: {
     PUBLIC_URL_SUCCESS:"successfully generated public url"
+  },
+  VARIABLE: {
+    VARIABLE_FOUND:"value found successfully",
   }
 });
