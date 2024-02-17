@@ -1,6 +1,12 @@
 import React from "react";
 
-export const EditIcon: React.FC<SvgIconProps> =({height,width,className,fillColor,isDarkMode})=> {
+export const EditIcon: React.FC<SvgIconProps> = ({
+  height = "25",
+  width = "25",
+  className,
+  fillColor,
+  isDarkMode,
+}) => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -26,4 +32,4 @@ export const EditIcon: React.FC<SvgIconProps> =({height,width,className,fillColo
       </g>
     </svg>
   );
-}
+};
