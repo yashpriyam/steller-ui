@@ -59,6 +59,9 @@ const questionSchema = new Schema<QuestionSchemaType>({
     enum: questionTypes,
     required: true,
   },
+  questionTypeTags: {
+    type:[String]
+  },
   answer: {
     type: [{ imageUrl: String, text: String, iframe: String }],
     required: true,
