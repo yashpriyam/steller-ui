@@ -1,7 +1,7 @@
 import { apolloClient } from "../graphql/apolloClient/apolloClient";
 import { GET_VARIABLE_VALUE } from "../graphql/query/variable/getVariableValue";
 
-export const getValiableValue = async (key: string) => {
+export const getVariableValue = async (key: string) => {
   try {
     const response = await apolloClient.query({
       query: GET_VARIABLE_VALUE,
