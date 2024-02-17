@@ -3,7 +3,7 @@ import { User, questionAttempt, questionModel } from "@models";
 import {
   isLoggedIn,
   getUnauthorizedResponse,
-  checkPaidUser,
+  checkPaidUser, QuestionTypeObject,
   isAdmin,
 } from "@utils";
 import mongoose from "mongoose";
@@ -92,7 +92,13 @@ export const getAllQuestions = async (
     });
     let totalCorrectQuestions = 0;
     const updatedQuestionList = questionList.map((questionData) => {
-      if (questionData.questionType === "codeblock") {
+      const { questionType } = questionData || {};
+      const questionTypes = {
+        Single: questionType===QuestionTypeObject.single,
+        Multi: questionType===QuestionTypeObject.multi,
+        Codeblock: questionType===QuestionTypeObject.codeblock,
+      }
+      if (questionTypes.Codeblock) {
         return questionData;
       }
       const updatedQuestionData = {
@@ -102,7 +108,7 @@ export const getAllQuestions = async (
       };
       const attemptData = questionAttemptIdMap[questionData._id.toString()];
       if (attemptData) {
-        if (attemptData.isCorrect) {
+        if (attemptData.isCorrect && (questionTypes.Single || questionTypes.Multi)) {
           totalCorrectQuestions += 1;
           updatedQuestionData.isCorrect = true;
         }

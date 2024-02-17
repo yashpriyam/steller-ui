@@ -1,11 +1,12 @@
 import { dayModel, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
+import { QuestionTypeObject } from "@utils";
 export const createQuestion = async (
   _parent: undefined,
   args: { questionData: QuestionSchemaType }
 ): Promise<CreateQuestionOutputType | unknown> => {
   const { QUESTION_CREATION_SUCCESS } = localMessages.QUESTION_MODEL;
-  const { QUESTION_CREATION_FAILED } = errorMessages.QUESTION_MODEL;
+  const { QUESTION_CREATION_FAILED,QUESTION_OPTIONS_NOT_FOUND } = errorMessages.QUESTION_MODEL;
   const errorData: CustomResponseType = {
     message: QUESTION_CREATION_FAILED,
     status: statusCodes.BAD_REQUEST,
@@ -31,7 +32,18 @@ export const createQuestion = async (
         },
       };
     }
-
+    const questionTypes = {
+      Single: questionType===QuestionTypeObject.single,
+      Multi: questionType===QuestionTypeObject.multi,
+    }
+    if((questionTypes.Single || questionTypes.Multi) && !Boolean(options?.length)){
+      return {
+        response : {
+          message: QUESTION_OPTIONS_NOT_FOUND,
+          status: statusCodes.BAD_REQUEST,
+        }
+      }
+    }
     const createdQuestionData: QuestionSchemaType = await questionModel.create({
       title,
       questionType,

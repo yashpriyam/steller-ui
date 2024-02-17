@@ -1,6 +1,6 @@
 import { questionAttempt, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
-import { isCorrectAnswer, getCheckedOptions, isLoggedIn, getUnauthorizedResponse } from "@utils";
+import { isCorrectAnswer, getCheckedOptions, isLoggedIn, getUnauthorizedResponse, QuestionTypeObject } from "@utils";
 export const createQuestionAttemptByUser = async (
   _parent: undefined,
   args: { questionAttemptData: QuestionAttemptInputType },
@@ -22,9 +22,19 @@ export const createQuestionAttemptByUser = async (
   try {
     const { questionAttemptData } = args;
     const { questionId, response } = questionAttemptData;
-    const question = await questionModel.findById(questionId);
-    const isCorrect = isCorrectAnswer(response, question!.answer);
-    const updatedResponse = getCheckedOptions(response, question?.options);
+    const question : QuestionSchemaType | null = await questionModel.findById(questionId);
+    const { questionType } = question || {};
+    const questionTypes = {
+      Fillup: questionType===QuestionTypeObject.fillup,
+    }
+
+    let isCorrect, updatedResponse;
+    if(questionType && questionTypes.Fillup) {
+      updatedResponse = response;
+    } else {
+        isCorrect = isCorrectAnswer(response, question!.answer);
+        updatedResponse = getCheckedOptions(response, question?.options);
+      }
     const existingQuestionAttempt = await questionAttempt.findOne({
       questionId,
       userId,

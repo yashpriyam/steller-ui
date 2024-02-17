@@ -414,7 +414,7 @@ const typeDefs = gql`
   }
   input CreateQuestionInputType {
     title: [QuestionOptionInputType!]!
-    options: [QuestionOptionInputType!]!
+    options: [QuestionOptionInputType!]
     questionType: QuestionType!
     answer: [QuestionOptionInputType!]!
     marks: Int!
