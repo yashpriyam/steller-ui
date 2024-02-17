@@ -14,7 +14,7 @@ export const createQuestion = async (
 
   try {
     const { questionData } = args;
-    const { title, questionType, answer, marks, options, meta } = questionData;
+    const { title, questionType, answer, marks, options, meta ,questionTypeTags } = questionData;
 
     const { batchCode, day, week } = meta;
 
@@ -51,6 +51,7 @@ export const createQuestion = async (
       options,
       answer,
       meta,
+      questionTypeTags,
     });
 
     if (!createdQuestionData) {
