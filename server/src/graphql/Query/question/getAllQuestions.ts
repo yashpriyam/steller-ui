@@ -66,7 +66,6 @@ export const getAllQuestions = async (
       const questionTypes = {
         Single: questionType===QuestionTypeObject.single,
         Multi: questionType===QuestionTypeObject.multi,
-        Fillup: questionType===QuestionTypeObject.fillup,
         Codeblock: questionType===QuestionTypeObject.codeblock,
       }
       if (questionTypes.Codeblock) {

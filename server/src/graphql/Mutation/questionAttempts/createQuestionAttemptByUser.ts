@@ -25,10 +25,7 @@ export const createQuestionAttemptByUser = async (
     const question : QuestionSchemaType | null = await questionModel.findById(questionId);
     const { questionType } = question || {};
     const questionTypes = {
-      Single: questionType===QuestionTypeObject.single,
-      Multi: questionType===QuestionTypeObject.multi,
       Fillup: questionType===QuestionTypeObject.fillup,
-      Codeblock: questionType===QuestionTypeObject.codeblock,
     }
 
     let isCorrect, updatedResponse;
