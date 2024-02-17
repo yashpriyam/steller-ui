@@ -1048,5 +1048,8 @@ declare global {
     publicUrl?: string;
     response: CustomResponseType;
   };
-
+  type getVariableOutputType = {
+    value?: string[];
+    response: CustomResponseType;
+  }
 }

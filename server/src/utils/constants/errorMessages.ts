@@ -66,7 +66,8 @@ export const errorMessages = Object.freeze({
     UNAUTHORIZED_USER: "unauthorized user",
   },
   DAY_MODEL: {
-    DAY_MODEL_REQUIRED_FIELDS: "WeekNumber, batchCode, dayNumber and date is required",
+    DAY_MODEL_REQUIRED_FIELDS:
+      "WeekNumber, batchCode, dayNumber and date is required",
     DAY_CREATION_FAILED: "unable to insert day data",
     DAY_UPDATION_FAILED: "unable to update day data",
   },
@@ -92,7 +93,7 @@ export const errorMessages = Object.freeze({
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
     USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
-    USER_PAYMENT_UPDATE_FAILED: "Failed to update user payments"
+    USER_PAYMENT_UPDATE_FAILED: "Failed to update user payments",
   },
   CITIES: {
     DATA_NOT_FOUND: "No data found for cities",
@@ -111,5 +112,8 @@ export const errorMessages = Object.freeze({
     CANNOT_FIND_MEETING_DETAILS:
       "Cannot find meeting details with given filter",
     UNABLE_TO_UPDATE_MEETINGS: "Unable to update meeting details",
+  },
+  VARIABLE: {
+    VARIABLE_NOT_FOUND: "key not found",
   },
 });
