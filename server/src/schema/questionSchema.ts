@@ -60,7 +60,7 @@ const questionSchema = new Schema<QuestionSchemaType>({
     required: true,
   },
   questionTypeTags: {
-    type:String
+    type:[String]
   },
   answer: {
     type: [{ imageUrl: String, text: String, iframe: String }],
