@@ -12,9 +12,11 @@ import { createQuestionApi } from "../../redux/actions/admin/createQuestion";
 import { validateQuestionInput } from "./validatequestionInput";
 import { getVariableValue } from "../../utils/getVariableValue";
 import { useBatch } from "../../redux/actions/batchAction";
+import { getBatches } from "../../utils/getBatches";
 export const CreateQuestionComponent: React.FC<
-  CreateQuestionComponentProps
+CreateQuestionComponentProps
 > = ({ onClose }) => {
+  const QUESTION_TYPE_TAGS = "questionTypeTags";
   const selectedBoolean = [
     {
       text: "true",
@@ -45,10 +47,10 @@ export const CreateQuestionComponent: React.FC<
     { text: "codeblock", value: "codeblock" },
   ];
   const { getBatchCode } = useBatch();
-  const [batchList, setBatchList] = useState();
+  const [batchList, setBatchList] = useState<SelectOptionType[]>();
   const [variableList, setVariableList] = useState<[]>([]);
   const getVariableList = async () => {
-    const { value } = await getVariableValue("questionTypeTags");
+    const { value } = await getVariableValue(QUESTION_TYPE_TAGS);
     const list = value?.map((listData: string) => {
       return {
         text: listData,
@@ -59,13 +61,8 @@ export const CreateQuestionComponent: React.FC<
   };
   const getBatchCodeList = async () => {
     const response = await getBatchCode();
-    const batchData = response?.data?.getBatchCode?.batchData;
-    const batches = batchData?.map((batch: {[key: string]: string}) => {
-      return {
-        text: batch?.batchCode,
-        value: batch?.batchCode,
-      };
-    });
+    const batches = getBatches(response?.data?.getBatchCode?.batchData);
+     
     setBatchList(batches);
   };
   useEffect(() => {
