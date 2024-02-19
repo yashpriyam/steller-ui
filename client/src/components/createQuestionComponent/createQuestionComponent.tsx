@@ -60,7 +60,7 @@ export const CreateQuestionComponent: React.FC<
   const getBatchCodeList = async () => {
     const response = await getBatchCode();
     const batchData = response?.data?.getBatchCode?.batchData;
-    const batches = batchData?.map((batch: any) => {
+    const batches = batchData?.map((batch: {[key: string]: string}) => {
       return {
         text: batch?.batchCode,
         value: batch?.batchCode,
