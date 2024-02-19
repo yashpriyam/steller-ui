@@ -52,7 +52,6 @@ const questionSchema = new Schema<QuestionSchemaType>({
         }]
       }
     } }],
-    required: true,
   },
   questionType: {
     type: String,

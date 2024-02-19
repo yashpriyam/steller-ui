@@ -1,7 +1,7 @@
 import { Select } from "../../components/select/select";
 import { InputComponent } from "../../components/input/inputComponent";
 import "./createQuestionComponent.scss";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Accordion from "../accordion/accordion";
 import { Options } from "../options/options";
 import { CloseCrossIcon, AddIcon } from "../../icons/index";
@@ -9,11 +9,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { createQuestionActions } from "../../redux/slices/createQuestion/createQuestionSlice";
 import { Button } from "../../components/button/button";
 import { createQuestionApi } from "../../redux/actions/admin/createQuestion";
-import Toast from "../../utils/toast";
 import { validateQuestionInput } from "./validatequestionInput";
+import { getVariableValue } from "../../utils/getVariableValue";
+import { useBatch } from "../../redux/actions/batchAction";
+import { getBatches } from "../../utils/getBatches";
 export const CreateQuestionComponent: React.FC<
-  CreateQuestionComponentProps
+CreateQuestionComponentProps
 > = ({ onClose }) => {
+  const QUESTION_TYPE_TAGS = "questionTypeTags";
   const selectedBoolean = [
     {
       text: "true",
@@ -43,6 +46,29 @@ export const CreateQuestionComponent: React.FC<
     { text: "fillup", value: "fillup" },
     { text: "codeblock", value: "codeblock" },
   ];
+  const { getBatchCode } = useBatch();
+  const [batchList, setBatchList] = useState<SelectOptionType[]>();
+  const [variableList, setVariableList] = useState<[]>([]);
+  const getVariableList = async () => {
+    const { value } = await getVariableValue(QUESTION_TYPE_TAGS);
+    const list = value?.map((listData: string) => {
+      return {
+        text: listData,
+        value: listData,
+      };
+    });
+    setVariableList(list);
+  };
+  const getBatchCodeList = async () => {
+    const response = await getBatchCode();
+    const batches = getBatches(response?.data?.getBatchCode?.batchData);
+     
+    setBatchList(batches);
+  };
+  useEffect(() => {
+    getVariableList();
+    getBatchCodeList();
+  }, []);
   const { createQuestion: createdQuestionData } = useSelector(
     (state): any => state
   );
@@ -56,8 +82,8 @@ export const CreateQuestionComponent: React.FC<
   });
   const [isRequiredFiledError, setIsRequiredFiledError] =
     useState<boolean>(false);
-  const handleOnSetBatchCode = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleOnSetBatchCode = (option: SelectOptionType) => {
+    const value = option.value;
     const path = `meta.batchCode`;
     dispatch(updateState({ path, value }));
   };
@@ -111,6 +137,11 @@ export const CreateQuestionComponent: React.FC<
     const path = `questionType`;
     dispatch(updateState({ path, value }));
   };
+  const handleOnSetQuestionTypeTags = (option: SelectOptionType) => {
+    const value = option.value;
+    const path = `questionTypeTags`;
+    dispatch(updateState({ path, value }));
+  };
   const optionsList: JSX.Element[] = [];
   const titleList: JSX.Element[] = [];
   const answerList: JSX.Element[] = [];
@@ -135,8 +166,15 @@ export const CreateQuestionComponent: React.FC<
   };
   const handleOnAddQuestion = async () => {
     try {
-      const { answer, options, meta, questionType, title, marks } =
-        createdQuestionData;
+      const {
+        answer,
+        options,
+        meta,
+        questionType,
+        title,
+        marks,
+        questionTypeTags,
+      } = createdQuestionData;      
       const isValidInput = validateQuestionInput({
         meta,
         answer,
@@ -144,6 +182,7 @@ export const CreateQuestionComponent: React.FC<
         title,
         questionType,
         marks,
+        questionTypeTags,
       });
       if (!isValidInput) {
         setIsRequiredFiledError(true);
@@ -161,6 +200,7 @@ export const CreateQuestionComponent: React.FC<
         options: options,
         questionType: questionType,
         title: title,
+        questionTypeTags,
       });
       setIsQuestionAdding(false);
       const message = response?.response?.message;
@@ -186,13 +226,12 @@ export const CreateQuestionComponent: React.FC<
           <label htmlFor="batch-code" className="create-question-label">
             Batch Code:
           </label>
-          <InputComponent
+          <Select
+            className="create-question-select"
             key={"batchCode"}
-            className="create-question-input"
-            type="text"
-            onChange={handleOnSetBatchCode}
-            placeholder="Batch Code"
-          />
+            data={batchList}
+            onSelect={handleOnSetBatchCode}
+          ></Select>
         </div>
         <div className="create-question-input-wrapper">
           <label htmlFor="batch-code" className="create-question-label">
@@ -319,6 +358,18 @@ export const CreateQuestionComponent: React.FC<
             onSelect={handleOnSetQuestionType}
           ></Select>
         </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Question Type Tags :
+          </label>
+          <Select
+            className="create-question-select"
+            key={"question-type"}
+            defaultSelected="Question type"
+            data={variableList}
+            onSelect={handleOnSetQuestionTypeTags}
+          ></Select>
+        </div>
       </div>
       <Accordion title={"Title"} key={"title"} className="accordian-container">
         {titleList.map((title) => {
@@ -358,9 +409,13 @@ export const CreateQuestionComponent: React.FC<
           </span>
         </div>
       </Accordion>
-      <div className={`error-message-container ${isRequiredFiledError && "error-message-show"}`}>
-          please enter all required filed
-        </div>
+      <div
+        className={`error-message-container ${
+          isRequiredFiledError && "error-message-show"
+        }`}
+      >
+        please enter all required filed
+      </div>
       <div className="add-question-button-container">
         <Button
           key={"addButton"}
