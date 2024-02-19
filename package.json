@@ -1,6 +1,6 @@
 {
-  "name": "testing-priyam-innovations",
-  "version": "0.1.1",
+  "name": "stellerui",
+  "version": "0.1.2",
   "private": false,
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
