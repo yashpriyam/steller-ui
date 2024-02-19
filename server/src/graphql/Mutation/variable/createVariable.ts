@@ -12,8 +12,10 @@ export const createVariable = async (
   const { VARIABLE_KEY_ALREADY_EXIST, VARIABLE_NOT_CREATED } =
     errorMessages.VARIABLE;
   try {
+    // Check if user is logged in
     if (!isLoggedIn(contextData)) {
       const { message, status } = getUnauthorizedResponse();
+      // Return unauthorized response if user is not logged in
       return {
         response: {
           message,
@@ -22,9 +24,11 @@ export const createVariable = async (
       };
     }
     const { variableData } = args;
+    // Check if variable with the same key already exists
     const findVariable = await variableModel.find({ key: variableData.key });
 
     if (findVariable?.length) {
+      // Return error if variable with the same key exists
       return {
         response: {
           status: statusCodes.NOT_FOUND,
@@ -32,7 +36,9 @@ export const createVariable = async (
         },
       };
     }
+    // Create new variable
     const data: VariableSchemaType = await variableModel.create(variableData);
+    // Return success response
     return {
       data,
       response: {
