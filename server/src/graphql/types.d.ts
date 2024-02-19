@@ -245,7 +245,7 @@ declare global {
     _id: string;
     title: QuestionInfoType[];
     questionType: QuestionTypeEnum;
-    options: QuestionInfoType[];
+    options ?: QuestionInfoType[];
     answer: QuestionInfoType[];
     marks: number;
     meta: QuestionMetaData;

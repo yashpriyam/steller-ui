@@ -303,10 +303,11 @@ declare global {
   interface CreateQuestionInterface {
     title: QuestionOptionType[];
     questionType: "";
-    options: QuestionOptionType[];
+    options?: QuestionOptionType[];
     answer: QuestionOptionType[];
     marks: number;
     meta: QuestionMetaDataType;
+    questionTypeTags: string;
   };
 
   type QuestionMetaDataType = {
