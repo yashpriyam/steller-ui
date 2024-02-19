@@ -1056,4 +1056,12 @@ declare global {
     value?: string[];
     response: CustomResponseType;
   }
+  type VariableDataType = {
+    key?: string;
+    value?: string[]
+  }
+  type VariableDataOutputType = {
+    data?: VariableDataType;
+    response?: CustomResponseType;
+  }
 }

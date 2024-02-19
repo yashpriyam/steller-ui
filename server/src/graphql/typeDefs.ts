@@ -32,6 +32,7 @@ const typeDefs = gql`
     ): CreateTransactionOutputType
     createNotes(notesData: CreateNotesInputType!): CreateNotesOutputType
     createVideo(videoData: CreateVideoInput!): VideoOutputDataType
+    createVariable(variableData: VariableDataInput): CreateVariableOutputType
     deleteNotesById(notesId: ID!): DeletedNotesOutputType
     deleteVideoById(videoId: ID!): VideoOutputDataType
     updateVideoById(
@@ -107,6 +108,21 @@ const typeDefs = gql`
       input: UpdateUserPaymentInput
     ): UserPaymentsDataOutputType
     createImagePublicUrl(url: String!): CreateImagePublicUrlOutputType
+  }
+
+  input VariableDataInput {
+    key: String
+    value: [String]
+  }
+
+  type VariableDataType {
+    key: String
+    value: [String]
+  }
+
+  type CreateVariableOutputType {
+    data: VariableDataType
+    response: CustomResponseType!
   }
 
   input SaveUserCodeInput {
