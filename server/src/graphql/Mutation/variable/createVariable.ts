@@ -1,33 +1,50 @@
-import { variableModel } from '@models';
+import { statusCodes, localMessages, errorMessages } from "@constants";
+import { variableModel } from "@models";
+import { getUnauthorizedResponse, isLoggedIn } from "@utils";
+import { response } from "express";
 
 export const createVariable = async (
   _parent: undefined,
-  args: { variableData: VariableDataType }
+  args: { variableData: VariableDataType },
+  { contextData }: ContextType
 ): Promise<VariableDataOutputType> => {
+  const { VARIABLE_CREATED } = localMessages.VARIABLE;
+  const { VARIABLE_KEY_ALREADY_EXIST, VARIABLE_NOT_CREATED } =
+    errorMessages.VARIABLE;
   try {
+    if (!isLoggedIn(contextData)) {
+      const { message, status } = getUnauthorizedResponse();
+      return {
+        response: {
+          message,
+          status,
+        },
+      };
+    }
     const { variableData } = args;
-
     const findVariable = await variableModel.find({ key: variableData.key });
 
-    if (!findVariable?.length) {
-      await variableModel.create(variableData);
+    if (findVariable?.length) {
+      return {
+        response: {
+          status: statusCodes.NOT_FOUND,
+          message: VARIABLE_KEY_ALREADY_EXIST,
+        },
+      };
     }
-    console.log({ findVariable });
-    console.log(variableData);
+    const data: VariableSchemaType = await variableModel.create(variableData);
     return {
-      data: {},
+      data,
       response: {
-        status: 404,
-        message: 'Key already exists in variable schema',
+        status: statusCodes.OK,
+        message: VARIABLE_CREATED,
       },
     };
-} catch (error) {
-    console.log(error);
+  } catch (error) {
     return {
-      data: {},
       response: {
-        status: 404,
-        message: 'Key already exists in variable schema',
+        status: statusCodes.BAD_REQUEST,
+        message: VARIABLE_NOT_CREATED,
       },
     };
   }

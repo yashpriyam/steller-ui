@@ -84,7 +84,7 @@ export const localMessages = Object.freeze({
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_SUCCESS: "User payment created successfully.",
     USER_PAYMENTS_FETCHED_SUCCESSFULLY: "User payments fetched successfully",
-    USER_PAYMENT_UPDATE_SUCCESS: "User payments updated successfully"
+    USER_PAYMENT_UPDATE_SUCCESS: "User payments updated successfully",
   },
   MEETING_MODEL: {
     MEETING_CREATED_SUCCESSFULLY: "Meeting created successfully",
@@ -97,9 +97,10 @@ export const localMessages = Object.freeze({
     INSERTION_SUCCESS: "Successfully inserted cities data",
   },
   IMAGE: {
-    PUBLIC_URL_SUCCESS:"successfully generated public url"
+    PUBLIC_URL_SUCCESS: "successfully generated public url",
   },
   VARIABLE: {
-    VARIABLE_FOUND:"value found successfully",
-  }
+    VARIABLE_FOUND: "value found successfully",
+    VARIABLE_CREATED: "Successfully created new variable",
+  },
 });

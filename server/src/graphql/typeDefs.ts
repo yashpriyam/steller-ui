@@ -11,9 +11,11 @@ const typeDefs = gql`
       pagination: Pagination
     ): GetAllQuestionsOutputType
     getAllVideos(videoDataFilter: VideoInputFilterType): AllVideoOutputDataType
-    getScheduleData( accessWeeks: [Int]
-      weekDataFilter: WeekDataInputType sortData: SortDataInputType
-      ): WeekDataOutputType
+    getScheduleData(
+      accessWeeks: [Int]
+      weekDataFilter: WeekDataInputType
+      sortData: SortDataInputType
+    ): WeekDataOutputType
     getAllCities: CitiesOutputType
     getMeetingList(data: MeetingListFilterInputType!): MeetingListOutputType
     getUser: UserDataOutputType!
@@ -21,7 +23,7 @@ const typeDefs = gql`
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
     getBatchCode: AllBatchDataOutputType!
     getLeaderBoardData: [LeaderBoardData]
-    getVariableValue(key:String!):getVariableOutputType
+    getVariableValue(key: String!): getVariableOutputType
   }
 
   type Mutation {
@@ -436,7 +438,7 @@ const typeDefs = gql`
     answer: [QuestionOptionInputType!]!
     marks: Int!
     meta: QuestionMeta!
-    questionTypeTags:[String]
+    questionTypeTags: [String]
   }
   input QuestionOptionInputType {
     text: String!
@@ -508,7 +510,7 @@ const typeDefs = gql`
     answer: [QuestionOptionOutputType!]!
     marks: Int!
     meta: QuestionMetaOutput!
-    questionTypeTags:[String]
+    questionTypeTags: [String]
   }
   type QuestionMetaOutput {
     topic: String!
@@ -538,7 +540,7 @@ const typeDefs = gql`
     answer: [UpdateOptionInput]
     marks: Int
     meta: QuestionMetaInput
-    questionTypeTags:[String]
+    questionTypeTags: [String]
   }
   input UpdateOptionInput {
     imageUrl: String
@@ -575,7 +577,7 @@ const typeDefs = gql`
     answer: [QuestionOptionOutputType]
     marks: Int
     meta: QuestionMetaOutput
-    questionTypeTags:[String]
+    questionTypeTags: [String]
   }
   type QuestionMetaOutput {
     topic: String
@@ -630,7 +632,7 @@ const typeDefs = gql`
     answer: [AttemptQuestionOptionOutputType]
     marks: Int
     meta: QuestionMetaOutput
-    questionTypeTags:[String]
+    questionTypeTags: [String]
   }
 
   type GetAllQuestionsOutputType {
@@ -1137,12 +1139,12 @@ const typeDefs = gql`
     isPaidUser: IsPaidUsertype
   }
   type UserTemporaryAccessType {
-    allowTemporaryAccess: Boolean,
+    allowTemporaryAccess: Boolean
     allowedAccessDate: DateTime
   }
-  type IsPaidUsertype  {
+  type IsPaidUsertype {
     isPaidUser: Boolean
-    accessWeeks:[Int]
+    accessWeeks: [Int]
   }
   input PartialUserSchemaType {
     email: String
@@ -1247,21 +1249,20 @@ const typeDefs = gql`
   }
 
   enum SortDirection {
-    asc 
+    asc
     desc
   }
   input SortDataInputType {
     sortOrder: SortDirection
     sortBy: String
   }
- 
 
   type LeaderBoardData {
     _id: String
     user: UserSchemaType
     submissions: [Submission]
     rank: Int
-    totalSubmissions: Int 
+    totalSubmissions: Int
   }
   type Submission {
     _id: String
@@ -1276,9 +1277,9 @@ const typeDefs = gql`
     publicUrl: String
     response: CustomResponseType!
   }
-  type getVariableOutputType{
-    value:[String]
-    response:CustomResponseType!
+  type getVariableOutputType {
+    value: [String]
+    response: CustomResponseType!
   }
   scalar DateTime
   scalar JSON

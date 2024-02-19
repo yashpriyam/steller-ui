@@ -1,8 +1,10 @@
 import { statusCodes, errorMessages, localMessages } from "@constants";
 import { variableModel } from "@models";
+import { getUnauthorizedResponse, isLoggedIn } from "@utils";
 export const getVariableValue = async (
   _parent: undefined,
-  args: { key: string }
+  args: { key: string },
+  { contextData }: ContextType
 ): Promise<getVariableOutputType> => {
   const { VARIABLE_FOUND } = localMessages.VARIABLE;
   const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
@@ -11,6 +13,15 @@ export const getVariableValue = async (
     status: statusCodes.BAD_REQUEST,
   };
   try {
+    if (!isLoggedIn(contextData)) {
+      const { message, status } = getUnauthorizedResponse();
+      return {
+        response: {
+          message,
+          status,
+        },
+      };
+    }
     const { key } = args;
     const variableData = await variableModel.findOne({ key: key });
     const response: CustomResponseType = variableData?.value?.length
