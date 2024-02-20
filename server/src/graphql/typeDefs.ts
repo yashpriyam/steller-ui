@@ -444,6 +444,7 @@ const typeDefs = gql`
     marks: Int!
     meta: QuestionMeta!
     questionTypeTags: [String]
+    questionSubTopics: [SubTopicsType!]
   }
   input QuestionOptionInputType {
     text: String!
@@ -516,6 +517,7 @@ const typeDefs = gql`
     marks: Int!
     meta: QuestionMetaOutput!
     questionTypeTags: [String]
+    questionSubTopics: [SubTopicsOutputType!]
   }
   type QuestionMetaOutput {
     topic: String!
@@ -546,6 +548,7 @@ const typeDefs = gql`
     marks: Int
     meta: QuestionMetaInput
     questionTypeTags: [String]
+    questionSubTopics: [SubTopicsType!]
   }
   input UpdateOptionInput {
     imageUrl: String
@@ -583,6 +586,7 @@ const typeDefs = gql`
     marks: Int
     meta: QuestionMetaOutput
     questionTypeTags: [String]
+    questionSubTopics: [SubTopicsOutputType!]
   }
   type QuestionMetaOutput {
     topic: String
@@ -625,6 +629,7 @@ const typeDefs = gql`
     answer: [QuestionOptionOutputType!]!
     marks: Int!
     meta: QuestionMetaOutput!
+    questionSubTopics: [SubTopicsOutputType!]
   }
 
   type AttemptedQuestionDataType {
@@ -638,6 +643,7 @@ const typeDefs = gql`
     marks: Int
     meta: QuestionMetaOutput
     questionTypeTags: [String]
+    questionSubTopics: [SubTopicsOutputType!]
   }
 
   type GetAllQuestionsOutputType {
@@ -1299,11 +1305,9 @@ const typeDefs = gql`
     isMandatory: Boolean
     createdAt: DateTime
     updatedAt: DateTime
-}
+  }
 
-
-
-type UserGoalCompletion {
+  type UserGoalCompletion {
     userId: UserSchemaType
     goalId: Goal
     completedAt: DateTime
@@ -1311,45 +1315,45 @@ type UserGoalCompletion {
     weekNumber: Int
     createdAt: DateTime
     updatedAt: DateTime
-}
-type GoalOutputType {
-  goal: Goal
-  response: CustomResponseType
- }
- input GoalInputType {
-  title: String!
-  description: String
-  goalType: String
-  isAutomated: Boolean
-  frequency: String
-  isActive: Boolean
-  startWeek: String
-  endWeek: String
-  questionList: [String]
-  topicList: [String]
-  batchCode: String!
-  isMandatory: Boolean
-}
+  }
+  type GoalOutputType {
+    goal: Goal
+    response: CustomResponseType
+  }
+  input GoalInputType {
+    title: String!
+    description: String
+    goalType: String
+    isAutomated: Boolean
+    frequency: String
+    isActive: Boolean
+    startWeek: String
+    endWeek: String
+    questionList: [String]
+    topicList: [String]
+    batchCode: String!
+    isMandatory: Boolean
+  }
 
-input UpdateGoalInputType {
-  title: String
-  description: String
-  goalType: String
-  isAutomated: Boolean
-  frequency: String
-  isActive: Boolean
-  startWeek: String
-  endWeek: String
-  questionList: [String]
-  topicList: [String]
-  batchCode: String
-  isMandatory: Boolean
-}
+  input UpdateGoalInputType {
+    title: String
+    description: String
+    goalType: String
+    isAutomated: Boolean
+    frequency: String
+    isActive: Boolean
+    startWeek: String
+    endWeek: String
+    questionList: [String]
+    topicList: [String]
+    batchCode: String
+    isMandatory: Boolean
+  }
 
-type GoalListOutputType {
-  goals: [Goal]
-  response: CustomResponseType
-}
+  type GoalListOutputType {
+    goals: [Goal]
+    response: CustomResponseType
+  }
 
   type getVariableOutputType {
     value: [String]
@@ -1363,12 +1367,12 @@ type GoalListOutputType {
     title: String
   }
   type CreateTopicOutputType {
-    topicData:TopicDataType
+    topicData: TopicDataType
     response: CustomResponseType!
   }
   type TopicDataType {
-    topic:String
-    subTopics:[SubTopicsOutputType]
+    topic: String
+    subTopics: [SubTopicsOutputType]
   }
   type SubTopicsOutputType {
     title: String

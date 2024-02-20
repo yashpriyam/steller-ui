@@ -250,7 +250,11 @@ declare global {
     marks: number;
     meta: QuestionMetaData;
     questionTypeTags?: string[];
+    questionSubTopics?:QuestionSubTopicsType[]
   };
+  type questionSubTopicsType = {
+    title:string,
+  }
 
   type QuestionOptionType = {
     text: string;
