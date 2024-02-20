@@ -8,7 +8,7 @@ import {
   isValidPhoneNumber,
   uploadImage,
   imageVariableKeys,
-  getVariableValuesByKey
+  getSubFolderNameByKey,
 } from "@utils";
 import { UserInputError } from "apollo-server-express";
 import { errorMessages, localMessages, statusCodes } from "@constants";
@@ -58,19 +58,14 @@ export const registerUser = async (
     }
     let cloudinaryImageData = {};
     if (profileImage && typeof profileImage === "string") {
-      const baseFolderName = 
-          await getVariableValuesByKey(imageVariableKeys.cloudinaryBaseFolder)
-      const subFolderName = 
-          await getVariableValuesByKey(imageVariableKeys.profileImages)
-    if (!subFolderName || !baseFolderName) return {
-      response: {
-        message: VARIABLE_NOT_FOUND,
-        status:statusCodes.BAD_REQUEST,
-      },
-    }
-    const imageFolderName = `${baseFolderName?.value[0]}/${subFolderName?.value[0]}`
-    console.log({subFolderName, imageFolderName})
-      const {publicId,secureUrl} = await uploadImage(profileImage, imageFolderName);
+      const folderName = await getSubFolderNameByKey(imageVariableKeys.profileImages)
+      if (!folderName) return {
+        response: {
+          message: VARIABLE_NOT_FOUND,
+          status:statusCodes.BAD_REQUEST,
+        },
+      }
+      const {publicId,secureUrl} = await uploadImage(profileImage, folderName);
       cloudinaryImageData = {
         publicId,
         secureUrl,

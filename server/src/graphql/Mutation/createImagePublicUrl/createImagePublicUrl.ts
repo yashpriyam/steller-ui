@@ -1,5 +1,5 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { getVariableValuesByKey, imageVariableKeys, uploadImage } from "@utils";
+import { getSubFolderNameByKey, imageVariableKeys, uploadImage } from "@utils";
 
 export const createImagePublicUrl = async (
   _parent: undefined,
@@ -14,16 +14,14 @@ export const createImagePublicUrl = async (
   };
   try {
       const { url } = args;
-      const baseFolderName = await getVariableValuesByKey(imageVariableKeys.cloudinaryBaseFolder)
-      const subFolderName = await getVariableValuesByKey(imageVariableKeys.questions)
-      if (!subFolderName || !baseFolderName) return {
+      const folderName = await getSubFolderNameByKey(imageVariableKeys.questions);
+      if (!folderName) return {
         response: {
           message: VARIABLE_NOT_FOUND,
           status:statusCodes.BAD_REQUEST,
         },
       }
-    const imageFolderName = `${baseFolderName?.value[0]}/${subFolderName?.value[0]}`
-    const { secureUrl } = await uploadImage(url, imageFolderName);      
+    const { secureUrl } = await uploadImage(url, folderName);      
     return {
       publicUrl:secureUrl,
       response: {

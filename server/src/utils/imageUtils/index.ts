@@ -3,3 +3,4 @@ export { deleteImage } from "./deleteImage";
 export { getImage } from "./getImage";
 export { uploadImage } from "./uploadImage";
 export { uploadImageList } from "./uploadImageList";
+export { getSubFolderNameByKey } from "./getSubFolderNameByKey";

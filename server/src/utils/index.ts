@@ -11,7 +11,7 @@ export { generateNestedUpdate } from "./generateNestedFields";
 export { getRandomNumOfDigits } from "./random";
 export { getEmailVerificationMessage } from "./getHtmlForSendingEmail";
 export { 
-  getImage, deleteImage, imageVariableKeys,uploadImage,uploadImageList 
+  getImage, deleteImage, imageVariableKeys,uploadImage,uploadImageList, getSubFolderNameByKey 
 } from "./imageUtils/index";
 export { getUnauthorizedResponse } from "./getUnauthorizedResponse";
 export { isLoggedIn } from "./isLoggedIn";

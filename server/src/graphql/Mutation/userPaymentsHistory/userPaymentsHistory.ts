@@ -1,6 +1,6 @@
 import { batchModel, userPaymentModel, variableModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { getUnauthorizedResponse, getVariableValuesByKey, imageVariableKeys, isLoggedIn, uploadImage } from "@utils";
+import { getSubFolderNameByKey, getUnauthorizedResponse, getVariableValuesByKey, imageVariableKeys, isLoggedIn, uploadImage } from "@utils";
 
 export const createUserPayment = async (
   parent: undefined,
@@ -27,21 +27,13 @@ export const createUserPayment = async (
 
     const batch = await batchModel.findOne({batchCode: input.batch})
 
-    const baseFolderName = await getVariableValuesByKey(imageVariableKeys.cloudinaryBaseFolder)
-    const subFolderName = await getVariableValuesByKey(imageVariableKeys.userPaymentReceipt)
-    if (!subFolderName || !baseFolderName) return {
-      response: {
-        message: VARIABLE_NOT_FOUND,
-        status:statusCodes.BAD_REQUEST,
-      },
-    }
-    const imageFolderName = `${baseFolderName?.value[0]}/${subFolderName?.value[0]}`
+    const folderName = await getSubFolderNameByKey(imageVariableKeys.userPaymentReceipt);
 
     const { feePlan, installmentId, isApproved, isRejected, isPending } = input
     // Validate required input fields
-    if (!input.imageUrl || !imageFolderName || !installmentId) return { response: errorData };
+    if (!input.imageUrl || !folderName || !installmentId) return { response: errorData };
 
-    const imageData = await uploadImage(input.imageUrl, imageFolderName)
+    const imageData = await uploadImage(input.imageUrl, folderName)
 
     // Create the user payment in the database
     const newUserPaymentData = await userPaymentModel.create({

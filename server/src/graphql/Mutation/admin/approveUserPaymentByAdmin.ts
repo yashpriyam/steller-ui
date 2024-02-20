@@ -7,7 +7,7 @@ import {
   uploadImage,
   generatePaymentApprovalEmail,
   imageVariableKeys,
-  getVariableValuesByKey,
+  getSubFolderNameByKey,
 } from "@utils";
 
 export const approveUserPaymentByAdmin = async (
@@ -33,20 +33,12 @@ export const approveUserPaymentByAdmin = async (
 
     const { paymentId, image, isApproved, isPending, isRejected } = input;
 
-    const baseFolderName = await getVariableValuesByKey(imageVariableKeys.cloudinaryBaseFolder)
-    const subFolderName = await getVariableValuesByKey(imageVariableKeys.userPaymentReceipt)
-    if (!subFolderName || !baseFolderName) return {
-      response: {
-        message: VARIABLE_NOT_FOUND,
-        status:statusCodes.BAD_REQUEST,
-      },
-    }
-    const imageFolderName = `${baseFolderName?.value[0]}/${subFolderName?.value[0]}`
+    const folderName = await getSubFolderNameByKey(imageVariableKeys.profileImages);
     // Validate required input fields
-    if (!paymentId || !image || !imageFolderName)
+    if (!paymentId || !image || !folderName)
       return { response: errorData };
 
-    const imageData = await uploadImage(image, imageFolderName);
+    const imageData = await uploadImage(image, folderName);
 
     // Update the user payment information
     const updatedUserPaymentData = await userPaymentModel
