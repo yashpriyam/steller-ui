@@ -33,7 +33,6 @@ const questionSchema = new Schema<QuestionSchemaType>({
         }]
       }
     } }],
-    required: true,
   },
   options: {
     type: [{ imageUrl: String, text: String, iframe: String, codeBlock: {
@@ -56,30 +55,30 @@ const questionSchema = new Schema<QuestionSchemaType>({
   questionType: {
     type: String,
     enum: questionTypes,
-    required: true,
   },
   questionTypeTags: {
     type:[String]
   },
+  questionSubTopics: {
+    type:[{title:String}]
+  },
   answer: {
     type: [{ imageUrl: String, text: String, iframe: String }],
-    required: true,
   },
   marks: { type: Number, default: 1 },
   meta: {
-    topic: { type: String, required: true },
-    batchCode: { type: String, required: true },
-    week: { type: Number, required: true },
-    day: { type: Number, required: true },
-    isActive: { type: Boolean, required: true },
-    isArchived: { type: Boolean, required: true },
+    topic: { type: String},
+    batchCode: { type: String},
+    week: { type: Number},
+    day: { type: Number},
+    isActive: { type: Boolean},
+    isArchived: { type: Boolean},
     type: {
       type: String,
       enum: questionDurationTypes,
-      required: true,
     },
-    expiresInMins: { type: Number, required: true },
-    isOpenable: { type: Boolean, required: true },
+    expiresInMins: { type: Number},
+    isOpenable: { type: Boolean},
   },
 });
 
