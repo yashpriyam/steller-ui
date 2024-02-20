@@ -23,6 +23,8 @@ const typeDefs = gql`
     getUserCode(input: GetUserCodeInputType): GetUserCodeOutput
     getBatchCode: AllBatchDataOutputType!
     getLeaderBoardData: [LeaderBoardData]
+    getAllGoals: GoalListOutputType!
+
     getVariableValue(key: String!): getVariableOutputType
   }
 
@@ -110,6 +112,8 @@ const typeDefs = gql`
       input: UpdateUserPaymentInput
     ): UserPaymentsDataOutputType
     createImagePublicUrl(url: String!): CreateImagePublicUrlOutputType
+    createNewGoal(input: GoalInputType): GoalOutputType
+    updateGoal(id: ID!, input: UpdateGoalInputType!): GoalOutputType
   }
 
   input VariableDataInput {
@@ -1277,6 +1281,76 @@ const typeDefs = gql`
     publicUrl: String
     response: CustomResponseType!
   }
+
+  type Goal {
+    title: String!
+    description: String
+    goalType: String
+    isAutomated: Boolean
+    frequency: String
+    isActive: Boolean
+    startWeek: Int
+    endWeek: Int
+    questionList: [String]
+    topicList: [String]
+    subTopicList: [String]
+    batchCode: String!
+    isMandatory: Boolean
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+
+
+
+type UserGoalCompletion {
+    userId: UserSchemaType
+    goalId: Goal
+    completedAt: DateTime
+    userResponse: JSON
+    weekNumber: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+}
+type GoalOutputType {
+  goal: Goal
+  response: CustomResponseType
+ }
+ input GoalInputType {
+  title: String!
+  description: String
+  goalType: String
+  isAutomated: Boolean
+  frequency: String
+  isActive: Boolean
+  startWeek: String
+  endWeek: String
+  questionList: [String]
+  topicList: [String]
+  batchCode: String!
+  isMandatory: Boolean
+}
+
+input UpdateGoalInputType {
+  title: String
+  description: String
+  goalType: String
+  isAutomated: Boolean
+  frequency: String
+  isActive: Boolean
+  startWeek: String
+  endWeek: String
+  questionList: [String]
+  topicList: [String]
+  batchCode: String
+  isMandatory: Boolean
+}
+
+type GoalListOutputType {
+  goals: [Goal]
+  response: CustomResponseType
+}
+
+
   type getVariableOutputType {
     value: [String]
     response: CustomResponseType!
