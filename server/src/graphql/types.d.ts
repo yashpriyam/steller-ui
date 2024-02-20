@@ -1064,4 +1064,8 @@ declare global {
     data?: VariableDataType;
     response: CustomResponseType;
   };
+  type TopicSchemaType = {
+    topic: string;
+    subTopics:{title:string}[]
+  }
 }
