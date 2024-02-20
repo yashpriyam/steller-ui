@@ -1,6 +1,8 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import {
   getUnauthorizedResponse,
+  getVariableValuesByKey,
+  imageVariableKeys,
   isLoggedIn,
   updateImage,
   uploadImage,
@@ -26,18 +28,27 @@ export const updateProfilePicture = async (
       status: statusCodes.BAD_REQUEST,
     },
   };
+  const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
   try {
     if (!image) {
       return errorResponse;
     }
-
+    const baseFolderName = await getVariableValuesByKey(imageVariableKeys.cloudinaryBaseFolder)
+    const subFolderName = await getVariableValuesByKey(imageVariableKeys.profileImages)
+    if (!subFolderName || !baseFolderName) return {
+      response: {
+        message: VARIABLE_NOT_FOUND,
+        status:statusCodes.BAD_REQUEST,
+      },
+    }
+    const imageFolderName = `${baseFolderName?.value[0]}/${subFolderName?.value[0]}`
     const response = userData?.profileImage?.publicId
       ? await updateImage(
           image,
-          USER_PROFILE_PICTURES_FOLDER,
+          imageFolderName,
           userData.profileImage.publicId
         )
-      : await uploadImage(image, USER_PROFILE_PICTURES_FOLDER);
+      : await uploadImage(image, imageFolderName);
 
     const { publicId, secureUrl } = response;
 

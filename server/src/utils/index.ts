@@ -10,10 +10,9 @@ export { removeNullAndUndefinedKeys } from "./removeNullAndUndefinedKeys";
 export { generateNestedUpdate } from "./generateNestedFields";
 export { getRandomNumOfDigits } from "./random";
 export { getEmailVerificationMessage } from "./getHtmlForSendingEmail";
-export { uploadImage } from "./imageUtils/uploadImage";
-export { uploadImageList } from "./imageUtils/uploadImageList";
-export { deleteImage } from "./imageUtils/deleteImage";
-export { getImage } from "./imageUtils/getImage";
+export { 
+  getImage, deleteImage, imageVariableKeys,uploadImage,uploadImageList 
+} from "./imageUtils/index";
 export { getUnauthorizedResponse } from "./getUnauthorizedResponse";
 export { isLoggedIn } from "./isLoggedIn";
 export { updateImage } from "./updateImage";
@@ -26,3 +25,4 @@ export { checkPaidUser } from "./checkPaidUser"
 export { generatePaymentApprovalEmail } from "./getPaymentApprovalHtml"
 export { sortDirection } from "./sortUtils";
 export { QuestionTypeObject } from "./questionTypeEnum";
+export { getVariableValuesByKey } from "./getVariableValuesByKey";

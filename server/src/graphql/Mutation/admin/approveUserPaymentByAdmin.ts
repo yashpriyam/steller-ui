@@ -1,4 +1,4 @@
-import { userPaymentModel, variableModel } from "@models";
+import { userPaymentModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import {
   getUnauthorizedResponse,
@@ -6,6 +6,8 @@ import {
   sendEmail,
   uploadImage,
   generatePaymentApprovalEmail,
+  imageVariableKeys,
+  getVariableValuesByKey,
 } from "@utils";
 
 export const approveUserPaymentByAdmin = async (
@@ -14,6 +16,7 @@ export const approveUserPaymentByAdmin = async (
   { contextData }: ContextType
 ): Promise<UserPaymentDataOutputType | unknown> => {
   const { USER_PAYMENT_UPDATE_FAILED } = errorMessages.USER_PAYMENT_MODEL;
+  const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
   const errorData: CustomResponseType = {
     message: USER_PAYMENT_UPDATE_FAILED,
     status: statusCodes.BAD_REQUEST,
@@ -30,15 +33,20 @@ export const approveUserPaymentByAdmin = async (
 
     const { paymentId, image, isApproved, isPending, isRejected } = input;
 
-    const imageFolderName = await variableModel.findOne({
-      key: "userPaymentReceiptFolder",
-    });
-
+    const baseFolderName = await getVariableValuesByKey(imageVariableKeys.cloudinaryBaseFolder)
+    const subFolderName = await getVariableValuesByKey(imageVariableKeys.userPaymentReceipt)
+    if (!subFolderName || !baseFolderName) return {
+      response: {
+        message: VARIABLE_NOT_FOUND,
+        status:statusCodes.BAD_REQUEST,
+      },
+    }
+    const imageFolderName = `${baseFolderName?.value[0]}/${subFolderName?.value[0]}`
     // Validate required input fields
     if (!paymentId || !image || !imageFolderName)
       return { response: errorData };
 
-    const imageData = await uploadImage(image, imageFolderName?.value[0]);
+    const imageData = await uploadImage(image, imageFolderName);
 
     // Update the user payment information
     const updatedUserPaymentData = await userPaymentModel
