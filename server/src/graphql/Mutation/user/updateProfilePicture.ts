@@ -1,14 +1,14 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import {
+  getSubFolderNameByKey,
   getUnauthorizedResponse,
+  imageVariableKeys,
   isLoggedIn,
   updateImage,
   uploadImage,
 } from "@utils";
 
 import { User } from "../../../schema/userSchema";
-
-const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
 
 export const updateProfilePicture = async (
   _: undefined,
@@ -26,18 +26,25 @@ export const updateProfilePicture = async (
       status: statusCodes.BAD_REQUEST,
     },
   };
+  const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
   try {
     if (!image) {
       return errorResponse;
     }
-
+    const PROFILE_IMAGE_FOLDER = await getSubFolderNameByKey(imageVariableKeys.profileImages);
+    if (!PROFILE_IMAGE_FOLDER) return {
+      response: {
+        message: VARIABLE_NOT_FOUND,
+        status:statusCodes.BAD_REQUEST,
+      },
+    }
     const response = userData?.profileImage?.publicId
       ? await updateImage(
           image,
-          USER_PROFILE_PICTURES_FOLDER,
+          PROFILE_IMAGE_FOLDER,
           userData.profileImage.publicId
         )
-      : await uploadImage(image, USER_PROFILE_PICTURES_FOLDER);
+      : await uploadImage(image, PROFILE_IMAGE_FOLDER);
 
     const { publicId, secureUrl } = response;
 

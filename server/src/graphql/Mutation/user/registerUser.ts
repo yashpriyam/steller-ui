@@ -7,10 +7,11 @@ import {
   isValidEmail,
   isValidPhoneNumber,
   uploadImage,
+  imageVariableKeys,
+  getSubFolderNameByKey,
 } from "@utils";
 import { UserInputError } from "apollo-server-express";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
 
 export const registerUser = async (
   _parent: undefined,
@@ -18,6 +19,7 @@ export const registerUser = async (
   { res, req }: ContextType,
 ): Promise<RegisterOutputType | UserInputError | unknown> => {
   const { USER_EXIST } = errorMessages.USER;
+  const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
   const { USER_REGISTERED_SUCCESSFULLY} = localMessages.USER;
   try {
     const { data } = args;
@@ -56,7 +58,14 @@ export const registerUser = async (
     }
     let cloudinaryImageData = {};
     if (profileImage && typeof profileImage === "string") {
-      const {publicId,secureUrl} = await uploadImage(profileImage, USER_PROFILE_PICTURES_FOLDER);
+      const PROFILE_IMAGE_FOLDER = await getSubFolderNameByKey(imageVariableKeys.profileImages)
+      if (!PROFILE_IMAGE_FOLDER) return {
+        response: {
+          message: VARIABLE_NOT_FOUND,
+          status:statusCodes.BAD_REQUEST,
+        },
+      }
+      const {publicId,secureUrl} = await uploadImage(profileImage, PROFILE_IMAGE_FOLDER);
       cloudinaryImageData = {
         publicId,
         secureUrl,

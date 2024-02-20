@@ -1,6 +1,8 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import {
+  getSubFolderNameByKey,
   getUnauthorizedResponse,
+  imageVariableKeys,
   isLoggedIn,
   updateImage,
   uploadImage,
@@ -18,11 +20,11 @@ export const updateCoverImage = async (
   }
   const { data } = args;
   const { image } = data;
-  const USER_COVER_IMAGE_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
   const { user } = contextData;
   const { _id: userId } = user;
   const { IMAGE_UPLOADED_SUCCESSFULLY } = localMessages.USER;
   const { UPLOAD_IMAGE_FAILED } = errorMessages.USER;
+  const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
   const errorResponse: CustomResponseType = {
     message: UPLOAD_IMAGE_FAILED,
     status: statusCodes.BAD_REQUEST,
@@ -30,6 +32,13 @@ export const updateCoverImage = async (
   try {
     if (!image) {
       return errorResponse;
+    }
+    const USER_COVER_IMAGE_FOLDER = await getSubFolderNameByKey(imageVariableKeys.profileImages);
+    if (!USER_COVER_IMAGE_FOLDER) return {
+      response: {
+        message: VARIABLE_NOT_FOUND,
+        status:statusCodes.BAD_REQUEST,
+      },
     }
     const response = user?.coverImage?.publicId
       ? await updateImage(

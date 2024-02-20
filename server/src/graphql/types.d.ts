@@ -1101,6 +1101,12 @@ type UserGoalCompletion = {
     data?: VariableDataType;
     response: CustomResponseType;
   };
+  type CloudinaryCrendentialsType = {
+    cloudinaryApiKey?: string;
+    cloudinaryApiSecret?: string;
+    cloudinaryCloudName?: string;
+    [key?: string]: string;
+  };
   type TopicSchemaType = {
     topic: string;
     subTopics:{title:string}[]

@@ -1,6 +1,6 @@
 import { batchModel, userPaymentModel, variableModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { getUnauthorizedResponse, isLoggedIn, uploadImage } from "@utils";
+import { getSubFolderNameByKey, getUnauthorizedResponse, imageVariableKeys, isLoggedIn, uploadImage } from "@utils";
 
 export const createUserPayment = async (
   parent: undefined,
@@ -8,6 +8,7 @@ export const createUserPayment = async (
   { contextData }: ContextType
 ): Promise<UserPaymentDataOutputType> => {
   const { USER_PAYMENT_CREATION_FAILED } = errorMessages.USER_PAYMENT_MODEL;
+  const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
   const errorData: CustomResponseType = {
     message: USER_PAYMENT_CREATION_FAILED,
     status: statusCodes.BAD_REQUEST,
@@ -26,14 +27,13 @@ export const createUserPayment = async (
 
     const batch = await batchModel.findOne({batchCode: input.batch})
 
-    const imageFolderName = await variableModel.findOne({key: 'userPaymentReceiptFolder'})
-
+    const USER_PAYMENT_FOLDER = await getSubFolderNameByKey(imageVariableKeys.userPaymentReceipt);
 
     const { feePlan, installmentId, isApproved, isRejected, isPending } = input
     // Validate required input fields
-    if (!input.imageUrl || !imageFolderName?.value || !installmentId) return { response: errorData };
+    if (!input.imageUrl || !USER_PAYMENT_FOLDER || !installmentId) return { response: errorData };
 
-    const imageData = await uploadImage(input.imageUrl, imageFolderName?.value[0])
+    const imageData = await uploadImage(input.imageUrl, USER_PAYMENT_FOLDER)
 
     // Create the user payment in the database
     const newUserPaymentData = await userPaymentModel.create({
