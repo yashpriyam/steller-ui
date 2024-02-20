@@ -18,4 +18,7 @@ export { cityModel } from "./citySchema";
 export { meetingModel } from "./meetingSchema";
 export {  variableModel } from "./variablesSchema"
 export { userCodeModel } from "./userCodeSchema"
+export { Goal } from "./goalSchema"
+export { UserGoalCompletion } from "./userGoalCompletionSchema"
+export { goalTypeModel } from "./goalTypeSchema"
 export { topicModel } from "./topicSchema";
