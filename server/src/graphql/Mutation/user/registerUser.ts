@@ -12,7 +12,6 @@ import {
 } from "@utils";
 import { UserInputError } from "apollo-server-express";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
 
 export const registerUser = async (
   _parent: undefined,

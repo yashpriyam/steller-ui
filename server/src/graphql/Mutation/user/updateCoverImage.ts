@@ -1,6 +1,8 @@
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import {
   getUnauthorizedResponse,
+  getVariableValuesByKey,
+  imageVariableKeys,
   isLoggedIn,
   updateImage,
   uploadImage,
@@ -18,11 +20,11 @@ export const updateCoverImage = async (
   }
   const { data } = args;
   const { image } = data;
-  const USER_COVER_IMAGE_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
   const { user } = contextData;
   const { _id: userId } = user;
   const { IMAGE_UPLOADED_SUCCESSFULLY } = localMessages.USER;
   const { UPLOAD_IMAGE_FAILED } = errorMessages.USER;
+  const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
   const errorResponse: CustomResponseType = {
     message: UPLOAD_IMAGE_FAILED,
     status: statusCodes.BAD_REQUEST,
@@ -31,13 +33,24 @@ export const updateCoverImage = async (
     if (!image) {
       return errorResponse;
     }
+    const baseFolderName = 
+          await getVariableValuesByKey(imageVariableKeys.cloudinaryBaseFolder)
+    const subFolderName = 
+          await getVariableValuesByKey(imageVariableKeys.profileImages)
+    if (!subFolderName || !baseFolderName) return {
+      response: {
+        message: VARIABLE_NOT_FOUND,
+        status:statusCodes.BAD_REQUEST,
+      },
+    }
+    const imageFolderName = `${baseFolderName?.value[0]}/${subFolderName?.value[0]}`
     const response = user?.coverImage?.publicId
       ? await updateImage(
           image,
-          USER_COVER_IMAGE_FOLDER,
+          imageFolderName,
           user.coverImage.publicId
         )
-      : await uploadImage(image, USER_COVER_IMAGE_FOLDER);
+      : await uploadImage(image, imageFolderName);
     const { publicId, secureUrl } = response;
     await User.findByIdAndUpdate(
       userId,

@@ -10,8 +10,6 @@ import {
 
 import { User } from "../../../schema/userSchema";
 
-const USER_PROFILE_PICTURES_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
-
 export const updateProfilePicture = async (
   _: undefined,
   { image }: ImageUploadArgs,

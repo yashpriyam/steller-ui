@@ -5,7 +5,6 @@ export const createImagePublicUrl = async (
   _parent: undefined,
   args: { url: string }
 ): Promise<CreateImagePublicUrlOutputType> => {
-  const USER_COVER_IMAGE_FOLDER = process.env.CLOUDINARY_IMAGE_FOLDER || "";
   const { PUBLIC_URL_SUCCESS } = localMessages.IMAGE;
   const { PUBLIC_URL_FAILED } = errorMessages.IMAGE;
   const { VARIABLE_NOT_FOUND } = errorMessages.VARIABLE;
