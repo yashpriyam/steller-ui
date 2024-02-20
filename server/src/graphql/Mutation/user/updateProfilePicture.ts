@@ -2,7 +2,6 @@ import { localMessages, errorMessages, statusCodes } from "@constants";
 import {
   getSubFolderNameByKey,
   getUnauthorizedResponse,
-  getVariableValuesByKey,
   imageVariableKeys,
   isLoggedIn,
   updateImage,

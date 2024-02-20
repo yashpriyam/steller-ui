@@ -25,4 +25,4 @@ export { checkPaidUser } from "./checkPaidUser"
 export { generatePaymentApprovalEmail } from "./getPaymentApprovalHtml"
 export { sortDirection } from "./sortUtils";
 export { QuestionTypeObject } from "./questionTypeEnum";
-export { getVariableValuesByKey } from "./getVariableValuesByKey";
+export { getCloudinaryCredentials } from "./getCloudinaryCredentials";

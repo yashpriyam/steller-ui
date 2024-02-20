@@ -1064,4 +1064,10 @@ declare global {
     data?: VariableDataType;
     response: CustomResponseType;
   };
+  type CloudinaryCrendentialsType = {
+    cloudinaryApiKey?: string;
+    cloudinaryApiSecret?: string;
+    cloudinaryCloudName?: string;
+    [key?: string]: string;
+  };
 }

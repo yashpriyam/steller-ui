@@ -1,6 +1,6 @@
 import { batchModel, userPaymentModel, variableModel } from "@models";
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { getSubFolderNameByKey, getUnauthorizedResponse, getVariableValuesByKey, imageVariableKeys, isLoggedIn, uploadImage } from "@utils";
+import { getSubFolderNameByKey, getUnauthorizedResponse, imageVariableKeys, isLoggedIn, uploadImage } from "@utils";
 
 export const createUserPayment = async (
   parent: undefined,
