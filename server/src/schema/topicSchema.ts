@@ -4,7 +4,7 @@ const topicSchema = new Schema<TopicSchemaType>({
   subTopics: [{ title: String }],
 });
 
-export const TopicModel = model<TopicSchemaType>(
+export const topicModel = model<TopicSchemaType>(
   "topic",
   topicSchema
 );

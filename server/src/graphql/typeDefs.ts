@@ -110,6 +110,7 @@ const typeDefs = gql`
       input: UpdateUserPaymentInput
     ): UserPaymentsDataOutputType
     createImagePublicUrl(url: String!): CreateImagePublicUrlOutputType
+    createTopic(topicData: CreateTopicInputType!): CreateTopicOutputType
   }
 
   input VariableDataInput {
@@ -1280,6 +1281,24 @@ const typeDefs = gql`
   type getVariableOutputType {
     value: [String]
     response: CustomResponseType!
+  }
+  input CreateTopicInputType {
+    topic: String!
+    subTopics: [SubTopicsType!]!
+  }
+  input SubTopicsType {
+    title: String
+  }
+  type CreateTopicOutputType {
+    topicData:TopicDataType
+    response: CustomResponseType!
+  }
+  type TopicDataType {
+    topic:String
+    subTopics:[SubTopicsOutputType]
+  }
+  type SubTopicsOutputType {
+    title: String
   }
   scalar DateTime
   scalar JSON

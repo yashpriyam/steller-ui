@@ -103,4 +103,7 @@ export const localMessages = Object.freeze({
     VARIABLE_FOUND: "value found successfully",
     VARIABLE_CREATED: "Successfully created new variable",
   },
+  TOPIC: {
+    CREATION_SUCCESS: "topic creation successful",
+  },
 });

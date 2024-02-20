@@ -17,4 +17,5 @@ export { userPaymentModel } from "./userPaymentSchema";
 export { cityModel } from "./citySchema";
 export { meetingModel } from "./meetingSchema";
 export {  variableModel } from "./variablesSchema"
-export {  userCodeModel } from "./userCodeSchema"
+export { userCodeModel } from "./userCodeSchema"
+export { topicModel } from "./topicSchema";
