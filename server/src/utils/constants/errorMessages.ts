@@ -111,4 +111,9 @@ export const errorMessages = Object.freeze({
       "Cannot find meeting details with given filter",
     UNABLE_TO_UPDATE_MEETINGS: "Unable to update meeting details",
   },
+  GOAL_MODEL: {
+    GOAL_CREATION_FAILED: "Failed to create new goal.",
+    GOAL_UPDATE_FAILED: "Failed to update the goal.",
+    GOAL_FETCH_FAILED: "Failed to fetch goals."
+  }
 });

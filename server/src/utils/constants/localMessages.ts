@@ -98,5 +98,10 @@ export const localMessages = Object.freeze({
   },
   IMAGE: {
     PUBLIC_URL_SUCCESS:"successfully generated public url"
+  },
+  GOAL_MODEL: {
+    GOAL_CREATION_SUCCESS: "New goal has been created successfully.",
+    GOAL_UPDATE_SUCCESS: "The goal has been updated successfully.",
+    GOAL_FETCH_SUCCESS: "Goals fetched"
   }
 });

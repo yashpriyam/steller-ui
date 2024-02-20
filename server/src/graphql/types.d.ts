@@ -1049,4 +1049,41 @@ declare global {
     response: CustomResponseType;
   };
 
+  type IGoal = {
+    title: string;
+    description?: string;
+    goalType?: ObjectId;
+    isAutomated?: boolean;
+    frequency?: 'daily' | 'weekly' | 'any';
+    isActive?: boolean;
+    startWeek?: WeekDataType;
+    endWeek?: WeekDataType;
+    questionList?: QuestionDataType[];
+    topicList?: string[];
+    subTopicList?: string[];
+    dependedOn?: JSON;
+    batchCode: ObjectId;
+    isMandatory?: boolean;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+type UserGoalCompletion = {
+  userId: UserSchemaType;
+  goalId: IGoal;
+  completedAt?: Date;
+  userResponse?: JSON; 
+  weekNumber?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+ type GoalOutputType = {
+  goal?: IGoal;
+  response: CustomResponseType;
+ }
+ type GoalsOutputType = {
+  goals?: IGoal[];
+  response: CustomResponseType;
+ }
+
 }

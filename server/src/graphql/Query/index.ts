@@ -10,3 +10,4 @@ export { getUser } from "./user/index";
 export { getUserCode } from "./code/getUserCode";
 export { getBatchCode } from "./batch/getBatchCode";
 export { getLeaderBoardData } from "./leaderboard"
+export { getAllGoals } from "./goal/index"

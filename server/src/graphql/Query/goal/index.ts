@@ -1,0 +1,1 @@
+export { getAllGoals } from "./getAllGoals"
