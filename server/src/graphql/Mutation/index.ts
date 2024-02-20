@@ -34,3 +34,4 @@ export { getAllUserPayments, approveUserPaymentByAdmin, rejectUserPaymentByAdmin
 export { createImagePublicUrl } from "./createImagePublicUrl/createImagePublicUrl"
 export { createNewGoal, updateGoal } from "./goal/index"
 export { createVariable } from "./variable/createVariable";
+export { createTopic } from "./admin/topic/createTopic"

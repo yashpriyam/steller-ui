@@ -3,7 +3,7 @@ import { weekModel } from "./weekSchema";
 import { questionModel } from "./questionSchema";
 import { goalTypeModel } from "./goalTypeSchema";
 import { batchModel } from "./batchSchema";
-import { TopicModel } from "./topicSchema";
+import { topicModel } from "./topicSchema";
 
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -39,7 +39,7 @@ const goalSchema = new mongoose.Schema<Goal>(
     topicList: [
       {
         type: ObjectId,
-        ref: TopicModel
+        ref: topicModel
       },
     ],
     dependedOn: {

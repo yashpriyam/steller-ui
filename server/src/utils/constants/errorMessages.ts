@@ -10,6 +10,7 @@ export const errorMessages = Object.freeze({
     USER_UPDATE_FAILED: "User update failed.",
     USER_NOT_FOUND: "User not found.",
     USER_FETCH_FAILED: "Failed to fetch user information.",
+    USER_IS_NOT_ADMIN: "Only admin have access, unauthorized access",
   },
   PROGRAMS: {
     NOT_FOUND: "program is not active or not exists",
@@ -123,5 +124,9 @@ export const errorMessages = Object.freeze({
     VARIABLE_NOT_FOUND: "key not found",
     VARIABLE_KEY_ALREADY_EXIST: "Key already exists in variable schema",
     VARIABLE_NOT_CREATED: "Variable  not created",
+  },
+  TOPIC: {
+    CREATION_FAILED: "topic creation failed",
+    TOPIC_DUPLICACY:"topic already exist"
   },
 });

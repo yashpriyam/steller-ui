@@ -114,6 +114,7 @@ const typeDefs = gql`
     createImagePublicUrl(url: String!): CreateImagePublicUrlOutputType
     createNewGoal(input: GoalInputType): GoalOutputType
     updateGoal(id: ID!, input: UpdateGoalInputType!): GoalOutputType
+    createTopic(topicData: CreateTopicInputType!): CreateTopicOutputType
   }
 
   input VariableDataInput {
@@ -1350,10 +1351,27 @@ type GoalListOutputType {
   response: CustomResponseType
 }
 
-
   type getVariableOutputType {
     value: [String]
     response: CustomResponseType!
+  }
+  input CreateTopicInputType {
+    topic: String!
+    subTopics: [SubTopicsType!]!
+  }
+  input SubTopicsType {
+    title: String
+  }
+  type CreateTopicOutputType {
+    topicData:TopicDataType
+    response: CustomResponseType!
+  }
+  type TopicDataType {
+    topic:String
+    subTopics:[SubTopicsOutputType]
+  }
+  type SubTopicsOutputType {
+    title: String
   }
   scalar DateTime
   scalar JSON
