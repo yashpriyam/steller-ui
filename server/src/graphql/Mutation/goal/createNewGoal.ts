@@ -19,7 +19,6 @@ export const createNewGoal = async (
     isMandatory,
     questionList,
     startWeek,
-    subTopicList,
     topicList,
   } = args.input;
 
@@ -48,7 +47,6 @@ export const createNewGoal = async (
     isMandatory,
     questionList,
     startWeek,
-    subTopicList,
     topicList,
   })
 

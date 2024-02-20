@@ -1063,8 +1063,7 @@ declare global {
     startWeek?: WeekDataType;
     endWeek?: WeekDataType;
     questionList?: QuestionDataType[];
-    topicList?: string[];
-    subTopicList?: string[];
+    topicList?: TopicSchemaType[];
     dependedOn?: JSON;
     batchCode: ObjectId;
     isMandatory?: boolean;

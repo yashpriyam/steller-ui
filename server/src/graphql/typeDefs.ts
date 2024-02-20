@@ -1330,7 +1330,6 @@ type GoalOutputType {
   endWeek: String
   questionList: [String]
   topicList: [String]
-  subTopicList: [String]
   batchCode: String!
   isMandatory: Boolean
 }
@@ -1346,7 +1345,6 @@ input UpdateGoalInputType {
   endWeek: String
   questionList: [String]
   topicList: [String]
-  subTopicList: [String]
   batchCode: String
   isMandatory: Boolean
 }

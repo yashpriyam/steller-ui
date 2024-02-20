@@ -21,7 +21,6 @@ export const updateGoal = async (
         isMandatory,
         questionList,
         startWeek,
-        subTopicList,
         topicList,
       }
     } = args;
@@ -53,7 +52,6 @@ export const updateGoal = async (
           isMandatory,
           questionList,
           startWeek,
-          subTopicList,
           topicList,
         }
       }, { new: true });
