@@ -1052,6 +1052,43 @@ declare global {
     publicUrl?: string;
     response: CustomResponseType;
   };
+
+  type Goal = {
+    title: string;
+    description?: string;
+    goalType?: ObjectId;
+    isAutomated?: boolean;
+    frequency?: 'daily' | 'weekly' | 'any';
+    isActive?: boolean;
+    startWeek?: WeekDataType;
+    endWeek?: WeekDataType;
+    questionList?: QuestionDataType[];
+    topicList?: TopicSchemaType[];
+    dependedOn?: JSON;
+    batchCode: ObjectId;
+    isMandatory?: boolean;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
+
+type UserGoalCompletion = {
+  userId: UserSchemaType;
+  goalId: Goal;
+  completedAt?: Date;
+  userResponse?: JSON; 
+  weekNumber?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+ type GoalOutputType = {
+  goal?: Goal;
+  response: CustomResponseType;
+ }
+ type GoalsOutputType = {
+  goals?: Goal[];
+  response: CustomResponseType;
+ }
+
   type getVariableOutputType = {
     value?: string[];
     response: CustomResponseType;

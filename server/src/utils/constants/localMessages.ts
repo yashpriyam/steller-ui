@@ -103,4 +103,9 @@ export const localMessages = Object.freeze({
     VARIABLE_FOUND: "value found successfully",
     VARIABLE_CREATED: "Successfully created new variable",
   },
+  GOAL_MODEL: {
+    GOAL_CREATION_SUCCESS: "New goal has been created successfully.",
+    GOAL_UPDATE_SUCCESS: "The goal has been updated successfully.",
+    GOAL_FETCH_SUCCESS: "Goals fetched"
+  }
 });
