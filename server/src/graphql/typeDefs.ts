@@ -1351,7 +1351,6 @@ type GoalListOutputType {
   response: CustomResponseType
 }
 
-
   type getVariableOutputType {
     value: [String]
     response: CustomResponseType!
