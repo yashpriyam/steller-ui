@@ -33,8 +33,8 @@ export const updateCoverImage = async (
     if (!image) {
       return errorResponse;
     }
-    const folderName = await getSubFolderNameByKey(imageVariableKeys.profileImages);
-    if (!folderName) return {
+    const USER_COVER_IMAGE_FOLDER = await getSubFolderNameByKey(imageVariableKeys.profileImages);
+    if (!USER_COVER_IMAGE_FOLDER) return {
       response: {
         message: VARIABLE_NOT_FOUND,
         status:statusCodes.BAD_REQUEST,
@@ -43,10 +43,10 @@ export const updateCoverImage = async (
     const response = user?.coverImage?.publicId
       ? await updateImage(
           image,
-          folderName,
+          USER_COVER_IMAGE_FOLDER,
           user.coverImage.publicId
         )
-      : await uploadImage(image, folderName);
+      : await uploadImage(image, USER_COVER_IMAGE_FOLDER);
     const { publicId, secureUrl } = response;
     await User.findByIdAndUpdate(
       userId,

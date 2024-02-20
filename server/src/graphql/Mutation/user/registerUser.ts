@@ -58,14 +58,14 @@ export const registerUser = async (
     }
     let cloudinaryImageData = {};
     if (profileImage && typeof profileImage === "string") {
-      const folderName = await getSubFolderNameByKey(imageVariableKeys.profileImages)
-      if (!folderName) return {
+      const PROFILE_IMAGE_FOLDER = await getSubFolderNameByKey(imageVariableKeys.profileImages)
+      if (!PROFILE_IMAGE_FOLDER) return {
         response: {
           message: VARIABLE_NOT_FOUND,
           status:statusCodes.BAD_REQUEST,
         },
       }
-      const {publicId,secureUrl} = await uploadImage(profileImage, folderName);
+      const {publicId,secureUrl} = await uploadImage(profileImage, PROFILE_IMAGE_FOLDER);
       cloudinaryImageData = {
         publicId,
         secureUrl,

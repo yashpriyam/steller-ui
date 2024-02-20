@@ -14,14 +14,14 @@ export const createImagePublicUrl = async (
   };
   try {
       const { url } = args;
-      const folderName = await getSubFolderNameByKey(imageVariableKeys.questions);
-      if (!folderName) return {
+      const QUESTIONS_FOLDER = await getSubFolderNameByKey(imageVariableKeys.questions);
+      if (!QUESTIONS_FOLDER) return {
         response: {
           message: VARIABLE_NOT_FOUND,
           status:statusCodes.BAD_REQUEST,
         },
       }
-    const { secureUrl } = await uploadImage(url, folderName);      
+    const { secureUrl } = await uploadImage(url, QUESTIONS_FOLDER);      
     return {
       publicUrl:secureUrl,
       response: {

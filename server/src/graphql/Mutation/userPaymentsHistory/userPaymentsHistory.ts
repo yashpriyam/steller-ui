@@ -27,13 +27,13 @@ export const createUserPayment = async (
 
     const batch = await batchModel.findOne({batchCode: input.batch})
 
-    const folderName = await getSubFolderNameByKey(imageVariableKeys.userPaymentReceipt);
+    const USER_PAYMENT_FOLDER = await getSubFolderNameByKey(imageVariableKeys.userPaymentReceipt);
 
     const { feePlan, installmentId, isApproved, isRejected, isPending } = input
     // Validate required input fields
-    if (!input.imageUrl || !folderName || !installmentId) return { response: errorData };
+    if (!input.imageUrl || !USER_PAYMENT_FOLDER || !installmentId) return { response: errorData };
 
-    const imageData = await uploadImage(input.imageUrl, folderName)
+    const imageData = await uploadImage(input.imageUrl, USER_PAYMENT_FOLDER)
 
     // Create the user payment in the database
     const newUserPaymentData = await userPaymentModel.create({

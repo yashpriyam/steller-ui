@@ -33,12 +33,12 @@ export const approveUserPaymentByAdmin = async (
 
     const { paymentId, image, isApproved, isPending, isRejected } = input;
 
-    const folderName = await getSubFolderNameByKey(imageVariableKeys.profileImages);
+    const USER_PAYMENT_IMAGE_FOLDER = await getSubFolderNameByKey(imageVariableKeys.profileImages);
     // Validate required input fields
-    if (!paymentId || !image || !folderName)
+    if (!paymentId || !image || !USER_PAYMENT_IMAGE_FOLDER)
       return { response: errorData };
 
-    const imageData = await uploadImage(image, folderName);
+    const imageData = await uploadImage(image, USER_PAYMENT_IMAGE_FOLDER);
 
     // Update the user payment information
     const updatedUserPaymentData = await userPaymentModel

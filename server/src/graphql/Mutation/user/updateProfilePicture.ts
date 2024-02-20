@@ -32,8 +32,8 @@ export const updateProfilePicture = async (
     if (!image) {
       return errorResponse;
     }
-    const folderName = await getSubFolderNameByKey(imageVariableKeys.profileImages);
-    if (!folderName) return {
+    const PROFILE_IMAGE_FOLDER = await getSubFolderNameByKey(imageVariableKeys.profileImages);
+    if (!PROFILE_IMAGE_FOLDER) return {
       response: {
         message: VARIABLE_NOT_FOUND,
         status:statusCodes.BAD_REQUEST,
@@ -42,10 +42,10 @@ export const updateProfilePicture = async (
     const response = userData?.profileImage?.publicId
       ? await updateImage(
           image,
-          folderName,
+          PROFILE_IMAGE_FOLDER,
           userData.profileImage.publicId
         )
-      : await uploadImage(image, folderName);
+      : await uploadImage(image, PROFILE_IMAGE_FOLDER);
 
     const { publicId, secureUrl } = response;
 
