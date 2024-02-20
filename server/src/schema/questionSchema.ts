@@ -52,12 +52,14 @@ const questionSchema = new Schema<QuestionSchemaType>({
         }]
       }
     } }],
-    required: true,
   },
   questionType: {
     type: String,
     enum: questionTypes,
     required: true,
+  },
+  questionTypeTags: {
+    type:[String]
   },
   answer: {
     type: [{ imageUrl: String, text: String, iframe: String }],

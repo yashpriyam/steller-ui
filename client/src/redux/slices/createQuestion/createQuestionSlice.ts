@@ -14,6 +14,7 @@ const initialState = {
     expiresInMins: null,
     isOpenable: null,
   },
+  questionTypeTags:"",
   questionType: "",
   marks: null,
 };

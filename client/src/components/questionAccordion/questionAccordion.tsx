@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Accordion from "../accordion/accordion";
 import "./questionAccordion.scss";
 import { Checkbox } from "../checkbox/checkbox";
@@ -8,7 +8,7 @@ import CodeBlock from "../../components/codeBlock/codeBlock";
 import { CheckedIcon } from "../../icons/CheckedIcon";
 import { useUserCode } from "../../redux/actions/userCodeActions";
 import { useUser } from "../../redux/actions/userAction";
-import { EditzIcon, DeleteIcon } from "../../icons/index";
+import { EditIcon, DeleteIcon } from "../../icons/index";
 const QuestionAccordion = ({
   questionData,
   onSubmit,
@@ -21,7 +21,7 @@ const QuestionAccordion = ({
 }: QuestionAccordionProps) => {
   const [selectedValues, setSelectedValues] = useState<CheckboxValueType[]>([]);
   const { title, options, questionType } = questionData;
-  const [fillupValue, setFillupValue] = useState<string>("");
+  const [fillupValue, setFillupValue] = useState<CheckboxValueType[]>([]);
   const isFillupType = questionType === "fillup";
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
@@ -31,7 +31,7 @@ const QuestionAccordion = ({
     : !selectedValues.length || isLoading;
   const handleOnSubmitQuestion = async () => {
     setIsLoading(true);
-    await onSubmit(questionData, selectedValues);
+    await onSubmit(questionData, isFillupType ? fillupValue : selectedValues);
     setIsLoading(false);
   };
   const { userCodeData } = useUserCode();
@@ -55,6 +55,9 @@ const QuestionAccordion = ({
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
   }
+  useEffect(()=>{
+    setFillupValue(options)
+  },[options])
   return (
     <Accordion
       className={`question-title ${className}`}
@@ -78,7 +81,7 @@ const QuestionAccordion = ({
             {isAdmin ? (
               <div className="edit-delete-wrapper">
                 <span onClick={handleEdit}>
-                  <EditzIcon width="25px" height="25px" />
+                  <EditIcon width="25px" height="25px"/>
                 </span>
                 <span onClick={handleDelete}>
                   <DeleteIcon height="25px" width="25px" />
@@ -134,8 +137,8 @@ const QuestionAccordion = ({
               <InputComponent
                 className="question-fillup-input"
                 type="text"
-                onChange={(e) => setFillupValue(e.target.value)}
-                value={fillupValue}
+                onChange={(e) => setFillupValue([{text: e.target.value}])}
+                value={fillupValue[0]?.text}
               />
             ) : (
               questionData.questionType !== "codeblock" && (
@@ -158,7 +161,6 @@ const QuestionAccordion = ({
             ) : (
               <div className="question-incorrect-ans">{errorMsg}</div>
             ))}
-          {isAnswered && isFillupType && <iframe src={fillupValue}></iframe>}
           {questionData.questionType !== "codeblock" && (
             <div className="question-submit-btn-wrapper">
               <Button

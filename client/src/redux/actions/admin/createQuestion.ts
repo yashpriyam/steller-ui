@@ -9,6 +9,7 @@ export const createQuestionApi = () => {
     marks,
     options,
     questionType,
+    questionTypeTags,
   }: CreateQuestionInterface) => {
     const {
       batchCode,
@@ -39,6 +40,7 @@ export const createQuestionApi = () => {
             },
             marks,
             questionType,
+            questionTypeTags,
             answer,
             options,
             title,

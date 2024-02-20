@@ -303,10 +303,11 @@ declare global {
   interface CreateQuestionInterface {
     title: QuestionOptionType[];
     questionType: "";
-    options: QuestionOptionType[];
+    options?: QuestionOptionType[];
     answer: QuestionOptionType[];
     marks: number;
     meta: QuestionMetaDataType;
+    questionTypeTags: string;
   };
 
   type QuestionMetaDataType = {
@@ -567,7 +568,7 @@ declare global {
           openNewPage?: boolean;
           onClick?: (e: MouseEvent<HTMLDivElement>) => void;
           isProfile?: boolean;
-        }
+        }[]
       | false;
   }
 

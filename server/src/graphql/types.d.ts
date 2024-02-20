@@ -1,5 +1,5 @@
-import { UserProfileSchemaType } from '@models';
-import { sortDirection } from '@utils';
+import { UserProfileSchemaType } from "@models";
+import { sortDirection } from "@utils";
 import { Request, Response } from "express";
 import { ObjectId } from "mongoose";
 
@@ -112,7 +112,7 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
-    batchCode?: string
+    batchCode?: string;
   };
   type CreateNotesOutputType = {
     notesData: NotesDataType;
@@ -128,7 +128,7 @@ declare global {
     noOfPages?: number;
     description?: string;
     estimatedReadingTime?: string;
-    batchCode?: string
+    batchCode?: string;
   };
   type UpdateNotesOutputType = {
     notesData?: UpdateNotesDataType;
@@ -144,7 +144,7 @@ declare global {
     estimatedReadingTime?: string;
   };
   type NotesDataType = {
-    _id:string
+    _id: string;
     title: string;
     link: string;
     topics: [string];
@@ -153,7 +153,7 @@ declare global {
     noOfPages?: Number;
     description?: string;
     estimatedReadingTime?: string;
-    batchCode?: string
+    batchCode?: string;
   };
 
   type VideoOutputDataType = {
@@ -226,7 +226,7 @@ declare global {
     multi = "multi",
     single = "single",
     fillup = "fillup",
-    codeblock = "codeblock"
+    codeblock = "codeblock",
   }
 
   enum QuestionMetaType {
@@ -245,10 +245,11 @@ declare global {
     _id: string;
     title: QuestionInfoType[];
     questionType: QuestionTypeEnum;
-    options: QuestionInfoType[];
+    options ?: QuestionInfoType[];
     answer: QuestionInfoType[];
     marks: number;
     meta: QuestionMetaData;
+    questionTypeTags?: string[];
   };
 
   type QuestionOptionType = {
@@ -380,6 +381,7 @@ declare global {
     marks?: number;
     batchCode?: string;
     meta: QuestioinMetaDataUpdate;
+    questionTypeTags?: string[];
   };
   type QuestioinMetaDataUpdate = {
     topic?: string;
@@ -402,6 +404,7 @@ declare global {
     marks: number;
     batchCode: string;
     meta: QuestionUpdateOutputMetaData;
+    questionTypeTags?: string[];
   };
   type QuestionUpdateOutputMetaData = {
     topic: string;
@@ -433,7 +436,7 @@ declare global {
   type pagination = {
     skip: number;
     limit: number;
-  }
+  };
   type AllQuestionDataType = {
     _id: string;
     isAnswered: boolean;
@@ -444,12 +447,13 @@ declare global {
     answer: QuestionInfoType[];
     marks: number;
     meta: QuestionMetaData;
+    questionTypeTags?: string[];
   };
   type QuestionsReturnType = {
     questions: [AllQuestionDataType];
     totalQuestions: number;
     totalCorrectQuestions: number;
-    totalInCorrectQuestions:number;
+    totalInCorrectQuestions: number;
     totalUnAttemptedQuestions: number;
     response: CustomResponseType;
   };
@@ -508,7 +512,7 @@ declare global {
     password: string;
   };
   type loginOutputType = {
-    userData?: UserSchemaType
+    userData?: UserSchemaType;
     response: CustomResponseType;
     credentials?: string;
   };
@@ -576,7 +580,7 @@ declare global {
     days?: string[];
   };
   type GetWeekDataType = {
-    [key: string]: string
+    [key: string]: string;
     batchCode?: string;
     weekNumber?: number;
     date?: Date;
@@ -585,7 +589,7 @@ declare global {
     isActive?: boolean;
     isDisabledForUnpaidUsers?: boolean;
     days?: string[];
-  }
+  };
   interface paidUserSchemaType {
     username: string;
     email: string;
@@ -796,7 +800,7 @@ declare global {
   interface UpsertUserProfileOutputType {
     response: CustomResponseType;
     userProfile?: UserProfileSchemaType | null;
-  };
+  }
 
   type QuestionAttemptIdMapType = {
     [key: string]: QuestionAttemptSchemaType;
@@ -804,50 +808,50 @@ declare global {
 
   type BatchSchemaType = {
     batchCode: string;
-    paymentType?: FeePlanSchemaType; 
+    paymentType?: FeePlanSchemaType;
     paidStudents?: UserSchemaType[];
     registeredStudents?: UserSchemaType[];
     demoStudents?: UserSchemaType[];
-    startDate?: Date
+    startDate?: Date;
   };
 
   type FeePlanSchemaType = {
     batchCode?: string;
     name?: string;
     description?: string;
-    installments?: Installment[],
-    miscellaneous?: JSON
+    installments?: Installment[];
+    miscellaneous?: JSON;
   };
 
   type Installment = {
-    _id?: string
-    id? :string;
+    _id?: string;
+    id?: string;
     amount?: string;
     sequence?: string;
-    dueDate?: Date; 
+    dueDate?: Date;
     accessWeeks?: WeekDataType[]; // we'll store week data here
-    miscellaneous?: JSON
-  }
+    miscellaneous?: JSON;
+  };
 
   type UserPaymentSchemaType = {
     _id?: string;
-    user: PaidUserInputType; 
-    batch: BatchSchemaType; 
-    feePlan: FeePlanSchemaType; 
+    user: PaidUserInputType;
+    batch: BatchSchemaType;
+    feePlan: FeePlanSchemaType;
     installmentId?: string;
     isApproved?: boolean;
     isRejected?: boolean;
     isPending?: {
       totalAmount?: string;
       totalPendingAmount?: string;
-    },
+    };
     image?: ImageInputType;
     createdAt?: Date;
     updatedAt?: Date;
     imageUrl?: string;
-    rejectReason?: string
-  };  
-   
+    rejectReason?: string;
+  };
+
   type BatchDataOutputType = {
     batchData?: BatchSchemaType;
     response: CustomResponseType;
@@ -860,18 +864,18 @@ declare global {
   type UserPaymentDataOutputType = {
     userPaymentData?: UserPaymentSchemaType;
     response: CustomResponseType;
-  }
+  };
 
   type UserAllPaymentDataOutputType = {
     userPaymentData?: UserPaymentSchemaType[];
     response: CustomResponseType;
-  }
+  };
   type UserAllFeePlanDataOutputType = {
     feePlanData?: FeePlanSchemaType[];
     response: CustomResponseType;
-  }
-  
-  type CitiesOutputType = { 
+  };
+
+  type CitiesOutputType = {
     cityData?: string[];
     response: CustomResponseType;
   };
@@ -886,75 +890,75 @@ declare global {
     link?: string;
     scheduledAt?: Date;
     description?: string;
-  }
-  
+  };
+
   type MeetingReturnType = {
     meetingData?: MeetingSchemaType;
     response: CustomResponseType;
-  }
+  };
 
   type MeetingListDataType = {
     meetingList?: MeetingSchemaType[];
     response: CustomResponseType;
-  }
+  };
 
   type GetMeetingListArgsType = {
     isPaid?: boolean;
     isActive?: boolean;
     scheduledAt?: Date;
     meetingCodeList?: string[];
-  }
-  
+  };
+
   type UserDataOutputType = {
     userData?: UserSchemaType;
     response: CustomResponseType;
     isAdmin?: boolean;
     isPaidUser?: IsPaidUsertype;
-  }
+  };
   type IsPaidUsertype = {
     isPaidUser: boolean;
     accessWeeks: number[];
-  }
+  };
   type GetMeetingArgsType = {
     meetingNumber?: string;
     meetingCode?: string;
     title?: string;
-  }
+  };
 
   type GetMeetingOutputType = {
     meetingData?: MeetingSchemaType | null;
-    response: CustomResponseType
-  }
+    response: CustomResponseType;
+  };
 
   type UpdateMeetingFilterType = {
     meetingNumber?: string;
     meetingCode?: string;
     title?: string;
-  }
+  };
   interface VariableSchemaType extends Document {
     key: string;
     value: string[];
   }
-  
+
   type Code = {
     html?: string;
     css?: string;
     js?: string;
   };
-  
+
   type UserCode = {
     questionId: string;
     weekNumber?: number;
     dayNumber?: number;
     code?: Code;
   };
-  
+
   type CodeInput = {
     html?: string;
     css?: string;
     js?: string;
   };
-  
+
   type SaveUserCodeInput = {
     questionId: string;
     weekNumber?: number;
@@ -964,21 +968,21 @@ declare global {
 
   type UpdateUserPaymentSchemaType = {
     installmentId?: string;
-    user: PaidUserInputType; 
-    batch: BatchSchemaType; 
-    feePlan: FeePlanSchemaType; 
+    user: PaidUserInputType;
+    batch: BatchSchemaType;
+    feePlan: FeePlanSchemaType;
     installmentId?: string;
     isApproved?: boolean;
     isRejected?: boolean;
     isPending?: {
       totalAmount?: string;
       totalPendingAmount?: string;
-    },
+    };
     image?: ImageInputType;
     createdAt?: Date;
-    updatedAt?: Date
-    imageUrl?: string
-  };  
+    updatedAt?: Date;
+    imageUrl?: string;
+  };
 
   type GetUserCodeInput = {
     questionId?: string;
@@ -991,33 +995,33 @@ declare global {
     questionId?: string;
     weekNumber?: number;
     dayNumber?: number;
-    userId?: ObjectId | string
-  }
+    userId?: ObjectId | string;
+  };
 
   type UserPaymentsDataOutputType = {
     userPaymentData?: UserPaymentSchemaType[];
     response: CustomResponseType;
-  }
+  };
 
   type UpdateUserPaymentInput = {
-    paymentId: string
-    isApproved? :boolean
+    paymentId: string;
+    isApproved?: boolean;
     isApproved?: boolean;
     isRejected?: boolean;
     isPending?: {
       totalAmount?: string;
       totalPendingAmount?: string;
-    },
+    };
     image?: string;
-    rejectReason?: string
-  }
+    rejectReason?: string;
+  };
 
   interface PaymentApprovalEmailData {
     status: string;
     date: string;
     receiptImageUrl?: string;
     userEmail: string;
-    rejectReason?: string
+    rejectReason?: string;
   }
   type AllBatchDataOutputType = {
     batchData?: BatchSchemaType[];
@@ -1027,18 +1031,18 @@ declare global {
   type SortDataType = {
     sortOrder?: SortDirectionType;
     sortBy?: string;
-  }
+  };
 
   interface LeaderBoardData {
     _id: mongoose.Types.ObjectId;
     user: UserSchemaType;
     submissions: Submission[];
     rank?: number;
-    totalSubmissions?: number 
+    totalSubmissions?: number;
   }
   interface Submission {
     _id: mongoose.Types.ObjectId;
-    code: Code; 
+    code: Code;
     dayNumber: number;
     questionId: mongoose.Types.ObjectId;
     createdAt: Date;
@@ -1086,4 +1090,20 @@ type UserGoalCompletion = {
   response: CustomResponseType;
  }
 
+  type getVariableOutputType = {
+    value?: string[];
+    response: CustomResponseType;
+  };
+  type VariableDataType = {
+    key?: string;
+    value?: string[];
+  };
+  type VariableDataOutputType = {
+    data?: VariableDataType;
+    response: CustomResponseType;
+  };
+  type TopicSchemaType = {
+    topic: string;
+    subTopics:{title:string}[]
+  }
 }

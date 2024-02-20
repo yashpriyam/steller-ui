@@ -9,7 +9,7 @@ import { EducationalSection } from '../../components/educationSection/educationS
 import { ProfileAvatar } from '../../icons/profileAvatar';
 import { ProfileBackGroundImg } from '../../icons/profileBackGroundImg';
 import SaveIcon from '../../icons/saveIcon';
-import EditIcon from '../../icons/editIcon';
+import { EditIcon } from '../../icons/editIcon';
 import UploadIcon from '../../icons/fileUploadIcon';
 import CrossIcon from '../../icons/CrossIcon';
 import Accordion from '../../components/accordion/accordion';

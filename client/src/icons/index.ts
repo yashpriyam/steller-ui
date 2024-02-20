@@ -18,7 +18,7 @@ export { CheckedIcon } from "./CheckedIcon";
 export { SortIcon } from "./sortIcon";
 export { PremiumMemberIcon } from "./premiumMemberIcon";
 export { LeaderBoard } from "./leaderboard";
-export { EditzIcon } from "./editzIcon";
+export { EditIcon } from "./editIcon";
 export { DeleteIcon } from "./deleteIcon";
 export { AddIcon } from "./addIcon"
 export { CloseCrossIcon } from "./closeCrossIcon"

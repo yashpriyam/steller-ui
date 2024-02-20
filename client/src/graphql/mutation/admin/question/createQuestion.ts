@@ -60,6 +60,7 @@ export const CREATE_QUESTION = gql`
           }
         }
         questionType
+        questionTypeTags
         meta {
           batchCode
           day

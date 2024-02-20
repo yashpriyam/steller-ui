@@ -10,7 +10,8 @@ import {
   VideoIcon,
   NameIcon,
   PaymentIcon,
-  LeaderBoard
+  LeaderBoard,
+  EditIcon,
 } from "./icons/index";
 import { useTranslation } from "react-i18next";
 import { useUser } from "./redux/actions/userAction";
@@ -54,13 +55,20 @@ export const useAppData = (): UseAppDataReturnType => {
         <AvatarIcon isDarkMode={true} />
       ),
       url: "/profile",
-      moreInfo:{ batchCode },
+      moreInfo: { batchCode },
     },
-    admin: user.isAdmin && {
-      image: <PaymentIcon isDarkMode={true} />,
-      text: t("all_users_payments"),
-      url: "/admin/usersPayments",
-    },
+    admin: user.isAdmin && [
+      {
+        image: <PaymentIcon isDarkMode={true} />,
+        text: t("all_users_payments"),
+        url: "/admin/usersPayments",
+      },
+      {
+        text: t("create_question"),
+        image: <EditIcon height="25" width="25"/>,
+        url: "/admin/createQuestions",
+      },
+    ],
     optionsAtFirst: [
       // {
       //   text: t("search"),
@@ -95,8 +103,8 @@ export const useAppData = (): UseAppDataReturnType => {
       },
       {
         text: t("Leaderboard"),
-        image: <LeaderBoard/>,
-        url: "/leaderboard"
+        image: <LeaderBoard />,
+        url: "/leaderboard",
       },
     ],
     optionAtLast: {

@@ -36,7 +36,7 @@ const QuestionPage = () => {
     try {
       await createQuestionAttemptByUser(filteredData, question._id);
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   };
   useEffect(() => {

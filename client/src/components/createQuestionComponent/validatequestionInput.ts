@@ -21,7 +21,6 @@ export const validateQuestionInput = ({
     }    
   if (title.length === 0) return false;
   if (answer.length === 0) return false;
-  if (options.length === 0) return false;
     for (let i = 0; i < title.length; i++) {
       if (!title[i].text) {        
       return false;
@@ -32,7 +31,7 @@ export const validateQuestionInput = ({
       return false;
     }
   }
-  for (let i = 0; i < options.length; i++) {
+  if(options) for (let i = 0; i < options.length; i++) {
     if (!options[i].text) {
       return false;
     }

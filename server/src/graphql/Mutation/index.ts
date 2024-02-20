@@ -33,3 +33,4 @@ export { saveUserCode } from './code/saveUserCode';
 export { getAllUserPayments, approveUserPaymentByAdmin, rejectUserPaymentByAdmin } from "./admin/index"
 export { createImagePublicUrl } from "./createImagePublicUrl/createImagePublicUrl"
 export { createNewGoal, updateGoal } from "./goal/index"
+export { createVariable } from "./variable/createVariable";

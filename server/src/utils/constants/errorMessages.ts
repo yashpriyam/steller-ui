@@ -33,6 +33,8 @@ export const errorMessages = Object.freeze({
     QUESTION_CREATION_FAILED: "unable to add question data",
     QUESTION_UPDATION_FAILED: "unable to update question data",
     QUESTION_NOT_FOUND: "questions not found",
+    QUESTION_OPTIONS_NOT_FOUND:
+      "unable to create a multiple choice question without options",
   },
   OTP_MODEL: {
     OTP_SENT_FAILED: "Failed to send OTP",
@@ -65,7 +67,8 @@ export const errorMessages = Object.freeze({
     UNAUTHORIZED_USER: "unauthorized user",
   },
   DAY_MODEL: {
-    DAY_MODEL_REQUIRED_FIELDS: "WeekNumber, batchCode, dayNumber and date is required",
+    DAY_MODEL_REQUIRED_FIELDS:
+      "WeekNumber, batchCode, dayNumber and date is required",
     DAY_CREATION_FAILED: "unable to insert day data",
     DAY_UPDATION_FAILED: "unable to update day data",
   },
@@ -91,7 +94,7 @@ export const errorMessages = Object.freeze({
   USER_PAYMENT_MODEL: {
     USER_PAYMENT_CREATION_FAILED: "User payment creation failed.",
     USER_PAYMENT_FETCH_FAILED: "Failed to fetch user payments",
-    USER_PAYMENT_UPDATE_FAILED: "Failed to update user payments"
+    USER_PAYMENT_UPDATE_FAILED: "Failed to update user payments",
   },
   CITIES: {
     DATA_NOT_FOUND: "No data found for cities",
@@ -115,5 +118,10 @@ export const errorMessages = Object.freeze({
     GOAL_CREATION_FAILED: "Failed to create new goal.",
     GOAL_UPDATE_FAILED: "Failed to update the goal.",
     GOAL_FETCH_FAILED: "Failed to fetch goals."
-  }
+  },
+  VARIABLE: {
+    VARIABLE_NOT_FOUND: "key not found",
+    VARIABLE_KEY_ALREADY_EXIST: "Key already exists in variable schema",
+    VARIABLE_NOT_CREATED: "Variable  not created",
+  },
 });
