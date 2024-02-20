@@ -1287,7 +1287,7 @@ const typeDefs = gql`
     description: String
     goalType: String
     isAutomated: Boolean
-    frequency: Frequency
+    frequency: String
     isActive: Boolean
     startWeek: Int
     endWeek: Int
@@ -1300,11 +1300,7 @@ const typeDefs = gql`
     updatedAt: DateTime
 }
 
-enum Frequency {
-    daily
-    weekly
-    any
-}
+
 
 type UserGoalCompletion {
     userId: UserSchemaType
@@ -1324,7 +1320,7 @@ type GoalOutputType {
   description: String
   goalType: String
   isAutomated: Boolean
-  frequency: Frequency
+  frequency: String
   isActive: Boolean
   startWeek: String
   endWeek: String
@@ -1339,7 +1335,7 @@ input UpdateGoalInputType {
   description: String
   goalType: String
   isAutomated: Boolean
-  frequency: Frequency
+  frequency: String
   isActive: Boolean
   startWeek: String
   endWeek: String

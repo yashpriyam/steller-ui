@@ -7,7 +7,7 @@ import { TopicModel } from "./topicSchema";
 
 const { ObjectId } = mongoose.Schema.Types;
 
-const goalSchema = new mongoose.Schema<IGoal>(
+const goalSchema = new mongoose.Schema<Goal>(
   {
     title: String,
     description: String,
@@ -20,7 +20,6 @@ const goalSchema = new mongoose.Schema<IGoal>(
     },
     frequency: {
       type: String,
-      enum: ["daily", "weekly", "any"],
     },
     isActive: Boolean,
     startWeek: {
@@ -60,4 +59,4 @@ const goalSchema = new mongoose.Schema<IGoal>(
   }
 );
 
-export const Goal = mongoose.model<IGoal>("Goal", goalSchema);
+export const Goal = mongoose.model<Goal>("Goal", goalSchema);

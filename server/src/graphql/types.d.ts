@@ -1053,7 +1053,7 @@ declare global {
     response: CustomResponseType;
   };
 
-  type IGoal = {
+  type Goal = {
     title: string;
     description?: string;
     goalType?: ObjectId;
@@ -1073,7 +1073,7 @@ declare global {
 
 type UserGoalCompletion = {
   userId: UserSchemaType;
-  goalId: IGoal;
+  goalId: Goal;
   completedAt?: Date;
   userResponse?: JSON; 
   weekNumber?: number;
@@ -1081,11 +1081,11 @@ type UserGoalCompletion = {
   updatedAt?: Date;
 }
  type GoalOutputType = {
-  goal?: IGoal;
+  goal?: Goal;
   response: CustomResponseType;
  }
  type GoalsOutputType = {
-  goals?: IGoal[];
+  goals?: Goal[];
   response: CustomResponseType;
  }
 

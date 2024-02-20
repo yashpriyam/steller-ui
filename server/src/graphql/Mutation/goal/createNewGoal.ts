@@ -3,7 +3,7 @@ import { Goal } from "@models";
 
 export const createNewGoal = async (
   parent: undefined,
-  args: { input: IGoal }
+  args: { input: Goal }
 ): Promise<GoalOutputType | undefined> => {
 
   const {
