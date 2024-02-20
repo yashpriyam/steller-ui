@@ -11,10 +11,13 @@ export const createTopic = async (
   const { USER_IS_NOT_ADMIN } = errorMessages.USER;
   const { CREATION_FAILED, TOPIC_DUPLICACY } = errorMessages.TOPIC;
   try {
+    // Extracting user information from context
     const { user } = contextData;
     const { email } = user;
+    // Checking if the user is an admin
     const isAdminUser = await isAdmin(email);
     if (!isAdminUser) {
+      // Return unauthorized response if user is not an admin
       return {
         response: {
           message: USER_IS_NOT_ADMIN,
@@ -22,10 +25,13 @@ export const createTopic = async (
         },
       };
     }
+    // Extracting topic data from arguments
     const { topicData } = args;
-    const { subTopics, topic } = topicData; 
+    const { subTopics, topic } = topicData;
+    // Checking if the topic already exists
     const isTopicExist = await topicModel.exists({ topic });
     if (isTopicExist) {
+      // Return error response if the topic already exists
       return {
         response: {
           message: TOPIC_DUPLICACY,
@@ -33,10 +39,12 @@ export const createTopic = async (
         },
       };
     }
+    // Creating the new topic
     const topicResponse: TopicSchemaType = await topicModel.create({
       topic,
       subTopics,
     });
+    // Returning success response with created topic data
     return {
       topicData: topicResponse,
       response: {
@@ -46,6 +54,7 @@ export const createTopic = async (
     };
   } catch (error) {
     return {
+      // Handling errors and returning error response
       response: {
         message: CREATION_FAILED,
         status: statusCodes.BAD_REQUEST,
