@@ -23,7 +23,7 @@ export const createTopic = async (
       };
     }
     const { topicData } = args;
-    const { subTopics, topic } = topicData;
+    const { subTopics, topic } = topicData; 
     const isTopicExist = await topicModel.exists({ topic });
     if (isTopicExist) {
       return {
