@@ -72,11 +72,26 @@ export const getAllQuestions = async (
     if (!isAdminUser && !Boolean(filterData.week)) {
       updatedFields[`meta.week`] = { $in: accessWeeks };
     }
-    const questionList: [QuestionSchemaType] = await questionModel
-      .find(updatedFields)
-      .skip(skip)
-      .limit(limit)
-      .lean();
+    const result = await questionModel.aggregate([
+      // Match documents based on the filter criteria
+      { $match: updatedFields },
+      // Facet stage to perform multiple operations on the same input documents
+      {
+        $facet: {
+          // Get the total count of documents
+          totalCount: [{ $count: "value" }],
+          // Get the paginated data
+          paginatedData: [
+            { $skip: skip },
+            { $limit: limit },
+          ],
+        },
+      },
+    ]);
+
+    const totalQuestionCount = result[0]?.totalCount[0]?.value;
+    const questionList:QuestionSchemaType[] = result[0]?.paginatedData;
+    
     // Fetch question attempts for the user
     const questionIdList = questionList.map((question) => question._id);
     const questionAttemptList: AllAttemptedQuestionDataType[] =
@@ -128,7 +143,7 @@ export const getAllQuestions = async (
     const totalInCorrectQuestions = questionList.length - totalCorrectQuestions;
     return {
       questions: updatedQuestionList,
-      totalQuestions: questionList.length,
+      totalQuestions: totalQuestionCount,
       totalCorrectQuestions,
       totalInCorrectQuestions,
       totalUnAttemptedQuestions,

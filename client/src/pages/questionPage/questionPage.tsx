@@ -13,7 +13,7 @@ const QuestionPage = () => {
   const { questions, getAllQuestions } = useQuestions();
   const { createQuestionAttemptByUser } = useQuestionAttempt();
   const { getUserCode } = useUserCode();
-  const { questions: questionList, isQuestionLoading } = questions;
+  const { questions: questionList, isQuestionLoading,totalQuestions } = questions;
   const { t } = useTranslation();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -71,7 +71,7 @@ const QuestionPage = () => {
           </Text>
         )}
         {Boolean(questionList?.length) && (
-          <Text textType='h3'>{`${t('totalQuestions')} : ${questionList?.length}`}</Text>
+          <Text textType='h3'>{`${t('totalQuestions')} : ${totalQuestions}`}</Text>
         )}
       </div>
       <div className="question-page-sub-container">
