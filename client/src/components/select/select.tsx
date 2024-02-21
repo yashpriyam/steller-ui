@@ -35,11 +35,11 @@ export const Select: React.FC<SelectProps> = ({
 
   const handleSelect = (option: SelectOptionType): void => {
     setSelectedValue(option.text);
-    // setIsOpen(false);
+    setIsOpen(false);
     onSelect(option);
   };
 
-  // useOnOutsideClick(dropdownRef, () => setIsOpen(false));
+  useOnOutsideClick(dropdownRef, () => setIsOpen(false));
 
   useEffect(() => {
     setIsOpen(false);
@@ -47,7 +47,7 @@ export const Select: React.FC<SelectProps> = ({
 
   return (
     <div
-      // ref={dropdownRef}
+      ref={dropdownRef}
       style={style}
       className={`select-container ${className}`}
     >
