@@ -1290,15 +1290,19 @@ const typeDefs = gql`
     response: CustomResponseType!
   }
 
+  type GoalType {
+    goalType: String
+  }
+
   type Goal {
     title: String!
     description: String
-    goalType: String
+    goalType: GoalType
     isAutomated: Boolean
     frequency: String
     isActive: Boolean
-    startWeek: Int
-    endWeek: Int
+    startWeek: WeekDataType
+    endWeek: WeekDataType
     questionList: [String]
     topicList: [String]
     subTopicList: [String]

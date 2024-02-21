@@ -12,6 +12,7 @@ import {
   PaymentIcon,
   LeaderBoard,
   EditIcon,
+  GoalsIcon,
 } from "./icons/index";
 import { useTranslation } from "react-i18next";
 import { useUser } from "./redux/actions/userAction";
@@ -105,6 +106,11 @@ export const useAppData = (): UseAppDataReturnType => {
         text: t("Leaderboard"),
         image: <LeaderBoard />,
         url: "/leaderboard",
+      },
+      {
+        text: t("goals"),
+        image: <GoalsIcon isDarkMode={false} />,
+        url: "/goals",
       },
     ],
     optionAtLast: {

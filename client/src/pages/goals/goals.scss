@@ -1,0 +1,49 @@
+@import "../../components/variables.scss";
+.goals-page-main-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .goals-page-sub-container {
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        @media (max-width: $screenXs) {
+            width: 90%;
+        }
+        .goals-list-main-wrapper {
+            height: 350px;
+            margin: 20px;
+            background-color: $accent-color-7-faded;
+            width: 500px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 2px 2px 1px 1px $accent-color-7;
+            border-radius: 5px;
+            .goals-data-key-value-wrapper {
+                display: flex;
+                gap: 5px;
+                border-bottom: 1px solid $Gray29;
+                padding: 5px 0px;
+                margin-bottom: 5px;
+                .goals-data-key {
+                    flex-basis: 120px;
+                    color: $accent-color-8-faded;
+                }
+                .goals-data-value {
+                    flex-basis: 300px;
+                    color: $accent-color-8;
+                }
+            }
+            .goals-start-button {
+                width: fit-content;
+                padding: 5px 15px;
+                margin-top: 5px;
+            }
+        }
+    }
+}

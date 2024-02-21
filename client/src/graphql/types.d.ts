@@ -1191,5 +1191,27 @@ declare global {
     color: string;
   }
   type ThemeValueType = "light" | "dark";
+  type GoalsType = {
+    title: string;
+    description?: string;
+    goalType?: ObjectId;
+    isAutomated?: boolean;
+    frequency?: 'daily' | 'weekly' | 'any';
+    isActive?: boolean;
+    startWeek?: WeekDataType;
+    endWeek?: WeekDataType;
+    questionList?: QuestionDataType[];
+    topicList?: TopicSchemaType[];
+    dependedOn?: JSON;
+    batchCode: ObjectId;
+    isMandatory?: boolean;
+    createdAt?: Date;
+    updatedAt?: Date;
+  }
+  type GoalsDataStateType = {
+    goalsList: GoalsType[];
+    response: CustomResponseType | null;
+    isGoalLoading: boolean;
+  }
 }
 export {};

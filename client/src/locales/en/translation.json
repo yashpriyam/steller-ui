@@ -84,5 +84,6 @@
     "no_video_found": "No Video Available",
     "no_note_found": "No Notes Available",
     "no_question_found": "No Question Available",
-    "create_question":"Create Questions"
+    "create_question":"Create Questions",
+    "goals": "Goals"
 }

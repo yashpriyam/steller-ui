@@ -14,6 +14,7 @@ import userCodeSlice from "./slices/userCode/userCodeSlice";
 import allUsersPaymentsSlice from "./slices/allusersPayments/allUsersPaymentsSlice";
 import batchSlice from "./slices/batch/batchSlice";
 import createQuestionSlice from "./slices/createQuestion/createQuestionSlice"
+import goalsSlice from "./slices/goals/goalsSlice";
 export default configureStore({
   reducer: {
     user: userSlice,
@@ -30,6 +31,7 @@ export default configureStore({
     userCode: userCodeSlice,
     allUsersPayments: allUsersPaymentsSlice,
     batch: batchSlice,
-    createQuestion:createQuestionSlice
+    createQuestion:createQuestionSlice,
+    goals: goalsSlice,
   },
 });

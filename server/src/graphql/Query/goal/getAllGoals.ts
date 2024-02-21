@@ -3,7 +3,9 @@ import { Goal } from "@models";
 
 export const getAllGoals = async (): Promise<GoalsOutputType> => {
     try {
-      const goals = await Goal.find();
+      const goals = await Goal.find().populate("startWeek endWeek goalType");
+      
+      
       return {
         goals,
         response: {

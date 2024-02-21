@@ -1,15 +1,15 @@
 @font-face {
-  font-family: 'Nunito';
-  src: url('../styles/fonts/Nunito-VariableFont_wght.ttf');
-};
+  font-family: "Nunito";
+  src: url("../styles/fonts/Nunito-VariableFont_wght.ttf");
+}
 @font-face {
-  font-family: 'Source Sans 3';
-  src: url('../styles/fonts/SourceSans3-VariableFont_wght.ttf');
-};
-$primaryFontFamily: 'Source Sans 3';
-$secondaryFontFamily: 'Nunito';
+  font-family: "Source Sans 3";
+  src: url("../styles/fonts/SourceSans3-VariableFont_wght.ttf");
+}
+$primaryFontFamily: "Source Sans 3";
+$secondaryFontFamily: "Nunito";
 $primaryBgColor: #161616;
-$secondaryBgColor: #1C1C1C;
+$secondaryBgColor: #1c1c1c;
 $primaryColor: white;
 $primaryBg: #fff;
 $red: red;
@@ -21,36 +21,36 @@ $lightBlack: rgba(25, 25, 25, 0.849);
 $lightGreyPrimary: rgb(172, 163, 163);
 $lightGreySecondary: rgba(203, 200, 200, 0.854);
 $gray: gray;
-$primaryTextColor:#fff;
+$primaryTextColor: #fff;
 $gray: rgb(128, 128, 128);
-$fadedGrayPrimary: rgba(128, 128, 128,0.5);
-$fadedGraySecondary: rgba(128, 128, 128,0.85);
-$primaryBorderColor:#1565C0;
-$sencondaryBg:#1565C0;
-$primaryBorderColor:#1565C0;
-$primaryBgColorOnHover:rgb(79, 77, 77);
-$sencondaryBorderColor:rgba(0, 0, 0, 0.1);
-$secondaryBorderColorHighlighted:rgba(0, 0, 0, 0.7);
-$bacgroundBlackColor:#000;
+$fadedGrayPrimary: rgba(128, 128, 128, 0.5);
+$fadedGraySecondary: rgba(128, 128, 128, 0.85);
+$primaryBorderColor: #1565c0;
+$sencondaryBg: #1565c0;
+$primaryBorderColor: #1565c0;
+$primaryBgColorOnHover: rgb(79, 77, 77);
+$sencondaryBorderColor: rgba(0, 0, 0, 0.1);
+$secondaryBorderColorHighlighted: rgba(0, 0, 0, 0.7);
+$bacgroundBlackColor: #000;
 $fadedBlackColor: rgba(66, 66, 66, 0.4);
 $extraSmallFontSize: 12px;
-$smallFontSize:14px;
-$mediumFontSize:16px;
-$largerFontSize:18px;
+$smallFontSize: 14px;
+$mediumFontSize: 16px;
+$largerFontSize: 18px;
 $titleFontSize: 20px;
-$drawerFontSize:20px;
-$textFontSize:24px;
-$mediumLargFontSize:25px;
+$drawerFontSize: 20px;
+$textFontSize: 24px;
+$mediumLargFontSize: 25px;
 $subHeaderFontSize: 25px;
 $headerFontSize: 40px;
 $extraLargFontsize: 40px;
 $doubleXlFontSize: 60px;
-$bottomBorderColor:rgb(129, 128, 128);
-$boxShadowColor:rgb(162, 161, 161 ,0.5);
-$textColorBlack:#000;
-$menuBarFontSize:34px;
-$boxShadowColor:rgb(145, 143, 143);
-$primaryBoxShadow:rgba(0, 0, 0, 0.24) 0px 3px 8px;
+$bottomBorderColor: rgb(129, 128, 128);
+$boxShadowColor: rgb(162, 161, 161, 0.5);
+$textColorBlack: #000;
+$menuBarFontSize: 34px;
+$boxShadowColor: rgb(145, 143, 143);
+$primaryBoxShadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 $redBorderColor: rgba(239, 29, 29, 0.479);
 $lightOrangeColor: rgb(202, 110, 67);
 $orangeColor: rgb(136, 83, 60);
@@ -60,8 +60,8 @@ $green: green;
 $orange: #ff9800;
 $loaderColors: #fff, #fff, #fff, #fff, #fff;
 $premiumColor: rgb(255, 215, 0);
-$fadedPremiumColor: rgba(255, 215, 0,0.5);
-$bgBlackColor:  rgba(0, 0, 0, 0.5);
+$fadedPremiumColor: rgba(255, 215, 0, 0.5);
+$bgBlackColor: rgba(0, 0, 0, 0.5);
 
 $screenXs: 480px;
 $screenSm: 576px;
@@ -69,14 +69,13 @@ $screenMd: 768px;
 $screenLg: 992px;
 $screenXl: 1200px;
 
-$sencondaryTextColor:rgb(185, 185, 185);
-$Gray29:rgb(74, 74, 74);
-$Gray35:rgb(35, 35, 35);
-$Gray43:rgb(43, 43, 43);
+$sencondaryTextColor: rgb(185, 185, 185);
+$Gray29: rgb(74, 74, 74);
+$Gray35: rgb(35, 35, 35);
+$Gray43: rgb(43, 43, 43);
 
-
-$subHeaderFontSize:25px;
-$headerFontSize:40px;
+$subHeaderFontSize: 25px;
+$headerFontSize: 40px;
 
 $primary-color: #ffffff;
 $background-color: #f4f4f4;
@@ -88,8 +87,12 @@ $accent-color-3: #27ae60;
 $accent-color-4: #f39c12;
 $accent-color-5: #ce3434;
 $accent-color-6: #002946;
+$accent-color-7: #13505a;
+$accent-color-8: #49eaf3;
+$accent-color-8-faded: #ccf9f7;
+$accent-color-7-faded: rgba(19, 80, 90, 0.3);
 $accent-color-3-faded: rgba(39, 174, 95, 0.2);
-$accent-color-5-faded:rgba(206, 52, 52, 0.2);
+$accent-color-5-faded: rgba(206, 52, 52, 0.2);
 
 $link-color: #3498db;
 $link-hover-color: #2980b9;
@@ -102,11 +105,11 @@ $input-bg: #ffffff;
 $input-text: #333333;
 $input-border: #555555;
 
-$videoHutBorderColor:rgba(255, 255, 255, 0.3);
-$radialGradient: var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63,
- rgba(255, 255, 255, 0.15))2.210024196147939%,
- hsla(0, 0%, 100%, 0);
- 
+$videoHutBorderColor: rgba(255, 255, 255, 0.3);
+$radialGradient:
+  var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63, rgba(255, 255, 255, 0.15)) 2.210024196147939%,
+  hsla(0, 0%, 100%, 0);
+
 $screenXs: 480px;
 $screenSm: 576px;
 $screenMd: 768px;
@@ -114,7 +117,7 @@ $screenLg: 992px;
 $screenXl: 1080px;
 $black: black;
 $darkGrey: rgb(33, 32, 32);
-$textWhite: #F6F6F6;
+$textWhite: #f6f6f6;
 $textGrey: #808080;
 $borderGrey: rgb(78, 77, 77);
 $boxShadowGrey: #808080a8;
