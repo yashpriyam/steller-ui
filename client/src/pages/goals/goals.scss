@@ -8,12 +8,12 @@
         width: 80%;
         display: flex;
         flex-wrap: wrap;
-        gap: 20px;
         justify-content: center;
         .goals-list-main-wrapper{
-            height: fit-content;
+            height: 250px;
+            margin: 20px;
             background-color: $accent-color-7-faded;
-            width: fit-content;
+            width: 300px;
             padding: 10px;
             display: flex;
             flex-direction: column;
