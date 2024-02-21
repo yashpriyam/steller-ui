@@ -518,7 +518,7 @@ const typeDefs = gql`
     marks: Int!
     meta: QuestionMetaOutput!
     questionTypeTags: [String]
-    questionSubTopics: [SubTopicsOutputType!]
+    questionSubTopics: [SubTopicsOutputType]
   }
   type QuestionMetaOutput {
     topic: String!

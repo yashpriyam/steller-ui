@@ -17,6 +17,7 @@ export const Select: React.FC<SelectProps> = ({
   placeHolder,
   style = {},
   backgroundColor,
+  children
 }: SelectProps) => {
   const selectClassName = useUpdateThemeColor({
     useStyle: useSelectStyles,
@@ -35,11 +36,11 @@ export const Select: React.FC<SelectProps> = ({
 
   const handleSelect = (option: SelectOptionType): void => {
     setSelectedValue(option.text);
-    setIsOpen(false);
+    // setIsOpen(false);
     onSelect(option);
   };
 
-  useOnOutsideClick(dropdownRef, () => setIsOpen(false));
+  // useOnOutsideClick(dropdownRef, () => setIsOpen(false));
 
   useEffect(() => {
     setIsOpen(false);
@@ -47,7 +48,7 @@ export const Select: React.FC<SelectProps> = ({
 
   return (
     <div
-      ref={dropdownRef}
+      // ref={dropdownRef}
       style={style}
       className={`select-container ${className}`}
     >
@@ -79,7 +80,7 @@ export const Select: React.FC<SelectProps> = ({
             {selectedValue || placeHolder || "Select an option"}
           </div>
           {isOpen && (
-            <ul
+            children ? <div className="select-children-conatiner">{children}</div> :<ul
               className={`${selectClassName.optionContainer} options-container`}
             >
               {data.map((option) => (

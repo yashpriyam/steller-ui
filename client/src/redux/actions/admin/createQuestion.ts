@@ -11,7 +11,7 @@ export const createQuestionApi = () => {
     questionType,
     questionTypeTags,
     questionSubTopics,
-  }: CreateQuestionInterface) => {
+  }: CreateQuestionInterface) => {    
     const {
       batchCode,
       day,
