@@ -1,0 +1,30 @@
+@import "../../components/variables.scss";
+.goals-page-main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    .goals-page-sub-container{
+        width: 80%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+        .goals-list-main-wrapper{
+            height: fit-content;
+            background-color: $accent-color-7-faded;
+            width: fit-content;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 2px 2px 1px 1px $accent-color-7;
+            border-radius: 5px;
+            .goals-start-button{
+                width: fit-content;
+                padding: 5px 15px;
+                margin-top: 5px;
+            }
+        }
+    }
+}

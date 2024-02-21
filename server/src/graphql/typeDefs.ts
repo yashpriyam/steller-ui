@@ -1289,8 +1289,8 @@ const typeDefs = gql`
     isAutomated: Boolean
     frequency: String
     isActive: Boolean
-    startWeek: Int
-    endWeek: Int
+    startWeek: String
+    endWeek: String
     questionList: [String]
     topicList: [String]
     subTopicList: [String]
