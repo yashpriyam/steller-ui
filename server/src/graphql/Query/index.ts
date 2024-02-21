@@ -12,3 +12,5 @@ export { getBatchCode } from "./batch/getBatchCode";
 export { getLeaderBoardData } from "./leaderboard"
 export { getAllGoals } from "./goal/index"
 export { getVariableValue } from "./variable/getVariableValue";
+export { getTopicList } from "./topic/getTopicList"
+export { getSubTopicList } from "./topic/getSubTopicList"

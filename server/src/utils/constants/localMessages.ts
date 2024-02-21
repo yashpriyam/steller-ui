@@ -110,5 +110,6 @@ export const localMessages = Object.freeze({
   },
   TOPIC: {
     CREATION_SUCCESS: "topic creation successful",
+    TOPIC_LIST_READ_SUCCESS: "successfully read topics",
   },
 });

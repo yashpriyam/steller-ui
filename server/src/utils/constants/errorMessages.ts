@@ -129,5 +129,7 @@ export const errorMessages = Object.freeze({
     CREATION_FAILED: "topic creation failed",
     TOPIC_DUPLICACY: "topic already exist",
     INVALID_TOPIC_AND_SUBTOPIC: "Invalid Topic or Sub-topic",
+    TOPIC_READ_FAILED: "unable to get topic list ",
+    TOPIC_LIST_IS_EMPTY:"topic list is empty"
   },
 });
