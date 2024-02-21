@@ -14,9 +14,10 @@ const initialState = {
     expiresInMins: null,
     isOpenable: null,
   },
-  questionTypeTags:"",
+  questionTypeTags: "",
   questionType: "",
   marks: null,
+  questionSubTopics:{},
 };
 export const createQuestionSlice = createSlice({
   name: "createQuestion",

@@ -174,6 +174,7 @@ CreateQuestionComponentProps
         title,
         marks,
         questionTypeTags,
+        questionSubTopics,
       } = createdQuestionData;      
       const isValidInput = validateQuestionInput({
         meta,
@@ -201,6 +202,7 @@ CreateQuestionComponentProps
         questionType: questionType,
         title: title,
         questionTypeTags,
+        questionSubTopics,
       });
       setIsQuestionAdding(false);
       const message = response?.response?.message;
