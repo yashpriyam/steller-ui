@@ -6,12 +6,18 @@ export const GET_All_GOALS = gql`
             goals {
                 title
                 description
-                goalType
+                goalType {
+                    goalType
+                }
                 isAutomated
                 frequency
                 isActive
-                startWeek
-                endWeek
+                startWeek {
+                  weekNumber
+                }
+                endWeek {
+                 weekNumber
+                }
                 questionList
                 topicList
                 subTopicList
