@@ -1121,4 +1121,12 @@ type UserGoalCompletion = {
   type SubTopicType = {
     title: string;
   };
+  type GetTopicOutputType = {
+    topicList?: string[];
+    response:CustomResponseType
+  }
+  type getSubTopicListOutputType = {
+    subTopicList?: SubTopicType[];
+    response: CustomResponseType,
+  }
 }

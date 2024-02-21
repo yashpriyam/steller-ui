@@ -24,8 +24,9 @@ const typeDefs = gql`
     getBatchCode: AllBatchDataOutputType!
     getLeaderBoardData: [LeaderBoardData]
     getAllGoals: GoalListOutputType!
-
+    getTopicList: TopicsListOutputType!
     getVariableValue(key: String!): getVariableOutputType
+    getSubTopicList(topic: String!): SubTopicsListOutputType
   }
 
   type Mutation {
@@ -1376,6 +1377,14 @@ const typeDefs = gql`
   }
   type SubTopicsOutputType {
     title: String
+  }
+  type TopicsListOutputType {
+    topicList: [String]
+    response: CustomResponseType!
+  }
+  type SubTopicsListOutputType {
+    subTopicList: [SubTopicsOutputType]
+    response: CustomResponseType!
   }
   scalar DateTime
   scalar JSON
