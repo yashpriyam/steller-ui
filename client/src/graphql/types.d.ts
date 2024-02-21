@@ -1094,7 +1094,6 @@ declare global {
     style?: React.CSSProperties;
     backgroundColor?: string;
     theme?: ThemeValueType;
-    children?: React.ReactNode;
   }
 
   type SelectOptionType = {

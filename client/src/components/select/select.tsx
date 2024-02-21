@@ -17,7 +17,6 @@ export const Select: React.FC<SelectProps> = ({
   placeHolder,
   style = {},
   backgroundColor,
-  children
 }: SelectProps) => {
   const selectClassName = useUpdateThemeColor({
     useStyle: useSelectStyles,
@@ -80,7 +79,7 @@ export const Select: React.FC<SelectProps> = ({
             {selectedValue || placeHolder || "Select an option"}
           </div>
           {isOpen && (
-            children ? <div className="select-children-conatiner">{children}</div> :<ul
+            <ul
               className={`${selectClassName.optionContainer} options-container`}
             >
               {data.map((option) => (
