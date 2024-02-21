@@ -27,4 +27,4 @@ export { sortDirection } from "./sortUtils";
 export { QuestionTypeObject } from "./questionTypeEnum";
 export { getCloudinaryCredentials } from "./getCloudinaryCredentials";
 export { checkIsTopicExist } from "./checkIsTopicExist" 
-export { isSubTopicInSubTopicList } from "./isSubTopicInSubTopicList"
+export { isSubTopicInSubTopicListExist } from "./isSubTopicInSubTopicListExist";

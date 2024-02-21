@@ -1,4 +1,4 @@
-export const isSubTopicInSubTopicList = ({
+export const isSubTopicInSubTopicListExist = ({
   subTopic,
   subTopicList,
 }: {subTopic:string,subTopicList:SubTopicType[]}) => {
