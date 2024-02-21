@@ -1,11 +1,13 @@
 import { dayModel, questionModel } from "@models";
 import { localMessages, errorMessages, statusCodes } from "@constants";
 import { QuestionTypeObject } from "@utils";
+import { checkIsTopicExist } from "@utils";
 export const createQuestion = async (
   _parent: undefined,
   args: { questionData: QuestionSchemaType }
 ): Promise<CreateQuestionOutputType | unknown> => {
   const { QUESTION_CREATION_SUCCESS } = localMessages.QUESTION_MODEL;
+  const { INVALID_TOPIC_AND_SUBTOPIC } = errorMessages.TOPIC;
   const { QUESTION_CREATION_FAILED,QUESTION_OPTIONS_NOT_FOUND } = errorMessages.QUESTION_MODEL;
   const errorData: CustomResponseType = {
     message: QUESTION_CREATION_FAILED,
@@ -16,8 +18,17 @@ export const createQuestion = async (
     const { questionData } = args;
     const { title, questionType, answer, marks, options, meta ,questionTypeTags,questionSubTopics } = questionData;
 
-    const { batchCode, day, week } = meta;
-
+    const { batchCode, day, week, topic } = meta;
+    const isTopicExist = await checkIsTopicExist({ topic, subTopics: questionSubTopics ?? [] })
+    if (!isTopicExist) {
+      return {
+        response: {
+          message: INVALID_TOPIC_AND_SUBTOPIC,
+          status:statusCodes.BAD_REQUEST,
+        } 
+      }
+    }
+    
     const dayResponse = await dayModel.findOne({
       dayNumber: day,
       batchCode: batchCode,
