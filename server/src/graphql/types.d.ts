@@ -386,6 +386,7 @@ declare global {
     batchCode?: string;
     meta: QuestioinMetaDataUpdate;
     questionTypeTags?: string[];
+    questionSubTopics?: questionSubTopicsType[];
   };
   type QuestioinMetaDataUpdate = {
     topic?: string;
@@ -409,6 +410,7 @@ declare global {
     batchCode: string;
     meta: QuestionUpdateOutputMetaData;
     questionTypeTags?: string[];
+    questionSubTopics?: questionSubTopicsType[];
   };
   type QuestionUpdateOutputMetaData = {
     topic: string;
@@ -452,6 +454,7 @@ declare global {
     marks: number;
     meta: QuestionMetaData;
     questionTypeTags?: string[];
+    questionSubTopics?: questionSubTopicsType[];
   };
   type QuestionsReturnType = {
     questions: [AllQuestionDataType];
@@ -1113,6 +1116,9 @@ type UserGoalCompletion = {
   };
   type TopicSchemaType = {
     topic: string;
-    subTopics:{title:string}[]
-  }
+    subTopics: SubtopicType[];
+  };
+  type SubTopicType = {
+    title: string;
+  };
 }

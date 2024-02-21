@@ -106,7 +106,7 @@ export const localMessages = Object.freeze({
   GOAL_MODEL: {
     GOAL_CREATION_SUCCESS: "New goal has been created successfully.",
     GOAL_UPDATE_SUCCESS: "The goal has been updated successfully.",
-    GOAL_FETCH_SUCCESS: "Goals fetched"
+    GOAL_FETCH_SUCCESS: "Goals fetched",
   },
   TOPIC: {
     CREATION_SUCCESS: "topic creation successful",

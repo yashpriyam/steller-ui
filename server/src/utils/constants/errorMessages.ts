@@ -118,7 +118,7 @@ export const errorMessages = Object.freeze({
   GOAL_MODEL: {
     GOAL_CREATION_FAILED: "Failed to create new goal.",
     GOAL_UPDATE_FAILED: "Failed to update the goal.",
-    GOAL_FETCH_FAILED: "Failed to fetch goals."
+    GOAL_FETCH_FAILED: "Failed to fetch goals.",
   },
   VARIABLE: {
     VARIABLE_NOT_FOUND: "key not found",
@@ -127,6 +127,7 @@ export const errorMessages = Object.freeze({
   },
   TOPIC: {
     CREATION_FAILED: "topic creation failed",
-    TOPIC_DUPLICACY:"topic already exist"
+    TOPIC_DUPLICACY: "topic already exist",
+    INVALID_TOPIC_AND_SUBTOPIC: "Invalid Topic or Sub-topic",
   },
 });
