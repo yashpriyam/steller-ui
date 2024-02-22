@@ -13,8 +13,13 @@ import { validateQuestionInput } from "./validatequestionInput";
 import { getVariableValue } from "../../utils/getVariableValue";
 import { useBatch } from "../../redux/actions/batchAction";
 import { getBatches } from "../../utils/getBatches";
+import {
+  getSubTopicList,
+  getTopicList,
+} from "../../redux/actions/getTopicAction";
+import { Checkbox } from "../checkbox/checkbox";
 export const CreateQuestionComponent: React.FC<
-CreateQuestionComponentProps
+  CreateQuestionComponentProps
 > = ({ onClose }) => {
   const QUESTION_TYPE_TAGS = "questionTypeTags";
   const selectedBoolean = [
@@ -47,7 +52,9 @@ CreateQuestionComponentProps
     { text: "codeblock", value: "codeblock" },
   ];
   const { getBatchCode } = useBatch();
-  const [batchList, setBatchList] = useState<SelectOptionType[]>();
+  const [topicList, setTopicList] = useState<CheckboxValueType[]>([]);
+  const [subTopicList, setSubTopicList] = useState<CheckboxValueType[]>([]);
+  const [batchList, setBatchList] = useState<SelectOptionType[]>([]);
   const [variableList, setVariableList] = useState<[]>([]);
   const getVariableList = async () => {
     const { value } = await getVariableValue(QUESTION_TYPE_TAGS);
@@ -62,12 +69,30 @@ CreateQuestionComponentProps
   const getBatchCodeList = async () => {
     const response = await getBatchCode();
     const batches = getBatches(response?.data?.getBatchCode?.batchData);
-     
     setBatchList(batches);
+  };
+  const getSubTopicApiCall = async (value: string) => {
+    const response = await getSubTopicList(value);
+    const subTopicDataList: SubTopicType[] = response.subTopicList;
+    const subTopicOptionList: CheckboxValueType[] = subTopicDataList.map(
+      (subtopic) => {
+        return { text: subtopic.title };
+      }
+    );
+    setSubTopicList(subTopicOptionList);
+  };
+  const getTopicApiCall = async () => {
+    const response = await getTopicList();
+    const topicData: string[] = response?.topicList;
+    const topicOptionList: CheckboxValueType[] = topicData.map((topic) => {
+      return { text: topic };
+    });
+    setTopicList(topicOptionList);
   };
   useEffect(() => {
     getVariableList();
     getBatchCodeList();
+    getTopicApiCall();
   }, []);
   const { createQuestion: createdQuestionData } = useSelector(
     (state): any => state
@@ -97,10 +122,27 @@ CreateQuestionComponentProps
     const path = `meta.week`;
     dispatch(updateState({ path, value }));
   };
-  const handleOnSetTopic = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
+  const handleOnSetTopic = (
+    currentSelected: {},
+    selectedValues: Record<number, CheckboxValueType>
+  ) => {
+    const values = Object.values(selectedValues);
+    const value = values[0]?.text;
     const path = `meta.topic`;
+    if (!value || !values.length) setSubTopicList([]);
+    value && getSubTopicApiCall(value);
     dispatch(updateState({ path, value }));
+  };
+  const handleOnSetSubTopic = (
+    currentSelected: {},
+    selectedValues: Record<number, CheckboxValueType>
+  ) => {
+    const selectedSubTopicList = Object.values(selectedValues);
+    const values = selectedSubTopicList.map((item) => {
+      return { title: item?.text };
+    });
+    const path = `questionSubTopics`;
+    dispatch(updateState({ path, value: values }));
   };
   const handleOnSetExpiresTime = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -174,6 +216,7 @@ CreateQuestionComponentProps
         title,
         marks,
         questionTypeTags,
+        questionSubTopics,
       } = createdQuestionData;      
       const isValidInput = validateQuestionInput({
         meta,
@@ -201,6 +244,7 @@ CreateQuestionComponentProps
         questionType: questionType,
         title: title,
         questionTypeTags,
+        questionSubTopics,
       });
       setIsQuestionAdding(false);
       const message = response?.response?.message;
@@ -255,18 +299,6 @@ CreateQuestionComponentProps
             key={"weekNumber"}
             onChange={handleOnSetWeekNumber}
             placeholder="Week Number"
-          />
-        </div>
-        <div className="create-question-input-wrapper">
-          <label htmlFor="batch-code" className="create-question-label">
-            Topic :
-          </label>
-          <InputComponent
-            className="create-question-input"
-            type="text"
-            key={"Topic"}
-            onChange={handleOnSetTopic}
-            placeholder="Topic"
           />
         </div>
         <div className="create-question-input-wrapper">
@@ -329,6 +361,22 @@ CreateQuestionComponentProps
             onSelect={handleOnSetType}
           ></Select>
         </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Topic :
+          </label>
+          <Accordion
+            title="Select Topic"
+            className="select-accordian-container"
+          >
+            <Checkbox
+              className="checkbox-container"
+              options={topicList}
+              type="single"
+              onSelect={handleOnSetTopic}
+            />
+          </Accordion>
+        </div>
       </div>
       <div className="break-line"></div>
       <div className="marks-questionType-wrapper">
@@ -369,6 +417,23 @@ CreateQuestionComponentProps
             data={variableList}
             onSelect={handleOnSetQuestionTypeTags}
           ></Select>
+        </div>
+        <div className="create-question-input-wrapper">
+          <label htmlFor="batch-code" className="create-question-label">
+            Sub Topics :
+          </label>
+          <Accordion
+            disabled={subTopicList.length === 0}
+            title=" Sub Topic"
+            className="select-accordian-container"
+          >
+            <Checkbox
+              className="checkbox-container"
+              options={subTopicList}
+              type="multi"
+              onSelect={handleOnSetSubTopic}
+            />
+          </Accordion>
         </div>
       </div>
       <Accordion title={"Title"} key={"title"} className="accordian-container">

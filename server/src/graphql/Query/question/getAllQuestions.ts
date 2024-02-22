@@ -72,25 +72,11 @@ export const getAllQuestions = async (
     if (!isAdminUser && !Boolean(filterData.week)) {
       updatedFields[`meta.week`] = { $in: accessWeeks };
     }
-    const result = await questionModel.aggregate([
-      // Match documents based on the filter criteria
-      { $match: updatedFields },
-      // Facet stage to perform multiple operations on the same input documents
-      {
-        $facet: {
-          // Get the total count of documents
-          totalCount: [{ $count: "value" }],
-          // Get the paginated data
-          paginatedData: [
-            { $skip: skip },
-            { $limit: limit },
-          ],
-        },
-      },
+    
+    const [totalQuestionCount,questionList] = await Promise.all([
+      questionModel.countDocuments(updatedFields),
+      questionModel.find(updatedFields).skip(skip).limit(limit).lean(),
     ]);
-
-    const totalQuestionCount = result[0]?.totalCount[0]?.value;
-    const questionList:QuestionSchemaType[] = result[0]?.paginatedData;
     
     // Fetch question attempts for the user
     const questionIdList = questionList.map((question) => question._id);

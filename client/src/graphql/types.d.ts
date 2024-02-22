@@ -308,8 +308,11 @@ declare global {
     marks: number;
     meta: QuestionMetaDataType;
     questionTypeTags: string;
+    questionSubTopics?: SubTopicType[];
   };
-
+  interface SubTopicType{
+    title:string
+  }
   type QuestionMetaDataType = {
     topic: string;
     day: number;
