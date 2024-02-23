@@ -81,6 +81,10 @@ const questionSchema = new Schema<QuestionSchemaType>({
     expiresInMins: { type: Number},
     isOpenable: { type: Boolean},
   },
+  description: {
+    value: { type: String },
+    type:{ type: String }
+  }
 });
 
 export const questionModel = model<QuestionSchemaType>(
