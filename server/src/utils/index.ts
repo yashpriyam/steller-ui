@@ -28,3 +28,4 @@ export { QuestionTypeObject } from "./questionTypeEnum";
 export { getCloudinaryCredentials } from "./getCloudinaryCredentials";
 export { checkIsTopicExist } from "./checkIsTopicExist" 
 export { isSubTopicInSubTopicListExist } from "./isSubTopicInSubTopicListExist";
+export { isLeetCodeLink } from "./isLeetCodeLink";

@@ -341,14 +341,16 @@ declare global {
     isCorrect?: boolean;
     timestamp: Date;
     isLatest?: boolean;
-    dsaResponse?: {
-      submissionLink:string ,
-      questionSubmissionStatus: string ,
-      testCases?: {
-        totalTestCases:number ,
-        passedTestCases: number,
-      },
-    },
+    dsaResponse?: DsaResponseType;
+  };
+  type DsaResponseType = {
+    submissionLink: string,
+    questionSubmissionStatus: string,
+    testCases?: TestCasesType,
+  };
+  type TestCasesType = {
+    totalTestCases: number;
+    passedTestCases: number;
   };
   type QuestionAttemptInputType = {
     questionId: ObjectId;

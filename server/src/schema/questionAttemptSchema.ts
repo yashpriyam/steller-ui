@@ -21,7 +21,6 @@ const questionAttemptSchema = new Schema<QuestionAttemptSchemaType>(
       type: [
         { imageUrl: String, text: String, iframe: String, isChecked: Boolean },
       ],
-      required: true,
     },
     isLatest: { type: Boolean },
   },

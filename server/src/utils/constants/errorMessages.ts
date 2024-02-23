@@ -45,6 +45,9 @@ export const errorMessages = Object.freeze({
   },
   QUESTION_ATTEMPT_MODEL: {
     QUESTION_ATTEMPT_FAILED: "unable to submit your response",
+    FAILED_TO_SAVE_RESPONSE: "unable to submit question data",
+    BAD_TEST_DATA: "passed test is greater than total test cases",
+    BAD_SUBMISSION_LINK: "wrong link!, enter correct leetcode link",
   },
   IMAGE: {
     NOT_AN_ARRAY: "Please provide image in an array",
@@ -130,6 +133,6 @@ export const errorMessages = Object.freeze({
     TOPIC_DUPLICACY: "topic already exist",
     INVALID_TOPIC_AND_SUBTOPIC: "Invalid Topic or Sub-topic",
     TOPIC_READ_FAILED: "unable to get topic list ",
-    TOPIC_LIST_IS_EMPTY:"topic list is empty"
+    TOPIC_LIST_IS_EMPTY: "topic list is empty",
   },
 });
