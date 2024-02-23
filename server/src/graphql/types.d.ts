@@ -335,13 +335,13 @@ declare global {
     isCorrect?: boolean;
     timestamp: Date;
     isLatest?: boolean;
-     dsaResponse?: {
+    dsaResponse?: {
       submissionLink:string ,
       questionSubmissionStatus: string ,
-    },
-    testCases?: {
-      totalTestCases:number ,
-      passesTestCases: number,
+      testCases?: {
+        totalTestCases:number ,
+        passedTestCases: number,
+      },
     },
   };
   type QuestionAttemptInputType = {

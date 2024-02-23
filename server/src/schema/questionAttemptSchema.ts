@@ -12,10 +12,10 @@ const questionAttemptSchema = new Schema<QuestionAttemptSchemaType>(
     dsaResponse: {
       submissionLink: { type: String },
       questionSubmissionStatus: { type: String },
-    },
-    testCases: {
-      totalTestCases: { type: Number },
-      passesTestCases: { type: Number },
+      testCases: {
+        totalTestCases: { type: Number },
+        passedTestCases: { type: Number },
+      },
     },
     response: {
       type: [
