@@ -9,6 +9,14 @@ const questionAttemptSchema = new Schema<QuestionAttemptSchemaType>(
       required: true,
     },
     isCorrect: { type: Boolean },
+    dsaResponse: {
+      submissionLink: { type: String },
+      questionSubmissionStatus: { type: String },
+    },
+    testCases: {
+      totalTestCases: { type: Number },
+      passesTestCases: { type: Number },
+    },
     response: {
       type: [
         { imageUrl: String, text: String, iframe: String, isChecked: Boolean },
