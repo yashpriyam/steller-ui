@@ -4,7 +4,8 @@ const questionTypes = {
   multi: "multi",
   single: "single",
   fillup: "fillup",
-  codeblock: "codeblock"
+  codeblock: "codeblock",
+  dsa:"dsa"
 };
 const questionDurationTypes = {
   timed: "timed",
@@ -17,7 +18,7 @@ const codeEditorWindowTypes = {
 };
 const questionSchema = new Schema<QuestionSchemaType>({
   title: {
-    type: [{ imageUrl: String, text: String, iframe: String, codeBlock: {
+    type: [{ imageUrl: String, text: String, iframe: String,redirectLink:String, codeBlock: {
       enableCodeBlock: Boolean,
       configuration: {
         showOutputWindow: Boolean,

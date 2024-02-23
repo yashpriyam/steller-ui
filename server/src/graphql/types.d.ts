@@ -227,6 +227,7 @@ declare global {
     single = "single",
     fillup = "fillup",
     codeblock = "codeblock",
+    dsa="dsa"
   }
 
   enum QuestionMetaType {
@@ -250,8 +251,13 @@ declare global {
     marks: number;
     meta: QuestionMetaData;
     questionTypeTags?: string[];
-    questionSubTopics?:QuestionSubTopicsType[]
+    questionSubTopics?: QuestionSubTopicsType[]
+    description?:descriptionType
   };
+  type descriptionType = {
+    type: string;
+    value: string;
+  }
   type questionSubTopicsType = {
     title:string,
   }
