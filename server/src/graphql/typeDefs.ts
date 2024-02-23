@@ -438,7 +438,7 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   input CreateQuestionInputType {
-    title: [QuestionOptionInputType!]!
+    title: [QuestionTitleInputType!]!
     options: [QuestionOptionInputType!]
     questionType: QuestionType!
     answer: [QuestionOptionInputType!]!
@@ -446,6 +446,18 @@ const typeDefs = gql`
     meta: QuestionMeta!
     questionTypeTags: [String]
     questionSubTopics: [SubTopicsType!]
+    description: QuestionDescriptionInputType
+  }
+  input QuestionDescriptionInputType {
+    value: String
+    type: String
+  }
+  input QuestionTitleInputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+    codeBlock: CodeBlockInputType
+    redirectLink: String
   }
   input QuestionOptionInputType {
     text: String!
@@ -511,7 +523,7 @@ const typeDefs = gql`
   }
   type QuestionDataType {
     id: String
-    title: [QuestionOptionOutputType!]!
+    title: [QuestionTitleOutputType!]!
     options: [QuestionOptionOutputType!]!
     questionType: QuestionType!
     answer: [QuestionOptionOutputType!]!
@@ -519,6 +531,18 @@ const typeDefs = gql`
     meta: QuestionMetaOutput!
     questionTypeTags: [String]
     questionSubTopics: [SubTopicsOutputType]
+    description: QuestionDescriptionOutputType
+  }
+  type QuestionTitleOutputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+    codeBlock: CodeBlockOutputType
+    redirectLink: String
+  }
+  type QuestionDescriptionOutputType {
+    value: String
+    type: String
   }
   type QuestionMetaOutput {
     topic: String!
