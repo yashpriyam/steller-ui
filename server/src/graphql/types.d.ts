@@ -241,18 +241,24 @@ declare global {
     iframe?: string;
     isChecked?: boolean;
   };
-
+  type QuestionTitleType = {
+    text: string;
+    imageUrl?: string;
+    iframe?: string;
+    isChecked?: boolean;
+    redirectLink?: string;
+  };
   type QuestionSchemaType = {
     _id: string;
-    title: QuestionInfoType[];
+    title: QuestionTitleType[];
     questionType: QuestionTypeEnum;
-    options ?: QuestionInfoType[];
+    options?: QuestionInfoType[];
     answer: QuestionInfoType[];
     marks: number;
     meta: QuestionMetaData;
     questionTypeTags?: string[];
-    questionSubTopics?: QuestionSubTopicsType[]
-    description?:descriptionType
+    questionSubTopics?: QuestionSubTopicsType[];
+    description?: descriptionType;
   };
   type descriptionType = {
     type: string;
