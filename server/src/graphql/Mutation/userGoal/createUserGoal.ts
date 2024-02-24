@@ -1,6 +1,7 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
 import { UserGoalCompletion } from "@models"; 
 import { getUnauthorizedResponse, isLoggedIn } from "@utils";
+import { getCurrentDate } from "@utils";
 
 export const createUserGoalCompletion = async (
   parent: undefined,
@@ -38,7 +39,7 @@ export const createUserGoalCompletion = async (
     const newUserGoalCompletion = await UserGoalCompletion.create({
       userId,
       goalId,
-      completedAt: Date.now(),
+      completedAt: getCurrentDate(),
       userResponse,
       weekNumber
     });
