@@ -118,6 +118,9 @@ const typeDefs = gql`
     createTopic(topicData: CreateTopicInputType!): CreateTopicOutputType
     createUserGoalCompletion(input: UserGoalCompletionInput!): UserGoalCompletionOutput
     updateUserGoalCompletion(input: UpdateUserGoalCompletionInput!): UserGoalCompletionOutput
+    dsaQuestionAttempt(
+      questionData: DsaQuestionAttemptInputType!
+    ): DsaQuestionAttemptQuestionOutputType
   }
 
   input VariableDataInput {
@@ -684,6 +687,36 @@ const typeDefs = gql`
   input QuestionAttemptType {
     questionId: String!
     response: [QuestionOptionInputType]!
+  }
+  input DsaQuestionAttemptInputType {
+    questionId: String!
+    dsaResponse: DsaResponseInputType!
+  }
+  input DsaResponseInputType {
+    submissionLink: String!
+    questionSubmissionStatus: String!
+    testCases: DsaTestCasesInputType!
+  }
+  input DsaTestCasesInputType {
+    totalTestCases: Int!
+    passedTestCases: Int!
+  }
+  type DsaQuestionAttemptQuestionOutputType {
+    dsaResponseData: DsaResponseDataType
+    response: CustomResponseType!
+  }
+  type DsaResponseDataType {
+    questionId: String
+    dsaResponse: DsaResponseOutputType
+  }
+  type DsaResponseOutputType {
+    submissionLink: String
+    questionSubmissionStatus: String
+    testCases: DsaTestCasesOutputType
+  }
+  type DsaTestCasesOutputType {
+    totalTestCases: Int
+    passedTestCases: Int
   }
   type QuestionAttemptOutputType {
     questionData: QuestionAttemptDataType
