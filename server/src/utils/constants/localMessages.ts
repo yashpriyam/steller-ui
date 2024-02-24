@@ -112,4 +112,8 @@ export const localMessages = Object.freeze({
     CREATION_SUCCESS: "topic creation successful",
     TOPIC_LIST_READ_SUCCESS: "successfully read topics",
   },
+  USER_GOAL_COMPLETION_MODEL: {
+    USER_GOAL_COMPLETION_SUCCESS: "User goal created successfully",
+    USER_GOAL_COMPLETION_UPDATE_SUCCESS: "User goal updated successfully",
+  }
 });

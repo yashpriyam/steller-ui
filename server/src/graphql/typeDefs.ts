@@ -116,6 +116,8 @@ const typeDefs = gql`
     createNewGoal(input: GoalInputType): GoalOutputType
     updateGoal(id: ID!, input: UpdateGoalInputType!): GoalOutputType
     createTopic(topicData: CreateTopicInputType!): CreateTopicOutputType
+    createUserGoalCompletion(input: UserGoalCompletionInput!): UserGoalCompletionOutput
+    updateUserGoalCompletion(input: UpdateUserGoalCompletionInput!): UserGoalCompletionOutput
   }
 
   input VariableDataInput {
@@ -1390,6 +1392,32 @@ const typeDefs = gql`
     subTopicList: [SubTopicsOutputType]
     response: CustomResponseType!
   }
+ 
+  input UserGoalCompletionInput {
+    goalId: ID! 
+    userResponse: JSON
+    weekNumber: Int 
+  }
+
+  type UserGoalCompletion {
+    id: ID
+    userId: UserSchemaType
+    goalId: Goal
+    completedAt: DateTime
+    userResponse: JSON
+    weekNumber: Int
+    createdAt: DateTime
+    updatedAt: DateTime
+  }
+  type UserGoalCompletionOutput {
+    userGoalCompletion: UserGoalCompletion 
+    response: CustomResponseType! 
+  }
+  input UpdateUserGoalCompletionInput {
+    id: ID!
+    response: JSON!
+  }
+
   scalar DateTime
   scalar JSON
 `;
