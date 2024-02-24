@@ -35,3 +35,4 @@ export { createImagePublicUrl } from "./createImagePublicUrl/createImagePublicUr
 export { createNewGoal, updateGoal } from "./goal/index"
 export { createVariable } from "./variable/createVariable";
 export { createTopic } from "./admin/topic/createTopic"
+export { createUserGoalCompletion, updateUserGoalCompletion } from "./userGoal/index"

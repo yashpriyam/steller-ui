@@ -1101,13 +1101,14 @@ declare global {
 }
 
 type UserGoalCompletion = {
-  userId: UserSchemaType;
-  goalId: Goal;
+  userId?: UserSchemaType;
+  goalId?: Goal;
   completedAt?: Date;
   userResponse?: JSON; 
   weekNumber?: number;
   createdAt?: Date;
   updatedAt?: Date;
+  isVerified?: Boolean
 }
  type GoalOutputType = {
   goal?: Goal;
@@ -1150,5 +1151,10 @@ type UserGoalCompletion = {
   type getSubTopicListOutputType = {
     subTopicList?: SubTopicType[];
     response: CustomResponseType,
+  }
+
+  interface UserGoalCompletionOutput {
+    userGoalCompletion?: UserGoalCompletion; 
+    response: CustomResponseType;
   }
 }
