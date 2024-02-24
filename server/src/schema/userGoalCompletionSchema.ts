@@ -21,6 +21,7 @@ const userGoalCompletionSchema = new mongoose.Schema<UserGoalCompletion>(
       type: mongoose.Schema.Types.Mixed,
     },
     weekNumber: Number,
+    isVerified: Boolean
   },
   {
     timestamps: true,

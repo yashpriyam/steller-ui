@@ -132,4 +132,8 @@ export const errorMessages = Object.freeze({
     TOPIC_READ_FAILED: "unable to get topic list ",
     TOPIC_LIST_IS_EMPTY:"topic list is empty"
   },
+  USER_GOAL_COMPLETION_MODEL: {
+    USER_GOAL_COMPLETION_FAILED: "Failed to create user goal",
+    USER_GOAL_COMPLETION_UPDATE_FAILED: "Failed to update user goal"
+  }
 });
