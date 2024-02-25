@@ -300,15 +300,41 @@ declare global {
     isCorrect?: boolean;
     isAnswered?: boolean;
   };
+  interface QuestionTitleType {
+    imageUrl?: string;
+    text: string;
+    iframe?: string;
+    isChecked?: boolean;
+    codeBlock?: CodeBlockType;
+    redirectLink?: string;
+  }
   interface CreateQuestionInterface {
-    title: QuestionOptionType[];
-    questionType: "";
+    title: QuestionTitleType[];
+    questionType: string;
     options?: QuestionOptionType[];
     answer: QuestionOptionType[];
     marks: number;
     meta: QuestionMetaDataType;
     questionTypeTags: string;
     questionSubTopics?: SubTopicType[];
+    description?:DescriptionType
+  };
+  interface DescriptionType{
+    type: string;
+    value: string;
+  }
+   type DsaQuestionAttemptType = {
+     questionId: ObjectId;
+     dsaResponse: DsaResponseType;
+  };
+  type DsaResponseType={
+    submissionLink: string,
+    questionSubmissionStatus: string,
+    testCases?: TestCasesType,
+  }
+   type TestCasesType = {
+    totalTestCases: number;
+    passedTestCases: number;
   };
   interface SubTopicType{
     title:string
@@ -1184,6 +1210,7 @@ declare global {
   };
   interface OptionsProps {
     prevPath: string;
+    optionQuestionType?: string;
   }
   interface AdminEditorProps {
     heading: string;
@@ -1216,5 +1243,39 @@ declare global {
     response: CustomResponseType | null;
     isGoalLoading: boolean;
   }
+  type GetDsaResponseType = {
+    questionId: string
+    title: QuestionTitleOutputType[]
+    questionType: QuestionType
+    meta:QuestionMetaDataType
+    questionTypeTags: string[]
+    questionSubTopics: SubTopicType[]
+    description: QuestionDescriptionOutputType
+    attemptResponse: DsaResponseDataType
+  }
+   type QuestionDescriptionOutputType = {
+    value: string
+    type: string
+  }
+   type DsaResponseDataType = {
+    questionId: string
+    dsaResponse: DsaResponseOutputType
+  }
+  type DsaResponseOutputType = {
+    submissionLink: string;
+    questionSubmissionStatus: string;
+    testCases: DsaTestCasesOutputType;
+  };
+  type DsaTestCasesOutputType = {
+    totalTestCases: number
+    passedTestCases: number
+  }
+  type DsaQuestionComponentProps = {
+    questionId: string;
+    title: QuestionTitleOutputType[];
+    meta: QuestionMetaDataType;
+    attemptResponse: DsaResponseDataType;
+    description: QuestionDescriptionOutputType;
+  };
 }
 export {};

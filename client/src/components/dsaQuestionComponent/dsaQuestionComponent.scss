@@ -1,0 +1,42 @@
+.dsa-question-accordian {
+  gap: 10px;
+  .accordion-header {
+    align-items: start;
+    width: 100%;
+    .title-subtitle .accordion-title {
+      width: 100%;
+      .title-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .title-text {
+          width: 100%;
+        }
+        .question-link-container {
+          padding: 0 5px;
+        }
+      }
+    }
+  }
+  .dsa-content-container {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .create-question-input-wrapper {
+      .create-question-input {
+        width: 100%;
+      }
+    }
+    .test-cases-conatiner {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  }
+  .dsa-attempt-button-container {
+    .dsa-attempt-button {
+      border: none;
+    }
+  }
+}

@@ -11,6 +11,7 @@ export const createQuestionApi = () => {
     questionType,
     questionTypeTags,
     questionSubTopics,
+    description
   }: CreateQuestionInterface) => {    
     const {
       batchCode,
@@ -46,6 +47,7 @@ export const createQuestionApi = () => {
             options,
             title,
             questionSubTopics,
+            description
           },
         },
       });

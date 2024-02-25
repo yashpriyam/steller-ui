@@ -7,6 +7,7 @@ import {
 } from "../slices/questionAttempt/questionAttemptSlice";
 import { CREATE_QUESTION_ATTEMPT_BY_USER } from "../../graphql/mutation/questionAttempt/createQuestionAttemptByUser";
 import { actions } from "../slices/question/questionSlice";
+import { DSA_QUESTION_ATTEMPT } from "../../graphql/mutation/questionAttempt/dsaQuestionAttempt";
 
 export const useQuestionAttempt = () => {
   const questionAttempt = useSelector(selectQuestionAttempt);
@@ -38,7 +39,35 @@ export const useQuestionAttempt = () => {
     }
   };
 
+  const dsaQuestionAttemptApi = async ({
+    questionId,
+    dsaResponse,
+  }: DsaQuestionAttemptType) => {    
+    try {
+      const response = await apolloClient.mutate({
+        mutation: DSA_QUESTION_ATTEMPT,
+        variables: {
+          questionAttemptData: {
+            questionId,
+            dsaResponse: {
+              questionSubmissionStatus: dsaResponse?.questionSubmissionStatus,
+              submissionLink: dsaResponse?.submissionLink,
+              testCases: {
+                passedTestCases: dsaResponse?.testCases?.passedTestCases,
+                totalTestCases:dsaResponse?.testCases?.totalTestCases
+              },
+            },
+          },
+        },
+      });
+      return response.data.dsaQuestionAttempt;      
+    } catch (error) {
+      console.log({error})
+    }
+  };
+
   return {
+    dsaQuestionAttemptApi,
     questionAttempt,
     createQuestionAttemptByUser,
   };
