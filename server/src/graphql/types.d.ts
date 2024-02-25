@@ -834,7 +834,12 @@ declare global {
   type QuestionAttemptIdMapType = {
     [key: string]: QuestionAttemptSchemaType;
   };
-
+  type DsaQuestionAttemptIdMapType = {
+    [key: string]: DsaQuestionAttemptType;
+  };
+  type DsaQuestionAttemptType = {
+    dsaResponse?: DsaResponseType ;
+  };
   type BatchSchemaType = {
     batchCode: string;
     paymentType?: FeePlanSchemaType;

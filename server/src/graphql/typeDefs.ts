@@ -27,6 +27,10 @@ const typeDefs = gql`
     getTopicList: TopicsListOutputType!
     getVariableValue(key: String!): getVariableOutputType
     getSubTopicList(topic: String!): SubTopicsListOutputType
+    getAllDsaQuestions(
+      filterData: FilterData
+      pagination: Pagination
+    ): DSAQuestionListOutputType
   }
 
   type Mutation {
@@ -510,6 +514,7 @@ const typeDefs = gql`
     single
     fillup
     codeblock
+    dsa
   }
   input QuestionMeta {
     topic: String!
@@ -717,6 +722,20 @@ const typeDefs = gql`
   type DsaTestCasesOutputType {
     totalTestCases: Int
     passedTestCases: Int
+  }
+  type GetDsaResponseType {
+    questionId: String
+    title: [QuestionTitleOutputType]
+    questionType: QuestionType
+    meta: QuestionMetaOutput
+    questionTypeTags: [String]
+    questionSubTopics: [SubTopicsOutputType]
+    description: QuestionDescriptionOutputType
+    attemptResponse: DsaResponseDataType
+  }
+  type DSAQuestionListOutputType {
+    questionData: [GetDsaResponseType]
+    response: CustomResponseType!
   }
   type QuestionAttemptOutputType {
     questionData: QuestionAttemptDataType

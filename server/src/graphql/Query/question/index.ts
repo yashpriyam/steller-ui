@@ -1,1 +1,2 @@
-export { getAllQuestions} from "./getAllQuestions"
+export { getAllQuestions } from "./getAllQuestions"
+export { getAllDsaQuestions } from  "./getAllDsaQuestions"
