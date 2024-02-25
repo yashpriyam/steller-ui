@@ -698,11 +698,11 @@ const typeDefs = gql`
   input DsaResponseInputType {
     submissionLink: String!
     questionSubmissionStatus: String!
-    testCases: DsaTestCasesInputType!
+    testCases: DsaTestCasesInputType
   }
   input DsaTestCasesInputType {
-    totalTestCases: Int!
-    passedTestCases: Int!
+    totalTestCases: Int
+    passedTestCases: Int
   }
   type DsaQuestionAttemptQuestionOutputType {
     dsaResponseData: DsaResponseDataType

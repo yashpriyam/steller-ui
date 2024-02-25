@@ -43,6 +43,7 @@ export const CreateQuestionComponent: React.FC<
     },
   ];
   const questionType = [
+    { text: "dsa", value: "dsa" },
     { text: "single", value: "single" },
     {
       text: "multi",
@@ -51,6 +52,7 @@ export const CreateQuestionComponent: React.FC<
     { text: "fillup", value: "fillup" },
     { text: "codeblock", value: "codeblock" },
   ];
+  const descriptionTypeList= [{ text: "text", value: "text" }, { text: "html", value: "html" }];
   const { getBatchCode } = useBatch();
   const [topicList, setTopicList] = useState<CheckboxValueType[]>([]);
   const [subTopicList, setSubTopicList] = useState<CheckboxValueType[]>([]);
@@ -184,6 +186,16 @@ export const CreateQuestionComponent: React.FC<
     const path = `questionTypeTags`;
     dispatch(updateState({ path, value }));
   };
+  const handleOnSetDescriptionType = (option: SelectOptionType) => {
+    const value = option.value;
+    const path = `description.type`;
+    dispatch(updateState({ path, value }));
+  };
+  const handleOnDescriptionValue = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = event.target.value;
+    const path = `description.value`;
+    dispatch(updateState({ path, value }));
+  }
   const optionsList: JSX.Element[] = [];
   const titleList: JSX.Element[] = [];
   const answerList: JSX.Element[] = [];
@@ -192,7 +204,9 @@ export const CreateQuestionComponent: React.FC<
     optionsList.push(<Options prevPath={`options.${index}`} />);
   }
   for (let index = 0; index < count.titleCount; index++) {
-    titleList.push(<Options prevPath={`title.${index}`} />);
+    titleList.push(
+      <Options prevPath={`title.${index}`} optionQuestionType={createdQuestionData.questionType} />
+    );
   }
   for (let index = 0; index < count.answerCount; index++) {
     answerList.push(<Options prevPath={`answer.${index}`} />);
@@ -217,7 +231,8 @@ export const CreateQuestionComponent: React.FC<
         marks,
         questionTypeTags,
         questionSubTopics,
-      } = createdQuestionData;      
+        description
+      } = createdQuestionData;           
       const isValidInput = validateQuestionInput({
         meta,
         answer,
@@ -245,6 +260,7 @@ export const CreateQuestionComponent: React.FC<
         title: title,
         questionTypeTags,
         questionSubTopics,
+        description
       });
       setIsQuestionAdding(false);
       const message = response?.response?.message;
@@ -436,6 +452,28 @@ export const CreateQuestionComponent: React.FC<
           </Accordion>
         </div>
       </div>
+      {createdQuestionData?.questionType === "dsa" && (
+        <div className="description-container">
+          <div className="create-question-input-wrapper">
+            <label htmlFor="batch-code" className="create-question-label">
+              Description Type :
+            </label>
+            <Select
+              className="create-question-select"
+              key={"description-type"}
+              defaultSelected="Description type"
+              data={descriptionTypeList}
+              onSelect={handleOnSetDescriptionType}
+            ></Select>
+          </div>
+          <div className="create-question-input-wrapper">
+            <label htmlFor="batch-code" className="create-question-label">
+              Enter description :
+            </label>
+            <textarea rows={7} className="description-text-conatiner"  onChange={handleOnDescriptionValue}></textarea>
+          </div>
+        </div>
+      )}
       <Accordion title={"Title"} key={"title"} className="accordian-container">
         {titleList.map((title) => {
           return title;

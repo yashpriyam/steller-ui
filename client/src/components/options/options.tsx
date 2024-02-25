@@ -9,7 +9,10 @@ import { UploadImage } from "../uploadImage/uploadImage";
 import { createImageePublicUrl } from "../../redux/actions/imageAction";
 import { useState } from "react";
 import { Button } from "../button/button";
-export const Options: React.FC<OptionsProps> = ({ prevPath }) => {
+export const Options: React.FC<OptionsProps> = ({
+  prevPath,
+  optionQuestionType,
+}: OptionsProps) => {
   const { createQuestion } = useSelector((state): any => state);
   const { questionType } = createQuestion as CreateQuestionInterface;
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string>("");
@@ -57,6 +60,11 @@ export const Options: React.FC<OptionsProps> = ({ prevPath }) => {
     const path = `${prevPath}.iframe`;
     dispatch(updateState({ path, value }));
   };
+  const handleOnSetQuestionLink = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const path = `${prevPath}.redirectLink`;
+    dispatch(updateState({ path, value }));
+  };
   return (
     <div className="option-container">
       <div className="create-question-input-wrapper">
@@ -71,6 +79,21 @@ export const Options: React.FC<OptionsProps> = ({ prevPath }) => {
           className="question-input-container"
         />
       </div>
+      {optionQuestionType === "dsa" && (
+        <div className="create-question-input-wrapper">
+          <label htmlFor="-code" className="create-question-label">
+            Leetcode Question Link :
+          </label>
+          <InputComponent
+            className="question-input-container"
+            type="text"
+            key={"questionLink"}
+            backgroundColor="black"
+            onChange={handleOnSetQuestionLink}
+            placeholder="Question Link"
+          />
+        </div>
+      )}
       <div className="upload-image-conatiner-wrapper">
         <UploadImage
           onChange={handleOnSelectImageClick}

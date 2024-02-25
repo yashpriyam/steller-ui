@@ -17,7 +17,11 @@ const initialState = {
   questionTypeTags: "",
   questionType: "",
   marks: null,
-  questionSubTopics:{},
+  questionSubTopics: {},
+  description: {
+    type: "",
+    value:""
+  }
 };
 export const createQuestionSlice = createSlice({
   name: "createQuestion",
