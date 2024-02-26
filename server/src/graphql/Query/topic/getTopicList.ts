@@ -8,7 +8,6 @@ export const getTopicList = async ():Promise<GetTopicOutputType> => {
     const topicsData = await topicModel.find();
     if (topicsData?.length) {
       const topicsList = topicsData.map((topic) => topic.topic);
-      console.log(topicsList);
       
       return {
         topicList: topicsList,

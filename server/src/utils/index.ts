@@ -29,3 +29,4 @@ export { getCloudinaryCredentials } from "./getCloudinaryCredentials";
 export { checkIsTopicExist } from "./checkIsTopicExist" 
 export { isSubTopicInSubTopicListExist } from "./isSubTopicInSubTopicListExist";
 export { getCurrentDate } from "./getCurrentDate"
+export { isLeetCodeLink } from "./isLeetCodeLink";

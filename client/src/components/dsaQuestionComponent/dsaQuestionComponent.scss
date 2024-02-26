@@ -1,0 +1,57 @@
+.dsa-question-accordian {
+  gap: 10px;
+  .accordion-header {
+    align-items: center;
+    width: 100%;
+    .title-subtitle .accordion-title {
+      width: 100%;
+      .title-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        .title-text {
+          width: 100%;
+        }
+        .question-link-container {
+          display: flex;
+          align-items: start;
+          gap:  5px;
+          padding: 0 5px;
+          .question-submitted-icon {
+            width: 30px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  .dsa-content-container {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .description-header{
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .pseudocode-container{
+      padding: 0 20px;
+    }
+    .create-question-input-wrapper {
+      .create-question-input {
+        width: 100%;
+      }
+    }
+    .test-cases-conatiner {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+  }
+  .dsa-attempt-button-container {
+    .dsa-attempt-button {
+      border: none;
+    }
+  }
+}

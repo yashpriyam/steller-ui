@@ -16,7 +16,7 @@ export const createQuestion = async (
 
   try {
     const { questionData } = args;
-    const { title, questionType, answer, marks, options, meta ,questionTypeTags,questionSubTopics } = questionData;
+    const { title, questionType, answer, marks, options, meta ,questionTypeTags,questionSubTopics,description } = questionData;
 
     const { batchCode, day, week, topic } = meta;
     const isTopicExist = await checkIsTopicExist({ topic, subTopics: questionSubTopics ?? [] })
@@ -64,6 +64,7 @@ export const createQuestion = async (
       meta,
       questionTypeTags,
       questionSubTopics,
+      description,
     });
 
     if (!createdQuestionData) {

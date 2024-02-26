@@ -28,6 +28,10 @@ const typeDefs = gql`
     getVariableValue(key: String!): getVariableOutputType
     getSubTopicList(topic: String!): SubTopicsListOutputType
     getAllUserGoals: UserGoalListOutputType
+    getAllDsaQuestions(
+      filterData: FilterData
+      pagination: Pagination
+    ): DSAQuestionListOutputType
   }
 
   type Mutation {
@@ -119,6 +123,9 @@ const typeDefs = gql`
     createTopic(topicData: CreateTopicInputType!): CreateTopicOutputType
     createUserGoalCompletion(input: UserGoalCompletionInput!): UserGoalCompletionOutput
     updateUserGoalCompletion(input: UpdateUserGoalCompletionInput!): UserGoalCompletionOutput
+    dsaQuestionAttempt(
+      questionData: DsaQuestionAttemptInputType!
+    ): DsaQuestionAttemptQuestionOutputType
   }
 
   input VariableDataInput {
@@ -441,7 +448,7 @@ const typeDefs = gql`
     estimatedReadingTime: String
   }
   input CreateQuestionInputType {
-    title: [QuestionOptionInputType!]!
+    title: [QuestionTitleInputType!]!
     options: [QuestionOptionInputType!]
     questionType: QuestionType!
     answer: [QuestionOptionInputType!]!
@@ -449,6 +456,18 @@ const typeDefs = gql`
     meta: QuestionMeta!
     questionTypeTags: [String]
     questionSubTopics: [SubTopicsType!]
+    description: QuestionDescriptionInputType
+  }
+  input QuestionDescriptionInputType {
+    value: String
+    type: String
+  }
+  input QuestionTitleInputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+    codeBlock: CodeBlockInputType
+    redirectLink: String
   }
   input QuestionOptionInputType {
     text: String!
@@ -496,6 +515,7 @@ const typeDefs = gql`
     single
     fillup
     codeblock
+    dsa
   }
   input QuestionMeta {
     topic: String!
@@ -514,14 +534,26 @@ const typeDefs = gql`
   }
   type QuestionDataType {
     id: String
-    title: [QuestionOptionOutputType!]!
+    title: [QuestionTitleOutputType!]!
     options: [QuestionOptionOutputType!]!
     questionType: QuestionType!
     answer: [QuestionOptionOutputType!]!
     marks: Int!
     meta: QuestionMetaOutput!
     questionTypeTags: [String]
-    questionSubTopics: [SubTopicsOutputType!]
+    questionSubTopics: [SubTopicsOutputType]
+    description: QuestionDescriptionOutputType
+  }
+  type QuestionTitleOutputType {
+    text: String!
+    imageUrl: String
+    iframe: String
+    codeBlock: CodeBlockOutputType
+    redirectLink: String
+  }
+  type QuestionDescriptionOutputType {
+    value: String
+    type: String
   }
   type QuestionMetaOutput {
     topic: String!
@@ -661,6 +693,50 @@ const typeDefs = gql`
   input QuestionAttemptType {
     questionId: String!
     response: [QuestionOptionInputType]!
+  }
+  input DsaQuestionAttemptInputType {
+    questionId: String!
+    dsaResponse: DsaResponseInputType!
+  }
+  input DsaResponseInputType {
+    submissionLink: String!
+    questionSubmissionStatus: String!
+    testCases: DsaTestCasesInputType
+  }
+  input DsaTestCasesInputType {
+    totalTestCases: Int
+    passedTestCases: Int
+  }
+  type DsaQuestionAttemptQuestionOutputType {
+    dsaResponseData: DsaResponseDataType
+    response: CustomResponseType!
+  }
+  type DsaResponseDataType {
+    questionId: String
+    dsaResponse: DsaResponseOutputType
+  }
+  type DsaResponseOutputType {
+    submissionLink: String
+    questionSubmissionStatus: String
+    testCases: DsaTestCasesOutputType
+  }
+  type DsaTestCasesOutputType {
+    totalTestCases: Int
+    passedTestCases: Int
+  }
+  type GetDsaResponseType {
+    questionId: String
+    title: [QuestionTitleOutputType]
+    questionType: QuestionType
+    meta: QuestionMetaOutput
+    questionTypeTags: [String]
+    questionSubTopics: [SubTopicsOutputType]
+    description: QuestionDescriptionOutputType
+    attemptResponse: DsaResponseDataType
+  }
+  type DSAQuestionListOutputType {
+    questionData: [GetDsaResponseType]
+    response: CustomResponseType!
   }
   type QuestionAttemptOutputType {
     questionData: QuestionAttemptDataType

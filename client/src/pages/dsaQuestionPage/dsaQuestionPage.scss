@@ -1,0 +1,11 @@
+.dsa-question-page-container{
+    padding: 10px;
+    display:  flex;
+    gap:10px;
+    flex-direction: column;
+    .dsa-question-sub-container{
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+    }
+}

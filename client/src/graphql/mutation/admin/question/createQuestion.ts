@@ -27,6 +27,7 @@ export const CREATE_QUESTION = gql`
           text
           imageUrl
           iframe
+          redirectLink
           codeBlock {
             configuration {
               showSplitWindow
@@ -61,6 +62,9 @@ export const CREATE_QUESTION = gql`
         }
         questionType
         questionTypeTags
+        questionSubTopics {
+          title
+        }
         meta {
           batchCode
           day
@@ -71,6 +75,10 @@ export const CREATE_QUESTION = gql`
           topic
           type
           week
+        }
+        description {
+          value
+          type
         }
       }
       response {

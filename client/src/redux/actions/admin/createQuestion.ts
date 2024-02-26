@@ -10,7 +10,9 @@ export const createQuestionApi = () => {
     options,
     questionType,
     questionTypeTags,
-  }: CreateQuestionInterface) => {
+    questionSubTopics,
+    description
+  }: CreateQuestionInterface) => {    
     const {
       batchCode,
       day,
@@ -44,6 +46,8 @@ export const createQuestionApi = () => {
             answer,
             options,
             title,
+            questionSubTopics,
+            description
           },
         },
       });

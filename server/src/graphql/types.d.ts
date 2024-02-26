@@ -227,6 +227,7 @@ declare global {
     single = "single",
     fillup = "fillup",
     codeblock = "codeblock",
+    dsa="dsa"
   }
 
   enum QuestionMetaType {
@@ -240,18 +241,29 @@ declare global {
     iframe?: string;
     isChecked?: boolean;
   };
-
+  type QuestionTitleType = {
+    text: string;
+    imageUrl?: string;
+    iframe?: string;
+    isChecked?: boolean;
+    redirectLink?: string;
+  };
   type QuestionSchemaType = {
     _id: string;
-    title: QuestionInfoType[];
+    title: QuestionTitleType[];
     questionType: QuestionTypeEnum;
-    options ?: QuestionInfoType[];
+    options?: QuestionInfoType[];
     answer: QuestionInfoType[];
     marks: number;
     meta: QuestionMetaData;
     questionTypeTags?: string[];
-    questionSubTopics?:QuestionSubTopicsType[]
+    questionSubTopics?: QuestionSubTopicsType[];
+    description?: descriptionType;
   };
+  type descriptionType = {
+    type: string;
+    value: string;
+  }
   type questionSubTopicsType = {
     title:string,
   }
@@ -329,6 +341,16 @@ declare global {
     isCorrect?: boolean;
     timestamp: Date;
     isLatest?: boolean;
+    dsaResponse?: DsaResponseType;
+  };
+  type DsaResponseType = {
+    submissionLink: string,
+    questionSubmissionStatus: string,
+    testCases?: TestCasesType,
+  };
+  type TestCasesType = {
+    totalTestCases: number;
+    passedTestCases: number;
   };
   type QuestionAttemptInputType = {
     questionId: ObjectId;
@@ -813,7 +835,12 @@ declare global {
   type QuestionAttemptIdMapType = {
     [key: string]: QuestionAttemptSchemaType;
   };
-
+  type DsaQuestionAttemptIdMapType = {
+    [key: string]: DsaQuestionAttemptType;
+  };
+  type DsaQuestionAttemptType = {
+    dsaResponse?: DsaResponseType ;
+  };
   type BatchSchemaType = {
     batchCode: string;
     paymentType?: FeePlanSchemaType;
