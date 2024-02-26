@@ -6,6 +6,7 @@ import { Select } from "../select/select";
 import { useState } from "react";
 import { Button } from "../button/button";
 import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
+import { CheckedIcon } from "../../icons/CheckedIcon";
 
 export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
   attemptResponse,
@@ -84,6 +85,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
         <span className="title-container">
           <span className="title-text">{`${questionIndex}. ${title[0]?.text}`}</span>
           <span className="question-link-container">
+            <span className="question-submitted-icon">{submissionLink && <CheckedIcon height="25" width="25"/>}</span>
             <a href={title[0]?.redirectLink} target="_blank">
               Link
             </a>
@@ -92,7 +94,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
       }
     >
       <div className="dsa-content-container">
-        <Text textType="h3">Pseudocode</Text>
+        <Text className="description-header" textType="h3">Pseudocode</Text>
         <div className="pseudocode-container">
          {description.type==="html"?<div dangerouslySetInnerHTML={{ __html: description.value }} />:description.value}
         </div>
