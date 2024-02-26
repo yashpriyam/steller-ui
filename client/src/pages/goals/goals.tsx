@@ -5,14 +5,16 @@ import "./goals.scss";
 import { Button } from "../../components/button/button";
 import NoDataFoundComponent from "../../components/noDataFound/noDataFound";
 import { UserGoalResponseComponent } from "../../components/userResponse/userResponse";
+import { useUserGoals } from "../../redux/actions/getUserGoalsAction";
 export const Goals = () => {
   const { getGoals, goals } = useGoals();
   const { goalsList, isGoalLoading } = goals || {};
+  const {getUserGoals, userGoals} = useUserGoals()
 
   useEffect(() => {
     getGoals();
-  }, []);
-
+    getUserGoals();
+  }, []);  
   return (
     <div className="goals-page-main-container">
       <div className="goals-page-sub-container">

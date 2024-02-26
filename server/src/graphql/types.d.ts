@@ -1109,6 +1109,7 @@ declare global {
 }
 
 type UserGoalCompletion = {
+  _id?: string;
   userId?: UserSchemaType;
   goalId?: Goal;
   completedAt?: Date;
@@ -1164,6 +1165,11 @@ type UserGoalCompletion = {
 
   interface UserGoalCompletionOutput {
     userGoalCompletion?: UserGoalCompletion; 
+    response: CustomResponseType;
+  }
+
+  type UserGoalsOutputType = {
+    userGoals?: UserGoalCompletion[]
     response: CustomResponseType;
   }
 }

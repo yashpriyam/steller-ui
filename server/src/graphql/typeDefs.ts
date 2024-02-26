@@ -27,6 +27,7 @@ const typeDefs = gql`
     getTopicList: TopicsListOutputType!
     getVariableValue(key: String!): getVariableOutputType
     getSubTopicList(topic: String!): SubTopicsListOutputType
+    getAllUserGoals: UserGoalListOutputType
     getAllDsaQuestions(
       filterData: FilterData
       pagination: Pagination
@@ -1482,6 +1483,7 @@ const typeDefs = gql`
   }
 
   type UserGoalCompletion {
+    _id: String
     id: ID
     userId: UserSchemaType
     goalId: Goal
@@ -1500,6 +1502,10 @@ const typeDefs = gql`
     id: ID!
     response: JSON!
     profileType: String
+  }
+  type UserGoalListOutputType {
+    userGoals: [UserGoalCompletion]
+    response: CustomResponseType
   }
 
   scalar DateTime
