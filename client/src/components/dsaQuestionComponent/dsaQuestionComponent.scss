@@ -1,7 +1,7 @@
 .dsa-question-accordian {
   gap: 10px;
   .accordion-header {
-    align-items: start;
+    align-items: center;
     width: 100%;
     .title-subtitle .accordion-title {
       width: 100%;
@@ -9,6 +9,7 @@
         width: 100%;
         display: flex;
         justify-content: space-between;
+        font-size: 16px;
         .title-text {
           width: 100%;
         }
