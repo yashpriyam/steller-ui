@@ -34,8 +34,8 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
     attemptResponse?.dsaResponse?.questionSubmissionStatus || ""
   );
   const [testCases, setTestCases] = useState<TestCasesType>({
-    totalTestCases: 0,
-    passedTestCases: 0,
+    totalTestCases: attemptResponse?.dsaResponse?.testCases?.totalTestCases || 0,
+    passedTestCases: attemptResponse?.dsaResponse?.testCases?.passedTestCases || 0,
   });
   const handleOnSetSubmissionLink = (
     e: React.ChangeEvent<HTMLInputElement>
