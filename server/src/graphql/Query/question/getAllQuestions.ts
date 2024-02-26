@@ -61,6 +61,10 @@ export const getAllQuestions = async (
     const filteredData: Record<string, string | number | boolean> = filterData;
     const updatedFields: Record<string, string | number | boolean | object> =
       {};
+
+    // Exclude 'dsa' from the query
+    updatedFields["questionType"] = { $ne: QuestionTypeObject.dsa };
+    
     // Prepare updatedFields for querying
     for (const key in filteredData) {
       if (filteredData.hasOwnProperty(key)) {
@@ -73,7 +77,7 @@ export const getAllQuestions = async (
       updatedFields[`meta.week`] = { $in: accessWeeks };
     }
     
-    const [totalQuestionCount,questionList] = await Promise.all([
+    const [totalQuestionCount, questionList] = await Promise.all([
       questionModel.countDocuments(updatedFields),
       questionModel.find(updatedFields).skip(skip).limit(limit).lean(),
     ]);
@@ -95,10 +99,10 @@ export const getAllQuestions = async (
     const updatedQuestionList = questionList.map((questionData) => {
       const { questionType } = questionData || {};
       const questionTypes = {
-        Single: questionType===QuestionTypeObject.single,
-        Multi: questionType===QuestionTypeObject.multi,
-        Codeblock: questionType===QuestionTypeObject.codeblock,
-      }
+        Single: questionType === QuestionTypeObject.single,
+        Multi: questionType === QuestionTypeObject.multi,
+        Codeblock: questionType === QuestionTypeObject.codeblock,
+      };
       if (questionTypes.Codeblock) {
         return questionData;
       }
@@ -109,7 +113,10 @@ export const getAllQuestions = async (
       };
       const attemptData = questionAttemptIdMap[questionData._id.toString()];
       if (attemptData) {
-        if (attemptData.isCorrect && (questionTypes.Single || questionTypes.Multi)) {
+        if (
+          attemptData.isCorrect &&
+          (questionTypes.Single || questionTypes.Multi)
+        ) {
           totalCorrectQuestions += 1;
           updatedQuestionData.isCorrect = true;
         }

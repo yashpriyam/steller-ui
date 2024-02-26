@@ -19,25 +19,26 @@ const populateWeekData = async ( {allowAccess=false, isAdminUser, DAYS : path, a
   const { sortBy, sortOrder } : SortDataType = sortData || {};
 
   const accessibleWeeks = isAdminUser || allowAccess ? {} : { weekNumber: { $in: accessWeeks ?? [] } };
-  const allWeeksData : GetWeekDataType[] = await weekModel
-  .find({...accessibleWeeks, ...weekDataFilter})
-  .populate({
-        path,
-        populate: [
-          {
-            path: 'questions',
-            model: questionModel,
-          },
-          {
-            path: 'videos',
-            model: videoModel,
-          },
-          {
-            path: 'notes',
-            model: notesModel,
-          },
-        ]
-      })
+  const allWeeksData: GetWeekDataType[] = await weekModel
+    .find({ ...accessibleWeeks, ...weekDataFilter })
+    .populate({
+      path,
+      populate: [
+        {
+          path: "questions",
+          model: questionModel,
+          match: { questionType: { $ne: "dsa" } }, // Exclude documents with questionType equal to "dsa"
+        },
+        {
+          path: "videos",
+          model: videoModel,
+        },
+        {
+          path: "notes",
+          model: notesModel,
+        },
+      ],
+    });
       if (sortBy && sortOrder) {
         allWeeksData.sort((a, b) => {
           const aValue = a[sortBy];
