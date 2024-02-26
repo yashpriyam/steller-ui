@@ -13,7 +13,15 @@
           width: 100%;
         }
         .question-link-container {
+          display: flex;
+          align-items: start;
+          gap:  5px;
           padding: 0 5px;
+          .question-submitted-icon{
+            width: 30px;
+            padding: 5px;
+            text-align: center;
+          }
         }
       }
     }

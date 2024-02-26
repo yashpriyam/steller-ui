@@ -6,6 +6,7 @@ import { Select } from "../select/select";
 import { useState } from "react";
 import { Button } from "../button/button";
 import { useQuestionAttempt } from "../../redux/actions/questionAttemptAction";
+import { CheckedIcon } from "../../icons/CheckedIcon";
 
 export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
   attemptResponse,
@@ -83,6 +84,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
         <span className="title-container">
           <span className="title-text">{title[0]?.text}</span>
           <span className="question-link-container">
+            <span className="question-submitted-icon">{submissionLink && <CheckedIcon height="25" width="25"/>}</span>
             <a href={title[0]?.redirectLink} target="_blank">
               Link
             </a>
