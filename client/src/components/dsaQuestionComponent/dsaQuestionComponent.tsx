@@ -160,7 +160,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
         <div className="dsa-attempt-button-container">
           <Button
             className="dsa-attempt-button"
-            text={isLoading ? "submiting" : "submit"}
+            text={isLoading ? "Submiting" : "Submit"}
             onClick={onSubmit}
           />
         </div>
