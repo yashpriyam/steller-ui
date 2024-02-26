@@ -13,6 +13,7 @@ import {
   LeaderBoard,
   EditIcon,
   GoalsIcon,
+  Internet,
 } from "./icons/index";
 import { useTranslation } from "react-i18next";
 import { useUser } from "./redux/actions/userAction";
@@ -44,7 +45,14 @@ export const useAppData = (): UseAppDataReturnType => {
     apolloClient.resetStore();
     navigate("/");
   };
+  const socialOptions = Object.entries(userData?.socialLinks ?? {}).map(([socialPlatform, link]) => (
+    {
 
+    text: socialPlatform,
+    image: <Internet /> ,
+    url: `socialLink/${socialPlatform}`,
+  }));
+  
   const sidebarData: SidebarProps = {
     profile: {
       text: name || t("profile"),
@@ -112,12 +120,14 @@ export const useAppData = (): UseAppDataReturnType => {
         image: <GoalsIcon isDarkMode={false} />,
         url: "/goals",
       },
+      
     ],
+    socialLinksOption: socialOptions,
     optionAtLast: {
       text: t(isLoggedIn ? "logout" : "login"),
       onClick: () => (isLoggedIn ? logOut() : setIsLoginModalOpen(true)),
     },
-  };
+  };  
   useEffect(() => {
     isLoggedIn && getUserData();
   }, [isLoggedIn]);

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useGoals } from "../../redux/actions/goalsAction";
 import Spinner from "../../components/spinner/spinner";
 import "./goals.scss";
@@ -9,12 +9,13 @@ import { useUserGoals } from "../../redux/actions/getUserGoalsAction";
 export const Goals = () => {
   const { getGoals, goals } = useGoals();
   const { goalsList, isGoalLoading } = goals || {};
-  const { getUserGoals, userGoals } = useUserGoals();
+  const { getUserGoals, userGoals, } = useUserGoals();
+  const [isGoalCompleted, setIsGoalCompleted]= useState(false)
 
-  useEffect(() => {
+  useEffect(()=> {
     getGoals();
     getUserGoals();
-  }, []);
+  },[isGoalCompleted])
 
   const completedGoalObj: { [key: string]: userGoalList } = {};
 
@@ -72,6 +73,7 @@ export const Goals = () => {
                 <UserGoalResponseComponent
                   goalId={data._id ?? ""}
                   profileType={data.profileType}
+                  setIsGoalCompleted={setIsGoalCompleted}
                 />
               )}
             </div>

@@ -53,7 +53,7 @@ export const createUserGoalCompletion = async (
     if (profileType) {
          await User.findOneAndUpdate({_id: userId},{
             socialLinks: {
-                profileType: newUserGoalCompletion.userResponse
+                [profileType]: newUserGoalCompletion.userResponse
             }
         }) 
     }
