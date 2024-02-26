@@ -14,6 +14,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
   questionId,
   title,
   description,
+  questionIndex
 }) => {
   const submissionStatusType = [
     {
@@ -82,7 +83,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
       className="dsa-question-accordian"
       title={
         <span className="title-container">
-          <span className="title-text">{title[0]?.text}</span>
+          <span className="title-text">{`${questionIndex}. ${title[0]?.text}`}</span>
           <span className="question-link-container">
             <span className="question-submitted-icon">{submissionLink && <CheckedIcon height="25" width="25"/>}</span>
             <a href={title[0]?.redirectLink} target="_blank">

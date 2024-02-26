@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Text } from "../../components/text/text";
 import { DsaQuestionComponent } from "../../components/dsaQuestionComponent/dsaQuestionComponent";
 import "./dsaQuestionPage.scss"
+import NotFoundComponent from "../../components/noDataFound/noDataFound"
 
 export const DsaQuestionPage: React.FC = () => {
   const { getAllDsaQuestions } = useQuestions();
@@ -43,11 +44,11 @@ export const DsaQuestionPage: React.FC = () => {
         <Text textType="h1">{t("Dsa questions page")}</Text>
       </div>
       <div className="dsa-question-sub-container">
-        {questionList.map((questionData) => {
+        {questionList.length?questionList.map((questionData,index) => {
           return (
-              <DsaQuestionComponent attemptResponse={questionData.attemptResponse} description={questionData.description} questionId={ questionData.questionId} meta={questionData.meta} title={questionData.title}/>
+              <DsaQuestionComponent attemptResponse={questionData.attemptResponse} description={questionData.description} questionId={ questionData.questionId} meta={questionData.meta} title={questionData.title} questionIndex={index+1}/>
           );
-        })}
+        }):<NotFoundComponent message="No dsa questions" />}
       </div>
     </div>
   );
