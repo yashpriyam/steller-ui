@@ -14,7 +14,7 @@
             width: 90%;
         }
         .goals-list-main-wrapper {
-            height: 350px;
+            height: 450px;
             margin: 20px;
             background-color: $accent-color-7-faded;
             width: 500px;
@@ -24,6 +24,7 @@
             justify-content: center;
             box-shadow: 2px 2px 1px 1px $accent-color-7;
             border-radius: 5px;
+            position: relative;
             .goals-data-key-value-wrapper {
                 display: flex;
                 gap: 5px;
@@ -53,3 +54,15 @@
     justify-content: space-between;
   }
   
+  .completed-indicator {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    background-color: $green;
+    color: $primaryColor;
+    padding: 5px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: 800;
+  }

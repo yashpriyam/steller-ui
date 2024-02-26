@@ -1241,10 +1241,25 @@ declare global {
     profileType?: string
   }
   type GoalsDataStateType = {
-    goalsList: GoalsType[];
+    userGoalsList?: userGoalList[];
+    goalsList?: GoalsType[];
     response: CustomResponseType | null;
     isGoalLoading: boolean;
   }
+
+  type userGoalList = {
+  _id?: string;
+  userId?: UserSchemaType;
+  goalId?: GoalsType;
+  completedAt?: Date;
+  userResponse?: JSON; 
+  weekNumber?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+  isVerified?: Boolean;
+  profileType?: string;
+  }
+
   type GetDsaResponseType = {
     questionId: string
     title: QuestionTitleOutputType[]

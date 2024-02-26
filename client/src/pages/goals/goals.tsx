@@ -9,20 +9,35 @@ import { useUserGoals } from "../../redux/actions/getUserGoalsAction";
 export const Goals = () => {
   const { getGoals, goals } = useGoals();
   const { goalsList, isGoalLoading } = goals || {};
-  const {getUserGoals, userGoals} = useUserGoals()
+  const { getUserGoals, userGoals } = useUserGoals();
 
   useEffect(() => {
     getGoals();
     getUserGoals();
-  }, []);  
+  }, []);
+
+  const completedGoalObj: { [key: string]: userGoalList } = {};
+
+  userGoals?.userGoalsList?.forEach((goal) => {
+    if (goal.goalId?._id) {
+      const id = goal.goalId._id;
+      completedGoalObj[id] = goal;
+    }
+  });
+ 
   return (
     <div className="goals-page-main-container">
       <div className="goals-page-sub-container">
         {isGoalLoading ? (
           <Spinner />
         ) : goalsList ? (
-          goalsList.map((data) => (  
+          goalsList.map((data) => (
             <div className="goals-list-main-wrapper">
+                {
+                    Boolean(completedGoalObj[data._id ?? '']) && (
+                        <div className="completed-indicator">Completed</div>
+                    )
+                }
               <div className="goals-data-key-value-wrapper">
                 <span className="goals-data-key">Goal Category</span>
                 <span className="goals-data-value">
@@ -54,7 +69,10 @@ export const Goals = () => {
                 </span>
               </div>
               {data.isActive && (
-               <UserGoalResponseComponent goalId={data._id ?? ''} profileType={data.profileType} />
+                <UserGoalResponseComponent
+                  goalId={data._id ?? ""}
+                  profileType={data.profileType}
+                />
               )}
             </div>
           ))
