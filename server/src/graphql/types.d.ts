@@ -804,6 +804,7 @@ declare global {
     location?: string;
     feePlan?: string;
     temporaryAccess?: UserTemporaryAccessType;
+    socialLinks?: JSON
   }
   interface UserTemporaryAccessType {
     allowTemporaryAccess: boolean;
@@ -1104,6 +1105,7 @@ declare global {
     isMandatory?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
+    profileType?: string
 }
 
 type UserGoalCompletion = {
@@ -1114,7 +1116,8 @@ type UserGoalCompletion = {
   weekNumber?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  isVerified?: Boolean
+  isVerified?: Boolean;
+  profileType?: string;
 }
  type GoalOutputType = {
   goal?: Goal;

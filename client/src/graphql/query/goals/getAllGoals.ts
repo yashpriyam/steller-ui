@@ -26,6 +26,7 @@ export const GET_All_GOALS = gql`
                 isMandatory
                 createdAt
                 updatedAt
+                profileType
             }
             response {
                 status

@@ -1,5 +1,5 @@
 import { errorMessages, localMessages, statusCodes } from "@constants";
-import { UserGoalCompletion } from "@models"; 
+import { User, UserGoalCompletion } from "@models"; 
 import { getUnauthorizedResponse, isLoggedIn } from "@utils";
 import { getCurrentDate } from "@utils";
 
@@ -13,7 +13,8 @@ export const createUserGoalCompletion = async (
     goalId,
     userResponse,
     weekNumber,
-    isVerified= false
+    isVerified= false,
+    profileType
   } = args.input;
 
   const { USER_GOAL_COMPLETION_FAILED } = errorMessages.USER_GOAL_COMPLETION_MODEL;
@@ -47,6 +48,14 @@ export const createUserGoalCompletion = async (
 
     if (!newUserGoalCompletion) {
       return { response: errorData };
+    }
+    
+    if (profileType) {
+         await User.findOneAndUpdate({_id: userId},{
+            socialLinks: {
+                profileType: newUserGoalCompletion.userResponse
+            }
+        }) 
     }
 
     return {

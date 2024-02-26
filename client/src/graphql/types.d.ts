@@ -1238,6 +1238,7 @@ declare global {
     isMandatory?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
+    profileType?: string
   }
   type GoalsDataStateType = {
     goalsList: GoalsType[];

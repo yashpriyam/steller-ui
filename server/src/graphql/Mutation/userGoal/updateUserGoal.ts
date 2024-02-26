@@ -4,7 +4,7 @@ import { getUnauthorizedResponse, isLoggedIn } from "@utils";
 
 export const updateUserGoalCompletion = async (
   parent: undefined,
-  args: { input:{ id: string, response?: JSON }},
+  args: { input:{ id: string, response?: JSON, profileType?: string }},
   { contextData }: ContextType
 ): Promise<UserGoalCompletionOutput | undefined> => {
   const { id, response } = args.input;

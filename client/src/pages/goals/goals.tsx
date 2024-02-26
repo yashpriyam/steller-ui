@@ -19,7 +19,7 @@ export const Goals = () => {
         {isGoalLoading ? (
           <Spinner />
         ) : goalsList ? (
-          goalsList.map((data) => (
+          goalsList.map((data) => (  
             <div className="goals-list-main-wrapper">
               <div className="goals-data-key-value-wrapper">
                 <span className="goals-data-key">Goal Category</span>
@@ -52,7 +52,7 @@ export const Goals = () => {
                 </span>
               </div>
               {data.isActive && (
-               <UserGoalResponseComponent goalId={data._id ?? ''} />
+               <UserGoalResponseComponent goalId={data._id ?? ''} profileType={data.profileType} />
               )}
             </div>
           ))
