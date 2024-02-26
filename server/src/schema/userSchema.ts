@@ -64,6 +64,9 @@ const userSchema = new mongoose.Schema<UserSchemaType>(
         required: false
       }
     },
+    socialLinks: {
+      type: mongoose.Schema.Types.Mixed
+    }
   },
   { timestamps: true }
 );

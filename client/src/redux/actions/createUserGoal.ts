@@ -5,7 +5,7 @@ import { CREATE_USER_GOAL } from "../../graphql/mutation/createUserGoal/createUs
 export const useUserGoals = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const createUserGoal = async (userResponse: string, goalId: string) => {
+  const createUserGoal = async (userResponse: string, goalId: string, profileType?: string) => {
     try {
       setIsLoading(true);
       const response = await apolloClient.mutate({
@@ -16,6 +16,7 @@ export const useUserGoals = () => {
             userResponse: {
               response: userResponse,
             },
+            profileType
           },
         },
       });

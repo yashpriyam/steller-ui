@@ -3,7 +3,7 @@ import { InputComponent } from "../../components/input/inputComponent";
 import { Button } from "../../components/button/button";
 import { useUserGoals } from "../../redux/actions/createUserGoal";
 
-export const UserGoalResponseComponent = ({ goalId }: { goalId: string }) => {
+export const UserGoalResponseComponent = ({ goalId, profileType }: { goalId: string, profileType?: string }) => {
   const [userResponse, setUserResponse] = useState("");
   const { createUserGoal, isLoading } = useUserGoals();
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ export const UserGoalResponseComponent = ({ goalId }: { goalId: string }) => {
   };
 
   const handleOnSubmit = async () => {
-    const response = await createUserGoal(userResponse, goalId);
+    const response = await createUserGoal(userResponse, goalId, profileType);
   };
 
   return (

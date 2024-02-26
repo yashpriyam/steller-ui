@@ -1198,6 +1198,7 @@ const typeDefs = gql`
     feePlan: String
     profileImage: ProfileImageType
     temporaryAccess: UserTemporaryAccessType
+    socialLinks: JSON
   }
 
   input UpdateMeetingInputFilter {
@@ -1313,6 +1314,7 @@ const typeDefs = gql`
     isMandatory: Boolean
     createdAt: DateTime
     updatedAt: DateTime
+    profileType: String
   }
 
   type UserGoalCompletion {
@@ -1341,6 +1343,7 @@ const typeDefs = gql`
     topicList: [String]
     batchCode: String!
     isMandatory: Boolean
+    profileType: String
   }
 
   input UpdateGoalInputType {
@@ -1356,6 +1359,7 @@ const typeDefs = gql`
     topicList: [String]
     batchCode: String
     isMandatory: Boolean
+    profileType: String
   }
 
   type GoalListOutputType {
@@ -1397,7 +1401,8 @@ const typeDefs = gql`
   input UserGoalCompletionInput {
     goalId: ID! 
     userResponse: JSON
-    weekNumber: Int 
+    weekNumber: Int
+    profileType: String
   }
 
   type UserGoalCompletion {
@@ -1409,6 +1414,7 @@ const typeDefs = gql`
     weekNumber: Int
     createdAt: DateTime
     updatedAt: DateTime
+    profileType: String
   }
   type UserGoalCompletionOutput {
     userGoalCompletion: UserGoalCompletion 
@@ -1417,6 +1423,7 @@ const typeDefs = gql`
   input UpdateUserGoalCompletionInput {
     id: ID!
     response: JSON!
+    profileType: String
   }
 
   scalar DateTime

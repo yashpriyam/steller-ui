@@ -28,6 +28,7 @@ query {
           allowTemporaryAccess
           allowedAccessDate
         }
+        socialLinks
       }
       response {
         message

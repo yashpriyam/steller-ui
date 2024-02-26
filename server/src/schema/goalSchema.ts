@@ -51,8 +51,10 @@ const goalSchema = new mongoose.Schema<Goal>(
     },
     isMandatory: {
       type: Boolean
+    },
+    profileType: {
+      type: String,
     }
-
   },
   {
     timestamps: true,
