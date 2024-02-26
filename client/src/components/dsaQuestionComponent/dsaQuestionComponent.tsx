@@ -94,7 +94,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
       }
     >
       <div className="dsa-content-container">
-        <Text textType="h3">Pseudocode</Text>
+        <Text className="description-header" textType="h3">Pseudocode</Text>
         <div className="pseudocode-container">
          {description.type==="html"?<div dangerouslySetInnerHTML={{ __html: description.value }} />:description.value}
         </div>
