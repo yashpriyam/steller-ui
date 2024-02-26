@@ -11,9 +11,9 @@ export const createUserGoalCompletion = async (
     
   const {
     goalId,
-    completedAt,
     userResponse,
-    weekNumber
+    weekNumber,
+    isVerified= false
   } = args.input;
 
   const { USER_GOAL_COMPLETION_FAILED } = errorMessages.USER_GOAL_COMPLETION_MODEL;
@@ -41,7 +41,8 @@ export const createUserGoalCompletion = async (
       goalId,
       completedAt: getCurrentDate(),
       userResponse,
-      weekNumber
+      weekNumber,
+      isVerified
     });
 
     if (!newUserGoalCompletion) {

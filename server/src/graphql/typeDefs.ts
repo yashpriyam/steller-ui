@@ -1297,6 +1297,7 @@ const typeDefs = gql`
   }
 
   type Goal {
+    _id: String
     title: String!
     description: String
     goalType: GoalType

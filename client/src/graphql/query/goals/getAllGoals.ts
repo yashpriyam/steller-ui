@@ -4,6 +4,7 @@ export const GET_All_GOALS = gql`
     query GetAllGoals {
         getAllGoals {
             goals {
+                _id
                 title
                 description
                 goalType {
