@@ -17,6 +17,7 @@ import UserPage from '../pages/userPage/userPage';
 import LeaderBoard from '../pages/leaderboard/leaderboard';
 import { Goals } from '../pages/goals/goals';
 import { DsaQuestionPage } from '../pages/dsaQuestionPage/dsaQuestionPage';
+import SocialLinksPage from '../pages/socialLinksPage/socialLinksPage';
 
 const protectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/questions": <QuestionPage />,
@@ -32,7 +33,8 @@ const protectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/meet/:meetingCode": <MeetingPage />,
   "/leaderboard": <LeaderBoard/>,
     "/goals": <Goals />,
-  "/dsa-questions":<DsaQuestionPage/>
+  "/dsa-questions":<DsaQuestionPage/>,
+  "/socialLink/:link": <SocialLinksPage/>
 });
 
 export const ProtectedRoutes = () => {

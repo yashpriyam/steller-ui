@@ -10,7 +10,8 @@ export const Sidebar = ({
     optionAtLast,
     optionsAtFirst,
     profile,
-    admin
+    admin,
+    socialLinksOption = []
 }: SidebarProps) => {
     const [isOpen, setIsOpen] = useState<boolean>(true);
     const navigate = useNavigate();
@@ -93,6 +94,20 @@ export const Sidebar = ({
               }`}
             >
               {options.map((data, index) => {
+                return (
+                  <SidebarOption
+                    onClick={() =>
+                      onOptionClick(data.url, Boolean(data.openNewPage))
+                    }
+                    key={index}
+                    showText={isOpen}
+                    text={data.text}
+                    image={data.image}
+                    url={data.url}
+                  />
+                );
+              })}
+               {socialLinksOption?.map((data, index) => {
                 return (
                   <SidebarOption
                     onClick={() =>

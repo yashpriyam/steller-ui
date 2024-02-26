@@ -599,6 +599,14 @@ declare global {
           isProfile?: boolean;
         }[]
       | false;
+      socialLinksOption?: {
+        image: string | ReactNode;
+        url?: string;
+        text: string;
+        openNewPage?: boolean;
+        onClick?: (e: MouseEvent<HTMLDivElement>) => void;
+        isProfile?: boolean;
+      }[] | []
   }
 
   type UseAppDataReturnType = {
@@ -799,6 +807,7 @@ declare global {
     branch?: string;
     location?: string;
     feePlan?: string;
+    socialLinks?: JSON
   }
 
   type SecondaryUserSchemaType = {

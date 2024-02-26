@@ -2,7 +2,7 @@ import { useState } from "react";
 import { apolloClient } from "../../graphql/apolloClient/apolloClient";
 import { CREATE_USER_GOAL } from "../../graphql/mutation/createUserGoal/createUserGoal";
 
-export const useUserGoals = () => {
+export const useUserGoalsMutation = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const createUserGoal = async (userResponse: string, goalId: string, profileType?: string) => {

@@ -23,3 +23,4 @@ export { DeleteIcon } from "./deleteIcon";
 export { AddIcon } from "./addIcon"
 export { CloseCrossIcon } from "./closeCrossIcon"
 export { GoalsIcon } from "./goalsIcon";
+export { Internet } from "./internet"
