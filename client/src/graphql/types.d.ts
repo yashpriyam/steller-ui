@@ -1222,6 +1222,7 @@ declare global {
   }
   type ThemeValueType = "light" | "dark";
   type GoalsType = {
+    _id?: string;
     title: string;
     description?: string;
     goalType?: ObjectId;
