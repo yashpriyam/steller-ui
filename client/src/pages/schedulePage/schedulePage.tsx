@@ -137,11 +137,12 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                             <div className="day-header">
                               <div className="day-title-and-date-wrapper">
                                 <strong className="day-title">{title}</strong>
-                               {date && 
-                               <span className="day-date-info">{
-                               convertDateToString(date)
-                               }</span>}
-                               </div>
+                                {date && (
+                                  <span className="day-date-info">
+                                    {convertDateToString(date)}
+                                  </span>
+                                )}
+                              </div>
                               {Boolean(tagsLength) && tagsLength && (
                                 <div className="topic-tags">
                                   {tags
@@ -196,13 +197,12 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                     e,
                                     `/question?weekNumber=${weekNumber}&dayNumber=${dayNumber}`,
                                     weekTitle,
-                                    description,
+                                    description
                                   );
                                 }}
                                 countLabel={questions?.length.toString()}
                                 positionOfCountLabel="outside"
                                 isDisabled={!questions?.length}
-                                
                               />
                               <Button
                                 text={t("notes")}
@@ -238,6 +238,19 @@ const SchedulingPage: React.FC<SchedulePagePropsInterface> = ({
                                   isDisabled={!videos?.length}
                                 />
                               )}
+                              <Button
+                                text={t("DSA")}
+                                className="button"
+                                onClick={(e) => {
+                                  handleNavigation(
+                                    e,
+                                    `/dsa-questions?weekNumber=${weekNumber}&dayNumber=${dayNumber}`
+                                  );
+                                }}
+                                // countLabel={videos?.length.toString()}
+                                // positionOfCountLabel="outside"
+                                // isDisabled={!videos?.length}
+                              />
                             </div>
                           </div>
                         );

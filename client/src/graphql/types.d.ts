@@ -1276,6 +1276,7 @@ declare global {
     meta: QuestionMetaDataType;
     attemptResponse: DsaResponseDataType;
     description: QuestionDescriptionOutputType;
+    questionIndex?: number;
   };
 }
 export {};
