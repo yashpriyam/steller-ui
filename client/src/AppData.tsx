@@ -50,7 +50,7 @@ export const useAppData = (): UseAppDataReturnType => {
 
     text: socialPlatform,
     image: <Internet /> ,
-    url: `socialLink/${socialPlatform}`,
+    url: `sociallink/${socialPlatform}`,
   }));
   
   const sidebarData: SidebarProps = {
