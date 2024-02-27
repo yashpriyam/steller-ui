@@ -34,7 +34,7 @@ const protectedRoutesMap: RoutesMapInterface = Object.freeze({
   "/leaderboard": <LeaderBoard/>,
     "/goals": <Goals />,
   "/dsa-questions":<DsaQuestionPage/>,
-  "/socialLink/:link": <SocialLinksPage/>
+  "/sociallink/:link": <SocialLinksPage/>
 });
 
 export const ProtectedRoutes = () => {
