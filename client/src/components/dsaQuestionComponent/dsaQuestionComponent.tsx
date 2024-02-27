@@ -18,12 +18,12 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
 }) => {
   const submissionStatusType = [
     {
-      text: "submitted",
-      value: "submitted",
+      text: "Submitted",
+      value: "Submitted",
     },
     {
-      text: "rejected",
-      value: "rejected",
+      text: "Rejected",
+      value: "Rejected",
     },
   ];
   const { dsaQuestionAttemptApi } = useQuestionAttempt();
@@ -125,7 +125,7 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
             value={submissionLink}
           />
         </div>
-        {submissionStatus === "rejected" && (
+        {(submissionStatus.toLowerCase()) === "rejected" && (
           <div className="test-cases-conatiner">
             <div className="create-input-wrapper">
               <label htmlFor="batch-code" className="create-question-label">
