@@ -51,7 +51,7 @@ export const DsaQuestionPage: React.FC = () => {
     <div className="dsa-question-page-container">
       <div className="dsa-question-page-sub-container">
         <div className="questions-page-header">
-          <Text textType="h1">{t("Dsa questions page")}</Text>
+          <Text textType="h1">{t("DSA Questions")}</Text>
         </div>
         <div className="about-question">
           {description && (
