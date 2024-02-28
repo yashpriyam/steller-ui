@@ -73,6 +73,7 @@ $sencondaryTextColor: rgb(185, 185, 185);
 $Gray29: rgb(74, 74, 74);
 $Gray35: rgb(35, 35, 35);
 $Gray43: rgb(43, 43, 43);
+$Gray34:#3d3b3bde ;
 
 $subHeaderFontSize: 25px;
 $headerFontSize: 40px;
@@ -109,7 +110,18 @@ $videoHutBorderColor: rgba(255, 255, 255, 0.3);
 $radialGradient:
   var(--token-31d2d8ec-6073-495b-98cd-5e142f56bc63, rgba(255, 255, 255, 0.15)) 2.210024196147939%,
   hsla(0, 0%, 100%, 0);
-
+$boxShadowWhiteColor:var(
+                      --token-05b8d98e-abe0-4137-a801-0f724209b039,
+                      rgb(224, 224, 224)
+                    );
+$borderSecondaryColor:var(
+                      --token-05b8d98e-abe0-4137-a801-0f724209b039,
+                      rgb(164, 164, 164)
+                    );                  
+$boxShawdowSecondaryColor:var(
+                    --token-05b8d98e-abe0-4137-a801-0f724209b039,
+                    rgb(0, 0, 0)
+                  );
 $screenXs: 480px;
 $screenSm: 576px;
 $screenMd: 768px;
