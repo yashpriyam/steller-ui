@@ -5,7 +5,6 @@ import {
   GET_USER_LEETCODE_PROFILE,
 } from "./graphql/RowQueries/index";
 
-
 export const updateUserWithLeetCodeData = async () => {
   try {
     const users = await User.find({
@@ -15,9 +14,9 @@ export const updateUserWithLeetCodeData = async () => {
 
     for (const user of users) {
       const socialLinks = user.socialLinks as Record<string, any>;
-     
-      if (socialLinks && socialLinks.LeetCode) {
-        let leetCodeUserId = socialLinks.LeetCode.response.replace(
+
+      if (socialLinks && socialLinks.Leetcode) {
+        let leetCodeUserId = socialLinks.Leetcode.response.replace(
           "https://leetcode.com/",
           ""
         );
@@ -71,39 +70,47 @@ export const updateUserWithLeetCodeData = async () => {
             limit: 100,
           }
         );
-        const recentACSubmissions =
-          recentSubmissionsData.recentAcSubmissionList;
+        const recentACSubmissions = recentSubmissionsData.recentAcSubmissionList;
 
-        for (const submission of recentACSubmissions) {
-          // Check if submission ID already exists for the user
-          const existingSubmission = await RecentSubmission.findOne({
+        // Extract recent submissions data to be inserted
+        const recentSubmissionsToInsert = recentACSubmissions.map(
+          (submission: RecentSubmissionDocument) => ({
             id: submission.id,
-          });
+            title: submission.title,
+            titleSlug: submission.titleSlug,
+            timestamp: submission.timestamp,
+          })
+        );
 
-          // If submission ID doesn't exist, add it to recent submissions
-          if (!existingSubmission) {
-            const newSubmission = new RecentSubmission({
-              id: submission.id,
-              title: submission.title,
-              titleSlug: submission.titleSlug,
-              timestamp: submission.timestamp,
-            });
-            // Save the new submission
-            await newSubmission.save();
+        // Find existing submissions
+        const existingSubmissions = await RecentSubmission.find({
+          id: {
+            $in: recentSubmissionsToInsert.map((submission: RecentSubmissionDocument) => submission.id),
+          },
+        });
 
-            // Push the new submission object into the user's recentSubmissions array
-            if (newSubmission) {
-              user?.recentSubmissions?.push(newSubmission as any);
-            }
-          }
+        // Filter out existing submissions
+        const newSubmissionsToInsert = recentSubmissionsToInsert.filter(
+          (submission: RecentSubmissionDocument) =>
+            !existingSubmissions.some(
+              (existingSubmission) => existingSubmission.id === submission.id
+            )
+        );
+
+        // Insert new submissions
+        if (newSubmissionsToInsert.length > 0) {
+          await RecentSubmission.insertMany(newSubmissionsToInsert);
         }
 
-        // Save the changes to the user document
+        // Update user's recentSubmissions array with new submission IDs
+        const newSubmissionIds = newSubmissionsToInsert.map(
+          (submission: RecentSubmissionDocument) => submission._id
+        );
+        user.recentSubmissions?.push(...newSubmissionIds);
         await user.save();
       }
     }
     console.log("user updated with leetcode data");
-    
   } catch (error) {
     console.error({ error });
   }
