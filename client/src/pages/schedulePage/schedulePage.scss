@@ -18,234 +18,254 @@
     gap: 15px;
     width: 75%;
     max-width: $screenLg;
-    @media (max-width: $screenMd){
+    @media (max-width: $screenMd) {
       width: 90%;
     }
-  .schedule-page-meet-container {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    .schedule-page-meet-btn {
+    .schedule-page-meet-container {
+      width: 100%;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid $primaryBg;
-      padding: 10px;
-      border-radius: 5px;
-      gap: 10px;
-      cursor: pointer;
-    }
-  }
-  .schedule-page-header-filter-wrapper{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .scheduling-page-accordion {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    .accordion-content-wrapper {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-      @media (max-width: $screenMd){
-        max-width: 100%;
-        padding: 0 20px; 
-      }
-
-      .week-description {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        flex-wrap: wrap;
-        font-size: $drawerFontSize;
-        color: $sencondaryTextColor;
-        font-weight: 600;
-      }
-      .daylist-container {
+      justify-content: flex-end;
+      .schedule-page-meet-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-wrap: wrap;
+        border: 1px solid $primaryBg;
+        padding: 10px;
+        border-radius: 5px;
         gap: 10px;
-        width: 100%;
-        @media (max-width: $screenMd){
-          padding-bottom: 20px;
+        cursor: pointer;
+      }
+    }
+    .schedule-page-header-filter-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .scheduling-page-accordion {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      .accordion-content-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        padding: 20px;
+        @media (max-width: $screenMd) {
+          max-width: 100%;
+          padding: 0 20px;
         }
-        .day-container {
-          color: $primaryColor;
-          padding: 10px;
-          border-radius: 7px;
-          border: 1px solid $videoHutBorderColor;
+
+        .week-description {
           width: 100%;
-          background-color: $Gray35;
-          transition: all 0.3s;
           display: flex;
           flex-direction: column;
-          gap: 12px;
-          &:hover {
-            cursor: pointer;
+          justify-content: left;
+          flex-wrap: wrap;
+          font-size: $drawerFontSize;
+          color: $sencondaryTextColor;
+          font-weight: 600;
+        }
+        .daylist-container {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 20px;
+          width: 100%;
+          @media (max-width: $screenMd) {
+            padding-bottom: 20px;
           }
-          @media (max-width: $screenMd){
-            border-radius: 25px;
-            padding: 20px;
-            align-items: center;
-            transition: 0.5s;;
-          }
-          @media (max-width: $screenMd){
-            border-radius: 10px;
-          }
-          .day-header {
+          .day-container {
+            color: $primaryColor;
+            padding: 10px;
+            border-radius: 7px;
+            width: 100%;
+            background-color: $Gray35;
+            transition: all 0.3s;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            .day-title-and-date-wrapper {
-              display: flex;
-              flex-direction: column;
-              gap: 5px;
-              .day-title {
-                font-size: $mediumFontSize;
-                font-family: $secondaryFontFamily;
-              }
-              .day-date-info{
-                font-size: $smallFontSize;
-                color: $gray;
-              }
+            flex-direction: column;
+            gap: 12px;
+            box-shadow: 0px 1px 6px 1px rgb(3 3 3);
+            &:hover {
+              cursor: pointer;
             }
-            .topic-tags {
-              display: flex;
-              gap: 10px;
-              position: relative;
-              font-size: $smallFontSize;
-              @media (max-width: $screenSm) {
-                font-size: $extraSmallFontSize;
-              }
-              .topic-tag {
-                transition: 0.3s;
-                padding: 5px;
-                border-radius: 5px;
-                background-color: rgba(132, 131, 131, 0.15);
-                &:hover {
-                  transform: scale(110%);
-                }
-                @media (max-width: $screenSm) {
-                  padding: 2px 3px;
-                }
-              }
-              .hidden-tags {
-                position: absolute;
-                display: none;
-                gap: 10px;
-                opacity: 0;
-                right: -80px;
-                top: 0px;
-                transition: 1s;
-              }
-              .show-hidden-tag {
-                display: flex;
-                opacity: 1;
-              }
-              .html {
-                color: $accent-color-2;
-              }
-              .css {
-                color: $accent-color-3;
-              }
-              .js {
-                color: $accent-color-4;
-              }
-              .react {
-                color: $accent-color-1;
-              }
-            }
-          }
-
-          .day-description {
-            color: $sencondaryTextColor;
-            font-size: $largerFontSize;
-            width: 100%;
-            @media (max-width: $screenMd){
-              font-size: $mediumFontSize;
-            }
-            @media (max-width: $screenMd){
-              font-size: $smallFontSize;
-            }
-          }
-
-          .buttons-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            width: 100%;
-            @media (max-width: $screenXs){
+            @media (max-width: $screenMd) {
+              border-radius: 25px;
+              padding: 20px;
               align-items: center;
+              transition: 0.5s;
             }
-            .button.join-meet-btn {
-              border: 1px solid $success-500;
-              background-color: $success-800;
-              &:hover {
-                color: $primaryColor;
-                border: 1px solid $success-200;
-                background-color: $success-800;
+            @media (max-width: $screenMd) {
+              border-radius: 10px;
+            }
+            .day-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              width: 100%;
+              .day-title-and-date-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                .day-title {
+                  font-size: $mediumFontSize;
+                  font-family: $secondaryFontFamily;
+                }
+                .day-date-info {
+                  font-size: $smallFontSize;
+                  color: $gray;
+                }
+              }
+              .topic-tags {
+                display: flex;
+                gap: 10px;
+                position: relative;
+                font-size: $smallFontSize;
+                @media (max-width: $screenSm) {
+                  font-size: $extraSmallFontSize;
+                }
+                .topic-tag {
+                  transition: 0.3s;
+                  padding: 5px;
+                  border-radius: 5px;
+                  background-color: rgba(132, 131, 131, 0.15);
+                  &:hover {
+                    transform: scale(110%);
+                  }
+                  @media (max-width: $screenSm) {
+                    padding: 2px 3px;
+                  }
+                }
+                .hidden-tags {
+                  position: absolute;
+                  display: none;
+                  gap: 10px;
+                  opacity: 0;
+                  right: -80px;
+                  top: 0px;
+                  transition: 1s;
+                }
+                .show-hidden-tag {
+                  display: flex;
+                  opacity: 1;
+                }
+                .html {
+                  color: $accent-color-2;
+                }
+                .css {
+                  color: $accent-color-3;
+                }
+                .js {
+                  color: $accent-color-4;
+                }
+                .react {
+                  color: $accent-color-1;
+                }
               }
             }
-            .button {
-              border: 1px solid $videoHutBorderColor;
-              background-color: $secondaryBorderColorHighlighted;
-              color: $primaryColor;
-              border-radius: 5px;
-              transition: all 0.3s;
 
-              &:hover {
-                color: $sencondaryTextColor;
-                background-color: $Gray43;
+            .day-description {
+              color: $sencondaryTextColor;
+              font-size: $largerFontSize;
+              width: 100%;
+              @media (max-width: $screenMd) {
+                font-size: $mediumFontSize;
               }
-              &:disabled:hover {
-                background-color: $secondaryBorderColorHighlighted;
+              @media (max-width: $screenMd) {
+                font-size: $smallFontSize;
+              }
+            }
+
+            .buttons-wrapper {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 20px;
+              width: 100%;
+              @media (max-width: $screenXs) {
+                align-items: center;
+              }
+              .button.join-meet-btn {
+                border: 1px solid $success-500;
+                background-color: $success-800;
+                &:hover {
+                  color: $primaryColor;
+                  border: 1px solid $success-200;
+                  background-color: $success-800;
+                }
+              }
+              .button {
+                border: none;
+                background-color: $Gray35;
                 color: $primaryColor;
+                border-radius: 5px;
+                transition: all 0.3s;
+                box-shadow: 0px 1px 7px 1px
+                  var(
+                    --token-05b8d98e-abe0-4137-a801-0f724209b039,
+                    rgb(0, 0, 0)
+                  );
+                padding: 14px 22px;
+                &:hover {
+                  color: $primaryColor;
+                  background-color: #3d3b3bde;
+                }
+                &:disabled {
+                  background-color: $Gray35;
+                  color: $primaryColor;
+                  box-shadow: 0px 0px 1px 0px
+                    var(
+                      --token-05b8d98e-abe0-4137-a801-0f724209b039,
+                      rgb(224, 224, 224)
+                    );
+                }
+                .count-label-outside {
+                  margin-left: 8px;
+                  border: 1px solid
+                    var(
+                      --token-05b8d98e-abe0-4137-a801-0f724209b039,
+                      rgb(164, 164, 164)
+                    );
+                  border-radius: 5px;
+                  padding: 1px 7px;
+                }
               }
             }
           }
         }
       }
     }
-   }
   }
 }
-  .pro-membership-weeks-wrapper{
-    border-color: $fadedPremiumColor;
+.pro-membership-weeks-wrapper {
+  border-color: $fadedPremiumColor;
+}
+.pro-membership-info-container {
+  color: $premiumColor;
+  border-bottom: 1px solid;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  gap: 5px;
+  justify-content: center;
+  cursor: pointer;
+  transition: box-shadow 0.3s, border-radius 0.3s;
+  &:hover {
+    border-radius: 5px;
+    box-shadow: 0px 5px 10px -7px;
   }
-  .pro-membership-info-container{
-    color: $premiumColor;
-    border-bottom: 1px solid;
-    display: flex;
-    align-items: center;
-    padding: 5px 10px;
-    gap: 5px;
-    justify-content: center;
-    cursor: pointer;
-    transition: box-shadow 0.3s, border-radius 0.3s;
-    &:hover {
-      border-radius: 5px;
-      box-shadow: 0px 5px 10px -7px;
-    }
-    .pro-membership-info-text{
-      font-size: $textFontSize;
-    }
+  .pro-membership-info-text {
+    font-size: $textFontSize;
   }
+}
 
-.schedule-week-title{
+.schedule-week-title {
   padding: 10px 0px;
-  @media (max-width:$screenMd){
+  @media (max-width: $screenMd) {
     padding: 2px 10px;
   }
 }
