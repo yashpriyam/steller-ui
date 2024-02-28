@@ -9,9 +9,9 @@ const sessionPreferences = Object.freeze({
 
 const userSchema = new mongoose.Schema<UserSchemaType>(
   {
-    email: { type: String, required: true },
-    name: { type: String, required: true },
-    phoneNumber: { type: String, required: true },
+    email: { type: String, required: false },
+    name: { type: String, required: false },
+    phoneNumber: { type: String, required: false },
     password: { type: String, required: false },
     isJobSeeker: { type: Boolean, default: false },
     occupation: { type: String },
@@ -66,7 +66,9 @@ const userSchema = new mongoose.Schema<UserSchemaType>(
     },
     socialLinks: {
       type: mongoose.Schema.Types.Mixed
-    }
+    }, 
+    leetCodeUserProfile: { type: ObjectId, ref: 'LeetCodeUserProfile' },
+    recentSubmissions: [{ type: ObjectId, ref: 'RecentSubmission' }]
   },
   { timestamps: true }
 );
