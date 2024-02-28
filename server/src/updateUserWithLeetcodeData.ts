@@ -1,4 +1,4 @@
-import { LeetCodeUserProfile, RecentSubmission, User } from "@models";
+import { leetCodeUserProfileModel, recentSubmissionModel, User } from "@models";
 import { executeGraphQLQuery } from "@utils";
 import {
   GET_RECENT_AC_SUBMISSIONS,
@@ -27,7 +27,7 @@ export const updateUserWithLeetCodeData = async () => {
         leetCodeUserId = leetCodeUserId.replace(/\/$/, "");
 
         // Check if LeetCode user profile already exists
-        let leetCodeProfile = await LeetCodeUserProfile.findOne({
+        let leetCodeProfile = await leetCodeUserProfileModel.findOne({
           username: leetCodeUserId,
         });
 
@@ -40,7 +40,7 @@ export const updateUserWithLeetCodeData = async () => {
           const matchedUser = data.matchedUser;
           if (matchedUser) {
             // Create new LeetCode user profile if it doesn't exist
-            leetCodeProfile = new LeetCodeUserProfile({
+            leetCodeProfile = new leetCodeUserProfileModel({
               username: matchedUser.username,
               submitStats: matchedUser.submitStats,
             });
@@ -87,7 +87,7 @@ export const updateUserWithLeetCodeData = async () => {
         );
 
         // Find existing submissions
-        const existingSubmissions = await RecentSubmission.find({
+        const existingSubmissions = await recentSubmissionModel.find({
           id: {
             $in: recentSubmissionsToInsert.map((submission: RecentSubmissionDocument) => submission.id),
           },
@@ -103,7 +103,7 @@ export const updateUserWithLeetCodeData = async () => {
 
         // Insert new submissions
         if (newSubmissionsToInsert.length > 0) {
-          await RecentSubmission.insertMany(newSubmissionsToInsert);
+          await recentSubmissionModel.insertMany(newSubmissionsToInsert);
         }
 
         // Update user's recentSubmissions array with new submission IDs

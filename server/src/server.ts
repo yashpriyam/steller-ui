@@ -8,10 +8,8 @@ import Connection from "./db/conn";
 import express from "express";
 import cookieParser from "cookie-parser";
 import cloudinaryConfiguration from "./db/cloudinaryConf";
-import pingServer from "./cron/pingServer";
 import jwt from "jsonwebtoken";
-import { updateUserWithLeetCodeData } from "./updateUserWithLeetcodeData";
-import cron from 'node-cron';
+import { startCronJobs } from "./cron/index";
 const PORT = process.env.PORT || 8080;
 
 
@@ -24,9 +22,6 @@ const PORT = process.env.PORT || 8080;
 
   // cloudinary configuration
   cloudinaryConfiguration();
-
-  // To ping server in every 10 mins
-  pingServer.start();
 
   // connect to db
   Connection(process.env.MONGODB_URI);
@@ -75,20 +70,5 @@ const PORT = process.env.PORT || 8080;
     console.log(`Server is running on port number ${PORT}`);
   });
 
-// Define the cron job schedule (runs every 4 hours)
-const cronSchedule = '0 */4 * * *';
-
-
-// Define the cron job task
-const cronTask = async () => {
-  try {
-    await updateUserWithLeetCodeData();
-  } catch (error) {
-    console.error('Error in updateUserWithLeetCodeData:', error);
-    process.exit(1); // Exit the server process with a non-zero exit code
-  }
-};
-
-// Start the cron job
-cron.schedule(cronSchedule, cronTask)
+  startCronJobs()
 })();

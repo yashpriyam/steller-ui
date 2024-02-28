@@ -11,15 +11,8 @@ const leetCodeUserProfileSchema = new mongoose.Schema({
   }
 });
 
-// Define a schema for storing recent submission data
-const recentSubmissionSchema = new mongoose.Schema({
-  id: { type: String, required: false },
-  title: { type: String, required: false },
-  titleSlug: { type: String, required: false },
-  timestamp: { type: String, required: false }
-});
 
-const LeetCodeUserProfile = mongoose.model('LeetCodeUserProfile', leetCodeUserProfileSchema);
-const RecentSubmission = mongoose.model('RecentSubmission', recentSubmissionSchema);
+const leetCodeUserProfileModel = mongoose.model('LeetCodeUserProfile', leetCodeUserProfileSchema);
 
-export { LeetCodeUserProfile, RecentSubmission };
+
+export { leetCodeUserProfileModel };
