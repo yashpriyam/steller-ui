@@ -93,12 +93,16 @@ export const updateUserWithLeetCodeData = async () => {
           },
         });
 
+
+        const existingSubmissionsMap: any = existingSubmissions.reduce((acc: Record<string, unknown>, elem: any) => {    
+            return { ...acc, [elem.id]: elem }
+        }, {})
+        
+
         // Filter out existing submissions
         const newSubmissionsToInsert = recentSubmissionsToInsert.filter(
           (submission: RecentSubmissionDocument) =>
-            !existingSubmissions.some(
-              (existingSubmission) => existingSubmission.id === submission.id
-            )
+            !existingSubmissionsMap[submission.id]
         );
 
         // Insert new submissions
