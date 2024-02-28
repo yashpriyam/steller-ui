@@ -1189,7 +1189,7 @@ type UserGoalCompletion = {
   
   
   interface RecentSubmissionDocument extends Document {
-    _id: any;
+    _id: string;
     id: string;
     title: string;
     titleSlug: string;
