@@ -10,13 +10,17 @@ export const updateUserWithLeetCodeData = async () => {
     const users = await User.find({
       feePlan: { $exists: true },
       socialLinks: { $exists: true },
+    },{
+        socialLinks: 1,
+        leetCodeUserProfile: 1,
+        recentSubmissions: 1
     });
-
+   
     for (const user of users) {
       const socialLinks = user.socialLinks as Record<string, any>;
 
-      if (socialLinks && socialLinks.Leetcode) {
-        let leetCodeUserId = socialLinks.Leetcode.response.replace(
+      if (socialLinks && socialLinks.LeetCode) {
+        let leetCodeUserId = socialLinks.LeetCode.response.replace(
           "https://leetcode.com/",
           ""
         );
