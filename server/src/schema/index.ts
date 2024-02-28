@@ -22,3 +22,5 @@ export { Goal } from "./goalSchema"
 export { UserGoalCompletion } from "./userGoalCompletionSchema"
 export { goalTypeModel } from "./goalTypeSchema"
 export { topicModel } from "./topicSchema";
+export { leetCodeUserProfileModel } from "./userLeetcodeSchema"
+export { recentSubmissionModel } from "./recentSubmissionSchema"
