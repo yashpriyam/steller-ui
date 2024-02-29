@@ -32,6 +32,7 @@ const typeDefs = gql`
       filterData: FilterData
       pagination: Pagination
     ): DSAQuestionListOutputType
+    getLeetCodeLeaderboardData: LeetCodeLeaderboardDataType
   }
 
   type Mutation {
@@ -1276,6 +1277,8 @@ const typeDefs = gql`
     profileImage: ProfileImageType
     temporaryAccess: UserTemporaryAccessType
     socialLinks: JSON
+    leetCodeUserProfile: JSON
+    recentSubmissions: [RecentSubmissionType]
   }
 
   input UpdateMeetingInputFilter {
@@ -1506,6 +1509,18 @@ const typeDefs = gql`
   type UserGoalListOutputType {
     userGoals: [UserGoalCompletion]
     response: CustomResponseType
+  }
+  type LeetCodeLeaderboardDataType {
+    users: [UserSchemaType]
+    response: CustomResponseType
+  }
+
+  type RecentSubmissionType {
+    _id: String
+    id: String
+    title: String
+    titleSlug: String
+    timestamp: String
   }
 
   scalar DateTime
