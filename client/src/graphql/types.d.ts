@@ -788,6 +788,7 @@ declare global {
   };
 
   interface UserSchemaType {
+    _id: string;
     email: string;
     name: string;
     phoneNumber: string;
@@ -807,7 +808,16 @@ declare global {
     branch?: string;
     location?: string;
     feePlan?: string;
-    socialLinks?: JSON
+    socialLinks?: JSON;
+    leetCodeUserProfile: JSON;
+    recentSubmissions: [RecentSubmissionType];
+  }
+  type RecentSubmissionType = {
+    _id: String
+    id: String
+    title: String
+    titleSlug: String
+    timestamp: String
   }
 
   type SecondaryUserSchemaType = {
