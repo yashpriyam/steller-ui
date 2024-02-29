@@ -1205,10 +1205,10 @@ type TagsSchemaType = {
   tagName: string;
   tagKey: string;
   tagType: string;
-  childrenTags: childrenTagsType[];
+  childrenTags: ChildrenTagsType[];
 }
 
-type childrenTagsType = {
+type ChildrenTagsType = {
   title: string;
   tagType: string;
   parentTagName: string;
