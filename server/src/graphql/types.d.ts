@@ -1196,5 +1196,10 @@ type UserGoalCompletion = {
     timestamp: string;
   }
 
+interface LeetCodeLeaderboardDataType {
+  users?: UserSchemaType[]
+  response?: CustomResponseType;
+}
+
 
 }
