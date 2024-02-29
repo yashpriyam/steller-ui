@@ -1258,6 +1258,7 @@ const typeDefs = gql`
   }
 
   type UserSchemaType {
+    _id: String
     email: String
     name: String
     phoneNumber: String
