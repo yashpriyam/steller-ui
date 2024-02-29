@@ -94,10 +94,10 @@ export const DsaQuestionComponent: React.FC<DsaQuestionComponentProps> = ({
       }
     >
       <div className="dsa-content-container">
-        <Text className="description-header" textType="h3">Pseudocode</Text>
-        <div className="pseudocode-container">
+        {description.value && <Text className="description-header" textType="h3">Pseudocode</Text>}
+        {description.value && <div className="pseudocode-container">
          {description.type==="html"?<div dangerouslySetInnerHTML={{ __html: description.value }} />:description.value}
-        </div>
+        </div>}
         <div className="create-question-input-wrapper">
           <label htmlFor="batch-code" className="create-question-label">
             Submission Status :
