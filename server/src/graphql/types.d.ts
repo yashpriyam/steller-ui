@@ -805,6 +805,8 @@ declare global {
     feePlan?: string;
     temporaryAccess?: UserTemporaryAccessType;
     socialLinks?: JSON
+    leetCodeUserProfile?: Types.ObjectId | LeetCodeUserProfileDocument;
+    recentSubmissions?: Types.ObjectId[] | RecentSubmissionDocument[];
   }
   interface UserTemporaryAccessType {
     allowTemporaryAccess: boolean;
@@ -1172,4 +1174,32 @@ type UserGoalCompletion = {
     userGoals?: UserGoalCompletion[]
     response: CustomResponseType;
   }
+
+
+  interface LeetCodeUserProfileDocument extends Document {
+    username: string;
+    submitStats: {
+      acSubmissionNum: {
+        difficulty: string;
+        count: number;
+        submissions: number;
+      }[];
+    };
+  }
+  
+  
+  interface RecentSubmissionDocument extends Document {
+    _id: string;
+    id: string;
+    title: string;
+    titleSlug: string;
+    timestamp: string;
+  }
+
+interface LeetCodeLeaderboardDataType {
+  users?: UserSchemaType[]
+  response?: CustomResponseType;
+}
+
+
 }

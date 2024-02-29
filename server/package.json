@@ -20,7 +20,7 @@
     "@types/node": "^20.9.0",
     "@types/nodemailer": "^6.4.14",
     "apollo-server-express": "^3.13.0",
-    "axios": "^1.6.5",
+    "axios": "^1.6.7",
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.1",
     "cookie-parser": "^1.4.6",
@@ -41,5 +41,8 @@
     "@utils": "src/utils/index",
     "@constants": "src/utils/constants/index",
     "@models": "src/schema/index"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.11"
   }
 }

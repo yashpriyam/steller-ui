@@ -8,9 +8,10 @@ import Connection from "./db/conn";
 import express from "express";
 import cookieParser from "cookie-parser";
 import cloudinaryConfiguration from "./db/cloudinaryConf";
-import pingServer from "./cron/pingServer";
 import jwt from "jsonwebtoken";
+import { startCronJobs } from "./cron/index";
 const PORT = process.env.PORT || 8080;
+
 
 (async () => {
   const app: express.Application = express();
@@ -21,9 +22,6 @@ const PORT = process.env.PORT || 8080;
 
   // cloudinary configuration
   cloudinaryConfiguration();
-
-  // To ping server in every 10 mins
-  pingServer.start();
 
   // connect to db
   Connection(process.env.MONGODB_URI);
@@ -71,4 +69,6 @@ const PORT = process.env.PORT || 8080;
   app.listen({ port: PORT }, () => {
     console.log(`Server is running on port number ${PORT}`);
   });
+
+  startCronJobs()
 })();

@@ -1247,7 +1247,7 @@ declare global {
     isMandatory?: boolean;
     createdAt?: Date;
     updatedAt?: Date;
-    profileType?: string
+    profileType: string
   }
   type GoalsDataStateType = {
     userGoalsList?: userGoalList[];
@@ -1303,6 +1303,13 @@ declare global {
     attemptResponse: DsaResponseDataType;
     description: QuestionDescriptionOutputType;
     questionIndex?: number;
+  };
+  type UserResponseInputType = {
+    goalId: string;
+    profileType?: string;
+    setIsGoalCompleted: React.Dispatch<React.SetStateAction<boolean>>;
+    responseData?: string;
+    id?: String;
   };
 }
 export {};

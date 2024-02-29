@@ -6,16 +6,24 @@ import { Button } from "../../components/button/button";
 import NoDataFoundComponent from "../../components/noDataFound/noDataFound";
 import { UserGoalResponseComponent } from "../../components/userResponse/userResponse";
 import { useUserGoals } from "../../redux/actions/getUserGoalsAction";
+import { useUser } from "../../redux/actions/userAction";
 export const Goals = () => {
   const { getGoals, goals } = useGoals();
   const { goalsList, isGoalLoading } = goals || {};
   const { getUserGoals, userGoals, } = useUserGoals();
   const [isGoalCompleted, setIsGoalCompleted]= useState(false)
+  const { user } = useUser();
+  const [socialLinks, setSocialLinks] = useState<any>(
+    user?.userData?.socialLinks
+  );
+  useEffect(() => {
+   setSocialLinks(user?.userData?.socialLinks); 
+ },[user])
 
-  useEffect(()=> {
+  useEffect(() => {
     getGoals();
     getUserGoals();
-  },[isGoalCompleted])
+  }, [isGoalCompleted, user]);
 
   const completedGoalObj: { [key: string]: userGoalList } = {};
 
@@ -34,11 +42,9 @@ export const Goals = () => {
         ) : goalsList ? (
           goalsList.map((data) => (
             <div className="goals-list-main-wrapper">
-                {
-                    Boolean(completedGoalObj[data._id ?? '']) && (
-                        <div className="completed-indicator">Completed</div>
-                    )
-                }
+              {Boolean(completedGoalObj[data._id ?? ""]) && (
+                <div className="completed-indicator">Completed</div>
+              )}
               <div className="goals-data-key-value-wrapper">
                 <span className="goals-data-key">Goal Category</span>
                 <span className="goals-data-value">
@@ -74,6 +80,12 @@ export const Goals = () => {
                   goalId={data._id ?? ""}
                   profileType={data.profileType}
                   setIsGoalCompleted={setIsGoalCompleted}
+                  responseData={
+                    socialLinks
+                      ? socialLinks[data?.profileType]?.response ?? ""
+                      : ""
+                  }
+                  id={completedGoalObj[data?._id??""]?._id}
                 />
               )}
             </div>
