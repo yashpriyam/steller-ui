@@ -133,7 +133,7 @@
                   transition: 0.3s;
                   padding: 5px;
                   border-radius: 5px;
-                  background-color: rgba(132, 131, 131, 0.15);
+                  background-color: $bgColorSecondary;
                   &:hover {
                     transform: scale(110%);
                   }
