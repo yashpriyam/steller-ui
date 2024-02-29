@@ -1201,5 +1201,19 @@ interface LeetCodeLeaderboardDataType {
   response?: CustomResponseType;
 }
 
+type TagsSchemaType = {
+  tagName: string;
+  tagKey: string;
+  tagType: string;
+  childrenTags: childrenTagsType[];
+}
+
+type childrenTagsType = {
+  title: string;
+  tagType: string;
+  parentTagName: string;
+  parentTagType: string;
+}
+
 
 }

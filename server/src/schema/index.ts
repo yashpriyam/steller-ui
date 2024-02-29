@@ -24,3 +24,4 @@ export { goalTypeModel } from "./goalTypeSchema"
 export { topicModel } from "./topicSchema";
 export { leetCodeUserProfileModel } from "./userLeetcodeSchema"
 export { recentSubmissionModel } from "./recentSubmissionSchema"
+export { tagsModel } from "./tagsSchema";
