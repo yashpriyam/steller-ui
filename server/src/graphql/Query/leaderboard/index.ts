@@ -1,2 +1,2 @@
 export { getLeaderBoardData } from "./getLeaderboardData"
-export { getLeetCodeLeaderboardData } from "./getLeetCodeLeaderBoardData"
+export { getLeetCodeLeaderboardData } from "./getLeetCodeLeaderboardData"
