@@ -16,6 +16,10 @@ export const Goals = () => {
   const [socialLinks, setSocialLinks] = useState<any>(
     user?.userData?.socialLinks
   );
+  const goalIndicatorMap = {
+    COMPLETED: "Completed",
+    PENDING:"Pending Verification"
+  }
   useEffect(() => {
    setSocialLinks(user?.userData?.socialLinks); 
  },[user])
@@ -43,7 +47,17 @@ export const Goals = () => {
           goalsList.map((data) => (
             <div className="goals-list-main-wrapper">
               {Boolean(completedGoalObj[data._id ?? ""]) && (
-                <div className="completed-indicator">Completed</div>
+                <div
+                  className={`goal-indicator ${
+                    completedGoalObj[data._id || ""].isVerified
+                      ? "completed-indicator"
+                      : "unverified-indicator"
+                  }`}
+                >
+                  {completedGoalObj[data._id || ""].isVerified
+                    ? goalIndicatorMap.COMPLETED
+                    : goalIndicatorMap.PENDING}
+                </div>
               )}
               <div className="goals-data-key-value-wrapper">
                 <span className="goals-data-key">Goal Category</span>

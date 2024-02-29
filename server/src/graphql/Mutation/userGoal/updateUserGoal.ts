@@ -4,10 +4,12 @@ import { getUnauthorizedResponse, isLoggedIn } from "@utils";
 
 export const updateUserGoalCompletion = async (
   parent: undefined,
-  args: { input:{ id: string, response?: JSON, profileType?: string }},
+  args: {
+    input: { id: string; response?: JSON; profileType?: string; isVerified?:boolean };
+  },
   { contextData }: ContextType
 ): Promise<UserGoalCompletionOutput | undefined> => {
-  const { id, response,profileType } = args.input;
+  const { id, response, profileType,isVerified } = args.input;
 
   const { USER_GOAL_COMPLETION_UPDATE_FAILED } = errorMessages.USER_GOAL_COMPLETION_MODEL;
   const { USER_GOAL_COMPLETION_UPDATE_SUCCESS } = localMessages.USER_GOAL_COMPLETION_MODEL;
@@ -39,6 +41,7 @@ export const updateUserGoalCompletion = async (
           $set: {
             userResponse: response,
           },
+          isVerified
         },
         { new: true }
       );

@@ -53,16 +53,23 @@
     display: flex;
     justify-content: space-between;
   }
-  
-  .completed-indicator {
+  .goal-indicator{
     position: absolute;
     top: 0%;
     left: 0%;
     width: 100%;
-    background-color: $green;
     color: $primaryColor;
     padding: 5px;
     border-radius: 3px;
     text-align: center;
-    font-weight: 800;
+    font-weight: 600;
+    font-size: $largerFontSize;
+  }
+  .completed-indicator {
+    background-color: $green;
+  }
+
+  .unverified-indicator{
+     background-color: $orange;
+     color: $textColorBlack;
   }
