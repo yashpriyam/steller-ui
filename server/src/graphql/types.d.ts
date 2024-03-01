@@ -1211,7 +1211,7 @@ type TagsSchemaType = {
 type ChildrenTagsType = {
   title: string;
   tagType: string;
-  parentTagName: string;
+  parentTagKey: string;
   parentTagType: string;
 }
 
