@@ -5,7 +5,7 @@ import { removeNullAndUndefinedKeys } from "@utils";
 export const getAllTags = async (
     _parent: undefined,
     args: { filter: TagsSchemaType }
-): Promise<CreateTagOutputType | unknown> => {
+): Promise<AllTagOutputType> => {
     const { TAG_FETCH_FAILED } = errorMessages.TAG;
     const errorData: CustomResponseType = {
         message: TAG_FETCH_FAILED,
@@ -16,7 +16,7 @@ export const getAllTags = async (
         const { filter } = args;
         let modifiedFilter = {};
         if (filter) modifiedFilter = removeNullAndUndefinedKeys(filter);
-        const tagData = await tagsModel.find({ ...modifiedFilter });
+        const tagData = await tagsModel.find(modifiedFilter);
         return tagData.length
             ? {
                 tagData,
