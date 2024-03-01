@@ -141,6 +141,7 @@ export const errorMessages = Object.freeze({
   },
   TAG: {
     TAG_CREATION_FAILED: "Failed to create Tag",
-    TAG_FETCH_FAILED: "Failed to fetch Tags.",
+    FIELDS_NOT_FOUND: "Unable to create Tag without required fields",
+    TAG_FETCH_FAILED: "Failed to fetch Tags",
   },
 });
