@@ -119,5 +119,6 @@ export const localMessages = Object.freeze({
   },
   TAG: {
     TAG_CREATION_SUCCESS: "Tag created successfully",
+    TAG_FETCH_SUCCESS: "Tags fetched",
   },
 });

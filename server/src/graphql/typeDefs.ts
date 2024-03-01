@@ -33,6 +33,7 @@ const typeDefs = gql`
       pagination: Pagination
     ): DSAQuestionListOutputType
     getLeetCodeLeaderboardData: LeetCodeLeaderboardDataType
+    getAllTags( filter: TagsSchemaInput ): AllTagOutputType
   }
 
   type Mutation {
@@ -1528,15 +1529,15 @@ const typeDefs = gql`
   }
 
   input TagsSchemaInput {
-    tagName: String!
-    tagKey: String!
-    tagType: String!
+    tagName: String
+    tagKey: String
+    tagType: String
     childrenTags: [ChildrenTagsInput]
   }
   input ChildrenTagsInput {
-    title: String!
-    tagType: String!
-    tagKey: String!
+    title: String
+    tagType: String
+    tagKey: String
   }
 
   type TagsSchemaType {
@@ -1555,6 +1556,11 @@ const typeDefs = gql`
   }
   type CreateTagOutputType {
     tagData: TagsSchemaType
+    response: CustomResponseType!
+  }
+
+  type AllTagOutputType {
+    tagData: [TagsSchemaType]
     response: CustomResponseType!
   }
 
