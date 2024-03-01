@@ -1205,15 +1205,18 @@ type TagsSchemaType = {
   tagName: string;
   tagKey: string;
   tagType: string;
-  childrenTags: ChildrenTagsType[];
+  childrenTags?: ChildrenTagsType[];
 }
 
 type ChildrenTagsType = {
   title: string;
   tagType: string;
-  parentTagKey: string;
-  parentTagType: string;
+  tagKey: string;
+  parentTagKey?: string;
+  parentTagType?: string;
 }
-
-
+type CreateTagOutputType = {
+  tagData?: TagsSchemaType;
+  response: CustomResponseType;
+}
 }

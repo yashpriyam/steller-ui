@@ -14,6 +14,7 @@ const tagsSchema = new Schema<TagsSchemaType>({
         {
             title: String,
             tagType: String,
+            tagKey: String,
             parentTagKey: String,
             parentTagType: String,
         },
