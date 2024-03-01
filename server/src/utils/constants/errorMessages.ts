@@ -138,5 +138,8 @@ export const errorMessages = Object.freeze({
   USER_GOAL_COMPLETION_MODEL: {
     USER_GOAL_COMPLETION_FAILED: "Failed to create user goal",
     USER_GOAL_COMPLETION_UPDATE_FAILED: "Failed to update user goal"
-  }
+  },
+  TAG: {
+    TAG_CREATION_FAILED: "Failed to create Tag",
+  },
 });

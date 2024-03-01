@@ -127,6 +127,7 @@ const typeDefs = gql`
     dsaQuestionAttempt(
       questionData: DsaQuestionAttemptInputType!
     ): DsaQuestionAttemptQuestionOutputType
+    createTag(tagsInput: TagsSchemaInput!) : CreateTagOutputType
   }
 
   input VariableDataInput {
@@ -1521,6 +1522,37 @@ const typeDefs = gql`
     title: String
     titleSlug: String
     timestamp: String
+  }
+
+  input TagsSchemaInput {
+    tagName: String!
+    tagKey: String!
+    tagType: String!
+    childrenTags: [ChildrenTagsInput]
+  }
+  input ChildrenTagsInput {
+    title: String!
+    tagType: String!
+    tagKey: String!
+  }
+
+  type TagsSchemaType {
+    tagName: String
+    tagKey: String
+    tagType: String
+    childrenTags: [ChildrenTagsType]
+  }
+  
+  type ChildrenTagsType {
+    title: String
+    tagType: String
+    tagKey: String
+    parentTagKey: String
+    parentTagType: String
+  }
+  type CreateTagOutputType {
+    tagData: TagsSchemaType
+    response: CustomResponseType!
   }
 
   scalar DateTime

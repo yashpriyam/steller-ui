@@ -116,5 +116,8 @@ export const localMessages = Object.freeze({
   USER_GOAL_COMPLETION_MODEL: {
     USER_GOAL_COMPLETION_SUCCESS: "User goal created successfully",
     USER_GOAL_COMPLETION_UPDATE_SUCCESS: "User goal updated successfully",
-  }
+  },
+  TAG: {
+    TAG_CREATION_SUCCESS: "Tag created successfully",
+  },
 });
