@@ -3,7 +3,7 @@ import { executeGraphQLQuery } from "@utils";
 import {
   GET_RECENT_AC_SUBMISSIONS,
   GET_USER_LEETCODE_PROFILE,
-} from "./graphql/RowQueries/index";
+} from "../graphql/RowQueries/index";
 
 export const updateUserWithLeetCodeData = async () => {
   try {

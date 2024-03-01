@@ -1,5 +1,5 @@
-import { updateUserWithLeetCodeData } from "../updateUserWithLeetcodeData";
-import cron from 'node-cron';
+import { updateUserWithLeetCodeData } from "../utils/updateUserWithLeetcodeData";
+const cron = require("node-cron");
 
 // Define the cron job schedule (runs every 4 hours)
 const cronSchedule = '0 */4 * * *';
