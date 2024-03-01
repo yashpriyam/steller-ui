@@ -1219,4 +1219,8 @@ type CreateTagOutputType = {
   tagData?: TagsSchemaType;
   response: CustomResponseType;
 }
+type AllTagOutputType = {
+  tagData?: TagsSchemaType[];
+  response: CustomResponseType;
+}
 }

@@ -15,3 +15,4 @@ export { getVariableValue } from "./variable/getVariableValue";
 export { getTopicList } from "./topic/getTopicList"
 export { getSubTopicList } from "./topic/getSubTopicList"
 export { getAllUserGoals } from "./userGoals/index"
+export { getAllTags } from "./tags";
