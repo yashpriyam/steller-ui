@@ -1497,6 +1497,7 @@ const typeDefs = gql`
     createdAt: DateTime
     updatedAt: DateTime
     profileType: String
+    isVerified:Boolean
   }
   type UserGoalCompletionOutput {
     userGoalCompletion: UserGoalCompletion 
@@ -1504,8 +1505,9 @@ const typeDefs = gql`
   }
   input UpdateUserGoalCompletionInput {
     id: ID!
-    response: JSON!
+    response: JSON
     profileType: String
+    isVerified:Boolean
   }
   type UserGoalListOutputType {
     userGoals: [UserGoalCompletion]
