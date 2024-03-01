@@ -1202,9 +1202,9 @@ interface LeetCodeLeaderboardDataType {
 }
 
 type TagsSchemaType = {
-  tagName: string;
-  tagKey: string;
-  tagType: string;
+  tagName?: string;
+  tagKey?: string;
+  tagType?: string;
   childrenTags?: ChildrenTagsType[];
 }
 

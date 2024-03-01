@@ -7,11 +7,14 @@ export const createTag = async (
     args: { tagsInput: TagsSchemaType },
     { contextData }: ContextType
 ): Promise<CreateTagOutputType> => {
-    const { TAG_CREATION_FAILED } = errorMessages.TAG;
-    const errorData: CustomResponseType = {
-        message: TAG_CREATION_FAILED,
-        status: statusCodes.BAD_REQUEST,
+    const { TAG_CREATION_FAILED, FIELDS_NOT_FOUND } = errorMessages.TAG;
+    const errorData = (error : boolean = true) : CustomResponseType => {
+      return {
+            message: error ? TAG_CREATION_FAILED : FIELDS_NOT_FOUND,
+            status: statusCodes.BAD_REQUEST,
+         }
     }
+    
     try {
         if (!isLoggedIn(contextData)) {
             return { response: getUnauthorizedResponse() }
@@ -19,6 +22,7 @@ export const createTag = async (
         const { TAG_CREATION_SUCCESS } = localMessages.TAG;
         const { tagsInput } = args;
         const { tagKey, tagName, tagType, childrenTags } = tagsInput;
+        if(!tagKey || !tagType || !tagName) return { response : errorData(false) }
         const updatedChildrenTags = childrenTags?.map((child) => ({ ...child, parentTagKey: tagKey, parentTagType: tagType }))
         const tagData = await tagsModel.create({
             tagName,
@@ -33,11 +37,11 @@ export const createTag = async (
                 status: statusCodes.OK,
             }
         } : {
-            response: errorData
+            response: errorData()
         }
     } catch (error) {
         return {
-            response: errorData
+            response: errorData()
         }
     }
 }
