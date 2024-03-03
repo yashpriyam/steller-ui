@@ -62,15 +62,15 @@
           background-color: transparent;
         }
         .question-category-card {
-          background-color:  #313131;
-          color: #C2C4C7;
+          background-color: $tertiaryBgColor;
+          color: $secondaryColor;
           border-radius: 25px;
           padding: 10px 15px;
           cursor: pointer;
         }
         .selected-question-category-card{
-          background-color: white;
-          color: black;
+          background-color:$primaryColor;
+          color:$bacgroundBlackColor;
         }
       }
       .question-level-topic-wise-filter-wrapper {
@@ -79,8 +79,8 @@
         flex-wrap: wrap;
         gap: 10px;
         .question-filter-selector  {
-          background-color: #313131;
-          color: #C2C4C7;
+          background-color: $tertiaryBgColor;
+          color: $secondaryColor;
           border-radius: 5px;
         }
       }
@@ -98,8 +98,8 @@
   }
 }
 .question-category-card {
-  background-color: white;
-  color: black;
+  background-color: $primaryColor;
+  color: $bacgroundBlackColor;
   border-radius: 25px;
   padding: 10px 15px;
   display: flex;
