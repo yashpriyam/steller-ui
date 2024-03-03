@@ -17,6 +17,8 @@ export const Select: React.FC<SelectProps> = ({
   placeHolder,
   style = {},
   backgroundColor,
+  childStyle={},
+  childCardStyle={}
 }: SelectProps) => {
   const selectClassName = useUpdateThemeColor({
     useStyle: useSelectStyles,
@@ -81,6 +83,7 @@ export const Select: React.FC<SelectProps> = ({
           {isOpen && (
             <ul
               className={`${selectClassName.optionContainer} options-container`}
+              style={childCardStyle}
             >
               {data.map((option) => (
                 <li
@@ -90,6 +93,7 @@ export const Select: React.FC<SelectProps> = ({
                     option.text === selectedValue &&
                     `${selectClassName.selectedOption}`
                   } ${selectClassName.optionList}`}
+                  style={childStyle}
                 >
                   {option.text}
                 </li>

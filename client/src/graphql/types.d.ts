@@ -1139,6 +1139,8 @@ declare global {
     style?: React.CSSProperties;
     backgroundColor?: string;
     theme?: ThemeValueType;
+    childCardStyle?: React.CSSProperties;
+    childStyle?: React.CSSProperties;
   }
 
   type SelectOptionType = {
@@ -1321,5 +1323,19 @@ declare global {
     responseData?: string;
     id?: String;
   };
+  type TagsSchemaType = {
+    tagName?: string;
+    tagKey?: string;
+    tagType?: string;
+    childrenTags?: ChildrenTagsType[];
+  }
+  
+  type ChildrenTagsType = {
+    title: string;
+    tagType: string;
+    tagKey: string;
+    parentTagKey?: string;
+    parentTagType?: string;
+  }
 }
 export {};

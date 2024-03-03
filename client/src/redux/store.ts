@@ -16,6 +16,7 @@ import batchSlice from "./slices/batch/batchSlice";
 import createQuestionSlice from "./slices/createQuestion/createQuestionSlice"
 import goalsSlice from "./slices/goals/goalsSlice";
 import userGoalsSlice from "./slices/userGoals/userGoalsSlice";
+import tagsSlice from "./slices/tags/tagsSlice";
 export default configureStore({
   reducer: {
     user: userSlice,
@@ -34,6 +35,7 @@ export default configureStore({
     batch: batchSlice,
     createQuestion:createQuestionSlice,
     goals: goalsSlice,
-    userGoals: userGoalsSlice
+    userGoals: userGoalsSlice,
+    tags: tagsSlice,
   },
 });
