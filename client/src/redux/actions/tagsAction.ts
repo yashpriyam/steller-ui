@@ -5,11 +5,16 @@ import { GET_ALL_TAGS } from "../../graphql/query/tag/getAllTags";
 export const useTag = () => {
     const dispatch = useDispatch();
     const tags = useSelector(selectTag);
-    const getAllTags = async () => {
+    const getAllTags = async (filter : Partial<TagsSchemaType> = { } ) => {
+        const { tagKey,tagName,tagType } = filter || {};
         try {
             const response = await apolloClient.query({
                 query: GET_ALL_TAGS,
-                variables: {},
+                variables: {
+                    tagKey,
+                    tagName,
+                    tagType
+                },
             });
             dispatch(actions.setTag(response.data.getAllTags));
             return response;

@@ -1125,10 +1125,14 @@ declare global {
   interface NoDataFoundProps {
     message?: string;
   }
+  type SelectDataType = {
+    text: string;
+    value: string;
+  }
   interface SelectProps {
     isDisabled?: boolean;
     className?: string;
-    data?: { text: string; value: string }[];
+    data?: SelectDataType[];
     defaultSelected?: string;
     onSelect?: (option: SelectOptionType) => void;
     label?: string;
@@ -1324,9 +1328,9 @@ declare global {
     id?: String;
   };
   type TagsSchemaType = {
-    tagName?: string;
-    tagKey?: string;
-    tagType?: string;
+    tagName: string;
+    tagKey: string;
+    tagType: string;
     childrenTags?: ChildrenTagsType[];
   }
   
@@ -1336,6 +1340,10 @@ declare global {
     tagKey: string;
     parentTagKey?: string;
     parentTagType?: string;
+  }
+  type TagsStateType = {
+    tagsData: {[key : string] : TagsSchemaType[]};
+    isTagLoading: boolean;
   }
 }
 export {};

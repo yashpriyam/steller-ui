@@ -16,18 +16,22 @@ export const getAllTags = async (
         const { filter } = args;
         let modifiedFilter = {};
         if (filter) modifiedFilter = removeNullAndUndefinedKeys(filter);
-        const tagData = await tagsModel.find(modifiedFilter);
-        return tagData.length
-            ? {
+        const tagList = await tagsModel.find(modifiedFilter);
+        if(!tagList.length) return { response : errorData };
+        const tagData: Record<string, TagsSchemaType[]> = {};
+        tagList.forEach((val: TagsSchemaType) => {
+            const key = val.tagType;
+            if (key) {
+                (tagData[key]) ? tagData[key].push(val) : tagData[key] = [val];
+            }
+        })
+        return {
                 tagData,
                 response: {
                     message: TAG_FETCH_SUCCESS,
                     status: statusCodes.OK,
                 },
             }
-            : {
-                response: errorData,
-            };
     } catch (error) {
         return {
             response: errorData,

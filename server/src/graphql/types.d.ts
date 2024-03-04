@@ -1220,7 +1220,7 @@ type CreateTagOutputType = {
   response: CustomResponseType;
 }
 type AllTagOutputType = {
-  tagData?: TagsSchemaType[];
+  tagData?: {[key: string ]:TagsSchemaType[]};
   response: CustomResponseType;
 }
 }

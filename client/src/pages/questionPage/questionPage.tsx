@@ -12,11 +12,7 @@ import { useTag } from "../../redux/actions/tagsAction";
 import { Select } from "../../components/select/select";
 
 const QuestionPage = () => {
-  const [tagsObject, setTagsObject] = useState<Record<string, any>>();
-  const [topics, setTopics] = useState<{ text: string; value: string }[]>([]);
-  const [difficultyLevel, setDifficultyLevel] = useState<
-    { text: string; value: string }[]
-  >([]);
+  const [selectionFilter, setSelectionFilter] = useState<Record<string,SelectDataType[]>>({});
   const { questions, getAllQuestions } = useQuestions();
   const { createQuestionAttemptByUser } = useQuestionAttempt();
   const { tags, getAllTags } = useTag();
@@ -52,26 +48,7 @@ const QuestionPage = () => {
       console.error(err);
     }
   };
-  const { tagList } = tags || {};
-  const setTagsObj = () => {
-    const tagsObj: Record<any, any[]> = {"All Category" : [{tagName: "All Category"}]};
-    tagList.forEach((val: TagsSchemaType) => {
-      const key = val.tagType;
-      if (key) {
-        if (tagsObj[key]) {
-          tagsObj[key].push(val);
-        } else {
-          tagsObj[key] = [val];
-        }
-      }
-    });
-    const filterTagMap : Record<string, boolean> = {"All Category" : true};
-    tagsObject?.QuestionCategory?.forEach((val: any) => (
-      {...filterTagMap,[val.tagName] : false}
-     ))
-    setTagsObject(tagsObj);
-    setFilterTagMap(filterTagMap);
-  };
+  const { tagsData } = tags || {};
 
   const handleCategoryFilter: MouseEventHandler<HTMLSpanElement> = (
     event
@@ -83,15 +60,14 @@ const QuestionPage = () => {
     }
   };
   const setTopicAndDifficultyLevelState = () => {
-    const newTopics = tagsObject?.Topic?.map((topic: any) => ({
-      text: topic?.tagName,
-      value: topic?.tagKey,
+    const newTopics = tagsData?.Topic?.map((topic: TagsSchemaType) => ({
+      text: topic.tagName,
+      value: topic.tagKey,
     }));
-    const newDifficultyLevel = tagsObject?.DifficultyLevel?.map(
-      (level: any) => ({ text: level?.tagName, value: level?.tagKey })
+    const newDifficultyLevel = tagsData?.DifficultyLevel?.map(
+      (level: TagsSchemaType) => ({ text: level.tagName, value: level.tagKey })
     );
-    setTopics(newTopics);
-    setDifficultyLevel(newDifficultyLevel);
+    setSelectionFilter({"topics": newTopics, "difficultyLevel" : newDifficultyLevel})
   };
   const handleOnSelect = (option: SelectOptionType) => {
     const selectedVal = option.value;
@@ -107,12 +83,11 @@ const QuestionPage = () => {
   }, [weekNumber, dayNumber]);
   useEffect(() => {
     getAllTags();
-    setTagsObj();
   }, [tags]);
 
   useEffect(() => {
     setTopicAndDifficultyLevelState();
-  }, [tagsObject]);
+  }, [tagsData]);
   return (
     <div className="question-page-container">
       <div className="question-page-sub-wrapper">
@@ -146,8 +121,8 @@ const QuestionPage = () => {
             <div 
               className="question-category-card selected-question-category-card"
               >All Category</div>
-            {tagsObject &&
-              tagsObject?.QuestionCategory?.map((val: any, idx: any) => {
+            {tagsData &&
+              tagsData?.QuestionCategory?.map((val: TagsSchemaType) => {
                 return (
                   <div 
                     className={`question-category-card ${filterTagMap && filterTagMap[val.tagName] && "selected-question-category-card"}`}
@@ -160,7 +135,7 @@ const QuestionPage = () => {
               <Select
                 childCardStyle={{ backgroundColor: "#313131", color: "#C2C4C7" }}
                 childStyle={{ backgroundColor: "#313131", color: "#C2C4C7", borderColor: "transparent" }}
-                data={topics}
+                data={selectionFilter.topics}
                 defaultSelected="Topics"
                 className="question-filter-selector"
                 onSelect={handleOnSelect}
@@ -168,11 +143,11 @@ const QuestionPage = () => {
               <Select
                 childCardStyle={{ backgroundColor: "#313131", color: "#C2C4C7" }}
                 childStyle={{ backgroundColor: "#313131", color: "#C2C4C7", borderColor: "transparent" }}
-                data={difficultyLevel}
+                data={selectionFilter.difficultyLevel}
                 defaultSelected="Difficulty Level"
                 className="question-filter-selector"
                 onSelect={handleOnSelect}
-              />     
+              />
           </div>
         </div>
         <div className="question-page-sub-container">

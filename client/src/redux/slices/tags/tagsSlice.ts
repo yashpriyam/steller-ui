@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    tagList: [],
+const initialState : TagsStateType = {
+    tagsData: {},
+    isTagLoading: true,
 };
 
 export const tagsSlice = createSlice({
@@ -9,11 +10,11 @@ export const tagsSlice = createSlice({
     initialState: initialState,
     reducers: {
         setTag: (state, action) => {
-            state.tagList = action.payload.tagData;
+            state.tagsData = action.payload.tagData;
         },
     },
 });
 
 export const { actions } = tagsSlice;
-export const selectTag = (state: { tags: {tagList : TagsSchemaType[]} }) => state.tags;
+export const selectTag = (state: { tags: TagsStateType }) => state.tags;
 export default tagsSlice.reducer;

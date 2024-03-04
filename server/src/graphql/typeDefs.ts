@@ -1560,7 +1560,7 @@ const typeDefs = gql`
   }
 
   type AllTagOutputType {
-    tagData: [TagsSchemaType]
+    tagData: JSON
     response: CustomResponseType!
   }
 
