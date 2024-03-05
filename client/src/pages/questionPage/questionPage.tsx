@@ -10,9 +10,11 @@ import Spinner from "../../components/spinner/spinner";
 import { Text } from "../../components/text/text";
 import { useTag } from "../../redux/actions/tagsAction";
 import { Select } from "../../components/select/select";
+import { Tabs } from "../../components/tabs/tabs";
 
 const QuestionPage = () => {
   const [selectionFilter, setSelectionFilter] = useState<Record<string,SelectDataType[]>>({});
+  const [tabsDataList, setTabsDataList] = useState<TabOptionsType[]>();
   const { questions, getAllQuestions } = useQuestions();
   const { createQuestionAttemptByUser } = useQuestionAttempt();
   const { tags, getAllTags } = useTag();
@@ -22,7 +24,6 @@ const QuestionPage = () => {
     isQuestionLoading,
     totalQuestions,
   } = questions;
-  const [filterTagMap, setFilterTagMap] = useState<Record<string, boolean>>();
   const { t } = useTranslation();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -50,15 +51,6 @@ const QuestionPage = () => {
   };
   const { tagsData } = tags || {};
 
-  const handleCategoryFilter: MouseEventHandler<HTMLSpanElement> = (
-    event
-  ) => {
-    const target = event.target as HTMLElement;
-    if (target instanceof HTMLElement) {
-      const innerTextValue: string = target.innerText;
-      setFilterTagMap({...filterTagMap,[innerTextValue]: Boolean([innerTextValue])});
-    }
-  };
   const setTopicAndDifficultyLevelState = () => {
     const newTopics = tagsData?.Topic?.map((topic: TagsSchemaType) => ({
       text: topic.tagName,
@@ -72,6 +64,15 @@ const QuestionPage = () => {
   const handleOnSelect = (option: SelectOptionType) => {
     const selectedVal = option.value;
   };
+  const setDataListForTabs = ()=>{
+    const newDataList : TabOptionsType[] = tagsData?.QuestionCategory?.map((data: TagsSchemaType)=>{
+      const { tagKey, tagName,tagType } = data;
+      const newObj : TabOptionsType = {value: tagKey, text: tagName }
+      return newObj;
+    })
+    newDataList && newDataList?.unshift({value: "allCategory", text:"All fdffds fdfdff sfsujal gotharwal category", selected: true, })
+    newDataList && setTabsDataList(newDataList);
+  }
   useEffect(() => {
     weekNumber && dayNumber
       ? getAllQuestions({ week: Number(weekNumber), day: Number(dayNumber) })
@@ -87,6 +88,7 @@ const QuestionPage = () => {
 
   useEffect(() => {
     setTopicAndDifficultyLevelState();
+    setDataListForTabs()
   }, [tagsData]);
   return (
     <div className="question-page-container">
@@ -118,18 +120,9 @@ const QuestionPage = () => {
         </div>
         <div className="question-page-filter-container">
           <div className="question-category-wrapper">
-            <div 
-              className="question-category-card selected-question-category-card"
-              >All Category</div>
-            {tagsData &&
-              tagsData?.QuestionCategory?.map((val: TagsSchemaType) => {
-                return (
-                  <div 
-                    className={`question-category-card ${filterTagMap && filterTagMap[val.tagName] && "selected-question-category-card"}`}
-                    onClick={handleCategoryFilter}
-                    >{val?.tagName}</div>
-                );
-              })}
+            {
+              tabsDataList && < Tabs dataList={tabsDataList}/>
+            }
           </div>
           <div className="question-level-topic-wise-filter-wrapper">
               <Select

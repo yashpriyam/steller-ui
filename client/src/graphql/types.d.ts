@@ -1345,5 +1345,31 @@ declare global {
     tagsData: {[key : string] : TagsSchemaType[]};
     isTagLoading: boolean;
   }
+  interface TabOptionsType {
+    text?: string | ReactNode;
+    value: string;
+    disabled?: boolean;
+    selected?: boolean;
+    onClick?: (e?: Event) => void;
+    className?: string;
+    style?: CSSProperties;
+    selectedClass?: string;
+  }
+  interface TabsProps {
+    dataList: TabOptionsType[];
+    style?: CSSProperties;
+    className?: string;
+  }
+  interface TabProps {
+    label?: string | ReactNode;
+    value: string;
+    style?: CSSProperties;
+    onClick?: (e: any) => void;
+    disabled?: boolean;
+    className?: string;
+    selectedClass?: string;
+    isSelected?: boolean;
+    index?: number;
+  }
 }
 export {};
