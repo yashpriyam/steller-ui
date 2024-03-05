@@ -1,5 +1,6 @@
 import { Tab } from "../tab/Tab";
-import React, {
+import * as React from "react";
+import {
   MouseEventHandler,
   useEffect,
   useState,
@@ -7,7 +8,7 @@ import React, {
 import "./tabs.css";
 import { TabsProps } from "./type";
 
-export const Tabs: React.FC<TabsProps> = (props) => {
+export const Tabs: React.FunctionComponent<TabsProps> = (props : TabsProps) => {
   const { dataList : dataListfromProp, className="", style={} } = props;
   const [tabSwitchMap, setTabSwitchMap] = useState<Record<string, boolean>>();
   const [tabSliderWidth, setTabSliderWidth] = useState<string>();
@@ -51,7 +52,9 @@ export const Tabs: React.FC<TabsProps> = (props) => {
     },
   ];
   return (
-    <><div className={`tabs-main-wrapper ${className}`} style={style}>
+    <>
+    <button>hello</button>
+    {/* <div className={`tabs-main-wrapper ${className}`} style={style}>
       {dataList.map((data, idx) => {
         const {text,value,disabled,selected,onClick=()=>{}, className="",selectedClass="",style={}} = data;
         return <Tab
@@ -71,7 +74,7 @@ export const Tabs: React.FC<TabsProps> = (props) => {
           style={style}
         />
         })}
-    </div>
+    </div> */}
     {/* <span style={{height: "2px", backgroundColor:"#26b3d7", display: "block", width: tabSliderWidth}} className="tab-slider-indicator"></span> */}
     </>
   );

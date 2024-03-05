@@ -13,8 +13,8 @@ const config: StorybookConfig = {
     name: "@storybook/react-webpack5",
     options: {
       builder: {
-        useSWC: true,
-      },
+        useSWC: true
+      }
     },
   },
   docs: {
